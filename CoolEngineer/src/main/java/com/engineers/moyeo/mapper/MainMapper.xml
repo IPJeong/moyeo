@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!--  
+<mapper namespace="패키지명.인터페이스">
+
+-->
+<mapper namespace="com.engineers.moyeo.main.dao.MainDAO">  <!-- 인터페이스 -->
+    
+    <insert id="insertTest" parameterType="com.engineers.moyeo.main.dto.MemberInfoDTO">
+    	INSERT INTO member_info (mem_id, passwd, name, address, tel, birth, email) values (#{mem_id}, #{passwd}, #{name}, #{address}, #{tel}, #{birth}, #{email})
+    </insert>
+    
+</mapper>
