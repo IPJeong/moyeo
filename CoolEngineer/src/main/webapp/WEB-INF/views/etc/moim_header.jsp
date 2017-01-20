@@ -119,7 +119,7 @@
 								<li><a href="../moim/moim_cheif_board.jsp"><span class="fa fa-caret-right"></span>게시물관리</a></li>
 							</ul>
 						</li>
-					</ul>
+					</ul>   
      
 					<div class="x-features">
 						<div class="x-features-nav-open">
