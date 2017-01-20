@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@ include file="../etc/moim_header.jsp"%>
-
 <style>
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
@@ -60,6 +58,8 @@ li {
 
 </style>
 
+<%@ include file="../etc/moim_header.jsp"%>
+
 <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
@@ -75,7 +75,7 @@ li {
 				<div class="panel-body padding-0" style="height: 270px;">
 					<div class="chart-holder" id="dashboard-line-1"
 						style="height: 180px;">
-						<img src="../../../resources/resource/assets/images/gallery/pin.jpg"
+						<img src="/moyeo/resources/resource/assets/images/gallery/pin.jpg"
 							width="180px" height="130px" style="magin: 5px 5px"><font
 							size="3">XENO_B.C - 영등포 볼링</font><br> <br> <br>
 						<h3>
@@ -112,19 +112,19 @@ li {
 				<div class="panel-body padding-0" style="height: 550px;">
 					<div class="chart-holder" id="dashboard-line-1">
 						<div class="main">
-							<img src="../../../resources/resource/assets/images/gallery/피카츄.png"
+							<img src="/moyeo/resources/resource/assets/images/gallery/피카츄.png"
 								width="150px" height="110px" style="magin: 5px 5px">피카츄 <a
 								href="#">[상세보기]</a><br>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[모임장]<br>
-							<img src="../../../resources/resource/assets/images/gallery/라이츄.png"
+							<img src="/moyeo/resources/resource/assets/images/gallery/라이츄.png"
 								width="150px" height="110px" style="magin: 5px 5px">라이츄 <a
 								href="#">[상세보기]</a><br>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[회원]<br>
-							<img src="../../../resources/resource/assets/images/gallery/파이리.png"
+							<img src="/moyeo/resources/resource/assets/images/gallery/파이리.png"
 								width="150px" height="110px" style="magin: 5px 5px">파이리 <a
 								href="#">[상세보기]</a><br>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[회원]<br>
-							<img src="../../../resources/resource/assets/images/gallery/꼬부기.jpg"
+							<img src="/moyeo/resources/resource/assets/images/gallery/꼬부기.jpg"
 								width="150px" height="110px" style="magin: 5px 5px">꼬부기 <a
 								href="#">[상세보기]</a><br>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[회원]<br>
@@ -188,32 +188,5 @@ li {
 		</div>
 	</div>
 </div>
-<!-- END PHOTO BLOCK -->
-
-<!-- START MOVIE BLOCK -->
-
-<!-- END MOVIE BLOCK -->
-
-<!-- START REALTIME MEET BLOCK -->
-
-<!-- END REALTIME MEET BLOCK -->
-
-<!-- START RECOMMENDATION LOCATION BLOCK -->
-
-<!-- END RECOMMENDATION LOCATION BLOCK -->
-
-<!-- START EVENT BLOCK -->
-
-<!-- END EVENT BLOCK -->
-
-<!-- START ADVERTISE BLOCK -->
-
-<!-- END ADVERTISE BLOCK -->
-
-<!-- START REVIEW BLOCK -->
-
-<!-- END REVIEW BLOCK -->
-
-<!-- END ROW -->
 
 <%@ include file="../etc/footer.jsp"%>
