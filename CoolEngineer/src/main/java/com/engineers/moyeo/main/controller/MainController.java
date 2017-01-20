@@ -26,4 +26,9 @@ public class MainController {
 		
 		return "main/main";
 	}
+	
+	@RequestMapping("/hh")
+	public String hh() {
+		return "event/NewFile";
+	}
 }

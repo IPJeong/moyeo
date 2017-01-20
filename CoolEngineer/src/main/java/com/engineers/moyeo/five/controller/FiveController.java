@@ -18,9 +18,8 @@ public class FiveController {
 	@Autowired
 	FiveService fiveService;
 	
-	
-	@RequestMapping("/main")
-	public String main(){
-		return null;
+	@RequestMapping("/moim")
+	public String moin() {
+		return "moim/moim_write_form";
 	}
 }

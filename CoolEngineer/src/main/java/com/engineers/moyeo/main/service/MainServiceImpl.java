@@ -26,7 +26,8 @@ public class MainServiceImpl implements MainService{
 		dto.setBirth(new Timestamp(System.currentTimeMillis()));
 		dto.setEmail("woo@naver.com");
 		
-		int cnt = mainDao.insertTest(dto);
-		System.out.println("ServiceImpl 입력 결과값 : " + cnt);
+		/*int cnt = mainDao.insertTest(dto);*/
+		/*System.out.println("ServiceImpl 입력 결과값 : " + cnt);*/
+		
 	}
 }
