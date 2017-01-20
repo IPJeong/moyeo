@@ -103,7 +103,7 @@
 							</ul>
 						</li>
 						<li class="xn-openable"><a>모임게시판</a>
-							<ul>
+							<ul>  
 								<li><a href="../moim/moim_notice_board.jsp"><span class="fa fa-caret-right"></span>모임공지 게시판</a></li>
 								<li><a href="../moim/moim_greeting_board.jsp"><span class="fa fa-caret-right"></span>가입인사 게시판</a></li>
 								<li><a href="../moim/moim_review_board.jsp"><span class="fa fa-caret-right"></span>모임후기 게시판</a></li>
