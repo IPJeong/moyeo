@@ -18,8 +18,11 @@ public class FiveController {
 	@Autowired
 	FiveService fiveService;
 	
-	@RequestMapping("/moim")
+	// 모임후기작성 페이지
+	@RequestMapping("/postForm")
 	public String moin() {
-		return "moim/moim_write_form";
+		return "five/postForm";
 	}
+	
+	
 }

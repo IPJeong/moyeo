@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <style>
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
@@ -62,10 +61,12 @@ li {
 
 <!-- START ROW -->
 <div class="row">
+	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
+		
 
 	<!-- 모임페이지 사이드바 시작 -->
 	<%@include file="../etc/moim_side.jsp" %>
-	<!-- 모임페이지 사이드바 종료 -->	
+	<!-- 모임페이지 사이드바 종료 -->
 
 	<!-- START PHOTO BLOCK -->
 	<div class="col-md-56" style="margin-top: 10px;">

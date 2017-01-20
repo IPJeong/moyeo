@@ -52,13 +52,13 @@ left: -3px;
 
 </style>
 
-                <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li><a href="../category/category_hobby.jsp">모임</a></li>
-                    <li><a href="../moim/moim_main.jsp">중앙2팀</a></li>
-                    <li><a href="../moim/moim_main.jsp">모임공지 게시판</a></li>
-                    <li class="active">게시글 보기</li>
-                </ul>
+  <ul class="breadcrumb push-down-0">
+      <li><a href="../main/main.jsp">Home</a></li>
+      <li><a href="../category/category_hobby.jsp">모임</a></li>
+      <li><a href="../moim/moim_main.jsp">중앙2팀</a></li>
+      <li><a href="../moim/moim_main.jsp">모임공지 게시판</a></li>
+      <li class="active">게시글 보기</li>
+  </ul>
 
 <!-- START ROW -->
 <div class="row">
