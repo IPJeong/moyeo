@@ -1,14 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<style>
-@media only screen and (max-width: 1010px) {
-	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
-		{
-		width: 100%;
-		background-color: #FBFBFB;
-		padding: 0px 20px;
-	}
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>        
+        <!-- META SECTION -->
+        <title>Atlant - Responsive Bootstrap Admin Template</title>            
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!-- END META SECTION -->
+                        
+        <!-- CSS INCLUDE -->        
+        <link rel="stylesheet" type="text/css" id="theme" href="/moyeo/resources/resource/css/theme-default.css"/>
+        <!-- EOF CSS INCLUDE -->
+        <style>
+       @media only screen and (max-width: 1010px) {
+.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
+	{
+	width: 100%;
+	background-color: #FBFBFB;
+	padding: 0px 20px;
+}
 }
 
 @media only screen and (max-width: 1010px) {
@@ -56,69 +70,142 @@ li {
 }
 
 </style>
-
-<%@ include file="../etc/moim_header.jsp"%>
-
-<!-- START ROW -->
+    </head>
+    <body>
+    <%@include file="../etc/moim_header.jsp" %>
+    
+    <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
-		
-
-	<!-- 모임페이지 사이드바 시작 -->
-	<%@include file="../etc/moim_side.jsp" %>
-	<!-- 모임페이지 사이드바 종료 -->
-
-	<!-- START PHOTO BLOCK -->
+    
+    <%@include file="../etc/moim_side.jsp" %>
+    <!-- START PHOTO BLOCK -->
 	<div class="col-md-56" style="margin-top: 10px;">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="panel-title-box">
-					<h3>글쓰기</h3>
-				</div>
-			</div>
+		<div class="panel panel-default">     
+           <form class="form-horizontal">
+               <div class="panel panel-default">
+                   <div class="panel-heading">
+                       <h3 class="panel-title"><strong>One Column</strong> Layout</h3>
+                       <ul class="panel-controls">
+                           <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                       </ul>
+                   </div>
+                   <div class="panel-body">
+                       <p>This is non libero bibendum, scelerisque arcu id, placerat nunc. Integer ullamcorper rutrum dui eget porta. Fusce enim dui, pulvinar a augue nec, dapibus hendrerit mauris. Praesent efficitur, elit non convallis faucibus, enim sapien suscipit mi, sit amet fringilla felis arcu id sem. Phasellus semper felis in odio convallis, et venenatis nisl posuere. Morbi non aliquet magna, a consectetur risus. Vivamus quis tellus eros. Nulla sagittis nisi sit amet orci consectetur laoreet. Vivamus volutpat erat ac vulputate laoreet. Phasellus eu ipsum massa.</p>
+                   </div>
+                   <div class="panel-body">                                                                        
+                       
+                       <div class="form-group">
+                           <label class="col-md-3 col-xs-12 control-label">Text Field</label>
+                           <div class="col-md-6 col-xs-12">                                            
+                               <div class="input-group">
+                                   <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                   <input type="text" class="form-control"/>
+                               </div>                                            
+                               <span class="help-block">This is sample of text field</span>
+                           </div>
+                       </div>
+                       
+                       <div class="form-group">                                        
+                           <label class="col-md-3 col-xs-12 control-label">Password</label>
+                           <div class="col-md-6 col-xs-12">
+                               <div class="input-group">
+                                   <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
+                                   <input type="password" class="form-control"/>
+                               </div>            
+                               <span class="help-block">Password field sample</span>
+                           </div>
+                       </div>
+                       
+                       <div class="form-group">                                        
+                           <label class="col-md-3 col-xs-12 control-label">Datepicker</label>
+                           <div class="col-md-6 col-xs-12">
+                               <div class="input-group">
+                                   <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                   <input type="text" class="form-control datepicker" value="2015-11-01">                                            
+                               </div>
+                               <span class="help-block">Click on input field to get datepicker</span>
+                           </div>
+                       </div>
+                       
+                       <div class="form-group">
+                           <label class="col-md-3 col-xs-12 control-label">Textarea</label>
+                           <div class="col-md-6 col-xs-12">                                            
+                               <textarea class="form-control" rows="5"></textarea>
+                               <span class="help-block">Default textarea field</span>
+                           </div>
+                       </div>
+                       
+                       <div class="form-group">
+                           <label class="col-md-3 col-xs-12 control-label">Tags</label>
+                           <div class="col-md-6 col-xs-12">                                                                                            
+                               <input type="text" class="tagsinput" value="First,Second,Third"/>
+                               <span class="help-block">Default textarea field</span>
+                           </div>
+                       </div>
+                       
+                       <div class="form-group">
+                           <label class="col-md-3 col-xs-12 control-label">Select</label>
+                           <div class="col-md-6 col-xs-12">                                                                                            
+                               <select class="form-control select">
+                                   <option>Option 1</option>
+                                   <option>Option 2</option>
+                                   <option>Option 3</option>
+                                   <option>Option 4</option>
+                                   <option>Option 5</option>
+                               </select>
+                               <span class="help-block">Select box example</span>
+                           </div>
+                       </div>
+                       
+                       <div class="form-group">
+                           <label class="col-md-3 col-xs-12 control-label">File</label>
+                           <div class="col-md-6 col-xs-12">                                                                                                                                        
+                               <input type="file" class="fileinput btn-primary" name="filename" id="filename" title="Browse file"/>
+                               <span class="help-block">Input type file</span>
+                           </div>
+                       </div>
+                       
+                       <div class="form-group">
+                           <label class="col-md-3 col-xs-12 control-label">Checkbox</label>
+                           <div class="col-md-6 col-xs-12">                                                                                                                                        
+                               <label class="check"><input type="checkbox" class="icheckbox" checked="checked"/> Checkbox title</label>
+                               <span class="help-block">Checkbox sample, easy to use</span>
+                           </div>
+                       </div>
 
-			<br> <br> <br> <br> <br> <br> <br>
-			<div style="width: 60%; margin-left: 180px;">
-				<form class="form-horizontal">
-					<fieldset>
-						<div class="form-group">
-							<label for="" class="col-lg-2 control-label">아이디</label>
-							<div class="col-lg-10">
-								<h5>받아온 아이디값</h5>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="" class="col-lg-2 control-label">제목</label>
-							<div class="col-lg-10">
-								<input type="text" class="form-control" id="inputEmail"
-									placeholder="">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="" class="col-lg-2 control-label">첨부파일</label>
-							<div class="col-lg-10">
-								<button class="btn btn-default" type="submit">사진첨부</button>
-								<button class="btn btn-default" type="submit">동영상첨부</button>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="textArea" class="col-lg-2 control-label">Textarea</label>
-							<div class="col-lg-10">
-								<textarea class="form-control" rows="15" id="textArea"></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-lg-10 col-lg-offset-2">
-								<button type="submit" class="btn btn-primary">Submit</button>
-								<button type="reset" class="btn btn-default">Cancel</button>
-							</div>
-						</div>
-					</fieldset>
-				</form>
-			</div>
-
-		</div>
-	</div>
-</div>
-
-<%@ include file="../etc/footer.jsp"%>
+                   </div>
+                   <div class="panel-footer">
+                       <button class="btn btn-default">Clear Form</button>                                    
+                       <button class="btn btn-primary pull-right">Submit</button>
+                   </div>
+               </div>
+               </form>
+              </div>
+          </div>                    
+      </div>
+  </div>          
+              
+    <!-- START SCRIPTS -->
+<!--         START PLUGINS -->
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>                
+        
+        <script type='text/javascript' src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+		
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js"></script>                
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-select.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
+        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>        
+        <!-- END TEMPLATE -->
+    <!-- END SCRIPTS -->                   
+    </body>
+</html>
