@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../etc/header.jsp"%>
 
-<head>
+<head> 
 	<title>Q&A작성 양식</title>
 	
 <style>

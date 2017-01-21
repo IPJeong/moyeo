@@ -5,7 +5,7 @@
 
 <style>
 
-.btn-success {
+.btn-success { 
     background-color: white;
     border-color: #c5c4c6;
 	color: #82a3b9;

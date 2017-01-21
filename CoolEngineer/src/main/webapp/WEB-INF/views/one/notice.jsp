@@ -4,7 +4,7 @@
 
 <style>
 .col-md-12 {
-	width: 75%;
+	width: 75%; 
 	margin: auto;
 	float: none;
 }

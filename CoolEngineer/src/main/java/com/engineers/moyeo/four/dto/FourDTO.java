@@ -2,7 +2,7 @@ package com.engineers.moyeo.four.dto;
 
 import java.sql.Timestamp;
 
-public class FourDTO {
+public class FourDTO { 
 	
 	//공지사항 dto
 	private int group_noti_num;

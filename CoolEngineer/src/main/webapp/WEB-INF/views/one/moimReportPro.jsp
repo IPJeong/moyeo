@@ -3,5 +3,5 @@
 
 <script type="text/javascript">
 	alert("등록 성공");
-	window.location='../one/moimMain';
+	window.location='../one/moimMain'; 
 </script>

@@ -54,7 +54,7 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// 모임신고 페이지
+	// 모임신고 페이지 
 	@RequestMapping("/moimReport")
 	public String moimReport() {
 		System.out.println("모임신고 페이지");

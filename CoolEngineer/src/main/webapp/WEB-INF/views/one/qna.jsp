@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../etc/header.jsp"%>
-
+ 
 <style>
 .col-md-12 {
 	width: 75%;
