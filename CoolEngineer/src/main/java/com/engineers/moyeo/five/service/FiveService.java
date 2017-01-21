@@ -5,5 +5,5 @@ import org.springframework.ui.Model;
 public interface FiveService {
 
 	public void main(Model model);
-	
+	public String postPro();
 }

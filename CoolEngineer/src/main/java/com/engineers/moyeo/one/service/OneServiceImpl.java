@@ -8,7 +8,8 @@ import com.engineers.moyeo.one.dao.OneDAO;
 @Service
 public class OneServiceImpl implements OneService{
 
-	
 	@Autowired
 	OneDAO oneDao;
+	
+	
 }

@@ -17,5 +17,12 @@ public class FiveServiceImpl implements FiveService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String postPro() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	
 }

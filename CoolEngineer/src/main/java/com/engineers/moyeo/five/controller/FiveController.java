@@ -18,11 +18,20 @@ public class FiveController {
 	@Autowired
 	FiveService fiveService;
 	
+	String viewPage;
+	
 	// 모임후기작성 페이지
 	@RequestMapping("/postForm")
 	public String moin() {
-		return "five/postForm";
+		viewPage = "five/postForm";
+		return viewPage;
 	}
-	//dddddddddd
+	
+	@RequestMapping("/postPro")	
+	public void postPro() {
+		fiveService.postPro();
+		
+	}
+	
 	
 }
