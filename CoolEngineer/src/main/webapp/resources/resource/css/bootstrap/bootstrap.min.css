@@ -2331,7 +2331,16 @@ pre code {
     	margin:auto;
     	width: 83%;
     }
-    
+    .col-md-6-4 {
+    	/* column-width:auto;
+    	column-count:2; */    	
+    	margin:auto;
+    	width: 83%;
+    	height:100%;
+    }
+    .col-md-6-5 {    	
+        width: 100%;
+    }
     .col-md-6 {    	
         width: 50%;
     }
