@@ -4,6 +4,6 @@ import org.springframework.ui.Model;
 
 public interface FiveService {
 
-	public void main(Model model);
-	public String postPro();
+	// 모임후기 등록 프로세스
+	public String postPro(Model model);
 }
