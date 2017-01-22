@@ -70,87 +70,93 @@ li {
 }
 
 </style>
-    </head>
-    <body>
-    <%@include file="../etc/moim_header.jsp" %>
+
+</head>
+<body>
+<%@include file="../etc/moim_header.jsp" %>
     
     <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
     
-    <%@include file="../etc/moim_side.jsp" %>
-    <!-- START PHOTO BLOCK -->
-	<div class="col-md-56" style="margin-top: 10px;">
-		<div class="panel panel-default">     
-           <form class="form-horizontal">
-               <div class="panel panel-default">
-                   <div class="panel-heading">
-                       <h3 class="panel-title"><strong>모임후기 작성</strong></h3>
-                   </div>
-                   <div class="panel-body">                                                                        
-                       
-                       <div class="form-group">
-                           <label class="col-md-3 col-xs-12 control-label">제목</label>
-                           <div class="col-md-6 col-xs-12">                                            
-                               <div class="input-group">
-                                   <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                   <input type="text" class="form-control"/>
-                               </div>                                            
-                           </div>
-                       </div>
-                       
-                       <div class="form-group">
-                           <label class="col-md-3 col-xs-12 control-label">후기내용</label>
-                           <div class="col-md-6 col-xs-12">                                            
-                               <textarea class="form-control" rows="20"></textarea>
-                               <span class="help-block">모임후기 내용</span>
-                           </div>
-                       </div>
-                       
-                       <div class="form-group">
-                           <label class="col-md-3 col-xs-12 control-label">태그</label>
-                           <div class="col-md-6 col-xs-12">                                                                                            
-                               <input type="text" class="tagsinput" value=""/>
-                           </div>
-                       </div>
-                       
-                       <div class="form-group">                                        
-                           <label class="col-md-3 col-xs-12 control-label">모임일자</label>
-                           <div class="col-md-6 col-xs-12">
-                               <div class="input-group">
-                                   <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                   <input type="text" class="form-control datepicker" value="2015-11-01">                                            
-                               </div>
-                           </div>
-                       </div>
-                       
-                       <div class="form-group">
-                           <label class="col-md-3 col-xs-12 control-label">사진</label>
-                           <div class="col-md-6 col-xs-12">                                                                                                                                        
-                               <input type="file" class="fileinput btn-primary" name="image" id="imgName" title="사진파일"/>
-                               <span class="help-block">사진을 선택하세요.</span>
-                           </div>
-                       </div>
-                       
-                       <div class="form-group">
-                           <label class="col-md-3 col-xs-12 control-label">동영상</label>
-                           <div class="col-md-6 col-xs-12">                                                                                                                                        
-                               <input type="file" class="fileinput btn-primary" name="video" id="vedioName" title="동영상파일"/>
-                               <span class="help-block">동영상을 선택하세요.</span>
-                           </div>
-                       </div>
-                       
-                   </div>
-                   <div class="panel-footer">
-                       <button class="btn btn-default">취소</button>                                    
-                       <button class="btn btn-primary pull-right">작성</button>
-                   </div>
-               </div>
-               </form>
-              </div>
-          </div>                    
-      </div>
-  </div>          
+	    <%@include file="../etc/moim_side.jsp" %>
+	    <!-- START PHOTO BLOCK -->
+		<div class="col-md-56" style="margin-top: 10px;">
+			<div class="panel panel-default">     
+	           <form class="form-horizontal" action="postPro" method="post" enctype="multipart/form-data">
+	               <div class="panel panel-default">
+	                   <div class="panel-heading">
+	                       <h3 class="panel-title"><strong>모임후기 작성</strong></h3>
+	                   </div>
+	                   <div class="panel-body">                                                                        
+	                       
+	                       <div class="form-group">
+	                           <label class="col-md-3 col-xs-12 control-label">제목</label>
+	                           <div class="col-md-6 col-xs-12">                                            
+	                               <div class="input-group">
+	                                   <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+	                                   <input type="text" class="form-control" name="post_title"/>
+	                               </div>                                            
+	                           </div>
+	                       </div>
+	                       
+	                       <div class="form-group">
+	                           <label class="col-md-3 col-xs-12 control-label">후기내용</label>
+	                           <div class="col-md-6 col-xs-12">                                            
+	                               <textarea class="form-control" rows="20" name="post_content"></textarea>
+	                               <span class="help-block">모임후기 내용</span>
+	                           </div>
+	                       </div>
+	                       
+	                       <div class="form-group">
+	                           <label class="col-md-3 col-xs-12 control-label">태그</label>
+	                           <div class="col-md-6 col-xs-12">                                                                                            
+	                               <input type="text" class="tagsinput" name="post_tag" />
+	                           </div>
+	                       </div>
+	                       
+	                       <div class="form-group" id="tagDiv">
+	                        	<label class="col-md-3 col-xs-12 control-label">태그1</label>
+                       			<input type="text" id="post_tag" onkeyup="tagVals(event)">
+	                       </div>
+	                       
+	                    <!--    <div class="form-group">                                        
+	                           <label class="col-md-3 col-xs-12 control-label">모임일자</label>
+	                           <div class="col-md-6 col-xs-12">
+	                               <div class="input-group">
+	                                   <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+	                                   <input type="text" class="form-control datepicker" value="2015-11-01">                                            
+	                               </div>
+	                           </div>
+	                       </div> -->
+	                       
+	                       <div class="form-group">
+	                           <label class="col-md-3 col-xs-12 control-label">사진</label>
+	                           <div class="col-md-6 col-xs-12">                                                                                                                                        
+	                               <input type="file" class="fileinput btn-primary" name="images" id="img" title="사진파일"/>
+	                               <span class="help-block">사진을 선택하세요.</span>
+	                           </div>
+	                       </div>
+	                       
+	                       <div class="form-group">
+	                           <label class="col-md-3 col-xs-12 control-label">동영상</label>
+	                           <div class="col-md-6 col-xs-12">                                                                                                                                        
+	                               <input type="file" class="fileinput btn-primary" name="videos" id="vedio" title="동영상파일"/>
+	                               <span class="help-block">동영상을 선택하세요.</span>
+	                           </div>
+	                       </div>
+	                       
+	                   </div>
+	                   <div class="panel-footer">
+	                       <button class="btn btn-default" type="reset">취소</button>                                    
+	                       <button class="btn btn-primary pull-right" type="submit">작성</button>
+	                   </div>
+	               </div>
+          		</form>
+             </div>
+         </div>                    
+     </div>
+ </div>          
               
     <!-- START SCRIPTS -->
 <!--         START PLUGINS -->
@@ -171,6 +177,8 @@ li {
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
         <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>        
         <!-- END TEMPLATE -->
+        
+        <script type="text/javascript" src="/moyeo/resources/customScript/five.js"></script>
     <!-- END SCRIPTS -->                   
     </body>
 </html>

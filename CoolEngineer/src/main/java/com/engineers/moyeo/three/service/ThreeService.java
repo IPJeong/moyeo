@@ -1,5 +1,8 @@
 package com.engineers.moyeo.three.service;
 
-public interface ThreeService {
+import org.springframework.ui.Model;
 
+public interface ThreeService {
+	
+	public String faq(Model model);
 }

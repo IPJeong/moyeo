@@ -25,8 +25,7 @@
 <!-- END PLUGINS -->
 
 <!-- START THIS PAGE PLUGINS-->
-<script type='text/javascript'
-	src="/moyeo/resources/resource/js/plugins/icheck/icheck.min.js"></script>
+<script type='text/javascript' src="/moyeo/resources/resource/js/plugins/icheck/icheck.min.js"></script>
 <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
