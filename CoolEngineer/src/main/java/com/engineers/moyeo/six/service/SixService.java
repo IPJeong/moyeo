@@ -15,6 +15,7 @@ public interface SixService {
 	//공지-글쓰기 처리
 	public void noticeWritePro(Model model);
 
+
 	//공지-글수정
 	public void noticeModify(Model model);
 
@@ -23,4 +24,10 @@ public interface SixService {
 
 	//공지-글삭제
 	public void noticeDelete(Model model);
+	
+	
+	
+	//모임-모임등록
+	public void moim_register(Model model);
+
 }
