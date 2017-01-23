@@ -3,15 +3,15 @@
 
 
 <%@ include file="../etc/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
 li {
-float:left;
-margin: 1px 1px 1px;
-list-style: none;
-left: -3px;
+	float: left;
+	margin: 1px 1px 1px;
+	list-style: none;
+	left: -3px;
 }
-
 </style>
 
 <!-- START ROW -->
@@ -22,8 +22,7 @@ left: -3px;
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<a href="../member/login.jsp"><h3>로그인</h3></a>
-					<span>설명</span>
+					<a href="../member/login.jsp"><h3>로그인</h3></a> <span>설명</span>
 				</div>
 			</div>
 			<div class="panel-body padding-0">
@@ -73,13 +72,27 @@ left: -3px;
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<a href="../customer-support/notice.jsp"><h3>공지</h3></a>
-					<span>설명</span>
+					<h3>
+						공지사항 &nbsp;&nbsp;<a class="fa fa-plus-square-o"
+							href="../six/customer-support/notice"><font size="2">더보기</font></a>
+					</h3>
 				</div>
 			</div>
 			<div class="panel-body padding-0">
 				<div class="chart-holder" id="dashboard-donut-1"
-					style="height: 200px;"></div>
+					style="height: 200px;">
+					<ul>
+						<br>
+						<c:forEach var="dto" items="${dtos}" begin="0" end="5">
+							<li style="float:none;"><a
+								href="../six/customer-support/notice_content?noti_num=${dto.noti_num}&pageNum=${pageNum}">
+							<h3>${dto.noti_title}</h3>
+							</a></li>
+						</c:forEach>
+					</ul>
+
+
+				</div>
 			</div>
 		</div>
 	</div>
@@ -112,25 +125,54 @@ left: -3px;
 				</div>
 			</div>
 			<div class="panel-body padding-0">
-				<div class="chart-holder" id="dashboard-bar-1"
-					style="height: 10px;"></div>
+				<div class="chart-holder" id="dashboard-bar-1" style="height: 10px;"></div>
 				<ul>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/nature-1.jpg" width="100px" height="75px"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/music-1.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/girls-1.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/nature-2.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/nature-2.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/space-1.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/music-2.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/nature-3.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/girls-2.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/space-2.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/nature-4.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/music-3.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/nature-6.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/girls-3.jpg" width="100" height="75"></li>
-					<li><img src="/moyeo/resources/resource/assets/images/gallery/music-5.jpg" width="100" height="75"></li>
-				
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/nature-1.jpg"
+						width="100px" height="75px"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/music-1.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/girls-1.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/nature-2.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/nature-2.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/space-1.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/music-2.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/nature-3.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/girls-2.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/space-2.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/nature-4.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/music-3.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/nature-6.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/girls-3.jpg"
+						width="100" height="75"></li>
+					<li><img
+						src="/moyeo/resources/resource/assets/images/gallery/music-5.jpg"
+						width="100" height="75"></li>
+
 				</ul>
 			</div>
 		</div>
@@ -147,14 +189,17 @@ left: -3px;
 				</div>
 			</div>
 			<div class="panel-body padding-0">
-				<div class="chart-holder" id="dashboard-bar-1"
-					style="height: 10px;"></div>
+				<div class="chart-holder" id="dashboard-bar-1" style="height: 10px;"></div>
 				<ul>
-					<li><video src="/moyeo/resources/resource/assets/video/12.mp4" widht="200px" height="150px" controls></video>  </li>
-					<li><video src="/moyeo/resources/resource/assets/video/12.mp4" widht="200px" height="150px" controls></video>  </li>	
-					<li><video src="/moyeo/resources/resource/assets/video/12.mp4" widht="200px" height="150px" controls></video>  </li>
-					<li><video src="/moyeo/resources/resource/assets/video/12.mp4" widht="200px" height="150px" controls></video>  </li>
-				</ul>	
+					<li><video src="/moyeo/resources/resource/assets/video/12.mp4"
+							widht="200px" height="150px" controls></video></li>
+					<li><video src="/moyeo/resources/resource/assets/video/12.mp4"
+							widht="200px" height="150px" controls></video></li>
+					<li><video src="/moyeo/resources/resource/assets/video/12.mp4"
+							widht="200px" height="150px" controls></video></li>
+					<li><video src="/moyeo/resources/resource/assets/video/12.mp4"
+							widht="200px" height="150px" controls></video></li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -182,8 +227,7 @@ left: -3px;
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<a href="../places/places.jsp"><h3>추천장소</h3></a>
-					<span>설명</span>
+					<a href="../places/places.jsp"><h3>추천장소</h3></a> <span>설명</span>
 				</div>
 			</div>
 			<div class="panel-body padding-0">
@@ -199,8 +243,7 @@ left: -3px;
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<a href="../event/ing-event.jsp"><h3>이벤트</h3></a>
-					<span>설명</span>
+					<a href="../event/ing-event.jsp"><h3>이벤트</h3></a> <span>설명</span>
 				</div>
 			</div>
 			<div class="panel-body padding-0">
