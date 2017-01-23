@@ -21,6 +21,9 @@ public class FiveController {
 	@Autowired
 	FiveService fiveService;
 	
+	// 업데이트
+	
+	
 	String viewPage;
 	
 	// 모임후기작성 페이지
