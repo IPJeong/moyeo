@@ -9,9 +9,46 @@
 -->
 <mapper namespace="com.engineers.moyeo.six.dao.SixDAO">  <!-- 인터페이스 -->
     
-    <!-- 회원정보 입력 -->
-    <select id="idCheck" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM mvc_member WHERE id= #{id}    
-    </select>
-    
+    <!-- 공지 글 개수 구하기 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*) FROM noti_board
+	</select>
+		
+	<!-- 공지 게시글 목록 조회 -->
+	<select id="getArticles" parameterType="Map" resultType="com.engineers.moyeo.six.dto.NoticeDTO">
+		SELECT * FROM (SELECT noti_num, noti_title, noti_content, noti_date, noti_hit, manager_id, rownum rnum 
+		FROM (select * from noti_board ORDER BY noti_num DESC)) 
+		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} ORDER BY noti_num DESC
+	</select>
+	
+	<!-- 공지 상세조회, 수정내역 -->
+	<select id="getArticle" parameterType="int" resultType="com.engineers.moyeo.six.dto.NoticeDTO">
+		SELECT * FROM noti_board WHERE noti_num = #{noti_num}
+	</select>
+	
+	<!-- 공지 조회수 증가 -->
+	<update id="addReadCnt" parameterType="int">
+		UPDATE noti_board SET noti_hit = noti_hit + 1 WHERE noti_num = #{noti_num}
+	</update>
+	
+	<!-- 공지 글작성 -->
+	<insert id="insert" parameterType="com.engineers.moyeo.six.dto.NoticeDTO">
+		INSERT INTO noti_board VALUES(noti_board_seq.NEXTVAL, #{noti_title}, #{noti_content}, #{noti_date}, 0, #{manager_id})	
+	</insert>
+	
+	<!-- 공지 글수정 -->
+	<update id="update" parameterType="com.engineers.moyeo.six.dto.NoticeDTO">
+		UPDATE noti_board SET noti_title=#{noti_title}, noti_content=#{noti_content} WHERE noti_num=#{noti_num}
+	</update>
+	
+	<!-- 공지 글삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM noti_board WHERE noti_num=#{noti_num}
+	</delete> 
+	
+	<!-- 공지 전체글목록 조회-메인화면용 -->
+	<select id="getArticles_main" resultType="com.engineers.moyeo.six.dto.NoticeDTO">
+		SELECT * FROM noti_board ORDER BY noti_num DESC
+	</select>
+  
 </mapper>
