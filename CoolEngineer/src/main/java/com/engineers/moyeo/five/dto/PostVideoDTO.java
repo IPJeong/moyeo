@@ -1,6 +1,6 @@
 package com.engineers.moyeo.five.dto;
 
-public class PostVideo {
+public class PostVideoDTO {
 
 	// 동영상 번호
 	int video_num;

@@ -44,7 +44,7 @@ public class FiveController {
 		// 모임후기등록 프로세스
 		viewPage = fiveService.postPro(model);
 		
-		return "five/postForm";
+		return viewPage;
 	}
 
 }

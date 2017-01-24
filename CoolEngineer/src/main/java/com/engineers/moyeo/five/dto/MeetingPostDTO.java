@@ -6,10 +6,6 @@ public class MeetingPostDTO {
 
 	// 모임후기 글넘버
 	int post_num;
-	// 좋아요 수
-	int like_num;
-	// 모임번호
-	int group_num;
 	// 모임후기 제목
 	String post_title;
 	// 모임후기 내용
@@ -18,8 +14,12 @@ public class MeetingPostDTO {
 	String post_tag;
 	// 모임후기 작성일
 	Timestamp post_date;
+	// 좋아요 수
+	int like_num;
 	// 작성한 회원아이디
 	String mem_id;
+	// 모임번호
+	int group_num;
 	
 	public int getPost_num() {
 		return post_num;
