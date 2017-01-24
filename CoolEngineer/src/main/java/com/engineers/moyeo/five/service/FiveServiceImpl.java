@@ -1,23 +1,22 @@
 package com.engineers.moyeo.five.service;
 
-import java.io.File;
-import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.engineers.moyeo.five.dao.FiveDAO;
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.main.common.Code;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.engineers.moyeo.main.common.FileManager;
+import com.engineers.moyeo.main.model.FileForm;
 
 @Service
 public class FiveServiceImpl implements FiveService{
@@ -28,72 +27,63 @@ public class FiveServiceImpl implements FiveService{
 	
 	// 모임후기 등록 프로세스
 	@Override
-	public String postPro(Model model) {
-		HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
+	public String postPro(Model model) throws NullPointerException{
 		
-		String path = Code.imgPath;
+		Map<String, Object> map = model.asMap();
+		FileForm fileForm = (FileForm)map.get("fileForm");
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
-		File f = new File(path);
-		// 해당 경로가 존재하지 않으면 경로를 지정해준다.
-		if(!f.exists()) {
-			f.mkdirs();
-		}
+		// JSP로부터 데이터 받아오는 부분
+		String title = req.getParameter("post_title");
+		String content= req.getParameter("post_content");
+		String memId = (String)req.getSession().getAttribute("memId");
+		int groupNum = 1;
 		
-		int size = 1024 * 1024 * 500; // 500MB
-		int cnt = 1;
+		// DTO생성하여 데이터 삽입
+		MeetingPostDTO dto = new MeetingPostDTO();
+		dto.setPost_title(title);
+		dto.setPost_content(content);
+		dto.setPost_date(new Timestamp(System.currentTimeMillis()));
+		dto.setGroup_num(groupNum);
+		dto.setLike_num(0);
+		dto.setMem_id(memId);
 		
-		try {
-			MultipartRequest multi = new MultipartRequest(req, path, size, "UTF-8", new DefaultFileRenamePolicy());
+		// 업로드파일 관리
+		List<MultipartFile> files = fileForm.getFiles();
+		
+		List<String> picList = new ArrayList<>();
+		List<String> videoList = new ArrayList<>();
+		
+		for (MultipartFile multipartFile : files) {
 			
-			// 입력폼의 값을 받아서 모임후기 DTO에 넣어주는 부분
-			// 모임후기 제목
-			String post_title = multi.getParameter("post_title");
-			// 모임후기 내용
-			String post_content = multi.getParameter("post_content");
-			// 모임후기 태그
-			String post_tag = multi.getParameter("post_tag");
-			// 모임번호
-//			int group_num = Integer.parseInt(multi.getParameter("group_num"));
-			// 모임후기 dto 생성
-			MeetingPostDTO dto = new MeetingPostDTO();
+			String fileName = multipartFile.getOriginalFilename();
 			
-//			cnt = fiveDao.insertPost(dto);
-			
-			if(cnt == 1) {
-				System.out.println("모임후기 정상 등록됨");
+			if(fileName.trim().length()>4){
 				
-				// 넘어온 파일 이름을 받아온다.
-				Enumeration fileNames = multi.getFileNames();
-				String[] files = multi.getParameterValues("images");
-				System.out.println("dd : " + Arrays.deepToString(files));
-				String fileName = null;
+				// 모임후기 이미지 저장경로
+				String imgPath = Code.postImgPath;
+				// 모임후기 동영상 저장경로
+				String videoPath = Code.postVideoPath;
 				
-//				int num = dto.getPost_num();
-//				List<ImageInfoDTO> images = new ArrayList<>();
-//				// 여러개의 이미지 파일을 읽어들임
-				while(fileNames.hasMoreElements()) {
-					String str = (String)fileNames.nextElement();
-					System.out.println("파일명 : " + str);
-////					String p = "/uploadImage/";
-					String p = "/shop_image/";
-					fileName = multi.getFilesystemName(str);
-					System.out.println("fileName : " + fileName);
-//					if(fileName != null) {
-//						ImageInfoDTO iDto = new ImageInfoDTO();
-//						iDto.setProduct_num(num);
-//						iDto.setSavePath(p);
-//						iDto.setFileName(fileName);
-//						images.add(iDto);
-//					}
+				int type = FileManager.checkFileType(fileName);
+				String filename = null;
+				if(type == 1) {
+					filename = FileManager.saveFile(multipartFile, imgPath, fileName);
+					
+				} else if(type == 2) {
+					filename = FileManager.saveFile(multipartFile, videoPath, fileName);
+					
 				}
-//				int c = dao.addPictures(num, images);
-//				System.out.println("저장된 이미지 수 : " + c);
+				// 업로드 파일의 확장자
+				
+				
+
 			}
-		}catch(IOException e) {
-			e.printStackTrace();
 		}
 		
 		return null;
 	}
+
+
 
 }

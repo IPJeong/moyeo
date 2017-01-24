@@ -1,5 +1,7 @@
 package com.engineers.moyeo.five.dto;
 
+import java.sql.Timestamp;
+
 public class MeetingPostDTO {
 
 	// 모임후기 글넘버
@@ -15,7 +17,7 @@ public class MeetingPostDTO {
 	// 모임후기 태그
 	String post_tag;
 	// 모임후기 작성일
-	String post_date;
+	Timestamp post_date;
 	// 작성한 회원아이디
 	String mem_id;
 	
@@ -55,10 +57,10 @@ public class MeetingPostDTO {
 	public void setPost_tag(String post_tag) {
 		this.post_tag = post_tag;
 	}
-	public String getPost_date() {
+	public Timestamp getPost_date() {
 		return post_date;
 	}
-	public void setPost_date(String post_date) {
+	public void setPost_date(Timestamp post_date) {
 		this.post_date = post_date;
 	}
 	public String getMem_id() {
