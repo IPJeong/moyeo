@@ -34,8 +34,9 @@ public class FiveController {
 	// 모임후기작성 프로세스
 	@RequestMapping("/postPro")
 	public String postPro(HttpServletRequest req, Model model) {
-		
+		// 모델에 req객체를 삽입
 		model.addAttribute("req", req);
+		// 모임후기등록 프로세스
 		viewPage = fiveService.postPro(model);
 		return "five/postForm";
 	}
