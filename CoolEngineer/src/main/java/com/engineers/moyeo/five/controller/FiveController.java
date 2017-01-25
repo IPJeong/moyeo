@@ -14,7 +14,6 @@ import com.engineers.moyeo.main.model.FileForm;
 /**
  * 
  * @author 정일품
- *  안녕하세요.
  */
 @RequestMapping("/five")
 @Controller

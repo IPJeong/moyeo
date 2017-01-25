@@ -104,13 +104,13 @@ li {
 	                       <div class="form-group">
 	                           <label class="col-md-3 col-xs-12 control-label">태그</label>
 	                           <div class="col-md-6 col-xs-12">                                                                                            
-	                               <input type="text" class="tagsinput" name="post_tag" />
+	                               <input type="text" class="tagsinput" />
 	                           </div>
 	                       </div>
 	                       
 	                       <div class="form-group" id="tagDiv">
 	                        	<label class="col-md-3 col-xs-12 control-label">태그1</label>
-                       			<input type="text" id="post_tag" onkeyup="tagVals(event)">
+                       			<input type="text" id="post_tag" name="post_tag" onkeyup="tagVals(event)">
 	                       </div>
 	                       
 	                       <div class="form-group">

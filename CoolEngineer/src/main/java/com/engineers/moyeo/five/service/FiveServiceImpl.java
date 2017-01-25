@@ -1,7 +1,6 @@
 package com.engineers.moyeo.five.service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +45,11 @@ public class FiveServiceImpl implements FiveService{
 		String title = req.getParameter("post_title");
 		String content= req.getParameter("post_content");
 		String memId = (String)req.getSession().getAttribute("memId");
+		String post_tag = req.getParameter("post_tag");
 		int groupNum = 1;
 		
 		Timestamp post_date = new Timestamp(System.currentTimeMillis());
+		
 		// DTO생성하여 데이터 삽입
 		MeetingPostDTO dto = new MeetingPostDTO();
 		dto.setPost_title(title);
@@ -57,11 +58,12 @@ public class FiveServiceImpl implements FiveService{
 		dto.setGroup_num(groupNum);
 		dto.setLike_num(0);
 		dto.setMem_id(memId);
+		dto.setPost_tag(post_tag);
 		cnt = fiveDao.insertPost(dto);
 		
 		Map<String, Object> dataMap = new HashMap<>();
 		dataMap.put("group_num", groupNum);
-		dataMap.put("reg_date", post_date);
+		dataMap.put("post_date", post_date);
 		
 		int post_num = fiveDao.getPostNum(dataMap);
 		
