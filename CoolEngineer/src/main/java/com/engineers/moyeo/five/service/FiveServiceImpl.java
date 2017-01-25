@@ -20,6 +20,7 @@ import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
 
+
 @Service
 public class FiveServiceImpl implements FiveService{
 	
@@ -27,9 +28,87 @@ public class FiveServiceImpl implements FiveService{
 	FiveDAO fiveDao;
 
 	
+	// 모임후기 리스트 출력 프로세스
+	@Override
+	public String postList(Model model) throws NumberFormatException, NullPointerException{
+		
+		HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
+		// 모임번호를 받아옴
+		//int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		int group_num = 1;
+		
+		int pageSize = 5;		//	한 페이지당 출력한 글 개수
+		int pageBlock = 5;		//	출력할 페이지 개수
+		
+		int cnt = 0;			// 글 개수
+		int start = 0;			// 현재 페이지 시작번호 : rownum
+		int end	= 0;			// 현재 페이지지 끝번호 : rownum
+		int number = 0;			// 출력할 글 번호
+		String pageNum = null;	// 페이지 번호
+		int currentPage = 0;	// 현재 페이지
+		
+		int pageCount = 0;		// 페이지 개수
+		int startPage = 0;		// 시작 페이지
+		int endPage = 0;		// 마지막 페이지
+		
+		// 글개수 구하기
+		cnt = fiveDao.getPostCnt(group_num);
+		
+		// 페이지번호를 받아옴
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";		// 첫페이지를 1페이지로 설정
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = ( cnt / pageSize ) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage -1) * pageSize + 1;	// (5-1) * 10 +1;
+		end = start + pageSize -1; // 41 + 10 -1 = 50;
+		
+		if(end > cnt) end = cnt;
+		
+		// 글번호
+		number = cnt - (currentPage -1) * pageSize;
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("group_num", group_num);
+		map.put("start", start);
+		map.put("end", end);
+		
+		// 모임후기 리스트를 가져옴
+		List<MeetingPostDTO> dtos = fiveDao.getPostList(map);
+		System.out.println("dto size : " + dtos.size());
+		
+		req.setAttribute("dtos", dtos);
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1;	// (5 / 3) * 3 + 1 = 4
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;	//(5 % 3)
+		
+		endPage = startPage + pageBlock - 1;	// 4 + 3 - 1 = 6;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number);
+		model.addAttribute("pageNum", pageNum);
+		
+		if(cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		return "five/postList";
+	}
+	
+	
 	// 모임후기 등록 프로세스
 	@Override
-	public String postPro(Model model) throws NullPointerException{
+	public String postPro(Model model) {
 		
 		// 모임후기의 등록 결과를 반환하는 숫자값
 		int cnt = 0;
@@ -77,6 +156,7 @@ public class FiveServiceImpl implements FiveService{
 			
 			if(fileName.trim().length()>4){
 				
+				String rootPath = Code.rootPath;
 				// 모임후기 이미지 저장경로
 				String imgPath = Code.postImgPath;
 				// 모임후기 동영상 저장경로
@@ -87,7 +167,7 @@ public class FiveServiceImpl implements FiveService{
 				
 				if(type == 1) {
 					// 파일을 저장 후 저장된 파일명을 반환
-					filename = FileManager.saveFile(multipartFile, imgPath, fileName);
+					filename = FileManager.saveFile(multipartFile, rootPath + imgPath, fileName);
 					PostPictureDTO picDto = new PostPictureDTO();
 					picDto.setPic_path(imgPath);
 					picDto.setPic_name(filename);
@@ -97,7 +177,7 @@ public class FiveServiceImpl implements FiveService{
 					fiveDao.insertPostPic(picDto);
 					
 				} else if(type == 2) {
-					filename = FileManager.saveFile(multipartFile, videoPath, fileName);
+					filename = FileManager.saveFile(multipartFile, rootPath + videoPath, fileName);
 					PostVideoDTO videoDto = new PostVideoDTO();
 					videoDto.setVideo_path(videoPath);
 					videoDto.setVideo_name(filename);
@@ -106,7 +186,6 @@ public class FiveServiceImpl implements FiveService{
 					videoDto.setPost_num(post_num);
 					fiveDao.insertPostVideo(videoDto);
 				}
-				
 			}
 		}
 		
@@ -114,7 +193,6 @@ public class FiveServiceImpl implements FiveService{
 		
 		return "five/postPro";
 	}
-
 
 
 }

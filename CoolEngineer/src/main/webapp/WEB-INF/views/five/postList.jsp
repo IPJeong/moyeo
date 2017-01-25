@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>        
@@ -72,10 +73,52 @@ li {
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
     
 	    <%@include file="../etc/moim_side.jsp" %>
-	    <!-- START PHOTO BLOCK -->
-		
-		
-		                
+	    
+	     <!-- START RESPONSIVE TABLES -->
+      <div style="margin-top:12px; width:1250px; height:860px;" class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">모임후기 게시판</h3>
+          </div>
+          
+          <div class="panel-body panel-body-table">
+
+              <div class="table-responsive">
+                  <table class="table table-bordered table-striped table-actions">
+                      <thead>
+                      	  <c:forEach var="dto" items="dtos">
+	                          <tr>
+	                              <th width="50">${number}</th>
+	                              <c:set var="number" value="${number-1}"/>
+	                              <th width="450px;">${dto.post_title}</th>
+	                              <th width="150px;"><img alt="미리보기 화면입니다." src=""></th>
+	                              <th width="100">조회수</th>
+	                              <th width="100">좋아한 사람수</th>
+	                              <th width="100">작성일</th>
+	                              <th width="120">관리</th>
+	                          </tr>
+                          </c:forEach>
+                      </thead>
+                      <tbody>                                            
+                          <tr id="trow_1">
+                              <td class="text-center">1</td>
+                              <td><strong>John Doe</strong></td>
+                              <td><span class="label label-success">New</span></td>
+                              <td><span class="label label-success">New</span></td>
+                              <td>$430.20</td>
+                              <td>24/09/2015</td>
+                              <td>
+                                  <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
+                                  <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-times"></span></button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>                                
+
+          </div>
+      </div>                                                
+
+        <!-- END RESPONSIVE TABLES -->
      </div>
  </div>          
               

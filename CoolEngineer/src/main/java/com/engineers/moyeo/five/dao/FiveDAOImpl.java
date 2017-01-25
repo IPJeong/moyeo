@@ -1,5 +1,6 @@
 package com.engineers.moyeo.five.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -19,6 +20,21 @@ public class FiveDAOImpl implements FiveDAO{
 	private SqlSession sqlSession;
 	
 	DataSource dataSource;	// 커넥션 객체를 보관
+
+	// 모임의 글개수를 반환하는 메서드
+	@Override
+	public int getPostCnt(int group_num) {
+		
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getPostCnt(group_num);
+	}
+
+	// 모임의 글 리스트를 가져오는 메서드
+	@Override
+	public List<MeetingPostDTO> getPostList(Map<String, Integer> map) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getPostList(map);
+	}
 
 	// 모임후기 데이터를 삽입하는 메서드
 	@Override

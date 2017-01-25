@@ -1,6 +1,7 @@
 package com.engineers.moyeo.five.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,5 +46,24 @@ public class FiveController {
 		
 		return viewPage;
 	}
+	
+	// 모임후기 게시판
+	@RequestMapping("/postList")
+	public String postList(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		try {
+			viewPage = fiveService.postList(model);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println("넘버포멧 예외발생");
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println("널포인트 예외발생");
+		}
+		
+		return "five/postList";
+	}
+	
 
 }

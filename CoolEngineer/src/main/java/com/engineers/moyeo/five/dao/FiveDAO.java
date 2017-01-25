@@ -1,5 +1,6 @@
 package com.engineers.moyeo.five.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
@@ -8,6 +9,11 @@ import com.engineers.moyeo.five.dto.PostVideoDTO;
 
 public interface FiveDAO {
 
+	// 모임후기의 글 개수 구하기
+	public int getPostCnt(int group_num);
+	// 모임후기의 글목록 가져오기
+	public List<MeetingPostDTO> getPostList(Map<String, Integer> map);
+	
 	// 모임후기 등록
 	public int insertPost(MeetingPostDTO dto);
 	// 모임후기번호 조회
@@ -16,4 +22,5 @@ public interface FiveDAO {
 	public int insertPostPic(PostPictureDTO dto);
 	// 모임후기의 동영상 파일을 등록
 	public int insertPostVideo(PostVideoDTO dto);
+	
 }
