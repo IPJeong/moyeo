@@ -24,4 +24,10 @@ public interface Code {
 	// 장소사진의 저장경로
 	public final static String placeImgPath = "placeImg\\";
 	
+	
+	// 숫자타입변환 예외 발생 메시지
+	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
+	// 널값 예외 발생 메시지
+	public final static String nullPoExceptionMsg = "========== NullPoint Exception ==========";
+	
 }
