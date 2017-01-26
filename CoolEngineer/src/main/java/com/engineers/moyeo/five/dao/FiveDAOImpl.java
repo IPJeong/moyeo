@@ -63,7 +63,28 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
 		return dao.insertPostVideo(dto);
 	}
+
+	// 모임후기의 상세정보를 조회
+	@Override
+	public MeetingPostDTO getPostDetail(int post_num) {
+		
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.getPostDetail(post_num);
+	}
 	
+	// 모임후기의 사진을 조회
+	@Override
+	public List<PostPictureDTO> getPostPics(int post_num) {
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.getPostPics(post_num);
+	}
+
+	// 모임후기의 동영상을 조회
+	@Override
+	public List<PostVideoDTO> getPostVideos(int post_num) {
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.getPostVideos(post_num);
+	}
 	
 	
 	

@@ -22,5 +22,11 @@ public interface FiveDAO {
 	public int insertPostPic(PostPictureDTO dto);
 	// 모임후기의 동영상 파일을 등록
 	public int insertPostVideo(PostVideoDTO dto);
+	// 모임후기의 상세정보를 조회
+	public MeetingPostDTO getPostDetail(int post_num);
+	// 모임후기의 사진을 조회
+	public List<PostPictureDTO> getPostPics(int post_num);
+	// 모임후기의 동영상을 조회
+	public List<PostVideoDTO> getPostVideos(int post_num);
 	
 }
