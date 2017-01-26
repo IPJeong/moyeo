@@ -5,21 +5,23 @@ import java.sql.Timestamp;
 public class MeetingPostDTO {
 
 	// 모임후기 글넘버
-	int post_num;
+	private int post_num;
 	// 모임후기 제목
-	String post_title;
+	private String post_title;
 	// 모임후기 내용
-	String post_content;
+	private String post_content;
 	// 모임후기 태그
-	String post_tag;
+	private String post_tag;
 	// 모임후기 작성일
-	Timestamp post_date;
+	private Timestamp post_date;
 	// 좋아요 수
-	int like_num;
+	private int like_num;
+	// 모임후기 조회수
+	private int post_hit;
 	// 작성한 회원아이디
-	String mem_id;
+	private String mem_id;
 	// 모임번호
-	int group_num;
+	private int group_num;
 	
 	public int getPost_num() {
 		return post_num;
@@ -63,10 +65,22 @@ public class MeetingPostDTO {
 	public void setPost_date(Timestamp post_date) {
 		this.post_date = post_date;
 	}
+	public int getPost_hit() {
+		return post_hit;
+	}
+	public void setPost_hit(int post_hit) {
+		this.post_hit = post_hit;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
+	}
+	
+	@Override
+	public String toString() {
+		return "[ post_num : " + post_num + ", post_title : " + post_title + ", post_content : " + post_content + ", post_tag : " + post_tag +
+				", post_date : " + post_date +", like_num : " + like_num + ", post_hit : " + post_hit + ", mem_id : " + mem_id + ", group_num : " + group_num;
 	}
 }
