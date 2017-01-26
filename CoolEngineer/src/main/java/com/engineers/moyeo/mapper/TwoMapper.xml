@@ -21,9 +21,9 @@
     <select id="getSuggestionList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.SuggestionDTO">
 		SELECT * 
 		FROM (SELECT sug_num, sug_title, sug_content, sug_date, re_email, sug_status, manager_id, sol_content, sol_date, mem_id, rownum rnum 
-			  FROM (SELECT * FROM suggestion)
+			  FROM (SELECT * FROM suggestion WHERE sug_status = #{sug_status})
 			 ) 
- 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND sug_status = #{sug_status}
+ 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
 	
 	<select id="readSuggestion" parameterType="int" resultType="com.engineers.moyeo.two.dto.SuggestionDTO">

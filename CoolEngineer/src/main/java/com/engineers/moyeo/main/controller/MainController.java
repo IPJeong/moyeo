@@ -20,23 +20,36 @@ public class MainController {
 
 	@Autowired
 	com.engineers.moyeo.main.service.MainService mainService;
-
+	String viewPage;
+	
 	// 모여의 메인페이지를 로드하는 메서드
 	@RequestMapping("/home")
 	public String home(HttpServletRequest req, Model model){
 		model.addAttribute("req", req);
-		
-		mainService.main();
-		System.out.println("입력 완료");
-		
-		mainService.main_notice(model);
-				
-		return "main/main/main";
+		System.out.println("메인페이지 로드");
+		return "main/main";
 	}
 	
 	@RequestMapping("/category/category_hobby")
-	public String hh() {
+	public String categoryHobby() {
 		System.out.println("카테고리 하비");
 		return "common/category/category_hobby";
+	}
+	
+	//
+	@RequestMapping("/memberLoginForm") 
+	public String memberLoginForm(HttpServletRequest req, Model model) {
+		System.out.println("로그인 페이지");
+		viewPage = "main/memberLoginForm";
+		return viewPage;
+	}
+	
+	//
+	@RequestMapping("/memberLoginPro")
+	public String loginPro(HttpServletRequest req, Model model) {
+		System.out.println("로그인 프로세스 호출");
+		model.addAttribute("req", req);
+		viewPage = mainService.memberLoginPro(model);
+		return viewPage;
 	}
 }

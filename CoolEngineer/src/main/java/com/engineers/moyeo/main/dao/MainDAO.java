@@ -1,9 +1,10 @@
 package com.engineers.moyeo.main.dao;
 
-import com.engineers.moyeo.main.dto.MemberInfoDTO;
+import java.util.Map;
+
 
 public interface MainDAO {
 
-	public int insertTest(MemberInfoDTO dto);
-	
+	public int idCheck(String mem_id);
+	public int pwdCheck(Map<String, String> map);
 }

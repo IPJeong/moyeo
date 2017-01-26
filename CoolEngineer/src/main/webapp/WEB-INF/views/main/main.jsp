@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@ include file="../../etc/header.jsp"%>
+<%@ include file="../etc/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
@@ -22,7 +22,12 @@ li {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<a href="../member/login.jsp"><h3>로그인</h3></a> <span>설명</span>
+					<c:if test="${sessionScope.mem_id == null}">
+					<a href="/moyeo/main/memberLoginForm"><h3>로그인</h3></a> <span>설명</span>
+					</c:if>
+					<c:if test="${sessionScope.mem_id != null}">
+					<h3>${sessionScope.mem_id}님 로그인됨</h3> <span>설명</span>
+					</c:if>
 				</div>
 			</div>
 			<div class="panel-body padding-0">
@@ -288,4 +293,4 @@ li {
 </div>
 <!-- END ROW -->
 
-<%@ include file="../../etc/footer.jsp"%>
+<%@ include file="../etc/footer.jsp"%>

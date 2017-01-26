@@ -54,4 +54,28 @@ public class MainServiceImpl implements MainService{
 			req.setAttribute("pageNum", 1);
 		}
 	}
+	
+	@Override
+	public String memberLoginPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest) map.get("req");
+		
+		String mem_id = req.getParameter("mem_id");
+		String passwd = req.getParameter("passwd");
+
+		Map<String, String> daoMap = new HashMap<String, String>(); 
+		daoMap.put("mem_id", mem_id);
+		daoMap.put("passwd", passwd);
+		
+		int cnt = mainDao.pwdCheck(daoMap);
+		
+		if(cnt == 1) {
+			req.getSession().setAttribute("mem_id", mem_id);
+			model.addAttribute("cnt", cnt);
+			return "main/memberLoginPro";
+		} else {
+			model.addAttribute("cnt", cnt);
+			return "main/memberLoginPro";	
+		}
+	}
 }

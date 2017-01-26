@@ -13,4 +13,12 @@
     	INSERT INTO member_info (mem_id, passwd, name, address, tel, birth, email) values (#{mem_id}, #{passwd}, #{name}, #{address}, #{tel}, #{birth}, #{email})
     </insert>
     
+    <select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member_info WHERE mem_id= #{mem_id}
+	</select>
+	
+	<select id="pwdCheck" parameterType="Map" resultType="int">
+		Select COUNT(*) FROM member_info WHERE mem_id= #{mem_id} AND passwd = #{passwd}
+	</select>
+	
 </mapper>
