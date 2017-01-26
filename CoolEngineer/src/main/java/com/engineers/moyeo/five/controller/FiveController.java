@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.engineers.moyeo.five.service.FiveService;
+import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.model.FileForm;
 
 /**
@@ -25,17 +26,44 @@ public class FiveController {
 	
 	String viewPage;
 	
+	// 모임후기 게시판
+	@RequestMapping("/postList")
+	public String postList(HttpServletRequest req, Model model) {
+		
+		System.out.println("모임후기 리스트 페이지 요청");
+		
+		model.addAttribute("req", req);
+		try {
+			// 모임후기 리스트 로드 프로세스 실행
+			viewPage = fiveService.postList(model);
+			
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		
+		return "five/postList";
+	}
+	
 	// 모임후기작성 페이지
 	@RequestMapping("/postForm")
 	public String postForm() {
+		
+		System.out.println("모임후기 작성 페이지 요청");
+		
 		viewPage = "five/postForm";
 		return viewPage;
 	}
-	
+		
 
 	// 모임후기작성 프로세스
 	@RequestMapping("/postPro")
 	public String postPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
+		
+		System.out.println("모임후기 작성 프로세스 요청");
 		
 		req.getSession().setAttribute("memId", "guest");
 		// 모델에 req객체를 삽입
@@ -47,22 +75,24 @@ public class FiveController {
 		return viewPage;
 	}
 	
-	// 모임후기 게시판
-	@RequestMapping("/postList")
-	public String postList(HttpServletRequest req, Model model) {
+	// 모임후기 상세보기
+	@RequestMapping("/postDetail")
+	public String postDetail(HttpServletRequest req, Model model) {
+		
+		System.out.println("모임후기 상세보기 페이지 요청");
 		
 		model.addAttribute("req", req);
 		try {
-			viewPage = fiveService.postList(model);
+			// 모임후기 상세보기 프로세스 실행
+			viewPage = fiveService.postDetail(model);
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
-			System.out.println("넘버포멧 예외발생");
+			System.out.println(Code.numForExceptionMsg);
 		} catch(NullPointerException e) {
 			e.printStackTrace();
-			System.out.println("널포인트 예외발생");
+			System.out.println(Code.nullPoExceptionMsg);
 		}
-		
-		return "five/postList";
+		return viewPage;
 	}
 	
 
