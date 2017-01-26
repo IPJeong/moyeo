@@ -10,9 +10,7 @@ function sugStatusSelect() {
 	for(var i=0; i<select.length; i++) {
 		if (select[i].value == "Y") {
 			window.location = "suggestionList?sug_status=Y";
-		}
-		
-		if (select[i].value == "N") {
+		} else {
 			window.location = "suggestionList?sug_status=N";
 		}
 	}

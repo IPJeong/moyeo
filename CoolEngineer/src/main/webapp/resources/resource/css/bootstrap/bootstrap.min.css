@@ -2347,6 +2347,13 @@ pre code {
     .col-md-6-5 {    	
         width: 100%;
     }
+    .col-md-6-6{
+    	position: absolute;
+    	left:25%;
+		top:25%;
+    	margin:auto;
+    	width:50%
+    }
     .col-md-6 {    	
         width: 50%;
     }
