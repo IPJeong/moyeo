@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../etc/header.jsp"%>
+<%@ include file="../../etc/header.jsp"%>
 
 <style>
 
-.btn-success { 
+.btn-success {
     background-color: white;
     border-color: #c5c4c6;
 	color: #82a3b9;
@@ -152,7 +152,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body profile">
 					<div class="profile-data">
-						<div class="profile-data-name"><a href="../one/qna">Q&A</a></div>
+						<div class="profile-data-name"><a href="../qna/one/qna">Q&A</a></div>
 						
 					</div>
 				</div>
@@ -215,4 +215,4 @@
 </div>
 <!-- END PAGE CONTENT WRAPPER -->
 
-<%@ include file="../etc/footer.jsp"%>
+<%@ include file="../../etc/footer.jsp"%>  

@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../etc/header.jsp"%>
+
+<%@ include file="../../etc/moim_header.jsp"%>
 
 <style>
 @media only screen and (max-width: 1010px){
@@ -151,7 +152,8 @@ margin: 10px 10px 10px 10px;
 		
 			<p style="margin-left:650px; margin-top:-60px;"><a href="../moim/moim_cheif_member.jsp"><input type="button" value="모임가입" style="width:100px; height:30px; font-size: 13px"></a>
 					<a href="../moim/moim_schedule.jsp"><input type="button" value="모임탈퇴" style="width:100px; height:30px; font-size: 13px"></a>
-					<a href="../one/moimReport"><input type="button" value="모임신고" style="width:100px; height:30px;  font-size: 13px"></a></p><br>
+					<input type="button" value="모임신고" style="width:100px; height:30px;  font-size: 13px"
+					       onclick="window.location='moimReportMain'"></p><br>
 			
 				<div class="panel-heading" style="margin-top:30px">
 						<h3>XENO_B.C - 영등포 볼링</h3>
@@ -264,4 +266,4 @@ margin: 10px 10px 10px 10px;
 </div>
 <!-- END ROW -->
 
-<%@ include file="../etc/footer.jsp"%>  
+<%@ include file="../../etc/footer.jsp"%>

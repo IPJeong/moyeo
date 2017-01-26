@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@ include file="../etc/header.jsp"%> 
+<%@ include file="../../etc/header.jsp"%>
 
 <!-- START SCRIPTS -->
 <!-- START PLUGINS -->
@@ -352,4 +352,4 @@
 
 <!-- END PAGE CONTENT WRAPPER -->
 
-<%@ include file="../etc/footer.jsp"%>
+<%@ include file="../../etc/footer.jsp"%>  

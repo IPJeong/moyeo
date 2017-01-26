@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     
-<%@ include file="../etc/moim_header.jsp"%>
+    
+<%@ include file="../../etc/moim_header.jsp"%>
 
 <head>
 	<title> 모임신고 작성</title>
@@ -44,30 +44,16 @@
                  <div class="col-md-6 col-xs-12">                                            
                      <div class="input-group">
                          <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                         <input type="text" class="form-control"/>
+                         <input type="text" class="form-control" name="report_title"/>
                      </div>                                            
                      <span class="help-block">This is sample of text field</span>
                  </div>
              </div>
              
              <div class="form-group">
-                 <label class="col-md-3 col-xs-12 control-label">신고사유</label>
-                 <div class="col-md-6 col-xs-12">                                                                                            
-                     <select class="form-control select">
-                         <option>욕설</option>
-                         <option>욕설2</option>
-                         <option>욕설3</option>
-                         <option>욕설4</option>
-                         <option>욕설5</option>
-                     </select>
-                     <span class="help-block">Select box example</span>
-                 </div>
-             </div>
-             
-             <div class="form-group">
                  <label class="col-md-3 col-xs-12 control-label">신고내용</label>
                  <div class="col-md-6 col-xs-12">                                            
-                     <textarea class="form-control" rows="5"></textarea>
+                     <textarea class="form-control" rows="5" name="report_content"></textarea>
                      <span class="help-block">Default textarea field</span>
                  </div>
              </div>
@@ -76,7 +62,7 @@
              <div class="form-group">
                  <label class="col-md-3 col-xs-12 control-label">사진</label>
                  <div class="col-md-6 col-xs-12">                                                                                                                                        
-                     <input type="file" class="fileinput btn-primary" name="filename" id="filename" title="Browse file" />
+                     <input type="file" class="fileinput btn-primary" name="pic_path" id="pic_path" title="Browse file" />
                      <span class="help-block">Input type file</span>
                  </div>
              </div>
@@ -97,4 +83,4 @@
 
 
 
-<%@ include file="../etc/footer.jsp"%>
+<%@ include file="../../etc/footer.jsp"%>
