@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,6 @@ public class FiveServiceImpl implements FiveService{
 		
 		// 모임후기 리스트를 가져옴
 		List<MeetingPostDTO> dtos = fiveDao.getPostList(map);
-		System.out.println("dto size : " + dtos.size());
 		
 		req.setAttribute("dtos", dtos);
 		
@@ -138,6 +138,7 @@ public class FiveServiceImpl implements FiveService{
 		dto.setLike_num(0);
 		dto.setMem_id(memId);
 		dto.setPost_tag(post_tag);
+		dto.setPost_hit(0);
 		cnt = fiveDao.insertPost(dto);
 		
 		Map<String, Object> dataMap = new HashMap<>();
@@ -192,6 +193,35 @@ public class FiveServiceImpl implements FiveService{
 		model.addAttribute("cnt", cnt);
 		
 		return "five/postPro";
+	}
+
+
+	@Override
+	public String postDetail(Model model) throws NumberFormatException, NullPointerException {
+		
+		HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
+		
+		int post_num = Integer.parseInt(req.getParameter("post_num"));
+		// 모임후기 정보를 조회
+		MeetingPostDTO postDto = fiveDao.getPostDetail(post_num);
+		// 모임후기의 사진정보를 조회
+		List<PostPictureDTO> picDtos = fiveDao.getPostPics(post_num);
+		// 모임후기의 동영상정보를 조회
+		List<PostVideoDTO> videoDtos = fiveDao.getPostVideos(post_num);
+		
+		int picCnt = picDtos.size();
+		int vidCnt = videoDtos.size();
+		
+		req.setAttribute("dto", postDto);
+		
+		if(picCnt > 0) {
+			req.setAttribute("picDtos", picDtos);
+		}
+		if(vidCnt > 0) {
+			req.setAttribute("videoDtos", videoDtos);
+		}
+		
+		return "five/postDetail";
 	}
 
 
