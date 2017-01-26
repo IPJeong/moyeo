@@ -15,6 +15,19 @@
     </select>
     
     <!-- 모임후기 리스트를 반환하는 메서드 -->
+<!--     <select id="getPostList" parameterType="map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
+    	SELECT mp.post_num, mp.post_title, mp.post_content, mp.post_tag, mp.post_date, mp.like_num, mp.mem_id, mp.group_num
+    	  FROM (SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, rownum as rnum
+    	  		  FROM (SELECT * 
+    	  		          FROM meeting_post
+    	  		         WHERE group_num = #{group_num} 
+    	  		         ORDER BY post_num DESC
+    	  		        )
+    	  		) mp , post_pic pp
+    	 WHERE mp.rnum BETWEEN #{start} AND #{end} 
+    	 	   AND mp.post_num = (SELECT post_num
+    	 	   					    FROM ) 
+    </select> -->
     <select id="getPostList" parameterType="map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
     	SELECT *
     	  FROM (SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, rownum as rnum
@@ -29,8 +42,8 @@
     
     <!-- 모임후기 삽입 쿼리 -->
     <insert id="insertPost" parameterType="com.engineers.moyeo.five.dto.MeetingPostDTO">
-    	INSERT INTO meeting_post (post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num) 
-    	                  VALUES (meeting_post_seq.nextval, #{post_title}, #{post_content}, #{post_tag}, #{post_date}, #{like_num}, #{mem_id}, #{group_num})
+    	INSERT INTO meeting_post (post_num, post_title, post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num) 
+    	                  VALUES (meeting_post_seq.nextval, #{post_title}, #{post_content}, #{post_tag}, #{post_date}, #{like_num}, #{post_hit},#{mem_id}, #{group_num})
     </insert>
     
     <!-- 모임후기 글번호를 읽어오는 쿼리 -->
@@ -50,4 +63,18 @@
     					VALUES (post_video_seq.nextval, #{video_path}, #{video_name}, #{mem_id}, #{group_num}, #{post_num})
     </insert>
     
+    <!-- 모임후기의 상세정보를 조회하는 쿼리 -->
+    <select id="getPostDetail" parameterType="int" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
+    	SELECT * FROM meeting_post WHERE post_num = #{post_num}
+    </select>
+    
+    <!-- 해당 모임후기의 사진을 조회하는 쿼리 -->
+    <select id="getPostPics" parameterType="int" reusltType="com.engineers.moyeo.five.dto.PostPictureDTO">
+    	SELECT * FROM post_pictures WHERE post_num = #{post_num}
+    </select>
+    
+    <!-- 해당 모임후기의  동영상을 조회하는 쿼리-->
+    <select id="getPostVideos" parameterType="int" resultType="com.engineers.moyeo.five.dto.PostVideoDTO">
+    	SELECT * FROM post_video WHERE post_num = #{post_num}
+    </select>
 </mapper>
