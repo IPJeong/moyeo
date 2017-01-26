@@ -23,4 +23,27 @@ public interface SixService {
 
 	//공지-글삭제
 	public void noticeDelete(Model model);
+	
+	
+	
+	//모인일정-메인
+	public void moimSchedule(Model model);
+	
+	//모임일정-조회
+	public void moimScheduleDetail(Model model);
+	
+	//모임일정-등록
+	public void moimRegister(Model model);
+
+	//모임일정-상세페이지
+	public void moimScheduleContents(Model model);
+	
+	//모임일정-수정
+	public void moimScheduleModify(Model model);
+	
+	//모임일정-수정처리
+	public void moimScheduleModifyPro(Model model);
+	
+	//모임일정-삭제
+	public void moimScheduleDelete(Model model);
 }

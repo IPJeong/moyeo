@@ -2295,11 +2295,17 @@ pre code {
    		width:100%;
     }
     
+     .col-md-12-8 {     			
+	height:80px;
+	column-width:auto;	   	
+	column-count:10;
+	padding: 15px;
+    }
     
-    
-    
-    
-    
+    .col-md-12-8 a {
+    	font-size:1.35em;
+    	color:#000;
+    }
     
     .col-md-11 {
         width: 91.66666667%;

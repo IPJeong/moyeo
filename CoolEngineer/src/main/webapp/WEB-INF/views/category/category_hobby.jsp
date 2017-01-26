@@ -34,7 +34,7 @@
 									</div>
 								</div>
 								<div class="panel-body padding-0">
-									<a href="../moim/moim_main.jsp"><h3>모임 예시- 중앙 2팀</h3></a>
+									<a href="../../six/moimMain/moimMain"><h3>모임 예시- 중앙 2팀</h3></a>
 								</div>
 							</div>
 						</div>						                   

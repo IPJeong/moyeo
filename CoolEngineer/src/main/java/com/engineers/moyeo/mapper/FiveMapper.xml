@@ -69,7 +69,7 @@
     </select>
     
     <!-- 해당 모임후기의 사진을 조회하는 쿼리 -->
-    <select id="getPostPics" parameterType="int" reusltType="com.engineers.moyeo.five.dto.PostPictureDTO">
+    <select id="getPostPics" parameterType="int" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
     	SELECT * FROM post_pictures WHERE post_num = #{post_num}
     </select>
     

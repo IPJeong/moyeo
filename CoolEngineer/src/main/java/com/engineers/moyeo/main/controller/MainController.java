@@ -34,8 +34,8 @@ public class MainController {
 		return "main/main";
 	}
 	
-	@RequestMapping("/hh")
+	@RequestMapping("/category/category_hobby")
 	public String hh() {
-		return "event/NewFile";
+		return "category/category_hobby";
 	}
 }

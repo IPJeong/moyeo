@@ -74,11 +74,11 @@
 				<!-- MENU BAR START -->
 				<div class="x-hnavigation">
 					<div class="x-hnavigation-logo">
-						<a href="../main/main.jsp">MoYeo</a>
+						<a href="../main/home">MoYeo</a>
 					</div>
 					<ul>
-						<li class=""><a href="../moim/moim_main.jsp">Home</a></li>
-						<li><a href="../moim/moim_schedule.jsp">모임일정</a></li>
+						<li class=""><a href="../six/moimMain/moimMain">Home</a></li>
+						<li><a href="../moimSchedule/moimSchedule">모임일정</a></li>
 						<li class="xn-openable"><a>모임갤러리</a>
 							<ul>
 								<li><a href="../moim/moim_picture.jsp"><span class="fa fa-caret-right"></span>사진보기</a></li>
@@ -87,9 +87,9 @@
 						</li>
 						<li class="xn-openable"><a>모임게시판</a>
 							<ul>  
-								<li><a href="../moim/moim_notice_board.jsp"><span class="fa fa-caret-right"></span>모임공지 게시판</a></li>
-								<li><a href="../moim/moim_greeting_board.jsp"><span class="fa fa-caret-right"></span>가입인사 게시판</a></li>
-								<li><a href="../moim/moim_review_board.jsp"><span class="fa fa-caret-right"></span>모임후기 게시판</a></li>
+								<li><a href="/moyeo/four/moim_notice_board"><span class="fa fa-caret-right"></span>모임공지 게시판</a></li>
+								<li><a href="/moyeo/four/moim_greeting_board"><span class="fa fa-caret-right"></span>가입인사 게시판</a></li>
+								<li><a href="../../five/postList"><span class="fa fa-caret-right"></span>모임후기 게시판</a></li>
 							</ul>
 						</li>
 						<li><a>모임채팅</a></li>

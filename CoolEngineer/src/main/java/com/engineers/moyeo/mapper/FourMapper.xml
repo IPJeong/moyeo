@@ -8,6 +8,49 @@
 
 -->
 <mapper namespace="com.engineers.moyeo.four.dao.FourDAO">  <!-- 인터페이스 -->
+    <!-- 글개수 세기 -->
+    <select id="getCount" resultType="int">
+  		SELECT count(*) FROM group_notice
+   </select>	
     
     
+    <!-- 글라인 목록 불러오기 -->
+    <select id="getArticles" parameterType="Map" resultType="com.engineers.moyeo.four.dto.GroupNoticeDTO"> <!-- 결과타입 Arraylist 아님 -->
+  		SELECT *  
+		  FROM (SELECT group_noti_num, group_noti_title, group_noti_content, group_noti_date, hit, mem_id, group_num, rownum rnum  
+				 FROM (SELECT * FROM group_notice 
+						ORDER BY group_noti_num DESC)
+				)		  
+          WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+   </select>    
+    
+    
+	<!-- 글 한줄 넣기 -->
+   <insert id="insert"  parameterType="com.engineers.moyeo.four.dto.GroupNoticeDTO"> 
+   		INSERT INTO group_notice(group_noti_num, group_noti_title, group_noti_content, group_noti_date, hit, mem_id, group_num)
+			VALUES (group_notice_seq.nextval, #{group_noti_title}, #{group_noti_content}, #{group_noti_date}, #{hit}, #{mem_id}, #{group_num}) 
+   </insert>
+    
+    <!-- 글 상세내역 -->
+   <select id="getArticle" parameterType="int" resultType="com.engineers.moyeo.four.dto.GroupNoticeDTO">
+   		SELECT * FROM group_notice WHERE group_noti_num = #{group_noti_num}
+   </select>
+  
+  <!-- 조회수 증가 -->
+   <update id="addReadCnt" parameterType="int" >
+   		UPDATE group_notice SET hit = hit+1 WHERE group_noti_num=#{group_noti_num}
+   </update>
+    
+    <!--삭제  -->
+   <delete id="delete" parameterType="int">
+        DELETE FROM group_notice WHERE group_noti_num=#{group_noti_num}
+   </delete> 
+    
+    
+	<!--수정 -->
+	
+ 	<update id="update" parameterType="com.engineers.moyeo.four.dto.GroupNoticeDTO">
+   		UPDATE group_notice SET group_noti_title=#{group_noti_title}, group_noti_content=#{group_noti_content} WHERE group_noti_num=#{group_noti_num}
+  	</update>
+  	 
 </mapper>

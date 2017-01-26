@@ -72,10 +72,10 @@ li {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<h3>
+					<h3><font size="4px">
 						공지사항 &nbsp;&nbsp;<a class="fa fa-plus-square-o"
-							href="../six/customer-support/notice"><font size="2">더보기</font></a>
-					</h3>
+							href="../six/notice/notice"><font size="2">더보기</font></a>
+					</font></h3>
 				</div>
 			</div>
 			<div class="panel-body padding-0">
@@ -85,13 +85,11 @@ li {
 						<br>
 						<c:forEach var="dto" items="${dtos}" begin="0" end="5">
 							<li style="float:none;"><a
-								href="../six/customer-support/notice_content?noti_num=${dto.noti_num}&pageNum=${pageNum}">
+								href="../six/notice/noticeContent?noti_num=${dto.noti_num}&pageNum=${pageNum}">
 							<h3>${dto.noti_title}</h3>
 							</a></li>
 						</c:forEach>
 					</ul>
-
-
 				</div>
 			</div>
 		</div>

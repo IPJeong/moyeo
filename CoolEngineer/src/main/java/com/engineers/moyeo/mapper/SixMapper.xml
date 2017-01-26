@@ -50,5 +50,45 @@
 	<select id="getArticles_main" resultType="com.engineers.moyeo.six.dto.NoticeDTO">
 		SELECT * FROM noti_board ORDER BY noti_num DESC
 	</select>
-  
+	
+	
+	
+	
+	
+	<!-- 모임일정-글 개수 구하기 -->
+	<select id="moimScheduleCount" resultType="int">
+		SELECT COUNT(*) FROM meeting_list
+	</select>
+	
+	<!-- 모임일정-메인용 일정리스트 -->
+	<select id="moimSchedule" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+		SELECT * FROM meeting_list ORDER BY meeting_date ASC
+	</select>
+	
+	<!-- 모임일정-일정리스트 -->
+	<select id="moimScheduleDetail" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+		SELECT * FROM (SELECT meeting_num, meeting_title, meeting_detail, meeting_loc, meeting_date, group_num, meeting_cost, meeting_pernum, loc_detail, rownum rnum 
+		FROM (select * from meeting_list ORDER BY meeting_date ASC)) 
+		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} ORDER BY meeting_date ASC
+	</select>
+	
+	<!-- 모임일정-상세정보 -->
+	<select id="moimScheduleContents" parameterType="int" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+		SELECT * FROM meeting_list WHERE meeting_num=#{num}
+	</select>
+	
+	<!-- 모임일정-등록 -->
+	<insert id="moimRegister" parameterType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+ 		INSERT INTO meeting_list VALUES(meeting_list_seq.NEXTVAL, #{meeting_title}, #{meeting_detail}, #{meeting_loc}, #{meeting_date}, 1, #{meeting_cost}, #{meeting_pernum}, #{loc_detail})
+ 	</insert> 
+ 	
+ 	<!-- 모임일정-수정 -->
+ 	<update id="moimScheduleModify" parameterType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+		UPDATE meeting_list SET meeting_title=#{meeting_title}, meeting_detail=#{meeting_detail}, meeting_loc=#{meeting_loc}, meeting_date=#{meeting_date}, meeting_cost=#{meeting_cost}, meeting_pernum=#{meeting_pernum} WHERE meeting_num=#{meeting_num}
+	</update>
+ 	
+ 	<!-- 모임일정-삭제 -->
+ 	<delete id="moimScheduleDelete" parameterType="int">
+ 		DELETE FROM meeting_list WHERE meeting_num = #{meeting_num}
+ 	</delete>
 </mapper>

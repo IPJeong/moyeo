@@ -4,11 +4,22 @@ import java.sql.Timestamp;
 
 public class NoticeDTO {
 
+	//공지사항 번호
 	private int noti_num;       
+	
+	//공지사항 제목
 	private String noti_title;   
+	
+	//공지사항 내용
 	private String noti_content;   
+	
+	//공지사항 작성일자
 	private Timestamp noti_date;   
+	
+	//공지사항 조회수
 	private int noti_hit;
+	
+	//공지사항 관리자ID
 	private String manager_id;
 
 	public int getNoti_num() {

@@ -9,11 +9,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 
 @Repository
 public class SixDAOImpl implements SixDAO{
-
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -97,4 +97,85 @@ public class SixDAOImpl implements SixDAO{
 
 		return cnt;
 	}
+
+	
+	
+	
+	
+	//모임일정-일정개수 구하기
+	public int moimScheduleCount() {
+		
+		int cnt = 0;
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		cnt = dao.moimScheduleCount();
+	
+		return cnt;	
+	}
+	
+	//모임일정-메인에 일정 리스트 불러오기
+	public ArrayList<MoimScheduleDTO> moimSchedule() {
+		ArrayList<MoimScheduleDTO> dtos = null;
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dtos = dao.moimSchedule();
+		
+		return dtos;
+	}
+	
+	//모임일정-일정 리스트
+	public ArrayList<MoimScheduleDTO> moimScheduleDetail(Map<String, Integer> daoMap) {
+		ArrayList<MoimScheduleDTO> dtos = null;
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dtos = dao.moimScheduleDetail(daoMap);
+		
+		return dtos;
+	}
+	
+	//모임일정-상세정보
+	public MoimScheduleDTO moimScheduleContents(int num) {
+		MoimScheduleDTO dto = null;
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dto = dao.moimScheduleContents(num);
+		
+		return dto;
+	}
+
+	//모임일정-등록
+	@Override
+	public int moimRegister(MoimScheduleDTO dto) {
+		int cnt = 0;
+		
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		cnt = dao.moimRegister(dto);
+		
+		return cnt;
+	}
+
+	//모임일정-수정
+	@Override
+	public int moimScheduleModify(MoimScheduleDTO dto) {
+		int cnt = 0;
+		
+	
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		cnt = dao.moimScheduleModify(dto);
+		
+		return cnt;
+	}
+	
+	//모임일정-삭제
+	@Override
+	public int moimScheduleDelete(int num) {
+		int cnt = 0;
+		
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		cnt = dao.moimScheduleDelete(num);
+		
+		return cnt;
+	}
+
+
+
+
+
+
 }
