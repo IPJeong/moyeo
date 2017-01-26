@@ -62,6 +62,14 @@ li {
     }
 }
 
+#writeBtn {
+	margin-top:30px; 
+	margin-right:30px; 
+	float:right;
+}
+#dataTable {
+	margin-top : 30px;
+}
 </style>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
@@ -83,38 +91,45 @@ li {
           <div class="panel-body panel-body-table">
 
               <div class="table-responsive">
-                  <table class="table table-bordered table-striped table-actions">
+<!--                   <table class="table table-bordered table-striped table-actions" id="dataTable"> -->
+                  <table class="table table-bordered" id="dataTable">
                       <thead>
-                      	  <c:forEach var="dto" items="dtos">
+                      	  
 	                          <tr>
-	                              <th width="50">${number}</th>
-	                              <c:set var="number" value="${number-1}"/>
-	                              <th width="450px;">${dto.post_title}</th>
-	                              <th width="150px;"><img alt="미리보기 화면입니다." src=""></th>
+	                              <th width="50">순번</th>
+	                              <th width="">후기제목</th>
 	                              <th width="100">조회수</th>
-	                              <th width="100">좋아한 사람수</th>
-	                              <th width="100">작성일</th>
+	                              <th width="100">좋아요</th>
+	                              <th width="200">작성일</th>
 	                              <th width="120">관리</th>
 	                          </tr>
-                          </c:forEach>
                       </thead>
-                      <tbody>                                            
-                          <tr id="trow_1">
-                              <td class="text-center">1</td>
-                              <td><strong>John Doe</strong></td>
-                              <td><span class="label label-success">New</span></td>
-                              <td><span class="label label-success">New</span></td>
-                              <td>$430.20</td>
-                              <td>24/09/2015</td>
-                              <td>
-                                  <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
-                                  <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-times"></span></button>
-                              </td>
-                          </tr>
+                      <tbody>               
+	                      <c:forEach var="dto" items="${dtos}">
+	                      	  <c:if test="${dto.post_hit >= 10 || dto.like_num >= 10}">                             
+	                         	 <tr id="trow_1" class="danger">
+	                          </c:if>
+	                          <c:if test="${dto.post_hit < 10 && dto.like_num < 10}">
+	                         	 <tr id="trow_1" class="active">
+	                          </c:if>
+	                              <td class="text-center">${number}</td>
+	                               <c:set var="number" value="${number-1}"/>
+	                              <td><strong><a href="postDetail?post_num=${dto.post_num}">${dto.post_title}</a></strong></td>
+	                              <td><span class="badge badge-success">${dto.post_hit}</span></td>
+	                              <td><span class="badge badge-info">${dto.like_num}</span></td>
+	                              <td>${dto.post_date}</td>
+	                              <td>
+	                                  <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
+	                                  <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-times"></span></button>
+	                              </td>
+	                          </tr>
+	                      </c:forEach>   
                       </tbody>
                   </table>
               </div>                                
-
+			  <div>
+			  	<input id="writeBtn" class="btn btn-primary btn-rounded" type="button" value="글쓰기" onclick="window.location='postForm'">
+			  </div>
           </div>
       </div>                                                
 
@@ -123,7 +138,7 @@ li {
  </div>          
               
     <!-- START SCRIPTS -->
-<!--         START PLUGINS -->
+	<!-- START PLUGINS -->
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>                
@@ -140,7 +155,7 @@ li {
         
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
         <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>        
-        <!-- END TEMPLATE -->
+    <!-- END PLUGINS -->
         
         <script type="text/javascript" src="/moyeo/resources/customScript/five.js"></script>
     <!-- END SCRIPTS -->                   

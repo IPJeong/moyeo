@@ -11,11 +11,13 @@
 	<c:if test="${cnt == 1}">
 		<script type="text/javascript">
 			alert('모임후기가 정상등록 되었습니다.');
+			window.location='postList';
 		</script>
 	</c:if>
 	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
 			alert('모임후기 등록에 실패하였습니다. \n 잠시후 다시 시도해주세요.');
+			history.back();
 		</script>	
 	</c:if>
 </body>
