@@ -79,10 +79,10 @@
 				<!-- TOP BAR START -->
 				<div class="x-content-tabs">
 					<ul>
-						<li><a href="../main/event/ing-event"><span class="fa fa-bell">이벤트</span><span>이벤트</span></a></li>
-						<li><a href="../main/customer-support/customer_support_main"><span class="fa fa-envelope">고객지원</span><span>고객지원</span></a></li>
-						<li><a href="../main/member/registration"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
-						<li><a href="../main/member/login"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
+						<li><a href="/moyeo/main/event/ing-event"><span class="fa fa-bell">이벤트</span><span>이벤트</span></a></li>
+						<li><a href="/moyeo/one/cusSupMain"><span class="fa fa-envelope">고객지원</span><span>고객지원</span></a></li>
+						<li><a href="/moyeo/main/member/registration"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
+						<li><a href="/moyeo/main/member/login"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
 					</ul>
 				</div>
 				<!-- TOP BAR END -->
@@ -90,16 +90,16 @@
 				<!-- MENU BAR START -->
 				<div class="x-hnavigation">
 					<div class="x-hnavigation-logo">
-						<a href="../../main/home">MoYeo</a>
+						<a href="/moyeo/main/home">MoYeo</a>
 					</div>
 					<ul>
-						<li class=""><a href="../../main/home">Home</a></li>
+						<li class=""><a href="/moyeo/main/home">Home</a></li>
 						<li class="xn-openable"><a>회사소개</a>
 							<ul>
-								<li><a href="../../main/introduce/introduce"><span class="glyphicon glyphicon-user"></span> 회사소개 </a></li>
-								<li><a href="../../main/introduce/introduce2"><span
+								<li><a href="/moyeo/main/introduce/introduce"><span class="glyphicon glyphicon-user"></span> 회사소개 </a></li>
+								<li><a href="/moyeo/main/introduce/introduce2"><span
 										class="fa fa-building-o"></span> 연혁 </a></li>
-								<li><a href="../../main/introduce/introduce3"><span class="fa fa-group"></span> 구성원
+								<li><a href="/moyeo//main/introduce/introduce3"><span class="fa fa-group"></span> 구성원
 								</a></li>
 								<li><a><span class="fa fa-calendar"></span>
 										조직도 </a></li>
@@ -116,7 +116,7 @@
 								<li><a><span class="fa fa-caret-right"></span>
 										시간대별 </a></li>
 							</ul></li>
-						<li class="xn-openable"><a href="../../main/realTime/realTime">잠깐모여</a>
+						<li class="xn-openable"><a href="/moyeo/main/realTime/realTime">잠깐모여</a>
 							<ul>								
 								<li><a><span class="fa fa-caret-right"></span>
 										지역별</a></li>
@@ -125,15 +125,13 @@
 								<li><a><span class="fa fa-caret-right"></span>
 										시간대별 </a></li>
 							</ul></li>
-						<li class="xn-openable"><a href="../../main/shop/shop">샵</a></li>
-						<li class="xn-openable"><a href="../../main/places/places">추천장소</a>
+						<li class="xn-openable"><a href="/moyeo/main/shop/shop">샵</a></li>
+						<li class="xn-openable"><a href="/moyeo/main/places/places">추천장소</a>
 							<ul>
-								<li><a><span class="fa fa-caret-right"></span> 지역별</a></li>
-								<li><a><span class="fa fa-caret-right"></span>
-										관심사별</a></li>
-								<li><a><span class="fa fa-caret-right"></span>
-										연령별</a></li>
-							</ul></li>
+								<li><a href="/moyeo/two/placeMainLoc"><span class="fa fa-caret-right"></span> 지역별</a></li>
+								<li><a href="/moyeo/two/placeMainRecpla"><span class="fa fa-caret-right"></span>관심사별</a></li>
+							</ul>
+						</li>
 					</ul>
 
 					<div class="x-features">

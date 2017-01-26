@@ -22,7 +22,7 @@
 <script type="text/javascript">
 	function delChk(){
 		if(confirm("정말 삭제하시겠습니까?")){
-			window.location='qnaDeletePro?qboard_num='+${dto.qboard_num}+'&pageNum='+${pageNum};
+			window.location='/moyeo/one/qnaDeletePro?qboard_num='+${dto.qboard_num}+'&pageNum='+${pageNum};
 		} 
 	}
 </script>

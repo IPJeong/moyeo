@@ -7,7 +7,7 @@
 	<c:if test="${deleteCnt == 1}">
 		<script>
 			alert("정상적으로 삭제되었습니다.");
-			window.location="../one/qnaContentForm?qboard_num="+${qboard_num}+"&number="+${number}+"&pageNum="+${pageNum};
+			window.location="/moyeo/one/qnaContentForm?qboard_num="+${qboard_num}+"&number="+${number}+"&pageNum="+${pageNum};
 		</script>
 	</c:if>
 	

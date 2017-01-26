@@ -27,21 +27,94 @@ public class ThreeDAOImpl implements ThreeDAO{
 
 	@Override
 	public int getCount2() { //FAQ 질문 개수
-		int cnt = 0;
-		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getCount2");
-		return cnt;
+		int cnt2 = 0;
+		cnt2 = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getCount2");
+		return cnt2;
 	}
 
 	@Override
 	public ArrayList<ThreeDTO> getCategory() {
 		ArrayList<ThreeDTO> dtos = null;
-		dtos = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getCategory");
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getCategory();
 		return dtos;
+	}
+	
+
+	@Override
+	public ArrayList<ThreeDTO> getQuestions() {		
+		ArrayList<ThreeDTO> dtos2 = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos2 = dao.getQuestions();
+		return dtos2;
 	}
 
 	@Override
-	public ArrayList<ThreeDTO> getQuestions() {
-		// TODO Auto-generated method stub
-		return null;
+	public int insert(ThreeDTO dto) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.insert", dto);
+		return cnt;
+	}
+
+	@Override
+	public int insertFaq(ThreeDTO dto) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.insertFaq", dto);
+		return cnt;
+	}
+
+	@Override
+	public int update(ThreeDTO dto) {
+		int cnt = 0;
+		cnt = this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.update", dto);
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dao.update2(dto);
+		return cnt;
+	}
+
+	@Override
+	public void update2(ThreeDTO dto) {
+		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.update2", dto);		
+	}
+
+	@Override
+	public int updateFaq(ThreeDTO dto) {
+		int cnt = 0;
+		cnt = this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.updateFaq", dto);
+		return cnt;
+	}
+
+	@Override
+	public ThreeDTO getInfo(int faqNum) {
+		ThreeDTO dto = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getInfo", faqNum);
+		return dto;
+	}
+
+	@Override
+	public int delete(ThreeDTO dto) {
+		int cnt = 0;
+		cnt = this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.delete", dto);
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dao.delete2(dto);
+		return cnt;
+	}
+
+	@Override
+	public void delete2(ThreeDTO dto) {
+		this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.delete2", dto);		
+	}
+
+	@Override
+	public int deleteFaq(ThreeDTO dto) {		
+		int cnt = 0;
+		cnt = this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.deleteFaq", dto);		
+		return cnt;
+	}
+
+	@Override
+	public int ctgCheck(ThreeDTO dto) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.ctgCheck", dto);
+		return cnt;
 	}
 }

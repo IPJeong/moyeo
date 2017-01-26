@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../etc/header.jsp"%>
+<%@ include file="../../etc/header.jsp"%>
          <!-- START BREADCRUMB -->
                 <ul class="breadcrumb push-down-0">
                     <li><a href="../main/main.jsp">Home</a></li>
@@ -19,10 +19,10 @@
 
 			<div class="panel panel-default tabs">
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="#tab-first" role="tab"
+					<li><a href="#tab-first" role="tab"
 						data-toggle="tab">관심사별</a></li>
 					<li><a href="#tab-second" role="tab" data-toggle="tab">지역별</a></li>
-					<li><a href="#tab-third" role="tab" data-toggle="tab">연령별</a></li>
+					<li class="active"><a href="#tab-third" role="tab" data-toggle="tab">연령별</a></li>
 				</ul>
 				<div class="panel-body tab-content">
 					<div class="tab-pane active" id="tab-first">
@@ -30,11 +30,11 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<div class="panel-title-box">
-										<h3>관심사별</h3>										
+										<h3>연령별</h3>										
 									</div>
 								</div>
 								<div class="panel-body padding-0">
-									<a href="../../six/moimMain/moimMain"><h3>모임 예시- 중앙 2팀</h3></a>
+									<a href="../moim/moim_main.jsp"><h3>모임 예시- 중앙 2팀</h3></a>
 								</div>
 							</div>
 						</div>						                   
@@ -139,4 +139,4 @@
 
 
 
-<%@ include file="../etc/footer.jsp"%>
+<%@ include file="../../etc/footer.jsp"%>

@@ -4,14 +4,28 @@ import java.sql.Timestamp;
 
 public class ThreeDTO {
 	
-	int ctgNum; //카테고리 번호
-	String ctgName; //카테고리 이름
-	int faqNum; //FAQ 게시물 번호
-	String faqTitle; //FAQ 게시물 제목
-	String faqContent; //FAQ 게시물 내용
-	Timestamp faqDate; //FAQ 게시날짜	
-	int ctgNum2; //FAQ 카테고리 번호
+	private int ctgNum; //카테고리 번호
+	private String ctgName; //카테고리 이름
+	private int faqNum; //FAQ 게시물 번호
+	private String faqTitle; //FAQ 게시물 제목
+	private String faqContent; //FAQ 게시물 내용
+	private Timestamp faqDate; //FAQ 게시날짜	
+	private String ctgName2; //카테고리 이름
+	private int ctgNum2; //FAQ 카테고리 번호
+	private String adminId;// 관리자아이디
 	
+	public String getCtgName2() {
+		return ctgName2;
+	}
+	public void setCtgName2(String ctgName2) {
+		this.ctgName2 = ctgName2;
+	}
+	public String getAdminId() {
+		return adminId;
+	}
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
+	}
 	public int getCtgNum() {
 		return ctgNum;
 	}

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@ include file="../etc/header.jsp"%>
+<%@ include file="../../etc/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
@@ -288,4 +288,4 @@ li {
 </div>
 <!-- END ROW -->
 
-<%@ include file="../etc/footer.jsp"%>
+<%@ include file="../../etc/footer.jsp"%>

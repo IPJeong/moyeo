@@ -65,8 +65,8 @@
 					<ul>
 						<li><a href="#main-tab"><span class="fa fa-bell">이벤트</span><span>이벤트</span></a></li>
 						<li><a href="#second-tab"><span class="fa fa-envelope">고객지원</span><span>고객지원</span></a></li>
-						<li><a href="../member/registration.jsp"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
-						<li><a href="../member/login.jsp"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
+						<li><a href="/moyeo/member/registration.jsp"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
+						<li><a href="/moyeo/member/login.jsp"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
 					</ul>
 				</div>
 				<!-- TOP BAR END -->
@@ -74,32 +74,32 @@
 				<!-- MENU BAR START -->
 				<div class="x-hnavigation">
 					<div class="x-hnavigation-logo">
-						<a href="../main/home">MoYeo</a>
+						<a href="/moyeo/main/home">MoYeo</a>
 					</div>
 					<ul>
-						<li class=""><a href="../six/moimMain/moimMain">Home</a></li>
-						<li><a href="../moimSchedule/moimSchedule">모임일정</a></li>
+						<li class=""><a href="/moyeo/six/moimMain/moimMain">Home</a></li>
+						<li><a href="/moyeo/six/moimSchedule/moimSchedule">모임일정</a></li>
 						<li class="xn-openable"><a>모임갤러리</a>
 							<ul>
-								<li><a href="../moim/moim_picture.jsp"><span class="fa fa-caret-right"></span>사진보기</a></li>
-								<li><a href="../moim/moim_movie.jsp"><span class="fa fa-caret-right"></span>동영상보기</a></li>
+								<li><a href="/moyeo/moim/moim_picture.jsp"><span class="fa fa-caret-right"></span>사진보기</a></li>
+								<li><a href="/moyeo/moim/moim_movie.jsp"><span class="fa fa-caret-right"></span>동영상보기</a></li>
 							</ul>
 						</li>
 						<li class="xn-openable"><a>모임게시판</a>
 							<ul>  
 								<li><a href="/moyeo/four/moim_notice_board"><span class="fa fa-caret-right"></span>모임공지 게시판</a></li>
 								<li><a href="/moyeo/four/moim_greeting_board"><span class="fa fa-caret-right"></span>가입인사 게시판</a></li>
-								<li><a href="../../five/postList"><span class="fa fa-caret-right"></span>모임후기 게시판</a></li>
+								<li><a href="/moyeo/five/postList"><span class="fa fa-caret-right"></span>모임후기 게시판</a></li>
 							</ul>
 						</li>
 						<li><a>모임채팅</a></li>
-						<li><a href="../moim/moim_stats.jsp">모임통계</a></li>
+						<li><a href="/moyeo/main/moim/moim_stats.jsp">모임통계</a></li>
 						<li class="xn-openable"><a>모임관리</a>
 							<ul>
-								<li><a href="../moim/moim_cheif_modify.jsp"><span class="fa fa-caret-right"></span>모임정보관리</a></li>
-								<li><a href="../moim/moim_cheif_join.jsp"><span class="fa fa-caret-right"></span>가입신청관리</a></li>
-								<li><a href="../moim/moim_cheif_member.jsp"><span class="fa fa-caret-right"></span>모임원관리</a></li>
-								<li><a href="../moim/moim_cheif_board.jsp"><span class="fa fa-caret-right"></span>게시물관리</a></li>
+								<li><a href="/moyeo/moim/moim_cheif_modify.jsp"><span class="fa fa-caret-right"></span>모임정보관리</a></li>
+								<li><a href="/moyeo/moim/moim_cheif_join.jsp"><span class="fa fa-caret-right"></span>가입신청관리</a></li>
+								<li><a href="/moyeo/moim/moim_cheif_member.jsp"><span class="fa fa-caret-right"></span>모임원관리</a></li>
+								<li><a href="/moyeo/moim/moim_cheif_board.jsp"><span class="fa fa-caret-right"></span>게시물관리</a></li>
 							</ul>
 						</li>
 					</ul>   

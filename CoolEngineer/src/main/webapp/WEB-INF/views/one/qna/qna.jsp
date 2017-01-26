@@ -99,8 +99,8 @@ tr {
 <body>
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb push-down-0">
-	<li><a href="../main/main.jsp">Home</a></li>
-	<li><a href="../customer-support/customer_support_main.jsp">고객지원</a></li>
+	<li><a href="/moyeo/one/main/main.jsp">Home</a></li>
+	<li><a href="/moyeo/one/customer-support/customer_support_main.jsp">고객지원</a></li>
 	<li class="active">공지사항</li>
 </ul>
 <!-- END BREADCRUMB -->
@@ -117,17 +117,17 @@ tr {
 			<div class="panel-body">
 				<table>
 					<tr>
-						<th align="center" class="num"><font size="5">글 번호</font>
+						<th align="center" class="num"><font size="4">글 번호</font>
 						</th>
-						<th align="center" class="subject"><font size="5">제목</font>
+						<th align="center" class="subject"><font size="4">제목</font>
 						</th>
-						<th align="center" class="writer"><font size="5">작성자</font>
+						<th align="center" class="writer"><font size="4">작성자</font>
 						</th>
-						<th align="center" class="announce"><font size="5">작성일</font>
+						<th align="center" class="announce"><font size="4">작성일</font>
 						</th>
-						<th align="center" class="count"><font size="5">조회수</font>
+						<th align="center" class="count"><font size="4">조회수</font>
 						</th>
-						<th align="center" class="answer"><font size="5">답변여부</font>
+						<th align="center" class="answer"><font size="4">답변여부</font>
 						</th>
 					</tr>
 					
@@ -135,47 +135,59 @@ tr {
 					<c:forEach var="dto" items="${dtos}">
 						<tr>
 							<td align="center">
-								${number}
+								<font size="4">
+									${number}
+								</font>
 								<c:set var="number" value="${number-1}" />
 							</td>
 							
 							<td align="center">
-								<a href="qnaContentForm?qboard_num=${dto.qboard_num}&pageNum=${pageNum}&number=${number+1}">${dto.title}</a>
+								<font size="4">
+									<a href="/moyeo/one/qnaContentForm?qboard_num=${dto.qboard_num}&pageNum=${pageNum}&number=${number+1}">${dto.title}</a>
+								</font>
 							</td>
 								
 							<td align="center">
-								${dto.mem_id}
+								<font size="4">
+									${dto.mem_id}
+								</font>	
 							</td>
 							
 							<td align="center">
-								<fmt:formatDate value="${dto.write_date}" type="both" pattern="yyyy-MM-dd HH:mm"/> 
+								<font size="4">
+									<fmt:formatDate value="${dto.write_date}" type="both" pattern="yyyy-MM-dd HH:mm"/>
+								</font> 
 							</td>
 							
 							<td align="center">
-								${dto.hit}
+								<font size="4">
+									${dto.hit}
+								</font>
 							</td>
 							
 							<c:if test="${dto.status == 'YES'}">
 							<td align="center">
-								<font style="color:blue">답변완료</font>
+								<font style="color:blue" size="4">답변완료</font>
 							</td>
 							</c:if>
 							
 							<c:if test="${dto.status != 'YES'}">
 							<td align="center">
-								답변전
+								<font size="4">
+									답변전
+								</font>
 							</td>
 							</c:if>
 					</c:forEach>
 				</c:if>
 				
-				<table style="width:1400px" align="center">
+				<table style="width:1400pxalign="center"" >
 				<th align="center">
 				<c:if test="${cnt > 0}">
 				<!-- 처음[◀◀] 이전[◀] ▶-->
 					<c:if test="${startPage > pageBlock}">
-						<a href="qna">[◀◀]</a>
-						<a href="qna?pageNum=${startPage - pageBlock}">[◀]</a>
+						<a href="/moyeo/one/qna">[◀◀]</a>
+						<a href="/moyeo/one/qna?pageNum=${startPage - pageBlock}">[◀]</a>
 					</c:if>
 					
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -184,14 +196,14 @@ tr {
 						</c:if>
 						
 						<c:if test="${i != currentPage}">
-							<a href="qna?pageNum=${i}">[${i}]</a>
+							<a href="/moyeo/one/qna?pageNum=${i}">[${i}]</a>
 						</c:if>
 					</c:forEach>
 					
 					<!-- 다음블록[▶] 끝[▶▶]-->
 					<c:if test="${pageCount > endPage}">
-						<a href="qna?pageNum=${startPage + pageBlock}">[▶]</a>
-						<a href="qna?pageNum=${pageCount}">[▶▶]</a>
+						<a href="/moyeo/one/qna?pageNum=${startPage + pageBlock}">[▶]</a>
+						<a href="/moyeo/one/qna?pageNum=${pageCount}">[▶▶]</a>
 					</c:if>
 				</c:if>
 				
@@ -208,7 +220,7 @@ tr {
 				
 			</div>
 		</div>
-		<a href="../one/qnaWrite"><input type="button" class="button" value="글 쓰기"></a>
+		<a href="/moyeo/one/qnaWrite"><input type="button" class="button" value="글 쓰기"></a>
 		<ul
 			class="pagination pagination-sm pull-right push-down-20 push-up-20"
 			style="align: center;">

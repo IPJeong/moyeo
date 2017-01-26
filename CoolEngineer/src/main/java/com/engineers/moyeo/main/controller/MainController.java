@@ -31,11 +31,12 @@ public class MainController {
 		
 		mainService.main_notice(model);
 				
-		return "main/main";
+		return "main/main/main";
 	}
 	
 	@RequestMapping("/category/category_hobby")
 	public String hh() {
-		return "category/category_hobby";
+		System.out.println("카테고리 하비");
+		return "common/category/category_hobby";
 	}
 }

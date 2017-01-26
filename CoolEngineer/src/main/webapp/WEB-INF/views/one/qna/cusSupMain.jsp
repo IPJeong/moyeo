@@ -5,6 +5,11 @@
 
 <style>
 
+.btn-success:active, .btn-success:active:focus{
+	background-color: #9bb2be;
+	border-color: #9bb2be;
+}
+
 .btn-success {
     background-color: white;
     border-color: #c5c4c6;
@@ -21,14 +26,25 @@
 	width: 45%;
 	margin: auto;
 }
-
 .col-md-4 {
+	width: 43%;
+}
+
+.col-md-5 {
 	width: 90%;
 	margin: auto;
 }
 
+.col-md-8 {
+	width: 50%;
+}
+
 .col-md-12{
-	width: 70%;
+	
+}
+
+.input-group {
+	width: 100%;
 }
 .profile {
 	background: #e3dbd7;
@@ -60,7 +76,7 @@
 					<p>검색 후 문의가 해결되지 않으면 Q&A를 이용하세요.</p>
 					<form class="form-horizontal">
 						<div class="form-group">
-							<div class="col-md-8">
+							<div class="col-md-8" style="float:left">
 								<div class="input-group">
 									<div class="input-group-addon">
 										<span class="fa fa-search"></span>
@@ -72,7 +88,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4" style="float:left">
+								<input type="button" class="btn btn-success btn-block" style="margin: 5px; float:left; width:20%;" value="건의사항" onclick="window.location='/moyeo/two/suggestionInputForm'">
+								<input type="button" class="btn btn-success btn-warning" style="margin: 5px; float:left; width:20%;" value="건의사항확인" onclick="window.location='/moyeo/two/suggestionList'">
 								
 							</div>
 						</div>
@@ -89,7 +107,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body profile">
 					<div class="profile-data">
-						<div class="profile-data-name"><a href="faq.jsp">FAQ</a></div>
+						<div class="profile-data-name"><a href="/moyeo/three/faq/">FAQ</a></div>
 					</div>
 				</div>
 				<div class="panel-body">
@@ -120,7 +138,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body profile">
 					<div class="profile-data">
-						<div class="profile-data-name"><a href="../customer-support/notice.jsp">공지사항</a></div>
+						<div class="profile-data-name"><a href="/moyeo/six/notice/notice">공지사항</a></div>
 						
 					</div>
 				</div>
@@ -152,7 +170,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body profile">
 					<div class="profile-data">
-						<div class="profile-data-name"><a href="../qna/one/qna">Q&A</a></div>
+						<div class="profile-data-name"><a href="/moyeo/one/qna/">Q&A</a></div>
 						
 					</div>
 				</div>
@@ -184,7 +202,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body profile">
 					<div class="profile-data">
-						<div class="profile-data-name"><a href="../customer-support/notice.jsp">이벤트</a></div>
+						<div class="profile-data-name"><a href="/moyeo/three/customer-support/notice.jsp">이벤트</a></div>
 						
 					</div>
 				</div>

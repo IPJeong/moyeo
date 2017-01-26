@@ -8,7 +8,125 @@
 
 -->
 <mapper namespace="com.engineers.moyeo.two.dao.TwoDAO">  <!-- 인터페이스 -->
-    
+
+    <insert id="writeSuggestion" parameterType="com.engineers.moyeo.two.dto.SuggestionDTO">
+		INSERT INTO suggestion(sug_num, sug_title, sug_content, sug_date, re_email, sug_status, manager_id, sol_content, sol_date, mem_id) 
+			VALUES (suggestion_seq.nextval, #{sug_title}, #{sug_content}, SYSDATE, #{re_email}, 'N', NULL, NULL, NULL, #{mem_id})
+	</insert>
 	
-    
+	<select id="getSuggetionCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM suggestion WHERE sug_status= #{sug_status}
+	</select>
+	
+    <select id="getSuggestionList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.SuggestionDTO">
+		SELECT * 
+		FROM (SELECT sug_num, sug_title, sug_content, sug_date, re_email, sug_status, manager_id, sol_content, sol_date, mem_id, rownum rnum 
+			  FROM (SELECT * FROM suggestion)
+			 ) 
+ 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND sug_status = #{sug_status}
+	</select>
+	
+	<select id="readSuggestion" parameterType="int" resultType="com.engineers.moyeo.two.dto.SuggestionDTO">
+		SELECT * FROM suggestion WHERE sug_num = #{sug_num}
+	</select>
+	
+	<update id="checkSuggestion" parameterType="com.engineers.moyeo.two.dto.SuggestionDTO">
+		UPDATE suggestion SET sug_status = 'Y', manager_id = '임시 아이디', sol_content = #{sol_content}, sol_date = SYSDATE WHERE sug_num = #{sug_num}
+	</update>
+	
+	<select id="getPlaceCount" resultType="int">
+		SELECT count(*) FROM place_info
+	</select>
+	
+	<select id="getPlaceList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
+		SELECT * 
+		FROM (SELECT place_num, place_name, place_address, place_detail, place_link, rownum rnum  
+			  FROM (SELECT * FROM place_info ORDER BY place_num DESC)
+			 ) 
+ 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	
+	<select id="getPlacePictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+		SELECT * 
+		FROM (SELECT place_pic_num, place_pic_path, place_pic_name, place_num, rownum rnum  
+			  FROM (SELECT * FROM place_pic ORDER BY place_num DESC)
+			 ) 
+ 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+ 		
+	</select>
+	
+	<select id="readPlace" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
+		SELECT * FROM place_info WHERE place_num = #{place_num}
+	</select>
+	
+	<select id="readPlacePicture" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+		SELECT * FROM place_pic WHERE place_num = #{place_num}
+	</select>
+	   
+	<insert id="inputPlace" parameterType="com.engineers.moyeo.two.dto.Place_infoDTO">
+		INSERT INTO place_info (place_num, place_name, place_address, place_detail, place_link)
+			VALUES (place_info_seq.NEXTVAL, #{place_name}, #{place_address}, #{place_detail}, #{place_link})
+	</insert>
+	
+	<select id="getPlaceNum" resultType="int">
+ 		SELECT MAX(place_num) FROM place_info
+	</select>
+	
+	<insert id="inputPictures">
+		INSERT INTO place_pic (place_pic_num, place_pic_path, place_pic_name, place_num)
+			VALUES (place_pic_seq.NEXTVAL, #{place_pic_path}, #{place_pic_name}, #{place_num})
+	</insert>
+	
+	<delete id="deletePlace" parameterType="int">
+		DELETE FROM place_info WHERE place_num = #{place_num}
+	</delete>
+	
+	<delete id="deletePlacePicture" parameterType="int">
+		DELETE FROM place_pic WHERE place_num = #{place_num}
+	</delete>	
+	
+	<update id="modifyPlace" parameterType="com.engineers.moyeo.two.dto.Place_infoDTO">
+		UPDATE place_info SET place_name = #{place_name}, place_address = #{place_address}, place_detail = #{place_detail}, place_link = #{place_link} WHERE place_num = #{place_num}
+	</update>
+	
+	<update id="modifyPictures">
+		UPDATE place_info SET place_pic_path = #{place_pic_path}, place_pic_name = #{place_pic_name} WHERE place_num = #{place_num}
+	</update>
+	
+	<select id="getRecPlaceList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
+		SELECT * 
+		FROM (SELECT recpla_num, recpla_title, recpla_content, recpla_category1, recpla_category2, recpla_tag, mem_id, place_num, rownum rnum 
+			  FROM (SELECT * FROM rec_place)
+			 ) 
+ 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	
+	<select id="readRecPlace" parameterType="int" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
+		SELECT * FROM rec_place WHERE recpla_num = #{recpla_num}
+	</select>
+	
+	<insert id="writeRecPlace" parameterType="com.engineers.moyeo.two.dto.Rec_placeDTO">
+		INSERT INTO rec_place(recpla_num, recpla_title, recpla_content, recpla_category1, recpla_category2, mem_id, place_num, recpla_tag)
+			VALUES (rec_place_seq.NEXTVAL, #{recpla_title}, #{recpla_content}, #{recpla_category1}, #{recpla_category2}, #{mem_id}, #{place_num}, #{recpla_tag})
+	</insert>
+		
+	<delete id="deleteRecPlace" parameterType="Map">
+		DELETE FROM rec_place WHERE recpla_num = #{recpla_num} AND mem_id = #{mem_id}";
+	</delete>
+	
+	<update id="modifyRecPlace" parameterType="com.engineers.moyeo.two.dto.Rec_placeDTO">
+		UPDATE rec_place SET recpla_title = #{recpla_title}, recpla_content = #{recpla_content}, recpla_category1 = #{recpla_category1}, recpla_category2 = #{recpla_category2}, recpla_tag = #{recpla_tag} WHERE recpla_num = #{recpla_num}
+	</update>
+	
+	<select id="readPlaceLike" parameterType="Map" resultType="int">
+		SELECT count(*) FROM place_like WHERE recpla_num = #{recpla_num}
+	</select>
+	
+	<insert id="plusPlaceLike" parameterType="Map">
+		INSERT INTO place_like (plalike_num, recpla_num, mem_id) VALUES(place_like_seq.NEXTVAL, #{recpla_num}, #{mem_id})
+	</insert>
+	
+	<delete id="minusPlaceLike" parameterType="Map">
+		DELETE FROM place_like WHERE recpla_num = #{recpla_num}, mem_id = #{mem_id}
+	</delete>
 </mapper>

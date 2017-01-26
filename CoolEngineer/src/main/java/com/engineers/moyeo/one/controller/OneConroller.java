@@ -33,7 +33,7 @@ public class OneConroller {
 	@RequestMapping("/cusSupMain")
 	public String cusSupMain() {
 		System.out.println("고객지원 홈");
-		viewPage = "one/cusSupMain";
+		viewPage = "one/qna/cusSupMain";
 		return viewPage;
 	}
 	
@@ -54,7 +54,7 @@ public class OneConroller {
 	// Q&A 질문 입력
 	@RequestMapping("/qnaWrite")
 	public String qnaWrite(HttpServletRequest req, Model model) {
-		req.getSession().setAttribute("mem_id", "박은선");
+		req.getSession().setAttribute("mem_id", "guest");
 		System.out.println("Q&A 질문 입력");
 		
 		model.addAttribute("req", req);
@@ -79,7 +79,7 @@ public class OneConroller {
 	@RequestMapping("/qnaContentForm")
 	public String qnaContentForm(HttpServletRequest req, Model model) {
 		System.out.println("Q&A 게시글 내용 확인");
-		req.getSession().setAttribute("mem_id", "박은선");
+		req.getSession().setAttribute("mem_id", "guest");
 		
 		model.addAttribute("req", req);
 		

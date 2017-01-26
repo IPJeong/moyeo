@@ -65,10 +65,10 @@ public class FileManager {
 		
 		String extension = filename.substring(filename.lastIndexOf(".")+1);
 		for(String img : imgs) {
-			if(img.equals(extension))return 1;
+			if(img.equals(extension.toLowerCase()))return 1;
 		}
 		for(String video : videos) {
-			if(video.equals(extension))return 2;
+			if(video.equals(extension.toLowerCase()))return 2;
 		}
 		
 		return 0;

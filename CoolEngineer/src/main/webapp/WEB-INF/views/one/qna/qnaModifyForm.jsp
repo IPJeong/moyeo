@@ -19,7 +19,7 @@
 
 <body>
 	<div class="col-md-12">                      
-	     <form class="form-horizontal" action="qnaModifyPro" method="post">
+	     <form class="form-horizontal" action="/moyeo/one/qnaModifyPro" method="post">
 	     
 	     <input type="hidden" name="qboard_num" value="${qboard_num}">
 	     <input type="hidden" name="pageNum" value="${pageNum}">

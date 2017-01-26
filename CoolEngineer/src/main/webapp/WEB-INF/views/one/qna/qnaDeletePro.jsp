@@ -8,7 +8,7 @@
 	<c:if test="${deleteCnt == 1}">
 		<script>
 			alert("정상적으로 삭제되었습니다.");
-			window.location="../one/qna";
+			window.location="/moyeo/one/qna";
 		</script>
 	</c:if>
 	

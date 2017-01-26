@@ -8,13 +8,13 @@
 	<!-- 작성 실패 -->
 	<script type="text/javascript">
 		alert("등록 실패");
-		window.location='../one/qna';
+		window.location='/moyeo/one/qna';
 	</script>
 	</c:if>
 
 	<c:if test="${cnt != 0}">
 	<script type="text/javascript">
 		alert("등록 성공");
-		window.location='../one/qna';
+		window.location='/moyeo/one/qna';
 	</script>
 	</c:if>

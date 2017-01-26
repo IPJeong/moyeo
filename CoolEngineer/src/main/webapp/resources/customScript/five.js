@@ -37,7 +37,7 @@ function chkType(id) {
 		isOk = videoChk(extension);
 	}
 	if(!isOk){
-		alert("이미지 파일은 (jpg, png, gif, bmp) 형식만 등록 가능합니다.");
+		alert("이미지 파일 혹은 동영상 파일 형식만 등록 가능합니다.");
 		$("#"+id).val("");
 	}
 }

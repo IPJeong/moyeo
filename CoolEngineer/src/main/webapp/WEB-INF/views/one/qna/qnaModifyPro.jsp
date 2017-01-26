@@ -9,14 +9,14 @@
 	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
 			alert("수정오류");
-			window.location='../one/qna';
+			window.location='/moyeo/one/qna';
 		</script>
 	</c:if>
 	
 	<c:if test="${cnt != 0}">
 		<script type="text/javascript">
 			alert("글이 수정되었습니다.");
-			window.location="../one/qnaContentForm?qboard_num="+${qboard_num}+"&pageNum="+${pageNum}+"&number="+${number};
+			window.location="/moyeo/one/qnaContentForm?qboard_num="+${qboard_num}+"&pageNum="+${pageNum}+"&number="+${number};
 		</script>
 	</c:if>
 	

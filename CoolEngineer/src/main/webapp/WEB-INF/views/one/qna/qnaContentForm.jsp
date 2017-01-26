@@ -24,13 +24,13 @@
 <script type="text/javascript">
 	function delChk(){
 		if(confirm("정말 삭제하시겠습니까?\n(답변이 달린 경우 함께 삭제됩니다.)")){
-			window.location='qnaDeletePro?qboard_num='+${dto.qboard_num}+'&pageNum='+${pageNum};
+			window.location='/moyeo/one/qnaDeletePro?qboard_num='+${dto.qboard_num}+'&pageNum='+${pageNum};
 		} 
 	}
 	
 	function delAnsChk(num){
 		if(confirm("정말 삭제하시겠습니까?")){
-			window.location='qnaAnsDelPro?reply_num='+num+'&pageNum='+${pageNum}+"&qboard_num="+${qboard_num}+"&number="+${number};
+			window.location='/moyeo/one/qnaAnsDelPro?reply_num='+num+'&pageNum='+${pageNum}+"&qboard_num="+${qboard_num}+"&number="+${number};
 			//window.location='qnaAnsDelPro?reply_num='+${bdto.reply_num}+'&pageNum='+${pageNum};
 		} 
 	}
@@ -87,7 +87,7 @@
                         <h3><span class="fa fa-info-circle"></span> 답변</h3>
                     </div>
                     <c:forEach var="bdto" items="${bdtos}">
-                    <div class="panel-body form-group-separated">                                    
+                    <div class="panel-body form-group-separated" style="border: 2px solid black; margin-top: 5px;">                                    
                         <div class="form-group" style="width:100%;">
                         	<label class="col-md-4 col-xs-5 control-label" style="width:18%;">작성자</label>
                             <div class="col-md-8 col-xs-7 line-height-30" style="width:82%;">${bdto.manager_id} 

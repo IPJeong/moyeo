@@ -8,7 +8,74 @@
 
 -->
 <mapper namespace="com.engineers.moyeo.three.dao.ThreeDAO">  <!-- 인터페이스 -->
-    
+    <select id="getCount" resultType="int">
+		SELECT count(*) FROM faq_category
+	</select>
 	
+	<select id="getCount2" resultType="int">
+		SELECT count(*) FROM faq
+	</select>
+	
+	<select id="getCategory" resultType="com.engineers.moyeo.three.dto.ThreeDTO">
+		SELECT * 
+			FROM (SELECT category_num as ctgNum, category_name as ctgName
+		     		FROM (SELECT * FROM faq_category
+		       	   	 	   ORDER BY category_name ASC
+		           	 	 )
+			  	 )			
+	</select>	
+	
+	<select id="getQuestions" resultType="com.engineers.moyeo.three.dto.ThreeDTO">
+		SELECT * 
+			FROM (SELECT faq_title as faqTitle, faq_content as faqContent, category_name as ctgName2, faq_num as faqNum
+		     		FROM (SELECT * FROM faq
+		       	   	 	   ORDER BY category_name ASC
+		           	 	 )
+			  	 )			
+	</select>
+	
+	<select id="ctgCheck" parameterType="com.engineers.moyeo.three.dto.ThreeDTO" resultType="int">
+		SELECT count(*) FROM faq_category WHERE category_name = #{ctgName}
+	</select>
+	
+	<insert id="insert" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
+		INSERT INTO faq_category
+		VALUES (faq_category_seq.NEXTVAL, #{ctgName})
+	</insert>
+	
+	<insert id="insertFaq" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
+		INSERT INTO faq
+		VALUES (faq_seq.NEXTVAL, #{faqTitle}, #{faqContent}, #{faqDate}, #{adminId}, #{ctgName})
+	</insert>
+	
+	<update id="update" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
+		UPDATE faq_category SET category_name=#{ctgName2} WHERE category_name = #{ctgName}
+	</update>
+	
+	<update id="update2" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
+		UPDATE faq SET category_name=#{ctgName2} WHERE category_name = #{ctgName}
+	</update>
+	
+	<select id="getInfo" parameterType="int" resultType="com.engineers.moyeo.three.dto.ThreeDTO">
+		SELECT faq_title as faqTitle, faq_content as faqContent, faq_num as faqNum, category_name as ctgName2
+		  FROM faq
+		 WHERE faq_Num = #{faqNum}	           	 	 		
+	</select>
+	
+	<update id="updateFaq" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
+		UPDATE faq SET category_name=#{ctgName}, faq_title=#{faqTitle}, faq_content=#{faqContent} WHERE faq_num = #{faqNum}
+	</update>
+	
+	<delete id="delete" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
+		DELETE FROM faq_category WHERE category_num = #{ctgNum}
+	</delete>
+	
+	<delete id="delete2" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
+		DELETE FROM faq WHERE category_name = #{ctgName}
+	</delete>
+	
+	<delete id="deleteFaq" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
+		DELETE FROM faq WHERE faq_num = #{faqNum}
+	</delete>
 
 </mapper>
