@@ -9,5 +9,67 @@
 -->
 <mapper namespace="com.engineers.moyeo.one.dao.OneDAO">  <!-- 인터페이스 -->
     
+    <!-- 글개수 구하기 -->
+    <select id="getCount" resultType="int">
+    	SELECT count(*) FROM qna
+    </select>
     
+    <select id="getArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaBoardDTO">
+    	SELECT * 
+    			FROM (SELECT qboard_num, title, content, write_date, hit, status, mem_id, rownum rnum
+    					FROM (SELECT * FROM qna
+    						  ORDER BY qboard_num DESC)
+    				  )  
+    	         
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+    </select>
+    
+    
+    <!-- 회원 게시판 조회,등록,수정,삭제 -->
+    <insert id="insert" parameterType="com.engineers.moyeo.one.dto.QnaBoardDTO">
+    	INSERT INTO qna(qboard_num, title, content, write_date, hit, status, mem_id)
+    				VALUES(qna_seq.NEXTVAL, #{title}, #{content},#{write_date}, 0, null, #{mem_id}) 
+    </insert>
+    
+    <select id="getArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaBoardDTO">
+    	SELECT * FROM qna WHERE qboard_num = #{qboard_num}
+    </select>
+    
+    <update id="addReadCnt" parameterType="int">
+    	UPDATE qna SET hit = hit+1 WHERE qboard_num=#{qboard_num}
+    </update>
+    
+    <update id = "update" parameterType="com.engineers.moyeo.one.dto.QnaBoardDTO">
+    	UPDATE qna SET title=#{title}, content=#{content} WHERE qboard_num=#{qboard_num} 
+    </update>
+    
+    <delete id="delete" parameterType="int">
+    	DELETE FROM qna WHERE qboard_num=#{qboard_num}
+    </delete>
+    
+    <delete id="deleteRe" parameterType="int">
+    	DELETE FROM qna_reply WHERE qboard_num=#{qboard_num}
+    </delete>
+    
+    <delete id="deleteAnws" parameterType="int">
+    	DELETE FROM qna_reply WHERE reply_num=#{reply_num}
+    </delete>
+    
+    <!-- 관리자 게시판 답변 등록 -->
+    <insert id="insertReply" parameterType="com.engineers.moyeo.one.dto.QnaReplyDTO">
+    	INSERT INTO qna_reply(reply_num, reply_content, manager_id, write_date, qboard_num)
+  					VALUES(qna_reply_seq.NEXTVAL, #{reply_content}, #{manager_id}, #{write_date}, #{qboard_num})
+    </insert>
+    
+    <select id="getReArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaReplyDTO">
+    	SELECT * FROM qna_reply WHERE qboard_num = #{qboard_num}
+    </select>
+    
+    <update id="updateStatus" parameterType="int">
+    	UPDATE qna SET status='YES' WHERE qboard_num=#{qboard_num}
+    </update>
+    
+    <select id="getArtReply" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaReplyDTO">
+    	SELECT * FROM qna_reply WHERE qboard_num = #{qboard_num}
+    </select>
 </mapper>
