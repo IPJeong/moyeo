@@ -124,12 +124,17 @@ li {
 	                           </div>
 	                       </div>
 	                   </div>
+	                   <!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+						  모달테스트
+						</button>
 	                   <div class="panel-footer">
 	                       <button class="btn btn-default" type="reset">취소</button>                                    
 	                       <button class="btn btn-primary pull-right" type="submit">작성</button>
 	                   </div>
 	               </div>
           		</form:form>
+	                   <%@ include file="modal.jsp" %>
              </div>
          </div>                    
      </div>

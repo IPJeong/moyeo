@@ -15,29 +15,29 @@ background:#C1F3FF;
 <!-- START SCRIPTS -->
 <!-- START PLUGINS -->
 
-<script type="text/javascript" src="../../../resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
 <script type="text/javascript"
-	src="../../../resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
 <!-- END PLUGINS -->
 
 <!-- START THIS PAGE PLUGINS-->
-<script type='text/javascript' src='../../../resources/resource/js/plugins/icheck/icheck.min.js'></script>
+<script type='text/javascript' src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
 <script type="text/javascript"
-	src="../../../resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+	src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
 <script type="text/javascript"
-	src="../../../resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+	src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 
 <script type="text/javascript"
-	src="../../../resources/resource/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
-<script type="text/javascript" src="../../../resources/resource/js/plugins/dropzone/dropzone.min.js"></script>
-<script type="text/javascript" src="../../../resources/resource/js/plugins/icheck/icheck.min.js"></script>
+	src="/moyeo/resources/resource/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/dropzone/dropzone.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/icheck/icheck.min.js"></script>
 <!-- END THIS PAGE PLUGINS-->
 
 <!-- START TEMPLATE -->
-<script type="text/javascript" src="../../../resources/resource/js/settings.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
 
-<script type="text/javascript" src="../../../resources/resource/js/plugins.js"></script>
-<script type="text/javascript" src="../../../resources/resource/js/actions.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>
 <!-- END TEMPLATE -->
 
 <script>            
@@ -109,9 +109,9 @@ background:#C1F3FF;
                         
                         <div class="gallery" id="links">
                              
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/nature-1.jpg" title="Nature Image 1" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/nature-1.jpg" title="Nature Image 1" data-gallery>
                                 <div class="image">                              
-                                    <img src="../../../resources/resource/assets/images/gallery/nature-1.jpg" alt="Nature Image 1" width="144px" height="105px"/>                                        
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/nature-1.jpg" alt="Nature Image 1" width="144px" height="105px"/>                                        
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -123,9 +123,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>
 
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/music-1.jpg" alt="Music picture 1" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/music-1.jpg" alt="Music picture 1" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -137,9 +137,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                            
 
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/girls-1.jpg" title="Girls Image 1" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/girls-1.jpg" title="Girls Image 1" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/girls-1.jpg" alt="Girls Image 1" width="144px" height="105px"/>                                        
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/girls-1.jpg" alt="Girls Image 1" width="144px" height="105px"/>                                        
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -151,9 +151,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>
 
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/nature-2.jpg" title="Nature Image 2" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/nature-2.jpg" title="Nature Image 2" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/nature-2.jpg" alt="Nature Image 2" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/nature-2.jpg" alt="Nature Image 2" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -165,9 +165,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>
 
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/space-1.jpg" title="Space picture 1" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/space-1.jpg" title="Space picture 1" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/space-1.jpg" alt="Space picture 1" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/space-1.jpg" alt="Space picture 1" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -179,9 +179,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>
                                                  
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/music-2.jpg" title="Music picture 2" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/music-2.jpg" title="Music picture 2" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/music-2.jpg" alt="Music picture 2" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/music-2.jpg" alt="Music picture 2" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -193,9 +193,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                            
 
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/nature-3.jpg" title="Nature Image 3" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/nature-3.jpg" title="Nature Image 3" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/nature-3.jpg" alt="Nature Image 3" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/nature-3.jpg" alt="Nature Image 3" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -207,9 +207,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                                                     
 
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/girls-2.jpg" title="Girls Image 2" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/girls-2.jpg" title="Girls Image 2" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/girls-2.jpg" alt="Girls Image 2" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/girls-2.jpg" alt="Girls Image 2" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -221,9 +221,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                                                
                             
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/space-2.jpg" title="Space picture 2" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/space-2.jpg" title="Space picture 2" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/space-2.jpg" alt="Space picture 2" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/space-2.jpg" alt="Space picture 2" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -235,9 +235,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                               
 
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/nature-4.jpg" title="Nature Image 4" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/nature-4.jpg" title="Nature Image 4" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/nature-4.jpg" alt="Nature Image 4" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/nature-4.jpg" alt="Nature Image 4" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -249,9 +249,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                                                                 
                             
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/music-3.jpg" title="Music picture 3" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/music-3.jpg" title="Music picture 3" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/music-3.jpg" alt="Music picture 3" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/music-3.jpg" alt="Music picture 3" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -263,9 +263,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                            
                             
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/nature-5.jpg" title="Nature Image 5" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/nature-5.jpg" title="Nature Image 5" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/nature-5.jpg" alt="Nature Image 5" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/nature-5.jpg" alt="Nature Image 5" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -277,9 +277,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>
                             
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/nature-6.jpg" title="Nature Image 6" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/nature-6.jpg" title="Nature Image 6" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/nature-6.jpg" alt="Nature Image 6" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/nature-6.jpg" alt="Nature Image 6" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -291,9 +291,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                                                    
                              
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/girls-3.jpg" title="Girls Image 3" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/girls-3.jpg" title="Girls Image 3" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/girls-3.jpg" alt="Girls Image 3" width="144px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/girls-3.jpg" alt="Girls Image 3" width="144px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -305,9 +305,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                                                      
                              
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/nature-7.jpg" title="Nature Image 7" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/nature-7.jpg" title="Nature Image 7" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/nature-7.jpg" alt="Nature Image 7" width="144px" height="105px"/>
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/nature-7.jpg" alt="Nature Image 7" width="144px" height="105px"/>
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
@@ -319,9 +319,9 @@ background:#C1F3FF;
                                 </div>                                
                             </a>                                                    
                             
-                            <a class="gallery-item" href="../../../resources/resource/assets/images/gallery/music-5.jpg" title="Music picture 5" data-gallery>
+                            <a class="gallery-item" href="/moyeo/resources/resource/assets/images/gallery/music-5.jpg" title="Music picture 5" data-gallery>
                                 <div class="image">
-                                    <img src="../../../resources/resource/assets/images/gallery/music-5.jpg" alt="Music picture 5" width="120px" height="105px"/>    
+                                    <img src="/moyeo/resources/resource/assets/images/gallery/music-5.jpg" alt="Music picture 5" width="120px" height="105px"/>    
                                     <ul class="gallery-item-controls">
                                         <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
                                         <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>

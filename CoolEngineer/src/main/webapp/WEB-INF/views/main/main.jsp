@@ -123,7 +123,7 @@ li {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<a href="../gallery/gallery.jsp"><h3>사진</h3></a>
+					<h3><a href="/moyeo/five/gallery">사진</a></h3>
 
 				</div>
 			</div>
