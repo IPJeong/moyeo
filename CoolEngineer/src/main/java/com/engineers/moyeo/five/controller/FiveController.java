@@ -95,5 +95,17 @@ public class FiveController {
 		return viewPage;
 	}
 	
+	// 사진 더보기 탭(메인)
+	@RequestMapping("/gallery")
+	public String galleryMore() {
+		System.out.println("갤러리 호출");
+		return "gallery/gallery";
+	}
+	
+	@RequestMapping("/modalTest")
+	public String modalTest() {
+		return "common/modal/modalExample";
+	}
+	
 
 }
