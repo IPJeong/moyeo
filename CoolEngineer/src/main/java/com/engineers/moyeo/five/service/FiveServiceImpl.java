@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.engineers.moyeo.five.dao.FiveDAO;
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
@@ -170,7 +170,7 @@ public class FiveServiceImpl implements FiveService{
 					// 파일을 저장 후 저장된 파일명을 반환
 					filename = FileManager.saveFile(multipartFile, rootPath + imgPath, fileName);
 					PostPictureDTO picDto = new PostPictureDTO();
-					picDto.setPic_path(imgPath);
+					picDto.setPic_path(Code.postImgPathS);
 					picDto.setPic_name(filename);
 					picDto.setGroup_num(groupNum);
 					picDto.setMem_id(memId);
@@ -180,7 +180,7 @@ public class FiveServiceImpl implements FiveService{
 				} else if(type == 2) {
 					filename = FileManager.saveFile(multipartFile, rootPath + videoPath, fileName);
 					PostVideoDTO videoDto = new PostVideoDTO();
-					videoDto.setVideo_path(videoPath);
+					videoDto.setVideo_path(Code.postVideoPathS);
 					videoDto.setVideo_name(filename);
 					videoDto.setMem_id(memId);
 					videoDto.setGroup_num(groupNum);
@@ -199,9 +199,13 @@ public class FiveServiceImpl implements FiveService{
 	@Override
 	public String postDetail(Model model) throws NumberFormatException, NullPointerException {
 		
-		HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
+		// 모임후기번호
+		int post_num = Integer.parseInt((String)model.asMap().get("post_num"));
+		// 업로드 사진 수
+		int picCnt = 0;
+		// 업로드 동영상 수
+		int videoCnt = 0;
 		
-		int post_num = Integer.parseInt(req.getParameter("post_num"));
 		// 모임후기 정보를 조회
 		MeetingPostDTO postDto = fiveDao.getPostDetail(post_num);
 		// 모임후기의 사진정보를 조회
@@ -209,20 +213,70 @@ public class FiveServiceImpl implements FiveService{
 		// 모임후기의 동영상정보를 조회
 		List<PostVideoDTO> videoDtos = fiveDao.getPostVideos(post_num);
 		
-		int picCnt = picDtos.size();
-		int vidCnt = videoDtos.size();
-		
-		req.setAttribute("dto", postDto);
-		
-		if(picCnt > 0) {
-			req.setAttribute("picDtos", picDtos);
+		if(picDtos != null) {
+			picCnt = picDtos.size();
+			if(picCnt > 0) {
+				model.addAttribute("picDtos", picDtos);
+			}
 		}
-		if(vidCnt > 0) {
-			req.setAttribute("videoDtos", videoDtos);
+		
+		if(videoDtos != null) {
+			videoCnt =  videoDtos.size();
+			if(videoCnt > 0) {
+				model.addAttribute("videoDtos", videoDtos);
+			}
 		}
+		// 모임후기 상세정보
+		model.addAttribute("dto", postDto);
+		// 모임후기 첨부사진 수
+		model.addAttribute("picCnt", picCnt);
+		// 모임후기 첨부 동영상 수
+		model.addAttribute("videoCnt", videoCnt);
 		
 		return "five/postDetail";
+				
 	}
 
+
+	@Override
+	public void getPostDetail(ModelAndView mav) throws NumberFormatException, NullPointerException {
+		// 모임후기번호
+		int post_num = Integer.parseInt((String)mav.getModel().get("post_num"));
+		// 업로드 사진 수
+		int picCnt = 0;
+		// 업로드 동영상 수
+		int videoCnt = 0;
+		
+		// 모임후기 정보를 조회
+		MeetingPostDTO postDto = fiveDao.getPostDetail(post_num);
+		// 모임후기의 사진정보를 조회
+		List<PostPictureDTO> picDtos = fiveDao.getPostPics(post_num);
+		// 모임후기의 동영상정보를 조회
+		List<PostVideoDTO> videoDtos = fiveDao.getPostVideos(post_num);
+		
+		if(picDtos != null) {
+			picCnt = picDtos.size();
+			if(picCnt > 0) {
+				mav.addObject("picDtos", picDtos);
+			}
+		}
+		
+		if(videoDtos != null) {
+			videoCnt =  videoDtos.size();
+			if(videoCnt > 0) {
+				mav.addObject("videoDtos", videoDtos);
+			}
+		}
+		// 모임후기 상세정보
+		mav.addObject("dto", postDto);
+		// 모임후기 첨부사진 수
+		mav.addObject("picCnt", picCnt);
+		// 모임후기 첨부 동영상 수
+		mav.addObject("videoCnt", videoCnt);
+		
+		
+	}
+
+	
 
 }

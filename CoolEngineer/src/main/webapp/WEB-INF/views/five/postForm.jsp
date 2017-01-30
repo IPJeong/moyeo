@@ -124,24 +124,19 @@ li {
 	                           </div>
 	                       </div>
 	                   </div>
-	                   <!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-						  모달테스트
-						</button>
 	                   <div class="panel-footer">
 	                       <button class="btn btn-default" type="reset">취소</button>                                    
 	                       <button class="btn btn-primary pull-right" type="submit">작성</button>
 	                   </div>
 	               </div>
           		</form:form>
-	                   <%@ include file="modal.jsp" %>
              </div>
          </div>                    
      </div>
  </div>          
               
     <!-- START SCRIPTS -->
-<!--         START PLUGINS -->
+		<!-- TART PLUGINS -->
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>                
@@ -153,11 +148,6 @@ li {
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js"></script>                
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
-        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
-        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>        
         <!-- END TEMPLATE -->
         
         <script type="text/javascript" src="/moyeo/resources/customScript/five.js"></script>

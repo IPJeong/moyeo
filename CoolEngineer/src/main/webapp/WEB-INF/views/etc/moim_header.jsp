@@ -46,7 +46,7 @@
 <!-- START TEMPLATE -->
 <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>
 <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>
-<script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
+<!-- <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script> -->
 <script type="text/javascript" src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script>
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->

@@ -1,0 +1,8 @@
+ <!-- Spring team project image path -->
+  <Context docBase="c:\dev\moyeo_image\post\img\" path="/postImgPath" reloadable="true"/>
+  <Context docBase="c:\dev\moyeo_image\post\video\" path="/postVideoPath" reloadable="true"/>
+  <Context docBase="c:\dev\moyeo_image\event\mainImg\" path="/eventImgPath" reloadable="true"/>
+  <Context docBase="c:\dev\moyeo_image\event\img\" path="/eventImgsPath" reloadable="true"/>
+  <Context docBase="c:\dev\moyeo_image\reportImg\" path="/reportImgPath" reloadable="true"/>
+  <Context docBase="c:\dev\moyeo_image\profileImg\" path="/profileImgPath" reloadable="true"/>
+  <Context docBase="c:\dev\moyeo_image\placeImg\" path="/placeImgPath" reloadable="true"/>

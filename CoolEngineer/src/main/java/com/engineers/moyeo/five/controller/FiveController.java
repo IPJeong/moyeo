@@ -1,13 +1,15 @@
 package com.engineers.moyeo.five.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.engineers.moyeo.five.service.FiveService;
 import com.engineers.moyeo.main.common.Code;
@@ -23,8 +25,8 @@ public class FiveController {
 	
 	@Autowired
 	FiveService fiveService;
-	
-	String viewPage;
+	private ModelAndView mav;
+	private String viewPage;
 	
 	// 모임후기 게시판
 	@RequestMapping("/postList")
@@ -76,12 +78,10 @@ public class FiveController {
 	}
 	
 	// 모임후기 상세보기
-	@RequestMapping("/postDetail")
-	public String postDetail(HttpServletRequest req, Model model) {
-		
+	@RequestMapping(value="/postDetail")
+	public String postDetail(Model model, @RequestParam String post_num) {
 		System.out.println("모임후기 상세보기 페이지 요청");
-		
-		model.addAttribute("req", req);
+		model.addAttribute("post_num", post_num);
 		try {
 			// 모임후기 상세보기 프로세스 실행
 			viewPage = fiveService.postDetail(model);
@@ -93,6 +93,25 @@ public class FiveController {
 			System.out.println(Code.nullPoExceptionMsg);
 		}
 		return viewPage;
+	}
+	
+	// 모임후기 상세보기
+	@RequestMapping(value="/getPostDetail", method=RequestMethod.POST)
+	public ModelAndView getPostDetail(@RequestParam String post_num) {
+		mav = new ModelAndView("JSON");
+		System.out.println("모임후기 상세보기 페이지 요청");
+		mav.addObject("post_num", post_num);
+		try {
+			// 모임후기 상세보기 프로세스 실행
+			fiveService.getPostDetail(mav);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		return mav;
 	}
 	
 	// 사진 더보기 탭(메인)
@@ -107,5 +126,10 @@ public class FiveController {
 		return "common/modal/modalExample";
 	}
 	
-
+	@RequestMapping("/slider")
+	public String slider() {
+		System.out.println("slider");
+		return "common/sliderSettings";
+	}
+	
 }

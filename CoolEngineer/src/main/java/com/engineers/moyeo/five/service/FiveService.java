@@ -1,6 +1,7 @@
 package com.engineers.moyeo.five.service;
 
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 public interface FiveService {
 
@@ -13,4 +14,6 @@ public interface FiveService {
 	// 모임후기 상세보기
 	public String postDetail(Model model) throws NumberFormatException, NullPointerException;
 	
+	// 모임후기 상세보기(모달창)
+	public void getPostDetail(ModelAndView mav) throws NumberFormatException, NullPointerException;
 }

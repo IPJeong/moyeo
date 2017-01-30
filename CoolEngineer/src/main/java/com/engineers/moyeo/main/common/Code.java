@@ -25,6 +25,26 @@ public interface Code {
 	public final static String placeImgPath = "placeImg\\";
 	
 	
+	// 모임후기 사진저장경로
+	public final static String postImgPathS = "/postImgPath";
+	// 모임후기 동영상저장경로
+	public final static String postVideoPathS = "/postVideoPath";
+
+	// 이벤트 메인사진 저장경로
+	public final static String eventImgPathS = "/eventImgPath";
+	// 이벤트 사진 저장경로
+	public final static String eventImgsPathS = "/eventImgsPath";
+	
+	// 모임신고사진 저장경로
+	public final static String reportImgPahtS = "/reportImgPath";
+	
+	// 회원의 프로필사진 저장경로
+	public final static String profileImgPathS = "/profileImgPath"; 
+	
+	// 장소사진의 저장경로
+	public final static String placeImgPathS = "/placeImgPath";
+	
+	
 	// 숫자타입변환 예외 발생 메시지
 	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
 	// 널값 예외 발생 메시지

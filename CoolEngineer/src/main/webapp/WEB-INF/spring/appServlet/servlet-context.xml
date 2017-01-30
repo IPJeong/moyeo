@@ -19,6 +19,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
 	
 	<!-- 컨트롤러 스캔위치 -->
@@ -47,7 +48,14 @@
 		<beans:constructor-arg index="0" ref="sqlSessionFactory" />
 	</beans:bean>
 	
+	<!-- 파일업로드를 위한 beanName view Resolver -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
+	<!-- JSON view -->
+	<beans:bean id="JSON" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+	<!-- BeanName ViewResolver -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" >
+		<beans:property name="order" value="1" />
+	</beans:bean>
 	
 </beans:beans>

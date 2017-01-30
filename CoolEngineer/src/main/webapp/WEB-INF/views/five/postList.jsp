@@ -5,7 +5,7 @@
 <html>
 <head>        
    <!-- META SECTION -->
-   <title>Atlant - Responsive Bootstrap Admin Template</title>            
+   <title>모임후기 조회</title>            
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,6 +16,11 @@
    <!-- CSS INCLUDE -->        
    <link rel="stylesheet" type="text/css" id="theme" href="/moyeo/resources/resource/css/theme-default.css"/>
    <!-- EOF CSS INCLUDE -->
+   
+   <!-- imageSlider CSS start-->
+   <link rel="stylesheet" type="text/css" href="/moyeo/resources/resource/js/plugins/slick/slick.css">
+   <link rel="stylesheet" type="text/css" href="/moyeo/resources/resource/js/plugins/slick/slick-theme.css">
+   <!-- imageSlider CSS end-->
 <style>
 @media only screen and (max-width: 1010px) {
 .x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
@@ -61,7 +66,6 @@ li {
     width: auto;
     }
 }
-
 #writeBtn {
 	margin-top:30px; 
 	margin-right:30px; 
@@ -70,6 +74,7 @@ li {
 #dataTable {
 	margin-top : 30px;
 }
+
 </style>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
@@ -91,21 +96,20 @@ li {
           <div class="panel-body panel-body-table">
 
               <div class="table-responsive">
-<!--                   <table class="table table-bordered table-striped table-actions" id="dataTable"> -->
                   <table class="table table-bordered" id="dataTable">
                       <thead>
-                      	  
-	                          <tr>
-	                              <th width="50">순번</th>
-	                              <th width="">후기제목</th>
-	                              <th width="100">조회수</th>
-	                              <th width="100">좋아요</th>
-	                              <th width="200">작성일</th>
-	                              <th width="120">관리</th>
-	                          </tr>
+                          <tr>
+                              <th width="50">순번</th>
+                              <th width="">후기제목</th>
+                              <th width="100">조회수</th>
+                              <th width="100">좋아요</th>
+                              <th width="200">작성일</th>
+                              <th width="120">관리</th>
+                          </tr>
                       </thead>
                       <tbody>               
 	                      <c:forEach var="dto" items="${dtos}">
+	                          
 	                      	  <c:if test="${dto.post_hit >= 10 || dto.like_num >= 10}">                             
 	                         	 <tr id="trow_1" class="danger">
 	                          </c:if>
@@ -114,7 +118,8 @@ li {
 	                          </c:if>
 	                              <td class="text-center">${number}</td>
 	                               <c:set var="number" value="${number-1}"/>
-	                              <td><strong><a href="postDetail?post_num=${dto.post_num}">${dto.post_title}</a></strong></td>
+	                              <%-- <td><strong><a href="" data-toggle="modal" data-target="#myModal" id="postTitle" onclick="getPost('${dto.post_num }');">${dto.post_title}</a></strong></td> --%>
+	                              <td><strong><a href="" id="postTitle"  data-toggle="modal" data-target="#myModal" data-backdrop="static" onclick="getPostDetail('${dto.post_num }');">${dto.post_title}</a></strong></td>
 	                              <td><span class="badge badge-success">${dto.post_hit}</span></td>
 	                              <td><span class="badge badge-info">${dto.like_num}</span></td>
 	                              <td>${dto.post_date}</td>
@@ -132,32 +137,30 @@ li {
 			  </div>
           </div>
       </div>                                                
-
         <!-- END RESPONSIVE TABLES -->
      </div>
- </div>          
-              
-    <!-- START SCRIPTS -->
-	<!-- START PLUGINS -->
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>                
-        
-        <script type='text/javascript' src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-		
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js"></script>                
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
-        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
-        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>        
-    <!-- END PLUGINS -->
-        
-        <script type="text/javascript" src="/moyeo/resources/customScript/five.js"></script>
-    <!-- END SCRIPTS -->                   
-    </body>
+ </div>
+ <%@ include file="postModal.jsp" %>          
+   <!-- START SCRIPTS -->
+   <!-- START PLUGINS -->
+       <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+       <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+       <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>                
+       
+       <script type='text/javascript' src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
+       <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+       <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+	
+       <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js"></script>                
+       <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
+       <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+       
+   <!-- END PLUGINS -->
+       
+   <script type="text/javascript" src="/moyeo/resources/customScript/five.js"></script>
+   <!-- END SCRIPTS -->    
+   <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
+   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+   <script src="/moyeo/resources/resource/js/plugins/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+</body>
 </html>

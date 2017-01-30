@@ -61,7 +61,7 @@ public class FileManager {
 	public static int checkFileType(String filename) {
 		
 		String[] imgs = {"jpg", "png", "gif", "bmp", "rel", "psd", "pdd", "tif", "pdf", "raw", "pct", "pic"};
-		String[] videos = {"mpg", "mpeg", "mpe", "wmv", "asf", "asx", "flv", "rm", "mov", "dat"};
+		String[] videos = {"mpg", "mpeg", "mpe", "wmv", "asf", "asx", "flv", "rm", "mov", "dat", "avi", "mp4"};
 		
 		String extension = filename.substring(filename.lastIndexOf(".")+1);
 		for(String img : imgs) {
