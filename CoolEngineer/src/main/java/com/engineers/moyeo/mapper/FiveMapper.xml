@@ -30,7 +30,7 @@
     </select> -->
     <select id="getPostList" parameterType="map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
     	SELECT *
-    	  FROM (SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, rownum as rnum
+    	  FROM (SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, post_hit, rownum as rnum
     	  		  FROM (SELECT * 
     	  		          FROM meeting_post
     	  		         WHERE group_num = #{group_num} 
@@ -73,8 +73,45 @@
     	SELECT * FROM post_pictures WHERE post_num = #{post_num}
     </select>
     
-    <!-- 해당 모임후기의  동영상을 조회하는 쿼리-->
+    <!-- 해당 모임후기의 동영상을 조회하는 쿼리-->
     <select id="getPostVideos" parameterType="int" resultType="com.engineers.moyeo.five.dto.PostVideoDTO">
     	SELECT * FROM post_video WHERE post_num = #{post_num}
     </select>
+    
+    <!-- 해당모임 후기의 조회수를 증가시키는 쿼리 -->
+    <update id="updatePostHit" parameterType="int">
+    	UPDATE meeting_post SET post_hit = post_hit+1 WHERE post_num = #{post_num}
+    </update>
+    
+    <!-- 해당모임 후기를 삭제시킴 -->
+    <delete id="deletePost" parameterType="int">
+    	DELETE from meeting_post WHERE post_num = #{post_num}  
+    </delete>
+    
+    <!-- 모임후기의 좋아요 추가 -->
+    <insert id="likePost"  parameterType="Map">
+    	INSERT INTO meeting_post_like (post_like_num, post_num, mem_id) VALUES (meeting_post_like_seq.nextval, #{post_num}, #{mem_id})
+    </insert>
+    
+    <!-- 모임후기의 좋아요 수 증가 -->
+    <update id="updateLikeNum" parameterType="int">
+    	UPDATE meeting_post SET like_num = like_num+1 WHERE post_num = #{post_num}
+    </update>
+    
+    <!-- 모임후기의 좋아요 취소 -->
+    <delete id="unLikePost" parameterType="Map">
+    	DELETE FROM meeting_post_like WHERE post_num = #{post_num} AND mem_id = #{mem_id}
+    </delete>
+    
+     <!-- 모임후기의 좋아요 수 감소 -->
+    <update id="downDateLikeNum" parameterType="int">
+    	UPDATE meeting_post SET like_num = like_num-1 WHERE post_num = #{post_num}
+    </update>
+    
+    <!-- 모임후기 좋아요 수 검색 -->
+    <select id="getLikeNum" parameterType="int" resultType="int">
+    	SELECT like_num FROM meeting_post WHERE post_num = #{post_num}
+    </select>
+    
+    
 </mapper>

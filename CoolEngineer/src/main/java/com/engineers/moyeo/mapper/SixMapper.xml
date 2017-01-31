@@ -53,22 +53,20 @@
 	
 	
 	
-	
-	
 	<!-- 모임일정-글 개수 구하기 -->
-	<select id="moimScheduleCount" resultType="int">
-		SELECT COUNT(*) FROM meeting_list
+	<select id="moimScheduleCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM meeting_list WHERE group_num = #{group_num}
 	</select>
 	
 	<!-- 모임일정-메인용 일정리스트 -->
-	<select id="moimSchedule" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
-		SELECT * FROM meeting_list ORDER BY meeting_date ASC
+	<select id="moimSchedule" parameterType="int" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+		SELECT * FROM meeting_list WHERE group_num=#{group_num} ORDER BY meeting_date ASC
 	</select>
 	
 	<!-- 모임일정-일정리스트 -->
 	<select id="moimScheduleDetail" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
 		SELECT * FROM (SELECT meeting_num, meeting_title, meeting_detail, meeting_loc, meeting_date, group_num, meeting_cost, meeting_pernum, loc_detail, rownum rnum 
-		FROM (select * from meeting_list ORDER BY meeting_date ASC)) 
+		FROM (select * from meeting_list ORDER BY meeting_date ASC) WHERE group_num=#{group_num}) 
 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} ORDER BY meeting_date ASC
 	</select>
 	
@@ -79,7 +77,7 @@
 	
 	<!-- 모임일정-등록 -->
 	<insert id="moimRegister" parameterType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
- 		INSERT INTO meeting_list VALUES(meeting_list_seq.NEXTVAL, #{meeting_title}, #{meeting_detail}, #{meeting_loc}, #{meeting_date}, 1, #{meeting_cost}, #{meeting_pernum}, #{loc_detail})
+ 		INSERT INTO meeting_list VALUES(meeting_list_seq.NEXTVAL, #{meeting_title}, #{meeting_detail}, #{meeting_loc}, #{meeting_date}, #{group_num}, #{meeting_cost}, #{meeting_pernum}, #{loc_detail})
  	</insert> 
  	
  	<!-- 모임일정-수정 -->
@@ -91,4 +89,355 @@
  	<delete id="moimScheduleDelete" parameterType="int">
  		DELETE FROM meeting_list WHERE meeting_num = #{meeting_num}
  	</delete>
+ 	
+ 	<!-- 모임일정-참석여부확인 -->
+ 	<select id="moimScheduleJoinCheck" parameterType="com.engineers.moyeo.six.dto.MoimScheduleDTO" resultType="int">
+ 		SELECT COUNT(*) FROM present_per_list WHERE mem_id = #{mem_id} AND meeting_num = #{meeting_num} 
+ 	</select>
+ 	
+ 	<!-- 모임일정-참석신청 -->
+ 	<insert id="moimScheduleJoin" parameterType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+ 		INSERT INTO present_per_list VALUES(present_per_list_seq.NEXTVAL , #{mem_id}, #{meeting_num})
+ 	</insert>
+ 	
+ 	<!-- 모임일정-참석취소 -->
+ 	<delete id="moimScheduleCancel" parameterType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+ 		DELETE FROM present_per_list WHERE mem_id = #{mem_id} AND meeting_num = #{meeting_num}
+ 	</delete>
+ 	
+ 	<!-- 모임일정-참석인원 확인 -->
+ 	<select id="moimScheduleCheck" parameterType="int" resultType="int">
+ 		SELECT COUNT(*) FROM present_per_list WHERE meeting_num = #{meeting_num}
+ 	</select>
+ 	
+ 	<!-- 모임일정-참석자명단 확인 -->
+ 	<select id="moimScheduleMember" parameterType="int" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
+ 		SELECT * FROM present_per_list WHERE meeting_num = #{meeting_num}
+ 	</select>
+ 	
+ 	
+ 	
+ 	<!-- 모임등록 -->
+ 	<insert id="moimOpenPro" parameterType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		INSERT INTO group_list VALUES(group_list_seq.NEXTVAL, #{group_name}, #{group_mem_cnt}, #{group_inte1}, #{group_inte2}, #{group_location}, #{group_intro})
+ 	</insert>
+ 	
+ 	
+ 	
+ 	<!-- 카테고리-관심사별(아웃도어/여행) -->
+ 	<select id="categoryHobbyA" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '아웃도어/여행' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(운동/스포츠) -->
+ 	<select id="categoryHobbyB" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '운동/스포츠' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(인문학/책/글) -->
+ 	<select id="categoryHobbyC" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '인문학/책/글' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(외국/언어) -->
+ 	<select id="categoryHobbyD" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '외국/언어' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(문화/공연) -->
+ 	<select id="categoryHobbyE" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '문화/공연' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(음악/악기) -->
+ 	<select id="categoryHobbyF" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '음악/악기' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(공예/만들기) -->
+ 	<select id="categoryHobbyG" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '공예/만들기' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(댄스/무용) -->
+ 	<select id="categoryHobbyH" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '댄스/무용' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(봉사활동) -->
+ 	<select id="categoryHobbyI" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '봉사활동' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(사교/인맥) -->
+ 	<select id="categoryHobbyJ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '사교/인맥' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(차/오토바이) -->
+ 	<select id="categoryHobbyK" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '차/오토바이' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(사진) -->
+ 	<select id="categoryHobbyL" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '사진' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(야구관람) -->
+ 	<select id="categoryHobbyM" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_inte1 = '야구관람' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(게임/오락) -->
+ 	<select id="categoryHobbyN" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location = '게임/오락' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(요리/체조) -->
+ 	<select id="categoryHobbyO" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location = '요리/체조' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(반려동물) -->
+ 	<select id="categoryHobbyP" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location = '반려동물' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(가족/결혼) -->
+ 	<select id="categoryHobbyQ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location = '가족/결혼' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-관심사별(자유주제) -->
+ 	<select id="categoryHobbyR" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location = '자유주제' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	
+ 	
+ 	<!-- 카테고리-지역별(서울특별시) -->
+ 	<select id="categoryLocationA" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '서울%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(부산광역시) -->
+ 	<select id="categoryLocationB" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '부산%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(인천광역시) -->
+ 	<select id="categoryLocationC" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '인천%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(대구광역시) -->
+ 	<select id="categoryLocationD" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '대구%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(대전광역시) -->
+ 	<select id="categoryLocationE" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '대전%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(광주광역시) -->
+ 	<select id="categoryLocationF" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '광주%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(울산광역시) -->
+ 	<select id="categoryLocationG" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '울산%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(세종특별자치시) -->
+ 	<select id="categoryLocationH" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '세종%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(경기도) -->
+ 	<select id="categoryLocationI" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '경기%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(강원도) -->
+ 	<select id="categoryLocationJ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '강원%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(충청북도) -->
+ 	<select id="categoryLocationK" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '충청북%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(충청남도) -->
+ 	<select id="categoryLocationL" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '충청남%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(경상북도) -->
+ 	<select id="categoryLocationM" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '경상북%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(경상남도) -->
+ 	<select id="categoryLocationN" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '경상남%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(전라북도) -->
+ 	<select id="categoryLocationO" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '전라북%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(전라남도) -->
+ 	<select id="categoryLocationP" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '전라남%' ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(제주특별자치도) -->
+ 	<select id="categoryLocationQ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_location LIKE '제주%' ORDER BY group_num DESC
+ 	</select>
+
+
+
+ 	<!-- 카테고리-규모별(5명이하) -->
+ 	<select id="categoryScaleA" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 5 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(10명이하) -->
+ 	<select id="categoryScaleB" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 10 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(20명이하) -->
+ 	<select id="categoryScaleC" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 20 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(30명이하) -->
+ 	<select id="categoryScaleD" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 30 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-지역별(40명이하) -->
+ 	<select id="categoryScaleE" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 40 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(50명이하) -->
+ 	<select id="categoryScaleF" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 50 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(100명이하) -->
+ 	<select id="categoryScaleG" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 100 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(150명이하) -->
+ 	<select id="categoryScaleH" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 150 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(200명이하) -->
+ 	<select id="categoryScaleI" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 200 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(250명이하) -->
+ 	<select id="categoryScaleJ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 250 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(300명이하) -->
+ 	<select id="categoryScaleK" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 300 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(350명이하) -->
+ 	<select id="categoryScaleL" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 350 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(400명이하) -->
+ 	<select id="categoryScaleM" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 400 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(450명이하) -->
+ 	<select id="categoryScaleN" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 450 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(500명이하) -->
+ 	<select id="categoryScaleO" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 500 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(600명이하) -->
+ 	<select id="categoryScaleP" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 600 ORDER BY group_num DESC
+ 	</select>
+ 	
+ 	<!-- 카테고리-규모별(700명이하) -->
+ 	<select id="categoryScaleQ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 700 ORDER BY group_num DESC
+ 	</select> 	
+ 	
+ 	<!-- 카테고리-규모별(800명이하) -->
+ 	<select id="categoryScaleR" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 800 ORDER BY group_num DESC
+ 	</select> 
+ 	
+ 	<!-- 카테고리-규모별(900명이하) -->
+ 	<select id="categoryScaleS" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 900 ORDER BY group_num DESC
+ 	</select> 
+ 	
+ 	<!-- 카테고리-규모별(1000명이하) -->
+ 	<select id="categoryScaleT" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_mem_cnt = 1000 ORDER BY group_num DESC
+ 	</select> 
+ 	
+ 	
+ 	
+ 	<!-- 모임-메인화면 -->
+ 	<select id="moimMain" parameterType="int" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		SELECT * FROM group_list WHERE group_num = #{group_num}
+ 	</select>
+ 	
+ 	<!-- 모임-모임정보수정처리 -->
+ 	<update id="moimModifyPro" parameterType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+ 		UPDATE group_list group_name = #{group_name}, group_mem_cnt = #{group_mem_cnt}, group_inte1 = #{group_inte1}, group_inte2 = #{group_inte2}, group_location = #{group_location}, group_intro = #{group_intro} WHERE group_num = #{group_num}
+ 	</update>
+ 	
+ 	<!-- 모임-모임삭제 -->
+ 	<delete id="moimDelete" parameterType="int">
+ 		DELETE FROM group_list WHERE group_num = #{group_num}
+ 	</delete>
+ 	
+ 	<!-- 모임-대표사진 등록 -->
+ 	<insert id="moimAddImagePro" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		INSERT INTO main_picture VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
+ 	</insert>
+ 	
+ 	<!-- 모임-대표사진 불러오기 -->
+ 	<select id="moimImageView" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		select * from main_picture WHERE main_pic_path = '/groupImgPath' AND group_num = #{group_num} ORDER BY main_pic_num DESC
+ 	</select>
+ 	
+ 	<!-- 모임-소개사진 등록 -->
+ 	<insert id="moimAddImageProB" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		INSERT INTO main_picture VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
+ 	</insert>
+ 	
+ 	<!-- 모임-소개사진 불러오기 -->
+ 	<select id="moimImageViewB" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		select * from main_picture WHERE main_pic_path = '/groupImgPath-' AND group_num = #{group_num} ORDER BY main_pic_num DESC
+ 	</select>
+ 	
 </mapper>
