@@ -199,8 +199,10 @@ public class FiveServiceImpl implements FiveService{
 	@Override
 	public String postDetail(Model model) throws NumberFormatException, NullPointerException {
 		
+		HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
 		// 모임후기번호
-		int post_num = Integer.parseInt((String)model.asMap().get("post_num"));
+		int post_num = Integer.parseInt(req.getParameter("post_num"));
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
 		// 업로드 사진 수
 		int picCnt = 0;
 		// 업로드 동영상 수
@@ -212,7 +214,6 @@ public class FiveServiceImpl implements FiveService{
 		List<PostPictureDTO> picDtos = fiveDao.getPostPics(post_num);
 		// 모임후기의 동영상정보를 조회
 		List<PostVideoDTO> videoDtos = fiveDao.getPostVideos(post_num);
-		
 		if(picDtos != null) {
 			picCnt = picDtos.size();
 			if(picCnt > 0) {
@@ -226,6 +227,12 @@ public class FiveServiceImpl implements FiveService{
 				model.addAttribute("videoDtos", videoDtos);
 			}
 		}
+		if(!postDto.getMem_id().equals(mem_id)) {
+			int cnt = fiveDao.updatePostHit(post_num);
+			if(cnt == 1) {
+				postDto = fiveDao.getPostDetail(post_num);
+			}
+		}
 		// 모임후기 상세정보
 		model.addAttribute("dto", postDto);
 		// 모임후기 첨부사진 수
@@ -237,7 +244,7 @@ public class FiveServiceImpl implements FiveService{
 				
 	}
 
-
+	// 모임후기 상세정보
 	@Override
 	public void getPostDetail(ModelAndView mav) throws NumberFormatException, NullPointerException {
 		// 모임후기번호
@@ -273,10 +280,55 @@ public class FiveServiceImpl implements FiveService{
 		mav.addObject("picCnt", picCnt);
 		// 모임후기 첨부 동영상 수
 		mav.addObject("videoCnt", videoCnt);
-		
-		
 	}
 
-	
+	// 모임후기 수정
+	@Override
+	public void modifyPost(ModelAndView mav) throws NumberFormatException, NullPointerException {
+		// 모임후기번호
+		int post_num = Integer.parseInt((String)mav.getModel().get("post_num"));
+		// 모임후기 정보를 조회
+		MeetingPostDTO postDto = fiveDao.getPostDetail(post_num);
+		// 모임후기 정보 삽입
+		mav.addObject("postDto", postDto);
+	}
 
+	// 모임후기 삭제
+	@Override
+	public void deletePost(ModelAndView mav) throws NumberFormatException, NullPointerException {
+		// 모임후기 번호
+		int post_num = Integer.parseInt((String)mav.getModel().get("post_num"));
+		// 모임후기 정보를 삭제
+		int cnt = fiveDao.deletePost(post_num);
+		// 모임후기 삭제 결과 삽입
+		mav.addObject("cnt", cnt);
+	}
+
+	// 모임후기 좋아요
+	@Override
+	public void likePost(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException {
+		// 모임후기 번호
+		int post_num = Integer.parseInt(req.getParameter("post_num"));
+		// 타입
+		int type = Integer.parseInt(req.getParameter("type"));
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("mem_id", mem_id);
+		map.put("post_num", post_num);
+		
+		int cnt = 0;
+		
+		if(type == 1) {
+			if(fiveDao.likePost(map) == 1)cnt = fiveDao.updateLikeNum(post_num);
+		} else if(type == 2){
+			if(fiveDao.unLikePost(map) == 1)cnt = fiveDao.downDateLikeNum(post_num);
+		}
+		int likeNum = fiveDao.getLikeNum(post_num);
+		mav.addObject("cnt", cnt);
+		mav.addObject("type", type);
+		mav.addObject("likeNum", likeNum);
+		mav.addObject("post_num", post_num);
+	}
+	 
 }
