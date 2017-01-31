@@ -80,7 +80,6 @@ function getPostDetail(postNum){
 			post_num : postNum				
 		},
 		success : function(data) {
-			
 			var mainImg = data.picDtos[0].pic_path + "/" + data.picDtos[0].pic_name;
 			var im = '<section class="regular slider">';
 			
@@ -136,6 +135,7 @@ function getPostDetail(postNum){
  
 
 function imgSlide() {
+	
 	$(".regular").slick({
 		dots: true,
 		infinite: true,
@@ -156,14 +156,105 @@ function imgSlide() {
 	});
 }
 
+// 메인이미지 변경
 function changeMainImg(fullPath) {
 	var tag = '<img style="margin: 30px auto; width: 350px; height: 350px;"  src="' + fullPath + '">';
 	$('#mainImg').html(tag);
 }
 
+// 메인동영상 변경
 function changeMainVideo(fullPath) {
 	var tag = '<video style="margin: 30px auto; width: 350px; height: 350px;" controls>' +
 			  '<source src="' + fullPath + '">' +  
 			  '</video>';
 	$('#mainImg').html(tag);
+}
+
+// 모임후기 수정
+function modPost(num) {
+	alert('실행');
+	jQuery.ajax({
+		type : "POST",
+		url:"/moyeo/five/modifyPost",
+		async : true,
+		dataType : "json",
+		data:{				
+			post_num : num				
+		},
+		success : function(data) {
+			$('#mod_post_title').val(data.postDto.post_title);
+			$('#mod_post_content').val(data.postDto.post_content);
+			$('#mod_post_tag').val(data.postDto.post_tag);
+		},
+		error : function(xhr) {
+			alert("정보조회에 실패하였습니다.");
+			alert("error html = " + xhr.statusText);
+		}
+	}); 
+}
+
+// 모임후기 삭제
+function deletePost(num) {
+	jQuery.ajax({
+		type : "POST",
+		url:"/moyeo/five/deletePost",
+		async : true,
+		dataType : "json",
+		data:{				
+			post_num : num				
+		},
+		success : function(data) {
+			var cnt = data.cnt;
+			if(cnt == 1) {
+				alert('모임후기가 정상적으로 삭제되었습니다.');
+				window.location='/moyeo/five/postList';
+			}
+		},
+		error : function(xhr) {
+			alert("모임후기 삭제에 실패하였습니다.");
+			alert("error html = " + xhr.statusText);
+		}
+	}); 
+}
+
+// 모임후기 좋아요
+function likePost(postnum, type) {
+	jQuery.ajax({
+		type : "POST",
+		url:"/moyeo/five/likePost",
+		async : true,
+		dataType : "json",
+		data:{				
+			post_num : postnum,
+			type : type
+		},
+		success : function(data) {
+			var cnt = data.cnt;
+			var type = data.type;
+			var likeNum = data.likeNum;
+			var post_num = data.post_num;
+			var resultBtn;
+			var resultLike;
+			
+			if(cnt == 1) {
+				if(type == 1) {
+					resultBtn = '<button class="btn btn-danger" id="listBtn" type="button" onclick="likePost(\''+post_num+'\', \'2\')">' + 
+								'좋아요 취소' + 
+								'</button>';
+				} else if(type == 2) {
+					resultBtn = '<button class="btn btn-danger" id="listBtn" type="button" onclick="likePost(\''+post_num+'\', \'1\')">' + 
+								'좋아요' + 
+								'</button>';
+				}
+			}
+			resultLike = '&nbsp; ' + likeNum + '명이 좋아합니다.';
+			$('#divLikeBtn').html(resultBtn);
+			$('#likeNum').html(resultLike);
+			
+		},
+		error : function(xhr) {
+			alert("모임후기 좋아하기를 실패하였습니다.");
+			alert("error html = " + xhr.statusText);
+		}
+	}); 
 }
