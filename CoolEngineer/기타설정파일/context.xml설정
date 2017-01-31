@@ -1,0 +1,7 @@
+<!-- 커넥션풀 작성 -->
+<!-- 기존 로컬DB -->
+<!-- <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="50" maxWait="1000" name="jdbc/Oracle11g" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="jsp"/> -->
+<!-- 팀프로젝트 공용DB -->
+<!-- <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="50" maxWait="1000" name="jdbc/Oracle11g" password="moyeo" type="javax.sql.DataSource" url="jdbc:oracle:thin:@211.183.7.41:1521:xe" username="engineer"/> -->
+<!-- 팀프로젝트 개인DB -->
+<!-- <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="50" maxWait="1000" name="jdbc/Oracle11g" password="moyeo" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="engineer"/> -->
