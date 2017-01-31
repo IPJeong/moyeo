@@ -85,6 +85,55 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
 		return fiveDao.getPostVideos(post_num);
 	}
+
+	// 모임후기의 조회수를 증가시킴
+	@Override
+	public int updatePostHit(int post_num) {
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.updatePostHit(post_num);
+	}
+
+	// 모임후기를 삭제시킴
+	@Override
+	public int deletePost(int post_num) {
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.deletePost(post_num);
+	}
+
+	// 모임후기 좋아요 추가
+	@Override
+	public int likePost(Map<String, Object> map) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.likePost(map);
+	}
+
+	// 모임후기 좋아요 수 업데이트(증가)
+	@Override
+	public int updateLikeNum(int post_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.updateLikeNum(post_num);
+	}
+
+	// 모임후기 좋아요 취소
+	@Override
+	public int unLikePost(Map<String, Object> map) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.unLikePost(map);
+	}
+	
+	// 모임후기 좋아요 수 업데이트(감소)
+	@Override
+	public int downDateLikeNum(int post_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.downDateLikeNum(post_num);
+	}
+
+	// 모임후기 좋아요 수 검색
+	@Override
+	public int getLikeNum(int post_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getLikeNum(post_num);
+	}
 	
 	
 	

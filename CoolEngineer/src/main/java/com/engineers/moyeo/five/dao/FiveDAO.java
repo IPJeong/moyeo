@@ -28,5 +28,19 @@ public interface FiveDAO {
 	public List<PostPictureDTO> getPostPics(int post_num);
 	// 모임후기의 동영상을 조회
 	public List<PostVideoDTO> getPostVideos(int post_num);
+	// 모임후기의 조회수를 증가시킴
+	public int updatePostHit(int post_num);
+	// 모임후기 삭제
+	public int deletePost(int post_num);
+	// 모임후기 좋아요 추가
+	public int likePost(Map<String, Object> map);
+	// 모임후기 좋아요 수 증가
+	public int updateLikeNum(int post_num);
+	// 모임후기 좋아요 취소
+	public int unLikePost(Map<String, Object> map);
+	// 모임후기 좋아요 수 감소
+	public int downDateLikeNum(int post_num);
+	// 모임후기 좋아요 수 검색
+	public int getLikeNum(int post_num);
 	
 }
