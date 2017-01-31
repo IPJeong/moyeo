@@ -18,24 +18,31 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<!-- 제목을 입력하는 공간 -->
-					<h4 class="modal-title" id="myModalLabel"></h4>
+					<h2 class="modal-title" id="myModalLabel"></h2>
 				</div>
 				<!-- 내용을 입력하는 공간 -->
 				<div class="modal-body">
 					<div style="float: left; width: 55%; height: 100%;">
-						<div style="margin: 50px auto; height: 40%;" id="mainImg">
+						<div style="margin: 20px auto; height: 40%;" id="mainImg">
 							<!-- 사진&동영상 데이터 입력창 -->
 						</div>
 						<div style="width:80%;" id="sliderDiv">
 							<!-- 슬라이드 이미지가 삽입되는 부분 -->
 						</div>
 					</div>
-					<div style="float: left; width: 30%; height: 100%;">
-						<div style="margin-top: 10%; height: 250px;" id="post_content">
-							<!-- 후기내용이 삽입되는 부분 -->							
+					<div style="float: left; width: 45%; height: 100%;">
+						<div style="margin-top: 10%; height: 250px;" >
+							<div id="post_content" style="width:100px; height:90%;">
+								<!-- 후기내용이 삽입되는 부분 -->					
+							</div>
+							<div  style="width:100px; height:10%; ">
+								<button class="btn btn-danger btn-rounded" style="position:relative; margin-left:95%;" type="button">
+									<span class="fa fa-heart">좋아요</span>
+								</button>
+							</div>						
 						</div>
 						<div style="margin-top: 10%; height: 250px;">
-							<h2>댓글</h2>
+							<h3>댓글</h3>
 							<p>댓글이 삽입되는 곳입니다.</p>
 							<!-- 댓글이 삽입되는 부분 -->
 						</div>

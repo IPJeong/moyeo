@@ -134,6 +134,26 @@ li {
               </div>                                
 			  <div>
 			  	<input id="writeBtn" class="btn btn-primary btn-rounded" type="button" value="글쓰기" onclick="window.location='postForm'">
+			  	<!-- 게시판 페이지 리스트 -->
+			  	<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+					<c:if test="${cnt > 0}">
+						<c:if test="${startPage > pageBlock}">
+							<li class=""><a href="/moyeo/five/postList?pageNum=${startPage - pageBlock}"><font
+									size="3"> «</font></a></li>
+						</c:if>
+						<c:forEach var="i" begin="${startPage}" end="${endPage}">
+							<c:if test="${i == currentPage}">
+								<li class=""><a href="#"><font size="3">${i}</font></a></li>
+							</c:if>
+							<c:if test="${i != currentPage}">
+								<li class=""><a href="/moyeo/five/postList?pageNum=${i}"><font size="3">${i}</font></a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pageCount > endPage}">
+							<li><a href="/moyeo/five/postList?pageNum=${startPage + pageBlock}"><font size="3">»</font></a></li>
+						</c:if>
+					</c:if>
+				</ul>
 			  </div>
           </div>
       </div>                                                
