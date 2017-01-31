@@ -16,7 +16,7 @@ public interface Code {
 	public final static String eventImgsPath = "event\\img\\";
 	
 	// 모임신고사진 저장경로
-	public final static String reportImgPaht = "reportImg\\";
+	public final static String reportImgPath = "reportImg\\";
 	
 	// 회원의 프로필사진 저장경로
 	public final static String profileImgPath = "profileImg\\"; 
@@ -39,7 +39,7 @@ public interface Code {
 	public final static String eventImgsPathS = "/eventImgsPath";
 	
 	// 모임신고사진 저장경로
-	public final static String reportImgPahtS = "/reportImgPath";
+	public final static String reportImgPathS = "/reportImgPath";
 	
 	// 회원의 프로필사진 저장경로
 	public final static String profileImgPathS = "/profileImgPath"; 
