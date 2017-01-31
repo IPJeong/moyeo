@@ -95,12 +95,14 @@ public class FiveController {
 		return viewPage;
 	}
 	
-	// 모임후기 상세보기
+	// 모임후기 상세보기(모달버전)
 	@RequestMapping(value="/getPostDetail", method=RequestMethod.POST)
-	public ModelAndView getPostDetail(@RequestParam String post_num) {
+	public ModelAndView getPostDetail(@RequestParam String post_num, HttpServletRequest req) {
 		mav = new ModelAndView("JSON");
 		System.out.println("모임후기 상세보기 페이지 요청");
 		mav.addObject("post_num", post_num);
+		mav.addObject("req", req);
+		
 		try {
 			// 모임후기 상세보기 프로세스 실행
 			fiveService.getPostDetail(mav);
@@ -114,22 +116,22 @@ public class FiveController {
 		return mav;
 	}
 	
-	// 사진 더보기 탭(메인)
-	@RequestMapping("/gallery")
-	public String galleryMore() {
-		System.out.println("갤러리 호출");
-		return "gallery/gallery";
-	}
-	
-	@RequestMapping("/modalTest")
-	public String modalTest() {
-		return "common/modal/modalExample";
-	}
-	
-	@RequestMapping("/slider")
-	public String slider() {
-		System.out.println("slider");
-		return "common/sliderSettings";
+	// 모임후기 수정
+	@RequestMapping(value="/modifyPost")
+	public ModelAndView modifyPost(@RequestParam String post_num) {
+		mav = new ModelAndView("JSON");
+		System.out.println("모임후기 수정 요청");
+		mav.addObject("post_num", post_num);
+		try {
+			fiveService.modifyPost(mav);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		return mav;
 	}
 	
 }
