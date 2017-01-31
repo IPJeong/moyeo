@@ -6,3 +6,4 @@
   <Context docBase="c:\dev\moyeo_image\reportImg\" path="/reportImgPath" reloadable="true"/>
   <Context docBase="c:\dev\moyeo_image\profileImg\" path="/profileImgPath" reloadable="true"/>
   <Context docBase="c:\dev\moyeo_image\placeImg\" path="/placeImgPath" reloadable="true"/>
+  <Context docBase="c:\dev\moyeo_image\groupImg\" path="/groupImgPath" reloadable="true" />	

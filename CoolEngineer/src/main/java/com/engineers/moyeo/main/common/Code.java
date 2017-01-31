@@ -24,6 +24,9 @@ public interface Code {
 	// 장소사진의 저장경로
 	public final static String placeImgPath = "placeImg\\";
 	
+	// 모임의 대표사진 저장경로
+	public final static String groupImgPath = "groupImg\\";
+	
 	
 	// 모임후기 사진저장경로
 	public final static String postImgPathS = "/postImgPath";
@@ -44,6 +47,8 @@ public interface Code {
 	// 장소사진의 저장경로
 	public final static String placeImgPathS = "/placeImgPath";
 	
+	// 모임의 대표사진 저장경로
+	public final static String groupImgPathS = "/groupImgPath";
 	
 	// 숫자타입변환 예외 발생 메시지
 	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
