@@ -31,6 +31,15 @@ public class MoimScheduleDTO {
 	//모임일정 정원
 	private int meeting_pernum;
 	
+	//모임일정 참여자번호
+	private int pre_per_num;
+	
+	//모임일정 참여자아이디
+	private String mem_id;
+	
+	//모임일정 참여자 숫자
+	private int join_num;
+	
 	public int getMeeting_num() {
 		return meeting_num;
 	}
@@ -85,5 +94,20 @@ public class MoimScheduleDTO {
 	public void setMeeting_pernum(int meeting_pernum) {
 		this.meeting_pernum = meeting_pernum;
 	}
-	
+	public int getPre_per_num() {
+		return pre_per_num;
+	}
+	public void setPre_per_num(int pre_per_num) {
+		this.pre_per_num = pre_per_num;
+	}
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public int getJoin_num() {
+		return join_num;
+	}
+
 }
