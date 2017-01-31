@@ -2,6 +2,62 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../../etc/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+
+<!-- START SCRIPTS -->
+<!-- START PLUGINS -->
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- END PLUGINS -->
+
+<!-- START THIS PAGE PLUGINS-->
+<script type='text/javascript'
+	src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/highlight/jquery.highlight-4.js"></script>
+<!-- END THIS PAGE PLUGINS-->
+
+<!-- START TEMPLATE -->
+<script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
+
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/faq.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/jquery-1.12.4.js"></script>
+<!-- END TEMPLATE -->
+
+<script type="text/javascript">
+	
+	$(function(){
+		$("#fade > #button").fadeToggle(0);
+		$("#fadeButton > #modifyButton").click(function() {
+			$("#fade > #button").fadeToggle(200);
+		});		
+	});
+	
+	$(function(){
+		$("#fade > #button2").fadeToggle(0);
+		$("#dfadeButton > #deleteButton").click(function() {
+			$("#fade > #button2").fadeToggle(200);
+		});		
+	});
+	
+	$(function(){
+		$("#fade2 > #button3").fadeToggle(0);
+		$("#dCtgfadeButton > #deleteCtgButton").click(function() {
+			$("#fade2 > #button3").fadeToggle(200);
+		});		
+	});
+</script>
 
 <style>
 
@@ -23,8 +79,8 @@
 }
 
 .col-md-3 {
-	width: 45%;
-	margin: auto;
+	width: 43%;
+	margin: 0;
 }
 .col-md-4 {
 	width: 43%;
@@ -88,7 +144,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4" style="float:left">
+							<div class="col-md-4" style="float:left; top:-5px">
 								<input type="button" class="btn btn-success btn-block" style="margin: 5px; float:left; width:20%;" value="건의사항" onclick="window.location='/moyeo/two/suggestionInputForm'">
 								<input type="button" class="btn btn-success btn-warning" style="margin: 5px; float:left; width:20%;" value="건의사항확인" onclick="window.location='/moyeo/two/suggestionList'">
 								
@@ -101,128 +157,97 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-md-3">
+	<div class="row" style="margin:auto;">
+		<div class="col-md-3" style="margin-left:100px;">
 			<!-- CONTACT ITEM -->
-			<div class="panel panel-default">
+			<div class="panel panel-default" style="height:200px;">
 				<div class="panel-body profile">
 					<div class="profile-data">
-						<div class="profile-data-name"><a href="/moyeo/three/faq/">FAQ</a></div>
+						<div class="profile-data-name"><a href="/moyeo/three/faq/" style="font-size:17px;">FAQ</a></div>
 					</div>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body faq" style="text-size:10px; height:150px; overflow:hidden;">
 					<div class="contact-info">
-						<p>
-							FAQ게시글1
-						</p>
-						<p>
-							FAQ게시글2
-						</p>
-						<p>
-							FAQ게시글3
-						</p>
-						<p>
-							FAQ게시글4
-						</p>
-						<p>
-							FAQ게시글5
-						</p>
+						<c:forEach var="dto" items="${dtos2}" begin="0" end="3">
+							<div class="faq-item" style="padding:0px; margin:0px;">
+								<div class="faq-title" style="size:5px;" id="fade">
+									<span class="" style="left:-20px"></span><font size="2px">${dto.faqTitle}</font>																							                                        
+	                            </div>
+								<div class="faq-text" style="padding:0px; margin:0px;">														
+									<p class="active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.faqContent}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>	
+			</div>
+		
+			<!-- END CONTACT ITEM -->
+		</div>
+
+		<div class="col-md-3" style="margin:auto;">
+			<!-- CONTACT ITEM -->
+			<div class="panel panel-default" style="height:200px;">
+				<div class="panel-body profile">
+					<div class="profile-data">
+						<div class="profile-data-name"><a href="/moyeo/six/notice/notice" style="font-size:17px;">공지사항</a></div>
+						
+					</div>
+				</div>
+				<div class="panel-body" style="padding:0px;">
+					<div class="contact-info">
+						<c:forEach var="dto" items="${dtos}" begin="0" end="4">
+							
+							<p style="margin:9px; font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+								href="../six/notice/noticeContent?noti_num=${dto.noti_num}&pageNum=${pageNum}">
+							${dto.noti_title}
+							</a></p>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
 			<!-- END CONTACT ITEM -->
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-3" style="margin-left:100px;">
 			<!-- CONTACT ITEM -->
-			<div class="panel panel-default">
+			<div class="panel panel-default" style="height:200px;">
 				<div class="panel-body profile">
 					<div class="profile-data">
-						<div class="profile-data-name"><a href="/moyeo/six/notice/notice">공지사항</a></div>
+						<div class="profile-data-name"><a href="/moyeo/one/qna/" style="font-size:17px;">Q&A</a></div>
 						
 					</div>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" style="padding:0px;">
 					<div class="contact-info">
-						<p>
-							공지사항1
-						</p>
-						<p>
-							공지사항2
-						</p>
-						<p>
-							공지사항3
-						</p>
-						<p>
-							공지사항4
-						</p>
-						<p>
-							공지사항5
-						</p>
-					</div>
-				</div>
-			</div>
-			<!-- END CONTACT ITEM -->
-		</div>
-
-		<div class="col-md-3">
-			<!-- CONTACT ITEM -->
-			<div class="panel panel-default">
-				<div class="panel-body profile">
-					<div class="profile-data">
-						<div class="profile-data-name"><a href="/moyeo/one/qna/">Q&A</a></div>
-						
-					</div>
-				</div>
-				<div class="panel-body">
-					<div class="contact-info">
-						<p>
-							Q&A 1
-						</p>
-						<p>
-							Q&A 2
-						</p>
-						<p>
-							Q&A 3
-						</p>
-						<p>
-							Q&A 4
-						</p>
-						<p>
-							Q&A 5
-						</p>
+						<c:forEach var="dto" items="${dtos3}" begin="0" end="4">
+							
+							<p style="margin:9px; font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+								href="../one/qnaContentForm?qboard_num=${dto.qboard_num}&pageNum=${pageNum}&number=${dto.qboard_num}">
+							${dto.title}
+							</a></p>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
 			<!-- END CONTACT ITEM -->
 		</div>
 		
-		<div class="col-md-3">
+		<div class="col-md-3" style="margin:auto;">
 			<!-- CONTACT ITEM -->
-			<div class="panel panel-default">
+			<div class="panel panel-default" style="height:200px;">
 				<div class="panel-body profile">
 					<div class="profile-data">
-						<div class="profile-data-name"><a href="/moyeo/three/customer-support/notice.jsp">이벤트</a></div>
+						<div class="profile-data-name"><a href="/moyeo/three/customer-support/notice.jsp" style="font-size:17px;">이벤트</a></div>
 						
 					</div>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" style="padding:0px;">
 					<div class="contact-info">
 						<p>
 							이벤트1
 						</p>
-						<p>
-							이벤트2
-						</p>
-						<p>
-							이벤트3
-						</p>
-						<p>
-							이벤트4
-						</p>
-						<p>
-							이벤트5
-						</p>
+		
 					</div>
 				</div>
 			</div>

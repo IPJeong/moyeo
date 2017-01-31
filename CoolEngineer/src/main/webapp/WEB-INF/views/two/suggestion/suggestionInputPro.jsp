@@ -17,7 +17,7 @@
 	<c:if test="${cnt != 0}">
 		<script type="text/javascript">
 			alert("건의사항이 전송되었습니다.");
-			window.location='/moyeo/one/cusSupMain';
+			window.location='/moyeo/six/cusSupMain';
 		</script>
 	</c:if>
 </body>

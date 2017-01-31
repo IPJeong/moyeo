@@ -77,21 +77,22 @@ li {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<h3><font size="4px">
+					<h3>
 						공지사항 &nbsp;&nbsp;<a class="fa fa-plus-square-o"
 							href="../six/notice/notice"><font size="2">더보기</font></a>
-					</font></h3>
+					</h3>
+					<span>&nbsp;&nbsp;&nbsp;모여의 서비스 신규, 업데이트 및 새로운 소식을 알려드립니다</span>
 				</div>
 			</div>
-			<div class="panel-body padding-0">
+			<div class="panel-body padding-0" style="padding:0px;">
 				<div class="chart-holder" id="dashboard-donut-1"
 					style="height: 200px;">
-					<ul>
-						<br>
+					<ul style="padding:0px;">
+						
 						<c:forEach var="dto" items="${dtos}" begin="0" end="5">
-							<li style="float:none;"><a
+							<li style="float:none; font-size:13px; margin:10px;"><a
 								href="../six/notice/noticeContent?noti_num=${dto.noti_num}&pageNum=${pageNum}">
-							<h3>${dto.noti_title}</h3>
+							${dto.noti_title}
 							</a></li>
 						</c:forEach>
 					</ul>
@@ -123,7 +124,7 @@ li {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<h3><a href="/moyeo/five/gallery">사진</a></h3>
+					<a href="../gallery/gallery.jsp"><h3>사진</h3></a>
 
 				</div>
 			</div>

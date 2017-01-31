@@ -119,13 +119,14 @@ li {
 	                              <td class="text-center">${number}</td>
 	                               <c:set var="number" value="${number-1}"/>
 	                              <%-- <td><strong><a href="" data-toggle="modal" data-target="#myModal" id="postTitle" onclick="getPost('${dto.post_num }');">${dto.post_title}</a></strong></td> --%>
-	                              <td><strong><a href="" id="postTitle"  data-toggle="modal" data-target="#myModal" data-backdrop="static" onclick="getPostDetail('${dto.post_num }');">${dto.post_title}</a></strong></td>
+								  <%-- <td><strong><a href="/moyeo/five/postDetail?post_num=${dto.post_num }" id="postTitle"  data-toggle="modal" data-target="#myModal" data-backdrop="static" >${dto.post_title}</a></strong></td> --%>
+	                              <td><strong><a href="/moyeo/five/postDetail?post_num=${dto.post_num }" id="postTitle" >${dto.post_title}</a></strong></td>
 	                              <td><span class="badge badge-success">${dto.post_hit}</span></td>
 	                              <td><span class="badge badge-info">${dto.like_num}</span></td>
 	                              <td>${dto.post_date}</td>
 	                              <td>
-	                                  <button class="btn btn-default btn-rounded btn-condensed btn-sm"><span class="fa fa-pencil"></span></button>
-	                                  <button class="btn btn-danger btn-rounded btn-condensed btn-sm" onClick="delete_row('trow_1');"><span class="fa fa-times"></span></button>
+	                                  <button class="btn btn-default btn-rounded btn-condensed btn-sm" type="button" onclick="modPost('${dto.post_num}');" data-toggle="modal" data-target="#modModal" data-backdrop="static" ><span class="fa fa-pencil"></span></button>
+	                                  <button class="btn btn-danger btn-rounded btn-condensed btn-sm" type="button" onclick="deletePost('${dto.post_num}');"><span class="fa fa-times"></span></button>
 	                              </td>
 	                          </tr>
 	                      </c:forEach>   
@@ -160,7 +161,8 @@ li {
         <!-- END RESPONSIVE TABLES -->
      </div>
  </div>
- <%@ include file="postModal.jsp" %>          
+ <%@ include file="postModal.jsp" %>
+ <%@ include file="postModifyModal.jsp" %>          
    <!-- START SCRIPTS -->
    <!-- START PLUGINS -->
        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>

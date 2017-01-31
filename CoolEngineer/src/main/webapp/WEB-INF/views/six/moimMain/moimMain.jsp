@@ -60,9 +60,9 @@ img {
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb push-down-0">
 	<li><a href="../main/main.jsp">Home</a></li>
-	<li><a href="../category/category_hobby.jsp">모임</a></li>
-	<li class="active">영등포 볼링</li>
-	
+	<li><a href="../category/category_hobby">모임</a></li>
+	<li class="active">${dto.group_name}</li>
+
 </ul>
 <!-- END BREADCRUMB -->
 
@@ -84,35 +84,49 @@ img {
 				<div class="panel-body padding-0"
 					style="text-align: center; font-size: 25px;">
 					<div class="chart-hodler"
-						style="width: 97%; height: 300px; margin-top: 0px; /* border-bottom:3px solid #D5D5D5; border-top:3px solid #D5D5D5; border-left:3px solid #D5D5D5; border-right:3px solid #D5D5D5; */ margin: 10px; margin-top: 20px">
-						<img src="/moyeo/resources/resource/assets/images/ds/moimMain.jpg"
-							width="600px" height="250px" style="float: left;"><br>
-						<div style="width: 500px; float: left;">#볼링 #치고 #친목 #도모 #술</div>
+						style="width: 97%; height: 260px; margin-top: 0px; /* border-bottom:3px solid #D5D5D5; border-top:3px solid #D5D5D5; border-left:3px solid #D5D5D5; border-right:3px solid #D5D5D5; */ margin: 10px; margin-top: 20px">
+						<div style="height: 100%;">
+							<div style="width:50%;"><img
+								src="/moyeo/resources/resource/assets/images/ds/moimMain.jpg"
+								width="100%" height="240px" style="float: left;">
+							</div>
+							<div style="width: 47%; height: 200px; float: left;"><br>${dto.group_intro}
+							</div>
+
+							<div style="width: 47%; height: 45px; float: left;">
+
+								
+								<input type="button"
+									value="사진등록"
+									style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb','','menubar=no, toolbar=no, width=450, height=135, left=950, top=150')"> 
+
+								<a href="../moim/moim_cheif_member.jsp">
+								<input type="button"
+									value="모임가입"
+									style="width: 20%; height: 40px; font-size: 13px"></a> 
+								<a
+									href="../moim/moim_schedule.jsp">
+								<input type="button"
+									value="모임탈퇴"
+									style="width: 20%; height: 40px; font-size: 13px"></a> 
+								<a>
+								<input
+									type="button" value="모임신고"
+									style="width: 20%; height: 40px; font-size: 13px">
+								</a>
+							</div>
+						</div>
 					</div>
-
-
-					<p style="margin-left: 650px; margin-top: -60px;">
-						<a href="../moim/moim_cheif_member.jsp"><input type="button"
-							value="모임가입" style="width: 100px; height: 40px; font-size: 13px"></a>
-						<a href="../moim/moim_schedule.jsp"><input type="button"
-							value="모임탈퇴" style="width: 100px; height: 40px; font-size: 13px"></a>
-						<input type="button" value="모임신고"
-							style="width: 100px; height: 40px; font-size: 13px">
-					</p>
-					<br>
-
-
-
-
-					<div class="panel-heading" style="margin-top: 30px">
-						<h3>XENO_B.C - 영등포 볼링</h3>
+					
+					<div class="panel-heading" style="">
+						<h3>${dto.group_name}</h3>
 					</div>
 
 					<div class="chart-holder" id="dashboard-bar-1"
 						style="height: 10px;">
 
 						<div class="chart-hodler"
-							style="width: 97%; height: 420px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 90px">
+							style="width: 97%; height: 420px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 65px">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<div class="panel-title-box">

@@ -31,7 +31,7 @@
 						</div>
 					</div>
 					<div style="float: left; width: 45%; height: 100%;">
-						<div style="margin-top: 10%; height: 250px;" >
+<!-- 						<div style="margin-top: 10%; height: 250px;" > -->
 							<div id="post_content" style="width:100px; height:90%;">
 								<!-- 후기내용이 삽입되는 부분 -->					
 							</div>

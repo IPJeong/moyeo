@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
+
 <body>
 <!-- START LOGIN BLOCK -->
 		<div class="col-md-51" style="height: 310px;">
@@ -14,14 +16,18 @@
 				<div class="panel-body padding-0" style="height: 270px;">
 					<div class="chart-holder" id="dashboard-line-1"
 						style="height: 180px;">
-						<img src="/moyeo/resources/resource/assets/images/gallery/pin.jpg"
-							width="180px" height="130px" style="magin: 5px 5px"><font
-							size="3">XENO_B.C - 영등포 볼링</font><br> <br> <br>
+						<input type="button" value="사진등록" style="margin-left: 200px;" onclick="window.open('moimAddImage','','menubar=no, toolbar=no, width=450, height=135')">
+						<center><img src="${main_pic_pathA}/${main_pic_nameA}"
+							width="180px" height="130px" style="margin: auto;"><br>
+						</center>
+						<center><font size="5">${group_name}</font></center>
+						<br>
 						<h3>
-							<center>스포츠/운동 -> 볼링</center>
+							<center>${group_inte1} -> ${group_inte2}</center>
 						</h3>
 						<center>
-							<input type="button" value="모임정보 수정">
+							<input type="button" style="margin-right:10px;" value="모임정보 수정" onclick="window.location='/moyeo/six/moimMain/moimModify?group_num=${group_num}'">
+							<input type="button" style="margin-left:10px;" value="모임폐쇄" onclick="window.location='/moyeo/six/moimMain/moimDelete?group_num=${group_num}'">
 						</center>
 
 					</div>

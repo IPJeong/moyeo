@@ -77,68 +77,65 @@ img {
 				<div class="panel-body padding-0"
 					style="text-align: center; font-size: 25px;">
 
+					<div class="chart-hodler"
+						style="width: 950px; height: 830px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 20px">
 
-
-
-
-					<div class="chart-holder" id="dashboard-bar-1"
-						style="height: 550px;">
-
-						<div class="chart-hodler"
-							style="width: 1100px; height: 830px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 20px">
-
-							<form action="moimScheduleModifyPro" name="register">
-								<div class="chart-holder"
-									style="width: 1000px; height: 780px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 20px; margin-left: 40px">
-									<img
-										src="/moyeo/resources/resource/assets/images/ds/calendar.jpg"
-										width="300px" height="200px"
-										style="magin: 5px 5px; margin-right: 800px">
-									<p style="margin-top: -130px">
-										<input type="hidden" name="map" value="${dto.meeting_loc}">
-										<input type="hidden" name="meeting_num"
-											value="${dto.meeting_num}"> 
-										<input type="text"
-											name="meeting_title" value="${dto.meeting_title}"
-											style="width: 560px; height: 40px; font-size: 18px; margin-left: 300px; margin-top: -70px" required>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										일자 : <input type="date" name="meeting_date" value="${date}"
-											style="width: 350px; height: 40px; font-size: 18px; margin-left: 0px; margin-top:0;" required><br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										시간 : 
-										<input type="time" name="meeting_time" value="${time}"
-											style="width: 350px; height: 40px; font-size: 18px; margin-left: 0px; margin-top: 30px" required>
-										
+						<form action="moimScheduleModifyPro" name="register">
+							<div class="chart-holder"
+								style="width: 870px; height: 780px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 20px; margin-left: 40px">
+								<img
+									src="/moyeo/resources/resource/assets/images/gallery/calendar.jpg"
+									width="250px" height="200px"
+									style="position: relative; left: -290px; magin: 5px 5px; text-align: left;">
+								<p style="margin-top: -130px">
+									<input type="hidden" name="map" value="${meeting_dto.meeting_loc}">
+									<input type="hidden" name="meeting_num"
+										value="${meeting_dto.meeting_num}"> <input type="text"
+										name="meeting_title" value="${meeting_dto.meeting_title}"
+										style="width: 500px; font-size: 18px; margin-left: 230px; height: 40px; margin-top: -70px"
+										required>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									일자 : <input type="date" name="meeting_date" value="${date}"
+										style="width: 350px; height: 40px; font-size: 18px; margin-left: 0px; margin-top: 0;"
+										required><br>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									시간 : <input type="time" name="meeting_time" value="${time}"
+											style="width: 350px; height: 40px; font-size: 18px; margin-left: 0px; margin-top: 30px"
+											required> 
 										<input type="button" name="meeting_loc"
-											value="${dto.meeting_loc}"
+											value="${meeting_dto.meeting_loc}"
 											style="width: 550px; height: 40px; font-size: 18px; margin-left: 20px; margin-top: 30px;"
-											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=650, height=350')"
+											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=800, height=450, left=450, top=270')"
 											required> <br> 
-										<input type="text" name="loc_detail" value="${dto.loc_detail}"
-											style="width: 550px; height: 40px; font-size: 18px; margin-left: 10px; margin-top: 30px;" required>
 										<input type="text"
-											name="meeting_cost" value="${dto.meeting_cost}"
+											name="loc_detail" value="${meeting_dto.loc_detail}"
+											style="width: 550px; height: 40px; font-size: 18px; margin-left: 10px; margin-top: 30px;"
+											required> 
+										<input type="number" min="0" max="99999999" name="meeting_cost"
+											value="${meeting_dto.meeting_cost}"
 											style="width: 550px; height: 40px; font-size: 18px; margin-left: 50px; margin-top: 30px;"
-											required> 원 <br> 
-										<input type="text"
-											name="meeting_pernum" value="${dto.meeting_pernum}"
+											required> 원 <br>
+										<input type="number" min="0" max="99999" 
+											name="meeting_pernum" value="${meeting_dto.meeting_pernum}"
 											style="width: 550px; height: 40px; font-size: 18px; margin-left: 50px; margin-top: 30px;"
 											required> 명 <br>
 										<textarea class="input" rows="10" cols="40"
 											name="meeting_detail"
 											style="width: 800px; height: 200px; font-size: 18px; margin-left: 7px; margin-top: 30px;"
-											required>${dto.meeting_detail}</textarea>
+											required>${meeting_dto.meeting_detail}</textarea>
 
-									</p>
+								</p>
 
-									<input type="submit" value="수정"
-										style="margin-left: 0px; margin-top: 10px; width: 100px; height: 35px; font-size: 13px;">
-									<input type="reset"	value="취소" style="margin-left: 0px; margin-top: 10px; width: 100px; height: 35px; font-size: 13px;" onclick="window.location='moimScheduleDetail'">	
-								</div>
-							</form>
+								<input type="submit" value="수정"
+									style="margin-left: 0px; margin-top: 10px; width: 100px; height: 35px; font-size: 13px;">
+								<input type="reset" value="취소"
+									style="margin-left: 0px; margin-top: 10px; width: 100px; height: 35px; font-size: 13px;"
+									onclick="window.location='moimScheduleDetail?group_num=${group_num}'">
+							</div>
+						</form>
 
-						</div>
 					</div>
+
 
 				</div>
 				<div id="aba" style="text-align: right"></div>

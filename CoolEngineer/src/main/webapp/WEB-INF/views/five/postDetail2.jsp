@@ -158,35 +158,19 @@ html, body {
 							<div style="margin-top: 10%; height: 250px;" >
 								<div id="post_content" style="width:100px; height:90%;">
 									<!-- 후기내용이 삽입되는 부분 -->
-									<h3>후기내용</h3> 
-									<div style="border: 1px solid black; width:500px; height:170px;">
-										<p>${dto.post_content}</p>
-									</div>
-						   								
+									<h2>후기내용</h2> 
+						   			<p>${dto.post_content}</p>					
 								</div>
 								<div  style="width:100px; height:10%; ">
-									<div style="float:left; width:150px; margin-bottom: 20px;">
-										<i class="fa fa-heart" id="likeNum">&nbsp;${dto.like_num}명이 좋아합니다.</i>
-									</div>
-									
-									<div style="float:left; width:150px;" id="divLikeBtn">
-										<button class="btn btn-danger" id="listBtn" type="button" onclick="likePost('${dto.post_num}', '1')">
-											좋아요
-										</button>
-									</div>
-									
+									<button class="btn btn-danger btn-rounded" style="position:relative; margin-left:95%;" type="button">
+										<span class="fa fa-heart">좋아요</span>
+									</button>
 								</div>						
 							</div>
-							<!-- 댓글이 삽입되는 부분 -->
 							<div style="margin-top: 10%; height: 250px;">
 								<h3>댓글</h3>
-								<div style="height:200px; boarder:1px solid black">
-									
-								</div>
-								
-								<div>
-									<input type="text" style="width:500px;" placeholder="댓글을 남겨보세요.">
-								</div>
+								<p>댓글이 삽입되는 곳입니다.</p>
+								<!-- 댓글이 삽입되는 부분 -->
 							</div>
 						</div>
 					</div>

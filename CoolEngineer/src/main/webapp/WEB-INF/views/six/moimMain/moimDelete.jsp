@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,19 +12,17 @@
 
 	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
-			alert("모임일정 등록에 실패하였습니다. \n 잠시후 다시 시도하세요!");
+			alert("모임 폐쇄에 실패하였습니다. \n 잠시후 다시 시도하세요!");
 			history.back();	
 		</script>
 	</c:if>
 	
 	<c:if test="${cnt != 0}">
 		<script type="text/javascript">
-			alert("모임일정을 등록했습니다!");
-			window.location = 'moimScheduleDetail?group_num=${group_num}';
+			alert("모임을 폐쇄했습니다. 새로운 모임으로 뵙겠습니다.!");
+			window.location = '/moyeo/six/category/category_hobby';
 		</script>
 	</c:if>
-	
-	
 
 </body>
 </html>
