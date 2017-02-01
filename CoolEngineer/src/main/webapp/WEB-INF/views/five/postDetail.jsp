@@ -121,6 +121,7 @@ html, body {
 			<!-- START PHOTO BLOCK -->
 			<div class="col-md-56" style="margin-top: 10px;">
 				<div class="panel panel-default">
+				<input type="hidden" id="post_num" value="${dto.post_num}">
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							<strong>후기제목 : ${dto.post_title}</strong>
@@ -155,122 +156,77 @@ html, body {
 						</div>
 						<div style="float: left; width: 50%; height: 100%;">
 							<div style="margin-top: 10%; height: 250px;" >
-								<div id="post_content" style="width:100px; height:90%;">
+<!-- 								<div id="post_content" style="width:100px; height:90%;"> -->
 									<!-- 후기내용이 삽입되는 부분 -->
 									<h3>후기내용</h3> 
-									<div style="border: 1px solid black; width:500px; height:170px;">
-										<p>${dto.post_content}</p>
-									</div>
+									<div class="panel-body panel-body-search" style="width:100%;">
+			                            <p>${dto.post_content}</p>                   
+		                            </div>
+<!-- 									<div style="border: 1px solid black; width:500px; height:170px;"> -->
+										
+<!-- 									</div> -->
 						   								
-								</div>
-								<div  style="width:100px; height:10%; ">
-									<div style="float:left; width:150px; margin-bottom: 20px;">
+<!-- 								</div> -->
+								<div  style="width:100px; height:10%;">
+									<div style="float:left; width:150px; margin-bottom: 20px; margin-top: 20px;">
 										<i class="fa fa-heart" id="likeNum">&nbsp;${dto.like_num}명이 좋아합니다.</i>
 									</div>
 									
 									<div style="float:left; width:150px;" id="divLikeBtn">
-										<button class="btn btn-danger" id="listBtn" type="button" onclick="likePost('${dto.post_num}', '1')">
-											좋아요
-										</button>
+										<c:if test="${sessionScope.mem_id == null }">
+											<button class="btn btn-info" id="listBtn" type="button" onclick="likePost('${dto.post_num}', '1')" disabled="disabled">
+												<i class="fa fa-thumbs-o-up"></i>&nbsp;좋아요
+											</button>
+										</c:if>
+										<c:if test="${sessionScope.mem_id != null }">
+											<c:if test="${didLike == 0}">
+												<button class="btn btn-info" id="listBtn" type="button" onclick="likePost('${dto.post_num}', '1')">
+													<i class="fa fa-thumbs-o-up"></i>&nbsp;좋아요
+												</button>
+											</c:if>
+											<c:if test="${didLike == 1}">
+												<button class="btn btn-warning" id="listBtn" type="button" onclick="likePost('${dto.post_num}', '2')"> 
+													<i class="fa fa-thumbs-o-down"></i>&nbsp;좋아요 취소 
+												</button>
+											</c:if>
+										</c:if>
+
 									</div>
 									
 								</div>						
 							</div>
 							<!-- 댓글이 삽입되는 부분 -->
 							<div style="margin-top: 10%; height: 250px;">
-							
 								<!-- 메시지박스 시작 -->
-										                        
 		                        <div class="panel panel-default push-up-10">
-		                            <div class="panel-body panel-body-search">
-		                            <div class="messages messages-img">
-		                            <div class="item in">
-		                                <div class="image">
-		                                    <img src="assets/images/users/user2.jpg" alt="John Doe">
-		                                </div>
-		                                <div class="text">
-		                                    <div class="heading">
-		                                        <a href="#">John Doe</a>
-		                                        <span class="date">08:33</span>
-		                                    </div>
-		                                    Lorem ipsum dolor sit amet, consectetur 
-		                                </div>
+		                            <div class="panel-body panel-body-search" id="msgBox">
+			                            <div class="messages messages-img">
+				                            <div class="item">
+				                                <div class="image">
+				                                    <img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
+				                                </div>                                
+				                                <div class="text">
+				                                    <div class="heading">
+				                                        <a href="#">Dmitry Ivaniuk</a>
+				                                        <span class="date">08:39</span>
+				                                        <i class="date">08:39</i>
+				                                    </div>                                    
+				                                    Integer et ipsum vitae urna mattis dictum. 
+				                                </div>
+				                            </div>
+				                        </div>                        
 		                            </div>
-		                            <div class="item">
-		                                <div class="image">
-		                                    <img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
-		                                </div>                                
-		                                <div class="text">
-		                                    <div class="heading">
-		                                        <a href="#">Dmitry Ivaniuk</a>
-		                                        <span class="date">08:39</span>
-		                                    </div>                                    
-		                                    Integer et ipsum vitae urna mattis dictum. 
-		                                </div>
-		                            </div>
-		                            <div class="item">
-		                                <div class="image">
-		                                    <img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
-		                                </div>                                
-		                                <div class="text">
-		                                    <div class="heading">
-		                                        <a href="#">Dmitry Ivaniuk</a>
-		                                        <span class="date">08:42</span>
-		                                    </div>                                    
-		                                    In dapibus ex ut nisl laoreet aliquam. Donec 
-		                                </div>
-		                            </div>
-		                            <div class="item in">
-		                                <div class="image">
-		                                    <img src="assets/images/users/user2.jpg" alt="John Doe">
-		                                </div>
-		                                <div class="text">
-		                                    <div class="heading">
-		                                        <a href="#">John Doe</a>
-		                                        <span class="date">08:58</span>
-		                                    </div>
-		                                    Curabitur et euismod urna?
-		                                </div>
-		                            </div>
-		                            <div class="item">
-		                                <div class="image">
-		                                    <img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
-		                                </div>                                
-		                                <div class="text">
-		                                    <div class="heading">
-		                                        <a href="#">Dmitry Ivaniuk</a>
-		                                        <span class="date">09:11</span>
-		                                    </div>                                    
-		                                    Fusce ultricies erat quis massa interdum, 
-		                                </div>
-		                            </div>
-		                            <div class="item in">
-		                                <div class="image">
-		                                    <img src="assets/images/users/user2.jpg" alt="John Doe">
-		                                </div>
-		                                <div class="text">
-		                                    <div class="heading">
-		                                        <a href="#">John Doe</a>
-		                                        <span class="date">09:22</span>
-		                                    </div>
-		                                    Vestibulum cursus ipsum ut dolor vulputate dapibus. 
-		                                </div>
-		                            </div>
-		                        </div>                        
-		                            
-		                            
-		                            
-		                            </div>
-		                              <div class="input-group">
-		                                    <div class="input-group-btn">
-		                                        <button class="btn btn-default"><span class="fa fa-camera"></span></button>
-		                                        <button class="btn btn-default"><span class="fa fa-chain"></span></button>
-		                                    </div>
-		                                    <input type="text" class="form-control" placeholder="Your message..."/>
-		                                    <div class="input-group-btn">
-		                                        <button class="btn btn-default">Send</button>
-		                                    </div>
-		                                </div>
+	                              <div class="input-group">
+	                              		<c:if test="${sessionScope.mem_id == null}">
+	                                    <input type="text" class="form-control" placeholder="댓글을 남기려면 로그인해주세요." readonly="readonly">
+	                                    </c:if>
+	                                    <c:if test="${sessionScope.mem_id != null}">
+	                                    <input type="text" id="reply_content" class="form-control" placeholder="댓글을 남겨보세요." onkeypress="keycheck(event);">
+	                                    </c:if>
+	                                    <div class="input-group-btn">
+	                                        <button class="btn btn-default" onclick="addPostReply();">입력</button>
+	                                    </div>
+	                                </div>
 		                        </div>
                         	    <!-- 메시지박스 끝 -->
 							</div>
@@ -281,11 +237,6 @@ html, body {
 		</div>
 	</div>
 	
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-	<script src="/moyeo/resources/resource/js/plugins/slick/slick.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/moyeo/resources/customScript/five.js" type="text/javascript"></script>
-
  <!-- START PLUGINS -->
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
@@ -302,6 +253,9 @@ html, body {
         <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
         
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>
+        
+		<script src="/moyeo/resources/resource/js/plugins/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/moyeo/resources/customScript/five.js" type="text/javascript"></script>
 </body>
 </html>

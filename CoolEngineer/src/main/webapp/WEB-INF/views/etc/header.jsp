@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -81,8 +82,13 @@
 					<ul>
 						<li><a href="/moyeo/main/event/ing-event"><span class="fa fa-bell">이벤트</span><span>이벤트</span></a></li>
 						<li><a href="/moyeo/six/cusSupMain"><span class="fa fa-envelope">고객지원</span><span>고객지원</span></a></li>
-						<li><a href="/moyeo/main/member/registration"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
-						<li><a href="/moyeo/main/memberLoginForm"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
+						<c:if test="${sessionScope.mem_id == null }">
+							<li><a href="/moyeo/main/member/registration"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
+							<li><a href="/moyeo/main/memberLoginForm"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
+						</c:if>
+						<c:if test="${sessionScope.mem_id != null }">
+							<li><a href="/moyeo/main/member/registration"><span class="fa fa-save"></span>${sessionScope.mem_id} 님</a></li>
+						</c:if>
 					</ul>
 				</div>
 				<!-- TOP BAR END -->
@@ -104,7 +110,7 @@
 								<li><a><span class="fa fa-calendar"></span>
 										조직도 </a></li>
 							</ul></li>
-						<li class="xn-openable"><a>모임</a>
+						<li class="xn-openable"><a href="#">모임</a>
 							<ul>
 								<li><a href="/moyeo/six/category/category_hobby"><span class="fa fa-caret-right"></span> 관심사별 </a></li>
 								<li><a href="/moyeo/six/category/category_location"><span class="fa fa-caret-right"></span>
@@ -112,7 +118,7 @@
 								<li><a href="/moyeo/six/category/category_scale"><span class="fa fa-caret-right"></span>
 										규모별 </a></li>
 							</ul></li>
-						<li class="xn-openable"><a href="/moyeo/main/realTime/realTime">잠깐모여</a>
+						<li class="xn-openable"><a href="#">잠깐모여</a>
 							<ul>								
 								<li><a><span class="fa fa-caret-right"></span>
 										지역별</a></li>
@@ -121,8 +127,8 @@
 								<li><a><span class="fa fa-caret-right"></span>
 										시간대별 </a></li>
 							</ul></li>
-						<li class="xn-openable"><a href="/moyeo/main/shop/shop">샵</a></li>
-						<li class="xn-openable"><a href="/moyeo/main/places/places">추천장소</a>
+						<li class="xn-openable"><a href="#">샵</a></li>
+						<li class="xn-openable"><a href="#">추천장소</a>
 							<ul>
 								<li><a href="/moyeo/two/placeMainLoc"><span class="fa fa-caret-right"></span> 지역별</a></li>
 								<li><a href="/moyeo/two/placeMainRecpla"><span class="fa fa-caret-right"></span>관심사별</a></li>
