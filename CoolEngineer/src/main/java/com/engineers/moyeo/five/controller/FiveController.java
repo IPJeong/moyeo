@@ -169,13 +169,30 @@ public class FiveController {
 		return mav;
 	}
 	
-	// 모임후기 댓글
+	// 모임후기 댓글 등록
 	@RequestMapping(value="/addPostReply", method=RequestMethod.POST)
 	public ModelAndView addPostReply(HttpServletRequest req) {
 		mav = new ModelAndView("JSON");
 		System.out.println("모임후기 댓글 등록 요청");
 		try {
 			fiveService.addPostReply(mav, req);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		return mav;
+	}
+	
+	// 모임후기 댓글 삭제
+	@RequestMapping(value="/deletePostReply", method=RequestMethod.POST)
+	public ModelAndView deletePostReply(HttpServletRequest req) {
+		mav = new ModelAndView("JSON");
+		System.out.println("모임후기 댓글 삭제 요청");
+		try {
+			fiveService.deletePostReply(mav, req);
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
 			System.out.println(Code.numForExceptionMsg);

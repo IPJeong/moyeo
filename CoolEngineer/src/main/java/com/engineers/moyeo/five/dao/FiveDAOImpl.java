@@ -101,6 +101,13 @@ public class FiveDAOImpl implements FiveDAO{
 		return fiveDao.likeCheck(likeMap);
 	}
 	
+	// 모임후기의 댓글을 불러옴
+	@Override
+	public List<PostReplyDTO> getPostReplys(int post_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getPostReplys(post_num);
+	}
+
 	// 모임후기를 삭제시킴
 	@Override
 	public int deletePost(int post_num) {
@@ -156,5 +163,13 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
 		return dao.getPostReply(map);
 	}
+
+	// 모임후기 댓글 삭제
+	@Override
+	public int deletePostReply(int postrep_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.deletePostReply(postrep_num);
+	}
+	
 	
 }

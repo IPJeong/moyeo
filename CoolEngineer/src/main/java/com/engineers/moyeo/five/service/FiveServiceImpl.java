@@ -19,7 +19,6 @@ import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.main.common.Code;
-import com.engineers.moyeo.main.common.DateParser;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
 
@@ -197,7 +196,7 @@ public class FiveServiceImpl implements FiveService{
 		return "five/postPro";
 	}
 
-
+	// 모임후기의 상세정보를 조회
 	@Override
 	public String postDetail(Model model) throws NumberFormatException, NullPointerException {
 		
@@ -223,6 +222,7 @@ public class FiveServiceImpl implements FiveService{
 			}
 		}
 		
+		
 		if(mem_id != null) {
 			Map<String, Object> likeMap = new HashMap<>();
 			likeMap.put("post_num", post_num);
@@ -247,6 +247,11 @@ public class FiveServiceImpl implements FiveService{
 				postDto = fiveDao.getPostDetail(post_num);
 			}
 		}
+		
+		// 모임후기의 댓글을 불러옴
+		List<PostReplyDTO> replyDtos = fiveDao.getPostReplys(post_num);
+		model.addAttribute("replyDtos", replyDtos);
+		
 		// 모임후기 상세정보
 		model.addAttribute("dto", postDto);
 		// 모임후기 첨부사진 수
@@ -373,6 +378,19 @@ public class FiveServiceImpl implements FiveService{
 			mav.addObject("dto", dto);
 		}
 		mav.addObject("cnt", cnt);
+	}
+
+	// 모임후기 댓글 삭제
+	@Override
+	public void deletePostReply(ModelAndView mav, HttpServletRequest req) 	throws NumberFormatException, NullPointerException {
+		
+		// 모임후기 댓글의 번호를 받아옴
+		int postrep_num = Integer.parseInt(req.getParameter("postrep_num"));
+		// 삭제 상태값 반환
+		int cnt = fiveDao.deletePostReply(postrep_num);
+		
+		mav.addObject("cnt", cnt);
+		mav.addObject("postrep_num", postrep_num);
 	}
 	
 	

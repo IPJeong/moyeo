@@ -13,7 +13,7 @@
 
 					</div>
 				</div>
-				<div class="panel-body padding-0" style="height: 270px;">
+				<div class="panel-body padding-0" style="height: 270px; overflow: auto;">
 					<div class="chart-holder" id="dashboard-line-1"
 						style="height: 180px;">
 						<input type="button" value="사진등록" style="margin-left: 200px;" onclick="window.open('/moyeo/six/moimMain/moimAddImage','','menubar=no, toolbar=no, width=450, height=170')">
@@ -45,7 +45,7 @@
 
 					</div>
 				</div>
-				<div class="panel-body padding-0" style="height: 550px;">
+				<div class="panel-body padding-0" style="height: 550px; overflow:auto;">
 					<div class="chart-holder" id="dashboard-line-1">
 						<div class="main">
 							<img src="/moyeo/resources/resource/assets/images/gallery/피카츄.png"

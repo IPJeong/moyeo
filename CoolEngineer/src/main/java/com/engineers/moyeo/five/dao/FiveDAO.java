@@ -33,6 +33,8 @@ public interface FiveDAO {
 	public int updatePostHit(int post_num);
 	// 모임후기 좋아요 여부 확인
 	public int likeCheck(Map<String, Object> likeMap);
+	// 모임후기의 댓글을 불러옴
+	public List<PostReplyDTO> getPostReplys(int post_num);
 	// 모임후기 삭제
 	public int deletePost(int post_num);
 	// 모임후기 좋아요 추가
@@ -49,4 +51,6 @@ public interface FiveDAO {
 	public int addPostReply(PostReplyDTO dto);
 	// 모임후기 번호로 모임후기 조회
 	public PostReplyDTO getPostReply(Map<String, Object> map);
+	// 모임후기 댓글 삭제
+	public int deletePostReply(int postrep_num);
 }

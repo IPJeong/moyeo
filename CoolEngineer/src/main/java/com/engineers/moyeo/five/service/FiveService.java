@@ -31,4 +31,7 @@ public interface FiveService {
 	// 모임후기 댓글 등록
 	public void addPostReply(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
 	
+	// 모임후기 댓글 삭제
+	public void deletePostReply(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
+	
 }

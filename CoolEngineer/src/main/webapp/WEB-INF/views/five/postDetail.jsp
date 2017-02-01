@@ -111,7 +111,7 @@ html, body {
 /* slider css */
 </style>
 </head>
-<body onload="imgSlide()">
+<body onload="imgSlide(); timestampToDateLoad();">
 	<%@include file="../etc/moim_header.jsp"%>
 
 	<!-- START ROW -->
@@ -122,12 +122,12 @@ html, body {
 			<div class="col-md-56" style="margin-top: 10px;">
 				<div class="panel panel-default">
 				<input type="hidden" id="post_num" value="${dto.post_num}">
-					<div class="panel-heading">
+					<div class="panel-heading" style="overflow:auto;">
 						<h3 class="panel-title">
 							<strong>후기제목 : ${dto.post_title}</strong>
 						</h3>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body" style="overflow:auto;">
 						<div style="float: left; width: 50%; height: 100%;">
 							<div style="margin: 10px auto; height: 50%;" id="mainImg">
 								<!-- 사진&동영상 데이터 입력창 -->
@@ -143,12 +143,12 @@ html, body {
 								<section class="regular slider">
 									<c:forEach var="picDto" items="${picDtos}">
 										<div>
-							     	    	<img style="width:120px; height:120px;" src="${picDto.pic_path}/${picDto.pic_name}" onclick="changeMainImg('${picDto.pic_path}/${picDto.pic_name}')">
+							     	    	<img style="width:90px; height:100px;" src="${picDto.pic_path}/${picDto.pic_name}" onclick="changeMainImg('${picDto.pic_path}/${picDto.pic_name}')">
 							            </div>
 									</c:forEach>
 									<c:forEach var="videoDto" items="${videoDtos}">
 										<div>
-							     	    	<video style="width:120px; height:120px;" src="${videoDto.video_path}/${videoDto.video_name}" onclick="changeMainVideo('${videoDto.video_path}/${videoDto.video_name}')" />
+							     	    	<video style="width:90px; height:100px;" src="${videoDto.video_path}/${videoDto.video_name}" onclick="changeMainVideo('${videoDto.video_path}/${videoDto.video_name}')" />
 							            </div>
 									</c:forEach>
 								</section>
@@ -156,17 +156,11 @@ html, body {
 						</div>
 						<div style="float: left; width: 50%; height: 100%;">
 							<div style="margin-top: 10%; height: 250px;" >
-<!-- 								<div id="post_content" style="width:100px; height:90%;"> -->
-									<!-- 후기내용이 삽입되는 부분 -->
-									<h3>후기내용</h3> 
-									<div class="panel-body panel-body-search" style="width:100%;">
-			                            <p>${dto.post_content}</p>                   
-		                            </div>
-<!-- 									<div style="border: 1px solid black; width:500px; height:170px;"> -->
-										
-<!-- 									</div> -->
-						   								
-<!-- 								</div> -->
+								<!-- 후기내용이 삽입되는 부분 -->
+								<h3>후기내용</h3> 
+								<div class="panel-body panel-body-search" style="width:100%; overflow: auto;">
+		                            <p>${dto.post_content}</p>                   
+	                            </div>
 								<div  style="width:100px; height:10%;">
 									<div style="float:left; width:150px; margin-bottom: 20px; margin-top: 20px;">
 										<i class="fa fa-heart" id="likeNum">&nbsp;${dto.like_num}명이 좋아합니다.</i>
@@ -175,18 +169,18 @@ html, body {
 									<div style="float:left; width:150px;" id="divLikeBtn">
 										<c:if test="${sessionScope.mem_id == null }">
 											<button class="btn btn-info" id="listBtn" type="button" onclick="likePost('${dto.post_num}', '1')" disabled="disabled">
-												<i class="fa fa-thumbs-o-up"></i>&nbsp;좋아요
+												<i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;좋아요
 											</button>
 										</c:if>
 										<c:if test="${sessionScope.mem_id != null }">
 											<c:if test="${didLike == 0}">
 												<button class="btn btn-info" id="listBtn" type="button" onclick="likePost('${dto.post_num}', '1')">
-													<i class="fa fa-thumbs-o-up"></i>&nbsp;좋아요
+													<i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;좋아요
 												</button>
 											</c:if>
 											<c:if test="${didLike == 1}">
 												<button class="btn btn-warning" id="listBtn" type="button" onclick="likePost('${dto.post_num}', '2')"> 
-													<i class="fa fa-thumbs-o-down"></i>&nbsp;좋아요 취소 
+													<i class="glyphicon glyphicon-thumbs-down"></i>&nbsp;좋아요 취소 
 												</button>
 											</c:if>
 										</c:if>
@@ -199,22 +193,29 @@ html, body {
 							<div style="margin-top: 10%; height: 250px;">
 								<!-- 메시지박스 시작 -->
 		                        <div class="panel panel-default push-up-10">
-		                            <div class="panel-body panel-body-search" id="msgBox">
-			                            <div class="messages messages-img">
-				                            <div class="item">
-				                                <div class="image">
-				                                    <img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
-				                                </div>                                
-				                                <div class="text">
-				                                    <div class="heading">
-				                                        <a href="#">Dmitry Ivaniuk</a>
-				                                        <span class="date">08:39</span>
-				                                        <i class="date">08:39</i>
-				                                    </div>                                    
-				                                    Integer et ipsum vitae urna mattis dictum. 
-				                                </div>
-				                            </div>
-				                        </div>                        
+		                            <div class="panel-body panel-body-search" id="msgBox" style="overflow: auto;">
+		                            	<c:forEach var="replyDto" items="${replyDtos}">
+				                            <div class="messages messages-img" id="reply${replyDto.postrep_num}">
+					                            <div class="item">
+					                                <div class="image">
+					                                    <img src="/moyeo/resources/resource/img/custom/manDef.jpg" alt="훈남입니다.">
+					                                </div>                                
+					                                <div class="text">
+					                                    <div class="heading">
+					                                        <a href="#">${replyDto.mem_id}</a>
+					                                        <span class="date">${replyDto.write_date}</span>
+					                                        <i class="time"></i>
+					                                        <c:if test="${sessionScope.mem_id == replyDto.mem_id}">
+						                                        <span style="margin-left:120px;">
+						                                        	<a href="" onclick="return deleteReply('${replyDto.postrep_num}')"><i class="fa fa-trash-o"></i>삭제</a>
+						                                        </span>
+					                                        </c:if>
+					                                    </div>                                    
+					                                    ${replyDto.reply_content}
+					                                </div>
+					                            </div>
+					                        </div>   
+				                        </c:forEach>                     
 		                            </div>
 	                              <div class="input-group">
 	                              		<c:if test="${sessionScope.mem_id == null}">
