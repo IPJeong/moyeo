@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -152,10 +153,9 @@ public class FiveController {
 	}
 	
 	// 모임후기 좋아요
-	@RequestMapping(value="/likePost")
+	@RequestMapping(value="/likePost", method=RequestMethod.POST)
 	public ModelAndView likePost(HttpServletRequest req) {
 		mav = new ModelAndView("JSON");
-		req.getSession().setAttribute("mem_id", "guest");
 		System.out.println("모임후기 좋아요 요청");
 		try {
 			fiveService.likePost(mav, req);
@@ -169,6 +169,20 @@ public class FiveController {
 		return mav;
 	}
 	
-	// 모임후기 수정
-	
+	// 모임후기 댓글
+	@RequestMapping(value="/addPostReply", method=RequestMethod.POST)
+	public ModelAndView addPostReply(HttpServletRequest req) {
+		mav = new ModelAndView("JSON");
+		System.out.println("모임후기 댓글 등록 요청");
+		try {
+			fiveService.addPostReply(mav, req);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		return mav;
+	}
 }

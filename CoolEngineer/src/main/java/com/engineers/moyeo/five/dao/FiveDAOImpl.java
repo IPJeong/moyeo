@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
 
 @Repository
@@ -93,6 +94,13 @@ public class FiveDAOImpl implements FiveDAO{
 		return fiveDao.updatePostHit(post_num);
 	}
 
+	// 모임후기 좋아요 여부를 확인
+	@Override
+	public int likeCheck(Map<String, Object> likeMap) {
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.likeCheck(likeMap);
+	}
+	
 	// 모임후기를 삭제시킴
 	@Override
 	public int deletePost(int post_num) {
@@ -134,7 +142,19 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
 		return dao.getLikeNum(post_num);
 	}
-	
-	
+
+	// 모임후기 댓글 추가
+	@Override
+	public int addPostReply(PostReplyDTO dto) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.addPostReply(dto);
+	}
+
+	// 모임후기 조회
+	@Override
+	public PostReplyDTO getPostReply(Map<String, Object> map) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getPostReply(map);
+	}
 	
 }

@@ -275,7 +275,6 @@ public class SixServiceImpl implements SixService{
 	//모일일정-리스트
 	public void moimScheduleDetail(Model model) {
 		
-		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
@@ -837,6 +836,7 @@ public class SixServiceImpl implements SixService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 	
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
 		req.getSession().setAttribute("group_num", group_num);
 		
 		//사이드 불러오기

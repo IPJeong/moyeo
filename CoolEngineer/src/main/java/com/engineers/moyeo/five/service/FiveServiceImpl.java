@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.engineers.moyeo.five.dao.FiveDAO;
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.main.common.Code;
+import com.engineers.moyeo.main.common.DateParser;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
 
@@ -221,6 +223,18 @@ public class FiveServiceImpl implements FiveService{
 			}
 		}
 		
+		if(mem_id != null) {
+			Map<String, Object> likeMap = new HashMap<>();
+			likeMap.put("post_num", post_num);
+			likeMap.put("mem_id", mem_id);
+			
+			// 모임후기의 좋아요 여부 조회
+			int didLike = fiveDao.likeCheck(likeMap);
+			// 모임후기 좋아요 여부
+			model.addAttribute("didLike", didLike);
+		}
+		
+		
 		if(videoDtos != null) {
 			videoCnt =  videoDtos.size();
 			if(videoCnt > 0) {
@@ -330,5 +344,38 @@ public class FiveServiceImpl implements FiveService{
 		mav.addObject("likeNum", likeNum);
 		mav.addObject("post_num", post_num);
 	}
+
+	// 모임후기 댓글 등록
+	@Override
+	public void addPostReply(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException {
+		
+		// 모임후기 번호
+		int post_num = Integer.parseInt(req.getParameter("post_num"));
+		// 댓글 내용
+		String reply_content = req.getParameter("reply_content");
+		// 작성한 회원의 아이디
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		Timestamp time = new Timestamp(System.currentTimeMillis());
+		
+		PostReplyDTO dto = new PostReplyDTO();
+		dto.setPost_num(post_num);
+		dto.setReply_content(reply_content);
+		dto.setMem_id(mem_id);
+		dto.setWrite_date(time);
+		
+		int cnt = fiveDao.addPostReply(dto);
+		if(cnt == 1) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("post_num", post_num);
+			map.put("mem_id", mem_id);
+			map.put("write_date", time);
+			dto = fiveDao.getPostReply(map);
+			mav.addObject("dto", dto);
+		}
+		mav.addObject("cnt", cnt);
+	}
+	
+	
+	
 	 
 }
