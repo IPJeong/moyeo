@@ -158,13 +158,13 @@ function imgSlide() {
 
 // 메인이미지 변경
 function changeMainImg(fullPath) {
-	var tag = '<img style="margin: 30px auto; width: 350px; height: 350px;"  src="' + fullPath + '">';
+	var tag = '<img style="margin-left: 50px; margin-top:50px; width: 400px; height: 400px;" src="' + fullPath + '">';
 	$('#mainImg').html(tag);
 }
 
 // 메인동영상 변경
 function changeMainVideo(fullPath) {
-	var tag = '<video style="margin: 30px auto; width: 350px; height: 350px;" controls>' +
+	var tag = '<video style="margin-left: 50px; margin-top:50px; width: 400px; height: 400px;" controls>' +
 			  '<source src="' + fullPath + '">' +  
 			  '</video>';
 	$('#mainImg').html(tag);
@@ -238,12 +238,12 @@ function likePost(postnum, type) {
 			
 			if(cnt == 1) {
 				if(type == 1) {
-					resultBtn = '<button class="btn btn-danger" id="listBtn" type="button" onclick="likePost(\''+post_num+'\', \'2\')">' + 
-								'좋아요 취소' + 
+					resultBtn = '<button class="btn btn-warning" id="listBtn" type="button" onclick="likePost(\''+post_num+'\', \'2\')">' + 
+								'<i class="fa fa-thumbs-o-down"></i>&nbsp;좋아요 취소' + 
 								'</button>';
 				} else if(type == 2) {
-					resultBtn = '<button class="btn btn-danger" id="listBtn" type="button" onclick="likePost(\''+post_num+'\', \'1\')">' + 
-								'좋아요' + 
+					resultBtn = '<button class="btn btn-info" id="listBtn" type="button" onclick="likePost(\''+post_num+'\', \'1\')">' + 
+								'<i class="fa fa-thumbs-o-up"></i>&nbsp;좋아요' + 
 								'</button>';
 				}
 			}
@@ -258,3 +258,55 @@ function likePost(postnum, type) {
 		}
 	}); 
 }
+
+//모임후기 댓글등록
+function addPostReply() {
+	jQuery.ajax({
+		type : "POST",
+		url:"/moyeo/five/addPostReply",
+		async : true,
+		dataType : "json",
+		data:{				
+			post_num : $('#post_num').val(),
+			reply_content : $('#reply_content').val()
+		},
+		success : function(data) {
+			
+			if(data.cnt == 1) {
+				var msg = '<div class="messages messages-img">' +
+						   '<div class="item item-visible">' +
+						   '<div class="image">' +
+						   '<img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">' +
+						   '</div>' +                                
+						   '<div class="text">' +
+						   '<div class="heading">' + 
+						   '<a href="#">Dmitry Ivaniuk</a>' +
+						   '<span class="date">'+data.dto.write_date+'</span>' +
+						   '<i class="date">08:39</i>' +
+						   '</div>' +                                    
+						     data.dto.reply_content + 
+						   '</div>' +
+						   '</div>' +
+						   '</div>';
+				$('#msgBox').append(msg);
+				$('#replyText').val('');
+				$('#replyText').focus();
+			} else {
+				alert('댓글 등록을 실패했습니다. \n잠시후 다시 시도해 주세요.');
+			}
+			
+		},
+		error : function(xhr) {
+			alert("댓글등록에 실패하였습니다. 서버오류");
+			alert("error html = " + xhr.statusText);
+		}
+	}); 
+}
+
+// 모임후기 댓글등록(엔터키로 입력)
+function keycheck(event) {
+	if(event.keyCode == 13) {
+		addPostReply();
+	}
+}
+
