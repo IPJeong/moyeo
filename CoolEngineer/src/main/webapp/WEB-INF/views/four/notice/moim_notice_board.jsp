@@ -94,6 +94,8 @@ left: -3px;
 						<div>
 							<table class="table table-striped table-hover" style="width:90%; margin-left:5%;">
 								<thead>
+									
+								
 									<tr class="info">
 										<td  style="width: 5%">번호</td>
 										<td  style="width: 35%">제목</td>

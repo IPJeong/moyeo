@@ -16,7 +16,7 @@
 				<div class="panel-body padding-0" style="height: 270px;">
 					<div class="chart-holder" id="dashboard-line-1"
 						style="height: 180px;">
-						<input type="button" value="사진등록" style="margin-left: 200px;" onclick="window.open('moimAddImage','','menubar=no, toolbar=no, width=450, height=135')">
+						<input type="button" value="사진등록" style="margin-left: 200px;" onclick="window.open('/moyeo/six/moimMain/moimAddImage','','menubar=no, toolbar=no, width=450, height=170')">
 						<center><img src="${main_pic_pathA}/${main_pic_nameA}"
 							width="180px" height="130px" style="margin: auto;"><br>
 						</center>

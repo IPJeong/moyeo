@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../../etc/moim_header.jsp"%>
 
@@ -102,34 +103,61 @@ li {
 										<td  style="width: 31%">제목</td>
 										<td  style="width: 10%">작성자</td>
 										<td  style="width: 20%">작성일</td>
+										<td  style="width: 10%">좋아요수</td>
 										<td  style="width: 10%">조회수</td>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Column content</td>
-										<td>Column content</td>
-										<td>Column content</td>
-										<td>Column content</td>
-									</tr>
+								
+									<c:forEach var="dto" items="${dtos}">
+										<tr>
+											<td>${number}</td>
+											<c:set var="number" value="${number-1}" /> 
+											
+											<td><a href="moim_greeting_contentform?num=${dto.greeting_num}&pageNum=${pageNum}&number=${number+1}"> ${dto.greeting_title}</a></td>
+											<td>${dto.mem_id}</td>
+											
+											
+											<td> 
+				  									<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dto.greeting_date}" />
+											</td>
+											<td>${dto.like_num}</td>
+											<td>${dto.greeting_hit}</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
 	
 						<div style="text-align: center; float: right; margin-right: 5%;">
-							<ul
-								class="pagination pagination-sm pull-right push-down-20 push-up-20">
-								<li class="disabled"><a href="#">≪</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">≫</a></li>
-							</ul>
+								<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+	
+							<c:if test="${cnt > 0}">
+				
+								<c:if test="${startPage > pageBlock}">
+									<li class=""><a href="moim_notice_board?pageNum=${startPage - pageBlock}"><font
+											size="3"> «</font></a></li>
+								</c:if>
+				
+				
+								<c:forEach var="i" begin="${startPage}" end="${endPage}">
+									<c:if test="${i == currentPage}">
+										<li class=""><a href="#"><font size="3">${i}</font></a></li>
+									</c:if>
+				
+									<c:if test="${i != currentPage}">
+										<li class=""><a href="moim_notice_board?pageNum=${i}"><font size="3">${i}</font></a></li>
+									</c:if>
+				
+								</c:forEach>
+								<c:if test="${pageCount > endPage}">
+									<li><a href="moim_notice_board?pageNum=${startPage + pageBlock}"><font
+											size="3">»</font></a></li>
+								</c:if>
+							</c:if>
+						</ul>
 						</div>
-						<div class=""
-							style="text-align: center; font-size: 15px">
+						<div class="panel-body padding-0" style="text-align: center; font-size: 15px">
 							<div class="chart-holder" id="dashboard-bar-1"
 								style="height: 15px; margin-left: 5%; margin-top: 90px;">
 	

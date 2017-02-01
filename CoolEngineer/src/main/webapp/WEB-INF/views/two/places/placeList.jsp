@@ -111,7 +111,7 @@ li {
 	<!-- END NOTICE BLOCK -->
 
 	<!-- START PHOTO BLOCK -->
-	<div class="col-md-56" style="margin-top:20px; margin-bottom:20px; margin-left:10%; height:1200px;">
+	<div class="col-md-56" style="margin-top:20px; margin-left:10%; height:1220px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
@@ -120,7 +120,7 @@ li {
 			</div>
 			
 			<div style="text-align: center; font-size: 25px">
-				<div class="chart-holder" id="dashboard-bar-1" style="height: 10px;">
+				<div class="chart-holder" id="dashboard-bar-1" style="height:10px;">
 					<br><br>
 					<h2>장소정보 리스트</h2>
 					
@@ -128,7 +128,7 @@ li {
 					
 					<form name="placelistform">
 						<div style="float: right; margin-right:10%;">
-							<input type="button" class="btn btn-default" value="장소 추가" onclick="placeInput()">
+							<input type="button" class="btn btn-info" value="장소 추가" onclick="placeInput()">
 						</div>
 					</form>
 					
@@ -152,7 +152,7 @@ li {
 								</td>
 								<c:set var="place_num" value="${place_num-1}" />
 								<td style="border:0; height:150px;" align="center">
-									<a href="placeContentForm?place_num=${pidtos.place_num}&pageNum=${pageNum}">
+									<a href="placeContentForm?place_num=${pidtos.place_num}">
 										${pidtos.place_name}
 									</a>	
 								</td>
@@ -167,7 +167,7 @@ li {
 						<c:forEach var="ppdtos" items="${ppdtos}">	
 							<tr style="border:0;">
 								<td style="border:0; height:150px;" align="center">
-									<img src="/placeImgPath/${ppdtos.place_pic_path}${ppdtos.place_pic_name}" style="width:70%; height:99%;"> 
+									<img src="${ppdtos.place_pic_path}/${ppdtos.place_pic_name}" style="width:70%; height:99%;"> 
 								</td>
 							</tr>	
 						</c:forEach>
@@ -185,19 +185,44 @@ li {
 						</table>
 				 </div>
 					<br><br>
-					<div class="dataTables_paginate paging_simple_numbers" id="customers2_paginate" style="margin-right:10%;">
-						<a class="paginate_button previous disabled" aria-controls="customers2" data-dt-idx="0" tabindex="0" id="customers2_previous">Previous</a>
-						<span>
-						<a class="paginate_button current" aria-controls="customers2" data-dt-idx="1" tabindex="0">1</a>
-						<a class="paginate_button " aria-controls="customers2" data-dt-idx="2" tabindex="0">2</a>
-						<a class="paginate_button " aria-controls="customers2" data-dt-idx="3" tabindex="0">3</a>
-						<a class="paginate_button " aria-controls="customers2" data-dt-idx="4" tabindex="0">4</a>
-						</span><a class="paginate_button next" aria-controls="customers2" data-dt-idx="7" tabindex="0" id="customers2_next">Next</a>
-					</div>
+					
+					
+				<div style="float:right; margin-right:50%;">	
+					<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+	
+						<c:if test="${cnt > 0}">
+				
+							<c:if test="${startPage > pageBlock}">
+								<li class=""><a href="placeList?pageNum=${startPage - pageBlock}"><font
+											size="3"> «</font></a></li>
+							</c:if>
+				
+				
+							<c:forEach var="i" begin="${startPage}" end="${endPage}">
+								<c:if test="${i == currentPage}">
+									<li class=""><a href="#"><font size="3">${i}</font></a></li>
+								</c:if>
+				
+								<c:if test="${i != currentPage}">
+									<li class=""><a href="placeList?pageNum=${i}"><font size="3">${i}</font></a></li>
+								</c:if>
+				
+							</c:forEach>
+							<c:if test="${pageCount > endPage}">
+								<li><a href="placeList?pageNum=${startPage + pageBlock}"><font
+											size="3">»</font></a></li>
+							</c:if>
+						</c:if>
+							
+					</ul>
+				</div>
+					
 					<br><br><br><br>
-				  <div style="float:left; margin-left:9%;">
-					  <jsp:include page="placeSearchForm.jsp"/>
-				  </div>
+			 <%-- 
+				  <div style="float:left; margin-left:9%; margin-top:4%;">
+				  	  <jsp:include page="placeSearchForm.jsp"/>
+				  </div> 
+			 --%>
 			  </div>
 			  <br>
 		</div>

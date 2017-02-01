@@ -94,7 +94,7 @@ li {
 	<!-- END NOTICE BLOCK -->
 
 	<!-- START PHOTO BLOCK -->
-	<div class="col-md-56" style="margin-top:20px; margin-bottom:20px; margin-left:10%; height:800px;">
+	<div class="col-md-56" style="margin-top:20px; margin-bottom:20px; margin-left:10%; height:750px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
@@ -140,8 +140,9 @@ li {
 									</a>
 								</td>
 								<td style="border:0;" align="center">
-									${dtos.sug_num}
+									${sug_num}
 								</td>
+								<c:set var="sug_num" value="${sug_num-1}" />
 								<td style="border:0;" align="center">
 									${dtos.sug_title}
 								</td>		
@@ -178,19 +179,38 @@ li {
 						</table>
 				 </div>
 
-					<div class="dataTables_paginate paging_simple_numbers" id="customers2_paginate" style="margin-right:5%;">
-						<a class="paginate_button previous disabled" aria-controls="customers2" data-dt-idx="0" tabindex="0" id="customers2_previous">Previous</a>
-						<span>
-						<a class="paginate_button current" aria-controls="customers2" data-dt-idx="1" tabindex="0">1</a>
-						<a class="paginate_button " aria-controls="customers2" data-dt-idx="2" tabindex="0">2</a>
-						<a class="paginate_button " aria-controls="customers2" data-dt-idx="3" tabindex="0">3</a>
-						<a class="paginate_button " aria-controls="customers2" data-dt-idx="4" tabindex="0">4</a>
-						</span><a class="paginate_button next" aria-controls="customers2" data-dt-idx="7" tabindex="0" id="customers2_next">Next</a>
-					</div>
+				 <div style="float:right; margin-right:50%;">	
+					<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+	
+						<c:if test="${cnt > 0}">
 				
+							<c:if test="${startPage > pageBlock}">
+								<li class=""><a href="suggestionList?pageNum=${startPage - pageBlock}"><font
+											size="3"> «</font></a></li>
+							</c:if>
+				
+				
+							<c:forEach var="i" begin="${startPage}" end="${endPage}">
+								<c:if test="${i == currentPage}">
+									<li class=""><a href="#"><font size="3">${i}</font></a></li>
+								</c:if>
+				
+								<c:if test="${i != currentPage}">
+									<li class=""><a href="suggestionList?pageNum=${i}"><font size="3">${i}</font></a></li>
+								</c:if>
+				
+							</c:forEach>
+							<c:if test="${pageCount > endPage}">
+								<li><a href="suggestionList?pageNum=${startPage + pageBlock}"><font
+											size="3">»</font></a></li>
+							</c:if>
+						</c:if>
+							
+					</ul>
 			  </div>
-			  <br>
+				  			
 		</div>
+	</div>
 	<!-- END PHOTO BLOCK -->
 
 

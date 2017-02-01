@@ -16,8 +16,7 @@
 <!-- END META SECTION -->
 
 <!-- CSS INCLUDE -->
-<link rel="stylesheet" type="text/css" id="theme"
-	href="/moyeo/resources/resource/css/theme-default.css" />
+<link rel="stylesheet" type="text/css" id="theme" href="/moyeo/resources/resource/css/theme-default.css" />
 <!-- EOF CSS INCLUDE -->
 <style>
 @media only screen and (max-width: 1010px) {
@@ -179,14 +178,101 @@ html, body {
 							</div>
 							<!-- 댓글이 삽입되는 부분 -->
 							<div style="margin-top: 10%; height: 250px;">
-								<h3>댓글</h3>
-								<div style="height:200px; boarder:1px solid black">
-									
-								</div>
-								
-								<div>
-									<input type="text" style="width:500px;" placeholder="댓글을 남겨보세요.">
-								</div>
+							
+								<!-- 메시지박스 시작 -->
+										                        
+		                        <div class="panel panel-default push-up-10">
+		                            <div class="panel-body panel-body-search">
+		                            <div class="messages messages-img">
+		                            <div class="item in">
+		                                <div class="image">
+		                                    <img src="assets/images/users/user2.jpg" alt="John Doe">
+		                                </div>
+		                                <div class="text">
+		                                    <div class="heading">
+		                                        <a href="#">John Doe</a>
+		                                        <span class="date">08:33</span>
+		                                    </div>
+		                                    Lorem ipsum dolor sit amet, consectetur 
+		                                </div>
+		                            </div>
+		                            <div class="item">
+		                                <div class="image">
+		                                    <img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
+		                                </div>                                
+		                                <div class="text">
+		                                    <div class="heading">
+		                                        <a href="#">Dmitry Ivaniuk</a>
+		                                        <span class="date">08:39</span>
+		                                    </div>                                    
+		                                    Integer et ipsum vitae urna mattis dictum. 
+		                                </div>
+		                            </div>
+		                            <div class="item">
+		                                <div class="image">
+		                                    <img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
+		                                </div>                                
+		                                <div class="text">
+		                                    <div class="heading">
+		                                        <a href="#">Dmitry Ivaniuk</a>
+		                                        <span class="date">08:42</span>
+		                                    </div>                                    
+		                                    In dapibus ex ut nisl laoreet aliquam. Donec 
+		                                </div>
+		                            </div>
+		                            <div class="item in">
+		                                <div class="image">
+		                                    <img src="assets/images/users/user2.jpg" alt="John Doe">
+		                                </div>
+		                                <div class="text">
+		                                    <div class="heading">
+		                                        <a href="#">John Doe</a>
+		                                        <span class="date">08:58</span>
+		                                    </div>
+		                                    Curabitur et euismod urna?
+		                                </div>
+		                            </div>
+		                            <div class="item">
+		                                <div class="image">
+		                                    <img src="assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
+		                                </div>                                
+		                                <div class="text">
+		                                    <div class="heading">
+		                                        <a href="#">Dmitry Ivaniuk</a>
+		                                        <span class="date">09:11</span>
+		                                    </div>                                    
+		                                    Fusce ultricies erat quis massa interdum, 
+		                                </div>
+		                            </div>
+		                            <div class="item in">
+		                                <div class="image">
+		                                    <img src="assets/images/users/user2.jpg" alt="John Doe">
+		                                </div>
+		                                <div class="text">
+		                                    <div class="heading">
+		                                        <a href="#">John Doe</a>
+		                                        <span class="date">09:22</span>
+		                                    </div>
+		                                    Vestibulum cursus ipsum ut dolor vulputate dapibus. 
+		                                </div>
+		                            </div>
+		                        </div>                        
+		                            
+		                            
+		                            
+		                            </div>
+		                              <div class="input-group">
+		                                    <div class="input-group-btn">
+		                                        <button class="btn btn-default"><span class="fa fa-camera"></span></button>
+		                                        <button class="btn btn-default"><span class="fa fa-chain"></span></button>
+		                                    </div>
+		                                    <input type="text" class="form-control" placeholder="Your message..."/>
+		                                    <div class="input-group-btn">
+		                                        <button class="btn btn-default">Send</button>
+		                                    </div>
+		                                </div>
+		                        </div>
+                        	    <!-- 메시지박스 끝 -->
 							</div>
 						</div>
 					</div>
@@ -195,9 +281,27 @@ html, body {
 		</div>
 	</div>
 	
-<script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
-<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-<script src="/moyeo/resources/resource/js/plugins/slick/slick.js" type="text/javascript" charset="utf-8"></script>
-<script src="/moyeo/resources/customScript/five.js" type="text/javascript"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+	<script src="/moyeo/resources/resource/js/plugins/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/moyeo/resources/customScript/five.js" type="text/javascript"></script>
+
+ <!-- START PLUGINS -->
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>        
+        <!-- END PLUGINS -->
+
+        <!-- THIS PAGE PLUGINS -->
+        <script type='text/javascript' src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+		<!-- END PAGE PLUGINS -->     
+
+        <!-- START TEMPLATE -->
+        <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
+        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>        
 </body>
 </html>

@@ -90,7 +90,7 @@ li {
 				
 				<!-- 폼 태그  -->
 				
-		<form action="moim_notice_deletePro" method="post" name="passwdform" onsubmit="return passwdCheck();">
+		<form action="moim_greeting_deletePro" method="post" name="passwdform" onsubmit="return passwdCheck();">
 			<input type="hidden" name="num" value="${num}">
 			<input type="hidden" name="pageNum" value="${pageNum}">
 			

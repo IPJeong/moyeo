@@ -11,7 +11,7 @@
 	<title>Q&A작성 양식</title>
 	
 <style>
-	 .button {
+	 .button {	
 		margin-right:47%;
 	} 
 	

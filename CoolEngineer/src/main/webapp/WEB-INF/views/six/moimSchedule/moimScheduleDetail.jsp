@@ -79,75 +79,22 @@ img {
 		}
 	});
 </script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/home">Home</a></li>
+	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li class="active">모임 일정</li>
+</ul>
+<!-- END BREADCRUMB -->
+
 <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
-
-<!-- START LOGIN BLOCK -->
-		<div class="col-md-51" style="height: 310px;">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<div class="panel-title-box">
-						<h3>모임개요</h3>
-
-					</div>
-				</div>
-				<div class="panel-body padding-0" style="height: 270px;">
-					<div class="chart-holder" id="dashboard-line-1"
-						style="height: 180px;">
-						<center><img src="/moyeo/resources/resource/assets/images/gallery/pin.jpg"
-							width="180px" height="130px" style="margin: auto;"><br>
-						<font size="5">${group_name}</font></center>
-						<br>
-						<h3>
-							<center>${group_inte1} -> ${group_inte2}</center>
-						</h3>
-						<center>
-							<input type="button" style="margin-right:20px;" value="모임정보 수정" onclick="window.location='/moyeo/six/moimMain/moimModify?group_num=${group_num}'">
-							<input type="button" style="margin-left:20px;" value="모임폐쇄" onclick="window.location='/moyeo/six/moimMain/moimDelete?group_num=${group_num}'">
-						</center>
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- END LOGIN BLOCK -->
-		
-			<!-- START RECOMMENDATION MEET BLOCK -->
-		<div class="col-md-55" style="margin-top: 10px;">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<div class="panel-title-box">
-						<h3>멤버리스트</h3>
-
-					</div>
-				</div>
-				<div class="panel-body padding-0" style="height: 550px;">
-					<div class="chart-holder" id="dashboard-line-1">
-						<div class="main">
-							<img src="/moyeo/resources/resource/assets/images/gallery/피카츄.png"
-								width="150px" height="110px" style="magin: 5px 5px">피카츄 <a
-								href="#">[상세보기]</a><br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[모임장]<br>
-							<img src="/moyeo/resources/resource/assets/images/gallery/라이츄.png"
-								width="150px" height="110px" style="magin: 5px 5px">라이츄 <a
-								href="#">[상세보기]</a><br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[회원]<br>
-							<img src="/moyeo/resources/resource/assets/images/gallery/파이리.png"
-								width="150px" height="110px" style="magin: 5px 5px">파이리 <a
-								href="#">[상세보기]</a><br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[회원]<br>
-							<img src="/moyeo/resources/resource/assets/images/gallery/꼬부기.jpg"
-								width="150px" height="110px" style="magin: 5px 5px">꼬부기 <a
-								href="#">[상세보기]</a><br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[회원]<br>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- END RECOMMENDATION MEET BLOCK -->
+		<!-- 모임페이지 사이드바 시작 -->
+		<%@include file="../../etc/moim_side.jsp"%>
+		<!-- 모임페이지 사이드바 종료 -->
 
 		<!-- START PHOTO BLOCK -->
 		<div class="col-md-56" style="margin-top: 10px;">
@@ -163,7 +110,7 @@ img {
 						style="height: 600px;">
 					
 						<div class="chart-hodler"
-							style="width: 950px; height: 800px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 20px">
+							style="width: 870px; height: 800px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 20px">
 							<c:if test="${cnt > 0}">
 							
 								
@@ -172,7 +119,7 @@ img {
 										value="${dtos[stat.index].meeting_num}">
 
 									<div class="chart-holder"
-										style="width: 750px; height: 180px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
+										style="width: 680px; height: 180px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
 										<div style="width: 25%; height: 100%; float: left">
 											<div style="width: 100%; height: 100%; magin: 5px 5px;">
 												<form name="left" style="height: 100%;">
@@ -184,7 +131,7 @@ img {
 											</div>
 										</div>
 
-										<div style="width: 50%; height: 100%; float: left">
+										<div style="width: 55%; height: 100%; float: left">
 											<p style="text-align: left; margin-left: 20px; font-size: 20px; margin-top: 15px;"><font color="#1d1f21">모임명 :</font>
 												${dtos[stat.index].meeting_title}</p>
 											<p style="text-align: left; margin-left: 20px; font-size: 20px;"><font color="#1d1f21">일시 :</font>
@@ -195,7 +142,7 @@ img {
 												${dtos[stat.index].meeting_pernum}</p>
 										</div>
 
-										<div style="width: 25%; height: 100%; float: left">
+										<div style="width: 20%; height: 100%; float: left">
 <!-- 											<script type="text/javascript">
 												function del() {
 													if(confirm("정말로 삭제하겠습니까?")) {
@@ -214,36 +161,36 @@ img {
 												}
 											</script>
  -->											<input type="button" value="상세보기"
-												style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 15px; float:left; margin-left:50px;" onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=800, height=500, left=450, top=270')"> 
+												style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 15px; float:left; " onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=950, height=500, left=300, top=100')"> 
 											<input
-												type="button" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; margin-left:50px;"
+												type="button" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; "
 												onclick="window.location='moimScheduleModify?meeting_num=${dtos[stat.index].meeting_num}&group_num=${group_num}'"> 
 											<input type="button"
-												value="모임삭제" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; margin-left:50px;" onclick="window.location='moimScheduleDelete?meeting_num=${dtos[stat.index].meeting_num}'">
+												value="모임삭제" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; " onclick="window.location='moimScheduleDelete?meeting_num=${dtos[stat.index].meeting_num}'">
 
 										</div>
 										<c:if test ="${dtos3[stat.index] eq 1}">
 											<input type="button" value="참석취소"
-												style="background:rgba(149, 130, 206, 0.8); color:white; height: 40px; font-size: 13px; width: 100px; position: absolute; left: 830px; margin-top: 40px"
+												style="background:rgba(149, 130, 206, 0.8); color:white; height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 40px"
 												onclick="window.location='moimScheduleCancel?meeting_num=${dtos[stat.index].meeting_num}'"
 												>
 										</c:if>
 										<c:if test ="${dtos3[stat.index] eq 0}"> 							
 											<c:if test ="${dtos2[stat.index] < dtos[stat.index].meeting_pernum}">
 												<input type="button" value="참석"
-													style="height: 40px; font-size: 13px; width: 100px; position: absolute; left: 830px; margin-top: 40px"
+													style="height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 40px"
 													onclick="window.location='moimScheduleJoin?meeting_num=${dtos[stat.index].meeting_num}&pageNum=${i}'">
 											</c:if>
 											<c:if test ="${dtos2[stat.index] >= dtos[stat.index].meeting_pernum}">
 												<input type="button" value="마감"
-													style="background:#d27373; color:white; height: 40px; font-size: 13px; width: 100px; position: absolute; left: 830px; margin-top: 40px"
+													style="background:#d27373; color:white; height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 40px"
 													>
 											</c:if>
 										</c:if>
 										<br>
 										<input type="button" value="참석멤버 보기"
-													style="height: 40px; font-size: 13px; width: 100px; position: absolute; left: 830px; margin-top: 60px"
-													onclick="window.open('moimScheduleMember?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=800, height=500, left=450, top=270')">
+													style="height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 60px"
+													onclick="window.open('moimScheduleMember?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=800, height=500, left=450, top=100')">
 										
 
 									</div>

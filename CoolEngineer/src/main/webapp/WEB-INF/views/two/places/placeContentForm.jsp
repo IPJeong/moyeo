@@ -19,6 +19,11 @@ function placeDelete() {
 	}
 }
 
+function recPlaceWrite() {
+	var place_num = document.placecontentform.place_num.value;
+	window.location = "recPlaceWriteForm?place_num=" + place_num;
+}
+
 </script>
 
 <style>
@@ -115,10 +120,10 @@ li {
 			<br> <br> <br> <br>
 			<h3 style="float:left; margin-left: 20%;">장소정보</h3>
 			
-			<br><br>
+			<br><br><br>
 			<div class="inner" style="width:60%; height:350px; margin-left:20%; border:1px solid #000000;">
 	            <div class="img" style="border:1; float:left; width:44%; height:300px; margin-top:25px; margin-left:5%;">
-	            	<img src="/placeImgPath/${ppdto.place_pic_path}${ppdto.place_pic_name}" alt="장소 사진" style="width:99%; height:99%;"> 
+	            	<img src="${ppdto.place_pic_path}/${ppdto.place_pic_name}" alt="장소 사진" style="width:99%; height:99%;"> 
 	            </div>  
 	                                  
 	            <div class="info" style="border:1; float:right; width:44%; height:300px; margin-top:25px; margin-right:5%;">
@@ -149,10 +154,11 @@ li {
             </div>
             <br>
                 <form name="placecontentform">
-                	<input type="hidden" name="place_num" value="${pidto.place_num}">
+                	<input type="hidden" name="place_num" value="${place_num}">
 					<div style="float: right; margin-right:20%;">
-						<input type="button" class="btn btn-default" value="수정" onclick="placeModify()">
-						<input type="button" class="btn btn-danger" value="삭제" onclick="placeDelete()">
+						<input type="button" class="btn btn-info" value="수정" onclick="placeModify()">
+						<input type="button" class="btn btn-info" value="삭제" onclick="placeDelete()">
+						<input type="button" class="btn btn-info" value="목록" onclick="window.location='placeList'">
 					</div>
 				</form>
 			<br> <br> 
@@ -163,32 +169,39 @@ li {
 						<br><br>
 					<h3 style="float:left; margin-left: 5%;">추천장소 후기</h3>
 						
+					<br><br>
+				<form name="recplalistform">
+                	<input type="hidden" name="place_num" value="${place_num}">
+					<div style="float:left; margin-left:6%;">
+						<input type="button" class="btn btn-info" value="추천후기 작성" onclick="recPlaceWrite()">
+					</div>
+				</form>
+					
 						<br>
-						
+										
 						<div>
 							<table class="table table-striped table-hover"
 								style="width: 90%; margin-left: 5%;">
 								<tr class="info">
-									<td style="width:3%">번호</td>
-									<td style="width:10%">제목</td>
-									<td style="width:5%">아이디</td>
-									<td style="width:3%">좋아요</td>
+									<td style="width:15%" align="center">번호</td>
+									<td style="width:65%">제목</td>
+									<td style="width:20%" align="center">아이디</td>
 								</tr>
 						<c:if test="${cnt > 0}">
-							<c:forEach var="dtos" items="${dtos}">
+							<c:forEach var="rpdtos" items="${rpdtos}">
 								<tr style="border:0;">
 									<td style="border:0;" align="center">
-
+										${recpla_num}
+									</td>
+									<c:set var="recpla_num" value="${recpla_num - 1}" />
+									<td style="border:0;">
+										<a href="recPlaceContentForm?recpla_num=${rpdtos.recpla_num}">
+											${rpdtos.recpla_title}
+										</a>	
 									</td>
 									<td style="border:0;" align="center">
-										
-									</td>
-									<td style="border:0;" align="center">
-									
+										${rpdtos.mem_id}
 									</td>		
-									<td style="border:0;" align="center">
-										
-									</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -204,15 +217,36 @@ li {
 							</table>
 					 </div>
 	
-						<div class="dataTables_paginate paging_simple_numbers" id="customers2_paginate" style="margin-right:5%;">
-							<a class="paginate_button previous disabled" aria-controls="customers2" data-dt-idx="0" tabindex="0" id="customers2_previous">Previous</a>
-							<span>
-							<a class="paginate_button current" aria-controls="customers2" data-dt-idx="1" tabindex="0">1</a>
-							<a class="paginate_button " aria-controls="customers2" data-dt-idx="2" tabindex="0">2</a>
-							<a class="paginate_button " aria-controls="customers2" data-dt-idx="3" tabindex="0">3</a>
-							<a class="paginate_button " aria-controls="customers2" data-dt-idx="4" tabindex="0">4</a>
-							</span><a class="paginate_button next" aria-controls="customers2" data-dt-idx="7" tabindex="0" id="customers2_next">Next</a>
-						</div>
+						
+					    <div style="float:right; margin-right:50%;">	
+							<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+			
+								<c:if test="${cnt > 0}">
+						
+									<c:if test="${startPage > pageBlock}">
+										<li class=""><a href="placeContentForm?place_num=${place_num}&recPlacePageNum=${startPage - pageBlock}"><font
+													size="3"> «</font></a></li>
+									</c:if>
+						
+						
+									<c:forEach var="i" begin="${startPage}" end="${endPage}">
+										<c:if test="${i == currentPage}">
+											<li class=""><a href="#"><font size="3">${i}</font></a></li>
+										</c:if>
+						
+										<c:if test="${i != currentPage}">
+											<li class=""><a href="placeContentForm?place_num=${place_num}&recPlacePageNum=${i}"><font size="3">${i}</font></a></li>
+										</c:if>
+						
+									</c:forEach>
+									<c:if test="${pageCount > endPage}">
+										<li><a href="placeContentForm?place_num=${place_num}&recPlacePageNum=${startPage + pageBlock}"><font
+													size="3">»</font></a></li>
+									</c:if>
+								</c:if>
+									
+							</ul>
+					  </div>
 					
 				  </div>
 				  <br>

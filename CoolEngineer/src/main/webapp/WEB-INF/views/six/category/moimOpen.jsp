@@ -476,7 +476,7 @@
 
 			</div>
 			<div class="panel panel-default"
-				style="margin-top: 20px; width: 100%; float: left;">
+				style="margin-top: 5px; width: 100%; float: left;">
 				<div class="panel-heading">
 					<div class="panel-title-box">
 						<h3>관심사 선택</h3>
@@ -514,7 +514,7 @@
 			</div>
 
 			<div class="panel panel-default"
-				style="margin-top: 20px; width: 100%; float: left;">
+				style="margin-top: 3px; width: 100%; float: left;">
 				<div class="panel-heading">
 					<div class="panel-title-box">
 						<h3>모임 이름을 작성해주세요</h3>
@@ -526,7 +526,7 @@
 				</div>
 			</div>
 			<div class="panel panel-default"
-				style="margin-top: 20px; width: 100%; height: 120px; float: left;">
+				style="margin-top: 3px; width: 100%; height: 120px; float: left;">
 				<div class="panel-heading">
 					<div class="panel-title-box">
 						<h3>어떤 모임인지 설명해주세요</h3>
@@ -535,13 +535,13 @@
 				<div class="panel-body padding-0"
 					style="height: 100%; margin-top: 0.5%; margin-bottom: 0.75%; margin-left: 0.5%;">
 					<textarea class="input" rows="10" cols="40" name="content"
-						style="width: 98%; height: 80%;" required></textarea>
+						style="width: 98%; height: 60%;" required></textarea>
 				</div>
 
 			</div>
 
 			<div class="panel panel-default"
-				style="margin-top: 20px; width: 100%; float: left;">
+				style="margin-top: 3px; width: 100%; float: left;">
 				<div class="panel-heading">
 					<div class="panel-title-box">
 						<h3>모임 정원을 선택해주세요</h3>
@@ -579,11 +579,11 @@
 		</div>
 
 	</div>
-	<div style="width: 15%; float: left;">
-		<div class="col-md-6" style="width: 100%; margin: 40px 0 20px -50px;">
+	<div style="width: 15%; float: left; ">
+		<div class="col-md-6" style="width: 100%; margin: 40px 0 20px 0;">
 			<input type="submit" class="btn btn-primary btn-block" value="모임개설">
 		</div>
-		<div class="col-md-6" style="width: 100%; margin: 0px 0 20px -50px;" onclick="window.history.back();">
+		<div class="col-md-6" style="width: 100%; margin: 0px 0 20px 0;" onclick="window.history.back();">
 			<input type="button" class="btn btn-primary btn-block" value="취소">
 		</div>
 	</div>

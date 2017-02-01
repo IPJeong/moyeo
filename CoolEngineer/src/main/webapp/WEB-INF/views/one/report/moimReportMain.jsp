@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <%@ include file="../../etc/moim_header.jsp"%>
 
 <head>
@@ -15,16 +17,14 @@
 
 <body>
 <div class="col-md-12">
-     <form class="form-horizontal">
+     <form:form class="form-horizontal" action="moimReportPro" method="post" modelAttribute="uploadForm" enctype="multipart/form-data">
+     	<input type="hidden" name="group_num" value="${group_num}">
      <div class="panel panel-default">
          <div class="panel-heading">
              <h3 class="panel-title"><strong>모임신고</strong> 불순한 모임을 신고하세요!</h3>
              <ul class="panel-controls">
                  <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
              </ul>
-         </div>
-         <div class="panel-body">
-             <p>This is non libero bibendum, scelerisque arcu id, placerat nunc. Integer ullamcorper rutrum dui eget porta. Fusce enim dui, pulvinar a augue nec, dapibus hendrerit mauris. Praesent efficitur, elit non convallis faucibus, enim sapien suscipit mi, sit amet fringilla felis arcu id sem. Phasellus semper felis in odio convallis, et venenatis nisl posuere. Morbi non aliquet magna, a consectetur risus. Vivamus quis tellus eros. Nulla sagittis nisi sit amet orci consectetur laoreet. Vivamus volutpat erat ac vulputate laoreet. Phasellus eu ipsum massa.</p>
          </div>
          <div class="panel-body">                                                                        
              
@@ -33,7 +33,7 @@
                  <div class="col-md-6 col-xs-12">                                            
                      <div class="input-group">
                          <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                         <input type="text" class="form-control"/>
+                         <input type="text" class="form-control" value="${dto.group_name}"/>
                      </div>                                            
                      <span class="help-block">This is sample of text field</span>
                  </div>
@@ -62,7 +62,7 @@
              <div class="form-group">
                  <label class="col-md-3 col-xs-12 control-label">사진</label>
                  <div class="col-md-6 col-xs-12">                                                                                                                                        
-                     <input type="file" class="fileinput btn-primary" name="pic_path" id="pic_path" title="Browse file" />
+                     <input type="file" class="fileinput btn-primary" name="files[0]" id="pic_path" title="Browse file" />
                      <span class="help-block">Input type file</span>
                  </div>
              </div>
@@ -70,10 +70,10 @@
          </div>
          <div class="panel-footer">
              <button class="btn btn-default">Clear Form</button>                                    
-             <a href="../one/moimReportPro"><input type="button" class="btn btn-primary pull-right" value="글쓰기"></a>
+             <input type="submit" class="btn btn-primary pull-right" value="글쓰기">
          </div>
      </div>
-     </form>
+     </form:form>
      
  </div>
 

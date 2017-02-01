@@ -61,7 +61,7 @@
 
 									<div style="width: 100%; height: 250px;">
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>아웃도어/여행</h3>
@@ -81,7 +81,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>운동/스포츠</h3>
@@ -101,7 +101,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>인문학/책/글</h3>
@@ -121,7 +121,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>외국/언어</h3>
@@ -141,7 +141,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>문화/공연</h3>
@@ -163,7 +163,7 @@
 									</div>
 									<div style="width: 100%; height: 250px;">
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>음악/악기</h3>
@@ -183,7 +183,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>공예/만들기</h3>
@@ -203,7 +203,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>댄스/무용</h3>
@@ -223,7 +223,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>봉사활동</h3>
@@ -243,7 +243,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>사교/인맥</h3>
@@ -265,7 +265,7 @@
 									</div>
 									<div style="width: 100%; height: 250px;">
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>차/오토바이</h3>
@@ -285,7 +285,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>사진</h3>
@@ -305,7 +305,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>야구관람</h3>
@@ -325,7 +325,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>게임/오락</h3>
@@ -345,7 +345,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>요리/제조</h3>
@@ -367,7 +367,7 @@
 									</div>
 									<div style="width: 100%; height: 250px;">
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>반려동물</h3>
@@ -387,7 +387,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>가족/결혼</h3>
@@ -407,7 +407,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 											<div class="panel-heading" style="background: #8ff9ff">
 												<div class="panel-title-box">
 													<h3>자유주제</h3>
@@ -427,11 +427,11 @@
 											</div>
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 0px solid #E5E5E5;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 0px solid #E5E5E5;">
 
 										</div>
 										<div class="panel panel-default"
-											style="width: 19.2%; height: 100%; margin: 5px; float: left; border: 0px solid #E5E5E5;">
+											style="width: 19%; height: 100%; margin: 5px; float: left; border: 0px solid #E5E5E5;">
 
 										</div>
 									</div>

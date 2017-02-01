@@ -304,7 +304,7 @@ li {
 			<div style="width:80%;">
 			
 				<form:form action="placeModifyPro" name="placemodifyform" class="form-horizontal" style="margin-left:20%;" modelAttribute="uploadForm" enctype="multipart/form-data">
-					<input type="hidden" value="${place_num}">
+					<input type="hidden" name=place_num value="${pidto.place_num}">
 					<fieldset>
 						<legend>장소정보 수정</legend><br>
 						
@@ -312,7 +312,7 @@ li {
 							<label class="col-lg-2 control-label">장소명</label>
 							<div class="col-lg-10">
 								<input type="text" class="form-control" name="place_name" maxlength="40"
-									placeholder="" required>
+									value="${pidto.place_name}" required>
 							</div>
 						</div>
 						
@@ -349,14 +349,15 @@ li {
 							<label class="col-lg-2 control-label">상세 주소</label>
 							<div class="col-lg-10">
 								<input type="text" class="form-control" name="place_address" maxlength="80"
-									placeholder="" required>
+									required>
 							</div>
 						</div>
 					
 						<div class="form-group">
 							<label class="col-lg-2 control-label">장소설명</label>
 							<div class="col-lg-10">
-								<textarea class="form-control" rows="17" name="place_detail" maxlength="2000" required></textarea>
+								<textarea class="form-control" rows="17" name="place_detail" maxlength="2000" 
+									value="${pidto.place_detail}"></textarea>
 								<span class="help-block"></span>
 							</div>
 						</div>
@@ -365,7 +366,7 @@ li {
 							<label class="col-lg-2 control-label">링크</label>
 							<div class="col-lg-10">
 								<input type="url" class="form-control" name="place_link" maxlength="120"
-									placeholder="">
+									value="${pidto.place_link}">
 							</div>
 						</div>
 						
@@ -375,7 +376,7 @@ li {
 	                           <div class="col-md-6 col-xs-12">
 	                           	   <span class="help-block">사진을 선택하세요.</span>
 	                           	   <div id="fileview">
-	                               		<input class="btn btn-warning btn-rounded" id="file0" type="file" name="files[0]" style="float:left;" onchange="chkType('file0')"/>
+	                               		<input class="btn btn-warning btn-rounded" id="file0" type="file" name="files[0]" style="float:left;" onchange="chkType('file0')"/ required>
 	                               		<input class="btn btn-info btn-rounded" id="addFile" type="button" value="파일추가" style="float:left; margin-left:1%;"/>	
 	                               </div>
 	                           </div>

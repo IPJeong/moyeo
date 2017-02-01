@@ -13,7 +13,7 @@
 	<c:if test="${cnt != 0}">
 		<script type="text/javascript">
 			alert("추천장소 후기가 입력되었습니다.");
-			window.location='list.do?pageNum=${pageNum}';
+			window.location='placeContentForm?place_num=' + ${place_num};
 		</script>
 	</c:if>
 </body>

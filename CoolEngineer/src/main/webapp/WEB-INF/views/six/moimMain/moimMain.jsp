@@ -61,7 +61,7 @@ img {
 <ul class="breadcrumb push-down-0">
 	<li><a href="../main/main.jsp">Home</a></li>
 	<li><a href="../category/category_hobby">모임</a></li>
-	<li class="active">${dto.group_name}</li>
+	<li class="active">${group_name}</li>
 
 </ul>
 <!-- END BREADCRUMB -->
@@ -87,10 +87,10 @@ img {
 						style="width: 97%; height: 260px; margin-top: 0px; /* border-bottom:3px solid #D5D5D5; border-top:3px solid #D5D5D5; border-left:3px solid #D5D5D5; border-right:3px solid #D5D5D5; */ margin: 10px; margin-top: 20px">
 						<div style="height: 100%;">
 							<div style="width:50%;"><img
-								src="/moyeo/resources/resource/assets/images/ds/moimMain.jpg"
+								src="${main_pic_pathB}/${main_pic_nameB}"
 								width="100%" height="240px" style="float: left;">
 							</div>
-							<div style="width: 47%; height: 200px; float: left;"><br>${dto.group_intro}
+							<div style="width: 47%; height: 200px; float: left;"><br>${group_intro}
 							</div>
 
 							<div style="width: 47%; height: 45px; float: left;">
@@ -98,7 +98,7 @@ img {
 								
 								<input type="button"
 									value="사진등록"
-									style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb','','menubar=no, toolbar=no, width=450, height=135, left=950, top=150')"> 
+									style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb','','menubar=no, toolbar=no, width=450, height=170, left=950, top=150')"> 
 
 								<a href="../moim/moim_cheif_member.jsp">
 								<input type="button"

@@ -120,7 +120,7 @@ tr {
 			<div class="panel-body">
 
 				<br>
-				<div class="table-responsive">
+				<div class="table-responsive" style="background: white;">
 					<table class="table">
 						<tr>
 							<th class="subject"

@@ -94,7 +94,7 @@
 					</div>
 					<ul>
 						<li class=""><a href="/moyeo/main/home">Home</a></li>
-						<li class="xn-openable"><a>회사소개</a>
+						<li class="xn-openable"><a href="#">회사소개</a>
 							<ul>
 								<li><a href="/moyeo/main/introduce/introduce"><span class="glyphicon glyphicon-user"></span> 회사소개 </a></li>
 								<li><a href="/moyeo/main/introduce/introduce2"><span

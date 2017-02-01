@@ -73,7 +73,7 @@ li {
 		<!-- 모임페이지 사이드바 시작 -->
 		<%@include file="../../etc/moim_side.jsp"%>
 		<!-- 모임페이지 사이드바 종료 -->
-		
+
 		<!-- START PHOTO BLOCK -->
 		<div class="col-md-56" style="margin-top: 10px;">
 			<div class="panel panel-default">
@@ -90,21 +90,21 @@ li {
 					
 					
 					
-					<form action="moim_greeting_writepro" method="post" name="writeform" class="form-horizontal">
-						
-						<input type="hidden" name="greeting_num" value="${greeting_num}">
+					<form action="moim_greeting_modifypro" method="post" name="modifyform" class="form-horizontal">
+						<input type="hidden" name="pageNum" value="${pageNum}">
+						<input type="hidden" name="greeting_num" value="${num}">
 						
 						<fieldset>
 							<div class="form-group">
 								<label for="" class="col-lg-2 control-label">아이디</label>
 								<div class="col-lg-10">
-									<h5>${sessionScope.mem_id}</h5>
+									<h5>받아온 아이디값</h5>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-lg-2 control-label">제목</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="title" id="subject" placeholder="">
+									<input type="text" class="form-control" name="title" id="subject" placeholder="" value="${dto.greeting_title}">
 								</div>
 								
 							</div>
@@ -118,27 +118,25 @@ li {
 							<div class="form-group">
 								<label for="textArea" class="col-lg-2 control-label">내용</label>
 								<div class="col-lg-10">
-									<textarea class="form-control" name="content" rows="15" id="textArea"></textarea>
+									<textarea class="form-control" name="content" rows="15" id="textArea">${dto.greeting_content}</textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
-									<input type="submit" class="btn btn-primary" value="글작성">
-									<button type="reset" class="btn btn-default">작성취소</button>
+									<input type="submit" class="btn btn-primary" value="수정">
+									<input class="btn btn-default" type="button" value="목록보기"
+				  				   onclick="window.location='moim_greeting_board?=${pageNum}'">
 								</div>
+								
 							</div>
 						</fieldset>
-					
-					
 					</form>
-					
 				<!-- 폼 태그 종료 -->
-					
 				</div>
-	
 			</div>
 		</div>
 	</div>
-<!-- END PHOTO BLOCK -->
+	<!-- END PHOTO BLOCK -->
 </div>
+
 <%@ include file="../../etc/footer.jsp"%>

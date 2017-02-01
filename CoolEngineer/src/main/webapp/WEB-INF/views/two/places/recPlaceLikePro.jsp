@@ -3,17 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <html>
 <body>
-	<c:if test="${cnt == 0}">
+	<c:if test="${cnt == -1}">
 		<script type="text/javascript">
-			alert("장소 정보를 수정하지 못 했습니다.");
+			alert("이미 '좋아요'를 눌렀습니다.");
 			history.back();
 		</script>
 	</c:if>
 	
-	<c:if test="${cnt != 0}">
+	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
-			alert("장소 정보가 수정되었습니다.");
-			window.location='placeContentForm?place_num=' + ${place_num};
+			alert("로그인해주세요.");
+			history.back();
+		</script>
+	</c:if>
+	
+	<c:if test="${cnt == 1}">
+		<script type="text/javascript">
+			alert("'좋아요'를 누르셨습니다.");
+			window.location='recPlaceContentForm?recpla_num=${recpla_num}';
 		</script>
 	</c:if>
 </body>

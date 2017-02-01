@@ -299,7 +299,7 @@ li {
 	<!-- END NOTICE BLOCK -->
 
 	<!-- START PHOTO BLOCK -->
-	<div class="col-md-56" style="margin-top:30px; margin-bottom:30px; margin-left:20%; height:800px;">
+	<div class="col-md-56" style="margin-top:30px; margin-bottom:30px; margin-left:20%; height:820px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">

@@ -10,14 +10,14 @@
 </head>
 <body>
 
-<c:if test="${cnt == 0}">
+<c:if test="${cnt != 1}">
 	<script type="text/javascript">
-		alert("모임개설에 실패하였습니다. \n 잠시후 다시 시도하세요!");
+		alert("로그인 후 이용가능합니다.!");
 		history.back();
 	</script>
 </c:if>
 
-<c:if test="${cnt != 0}">
+<c:if test="${cnt == 1}">
 	<script type="text/javascript">
 		alert("모임개설을 축하합니다!");
 		window.location = 'category_hobby';

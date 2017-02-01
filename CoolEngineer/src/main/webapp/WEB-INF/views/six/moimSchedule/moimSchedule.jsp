@@ -92,7 +92,7 @@ img {
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
 	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${dto.group_name}</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
 	<li class="active">모임 일정</li>
 </ul>
 <!-- END BREADCRUMB -->
@@ -118,7 +118,7 @@ img {
 						style="width: 97%; height: 260px; margin-top: 0px; /* border-bottom:3px solid #D5D5D5; border-top:3px solid #D5D5D5; border-left:3px solid #D5D5D5; border-right:3px solid #D5D5D5; */ margin: 10px; margin-top: 20px">
 						<div style="height: 100%;">
 							<img
-								src="/moyeo/resources/resource/assets/images/ds/moimMain.jpg"
+								src="${main_pic_pathB}/${main_pic_nameB}"
 								width="55%" height="240px" style="float: left;">
 							<div style="width: 40%; height: 200px; float: left;"><br>${dto.group_intro}</div>
 						
@@ -152,7 +152,7 @@ img {
 						style="height: 10px;">
 
 						<div class="chart-hodler"
-							style="width: 950px; height: 480px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 65px">
+							style="width: 860px; height: 480px; margin: 10px; margin-top: 65px">
 							<c:if test="${cnt > 0}">
 
 								<c:forEach var="dto" items="${dtos}" begin="0" end="1">
@@ -163,7 +163,7 @@ img {
 
 
 									<div class="chart-holder"
-										style="width: 750px; height: 180px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
+										style="width: 680px; height: 180px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
 										<div style="width: 25%; height: 100%; float: left">
 											<div style="width: 100%; height: 100%; magin: 5px 5px;">
 												<form name="left" style="height: 100%;">
@@ -190,13 +190,13 @@ img {
 											</p>
 											<p
 												style="text-align: left; margin-left: 20px; font-size: 20px;">
-												<font color="#1d1f21">인원 :</font> / ${dto.meeting_pernum}
+												<font color="#1d1f21">목표인원 :</font> ${dto.meeting_pernum}
 											</p>
 										</div>
 
 										<input type="button" value="상세보기"
-											style="width: 100px; height: 40px; font-size: 13px; position: absolute; left: 690px; margin-top: 15px;"
-											onclick="window.open('moimScheduleContents?meeting_num='+${dto.meeting_num},'', 'menubar=no, toolbar=no, width=700, height=450, left=400,top=100')"><br>
+											style="width: 100px; height: 40px; font-size: 13px; position: absolute; left: 610px; margin-top: 15px;"
+											onclick="window.open('moimScheduleContents?meeting_num='+${dto.meeting_num},'', 'menubar=no, toolbar=no, width=950, height=450, left=300, top=100')"><br>
 										
 									</div>
 								</c:forEach>
