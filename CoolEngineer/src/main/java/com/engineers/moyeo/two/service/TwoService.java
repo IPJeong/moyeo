@@ -8,6 +8,10 @@ public interface TwoService {
 	public String suggestionContentForm(Model model);
 	public String suggestionCheckPro(Model model);
 	
+	public String placeMainLoc(Model model);
+	public String placeMainLocSearch(Model model);
+	public String placeMainRecpla(Model model);
+	public String placeMainRecplaSearch(Model model);
 	public String placeList(Model model);
 	public String placeContentForm(Model model);
 	public String placeInputPro(Model model);
@@ -23,4 +27,5 @@ public interface TwoService {
 	public String recPlaceModifyPro(Model model);
 	public String plusPlaceLike(Model model);
 	public String minusPlaceLike(Model model);
+
 }

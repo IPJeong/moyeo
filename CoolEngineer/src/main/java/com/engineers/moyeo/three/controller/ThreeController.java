@@ -5,8 +5,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.three.service.ThreeService;
 
 
@@ -58,7 +60,7 @@ public class ThreeController {
 	}
 	
 	@RequestMapping("/faqInsert") //FAQ입력 처리
-	public String faqInput(HttpServletRequest req, Model model) {
+	public String faqInsert(HttpServletRequest req, Model model) {
 		model.addAttribute("req", req);
 		String viewPage = threeService.faqInsert(model);
 		System.out.println("faqInsert()");
@@ -110,7 +112,7 @@ public class ThreeController {
 		return viewPage;
 	}
 	
-	@RequestMapping("/faqDelete") //카테고리 삭제
+	@RequestMapping("/faqDelete") //FAQ 삭제
 	public String faqDelete(HttpServletRequest req, Model model) {
 		model.addAttribute("req", req);
 		String viewPage = threeService.faqDelete(model);
@@ -119,11 +121,24 @@ public class ThreeController {
 		return viewPage;
 	}
 	
-	@RequestMapping("/ing_event") 
+	@RequestMapping("/ing_event") //이벤트 페이지
 	public String ing_event(HttpServletRequest req, Model model) {		
+		model.addAttribute("req", req);
+		String viewPage = threeService.ing_event(model);
 		System.out.println("ing_event()");
 		
-		return "three/event/ing_event";
+		return viewPage;
+	}
+	
+	@RequestMapping("/eventInsert") //이벤트 입력
+	public String eventInsert(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		model.addAttribute("fileForm", fileForm);
+		String viewPage = threeService.eventInsert(model);
+		System.out.println("eventInsert()");
+		
+		return viewPage;
 	}
 	
 }

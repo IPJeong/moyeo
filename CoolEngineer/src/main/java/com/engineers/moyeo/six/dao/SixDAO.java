@@ -3,10 +3,13 @@ package com.engineers.moyeo.six.dao;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
+import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.three.dto.ThreeDTO;
 
 
 public interface SixDAO {
@@ -75,8 +78,14 @@ public interface SixDAO {
 
 	
 	
+	//모임-개설번호 받아오기
+	public int moimOpenNum();
+	
 	//모임-개설
 	public int moimOpenPro(MoimOpenDTO dto);
+	
+	//모임-모임장등록
+	public void moimLeaderRegister(MyGroupDTO dto);
 
 	
 	
@@ -271,7 +280,15 @@ public interface SixDAO {
 	//모임-소개사진 등록
 	public int moimAddImageProB(MainPictureDTO dto);
 	
-	//모임-대표사진 불러오기
+	//모임-소개사진 개수 구하기
+	public int moimImageCountB(int group_num);
+	
+	//모임-소개사진 불러오기
 	public ArrayList<MainPictureDTO> moimImageViewB(int group_num);
 	
+	//모임-출석체크 중복체크
+	public int checkPresentCount(CheckPresentDTO dto);
+	
+	//모임-출석체크 입력
+	public void checkPresent(CheckPresentDTO dto);
 }

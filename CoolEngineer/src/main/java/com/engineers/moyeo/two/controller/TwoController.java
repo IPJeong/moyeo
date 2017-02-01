@@ -68,16 +68,34 @@ public class TwoController {
 	}
 	
 	//
-	@RequestMapping("/placeMainRecpla")
-	public String placeMainRecpla(HttpServletRequest req, Model model) {
-		viewPage = "two/places/placeMainRecpla";
+	@RequestMapping("/placeMainLoc")
+	public String placeMainLoc(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
+		viewPage = twoService.placeMainLoc(model);
 		return viewPage;
 	}
 	
 	//
-	@RequestMapping("/placeMainLoc")
-	public String placeMainLoc(HttpServletRequest req, Model model) {
-		viewPage = "two/places/placeMainLoc";
+	@RequestMapping("/placeMainLocSearch")
+	public String placeMainLocSearch(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
+		viewPage = twoService.placeMainLocSearch(model);
+		return viewPage;
+	}
+	
+	//
+	@RequestMapping("/placeMainRecpla")
+	public String placeMainRecpla(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
+		viewPage = twoService.placeMainRecpla(model);
+		return viewPage;
+	}
+	
+	//
+	@RequestMapping("/placeMainRecplaSearch")
+	public String placeMainRecplaSearch(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
+		viewPage = twoService.placeMainRecplaSearch(model);
 		return viewPage;
 	}
 	
@@ -183,6 +201,22 @@ public class TwoController {
 	public String recPlaceModifyPro(HttpServletRequest req, Model model) {
 		model.addAttribute("req", req);
 		viewPage = twoService.recPlaceModifyPro(model);
+		return viewPage;
+	}
+	
+	//
+	@RequestMapping("/plusPlaceLike")
+	public String plusPlaceLike(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
+		viewPage = twoService.plusPlaceLike(model);
+		return viewPage;
+	}
+	
+	//
+	@RequestMapping("/minusPlaceLike")
+	public String minusPlaceLike(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
+		viewPage = twoService.minusPlaceLike(model);
 		return viewPage;
 	}
 }

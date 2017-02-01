@@ -117,9 +117,19 @@
  	
  	
  	
- 	<!-- 모임등록 -->
+ 	<!-- 모임개설번호 받아오기 -->
+ 	<select id="moimOpenNum" resultType="int">
+ 		SELECT group_list_seq.nextval FROM dual
+ 	</select>
+ 	
+ 	<!-- 모임개설 -->
  	<insert id="moimOpenPro" parameterType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		INSERT INTO group_list VALUES(group_list_seq.NEXTVAL, #{group_name}, #{group_mem_cnt}, #{group_inte1}, #{group_inte2}, #{group_location}, #{group_intro})
+ 		INSERT INTO group_list VALUES(#{group_num}, #{group_name}, #{group_mem_cnt}, #{group_inte1}, #{group_inte2}, #{group_location}, #{group_intro})
+ 	</insert>
+ 	
+ 	<!-- 모임장등록 -->
+ 	<insert id="moimLeaderRegister" parameterType="com.engineers.moyeo.six.dto.MyGroupDTO">
+ 		INSERT INTO my_group VALUES(my_group_seq.NEXTVAL, 1, #{group_num}, #{mem_id})
  	</insert>
  	
  	
@@ -425,6 +435,11 @@
  		INSERT INTO main_picture VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
  	</insert>
  	
+ 	<!-- 모임-대표사진 개수 구하기 -->
+ 	<select id="moimImageCount" parameterType="int" resultType="int">
+ 		SELECT COUNT(*) FROM main_picture WHERE main_pic_path = '/groupImgPath' AND group_num = #{group_num}
+ 	</select>
+ 	
  	<!-- 모임-대표사진 불러오기 -->
  	<select id="moimImageView" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
  		select * from main_picture WHERE main_pic_path = '/groupImgPath' AND group_num = #{group_num} ORDER BY main_pic_num DESC
@@ -435,9 +450,24 @@
  		INSERT INTO main_picture VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
  	</insert>
  	
+ 	<!-- 모임-소개사진 개수 구하기 -->
+ 	<select id="moimImageCountB" parameterType="int" resultType="int">
+ 		SELECT COUNT(*) FROM main_picture WHERE main_pic_path = '/groupImgPath-' AND group_num = #{group_num}
+ 	</select>
+ 	
  	<!-- 모임-소개사진 불러오기 -->
  	<select id="moimImageViewB" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		select * from main_picture WHERE main_pic_path = '/groupImgPath-' AND group_num = #{group_num} ORDER BY main_pic_num DESC
+ 		SELECT * FROM main_picture WHERE main_pic_path = '/groupImgPath-' AND group_num = #{group_num} ORDER BY main_pic_num DESC
  	</select>
+ 	
+ 	<!-- 모임-출석체크 중복체크 -->
+ 	<select id="checkPresentCount" parameterType="com.engineers.moyeo.six.dto.CheckPresentDTO" resultType="int">
+ 		SELECT COUNT(*) FROM check_present WHERE present_date = #{present_date} AND mem_id = #{mem_id} AND group_num = #{group_num}
+ 	</select>
+ 	
+ 	<!-- 모임-출석체크 입력 -->
+ 	<insert id="checkPresent" parameterType="com.engineers.moyeo.six.dto.CheckPresentDTO">
+ 		INSERT INTO check_present VALUES(check_present_seq.NEXTVAL, #{present_date}, #{mem_id}, #{group_num})
+ 	</insert>
  	
 </mapper>

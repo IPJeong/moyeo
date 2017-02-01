@@ -8,6 +8,7 @@
 
 -->
 <mapper namespace="com.engineers.moyeo.three.dao.ThreeDAO">  <!-- 인터페이스 -->
+<!-- FAQ -->
     <select id="getCount" resultType="int">
 		SELECT count(*) FROM faq_category
 	</select>
@@ -77,5 +78,49 @@
 	<delete id="deleteFaq" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		DELETE FROM faq WHERE faq_num = #{faqNum}
 	</delete>
+<!-- FAQ -->
+<!-- 이벤트 -->
 
+	<!-- 이벤트 입력 -->
+	<insert id="eventInsert" parameterType="com.engineers.moyeo.three.dto.EventDTO"> 
+		INSERT INTO event_list
+		VALUES (event_list_seq.NEXTVAL, #{eventTitle}, #{eventCon}, #{regDate}, #{startDate}, #{endDate}, #{ing}, #{notiDate}, #{adminId}, #{picPath}, #{picName})
+	</insert>
+	<!-- 이벤트 번호 가져오기 -->
+	<select id="getEventNum" parameterType="java.sql.Timestamp" resultType="int">
+		SELECT event_num as eventNum FROM event_list WHERE reg_date = #{regDate}
+	</select>
+	<!-- 썸네일 입력 -->
+	<update id="eventImgInsert" parameterType="com.engineers.moyeo.three.dto.EventDTO">
+		UPDATE event_list SET pic_path=#{picPath}, pic_name=#{picName} WHERE event_num = #{eventNum}
+	</update>
+	<!-- 이벤트 이미지 등록 -->
+	<insert id="eventImgsInsert" parameterType="com.engineers.moyeo.three.dto.EventDTO"> 
+		INSERT INTO event_pic
+		VALUES (event_pic_seq.NEXTVAL, #{picPath2}, #{picName2}, #{eventNum})
+	</insert>
+	<!-- 진행중인 이벤트 개수 -->
+	<select id="getEventCount" resultType="int">
+		SELECT count(*) FROM event_list
+	</select>
+	<!-- 이벤트 리스트 -->
+	<select id="getEventList" parameterType="map" resultType="com.engineers.moyeo.three.dto.EventDTO">
+		SELECT * 
+			FROM (SELECT event_num as eventNum, event_title as eventTitle, event_content as eventCon, reg_date as regDate, start_date as startDate, end_date as endDate, ing, noti_date as notiDate, pic_path as picPath, pic_name as picName, MANAGER_ID as adminId, rownum rnum
+		     		FROM (SELECT * FROM event_list
+		       	   	 	   ORDER BY event_num DESC
+		           	 	 )
+			  	 )
+			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}			
+	</select>
+	<!-- 이벤트 이미지 가져오기 -->
+	<select id="getEventPic" parameterType="map" resultType="com.engineers.moyeo.three.dto.EventDTO">
+		SELECT * 
+			FROM (SELECT event_num as eventNum2, evepic_path as picPath2, evepic_name as picName2
+		     		FROM (SELECT * FROM event_pic
+		     				ORDER BY event_num DESC
+		     		)
+			  	 )						
+	</select>
+<!-- 이벤트 -->
 </mapper>

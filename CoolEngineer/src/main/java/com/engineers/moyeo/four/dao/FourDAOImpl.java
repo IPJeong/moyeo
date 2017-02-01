@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
+import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 
 @Repository
@@ -84,31 +85,86 @@ public class FourDAOImpl implements FourDAO{
 		cnt = dao.delete(num);
 		return cnt;
 	}
-	
+	//가입인사 글 세기
 	@Override
 	public int greetingGetCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.greetingGetCount();
+		return cnt;
 	}
+	//가입인사 글 목록보여주기
 	@Override
 	public ArrayList<GreetingBoardDTO> greetingGetArticles(Map<String, Integer> daoMap) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<GreetingBoardDTO> dtos = null;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		dtos = dao.greetingGetArticles(daoMap);
+		return dtos;
 	}
+	
 	@Override
 	public int greetingInsert(GreetingBoardDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.greetingInsert(dto);
+		return cnt;
 	}
+	
+	@Override
+	public GreetingBoardDTO greetingGetArticle(int greeting_num) {
+		GreetingBoardDTO dto = null;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		dto = dao.greetingGetArticle(greeting_num);
+		return dto;
+	}
+	
+
+	@Override
+	public void greetingAddReadCnt(int num) {
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		dao.greetingAddReadCnt(num);
+	}
+	
 	@Override
 	public int greetingUpdate(GreetingBoardDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.greetingUpdate(dto);
+		return cnt;
 	}
 	@Override
 	public int greetingDelete(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.greetingDelete(num);
+		return cnt;
 	}
+	@Override
+	public int repleInsert(GreetingReplyDTO dto) {
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.repleInsert(dto);
+		return cnt;
 
+		
+	}
+	@Override
+	public ArrayList<GreetingReplyDTO> replegGetArticles(int greeting_num) {
+		ArrayList<GreetingReplyDTO> dtos = null;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		dtos = dao.replegGetArticles(greeting_num);
+		return dtos;
+	}
+	@Override
+	public int repledelete(int num) {
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.repledelete(num);
+		return cnt;
+	}
+	@Override
+	public int getRepleyCnt(int num) {
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		return dao.getRepleyCnt(num);
+	}
 }

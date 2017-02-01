@@ -72,4 +72,35 @@
     <select id="getArtReply" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaReplyDTO">
     	SELECT * FROM qna_reply WHERE qboard_num = #{qboard_num}
     </select>
+    
+    <select id="getMoimArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MoimReportDTO">
+    	SELECT * FROM group_list WHERE group_num = #{group_num}
+    </select>
+    
+    <insert id="MoimReportInsert" parameterType="com.engineers.moyeo.one.dto.MoimReportDTO">
+    	INSERT INTO report_group(report_num, report_title, report_content, report_date, sol_content, sol_status, sol_date, manager_id, pic_path, pic_name, mem_id, group_num)
+    				VALUES(report_group_seq.NEXTVAL, #{report_title}, #{report_content}, #{report_date}, null , null, null, null, #{pic_path}, #{pic_name}, #{mem_id}, #{group_num}) 
+    </insert>
+    
+    <!-- 모임신고 글갯수 구하기 -->
+    <select id="getReportCount" resultType="int">
+    	SELECT count(*) FROM report_group
+    </select>
+    
+    <select id="getReportArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MoimReportDTO">
+    	SELECT * 
+    			FROM (SELECT report_num, report_title, report_content, report_date, sol_content, sol_status, sol_date, manager_id, pic_path, pic_name, mem_id, group_num, rownum rnum
+    					FROM (SELECT * FROM report_group
+    						  ORDER BY report_num DESC)
+    				  )  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+    </select>
+    
+    <select id="getMoimContentArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MoimReportDTO">
+    	SELECT * FROM report_group WHERE report_num = #{report_num}
+    </select>
+    
+    <update id="updateReport" parameterType="com.engineers.moyeo.one.dto.MoimReportDTO">
+    	UPDATE report_group SET sol_content=#{sol_content}, sol_status='YES', sol_date=#{sol_date}, manager_id=#{manager_id} WHERE report_num=#{report_num} 
+    </update>
 </mapper>

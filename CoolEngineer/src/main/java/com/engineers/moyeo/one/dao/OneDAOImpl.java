@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
 
@@ -19,21 +20,21 @@ public class OneDAOImpl implements OneDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	DataSource dataSource;	// 커넥션 객체를 보관
+	DataSource dataSource;	// 而ㅻ꽖�뀡 媛앹껜瑜� 蹂닿�
 
-	// 글개수 구하기
+	// 湲�媛쒖닔 援ы븯湲�
 	@Override
 	public int getCount() {
 		int cnt = 0;
 		
-		// 인터페이스명 dao = this.sqlSession.getMapper("인터페이스명.class");
-		// dao.id명
+		// �씤�꽣�럹�씠�뒪紐� dao = this.sqlSession.getMapper("�씤�꽣�럹�씠�뒪紐�.class");
+		// dao.id紐�
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
 		cnt = dao.getCount();
 		return cnt;
 	}
 
-	// 게시글 목록조회
+	// 寃뚯떆湲� 紐⑸줉議고쉶
 	@Override
 	public ArrayList<QnaBoardDTO> getArticles(Map<String, Integer> daoMap) {
 		ArrayList<QnaBoardDTO> dtos = null;
@@ -149,5 +150,58 @@ public class OneDAOImpl implements OneDAO{
 		return dto;
 	}
 
+	@Override
+	public MoimReportDTO getMoimArticle(int group_num) {
+		MoimReportDTO dto = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dto = dao.getMoimArticle(group_num);
+		
+		return dto;
+	}
 
+	@Override
+	public int MoimReportInsert(MoimReportDTO dto) {
+		int count = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		
+		count = dao.MoimReportInsert(dto);
+		
+		return count;
+	}
+
+	@Override
+	public int getReportCount() {
+		int cnt = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.getReportCount();
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<MoimReportDTO> getReportArticles(Map<String, Integer> daoMap) {
+		ArrayList<MoimReportDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getReportArticles(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public MoimReportDTO getMoimContentArticle(int report_num) {
+		MoimReportDTO dto = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dto = dao.getMoimContentArticle(report_num);
+		
+		return dto;
+	}
+
+	@Override
+	public int updateReport(MoimReportDTO dto) {
+		int cnt = 0;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.updateReport(dto);
+		
+		return cnt;
+	}
 }

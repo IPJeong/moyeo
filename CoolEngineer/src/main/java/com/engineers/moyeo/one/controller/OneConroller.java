@@ -1,18 +1,23 @@
 package com.engineers.moyeo.one.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.one.service.OneReportService;
 import com.engineers.moyeo.one.service.OneService;
 
 /**
  * 
- * @author 양우진
+ * @author �뼇�슦吏�
  *
  */
 
@@ -32,15 +37,14 @@ public class OneConroller {
 	// 고객지원 홈
 	@RequestMapping("/cusSupMain")
 	public String cusSupMain() {
-		System.out.println("고객지원 홈");
 		viewPage = "one/qna/cusSupMain";
 		return viewPage;
 	}
 	
-	// Q&A 홈
+	// Q&A 게시판 홈
 	@RequestMapping("/qna")
 	public String qna(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 홈");
+		System.out.println("Q&A �솃");
 		
 		req.getSession().setAttribute("authority", "manager");
 		
@@ -51,11 +55,10 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 질문 입력
+	// Q&A에서 질문 입력하는 폼
 	@RequestMapping("/qnaWrite")
 	public String qnaWrite(HttpServletRequest req, Model model) {
 		req.getSession().setAttribute("mem_id", "guest");
-		System.out.println("Q&A 질문 입력");
 		
 		model.addAttribute("req", req);
 		
@@ -64,10 +67,10 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 질문 입력 확인
+	// Q&A 질문 입력 등록요청
 	@RequestMapping("/qnaWritePro")
 	public String qnaWritePro(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 질문 입력 확인");
+		System.out.println("Q&A 吏덈Ц �엯�젰 �솗�씤");
 		
 		model.addAttribute("req", req);
 		
@@ -75,10 +78,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 게시판 상세보기
+	// Q&A 질문 세부내용
 	@RequestMapping("/qnaContentForm")
 	public String qnaContentForm(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 게시글 내용 확인");
 		req.getSession().setAttribute("mem_id", "guest");
 		
 		model.addAttribute("req", req);
@@ -87,10 +89,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 질문내용 수정
+	// Q&A 질문 수정 폼
 	@RequestMapping("/qnaModifyForm")
 	public String qnaModifyForm(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 게시글 내용 수정");
 		
 		model.addAttribute("req", req);
 		
@@ -99,10 +100,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 질문내용 수정
+	// Q&A 질문 수정요청
 	@RequestMapping("/qnaModifyPro")
 	public String qnaModifyPro(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 게시글 내용 수정 확정");
 		
 		model.addAttribute("req", req);
 		
@@ -111,10 +111,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 질문내용 삭제
+	// Q&A 질문 삭제요청
 	@RequestMapping("/qnaDeletePro")
 	public String qnaDeletePro(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 게시글 내용 삭제");
 		
 		model.addAttribute("req", req);
 		
@@ -123,9 +122,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
+	// Q&A 관리자가 질문 삭제
 	@RequestMapping("/qnaAnsDelPro")
 	public String qnaAnsDelPro(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 게시글 답변내용 삭제");
 		
 		model.addAttribute("req", req);
 		
@@ -134,10 +133,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 게시글 답변폼
+	// Q&A 관리자가 질문에 대한 답변하는 폼
 	@RequestMapping("/qnaAnswerForm")
 	public String qnaAnswerForm(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 게시글 답변 등록폼(관리자)");
 		
 		req.getSession().setAttribute("manager_id", "admin");
 		
@@ -148,10 +146,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 게시글 답변 확정 페이지
+	// Q&A 관리자가 답변 등록요청
 	@RequestMapping("/qnaAnswerPro")
 	public String qnaAnswerPro(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 게시글 답변 확정(관리자)");
 		
 		req.getSession().setAttribute("manager_id", "admin");
 		
@@ -162,10 +159,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// 모임신고 페이지
+	// 모임메인 화면
 	@RequestMapping("/moimMain")
 	public String moimMain(HttpServletRequest req, Model model) {
-		System.out.println("모임메인 페이지");
 		
 		model.addAttribute("req", req);
 		
@@ -173,10 +169,9 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// 모임신고 페이지
+	// 모임신고 폼
 	@RequestMapping("/moimReportMain")
 	public String moimReport(HttpServletRequest req, Model model) {
-		System.out.println("모임신고 페이지");
 		
 		req.getSession().setAttribute("group_num", "1");
 		req.getSession().setAttribute("mem_id", "member2");
@@ -187,15 +182,51 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// 모임신고 작성 후 확인
-	@RequestMapping("/moimReportPro")
-	public String moimReportPro(HttpServletRequest req, Model model) {
-		System.out.println("모임신고 작성 후 alert");
+	// 모임신고 등록요청
+	@RequestMapping(value="/moimReportPro", method=RequestMethod.POST)
+	public String moimReportPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
+		System.out.println("모임신고 등록요청");
+		
+		model.addAttribute("req", req);
+		model.addAttribute("fileForm", fileForm);
+		
+		viewPage = oneReportService.moimReportPro(model);
+		
+		return viewPage;
+	}
+	
+	// 모임신고 관리자확인
+	@RequestMapping("/moimReportHandleMain")
+	public String moimReportHandleMain(HttpServletRequest req, Model model) {
 		
 		model.addAttribute("req", req);
 		
-		viewPage = oneReportService.moimReportPro(model);
+		viewPage = oneReportService.moimReportHandleMain(model);
 		return viewPage;
 	}
-
+	
+	// 모임신고 세부사항 관리자 확인
+	@RequestMapping("/reportContentForm")
+	public String reportContentForm(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		req.getSession().setAttribute("manager_id", "admin");
+		
+		viewPage = oneReportService.reportContentForm(model);
+		return viewPage;
+	}
+	
+	// 모임신고 관리자 답변
+	@RequestMapping("/reportAnswerPro")
+	public String reportAnswerPro(HttpServletRequest req, Model model) {
+		
+		req.getSession().setAttribute("manager_id", "admin");
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneReportService.reportAnswerPro(model);
+		
+		return viewPage;
+	}
+	
 }

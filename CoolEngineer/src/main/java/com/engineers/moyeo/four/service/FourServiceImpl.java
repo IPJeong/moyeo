@@ -12,12 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.engineers.moyeo.four.dao.FourDAO;
-
+import com.engineers.moyeo.four.dto.GreetingBoardDTO;
+import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
-import com.engineers.moyeo.main.common.TextMessage;
 
-
-@Service()
+@Service
 public class FourServiceImpl implements FourService{
 
 	@Autowired
@@ -311,7 +310,7 @@ public class FourServiceImpl implements FourService{
 		return "/four/notice/moim_notice_deletePro";
 	}
 	
-	//가입인사 게시판
+	//가입인사 게시판 - 글개수, 글목록 메소드 처리 
 	@Override
 	public String greetinglistExecute(Model model) {
 		
@@ -337,7 +336,7 @@ public class FourServiceImpl implements FourService{
 		
 		//1. db메소드 실행
 		//글 개수 구하기
-		cnt = fourDao.getCount();
+		cnt = fourDao.greetingGetCount();
 		
 		System.out.println("cnt: " + cnt);
 		
@@ -365,7 +364,7 @@ public class FourServiceImpl implements FourService{
 			daoMap.put("start", start);
 			daoMap.put("end", end);
 			
-			ArrayList<GroupNoticeDTO> dtos = fourDao.getArticles(daoMap);
+			ArrayList<GreetingBoardDTO> dtos = fourDao.greetingGetArticles(daoMap);
 			System.out.println("dtos: " + dtos);
 			
 			model.addAttribute("dtos", dtos);
@@ -398,16 +397,236 @@ public class FourServiceImpl implements FourService{
 	@Override
 	public String greetintwriteExecute(Model model) {
 		
+		Map<String, Object> map = model.asMap();
+		
+		//Map에서 가져온 값을 req변수에 담는다.
+		HttpServletRequest req= (HttpServletRequest)map.get("req");
+		
+		
 		return "/four/greeting_board/moim_greeting_write_form";
-	}
-
-	@Override
-	public String greetingWriteproExecute(Model model) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	
 
+	@Override
+	public String greetintwriteProExecute(Model model) {
+		//Model로부터 맵가져오는 것. 맵의 키를 이용하여 req의 값을 가져오기 위하여.
+		Map<String, Object> map = model.asMap();
+		
+		//Map에서 가져온 값을 req변수에 담는다.
+		HttpServletRequest req= (HttpServletRequest)map.get("req");
+		
+		//1. 작은 바구니(=DTO(data transfer object)를 만든다.
+		
+		GreetingBoardDTO dto = new GreetingBoardDTO();
+		//2. 입력받은 내용을 작은 바구니에 담는다.
+		
+		//not null인건 모두 데이터 셋팅
+		dto.setGreeting_title(req.getParameter("title"));
+	    dto.setGreeting_content(req.getParameter("content"));
+	    dto.setGreeting_date(new Timestamp(System.currentTimeMillis()));
+	    dto.setMem_id("guest");
+	    dto.setGroup_num(1);
+	    
+		
+		//3. dao객체 생성(싱긑톤, 다형성 적용)
+		//BoardDAO dao = BoardDAOImpl.getInstance();
+		
+		//4.insert
+		int cnt = fourDao.greetingInsert(dto);
+		
+		model.addAttribute("cnt", cnt);
+		System.out.println("insert cnt:" + cnt);
 
+		return "/four/greeting_board/moim_greeting_writepro";
+	}
+
+	@Override
+	public String greetingContentExecute(Model model) {
+		Map<String, Object> map = model.asMap(); 
+		HttpServletRequest req = (HttpServletRequest) map.get("req");
+		
+		
+		int num = Integer.parseInt(req.getParameter("num"));
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		int number = Integer.parseInt(req.getParameter("number"));
+		
+		//fourDao.greetingGetArticle(number);
+		GreetingBoardDTO dto = fourDao.greetingGetArticle(num);
+		
+		int number2 = fourDao.getRepleyCnt(num);
+		ArrayList<GreetingReplyDTO> dtos = fourDao.replegGetArticles(num);
+		
+		System.out.println("dto: " + dto);
+		//System.out.println("dtos: " + dtos);
+		fourDao.greetingAddReadCnt(num);
+		
+		model.addAttribute("num", num);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("number", number);
+		model.addAttribute("dto", dto);
+		// 댓글개수 카운트
+		model.addAttribute("number2", number2);
+		
+		model.addAttribute("dtos", dtos);
+		
+		return "/four/greeting_board/moim_greeting_contentform";
+	}
+
+	@Override
+	public String greetingDeleteExecute(Model model) {
+		
+		Map<String, Object> map = model.asMap(); 
+		HttpServletRequest req = (HttpServletRequest) map.get("req");
+		
+		int num = Integer.parseInt(req.getParameter("num"));
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
+		model.addAttribute("num", num);
+		model.addAttribute("pageNum", pageNum);
+		
+		return "/four/greeting_board/moim_greeting_delete";
+	}
+
+	@Override
+	public String greetingDeleteProExecute(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req= (HttpServletRequest)map.get("req");
+		
+		int num = Integer.parseInt(req.getParameter("num")); 
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
+		Map<String, Object> daoMap= new HashMap<String, Object>();
+		daoMap.put("num", num);
+		
+		int deleteCnt = fourDao.greetingDelete(num);
+				
+		//테스트
+		System.out.println("deleteCnt :" + deleteCnt);
+		
+		
+		req.setAttribute("deleteCnt", deleteCnt);
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		return "/four/greeting_board/moim_greeting_deletePro";
+	}
+
+	@Override
+	public String greetingModifyViewExecute(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req= (HttpServletRequest)map.get("req");
+		
+		int num = Integer.parseInt(req.getParameter("num"));
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("num", num);
+		
+		
+		GreetingBoardDTO dto = fourDao.greetingGetArticle(num);
+		req.setAttribute("dto", dto);
+	
+		req.setAttribute("num", num);
+		req.setAttribute("pageNum", pageNum);
+		
+		return "/four/greeting_board/moim_greeting_modifyView";
+	}
+
+	@Override
+	public String greetingModifyProExecute(Model model) {
+		//Model로부터 맵가져오는 것. 맵의 키를 이용하여 req의 값을 가져오기 위하여.
+	    Map<String, Object> map = model.asMap();
+	    
+	    //Map에서 가져온 값을 req변수에 담는다.
+	    HttpServletRequest req= (HttpServletRequest)map.get("req");
+	     
+	    int num = Integer.parseInt(req.getParameter("greeting_num"));
+		System.out.println(req.getParameter("pageNum"));
+	    
+	    int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
+	    
+	    
+	    GreetingBoardDTO dto = new GreetingBoardDTO();
+	    //2. 입력받은 내용을 작은 바구니에 담는다.
+	  
+	    
+	    
+	    //not null인건 모두 데이터 셋팅
+	    dto.setGreeting_num(num);
+	    dto.setGreeting_title(req.getParameter("title"));
+	    dto.setGreeting_content(req.getParameter("content"));
+	    dto.setGreeting_date(new Timestamp(System.currentTimeMillis()));
+	    dto.setMem_id("guest");
+	    dto.setGroup_num(1);
+	    
+	    
+	    
+	    //3. dao객체 생성(싱긑톤, 다형성 적용)
+	    //BoardDAO dao = BoardDAOImpl.getInstance();
+	    
+	    //4.insert
+	    
+	    int cnt = fourDao.greetingUpdate(dto);
+	    model.addAttribute("pageNum", pageNum);
+	    model.addAttribute("cnt", cnt);
+	
+		
+		return "/four/greeting_board/moim_greeting_modifypro";
+	}
+
+	@Override
+	public String greeting_repleExecute(Model model) {
+		Map<String, Object> map = model.asMap();
+	    HttpServletRequest req= (HttpServletRequest)map.get("req");
+		
+	   System.out.println("1번" + req.getParameter("replecontent"));
+	   
+	    int num = Integer.parseInt(req.getParameter("num"));
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		int number = Integer.parseInt(req.getParameter("number"));
+		int greeting_num = Integer.parseInt(req.getParameter("greeting_num"));
+		
+		
+		System.out.println("2번" + req.getParameter("replecontent"));
+		
+		GreetingReplyDTO dto = new GreetingReplyDTO();
+		
+		dto.setMem_id((String) req.getSession().getAttribute("mem_id"));
+		dto.setGre_reply_content(req.getParameter("replecontent"));
+		dto.setGre_reply_date(new Timestamp(System.currentTimeMillis()));
+		dto.setGreeting_num(greeting_num);
+		
+		System.out.println(greeting_num);
+		System.out.println("3번" + req.getParameter("replecontent"));
+		
+		//FourDAO dao = FourDAOImpl.getInstance();
+		int cnt = fourDao.repleInsert(dto);
+		System.out.println("cnt: " + cnt);
+		model.addAttribute("cnt", cnt);
+		
+		return "redirect:/four/moim_greeting_contentform?num="+num+"&pageNum="+pageNum+"&number="+number;
+
+	}
+
+	@Override
+	public String repledeleteExecute(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+	    HttpServletRequest req= (HttpServletRequest)map.get("req");
+	   
+	    int num = Integer.parseInt(req.getParameter("num"));
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		int number = Integer.parseInt(req.getParameter("number"));
+		int gre_reply_num = Integer.parseInt(req.getParameter("gre_reply_num"));
+		
+		int cnt = fourDao.repledelete(gre_reply_num);
+		System.out.println("삭제 cnt: " + cnt);
+		
+		return "redirect:/four/moim_greeting_contentform?num="+num+"&pageNum="+pageNum+"&number="+number;
+	}
 }

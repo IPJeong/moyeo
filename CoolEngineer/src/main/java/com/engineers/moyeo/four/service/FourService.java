@@ -1,7 +1,5 @@
 package com.engineers.moyeo.four.service;
 
-
-
 import org.springframework.ui.Model;
 
 public interface FourService {
@@ -36,11 +34,22 @@ public interface FourService {
 	
 	public String greetintwriteExecute(Model model);
 	
-	public String greetingWriteproExecute(Model model);
+	public String greetintwriteProExecute(Model model);
+	
+	public String greetingContentExecute(Model model);
+	
+	public String greetingDeleteExecute(Model model);
+	
+	public String greetingDeleteProExecute(Model model);
+	
+	public String greetingModifyViewExecute(Model model);
+	
+	public String greetingModifyProExecute(Model model);
 	
 	
 	
-	
-	
-	
+	//댓글 등록
+	public String greeting_repleExecute(Model model);
+	//댓글 삭제
+	public String repledeleteExecute(Model model);
 }

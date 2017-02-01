@@ -25,6 +25,7 @@ public interface FiveService {
 	// 모임후기 삭제하기
 	public void deletePost(ModelAndView mav) throws NumberFormatException, NullPointerException;
 	
+	// 모임후기 좋아요 / 좋아요 취소
 	public void likePost(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
 	
 }

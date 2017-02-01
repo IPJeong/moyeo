@@ -20,6 +20,15 @@ public interface TwoDAO {
 	public int getPlaceCount();
 	public ArrayList<Place_infoDTO> getPlaceList(Map<String, Object> daoMap);
 	public ArrayList<Place_picDTO> getPlacePictureList(Map<String, Object> daoMap);
+	public int getPlaceMainLocCount(Map<String, Object> daoMap);
+	public int getPlaceMainRecplaCount(Map<String, Object> daoMap);
+	public ArrayList<Place_infoDTO> getPlaceLocList(Map<String, Object> daoMap);
+	public ArrayList<Place_picDTO> getPlaceLocPictureList(Map<String, Object> daoMap);
+	public ArrayList<Place_infoDTO> getPlaceRecplaList(Map<String, Object> daoMap);
+	public ArrayList<Place_picDTO> getPlaceRecplaPictureList(Map<String, Object> daoMap);
+	public int getPlaceLikeCount();
+	public ArrayList<Place_infoDTO> getPlaceLikeList();
+	public ArrayList<Place_picDTO> getPlaceLikePictureList();
 	public Place_infoDTO readPlace(int place_num);
 	public Place_picDTO readPlacePicture(int place_num);
 	public int inputPlace(Place_infoDTO piDTO);
@@ -31,13 +40,16 @@ public interface TwoDAO {
 	public void modifyPictures(Place_picDTO ppdto);
 	
 	//추천장소&추천장소 좋아요
+	public int getRecPlaceCount(int place_num);
 	public ArrayList<Rec_placeDTO> getRecPlaceList(Map<String, Object> daoMap);
 	public Rec_placeDTO readRecPlace(int recplace_num);
 	public int writeRecPlace(Rec_placeDTO dto);
 	public int deleteRecPlace(Map<String, Object> daoMap);
 	public int modifyRecPlace(Rec_placeDTO dto);
 	public int readPlaceLike(Map<String, Object> daoMap);
+	public int checkMyPlaceLike(Map<String, Object> daoMap);
 	public int plusPlaceLike(Map<String, Object> daoMap);
-	public int minusPlaceLike(Map<String, Object> daoMap);
+	public int checkPlalikeNum(Map<String, Object> daoMap);
+	public int minusPlaceLike(int plalike_num);
 
 }

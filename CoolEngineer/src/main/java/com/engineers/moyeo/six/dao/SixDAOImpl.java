@@ -9,10 +9,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
+import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.three.dao.ThreeDAO;
+import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Repository
 public class SixDAOImpl implements SixDAO{
@@ -231,6 +235,15 @@ public class SixDAOImpl implements SixDAO{
 
 	
 	
+	//모임-개설번호 받아오기
+	@Override
+	public int moimOpenNum() {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int moimNum = dao.moimOpenNum();
+		
+		return moimNum;
+	}
+	
 	//모임-개설
 	@Override
 	public int moimOpenPro(MoimOpenDTO dto) {
@@ -241,6 +254,12 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;
 	}
 
+	//모임-모임장등록
+	@Override
+	public void moimLeaderRegister(MyGroupDTO dto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.moimLeaderRegister(dto);
+	}
 	
 	
 	//카테고리-관심사별(아웃도어/여행)
@@ -764,16 +783,6 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;
 	}
 	
-	//모임-대표사진 불러오기
-	@Override
-	public ArrayList<MainPictureDTO> moimImageView(int group_num) {
-		ArrayList<MainPictureDTO> dtos = null;
-		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		dtos = dao.moimImageView(group_num);
-		
-		return dtos;
-	}
-	
 	//모임-대표사진 개수 구하기
 	@Override
 	public int moimImageCount(int group_num) {
@@ -782,6 +791,16 @@ public class SixDAOImpl implements SixDAO{
 		cnt = dao.moimImageCount(group_num);
 		
 		return cnt;
+	}
+	
+	//모임-대표사진 불러오기
+	@Override
+	public ArrayList<MainPictureDTO> moimImageView(int group_num) {
+		ArrayList<MainPictureDTO> dtos = null;
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dtos = dao.moimImageView(group_num);
+		
+		return dtos;
 	}
 	
 	//모임-소개사진 등록
@@ -794,6 +813,16 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;
 	}
 	
+	//모임-소개사진 개수 구하기
+		public int moimImageCountB(int group_num) {
+			int cnt = 0;
+			SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+			cnt = dao.moimImageCountB(group_num);
+			
+			
+			return cnt;
+		}
+	
 	//모임-소개사진 불러오기
 	@Override
 	public ArrayList<MainPictureDTO> moimImageViewB(int group_num) {
@@ -802,5 +831,21 @@ public class SixDAOImpl implements SixDAO{
 		dtos = dao.moimImageViewB(group_num);
 		
 		return dtos;
+	}
+
+	//모임-출석체크 중복체크
+	@Override
+	public int checkPresentCount(CheckPresentDTO dto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.checkPresentCount(dto);
+	
+		return cnt;
+	}
+	
+	//모임-출석체크 입력
+	@Override
+	public void checkPresent(CheckPresentDTO dto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.checkPresent(dto);
 	}
 }

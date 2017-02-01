@@ -1,7 +1,10 @@
 package com.engineers.moyeo.three.dao;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Map;
 
+import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 public interface ThreeDAO {
@@ -20,5 +23,13 @@ public interface ThreeDAO {
 	public ThreeDTO getInfo(int faqNum); //FAQ 수정폼에 보여지는 정보
 	public ArrayList<ThreeDTO> getCategory(); //카테고리 리스트
 	public ArrayList<ThreeDTO> getQuestions(); //FAQ 리스트
+	
+	public int eventInsert(EventDTO dto); //이벤트 등록
+	public void eventImgInsert(EventDTO dto); //이벤트 썸네일 사진 등록
+	public void eventImgsInsert(EventDTO dto); //이벤트 사진 등록
+	public int getEventNum(Timestamp regDate); //이벤트 번호
+	public int getEventCount(); //진행중인 이벤트 개수
+	public ArrayList<EventDTO> getEventList(Map<String, Integer> map); //진행중인 이벤트 리스트
+	public ArrayList<EventDTO> getEventPic(Map<String, Integer> map); //진행중인 이벤트 사진
 
 }

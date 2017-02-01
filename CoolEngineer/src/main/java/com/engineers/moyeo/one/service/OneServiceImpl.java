@@ -26,24 +26,24 @@ public class OneServiceImpl implements OneService{
 	@Override
 	public String qna(Model model) {
 		
-		int pageSize = 10; 	// 한 페이지당 출력할 글 갯수
-		int pageBlock = 3; 	// 출력할 페이지 개수
+		int pageSize = 10; 	// �븳 �럹�씠吏��떦 異쒕젰�븷 湲� 媛��닔
+		int pageBlock = 3; 	// 異쒕젰�븷 �럹�씠吏� 媛쒖닔
 		
-		int cnt = 0;       	// 글 개수
-		int start = 0;      // 현재 페이지 시작번호 : rownum
-		int end = 0;        // 현재 페이지 끝 번호 : rownum
-		int number = 0;     // 출력한 글 번호
-		String pageNum = null; // 페이지 번호
-		int currentPage = 0;   // 현재 페이지
+		int cnt = 0;       	// 湲� 媛쒖닔
+		int start = 0;      // �쁽�옱 �럹�씠吏� �떆�옉踰덊샇 : rownum
+		int end = 0;        // �쁽�옱 �럹�씠吏� �걹 踰덊샇 : rownum
+		int number = 0;     // 異쒕젰�븳 湲� 踰덊샇
+		String pageNum = null; // �럹�씠吏� 踰덊샇
+		int currentPage = 0;   // �쁽�옱 �럹�씠吏�
 		
-		int pageCount = 0;     // 페이지 개수
-		int startPage = 0;     // 시작 페이지
-		int endPage = 0;       // 마지막 페이지
+		int pageCount = 0;     // �럹�씠吏� 媛쒖닔
+		int startPage = 0;     // �떆�옉 �럹�씠吏�
+		int endPage = 0;       // 留덉�留� �럹�씠吏�
 		
-		// 모델로부터 Map을 가져온다. Map의 키로 접근해서 req 값을 가져오기 위함
+		// 紐⑤뜽濡쒕��꽣 Map�쓣 媛��졇�삩�떎. Map�쓽 �궎濡� �젒洹쇳빐�꽌 req 媛믪쓣 媛��졇�삤湲� �쐞�븿
 		Map<String, Object> map = model.asMap();
 		
-		// Map에서 가져온 값을 req 변수에 담는다.
+		// Map�뿉�꽌 媛��졇�삩 媛믪쓣 req 蹂��닔�뿉 �떞�뒗�떎.
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
 		cnt = oneDao.getCount();
@@ -231,8 +231,8 @@ public class OneServiceImpl implements OneService{
 		
 		
 		int deleteCntRe = oneDao.deleteRe(qboard_num);
-		//QnaReplyDTO dto = oneDao.getArtReply(qboard_num);; // 답글이 있을 때
-		int deleteCnt = oneDao.delete(qboard_num); // 답글이 없을 때
+		//QnaReplyDTO dto = oneDao.getArtReply(qboard_num);; // �떟湲��씠 �엳�쓣 �븣
+		int deleteCnt = oneDao.delete(qboard_num); // �떟湲��씠 �뾾�쓣 �븣
 		
 		req.setAttribute("deleteCnt", deleteCnt);
 		req.setAttribute("deleteCntRe", deleteCntRe);

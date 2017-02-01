@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
 
 public interface OneDAO {
-	// 회원 게시판 등록,수정,삭제
+	// �쉶�썝 寃뚯떆�뙋 �벑濡�,�닔�젙,�궘�젣
 	public int getCount();
-	public ArrayList<QnaBoardDTO> getArticles(Map<String, Integer> daoMap); // 게시글 목록
+	public ArrayList<QnaBoardDTO> getArticles(Map<String, Integer> daoMap); // 寃뚯떆湲� 紐⑸줉
 	public int insert(QnaBoardDTO dto);
 	public QnaBoardDTO getArticle(int qboard_num);
 	public void addReadCnt(int qboard_num);
@@ -19,10 +20,18 @@ public interface OneDAO {
 	public int deleteAnws(int reply_num);
 
 	
-	// 관리자 게시판에 답변 등록
+	// 愿�由ъ옄 寃뚯떆�뙋�뿉 �떟蹂� �벑濡�
 	public int insertReply(QnaReplyDTO dto);
 	public int updateStatus(QnaBoardDTO dto);
 	public List<QnaReplyDTO> getReArticle(int qboard_num);
 	public QnaReplyDTO getArtReply(int qboard_num);
 	public int deleteRe(int qboard_num);
+	
+	// 모임신고 
+	public MoimReportDTO getMoimArticle(int group_num);
+	public int MoimReportInsert(MoimReportDTO dto);
+	public int getReportCount();
+	public ArrayList<MoimReportDTO> getReportArticles(Map<String, Integer> daoMap);
+	public MoimReportDTO getMoimContentArticle(int report_num);
+	public int updateReport(MoimReportDTO dto);
 }

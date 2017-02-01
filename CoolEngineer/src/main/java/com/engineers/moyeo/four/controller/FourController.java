@@ -1,5 +1,4 @@
 package com.engineers.moyeo.four.controller;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +118,69 @@ public class FourController {
 		return viewPage;
 	}
 	
+	//가입인사 글쓰기 처리 메소드
+	@RequestMapping("/moim_greeting_writepro")
+	public String moim_greeting_writePro(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
+		String viewPage=fourService.greetintwriteProExecute(model);
+		return viewPage;
+	}
 	
+	@RequestMapping("moim_greeting_contentform")
+	public String moim_greeting_contentform(HttpServletRequest req, Model model) {
+		System.out.println("moim_notice_contentform 내용 보기 실행");
+		model.addAttribute("req", req);
+		String viewPage=fourService.greetingContentExecute(model);
+		return viewPage;
+	}
+	
+	@RequestMapping("moim_greeting_delete")
+	public String moim_greeting_deleteForm(HttpServletRequest req, Model model) {
+		System.out.println("moim_greeting_delete 삭제 실행");
+		model.addAttribute("req", req);
+		String viewPage=fourService.greetingDeleteExecute(model);
+		return viewPage;
+	}
+	
+	@RequestMapping("moim_greeting_deletePro")
+	public String moim_greeting_deletePro(HttpServletRequest req, Model model) {
+		System.out.println("moim_greeting_delete 삭제 실행");
+		model.addAttribute("req", req);
+		
+		String viewPage=fourService.greetingDeleteProExecute(model);
+		return viewPage;
+	}
+	
+	@RequestMapping("moim_greeting_modifyView")
+	public String moim_greeting_modifyView(HttpServletRequest req, Model model) {
+		System.out.println("moim_notice_modifyView 수정 실행");
+		model.addAttribute("req", req);
+		String viewPage=fourService.greetingModifyViewExecute(model);
+		return viewPage;
+	}
+	
+	@RequestMapping("moim_greeting_modifypro")
+	public String moim_greeting_modifypro(HttpServletRequest req, Model model) {
+		System.out.println("moim_greeting_modifypro 수정 실행");
+		model.addAttribute("req", req);
+		String viewPage=fourService.greetingModifyProExecute(model);
+		return viewPage;
+	}
+	
+	@RequestMapping("greeting_reple")
+	public String greeting_reple(HttpServletRequest req, Model model) {
+		System.out.println("greeting_reple 댓글입력 실행");
+		model.addAttribute("req", req);
+		String viewPage=fourService.greeting_repleExecute(model);
+		return viewPage;
+	}
+	
+	@RequestMapping("repledelete")
+	public String repledelete(HttpServletRequest req, Model model) {
+		System.out.println("repledelete 댓글삭제 실행");
+		model.addAttribute("req", req);
+		String viewPage=fourService.repledeleteExecute(model);
+		return viewPage;
+	}
+		
 }
-

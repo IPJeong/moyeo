@@ -65,7 +65,7 @@ public interface SixService {
 	public void cusSupMain(Model model);
 	
 	
-	
+
 	//모임-개설
 	public void moimOpenPro(Model model);
 	

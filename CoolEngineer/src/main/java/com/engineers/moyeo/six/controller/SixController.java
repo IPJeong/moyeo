@@ -273,6 +273,7 @@ public class SixController {
 		System.out.println("/category/moimOpenPro");
 		model.addAttribute("req", req);
 		sixService.moimOpenPro(model);
+		/*sixService.*/
 		
 		return "six/category/moimOpenPro";
 	}

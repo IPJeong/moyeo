@@ -24,7 +24,7 @@ public class MainController {
 	
 	// 모여의 메인페이지를 로드하는 메서드
 	@RequestMapping("/home")
-	public String home(HttpServletRequest req, Model model){
+	public String home(HttpServletRequest req, Model model) {
 		model.addAttribute("req", req);
 		System.out.println("메인페이지 로드");
 		return "main/main";

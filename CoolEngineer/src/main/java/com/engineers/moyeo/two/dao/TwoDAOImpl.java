@@ -87,6 +87,80 @@ public class TwoDAOImpl implements TwoDAO{
 		return dtos;
 	}
 	
+
+	@Override
+	public int getPlaceMainLocCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getPlaceMainLocCount(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int getPlaceMainRecplaCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getPlaceMainRecplaCount(daoMap);
+		return cnt;
+	}
+	
+
+	@Override
+	public int getPlaceLikeCount() {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getPlaceLikeCount();
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<Place_infoDTO> getPlaceLocList(Map<String, Object> daoMap) {
+		ArrayList<Place_infoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlaceLocList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Place_picDTO> getPlaceLocPictureList(Map<String, Object> daoMap) {
+		ArrayList<Place_picDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlaceLocPictureList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Place_infoDTO> getPlaceRecplaList(Map<String, Object> daoMap) {
+		ArrayList<Place_infoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlaceRecplaList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Place_picDTO> getPlaceRecplaPictureList(Map<String, Object> daoMap) {
+		ArrayList<Place_picDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlaceRecplaPictureList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Place_infoDTO> getPlaceLikeList() {
+		ArrayList<Place_infoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlaceLikeList();
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Place_picDTO> getPlaceLikePictureList() {
+		ArrayList<Place_picDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlaceLikePictureList();
+		return dtos;
+	}
+	
 	@Override
 	public Place_infoDTO readPlace(int place_num) {
 		Place_infoDTO dto = null;
@@ -152,7 +226,15 @@ public class TwoDAOImpl implements TwoDAO{
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dao.modifyPictures(ppdto);
 	}
-	
+
+	@Override
+	public int getRecPlaceCount(int place_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getRecPlaceCount(place_num);
+		return cnt;
+	}
+
 	@Override
 	public ArrayList<Rec_placeDTO> getRecPlaceList(Map<String, Object> daoMap) {
 		ArrayList<Rec_placeDTO> dtos = null;
@@ -192,12 +274,21 @@ public class TwoDAOImpl implements TwoDAO{
 		cnt = dao.modifyRecPlace(dto);
 		return cnt;
 	}
-
+	
 	@Override
 	public int readPlaceLike(Map<String, Object> daoMap) {
 		int cnt = 0;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		cnt = dao.readPlaceLike(daoMap);
+		return cnt;
+	}
+	
+
+	@Override
+	public int checkMyPlaceLike(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.checkMyPlaceLike(daoMap);
 		return cnt;
 	}
 
@@ -210,11 +301,18 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public int minusPlaceLike(Map<String, Object> daoMap) {
+	public int checkPlalikeNum(Map<String, Object> daoMap) {
 		int cnt = 0;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		cnt = dao.minusPlaceLike(daoMap);
+		cnt = dao.checkPlalikeNum(daoMap);
 		return cnt;
 	}
 
+	@Override
+	public int minusPlaceLike(int plalike_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.minusPlaceLike(plalike_num);
+		return cnt;
+	}
 }

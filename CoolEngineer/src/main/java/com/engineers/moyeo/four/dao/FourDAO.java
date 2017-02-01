@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
+import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 
 public interface FourDAO {
 	
-	//글개수
 	public int getCount();
 	//글라인 목록
 	public ArrayList<GroupNoticeDTO> getArticles(Map<String, Integer> daoMap);
 	
 	//글쓰기 writePro
-	public int insert(GroupNoticeDTO dto);
+	public int insert(GroupNoticeDTO dto);  
 	
 	//글 상세조회 content
 	public GroupNoticeDTO getArticle(int num);
@@ -37,8 +37,26 @@ public interface FourDAO {
 	
 	public int greetingInsert(GreetingBoardDTO dto);
 	
+	public GreetingBoardDTO greetingGetArticle(int num);
+	
+	public void greetingAddReadCnt(int num);
+	
 	public int greetingUpdate(GreetingBoardDTO dto);
 	
 	public int greetingDelete(int num);
+	
+	
+	
+	
+	
+	//가입인사 댓글
+	
+	public int repleInsert(GreetingReplyDTO dto);
+	
+	public ArrayList<GreetingReplyDTO> replegGetArticles(int num);
+	
+	public int repledelete(int num);
+	// 댓글개수 카운트
+	public int getRepleyCnt(int num);
 	
 }

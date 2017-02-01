@@ -21,7 +21,7 @@
     <select id="getSuggestionList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.SuggestionDTO">
 		SELECT * 
 		FROM (SELECT sug_num, sug_title, sug_content, sug_date, re_email, sug_status, manager_id, sol_content, sol_date, mem_id, rownum rnum 
-			  FROM (SELECT * FROM suggestion WHERE sug_status = #{sug_status})
+			  FROM (SELECT * FROM suggestion WHERE sug_status = #{sug_status} ORDER BY sug_num DESC)
 			 ) 
  		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
@@ -31,7 +31,7 @@
 	</select>
 	
 	<update id="checkSuggestion" parameterType="com.engineers.moyeo.two.dto.SuggestionDTO">
-		UPDATE suggestion SET sug_status = 'Y', manager_id = '임시 아이디', sol_content = #{sol_content}, sol_date = SYSDATE WHERE sug_num = #{sug_num}
+		UPDATE suggestion SET sug_status = 'Y', manager_id = #{manager_id}, sol_content = #{sol_content}, sol_date = SYSDATE WHERE sug_num = #{sug_num}
 	</update>
 	
 	<select id="getPlaceCount" resultType="int">
@@ -40,7 +40,7 @@
 	
 	<select id="getPlaceList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
 		SELECT * 
-		FROM (SELECT place_num, place_name, place_address, place_detail, place_link, rownum rnum  
+		FROM (SELECT place_num, place_name, place_address, place_detail, place_link, rownum rnum 
 			  FROM (SELECT * FROM place_info ORDER BY place_num DESC)
 			 ) 
  		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
@@ -48,11 +48,221 @@
 	
 	<select id="getPlacePictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
 		SELECT * 
-		FROM (SELECT place_pic_num, place_pic_path, place_pic_name, place_num, rownum rnum  
+		FROM (SELECT place_pic_num, place_pic_path, place_pic_name, place_num, rownum rnum 
 			  FROM (SELECT * FROM place_pic ORDER BY place_num DESC)
 			 ) 
  		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
- 		
+	</select>
+	
+	<select id="getPlaceMainLocCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+			FROM
+			  (SELECT place_num,
+			          place_name,
+			          place_address
+			    FROM 
+			      (SELECT i.place_num,
+			              i.place_name,
+			              i.place_address,
+	                      p.place_pic_path,
+	                      p.place_pic_name
+			        FROM place_info i,
+			             place_pic p
+			        WHERE i.place_num = p.place_num
+			        ORDER BY i.place_num)
+			    WHERE place_address LIKE '%'||#{place_address}||'%'
+			      AND place_name LIKE '%'||#{place_name}||'%')
+	</select>
+	
+	<select id="getPlaceLocList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
+		SELECT *
+			FROM
+			  (SELECT place_num,
+			          place_name,
+			          place_address,
+			          rownum rnum
+			    FROM 
+			      (SELECT i.place_num,
+			              i.place_name,
+			              i.place_address,
+		                  p.place_pic_path,
+		                  p.place_pic_name
+			        FROM place_info i,
+			             place_pic p
+			        WHERE i.place_num = p.place_num
+			        ORDER BY i.place_num)
+			    WHERE place_address LIKE '%'||#{place_address}||'%'
+			      AND place_name LIKE '%'||#{place_name}||'%')
+			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	
+	<select id="getPlaceLocPictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+ 		 SELECT *
+			FROM
+			  (SELECT place_num,
+	                  place_address,
+	                  place_pic_path,
+			          place_pic_name,
+			          rownum rnum
+			    FROM 
+			      (SELECT i.place_num,
+			              i.place_name,
+			              i.place_address,
+                   		  p.place_pic_path,
+			              p.place_pic_name
+			        FROM place_info i,
+			             place_pic p
+			        WHERE i.place_num = p.place_num
+			        ORDER BY i.place_num)
+			    WHERE place_address LIKE '%'||#{place_address}||'%'
+			      AND place_name LIKE '%'||#{place_name}||'%')
+			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	
+	<select id="getPlaceMainRecplaCount" parameterType="Map" resultType="int">		
+		SELECT COUNT(*)             
+	   		FROM(SELECT place_num,
+		                place_name,
+		                place_address,
+		                recpla_category1,
+		                recpla_category2
+	           FROM (SELECT i.place_num,
+		                     i.place_name,
+		                     i.place_address,
+		                     p.place_pic_path,
+		                     p.place_pic_name,
+		                     r.recpla_category1,
+		                     r.recpla_category2
+	                  FROM place_info i,
+	                       place_pic p,
+	                       rec_place r
+	                    WHERE r.place_num = i.place_num
+	                      AND i.place_num = p.place_num
+	                    ORDER BY i.place_num)
+	           WHERE recpla_category1 LIKE '%'||#{recpla_category1}||'%'
+	            AND recpla_category2 LIKE '%'||#{recpla_category2}||'%'
+	            AND place_name LIKE '%'||#{place_name}||'%')    
+	</select>
+	
+	<select id="getPlaceRecplaList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
+		SELECT *             
+		    FROM(SELECT place_num,
+			             place_name,
+			             place_address,
+			             recpla_category1,
+			             recpla_category2,
+			             rownum rnum
+		           FROM (SELECT i.place_num,
+			                     i.place_name,
+			                     i.place_address,
+			                     p.place_pic_path,
+			                     p.place_pic_name,
+			                     r.recpla_category1,
+			                     r.recpla_category2
+		                  FROM place_info i,
+		                       place_pic p,
+		                       rec_place r
+		                    WHERE r.place_num = i.place_num
+		                      AND i.place_num = p.place_num
+		                    ORDER BY i.place_num)
+		           WHERE recpla_category1 LIKE '%'||#{recpla_category1}||'%'
+		            AND recpla_category2 LIKE '%'||#{recpla_category2}||'%'
+		            AND place_name LIKE '%'||#{place_name}||'%')
+			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	
+	<select id="getPlaceRecplaPictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">				
+		SELECT *             
+		    FROM(SELECT place_num,
+			             place_name,
+			             place_pic_path,
+			             place_pic_name,
+			             recpla_category1,
+			             recpla_category2,
+			             rownum rnum
+		           FROM (SELECT i.place_num,
+			                     i.place_name,
+			                     i.place_address,
+			                     p.place_pic_path,
+			                     p.place_pic_name,
+			                     r.recpla_category1,
+			                     r.recpla_category2
+		                  FROM place_info i,
+		                       place_pic p,
+		                       rec_place r
+		                    WHERE r.place_num = i.place_num
+		                      AND i.place_num = p.place_num
+		                    ORDER BY i.place_num)
+		           WHERE recpla_category1 LIKE '%'||#{recpla_category1}||'%'
+		            AND recpla_category2 LIKE '%'||#{recpla_category2}||'%'
+		            AND place_name LIKE '%'||#{place_name}||'%')
+			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	
+	<select id="getPlaceLikeCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+			  FROM(SELECT place_num,
+		                  place_name,
+	                      place_address
+				       FROM 
+				        (SELECT i.place_num,
+                      	i.place_name,
+                        i.place_address
+				           FROM place_info i,
+				                place_pic p,
+                        rec_place r,
+                        place_like l
+				          WHERE i.place_num = p.place_num
+		                    AND r.place_num = i.place_num
+		                    AND l.recpla_num = r.recpla_num
+	              )
+	         )
+	</select>
+	
+	<select id="getPlaceLikeList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">		
+		SELECT *
+			  FROM(SELECT place_num,
+		                  place_name,
+	                      place_address,
+	                      rownum rnum 
+				       FROM 
+				        (SELECT i.place_num,
+                      	i.place_name,
+                        i.place_address
+				           FROM place_info i,
+				                place_pic p,
+                        rec_place r,
+                        place_like l
+				          WHERE i.place_num = p.place_num
+		                    AND r.place_num = i.place_num
+		                    AND l.recpla_num = r.recpla_num
+		                  ORDER BY l.plalike_num DESC
+	              )
+	         )
+		  	WHERE rnum &gt;= 1 AND rnum &lt;= 5
+	</select>
+	
+	<select id="getPlaceLikePictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+		 SELECT *
+			  FROM(SELECT place_num,
+		                  place_pic_name,
+		                  place_pic_path,
+				          rownum rnum 
+				       FROM 
+				        (SELECT i.place_num,
+			  			   		p.place_pic_name,
+	                  p.place_pic_path
+				           FROM place_info i,
+				                place_pic p,
+                        rec_place r,
+                        place_like l
+				          WHERE i.place_num = p.place_num
+		                    AND r.place_num = i.place_num
+		                    AND l.recpla_num = r.recpla_num
+		                  ORDER BY l.plalike_num DESC
+	              )
+	         )
+		  	WHERE rnum &gt;= 1 AND rnum &lt;= 5
 	</select>
 	
 	<select id="readPlace" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
@@ -90,13 +300,17 @@
 	</update>
 	
 	<update id="modifyPictures">
-		UPDATE place_info SET place_pic_path = #{place_pic_path}, place_pic_name = #{place_pic_name} WHERE place_num = #{place_num}
+		UPDATE place_pic SET place_pic_path = #{place_pic_path}, place_pic_name = #{place_pic_name} WHERE place_num = #{place_num}
 	</update>
+	
+	<select id="getRecPlaceCount" resultType="int">
+		SELECT count(*) FROM rec_place WHERE place_num = #{place_num}
+	</select>
 	
 	<select id="getRecPlaceList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
 		SELECT * 
 		FROM (SELECT recpla_num, recpla_title, recpla_content, recpla_category1, recpla_category2, recpla_tag, mem_id, place_num, rownum rnum 
-			  FROM (SELECT * FROM rec_place)
+			  FROM (SELECT * FROM rec_place WHERE place_num = #{place_num} ORDER BY recpla_num DESC)
 			 ) 
  		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
@@ -111,22 +325,30 @@
 	</insert>
 		
 	<delete id="deleteRecPlace" parameterType="Map">
-		DELETE FROM rec_place WHERE recpla_num = #{recpla_num} AND mem_id = #{mem_id}";
+		DELETE FROM rec_place WHERE recpla_num = #{recpla_num} AND mem_id = #{mem_id}
 	</delete>
 	
 	<update id="modifyRecPlace" parameterType="com.engineers.moyeo.two.dto.Rec_placeDTO">
-		UPDATE rec_place SET recpla_title = #{recpla_title}, recpla_content = #{recpla_content}, recpla_category1 = #{recpla_category1}, recpla_category2 = #{recpla_category2}, recpla_tag = #{recpla_tag} WHERE recpla_num = #{recpla_num}
+		UPDATE rec_place SET recpla_title = #{recpla_title}, recpla_content = #{recpla_content}, recpla_category1 = #{recpla_category1}, recpla_category2 = #{recpla_category2}, recpla_tag = #{recpla_tag} WHERE recpla_num = #{recpla_num} AND mem_id = #{mem_id}
 	</update>
 	
 	<select id="readPlaceLike" parameterType="Map" resultType="int">
 		SELECT count(*) FROM place_like WHERE recpla_num = #{recpla_num}
 	</select>
 	
+	<select id="checkMyPlaceLike" parameterType="Map" resultType="int">
+		SELECT count(*) FROM place_like WHERE recpla_num = #{recpla_num} AND mem_id = #{mem_id}
+	</select>
+	
 	<insert id="plusPlaceLike" parameterType="Map">
 		INSERT INTO place_like (plalike_num, recpla_num, mem_id) VALUES(place_like_seq.NEXTVAL, #{recpla_num}, #{mem_id})
 	</insert>
 	
-	<delete id="minusPlaceLike" parameterType="Map">
-		DELETE FROM place_like WHERE recpla_num = #{recpla_num}, mem_id = #{mem_id}
+	<select id="checkPlalikeNum" parameterType="Map" resultType="int">
+		SELECT plalike_num FROM place_like WHERE recpla_num = #{recpla_num} AND mem_id = #{mem_id}
+	</select>
+	
+	<delete id="minusPlaceLike" parameterType="int">
+		DELETE FROM place_like WHERE plalike_num = #{plalike_num}
 	</delete>
 </mapper>

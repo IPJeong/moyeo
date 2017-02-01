@@ -1,6 +1,8 @@
 package com.engineers.moyeo.three.dao;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -8,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Repository
@@ -117,4 +120,53 @@ public class ThreeDAOImpl implements ThreeDAO{
 		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.ctgCheck", dto);
 		return cnt;
 	}
+
+	@Override
+	public int eventInsert(EventDTO dto) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.eventInsert", dto);
+		return cnt;
+	}
+	
+	@Override
+	public int getEventNum(Timestamp regDate) {
+		int eNum = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getEventNum", regDate);
+		return eNum;
+	}
+
+	@Override
+	public void eventImgInsert(EventDTO dto) {
+		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.eventImgInsert", dto);
+		
+	}
+
+	@Override
+	public void eventImgsInsert(EventDTO dto) {
+		this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.eventImgsInsert", dto);
+		
+	}
+
+	@Override
+	public int getEventCount() {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getEventCount");
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<EventDTO> getEventList(Map<String, Integer> map) {
+		ArrayList<EventDTO> dtos = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getEventList(map);			
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<EventDTO> getEventPic(Map<String, Integer> map) {
+		ArrayList<EventDTO> dtos = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getEventPic(map);		
+		return dtos;
+	}
+	
 }

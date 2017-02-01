@@ -53,4 +53,70 @@
    		UPDATE group_notice SET group_noti_title=#{group_noti_title}, group_noti_content=#{group_noti_content} WHERE group_noti_num=#{group_noti_num}
   	</update>
   	 
+  	<!-- 가입인사 글 개수 세기 -->
+  	  <select id="greetingGetCount" resultType="int">
+  		SELECT count(*) FROM  greeting_board
+   </select>	
+   
+   
+   <!-- 가입인사 글 목록 보여주기  -->
+   <select id="greetingGetArticles" parameterType="Map" resultType="com.engineers.moyeo.four.dto.GreetingBoardDTO"> <!-- 결과타입 Arraylist 아님 -->
+  		SELECT *  
+		  FROM (SELECT greeting_num, greeting_title, greeting_content, greeting_date, greeting_hit, like_num, mem_id, group_num, rownum rnum  
+				 FROM (SELECT * FROM greeting_board 
+						ORDER BY greeting_num DESC)
+				)		  
+          WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+   </select>    
+  	
+  	
+  	<!-- 글 한줄 넣기 -->
+  	
+  	<insert id="greetingInsert"  parameterType="com.engineers.moyeo.four.dto.GreetingBoardDTO"> 
+   		INSERT INTO greeting_board (greeting_num, greeting_title, greeting_content, greeting_date, greeting_hit, like_num, mem_id, group_num)
+			VALUES (greeting_board_seq.nextval, #{greeting_title}, #{greeting_content}, #{greeting_date}, #{greeting_hit}, #{like_num}, #{mem_id}, #{group_num}) 
+   </insert>
+   
+   <!-- 글 내용 보기 content -->
+    <select id="greetingGetArticle" parameterType="int" resultType="com.engineers.moyeo.four.dto.GreetingBoardDTO">
+   		SELECT * FROM greeting_board WHERE greeting_num = #{greeting_num}
+   </select>
+   
+   <!-- 조회수 증가 -->
+   <update id="greetingAddReadCnt" parameterType="int" >
+   		UPDATE greeting_board SET greeting_hit = greeting_hit+1 WHERE greeting_num=#{greeting_num}
+   </update>
+   
+   <!--삭제  -->
+   <delete id="greetingDelete" parameterType="int">
+        DELETE FROM greeting_board WHERE greeting_num=#{greeting_num}
+   </delete> 
+    
+	<!-- 수정 -->
+	
+ 	<update id="greetingUpdate" parameterType="com.engineers.moyeo.four.dto.GreetingBoardDTO">
+   		UPDATE greeting_board SET greeting_title=#{greeting_title}, greeting_content=#{greeting_content} WHERE greeting_num=#{greeting_num}
+  	</update>
+   
+   <!-- 댓글 등록 -->
+   <insert id="repleInsert" parameterType="com.engineers.moyeo.four.dto.GreetingReplyDTO">
+   INSERT INTO greeting_reply (gre_reply_num, gre_reply_content, gre_reply_date, mem_id, greeting_num)
+    VALUES (greeting_reply_seq.NEXTVAL, #{gre_reply_content}, #{gre_reply_date} , #{mem_id}, #{greeting_num})
+   </insert>  
+   
+   
+   <!-- 댓글 보기  -->
+  <select id="replegGetArticles" parameterType="int" resultType="com.engineers.moyeo.four.dto.GreetingReplyDTO">
+   		SELECT * FROM greeting_reply WHERE greeting_num = #{greeting_num} order by gre_reply_date ASC
+   </select>
+   
+   <!-- 댓글 삭제 -->
+    <delete id="repledelete" parameterType="int">
+        DELETE FROM greeting_reply WHERE gre_reply_num=#{gre_reply_num}
+   </delete> 
+   
+   <!-- 댓글 개수 카운트 -->
+   <select id="getRepleyCnt" parameterType="int" resultType="int">
+   		SELECT COUNT(*) FROM greeting_reply WHERE greeting_num = #{greeting_num}
+   </select>
 </mapper>

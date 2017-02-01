@@ -2,6 +2,8 @@ package com.engineers.moyeo.three.service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.engineers.moyeo.main.common.Code;
+import com.engineers.moyeo.main.common.FileManager;
+import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.three.dao.ThreeDAO;
+import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Service("faq")
@@ -89,6 +96,7 @@ public class ThreeServiceImpl implements ThreeService{
 
 	@Override
 	public String faqInsert(Model model) {
+		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
@@ -115,6 +123,7 @@ public class ThreeServiceImpl implements ThreeService{
 
 	@Override
 	public String faqCtgModify(Model model) {
+		
 		int cnt = 0;		
 		
 		cnt = dao.getCount();		
@@ -241,6 +250,164 @@ public class ThreeServiceImpl implements ThreeService{
 		model.addAttribute("cnt", cnt);
 		
 		return "/three/faq/faqDelete";
+	}
+
+	@Override
+	public String eventInsert(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		// 업로드 파일 객체를 꺼냄
+		FileForm fileForm = (FileForm)map.get("fileForm");
+		
+		String eventTitle = req.getParameter("eventTitle");
+		String eventCon = (req.getParameter("eventCon")).replace("\r\n","<br>");
+		Timestamp regDate = new Timestamp(System.currentTimeMillis());
+		Timestamp startDate = Timestamp.valueOf(req.getParameter("startDate") + " 00:00:00.0");
+		Timestamp endDate = Timestamp.valueOf(req.getParameter("endDate") + " 00:00:00.0");
+		Timestamp notiDate = Timestamp.valueOf(req.getParameter("notiDate") + " 00:00:00.0");
+		String ing = "Ing";
+		String adminId = "admin"; /*(String) req.getSession().getAttribute("admin");*/
+		
+		String pp="경로";
+		String pn="이름";
+		
+		EventDTO dto = new EventDTO();		
+		
+		dto.setEventTitle(eventTitle);
+		dto.setEventCon(eventCon);
+		dto.setRegDate(regDate);
+		dto.setStartDate(startDate);
+		dto.setEndDate(endDate);
+		dto.setNotiDate(notiDate);
+		dto.setIng(ing);
+		dto.setAdminId(adminId);
+		dto.setPicPath(pp);
+		dto.setPicName(pn);
+		
+		int cnt = dao.eventInsert(dto);				
+				
+		int eventNum = dao.getEventNum(regDate);
+		
+		// 업로드파일 관리
+		List<MultipartFile> files = fileForm.getFiles();		
+		System.out.println(files.size());
+		// 업로드 파일 확인
+		for (MultipartFile multipartFile : files) {
+			//업로드 파일 이름을 받아옴
+			String fileName = multipartFile.getOriginalFilename();			
+			
+			if(fileName.trim().length()>4){
+				
+				String rootPath = Code.rootPath;
+				//이벤트 썸네일 이미지 저장경로
+				String thumbImgPath = Code.eventImgPath;
+				//이벤트 이미지 저장경로
+				String conImgPath = Code.eventImgsPath;
+				//이미지 이름 확인하여 분류 하기
+				String imgName = multipartFile.getName();
+				// 파일의 타입을 확인하여 가져옴
+				int type = FileManager.checkFileType(fileName);				
+				String filename = null;				
+				
+				if(type == 1 && imgName.equals("files[0]")) {	
+					
+					filename = FileManager.saveFile(multipartFile, rootPath + thumbImgPath, fileName);
+					
+					dto.setPicPath(Code.eventImgPathS);
+					dto.setPicName(filename);
+					dto.setEventNum(eventNum);	
+					
+					dao.eventImgInsert(dto);
+					
+				} else if(type == 1 && imgName.equals("files[1]")) {
+					
+					filename = FileManager.saveFile(multipartFile, rootPath + conImgPath, fileName);
+					
+					dto.setPicPath2(Code.eventImgsPathS);
+					dto.setPicName2(filename);					
+					dto.setEventNum(eventNum);
+					
+					dao.eventImgsInsert(dto);
+				}
+			}
+			
+		}
+		
+		model.addAttribute("cnt", cnt);
+		
+		return "/three/event/eventInsert";
+	}
+
+	@Override
+	public String ing_event(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int pageSize = 5;		//	한 페이지당 출력한 글 개수
+		int pageBlock = 5;		//	출력할 페이지 개수
+		
+		int cnt = 0;			// 글 개수
+		int start = 0;			// 현재 페이지 시작번호 : rownum
+		int end	= 0;			// 현재 페이지지 끝번호 : rownum
+		int number = 0;			// 출력할 글 번호
+		String pageNum = null;	// 페이지 번호
+		int currentPage = 0;	// 현재 페이지
+		
+		int pageCount = 0;		// 페이지 개수
+		int startPage = 0;		// 시작 페이지
+		int endPage = 0;		// 마지막 페이지
+		
+		cnt = dao.getEventCount();
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1; // (5 - 1) * 10 + 1;
+		end = start + pageSize - 1; //41 + 10 - 1 = 50;
+		
+		if(end > cnt) end = cnt;
+				
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		Map<String, Integer> dataMap = new HashMap<>();
+		dataMap.put("start", start);
+		dataMap.put("end", end);
+		
+		if(cnt > 0) {
+			ArrayList<EventDTO> dtos = dao.getEventList(dataMap);
+			ArrayList<EventDTO> dtos2 = dao.getEventPic(dataMap);
+			model.addAttribute("dtos", dtos);
+			System.out.println("dtos : " + dtos);
+			req.setAttribute("dtos2", dtos2);
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number); 
+		model.addAttribute("pageNum", pageNum);		
+		
+		if(cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		return "/three/event/ing_event";	
 	}
 	
 	
