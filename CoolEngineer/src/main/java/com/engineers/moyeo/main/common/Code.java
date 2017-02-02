@@ -22,7 +22,7 @@ public interface Code {
 	public final static String profileImgPath = "profileImg\\";
 	
 	// 회원 프로필사진 기본경로
-	public final static String profileDefPath = "/moyeo/resources/resource/img/custom/";
+	public final static String profileDefPath = "/moyeo/resources/resource/img/custom";
 
 	// 회원 프로필사진 이름(남성)
 	public final static String profileDefNameM = "manDef.jpg";
