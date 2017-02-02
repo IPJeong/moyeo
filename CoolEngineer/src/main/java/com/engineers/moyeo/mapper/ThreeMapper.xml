@@ -123,4 +123,10 @@
 			  	 )						
 	</select>
 <!-- 이벤트 -->
+<!-- 회원 -->
+	<!-- 아이디 중복체크 -->
+	<select id="confirmId" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM member_info WHERE mem_id = #{memid}
+	</select>
+<!-- 회원 -->
 </mapper>

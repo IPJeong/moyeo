@@ -1,6 +1,9 @@
 package com.engineers.moyeo.three.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 public interface ThreeService {
 	
@@ -17,4 +20,7 @@ public interface ThreeService {
 	
 	public String ing_event(Model model); //이벤트 진입
 	public String eventInsert(Model model); //이벤트 입력
+	//아이디중복 여부확인
+	public void duplication(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
+	public String registMember(Model model); //회원가입
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
@@ -384,8 +385,7 @@ public class ThreeServiceImpl implements ThreeService{
 		if(cnt > 0) {
 			ArrayList<EventDTO> dtos = dao.getEventList(dataMap);
 			ArrayList<EventDTO> dtos2 = dao.getEventPic(dataMap);
-			model.addAttribute("dtos", dtos);
-			System.out.println("dtos : " + dtos);
+			req.setAttribute("dtos", dtos);
 			req.setAttribute("dtos2", dtos2);
 		}
 		
@@ -395,19 +395,64 @@ public class ThreeServiceImpl implements ThreeService{
 		endPage = startPage + pageBlock - 1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		model.addAttribute("cnt", cnt);
-		model.addAttribute("number", number); 
-		model.addAttribute("pageNum", pageNum);		
+		req.setAttribute("cnt", cnt);
+		req.setAttribute("number", number); 
+		req.setAttribute("pageNum", pageNum);		
 		
 		if(cnt > 0) {
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageCount", pageCount);
-			model.addAttribute("pageBlock", pageBlock);
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("startPage", startPage);
+			req.setAttribute("endPage", endPage);
+			req.setAttribute("pageCount", pageCount);
+			req.setAttribute("pageBlock", pageBlock);
 		}
 		
 		return "/three/event/ing_event";	
+	}
+	
+	//아이디 중복체크
+	@Override
+	public void duplication(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException {
+		//입력받은 아이디
+		String memid = req.getParameter("memid");
+					
+		Map<String, Object> map = new HashMap<>();
+		map.put("memid", memid);
+		
+		int cnt = dao.confirmId(map);		
+		
+		mav.addObject("cnt", cnt);
+		
+	}
+
+	@Override
+	public String registMember(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String name = (req.getParameter("firstName")) + " " + (req.getParameter("secondName"));
+		String email = req.getParameter("email");
+		String memid = req.getParameter("memid");
+		String passwd = req.getParameter("password");
+		String address = req.getParameter("loc_category1") + " " + req.getParameter("loc_category2");
+		String tel1 = req.getParameter("tel");
+		String tel = "";
+		String birth = req.getParameter("birthday");
+		
+		
+		if(tel1.length() == 10) {
+			tel = tel1.substring(0, 3) + "-" + tel1.substring(3, 6) + "-" + tel1.substring(6);
+		} else if (tel1.length() == 11) {
+			tel = tel1.substring(0, 3) + "-" + tel1.substring(3, 7) + "-" + tel1.substring(7);
+		} else if (tel1.length() < 10) {
+			tel = tel1.substring(0, 4) + "-" + tel1.substring(4);
+		}
+		
+		
+		
+		
+		return null;
 	}
 	
 	

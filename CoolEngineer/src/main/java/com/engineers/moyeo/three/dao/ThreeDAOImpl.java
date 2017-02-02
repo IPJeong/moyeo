@@ -168,5 +168,12 @@ public class ThreeDAOImpl implements ThreeDAO{
 		dtos = dao.getEventPic(map);		
 		return dtos;
 	}
+
+	@Override
+	public int confirmId(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.confirmId", map);
+		return cnt;
+	}
 	
 }
