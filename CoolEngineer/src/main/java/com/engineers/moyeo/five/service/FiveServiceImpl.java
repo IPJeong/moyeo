@@ -476,7 +476,9 @@ public class FiveServiceImpl implements FiveService{
 		// 모임후기 정보를 조회
 		MeetingPostViewDTO postDto = fiveDao.getPostDetail(post_num);
 		//태그 정렬
-		postDto.setPost_tags(Arrays.asList(postDto.getPost_tag().split(",")));
+		if(postDto.getPost_tag() != null) {
+			postDto.setPost_tags(Arrays.asList(postDto.getPost_tag().split(",")));
+		}
 		// 모임후기의 사진정보를 조회
 		List<PostPictureDTO> picDtos = fiveDao.getPostPics(post_num);
 		// 모임후기의 동영상정보를 조회
