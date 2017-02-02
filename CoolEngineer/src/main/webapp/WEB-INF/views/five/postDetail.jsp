@@ -160,11 +160,20 @@ html, body {
 								<!-- 후기내용이 삽입되는 부분 -->
 								<h3>후기내용</h3> 
 								<div class="panel-body panel-body-search" style="width:100%; overflow: auto;">
-		                            <p>${dto.post_content}</p>                   
+									<div>
+										<h3><b>
+											<c:forEach var="post_tag" items="${dto.post_tags}">
+												<a href="searchPosts?post_tag=${post_tag}">#${post_tag}</a>
+											</c:forEach>
+										</b></h3>
+									</div>
+									<div style="margin-top:5px;">
+										<h4>${dto.post_content}</h4>
+									</div>
 	                            </div>
 								<div  style="width:100px; height:10%;">
 									<div style="float:left; width:150px; margin-bottom: 20px; margin-top: 20px;">
-										<i class="fa fa-heart" id="likeNum">&nbsp;${dto.like_num}명이 좋아합니다.</i>
+										<h3><i class="fa fa-heart" id="likeNum">&nbsp;${dto.like_num}명이 좋아합니다.</i></h3>
 									</div>
 									
 									<div style="float:left; width:150px;" id="divLikeBtn">

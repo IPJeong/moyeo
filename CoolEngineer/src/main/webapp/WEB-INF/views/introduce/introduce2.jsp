@@ -23,15 +23,15 @@
 				</ul>
 				<div class="panel-body tab-content">
 					<div class="tab-pane" id="tab-first">
-						<img src="../../../resources/resource/assets/images/users/introduce.png"
+						<img src="/moyeo/resources/resource/assets/images/users/introduce.png"
 							width="1000px">
 					</div>
 					<div class="tab-pane active" id="tab-second">
-						<img src="../../../resources/resource/assets/images/users/introduce2.png"
+						<img src="/moyeo/resources/resource/assets/images/users/introduce2.png"
 							width="1000px">
 					</div>
 					<div class="tab-pane" id="tab-third">
-						<img src="../../../resources/resource/assets/images/users/introduce3.png"
+						<img src="/moyeo/resources/resource/assets/images/users/introduce3.png"
 							width="1000px">
 					</div>
 				</div>

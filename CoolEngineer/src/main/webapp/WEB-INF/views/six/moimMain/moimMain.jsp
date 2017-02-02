@@ -38,7 +38,7 @@
 
 .panel .panel-body {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .col-md-25 {
@@ -69,6 +69,7 @@ img {
 <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
+
 		<!-- 모임페이지 사이드바 시작 -->
 		<%@include file="../../etc/moim_side.jsp"%>
 		<!-- 모임페이지 사이드바 종료 -->

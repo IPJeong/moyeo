@@ -16,7 +16,7 @@
 				</div>
 				<div class="panel-body padding-0" style="height: 270px;">
 					<div class="chart-holder" id="dashboard-line-1"	style="height: 180px;">
-						<center><img src="{main_pic_pathA}/${main_pic_nameA}" width="200px" height="150px" style="margin-top: 10px;"><br></center>
+						<center><img src="${main_pic_pathA}/${main_pic_nameA}" width="200px" height="150px" style="margin-top: 10px;"><br></center>
 <%-- 						<center><font size="5">${group_name}</font></center> --%>
 						<br>
 						<h3>

@@ -38,7 +38,7 @@
 
 .panel .panel-body {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .col-md-25 {
@@ -56,6 +56,15 @@ img {
 	margin: 10px 10px 10px 10px;
 }
 </style>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/home">Home</a></li>
+	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li class="active">모임 일정</li>
+</ul>
+<!-- END BREADCRUMB -->
 
 <!-- START ROW -->
 <div class="row">

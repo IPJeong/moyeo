@@ -129,7 +129,7 @@ tr {
 							<td class="subject_title" colspan="3"
 								style="border-color: #d8bbff; border-right: 0px; border-top: 3px #d8bbff solid;"><font
 								size="3">${dto.noti_title}</font>
-							<td>
+							</td>
 						</tr>
 
 						<tr>
@@ -148,7 +148,7 @@ tr {
 
 					</table>
 					<br><br>
-					<div><font size="3">${dto.noti_content}</font></div>
+					<div style="margin:10px 30px;"><font size="3">${dto.noti_content}</font></div>
 					
 					<br><br>
 					<table>

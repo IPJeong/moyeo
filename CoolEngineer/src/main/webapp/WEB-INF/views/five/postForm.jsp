@@ -88,7 +88,7 @@ li {
 	                           <div class="col-md-6 col-xs-12">                                            
 	                               <div class="input-group">
 	                                   <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-	                                   <input type="text" class="form-control" name="post_title" required/>
+	                                   <input type="text" class="form-control" name="post_title" maxlength="30" required/>
 	                               </div>                                            
 	                           </div>
 	                       </div>
@@ -96,21 +96,15 @@ li {
 	                       <div class="form-group">
 	                           <label class="col-md-3 col-xs-12 control-label">후기내용</label>
 	                           <div class="col-md-6 col-xs-12">                                            
-	                               <textarea class="form-control" rows="20" name="post_content" required></textarea>
-	                               <span class="help-block">모임후기 내용</span>
+	                               <textarea class="form-control" rows="20" name="post_content" maxlength="1000" required></textarea>
 	                           </div>
 	                       </div>
 	                       
 	                       <div class="form-group">
 	                           <label class="col-md-3 col-xs-12 control-label">태그</label>
 	                           <div class="col-md-6 col-xs-12">                                                                                            
-	                               <input type="text" class="tagsinput" />
+	                               <input type="text" class="tagsinput" name="post_tag"/>
 	                           </div>
-	                       </div>
-	                       
-	                       <div class="form-group" id="tagDiv">
-	                        	<label class="col-md-3 col-xs-12 control-label">태그1</label>
-                       			<input type="text" id="post_tag" name="post_tag" onkeyup="tagVals(event)">
 	                       </div>
 	                       
 	                       <div class="form-group">

@@ -10,7 +10,6 @@ import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
-import com.engineers.moyeo.three.dto.ThreeDTO;
 
 
 public interface SixDAO {

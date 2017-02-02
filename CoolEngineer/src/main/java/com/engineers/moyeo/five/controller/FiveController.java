@@ -52,11 +52,12 @@ public class FiveController {
 	
 	// 모임후기작성 페이지
 	@RequestMapping("/postForm")
-	public String postForm(HttpServletRequest req) {
+	public String postForm(Model model, HttpServletRequest req) {
 		
 		System.out.println("모임후기 작성 페이지 요청");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
-		viewPage = "five/postForm";
+		model.addAttribute("req", req);
+		viewPage = fiveService.postForm(model);
 		return viewPage;
 	}
 		

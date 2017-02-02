@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.engineers.moyeo.main.model.FileForm;
-import com.engineers.moyeo.six.service.SixService;
 
 
 /**
@@ -28,6 +27,7 @@ public class SixController {
 	@RequestMapping("/notice/notice")
 	public String notice(HttpServletRequest req, Model model) {
 		System.out.println("/customer-support/notice");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 
 		sixService.notice(model);
@@ -38,6 +38,7 @@ public class SixController {
 	@RequestMapping("/notice/noticeContent")
 	public String noticeContents(HttpServletRequest req, Model model) {
 		System.out.println("/customerSupport/noticeContent");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 
 		sixService.noticeContent(model);
@@ -48,6 +49,7 @@ public class SixController {
 	@RequestMapping("/notice/noticeWrite")
 	public String noticeWrite(HttpServletRequest req, Model model) {
 		System.out.println("/customerSupport/noticeWrite");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 
 		sixService.noticeWrite(model);
@@ -58,6 +60,7 @@ public class SixController {
 	@RequestMapping("/notice/noticeWritePro")
 	public String noticeWritePro(HttpServletRequest req, Model model) {
 		System.out.println("/customerSupport/noticeWritePro");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 
 		sixService.noticeWritePro(model);
@@ -68,6 +71,7 @@ public class SixController {
 	@RequestMapping("/notice/noticeModify")
 	public String noticeModify(HttpServletRequest req, Model model) {
 		System.out.println("/customerSupport/noticeModify");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 
 		sixService.noticeModify(model);
@@ -78,6 +82,7 @@ public class SixController {
 	@RequestMapping("/notice/noticeModifyPro")
 	public String noticeModifyPro(HttpServletRequest req, Model model) {
 		System.out.println("/customerSupport/noticeModify");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 
 		sixService.noticeModifyPro(model);
@@ -88,6 +93,7 @@ public class SixController {
 	@RequestMapping("/notice/noticeDelete")
 	public String noticeDelete(HttpServletRequest req, Model model) {
 		System.out.println("/customerSupport/noticeDelete");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 
 		sixService.noticeDelete(model);
@@ -100,6 +106,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimSchedule")
 	public String moimSchedule(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimSchedule");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimSchedule(model);
 		
@@ -110,6 +117,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimScheduleDetail")
 	public String moimScheduleDetail(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleDetail");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimScheduleDetail(model);
 		
@@ -120,6 +128,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimRegister")
 	public String moimRegister(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimRegister");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimRegister(model);
 		
@@ -130,6 +139,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimRegisterMap")
 	public String moimRegisterMap(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimRegisterMap");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 	
 		return "six/moimSchedule/moimRegisterMap";
@@ -139,6 +149,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimRegisterPro")
 	public String moimRegisterPro(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimRegisterPro");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimRegisterPro(model);
 		
@@ -149,6 +160,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimScheduleContents")
 	public String moimScheduleContets(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleContents");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimScheduleContents(model);
 		
@@ -159,6 +171,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimScheduleModify")
 	public String moimScheduleModify(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleModify");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimScheduleModify(model);
 		
@@ -169,6 +182,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimScheduleModifyPro")
 	public String moimScheduleModifyPro(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleModifyPro");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimScheduleModifyPro(model);
 		
@@ -179,6 +193,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimScheduleDelete")
 	public String moimScheduleDelete(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleDelete");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimScheduleDelete(model);
 		
@@ -189,6 +204,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimScheduleJoin")
 	public String moimSheduleJoin(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleJoin");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimScheduleJoin(model);
 		
@@ -199,6 +215,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimScheduleCancel")
 	public String moimSheduleCancel(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleCancel");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimScheduleCancel(model);
 		
@@ -209,6 +226,7 @@ public class SixController {
 	@RequestMapping("/moimSchedule/moimScheduleMember")
 	public String moimSheduleMember(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleMember");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimScheduleMember(model);
 		
@@ -221,6 +239,7 @@ public class SixController {
 	@RequestMapping("/cusSupMain")
 	public String cusSupMain(HttpServletRequest req, Model model) {
 		System.out.println("고객지원 홈");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.cusSupMain(model);
 		
@@ -233,6 +252,7 @@ public class SixController {
 	@RequestMapping("/category/category_hobby")
 	public String categoryHobby(HttpServletRequest req, Model model) {
 		System.out.println("/category/category_hobby");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.categoryHobby(model);
 		
@@ -243,6 +263,7 @@ public class SixController {
 	@RequestMapping("/category/category_location")
 	public String categoryLocation(HttpServletRequest req, Model model) {
 		System.out.println("/category/category_location");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.categoryLocation(model);
 		return "six/category/category_location";
@@ -252,6 +273,7 @@ public class SixController {
 	@RequestMapping("/category/category_scale")
 	public String categoryAge(HttpServletRequest req, Model model) {
 		System.out.println("/category/category_scale");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.categoryScale(model);
 		return "six/category/category_scale";
@@ -261,9 +283,9 @@ public class SixController {
 	
 	//모임개설
 	@RequestMapping("/category/moimOpen")
-	public String moimOpen() {
+	public String moimOpen(HttpServletRequest req) {
 		System.out.println("/category/moimOpen");
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		return "six/category/moimOpen";
 	}
 	
@@ -271,6 +293,7 @@ public class SixController {
 	@RequestMapping("/category/moimOpenPro")
 	public String moimOpenPro(HttpServletRequest req, Model model) {
 		System.out.println("/category/moimOpenPro");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimOpenPro(model);
 		/*sixService.*/
@@ -282,6 +305,7 @@ public class SixController {
 	@RequestMapping("/moimMain/moimMain")
 	public String moimMain(HttpServletRequest req, Model model) {
 		System.out.println("/moimMain/moimMain");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimMain(model);
 		
@@ -292,6 +316,7 @@ public class SixController {
 	@RequestMapping("/moimMain/moimModify")
 	public String moimModify(HttpServletRequest req, Model model) {
 		System.out.println("/moimMain/moimModify");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimModify(model);
 		
@@ -302,6 +327,7 @@ public class SixController {
 	@RequestMapping("/moimMain/moimModifyPro")
 	public String moimModifyPro(HttpServletRequest req, Model model) {
 		System.out.println("/moimMain/moimModifyPro");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimModifyPro(model);
 		
@@ -312,6 +338,7 @@ public class SixController {
 	@RequestMapping("/moimMain/moimDelete")
 	public String moimDelete(HttpServletRequest req, Model model) {
 		System.out.println("/moimMain/moimDelete");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimDelete(model);
 		
@@ -322,6 +349,7 @@ public class SixController {
 	@RequestMapping("/moimMain/moimAddImage")
 	public String moimAddImage(HttpServletRequest req, Model model) {
 		System.out.println("/moimMain/moimAddImage");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 				
 		return "six/moimMain/moimAddImage";
@@ -331,6 +359,7 @@ public class SixController {
 	@RequestMapping("/moimMain/moimAddImagePro")
 	public String moimAddImagePro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
 		System.out.println("/moimMain/moimAddImagePro");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
 		
@@ -343,6 +372,7 @@ public class SixController {
 	@RequestMapping("/moimMain/moimAddImageb")
 	public String moimAddImageb(HttpServletRequest req, Model model) {
 		System.out.println("/moimMain/moimAddImageb");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 				
 		return "six/moimMain/moimAddImageb";
@@ -352,6 +382,7 @@ public class SixController {
 	@RequestMapping("/moimMain/moimAddImageProb")
 	public String moimAddImageProb(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
 		System.out.println("/moimMain/moimAddImageProb");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
 		
@@ -360,6 +391,16 @@ public class SixController {
 		return "six/moimMain/moimAddImageProb";
 	}
 	
+	//모임-모임채팅
+	@RequestMapping("/moimChat/moimChat")
+	public String moimAddImageProb(HttpServletRequest req, Model model) {
+		System.out.println("/moimChat/moimChat");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.moimChat(model);
+		
+		return "six/moimChat/moimChat";
+	}
 }
 
 

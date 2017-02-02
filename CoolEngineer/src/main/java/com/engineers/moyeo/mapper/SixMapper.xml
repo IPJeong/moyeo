@@ -201,27 +201,27 @@
  	
  	<!-- 카테고리-관심사별(게임/오락) -->
  	<select id="categoryHobbyN" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location = '게임/오락' ORDER BY group_num DESC
+ 		SELECT * FROM group_list WHERE group_inte1 = '게임/오락' ORDER BY group_num DESC
  	</select>
  	
- 	<!-- 카테고리-관심사별(요리/체조) -->
+ 	<!-- 카테고리-관심사별(요리/제조) -->
  	<select id="categoryHobbyO" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location = '요리/체조' ORDER BY group_num DESC
+ 		SELECT * FROM group_list WHERE group_inte1 = '요리/제조' ORDER BY group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(반려동물) -->
  	<select id="categoryHobbyP" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location = '반려동물' ORDER BY group_num DESC
+ 		SELECT * FROM group_list WHERE group_inte1 = '반려동물' ORDER BY group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(가족/결혼) -->
  	<select id="categoryHobbyQ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location = '가족/결혼' ORDER BY group_num DESC
+ 		SELECT * FROM group_list WHERE group_inte1 = '가족/결혼' ORDER BY group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(자유주제) -->
  	<select id="categoryHobbyR" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location = '자유주제' ORDER BY group_num DESC
+ 		SELECT * FROM group_list WHERE group_inte1 = '자유주제' ORDER BY group_num DESC
  	</select>
  	
  	

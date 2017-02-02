@@ -528,7 +528,7 @@
 				</div>
 				<div class="panel-body padding-0"
 					style="height: 100%; margin-top: 0.5%; margin-bottom: 0.75%; margin-left: 0.5%;">
-					<input type="text" value="${dto.group_num}" name="moim_title" style="width: 98%; height: 30px" required>
+					<input type="text" value="${dto.group_num}" name="moim_title" style="width: 98%; height: 30px" maxlength="20" required>
 				</div>
 			</div>
 			<div class="panel panel-default"
@@ -541,7 +541,7 @@
 				<div class="panel-body padding-0"
 					style="height: 100%; margin-top: 0.5%; margin-bottom: 0.75%; margin-left: 0.5%;">
 					<textarea class="input" rows="10" cols="40" name="content"
-						style="width: 98%; height: 80%;" required>${dto.group_intro}</textarea>
+						style="width: 98%; height: 60%;" maxlength="200" required>${dto.group_intro}</textarea>
 				</div>
 
 			</div>

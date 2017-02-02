@@ -50,11 +50,6 @@ public interface Code {
 	// 모임의 대표사진 저장경로
 	public final static String groupImgPathS = "/groupImgPath";
 	
-	// 숫자타입변환 예외 발생 메시지
-	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
-	// 널값 예외 발생 메시지
-	public final static String nullPoExceptionMsg = "========== NullPoint Exception ==========";
-	
 	// 모임페이지 권한번호
 	// 모임장 권한번호
 	public final static int moimJang = 1;
@@ -76,4 +71,9 @@ public interface Code {
 	public final static String authority_1 = "MASTER";
 	// 관리자 권한 코드(일반관리자)
 	public final static String authority_2 = "MANAGER";
+	
+	// 숫자타입변환 예외 발생 메시지
+	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
+	// 널값 예외 발생 메시지
+	public final static String nullPoExceptionMsg = "========== NullPoint Exception ==========";
 }

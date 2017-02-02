@@ -24,21 +24,6 @@ public class MainServiceImpl implements MainService{
 	@Autowired
 	SixDAO sixDao;
 
-	// 메인페이지가 로딩될 때 각종 정보를 읽어오는 메서드
-	@Override
-	public void main() {
-
-		MemberInfoDTO dto = new MemberInfoDTO();
-		dto.setMem_id("id");
-		dto.setPasswd("123");
-		dto.setName("양우진");
-		dto.setAddress("서울시");
-		dto.setTel("010-0000-0000");
-		dto.setBirth(new Timestamp(System.currentTimeMillis()));
-		dto.setEmail("woo@naver.com");
-
-	}
-
 	//메인페이지에 공지사항 글 연동
 	@Override
 	public void main_notice(Model model) {
@@ -55,6 +40,7 @@ public class MainServiceImpl implements MainService{
 		}
 	}
 	
+	// 로그인 프로세스
 	@Override
 	public String memberLoginPro(Model model) {
 		Map<String, Object> map = model.asMap();

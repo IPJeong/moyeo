@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
+import com.engineers.moyeo.five.dto.MeetingPostViewDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
@@ -67,7 +68,7 @@ public class FiveDAOImpl implements FiveDAO{
 
 	// 모임후기의 상세정보를 조회
 	@Override
-	public MeetingPostDTO getPostDetail(int post_num) {
+	public MeetingPostViewDTO getPostDetail(int post_num) {
 		
 		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
 		return fiveDao.getPostDetail(post_num);

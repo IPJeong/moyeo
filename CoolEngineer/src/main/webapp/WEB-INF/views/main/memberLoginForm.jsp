@@ -52,7 +52,8 @@
 			<div class="login-box animated fadeInDown">
 				<div class="login-body">
 					<div class="login-title">
-						<strong>Welcome</strong>, Please login.
+						<h2><strong>환영합니다.</strong></h2> 
+						<h3>로그인하고 새로운 모임을 찾아보세요.</h3>
 					</div>
 					<form action="memberLoginPro" class="form-horizontal" method="post">
 						<div class="form-group">
@@ -78,15 +79,15 @@
 						</div>
 						<div class="form-group">
 							<div class="col-md-6">
-								<a href="../member/forgetpassword.jsp">Forgot your password?</a>
+								<a href="../member/forgetpassword.jsp">비밀번호를 잃어버리셨나요?</a>
 							</div>
 							<div class="col-md-6 text-right">
-								<a href="../member/registration.jsp">Create an account</a>
+								<a href="../member/registration.jsp">회원가입을 해보세요.</a>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-12">
-								<button class="btn btn-primary btn-lg btn-block">Login</button>
+								<button class="btn btn-primary btn-lg btn-block">로그인</button>
 							</div>
 						</div>
 					</form>

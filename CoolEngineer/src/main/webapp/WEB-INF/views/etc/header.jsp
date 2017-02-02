@@ -88,7 +88,8 @@
 							<li><a href="/moyeo/main/memberLoginForm"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
 						</c:if>
 						<c:if test="${sessionScope.mem_id != null }">
-							<li><a href="/moyeo/main/member/registration"><span class="fa fa-save"></span>${sessionScope.mem_id} 님</a></li>
+							<li><a href="#"><span class="fa fa-save"></span>${sessionScope.mem_id} 님</a></li>
+							<li><a href="/moyeo/main/memberLogout"><span class="fa fa-save"></span>로그아웃</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -106,10 +107,8 @@
 								<li><a href="/moyeo/main/introduce/introduce"><span class="glyphicon glyphicon-user"></span> 회사소개 </a></li>
 								<li><a href="/moyeo/main/introduce/introduce2"><span
 										class="fa fa-building-o"></span> 연혁 </a></li>
-								<li><a href="/moyeo//main/introduce/introduce3"><span class="fa fa-group"></span> 구성원
+								<li><a href="/moyeo/main/introduce/introduce3"><span class="fa fa-group"></span> 구성원
 								</a></li>
-								<li><a><span class="fa fa-calendar"></span>
-										조직도 </a></li>
 							</ul></li>
 						<li class="xn-openable"><a href="#">모임</a>
 							<ul>

@@ -67,7 +67,7 @@
     </insert>
     
     <!-- 모임후기의 상세정보를 조회하는 쿼리 -->
-    <select id="getPostDetail" parameterType="int" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
+    <select id="getPostDetail" parameterType="int" resultType="com.engineers.moyeo.five.dto.MeetingPostViewDTO">
     	SELECT * 
     	  FROM meeting_post 
     	 WHERE post_num = #{post_num}

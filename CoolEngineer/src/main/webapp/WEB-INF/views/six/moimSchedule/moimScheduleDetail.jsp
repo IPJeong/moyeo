@@ -39,7 +39,7 @@
 
 .panel .panel-body {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .col-md-25 {
@@ -119,7 +119,7 @@ img {
 										value="${dtos[stat.index].meeting_num}">
 
 									<div class="chart-holder"
-										style="width: 680px; height: 180px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
+										style="width: 680px; height: 220px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
 										<div style="width: 25%; height: 100%; float: left">
 											<div style="width: 100%; height: 100%; magin: 5px 5px;">
 												<form name="left" style="height: 100%;">
@@ -161,7 +161,7 @@ img {
 												}
 											</script>
  -->											<input type="button" value="상세보기"
-												style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 15px; float:left; " onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=950, height=500, left=300, top=100')"> 
+												style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 25%; float:left; " onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=950, height=500, left=300, top=100')"> 
 											<input
 												type="button" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; "
 												onclick="window.location='moimScheduleModify?meeting_num=${dtos[stat.index].meeting_num}&group_num=${group_num}'"> 
@@ -175,7 +175,7 @@ img {
 												onclick="window.location='moimScheduleCancel?meeting_num=${dtos[stat.index].meeting_num}'"
 												>
 										</c:if>
-										<c:if test ="${dtos3[stat.index] eq 0}"> 							
+										<c:if test ="${dtos3[stat.index] eq 0}">					
 											<c:if test ="${dtos2[stat.index] < dtos[stat.index].meeting_pernum}">
 												<input type="button" value="참석"
 													style="height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 40px"
@@ -186,7 +186,7 @@ img {
 													style="background:#d27373; color:white; height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 40px"
 													>
 											</c:if>
-										</c:if>
+										</c:if> 
 										<br>
 										<input type="button" value="참석멤버 보기"
 													style="height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 60px"

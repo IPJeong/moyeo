@@ -97,4 +97,7 @@ public interface SixService {
 	
 	//모임-소개사진등록
 	public void moimAddImageProb(Model model);
+	
+	//모임채팅
+	public void moimChat(Model model);
 }

@@ -12,9 +12,7 @@
 
 <div class="row">
 	<div class="col-md-0">
-
 		<form class="form-horizontal">
-
 			<div class="panel panel-default tabs">
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active"><a href="#tab-first" role="tab"
@@ -24,22 +22,17 @@
 				</ul>
 				<div class="panel-body tab-content">
 					<div class="tab-pane active" id="tab-first">
-						<img src="../../../../../../../../../resources/resource/resource/resource/resource/assets/images/users/introduce.png"
-							width="1000px">
+						<img src="/moyeo/resources/resource/assets/images/users/introduce.png" width="1000px">
 					</div>
 					<div class="tab-pane" id="tab-second">
-						<img src="../../../../../../../../../resources/resource/resource/resource/resource/assets/images/users/introduce2.png"
-							width="1000px">
+						<img src="/moyeo/resources/resource/images/users/introduce2.png" width="1000px">
 					</div>
 					<div class="tab-pane" id="tab-third">
-						<img src="../../../../../../../../../resources/resource/resource/resource/resource/assets/images/users/introduce3.png"
-							width="1000px">
+						<img src="/moyeo/resources/resource/images/users/introduce3.png" width="1000px">
 					</div>
 				</div>
 			</div>
-
 		</form>
-
 	</div>
 </div>
 

@@ -38,7 +38,7 @@
 
 .panel .panel-body {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .col-md-25 {
@@ -56,6 +56,15 @@ img {
 	margin: 10px 10px 10px 10px;
 }
 </style>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/home">Home</a></li>
+	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li class="active">모임 일정</li>
+</ul>
+<!-- END BREADCRUMB -->
 
 <!-- START ROW -->
 <div class="row">
@@ -86,9 +95,10 @@ img {
 									width="250px" height="200px"
 									style="position: relative; left: -290px; magin: 5px 5px; text-align: left;">
 								<p style="margin-top: -130px">
-									<input type="hidden" name="map" value=""> <input
+									<input type="hidden" name="map" value=""> 
+									<input
 										type="text" name="meeting_title" placeholder="모임 이름을 입력하세요."
-										style="width: 500px; font-size: 18px; margin-left: 230px; height: 40px; margin-top: -70px"
+										maxlength="30" style="width: 500px; font-size: 18px; margin-left: 230px; height: 40px; margin-top: -70px"
 										required>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									일자 : <input type="date" name="meeting_date"
@@ -104,7 +114,7 @@ img {
 											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=800, height=450, left=450, top=270')"
 											required> <br> 
 										<input type="text"
-											name="loc_detail" placeholder="모임장소에 대한 설명을 입력해주세요."
+											name="loc_detail" maxlength="40" placeholder="모임장소에 대한 설명을 입력해주세요."
 											style="width: 550px; font-size: 18px; height: 40px; margin-left: 10px; margin-top: 30px;"
 											required> <br> 
 										<input type="number" min="0" max="99999999" 
@@ -116,7 +126,7 @@ img {
 											style="width: 550px; font-size: 18px; height: 40px; margin-left: 50px; margin-top: 30px;"
 											required> 명 <br>
 										<textarea class="input" rows="10" cols="40"
-											name="meeting_detail" placeholder="모임에 대한 설명을 입력해주세요."
+											name="meeting_detail" maxlength="50" placeholder="모임에 대한 설명을 입력해주세요."
 											style="width: 800px; font-size: 18px; height: 200px; font-size: 1.0em; margin-left: 7px; margin-top: 30px;"
 											required></textarea>
 											</p>

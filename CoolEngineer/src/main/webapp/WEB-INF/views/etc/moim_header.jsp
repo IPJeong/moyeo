@@ -72,6 +72,7 @@
 						</c:if>
 						<c:if test="${sessionScope.mem_id != null }">
 							<li><a href="/moyeo/main/member/registration"><span class="fa fa-save"></span>${sessionScope.mem_id} 님</a></li>
+							<li><a href="/moyeo/main/memberLogout"><span class="fa fa-save"></span>로그아웃</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -85,22 +86,22 @@
 					<ul>
 						<li class=""><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">Home</a></li>
 						<li><a href="/moyeo/six/moimSchedule/moimSchedule?group_num=${group_num}">모임일정</a></li>
-						<li class="xn-openable"><a>모임갤러리</a>
+						<li class="xn-openable"><a href="#">모임갤러리</a>
 							<ul>
 								<li><a href="/moyeo/moim/moim_picture?group_num=${group_num}"><span class="fa fa-caret-right"></span>사진보기</a></li>
 								<li><a href="/moyeo/moim/moim_movie?group_num=${group_num}"><span class="fa fa-caret-right"></span>동영상보기</a></li>
 							</ul>
 						</li>
-						<li class="xn-openable"><a>모임게시판</a>
+						<li class="xn-openable"><a href="#">모임게시판</a>
 							<ul>  
 								<li><a href="/moyeo/four/moim_notice_board?group_num=${group_num}"><span class="fa fa-caret-right"></span>모임공지 게시판</a></li>
 								<li><a href="/moyeo/four/moim_greeting_board?group_num=${group_num}"><span class="fa fa-caret-right"></span>가입인사 게시판</a></li>
 								<li><a href="/moyeo/five/postList?group_num=${group_num}"><span class="fa fa-caret-right"></span>모임후기 게시판</a></li>
 							</ul>
 						</li>
-						<li><a>모임채팅</a></li>
+						<li><a href="#">모임채팅</a></li>
 						<li><a href="/moyeo/main/moim/moim_stats?group_num=${group_num}">모임통계</a></li>
-						<li class="xn-openable"><a>모임관리</a>
+						<li class="xn-openable"><a href="#">모임관리</a>
 							<ul>
 								<li><a href="/moyeo/moim/moim_cheif_modify?group_num=${group_num}"><span class="fa fa-caret-right"></span>모임정보관리</a></li>
 								<li><a href="/moyeo/moim/moim_cheif_join?group_num=${group_num}"><span class="fa fa-caret-right"></span>가입신청관리</a></li>

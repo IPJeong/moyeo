@@ -499,6 +499,7 @@
 						<option value="봉사활동">봉사활동</option>
 						<option value="사교/인맥">사교/인맥</option>
 						<option value="차/오토바이">차/오토바이</option>
+						<option value="사진">사진</option>
 						<option value="야구관람">야구관람</option>
 						<option value="게임/오락">게임/오락</option>
 						<option value="요리/제조">요리/제조</option>
@@ -522,7 +523,7 @@
 				</div>
 				<div class="panel-body padding-0"
 					style="height: 100%; margin-top: 0.5%; margin-bottom: 0.75%; margin-left: 0.5%;">
-					<input type="text" name="moim_title" style="width: 98%; height: 30px" required>
+					<input type="text" name="moim_title" style="width: 98%; height: 30px" maxlength="20" required>
 				</div>
 			</div>
 			<div class="panel panel-default"
@@ -535,7 +536,7 @@
 				<div class="panel-body padding-0"
 					style="height: 100%; margin-top: 0.5%; margin-bottom: 0.75%; margin-left: 0.5%;">
 					<textarea class="input" rows="10" cols="40" name="content"
-						style="width: 98%; height: 60%;" required></textarea>
+						style="width: 98%; height: 60%;" maxlength="200" required></textarea>
 				</div>
 
 			</div>

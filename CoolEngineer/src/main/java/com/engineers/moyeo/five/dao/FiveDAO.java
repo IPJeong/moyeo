@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
+import com.engineers.moyeo.five.dto.MeetingPostViewDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
@@ -24,7 +25,7 @@ public interface FiveDAO {
 	// 모임후기의 동영상 파일을 등록
 	public int insertPostVideo(PostVideoDTO dto);
 	// 모임후기의 상세정보를 조회
-	public MeetingPostDTO getPostDetail(int post_num);
+	public MeetingPostViewDTO getPostDetail(int post_num);
 	// 모임후기의 사진을 조회
 	public List<PostPictureDTO> getPostPics(int post_num);
 	// 모임후기의 동영상을 조회

@@ -159,7 +159,7 @@ img {
 
 
 									<div class="chart-holder"
-										style="width: 780px; height: 220px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
+										style="width: 680px; height: 180px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
 										<div style="width: 25%; height: 100%; float: left">
 											<div style="width: 100%; height: 100%; magin: 5px 5px;">
 												<form name="left" style="height: 100%;">
@@ -191,7 +191,7 @@ img {
 										</div>
 
 										<input type="button" value="상세보기"
-											style="width: 100px; height: 40px; font-size: 13px; position: absolute; left: 710px; margin-top: 20%;"
+											style="width: 100px; height: 40px; font-size: 13px; position: absolute; left: 610px; margin-top: 15px;"
 											onclick="window.open('moimScheduleContents?meeting_num='+${dto.meeting_num},'', 'menubar=no, toolbar=no, width=950, height=450, left=300, top=100')"><br>
 										
 									</div>
