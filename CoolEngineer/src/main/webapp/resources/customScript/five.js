@@ -172,7 +172,6 @@ function changeMainVideo(fullPath) {
 
 //모임후기 수정
 function modPost(num) {
-	alert('실행');
 	jQuery.ajax({
 		type : "POST",
 		url:"/moyeo/five/modifyPost",
@@ -259,8 +258,77 @@ function likePost(postnum, type) {
 	}); 
 }
 
+
+//데이트형 타입으로 변환 (예. 2017년 2월 2월 -> 2017/2/2)
+function toDate(timestamp) {
+	var date = new Date(timestamp);
+	var year = date.getFullYear();
+	var month = date.getMonth();
+	month = month+1;
+	var day = date.getDate();
+	var hour = date.getHours();
+	var minutes = date.getMinutes();
+	var fullDate = year+"년 "+month+"월 "+day+"일  " + hour + "시 " + minutes + "분 에 작성";
+	return fullDate;
+}
+
+// 시간형 타입으로 변환(예. 11시 10분 -> 11:10)
+function toTime(timestamp) {
+	var date = new Date(timestamp);
+	var hour = date.getHours();
+	var minutes = date.getMinutes();
+	var seconds = date.getSeconds();
+	var fullTime = hour + "시 " + minutes +"분";
+	return fullTime;
+}
+
+function timestampToDateLoad() {
+	// 댓글 상자의 스크롤을 내려주는 기능
+	$('#msgBox').scrollTop($('#msgBox').prop('scrollHeight'));
+	// 날짜타입을 변환해주는 기능
+	$('.date').each(function(index) {
+		var text = $(this).text();
+		$(this).text(toDate(text));
+	});
+}
+
+function deleteReply(postrep_num) {
+	alert('aa');
+	jQuery.ajax({
+		type : "POST",
+		url:"/moyeo/five/deletePostReply",
+		async : true,
+		dataType : "json",
+		data:{				
+			postrep_num : postrep_num
+		},
+		success : function(data) {
+			var cnt = data.cnt;
+			if(cnt == 1) {
+				var postrep_num = data.postrep_num;
+				$('#reply'+postrep_num).remove();
+				alert('댓글이 삭제되었습니다.');
+			} else {
+				alert('댓글 삭제에 실패했습니다.\n확인바랍니다.');
+			}
+		},
+		error : function(xhr) {
+			alert("댓글등록에 실패하였습니다. 서버오류");
+			alert("error html = " + xhr.statusText);
+		}
+	});
+	return false;
+}
+
+//모임후기 댓글등록(엔터키로 입력)
+function keycheck(event) {
+	if(event.keyCode == 13) {
+		addPostReply();
+	}
+}
 //모임후기 댓글등록
 function addPostReply() {
+	
 	jQuery.ajax({
 		type : "POST",
 		url:"/moyeo/five/addPostReply",
@@ -273,7 +341,7 @@ function addPostReply() {
 		success : function(data) {
 			var fullDate = toDate(data.dto.write_date);
 			if(data.cnt == 1) {
-				var msg = '<div class="messages messages-img">' +
+				var msg = '<div class="messages messages-img" id="reply' + data.dto.postrep_num + '">' +
 				'<div class="item item-visible">' +
 				'<div class="image">' +
 				'<img src="/moyeo/resources/resource/img/custom/manDef.jpg" alt="훈남입니다.">' +
@@ -307,45 +375,6 @@ function addPostReply() {
 	}); 
 }
 
-//모임후기 댓글등록(엔터키로 입력)
-function keycheck(event) {
-	if(event.keyCode == 13) {
-		addPostReply();
-	}
-}
-
-//데이트형 타입으로 변환 (예. 2017년 2월 2월 -> 2017/2/2)
-function toDate(timestamp) {
-	var date = new Date(timestamp);
-	var year = date.getFullYear();
-	var month = date.getMonth();
-	month = month+1;
-	var day = date.getDate();
-	var hour = date.getHours();
-	var minutes = date.getMinutes();
-	var fullDate = year+"년 "+month+"월 "+day+"일  " + hour + "시 " + minutes + "분 에 작성";
-	return fullDate;
-}
-
-// 시간형 타입으로 변환(예. 11시 10분 -> 11:10)
-function toTime(timestamp) {
-	var date = new Date(timestamp);
-	var hour = date.getHours();
-	var minutes = date.getMinutes();
-	var seconds = date.getSeconds();
-	var fullTime = hour + "시 " + minutes +"분";
-	return fullTime;
-}
-
-function timestampToDateLoad() {
-	// 댓글 상자의 스크롤을 내려주는 기능
-	$('#msgBox').scrollTop($('#msgBox').prop('scrollHeight'));
-	// 날짜타입을 변환해주는 기능
-	$('.date').each(function(index) {
-		console.log($(this).text(toDate($(this).text())));
-	});
-}
-
 function deleteReply(postrep_num) {
 	jQuery.ajax({
 		type : "POST",
@@ -366,10 +395,9 @@ function deleteReply(postrep_num) {
 			}
 		},
 		error : function(xhr) {
-			alert("댓글등록에 실패하였습니다. 서버오류");
+			alert("댓글삭제에 실패하였습니다. 서버오류");
 			alert("error html = " + xhr.statusText);
 		}
 	});
 	return false;
 }
-
