@@ -15,7 +15,6 @@ public class PostVideoDTO {
 	// 모임후기 번호
 	int post_num;
 	
-	
 	public int getVideo_num() {
 		return video_num;
 	}

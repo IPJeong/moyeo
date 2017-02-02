@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
+import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
@@ -262,19 +263,19 @@ public interface SixDAO {
 	//모임-메인화면
 	public MoimOpenDTO moimMain(int group_num);
 	
-	//모임-모임정보수정처리
+	//모임사이드-모임정보수정처리
 	public int moimModifyPro(MoimOpenDTO dto);
 	
-	//모임-모임폐쇄
+	//모임사이드-모임폐쇄
 	public int moimDelete(int group_num);
 	
-	//모임-대표사진 등록
+	//모임사이드-대표사진 등록
 	public int moimAddImagePro(MainPictureDTO dto);
 
-	//모임-대표사진 개수 구하기
+	//모임사이드-대표사진 개수 구하기
 	public int moimImageCount(int group_num);
 	
-	//모임-대표사진 불러오기
+	//모임사이드-대표사진 불러오기
 	public ArrayList<MainPictureDTO> moimImageView(int group_num);
 	
 	//모임-소개사진 등록
@@ -286,9 +287,27 @@ public interface SixDAO {
 	//모임-소개사진 불러오기
 	public ArrayList<MainPictureDTO> moimImageViewB(int group_num);
 	
+	//모임-가입여부확인
+	public int memberCheck(CheckPresentDTO dto);
+	
 	//모임-출석체크 중복체크
 	public int checkPresentCount(CheckPresentDTO dto);
 	
 	//모임-출석체크 입력
 	public void checkPresent(CheckPresentDTO dto);
+	
+	//모임사이드-모임장정보 불러오기
+	public MemberInfoDTO moimLeaderLoad(int group_num);
+
+	//모임사이드-운영진들 아이디 불러오기
+	public ArrayList<String> moimSubLeaderLoadA(int group_num);
+
+	//모임사이드-운영진들 정보 불러오기
+	public MemberInfoDTO moimSubLeaderLoadB(String mem_id);
+	
+	//모임사이드-일반멤버들 아이디 불러오기
+	public ArrayList<String> moimMemberLoadA(int group_num);
+	
+	//모임사이드-일반멤버들 정보 불러오기
+	public MemberInfoDTO moimMemberLoadB(String mem_id);
 }

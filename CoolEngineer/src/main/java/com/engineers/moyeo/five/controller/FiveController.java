@@ -33,7 +33,7 @@ public class FiveController {
 	public String postList(HttpServletRequest req, Model model) {
 		
 		System.out.println("모임후기 리스트 페이지 요청");
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		try {
 			// 모임후기 리스트 로드 프로세스 실행
@@ -52,10 +52,10 @@ public class FiveController {
 	
 	// 모임후기작성 페이지
 	@RequestMapping("/postForm")
-	public String postForm() {
+	public String postForm(HttpServletRequest req) {
 		
 		System.out.println("모임후기 작성 페이지 요청");
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		viewPage = "five/postForm";
 		return viewPage;
 	}
@@ -66,7 +66,7 @@ public class FiveController {
 	public String postPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
 		
 		System.out.println("모임후기 작성 프로세스 요청");
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		req.getSession().setAttribute("memId", "guest");
 		// 모델에 req객체를 삽입
 		model.addAttribute("req", req);
@@ -81,6 +81,7 @@ public class FiveController {
 	@RequestMapping(value="/postDetail")
 	public String postDetail(Model model, HttpServletRequest req) {
 		System.out.println("모임후기 상세보기 페이지 요청");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		try {
 			// 모임후기 상세보기 프로세스 실행
@@ -95,30 +96,9 @@ public class FiveController {
 		return viewPage;
 	}
 	
-	/*// 모임후기 상세보기(모달버전)
-	@RequestMapping(value="/getPostDetail")
-	public ModelAndView getPostDetail(@RequestParam String post_num) {
-		mav = new ModelAndView("JSON");
-		System.out.println("모임후기 상세보기 페이지 요청");
-		mav.addObject("post_num", post_num);
-//		mav.addObject("req", req);
-		
-		try {
-			// 모임후기 상세보기 프로세스 실행
-			fiveService.getPostDetail(mav);
-		} catch(NumberFormatException e) {
-			e.printStackTrace();
-			System.out.println(Code.numForExceptionMsg);
-		} catch(NullPointerException e) {
-			e.printStackTrace();
-			System.out.println(Code.nullPoExceptionMsg);
-		}
-		return mav;
-	}*/
-	
 	// 모임후기 수정
 	@RequestMapping(value="/modifyPost")
-	public ModelAndView modifyPost(@RequestParam String post_num) {
+	public ModelAndView modifyPost(@RequestParam String post_num, HttpServletRequest req) {
 		mav = new ModelAndView("JSON");
 		System.out.println("모임후기 수정 요청");
 		mav.addObject("post_num", post_num);

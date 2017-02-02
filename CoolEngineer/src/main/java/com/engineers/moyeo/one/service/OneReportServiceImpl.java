@@ -164,7 +164,7 @@ public class OneReportServiceImpl implements OneReportService{
 		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("number", number);
-		model.addAttribute("pageNum", pageNum)	;
+		model.addAttribute("pageNum", pageNum);
 		
 		System.out.println("cnt: " + cnt);
 		

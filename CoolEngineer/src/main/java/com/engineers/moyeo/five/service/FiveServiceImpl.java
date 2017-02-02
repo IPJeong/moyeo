@@ -369,6 +369,7 @@ public class FiveServiceImpl implements FiveService{
 		dto.setWrite_date(time);
 		
 		int cnt = fiveDao.addPostReply(dto);
+		
 		if(cnt == 1) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("post_num", post_num);

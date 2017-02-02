@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
@@ -201,6 +202,42 @@ public class OneDAOImpl implements OneDAO{
 		int cnt = 0;
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
 		cnt = dao.updateReport(dto);
+		
+		return cnt;
+	}
+
+	@Override
+	public int getManagerCount() {
+		int cnt = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.getManagerCount();
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<MemberInformDTO> gerMemberArticles(Map<String, Integer> daoMap) {
+		ArrayList<MemberInformDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.gerMemberArticles(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public MemberInformDTO getMemberInformArticle(String mem_id) {
+		MemberInformDTO dto = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dto = dao.getMemberInformArticle(mem_id);
+		
+		return dto;
+	}
+	
+	@Override
+	public int deleteInfo(String mem_id) {
+		int cnt = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt= dao.deleteInfo(mem_id);
 		
 		return cnt;
 	}

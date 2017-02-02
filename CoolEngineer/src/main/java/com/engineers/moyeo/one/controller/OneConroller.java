@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.one.service.OneManagerService;
 import com.engineers.moyeo.one.service.OneReportService;
 import com.engineers.moyeo.one.service.OneService;
 
@@ -33,6 +34,9 @@ public class OneConroller {
 	
 	@Autowired
 	OneReportService oneReportService;
+	
+	@Autowired
+	OneManagerService oneManagerService;
 	
 	// 고객지원 홈
 	@RequestMapping("/cusSupMain")
@@ -229,4 +233,63 @@ public class OneConroller {
 		return viewPage;
 	}
 	
+////////////////// 관리자 화면 ///////////////////////
+	@RequestMapping("/managerMain")
+	public String managerMain(HttpServletRequest req, Model model) {
+		System.out.println("관리자 메인화면");
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.managerMain(model);
+		
+		return viewPage;
+	}
+	
+	// 회원리스트 불러오기
+	@RequestMapping("/guestList")
+	public String guestList(HttpServletRequest req, Model model) {
+		System.out.println("회원리스트 불러오는 화면");
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.guestList(model);
+		
+		return viewPage;
+	}
+	
+	// 회원리스트중 회원상세정보 불러오기
+	@RequestMapping("/guestInform")
+	public String guestInform(HttpServletRequest req, Model model) {
+		System.out.println("회원리스트 상세정보 조회");
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.guestInform(model);
+		
+		return viewPage;
+	}
+	
+	// 회원리스트중 회원탈퇴 시키기
+	@RequestMapping("/guestDelete")
+	public String guestDelete(HttpServletRequest req, Model model) {
+		System.out.println("회원리스트 강퇴하는 화면");
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.guestDelete(model);
+		
+		return viewPage;
+	}
+	
+	// 관리자 임명 폼
+	@RequestMapping("/adminAppoint")
+	public String adminAppoint(HttpServletRequest req, Model model) {
+		System.out.println("관리자 임명 폼");
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.adminAppoint(model);
+		
+		return viewPage;
+	}
 }

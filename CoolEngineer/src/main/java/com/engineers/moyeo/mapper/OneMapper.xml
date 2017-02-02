@@ -103,4 +103,27 @@
     <update id="updateReport" parameterType="com.engineers.moyeo.one.dto.MoimReportDTO">
     	UPDATE report_group SET sol_content=#{sol_content}, sol_status='YES', sol_date=#{sol_date}, manager_id=#{manager_id} WHERE report_num=#{report_num} 
     </update>
+    
+    <!-- 관리자가 회원정보 몇명인지 구하기 -->
+    <select id="getManagerCount" resultType="int">
+    	SELECT count(*) FROM member_info
+    </select>
+    
+     <select id="gerMemberArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    	SELECT * 
+    			FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
+    					FROM (SELECT * FROM member_info
+    						  ORDER BY join_date DESC)
+    				  )  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+    </select>
+    
+    <select id="getMemberInformArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    	SELECT * FROM member_info WHERE mem_id = #{mem_id}
+    </select>
+    
+    <!-- 관리자가 회원강퇴 -->
+    <delete id="deleteInfo" parameterType="String">
+    	DELETE FROM member_info WHERE mem_id=#{mem_id}
+    </delete>
 </mapper>

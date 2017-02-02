@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
+import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
@@ -773,7 +774,7 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;
 	}
 
-	//모임-대표사진 등록
+	//모임사이드-대표사진 등록
 	@Override
 	public int moimAddImagePro(MainPictureDTO dto) {
 		int cnt = 0;
@@ -783,7 +784,7 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;
 	}
 	
-	//모임-대표사진 개수 구하기
+	//모임사이드-대표사진 개수 구하기
 	@Override
 	public int moimImageCount(int group_num) {
 		int cnt = 0;
@@ -793,7 +794,7 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;
 	}
 	
-	//모임-대표사진 불러오기
+	//모임사이드-대표사진 불러오기
 	@Override
 	public ArrayList<MainPictureDTO> moimImageView(int group_num) {
 		ArrayList<MainPictureDTO> dtos = null;
@@ -833,6 +834,15 @@ public class SixDAOImpl implements SixDAO{
 		return dtos;
 	}
 
+	//모임-가입여부확인
+	@Override
+	public int memberCheck(CheckPresentDTO dto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.memberCheck(dto);
+		
+		return cnt;
+	}
+	
 	//모임-출석체크 중복체크
 	@Override
 	public int checkPresentCount(CheckPresentDTO dto) {
@@ -848,4 +858,50 @@ public class SixDAOImpl implements SixDAO{
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		dao.checkPresent(dto);
 	}
+	
+	//모임사이드-모임장정보 불러오기
+	@Override
+	public MemberInfoDTO moimLeaderLoad(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		MemberInfoDTO dto = dao.moimLeaderLoad(group_num);
+		
+		return dto;
+	}
+	
+	//모임사이드-운영진들 아이디 불러오기
+	@Override
+	public ArrayList<String> moimSubLeaderLoadA(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<String> dtos = dao.moimSubLeaderLoadA(group_num);
+		
+		return dtos;
+	}
+	
+	//모임사이드-운영진들 정보 불러오기
+	@Override
+	public MemberInfoDTO moimSubLeaderLoadB(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		MemberInfoDTO dto = dao.moimSubLeaderLoadB(mem_id);
+		
+		return dto;
+	}
+	
+	//모임사이드-일반멤버들 아이디 불러오기
+	@Override
+	public ArrayList<String> moimMemberLoadA(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<String> dtos = dao.moimMemberLoadA(group_num);
+		
+		return dtos;
+	}
+	
+	//모임사이드-일반멤버들 정보 불러오기
+	@Override
+	public MemberInfoDTO moimMemberLoadB(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		MemberInfoDTO dto = dao.moimMemberLoadB(mem_id);
+		
+		return dto;
+	}
+		
 }

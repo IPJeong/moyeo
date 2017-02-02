@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
@@ -34,4 +35,12 @@ public interface OneDAO {
 	public ArrayList<MoimReportDTO> getReportArticles(Map<String, Integer> daoMap);
 	public MoimReportDTO getMoimContentArticle(int report_num);
 	public int updateReport(MoimReportDTO dto);
+	
+	// 관리자게시판
+	public int getManagerCount();
+	public ArrayList<MemberInformDTO> gerMemberArticles(Map<String, Integer> daoMap);
+	public MemberInformDTO getMemberInformArticle(String mem_id);
+	
+	// 회원 강퇴
+	public int deleteInfo(String mem_id);
 }

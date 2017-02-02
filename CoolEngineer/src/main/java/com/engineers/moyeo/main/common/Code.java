@@ -55,4 +55,25 @@ public interface Code {
 	// 널값 예외 발생 메시지
 	public final static String nullPoExceptionMsg = "========== NullPoint Exception ==========";
 	
+	// 모임페이지 권한번호
+	// 모임장 권한번호
+	public final static int moimJang = 1;
+	// 모임운영진 권한번호
+	public final static int moimManager = 2;
+	// 모임원 권한번호
+	public final static int moimMember = 3;
+	// 비모임원 권한번호
+	public final static int noMember = 4;
+	
+	// 모임가입 신청 대기 상태
+	public final static String waiting = "대기";
+	// 모임가입 신청 승인
+	public final static String accepted = "승인";
+	// 모임가입 신청 거절
+	public final static String refused = "거절";
+	
+	// 관리자 권한 코드(최고관리자)
+	public final static String authority_1 = "MASTER";
+	// 관리자 권한 코드(일반관리자)
+	public final static String authority_2 = "MANAGER";
 }

@@ -1,18 +1,23 @@
 package com.engineers.moyeo.six.service;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
@@ -21,12 +26,16 @@ import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
+import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
+import com.engineers.moyeo.two.dto.Place_picDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Service
 public class SixServiceImpl implements SixService{
@@ -274,6 +283,7 @@ public class SixServiceImpl implements SixService{
 	
 	//모일일정-리스트
 	public void moimScheduleDetail(Model model) {
+		
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
@@ -836,18 +846,21 @@ public class SixServiceImpl implements SixService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 	
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
-		
 		req.getSession().setAttribute("group_num", group_num);
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
 		
-		//사이드 불러오기
-		MoimOpenDTO dto = sixDao.moimMain(group_num);
-		model.addAttribute("group_name", dto.getGroup_name());
-		model.addAttribute("group_inte1", dto.getGroup_inte1());
-		model.addAttribute("group_inte2", dto.getGroup_inte2());
 		
-		model.addAttribute("group_intro", dto.getGroup_intro());
+		//-- 사이드바 적용 영역
+		
+		//사이드에 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("group_name", open_dto.getGroup_name());
+		model.addAttribute("group_inte1", open_dto.getGroup_inte1());
+		model.addAttribute("group_inte2", open_dto.getGroup_inte2());
+		
+		model.addAttribute("group_intro", open_dto.getGroup_intro());
 	
-		//대표사진 개수 구하기
+		//사이드에 들어갈 대표사진 개수 구하기
 		int cntA = sixDao.moimImageCount(group_num);
 		
 		//모임 대표사진이 있는 경우만 대표사진 불러오기
@@ -861,6 +874,42 @@ public class SixServiceImpl implements SixService{
 			model.addAttribute("main_pic_nameA", main_pic_nameA);
 			model.addAttribute("main_pic_pathA", main_pic_pathA);
 		}
+		
+		//사이드에 들어갈 모임장정보 불러오기
+		MemberInfoDTO leader_dto = new MemberInfoDTO();
+		
+		leader_dto = sixDao.moimLeaderLoad(group_num);
+			
+		model.addAttribute("leader_id", leader_dto.getMem_id());
+		model.addAttribute("leader_name", leader_dto.getName());
+		model.addAttribute("leader_pic_name", leader_dto.getPropic_name());
+		model.addAttribute("leader_pic_path", leader_dto.getPropic_path());
+	
+		//사이드용 운영진들 아이디 불러오기
+		ArrayList<String> subLeaderA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		//사이드용 운영진들 정보 불러오기
+		ArrayList<MemberInfoDTO> subLeaderB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<subLeaderA_dtos.size(); i++) {
+			String subLeader_id = subLeaderA_dtos.get(i);
+			MemberInfoDTO subLeaderC_dto = sixDao.moimSubLeaderLoadB(subLeader_id);
+			subLeaderB_dtos.add(i, subLeaderC_dto);
+		}
+		model.addAttribute("subLeader_dtos", subLeaderB_dtos);
+		
+		//사이드용 일반 멤버들 아이디 불러오기
+		ArrayList<String> memberA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		//사이드용 일반 멤버들 정보불러오기
+		ArrayList<MemberInfoDTO> memberB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<memberA_dtos.size(); i++) {
+			String member_id = memberA_dtos.get(i);
+			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
+			memberB_dtos.add(i, memberC_dto);
+		}
+		model.addAttribute("member_dtos", memberB_dtos);
+		
+		//-- 사이드바 적용 영역
 		
 		//소개사진 개수 구하기
 		int cntB = sixDao.moimImageCountB(group_num);
@@ -891,14 +940,20 @@ public class SixServiceImpl implements SixService{
 		present_dto.setGroup_num(group_num);
 		
 		//로그인 한경우에만 실행
-		if(req.getSession().getAttribute("mem_id") != null) {
+		if(mem_id != null) {
 			
-			//출석체크 중복여부 확인
-			int present_cnt = sixDao.checkPresentCount(present_dto);
+			//모임가입여부 확인
+			int check_cnt = sixDao.memberCheck(present_dto);
 			
-			//중복이 안된 경우만 출석 인정(1일 1회)
-			if(present_cnt == 0){
-				sixDao.checkPresent(present_dto);
+			//모임가입된 경우에만 실행
+			if(check_cnt == 1) {
+				//출석체크 중복여부 확인
+				int present_cnt = sixDao.checkPresentCount(present_dto);
+				
+				//중복이 안된 경우만 출석 인정(1일 1회)
+				if(present_cnt == 0){
+					sixDao.checkPresent(present_dto);
+				}
 			}
 		}
 	}

@@ -25,13 +25,17 @@ public class MainController {
 	// 모여의 메인페이지를 로드하는 메서드
 	@RequestMapping("/home")
 	public String home(HttpServletRequest req, Model model) {
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		
 		model.addAttribute("req", req);
 		System.out.println("메인페이지 로드");
 		return "main/main";
 	}
 	
 	@RequestMapping("/category/category_hobby")
-	public String categoryHobby() {
+	public String categoryHobby(HttpServletRequest req) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		System.out.println("카테고리 하비");
 		return "common/category/category_hobby";
 	}
@@ -39,6 +43,7 @@ public class MainController {
 	//
 	@RequestMapping("/memberLoginForm") 
 	public String memberLoginForm(HttpServletRequest req, Model model) {
+		req.getSession().setAttribute("loginPage", true);
 		System.out.println("로그인 페이지");
 		viewPage = "main/memberLoginForm";
 		return viewPage;
