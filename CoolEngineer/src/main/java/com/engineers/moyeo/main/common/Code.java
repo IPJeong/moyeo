@@ -19,13 +19,22 @@ public interface Code {
 	public final static String reportImgPath = "reportImg\\";
 	
 	// 회원의 프로필사진 저장경로
-	public final static String profileImgPath = "profileImg\\"; 
+	public final static String profileImgPath = "profileImg\\";
+	
+	// 회원 프로필사진 기본경로
+	public final static String profileDefPath = "/moyeo/resources/resource/img/custom/";
+
+	// 회원 프로필사진 이름(남성)
+	public final static String profileDefNameM = "manDef.jpg";
+	// 회원 프로필사진 이름(여성)
+	public final static String profileDefNameW = "womanFef.jpg";
 	
 	// 장소사진의 저장경로
 	public final static String placeImgPath = "placeImg\\";
 	
 	// 모임의 대표사진 저장경로
 	public final static String groupImgPath = "groupImg\\";
+	
 	
 	
 	// 모임후기 사진저장경로
