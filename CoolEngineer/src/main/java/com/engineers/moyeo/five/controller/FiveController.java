@@ -100,11 +100,11 @@ public class FiveController {
 	// 모임후기 수정
 	@RequestMapping(value="/modifyPost")
 	public ModelAndView modifyPost(@RequestParam String post_num, HttpServletRequest req) {
-		mav = new ModelAndView("JSON");
-		System.out.println("모임후기 수정 요청");
+		mav = new ModelAndView("five/postModifyForm");
+		System.out.println("모임후기 수정폼 요청");
 		mav.addObject("post_num", post_num);
 		try {
-			fiveService.modifyPost(mav);
+			fiveService.modifyPost(mav, req);
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
 			System.out.println(Code.numForExceptionMsg);

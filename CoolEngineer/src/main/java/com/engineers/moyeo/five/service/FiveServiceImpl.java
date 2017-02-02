@@ -490,7 +490,6 @@ public class FiveServiceImpl implements FiveService{
 			}
 		}
 
-
 		if(mem_id != null) {
 			Map<String, Object> likeMap = new HashMap<>();
 			likeMap.put("post_num", post_num);
@@ -501,7 +500,6 @@ public class FiveServiceImpl implements FiveService{
 			// 모임후기 좋아요 여부
 			model.addAttribute("didLike", didLike);
 		}
-
 
 		if(videoDtos != null) {
 			videoCnt =  videoDtos.size();
@@ -534,13 +532,85 @@ public class FiveServiceImpl implements FiveService{
 
 	// 모임후기 수정
 	@Override
-	public void modifyPost(ModelAndView mav) throws NumberFormatException, NullPointerException {
+	public void modifyPost(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException {
+		
+		int group_num = (Integer)req.getSession().getAttribute("group_num");
 		// 모임후기번호
 		int post_num = Integer.parseInt((String)mav.getModel().get("post_num"));
 		// 모임후기 정보를 조회
 		MeetingPostDTO postDto = fiveDao.getPostDetail(post_num);
+		// 모임후기의 사진정보를 조회
+		List<PostPictureDTO> picDtos = fiveDao.getPostPics(post_num);
+		// 모임후기의 동영상정보를 조회
+		List<PostVideoDTO> videoDtos = fiveDao.getPostVideos(post_num);
+		
+		//-- 사이드바 적용 영역
+
+		//사이드에 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		mav.addObject("group_name", open_dto.getGroup_name());
+		mav.addObject("group_inte1", open_dto.getGroup_inte1());
+		mav.addObject("group_inte2", open_dto.getGroup_inte2());
+
+		mav.addObject("group_intro", open_dto.getGroup_intro());
+
+		//사이드에 들어갈 대표사진 개수 구하기
+		int cntA = sixDao.moimImageCount(group_num);
+
+		//모임 대표사진이 있는 경우만 대표사진 불러오기
+		if(cntA > 0) {
+			ArrayList<MainPictureDTO> dtos = new ArrayList<MainPictureDTO>();
+			dtos = sixDao.moimImageView(group_num);
+
+			String main_pic_nameA = dtos.get(0).getMain_pic_name();
+			String main_pic_pathA = dtos.get(0).getMain_pic_path();
+
+			mav.addObject("main_pic_nameA", main_pic_nameA);
+			mav.addObject("main_pic_pathA", main_pic_pathA);
+		}
+
+		//사이드에 들어갈 모임장정보 불러오기
+		MemberInfoDTO leader_dto = new MemberInfoDTO();
+
+		leader_dto = sixDao.moimLeaderLoad(group_num);
+
+		mav.addObject("leader_id", leader_dto.getMem_id());
+		mav.addObject("leader_name", leader_dto.getName());
+		mav.addObject("leader_pic_name", leader_dto.getPropic_name());
+		mav.addObject("leader_pic_path", leader_dto.getPropic_path());
+
+		//사이드용 운영진들 아이디 불러오기
+		ArrayList<String> subLeaderA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+
+		//사이드용 운영진들 정보 불러오기
+		ArrayList<MemberInfoDTO> subLeaderB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<subLeaderA_dtos.size(); i++) {
+			String subLeader_id = subLeaderA_dtos.get(i);
+			MemberInfoDTO subLeaderC_dto = sixDao.moimSubLeaderLoadB(subLeader_id);
+			subLeaderB_dtos.add(i, subLeaderC_dto);
+		}
+		mav.addObject("subLeader_dtos", subLeaderB_dtos);
+
+		//사이드용 일반 멤버들 아이디 불러오기
+		ArrayList<String> memberA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+
+		//사이드용 일반 멤버들 정보불러오기
+		ArrayList<MemberInfoDTO> memberB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<memberA_dtos.size(); i++) {
+			String member_id = memberA_dtos.get(i);
+			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
+			memberB_dtos.add(i, memberC_dto);
+		}
+		mav.addObject("member_dtos", memberB_dtos);
+
+		//-- 사이드바 적용 영역
+		
 		// 모임후기 정보 삽입
 		mav.addObject("postDto", postDto);
+		// 모임후기 사진을 삽입
+		mav.addObject("picDtos", picDtos);
+		// 모임후기 동영상을 삽입
+		mav.addObject("videoDtos", videoDtos);
 	}
 
 	// 모임후기 삭제

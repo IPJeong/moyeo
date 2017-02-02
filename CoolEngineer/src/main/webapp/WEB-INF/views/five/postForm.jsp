@@ -81,7 +81,7 @@ li {
 	                   <div class="panel-heading">
 	                       <h3 class="panel-title"><strong>모임후기 작성</strong></h3>
 	                   </div>
-	                   <div class="panel-body">                                                                        
+	                   <div class="panel-body" style="height:800px;">                                                                        
 	                       
 	                       <div class="form-group">
 	                           <label class="col-md-3 col-xs-12 control-label">제목</label>

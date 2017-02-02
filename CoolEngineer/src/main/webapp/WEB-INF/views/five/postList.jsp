@@ -125,7 +125,7 @@ li {
 	                              <td><span class="badge badge-info">${dto.like_num}</span></td>
 	                              <td>${dto.post_date}</td>
 	                              <td>
-	                                  <button class="btn btn-default btn-rounded btn-condensed btn-sm" type="button" onclick="modPost('${dto.post_num}');" data-toggle="modal" data-target="#modModal" data-backdrop="static" ><span class="fa fa-pencil"></span></button>
+	                                  <button class="btn btn-default btn-rounded btn-condensed btn-sm" type="button" onclick="window.location='modifyPost?post_num=${dto.post_num}'" ><span class="fa fa-pencil"></span></button>
 	                                  <button class="btn btn-danger btn-rounded btn-condensed btn-sm" type="button" onclick="deletePost('${dto.post_num}');"><span class="fa fa-times"></span></button>
 	                              </td>
 	                          </tr>
@@ -161,8 +161,6 @@ li {
         <!-- END RESPONSIVE TABLES -->
      </div>
  </div>
- <%@ include file="postModal.jsp" %>
- <%@ include file="postModifyModal.jsp" %>          
    <!-- START SCRIPTS -->
    <!-- START PLUGINS -->
        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>

@@ -20,7 +20,7 @@ public interface FiveService {
 	public String postDetail(Model model) throws NumberFormatException, NullPointerException;
 	
 	// 모임후기 수정하기
-	public void modifyPost(ModelAndView mav) throws NumberFormatException, NullPointerException;
+	public void modifyPost(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
 	
 	// 모임후기 삭제하기
 	public void deletePost(ModelAndView mav) throws NumberFormatException, NullPointerException;

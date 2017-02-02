@@ -170,28 +170,6 @@ function changeMainVideo(fullPath) {
 	$('#mainImg').html(tag);
 }
 
-//모임후기 수정
-function modPost(num) {
-	jQuery.ajax({
-		type : "POST",
-		url:"/moyeo/five/modifyPost",
-		async : true,
-		dataType : "json",
-		data:{				
-			post_num : num				
-		},
-		success : function(data) {
-			$('#mod_post_title').val(data.postDto.post_title);
-			$('#mod_post_content').val(data.postDto.post_content);
-			$('#mod_post_tag').val(data.postDto.post_tag);
-		},
-		error : function(xhr) {
-			alert("정보조회에 실패하였습니다.");
-			alert("error html = " + xhr.statusText);
-		}
-	}); 
-}
-
 //모임후기 삭제
 function deletePost(num) {
 	jQuery.ajax({
