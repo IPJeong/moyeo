@@ -19,7 +19,7 @@ import com.engineers.moyeo.main.model.FileForm;
 @RequestMapping("/six")
 @Controller
 public class SixController {
-
+//멋진 정일품
 	@Autowired
 	com.engineers.moyeo.six.service.SixService sixService;
 
