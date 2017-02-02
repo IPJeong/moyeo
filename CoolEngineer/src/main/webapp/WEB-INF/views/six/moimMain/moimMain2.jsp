@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
 <%@ include file="../../etc/moim_header.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+
 <style>
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
@@ -94,6 +95,8 @@ img {
 							</div>
 
 							<div style="width: 47%; height: 45px; float: left;">
+
+								
 								<input type="button"
 									value="사진등록"
 									style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb','','menubar=no, toolbar=no, width=450, height=170, left=950, top=150')"> 
@@ -136,48 +139,59 @@ img {
 										style="height: 10px;">
 										<br> <br> <br>
 										<div>
-											<table class="table table-striped table-hover" style="width: 90%; margin-left: 5%;">
+											<table class="table table-striped table-hover"
+												style="width: 90%; margin-left: 5%;">
 												<thead>
 													<tr class="info">
-														<td style="width: 5%">번호</td>
-														<td style="width: 35%">제목</td>
-														<td style="width: 7%">작성자</td>
-														<td style="width: 15%">작성일</td>
-														<td style="width: 8%">조회수</td>
+														<td>번호</td>
+														<td>제목</td>
+														<td>작성자</td>
+														<td>작성일</td>
+														<td>조회수</td>
 													</tr>
 												</thead>
 												<tbody>
-													<c:if test="${fn:length(dtos) > 0}">
-														<c:forEach var="dto" items="${dtos}">
-															<tr>
-																<td>${number}</td>
-																<c:set var="number" value="${number-1}" />
-					
-																<td><a
-																	href="moim_notice_contentform?num=${dto.group_noti_num}&pageNum=${pageNum}&number=${number+1}">
-																		${dto.group_noti_title}</a></td>
-																<td>${dto.mem_id}</td>
-					
-																<td><fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dto.group_noti_date}" />
-																</td>
-																<td>${dto.hit}</td>
-															</tr>
-														</c:forEach>
-													</c:if>
-													<c:if test="${empty dtos}">
-														<c:forEach var="dto" items="${dtos}">
-															<tr>
-																<h3>아직 등록된 공지사항이 없습니다. 공지사항을 등록해 보세요.</h3>
-															</tr>
-														</c:forEach>
-													</c:if>
+													<tr>
+														<td>1</td>
+														<td>Column content</td>
+														<td>Column content</td>
+														<td>Column content</td>
+														<td>Column content</td>
+													</tr>
 												</tbody>
 											</table>
 										</div>
 
+										<div
+											style="text-align: center; float: right; margin-right: 5%;">
+											<ul
+												class="pagination pagination-sm pull-right push-down-20 push-up-20">
+												<li class="disabled"><a href="#">≪</a></li>
+												<li class="active"><a href="#">1</a></li>
+												<li><a href="#">2</a></li>
+												<li><a href="#">3</a></li>
+												<li><a href="#">4</a></li>
+												<li><a href="#">≫</a></li>
+											</ul>
+										</div>
 										<div class="" style="text-align: center; font-size: 15px">
 											<div class="chart-holder" id="dashboard-bar-1"
 												style="height: 15px; margin-left: 5%">
+
+												<form class="navbar-form navbar-left" role="search"
+													style="margin-top: 70px; padding-top: 30px;">
+													<select name="">
+														<option value="1">ID</option>
+														<option value="2">닉네임</option>
+														<option value="3">IP</option>
+													</select>
+
+													<div class="form-group">
+														<input class="form-control" type="text"
+															placeholder="Search">
+													</div>
+													<button class="btn btn-default" type="submit">입력</button>
+												</form>
 											</div>
 										</div>
 									</div>

@@ -101,9 +101,8 @@ img {
 										maxlength="30" style="width: 500px; font-size: 18px; margin-left: 230px; height: 40px; margin-top: -70px"
 										required>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									일자 : <input type="date" name="meeting_date"
-										style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top:"
-										0" required><br>
+									일자 : <input type="date" name="meeting_date" style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top:"0" required><br>
+<!-- 									일자 : <input type="text" class="form-control datepicker" style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top: 30px;" value="2015-08-04" required> -->
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									시간 : <input type="time" name="meeting_time"
 											style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top: 30px"

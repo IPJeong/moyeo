@@ -19,7 +19,7 @@ import com.engineers.moyeo.main.model.FileForm;
 @RequestMapping("/six")
 @Controller
 public class SixController {
-//멋진 정일품
+	
 	@Autowired
 	com.engineers.moyeo.six.service.SixService sixService;
 
@@ -308,6 +308,8 @@ public class SixController {
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimMain(model);
+		// 모임 공지사항 불러옴
+		sixService.getNoticeBoardList(model);
 		
 		return "six/moimMain/moimMain";
 	}

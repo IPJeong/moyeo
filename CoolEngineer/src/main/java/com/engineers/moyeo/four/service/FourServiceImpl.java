@@ -149,7 +149,7 @@ public class FourServiceImpl implements FourService{
 		dto.setGroup_noti_content(req.getParameter("content"));
 		dto.setGroup_noti_date(new Timestamp(System.currentTimeMillis()));
 		dto.setMem_id("guest");
-		dto.setGroup_num(1);
+		dto.setGroup_num(41);
 		
 		//3. dao객체 생성(싱긑톤, 다형성 적용)
 		//BoardDAO dao = BoardDAOImpl.getInstance();

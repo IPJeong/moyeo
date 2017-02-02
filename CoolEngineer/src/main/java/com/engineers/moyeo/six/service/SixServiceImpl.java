@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
+import com.engineers.moyeo.four.dao.FourDAO;
+import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
@@ -48,6 +50,9 @@ public class SixServiceImpl implements SixService{
 	
 	@Autowired
 	OneDAO oneDao;
+	
+	@Autowired
+	FourDAO fourDao;
 
 	//공지-메인
 	@Override
@@ -1150,6 +1155,19 @@ public class SixServiceImpl implements SixService{
 				}
 			}
 		}
+	}
+	
+	//모임 - 공지사항을 불러옴
+	@Override
+	public void getNoticeBoardList(Model model) {
+		
+		Map<String, Integer> daoMap = new HashMap<String, Integer>();
+		daoMap.put("start", 1);
+		daoMap.put("end", 5);
+		ArrayList<GroupNoticeDTO> dtos = fourDao.getArticles(daoMap);
+		model.addAttribute("dtos", dtos);
+		model.addAttribute("number", dtos.size());
+		
 	}
 
 	//모임-모임정보수정(기존내용 읽어오기)
