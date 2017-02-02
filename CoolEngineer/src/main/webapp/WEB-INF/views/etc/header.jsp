@@ -70,6 +70,7 @@
 
 <body class="x-dashboard">
 	<!-- START PAGE CONTAINER -->
+	
 	<div class="page-container">
 
 		<!-- PAGE CONTENT -->

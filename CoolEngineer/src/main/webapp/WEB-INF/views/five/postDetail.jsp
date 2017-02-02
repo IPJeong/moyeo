@@ -110,6 +110,7 @@ html, body {
 }
 /* slider css */
 </style>
+<script src="/moyeo/resources/resource/customScript/five/postDetailTop.js" type="text/javascript"></script>
 </head>
 <body onload="imgSlide(); timestampToDateLoad();">
 	<%@include file="../etc/moim_header.jsp"%>
@@ -207,7 +208,7 @@ html, body {
 					                                        <i class="time"></i>
 					                                        <c:if test="${sessionScope.mem_id == replyDto.mem_id}">
 						                                        <span style="margin-left:120px;">
-						                                        	<a href="" onclick="return deleteReply('${replyDto.postrep_num}')"><i class="fa fa-trash-o"></i>삭제</a>
+						                                        	<a href="#" onclick="return deleteReply('${replyDto.postrep_num}')"><i class="fa fa-trash-o"></i>삭제</a>
 						                                        </span>
 					                                        </c:if>
 					                                    </div>                                    

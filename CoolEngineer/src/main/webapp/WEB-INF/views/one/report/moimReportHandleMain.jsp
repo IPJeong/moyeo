@@ -203,7 +203,7 @@ tr {
 				</c:if>
 				
 				</th>
-				</table>
+			</table>
 	     </div>                            
 	 </div>
 	
