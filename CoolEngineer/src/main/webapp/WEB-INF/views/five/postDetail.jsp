@@ -173,7 +173,7 @@ html, body {
 	                            </div>
 								<div  style="width:100px; height:10%;">
 									<div style="float:left; width:150px; margin-bottom: 20px; margin-top: 20px;">
-										<h3><i class="fa fa-heart" id="likeNum">&nbsp;${dto.like_num}명이 좋아합니다.</i></h3>
+										<h4><i class="fa fa-heart" id="likeNum">&nbsp;${dto.like_num}명이 좋아합니다.</i></h4>
 									</div>
 									
 									<div style="float:left; width:150px;" id="divLikeBtn">
