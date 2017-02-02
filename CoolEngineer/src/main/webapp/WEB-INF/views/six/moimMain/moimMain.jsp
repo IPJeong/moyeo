@@ -164,12 +164,11 @@ img {
 															</tr>
 														</c:forEach>
 													</c:if>
-													<c:if test="${empty dtos}">
-														<c:forEach var="dto" items="${dtos}">
-															<tr>
+													<c:if test="${fn:length(dtos) == 0}">
+														<tr>
+															<td colspan="5" rowspan="3">
 																<h3>아직 등록된 공지사항이 없습니다. 공지사항을 등록해 보세요.</h3>
-															</tr>
-														</c:forEach>
+															</td>
 													</c:if>
 												</tbody>
 											</table>
