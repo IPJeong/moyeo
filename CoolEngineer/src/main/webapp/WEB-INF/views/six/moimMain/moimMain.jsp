@@ -135,6 +135,7 @@ img {
 									<div class="chart-holder" id="dashboard-bar-1"
 										style="height: 10px; margin-top:10px;">
 										<div>
+										<br>
 											<table class="table table-striped table-hover" style="width: 90%; margin-left: 5%;">
 												<thead>
 													<tr class="info">
