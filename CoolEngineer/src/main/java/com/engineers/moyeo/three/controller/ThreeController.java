@@ -158,8 +158,7 @@ public class ThreeController {
 	}
 	
 	@RequestMapping("/registration") //회원가입
-	public String registration(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+	public String registration(HttpServletRequest req, Model model) {		
 		/*String viewPage = threeService.faq(model);*/
 		System.out.println("registration()");
 		
@@ -184,8 +183,7 @@ public class ThreeController {
 	}
 	
 	@RequestMapping("/registMember") //이벤트 입력
-	public String registMember(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+	public String registMember(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {		
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
 		viewPage = threeService.registMember(model);
