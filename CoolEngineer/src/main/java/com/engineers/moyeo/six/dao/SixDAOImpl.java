@@ -1,5 +1,6 @@
 package com.engineers.moyeo.six.dao;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -893,7 +894,7 @@ public class SixDAOImpl implements SixDAO{
 		return dtos;
 	}
 	
-	//모임사이드-일반멤버들 정보 불러오기
+	//모임사이드-회원정보불러오기
 	@Override
 	public MemberInfoDTO moimMemberLoadB(String mem_id) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
@@ -901,5 +902,13 @@ public class SixDAOImpl implements SixDAO{
 		
 		return dto;
 	}
-		
+
+	//최근접속일 불러오기
+	@Override
+	public Timestamp lastConnect(Map<String, Object> daoMap) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		Timestamp last_connect = dao.lastConnect(daoMap); 
+	
+		return last_connect;
+	}
 }
