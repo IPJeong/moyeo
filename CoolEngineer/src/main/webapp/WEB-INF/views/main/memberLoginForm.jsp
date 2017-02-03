@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../etc/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
@@ -41,7 +42,11 @@
                 </ul>
                <!-- END BREADCRUMB -->                                                
        
-
+<script>
+	window.onload = function() {
+	    document.loginform.beforeurl.value = document.referrer;
+	 };
+</script>
 
 
 <div class="row">
@@ -55,7 +60,8 @@
 						<h2><strong>환영합니다.</strong></h2> 
 						<h3>로그인하고 새로운 모임을 찾아보세요.</h3>
 					</div>
-					<form action="memberLoginPro" class="form-horizontal" method="post">
+					<form action="memberLoginPro" class="form-horizontal" method="post" name="loginform">
+						<input type="hidden" name="beforeurl" value="">
 						<div class="form-group">
 							<div class="col-md-12">
 								<div class="input-group">

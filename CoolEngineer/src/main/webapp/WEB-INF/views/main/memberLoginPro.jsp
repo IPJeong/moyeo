@@ -20,7 +20,7 @@
 	<c:if test="${cnt == 1}">
 		<script type="text/javascript">
 			alert("로그인 되었습니다.");
-			window.location='/moyeo/main/home';
+			window.location='<%=request.getParameter("beforeurl")%>';
 		</script>
 	</c:if>
 </body>
