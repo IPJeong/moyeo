@@ -47,16 +47,16 @@
 					<div class="chart-holder" id="dashboard-line-1">
 						<div class="main">
 							<div style="height: 60px; margin-top:10px; margin-left:15px;">
-								<div style="height: 60px; width: 60px; float:left;">
+								<div style="height: 60px; width: 16.5%; float:left;">
 									<img
 										src="${leader_pic_path}/${leader_pic_name}"
 										width="100%" height="60px" style="margin:0px">
 								</div>
 								<div style="height: 60px; width: 60%; float:left; margin-left:5px; font-size:13px;">
 									${leader_name}(${leader_id}) <br> 
-									<a href="#">[상세보기]</a> 
+									<a href="#" onclick="window.open('/moyeo/six/moimMain/moimMemberDetail?mem_id=${leader_id}&group_num=${group_num}', '모임멤버보기', 'width=700, height=700, top=100, left=500')">[상세보기]</a> 
 								</div>
-								<div style="height: 60px; width: 48px; float:left; text-align:left; font-size:13px;">
+								<div style="height: 60px; width: 20%; float:left; text-align:left; font-size:13px;">
 									[모임장]
 								</div>
 							</div>
@@ -64,16 +64,16 @@
 							<c:if test="${subLeader_dtos[0] != null}">
 								<c:forEach begin="0" end="${fn:length(subLeader_dtos)-1}" varStatus="stat">
 									<div style="height: 60px; margin-top:10px; margin-left:15px;">
-										<div style="height: 60px; width: 60px; float:left;">
+										<div style="height: 60px; width: 16.5%; float:left;">
 											<img
 												src="${subLeader_dtos[stat.index].propic_path}/${subLeader_dtos[stat.index].propic_name}"
 												width="100%" height="60px" style="margin:0px">
 										</div>
 										<div style="height: 60px; width: 60%; float:left; margin-left:5px; font-size:13px;">
 											${subLeader_dtos[stat.index].name}(${subLeader_dtos[stat.index].mem_id}) <br> 
-											<a href="#">[상세보기]</a> 
+											<a href="#" onclick="window.open('/moyeo/six/moimMain/moimMemberDetail?mem_id=${subLeader_dtos[stat.index].mem_id}&group_num=${group_num}', '모임멤버보기', 'width=700, height=700, top=100, left=500')">[상세보기]</a>
 										</div>
-										<div style="height: 60px; width: 48px; float:left; text-align:left; font-size:13px;">
+										<div style="height: 60px; width: 20%; float:left; text-align:left; font-size:13px;">
 											[운영진]
 										</div>
 									</div>
@@ -83,16 +83,16 @@
 							<c:if test="${member_dtos[0] != null}">
 								<c:forEach begin="0" end="${fn:length(member_dtos)-1}" varStatus="stat">
 									<div style="height: 60px; margin-top:10px; margin-left:15px;">
-										<div style="height: 60px; width: 60px; float:left;">
+										<div style="height: 60px; width: 16.5%; float:left;">
 											<img
 												src="${member_dtos[stat.index].propic_path}/${member_dtos[stat.index].propic_name}"
 												width="100%" height="60px" style="margin:0px">
 										</div>
 										<div style="height: 60px; width: 60%; float:left; margin-left:5px; font-size:13px;">
 											${member_dtos[stat.index].name}(${member_dtos[stat.index].mem_id}) <br> 
-											<a href="#">[상세보기]</a> 
+											<a href="#" onclick="window.open('/moyeo/six/moimMain/moimMemberDetail?mem_id=${member_dtos[stat.index].mem_id}&group_num=${group_num}', '모임멤버보기', 'width=700, height=700, top=100, left=500')">[상세보기]</a> 
 										</div>
-										<div style="height: 60px; width: 48px; float:left; text-align:left; font-size:13px;">
+										<div style="height: 60px; width: 20%; float:left; text-align:left; font-size:13px;">
 											[회원]
 										</div>
 									</div>
