@@ -128,5 +128,14 @@
 	<select id="confirmId" parameterType="map" resultType="int">
 		SELECT COUNT(*) FROM member_info WHERE mem_id = #{memid}
 	</select>
+	<!-- 회원가입 -->
+	<insert id="memInfoInsert" parameterType="com.engineers.moyeo.three.dto.MemberDTO">
+		INSERT INTO member_info(mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender)
+  			VALUES (#{mem_id}, #{passwd}, #{name}, #{address}, #{tel}, #{birth}, #{email}, #{proPicPath}, #{proPicName}, #{joinDate}, #{gender})
+	</insert>
+	<!-- 프로필 사진 입력 -->
+	<update id="proImgInsert" parameterType="com.engineers.moyeo.three.dto.MemberDTO">
+		UPDATE member_info SET propic_path = #{proPicPath}, propic_name = #{proPicName} WHERE mem_id = #{mem_id}
+	</update>
 <!-- 회원 -->
 </mapper>
