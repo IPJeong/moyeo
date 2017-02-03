@@ -9,6 +9,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.two.dto.Greeting_boardDTO;
+import com.engineers.moyeo.two.dto.Group_noticeDTO;
+import com.engineers.moyeo.two.dto.Join_requestDTO;
+import com.engineers.moyeo.two.dto.Meeting_postDTO;
+import com.engineers.moyeo.two.dto.Moim_infoDTO;
+import com.engineers.moyeo.two.dto.My_groupDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_picDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
@@ -315,4 +321,209 @@ public class TwoDAOImpl implements TwoDAO{
 		cnt = dao.minusPlaceLike(plalike_num);
 		return cnt;
 	}
+
+	@Override
+	public Moim_infoDTO readMoimInfo(int group_num) {
+		Moim_infoDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.readMoimInfo(group_num);
+		return dto;
+	}
+
+	@Override
+	public int modifyMoimInfo(Moim_infoDTO dto) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.modifyMoimInfo(dto);	
+		return cnt;
+	}
+	
+	@Override
+	public int identifyMoimMember(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.identifyMoimMember(daoMap);
+		return cnt;
+	}
+
+
+	@Override
+	public int moimJoin(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.moimJoin(daoMap);	
+		return cnt;
+	}
+	
+	@Override
+	public int moimWithdraw(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.moimWithdraw(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int getMoimJoinCount(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getMoimJoinCount(group_num);	
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<Join_requestDTO> getMoimJoinList(Map<String, Object> daoMap) {
+		ArrayList<Join_requestDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimJoinList(daoMap);
+		return dtos;
+	}
+	
+	@Override
+	public Join_requestDTO getMoimJoinInfo(int request_num) {
+		Join_requestDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.getMoimJoinInfo(request_num);
+		return dto;
+	}
+
+	@Override
+	public void moimJoinOK(Map<String, Object> daoMap) {
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dao.moimJoinOK(daoMap);
+	}
+	
+	@Override
+	public void moimJoinPro(Map<String, Object> daoMap) {
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dao.moimJoinPro(daoMap);
+	}
+
+	@Override
+	public void moimJoinNO(Map<String, Object> daoMap) {
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dao.moimJoinNO(daoMap);
+	}
+
+	@Override
+	public int getMoimMemberCount(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getMoimMemberCount(group_num);
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<My_groupDTO> getMoimMemberList(Map<String, Object> daoMap) {
+		ArrayList<My_groupDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimMemberList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public My_groupDTO getMoimMemberInfo(int my_group_num) {
+		My_groupDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.getMoimMemberInfo(my_group_num);
+		return dto;
+	}
+	
+
+	@Override
+	public My_groupDTO getMoimMemberInfo2(Map<String, Object> daoMap) {
+		My_groupDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.getMoimMemberInfo2(daoMap);
+		return dto;
+	}
+
+	@Override
+	public int changeMoimMemberRank(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.changeMoimMemberRank(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int banishMoimMember(int my_group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.banishMoimMember(my_group_num);
+		return cnt;
+	}
+
+	@Override
+	public int getNoticeBoardCount(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getNoticeBoardCount(group_num);
+		return cnt;
+	}
+
+	@Override
+	public int getGreetingBoardCount(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getGreetingBoardCount(group_num);
+		return cnt;
+	}
+
+	@Override
+	public int getPostBoardCount(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getPostBoardCount(group_num);
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<Group_noticeDTO> getNoticeBoardArticles(Map<String, Object> daoMap) {
+		ArrayList<Group_noticeDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getNoticeBoardArticles(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Greeting_boardDTO> getGreetingBoardArticles(Map<String, Object> daoMap) {
+		ArrayList<Greeting_boardDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getGreetingBoardArticles(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Meeting_postDTO> getPostBoardArticles(Map<String, Object> daoMap) {
+		ArrayList<Meeting_postDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPostBoardArticles(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public int deleteNoticeBoardArticle(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.deleteNoticeBoardArticle(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int deleteGreetingBoardArticle(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.deleteGreetingBoardArticle(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int deletePostBoardArticle(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.deletePostBoardArticle(daoMap);
+		return cnt;
+	}
+
 }
