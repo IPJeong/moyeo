@@ -81,10 +81,10 @@
 				<!-- TOP BAR START -->
 				<div class="x-content-tabs">
 					<ul>
-						<li><a href="/moyeo/main/event/ing-event"><span class="fa fa-bell">이벤트</span><span>이벤트</span></a></li>
+						<li><a href="/moyeo/three/ing_event"><span class="fa fa-bell">이벤트</span><span>이벤트</span></a></li>
 						<li><a href="/moyeo/six/cusSupMain"><span class="fa fa-envelope">고객지원</span><span>고객지원</span></a></li>
 						<c:if test="${sessionScope.mem_id == null }">
-							<li><a href="/moyeo/main/member/registration"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
+							<li><a href="/moyeo/three/registration"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
 							<li><a href="/moyeo/main/memberLoginForm"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
 						</c:if>
 						<c:if test="${sessionScope.mem_id != null }">

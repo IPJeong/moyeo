@@ -64,7 +64,7 @@
 				<!-- TOP BAR START -->
 				<div class="x-content-tabs">
 					<ul>
-						<li><a href="#main-tab"><span class="fa fa-bell">이벤트</span><span>이벤트</span></a></li>
+						<li><a href="/moyeo/three/ing_event"><span class="fa fa-bell">이벤트</span><span>이벤트</span></a></li>
 						<li><a href="/moyeo/six/cusSupMain"><span class="fa fa-envelope">고객지원</span><span>고객지원</span></a></li>
 						<c:if test="${sessionScope.mem_id == null }">
 							<li><a href="/moyeo/main/member/registration"><span class="fa fa-save">회원가입</span><span>회원가입</span></a></li>
@@ -101,12 +101,11 @@
 						</li>
 						<li><a href="/moyeo/six/moimChat/moimChat?group_num=${group_num}&mem_id=${mem_id}">모임채팅</a></li>
 						<li><a href="/moyeo/six/moimStatistics/moimStatistics?group_num=${group_num}">모임통계</a></li>
-						<li class="xn-openable"><a href="#">모임관리</a>
+						<li class="xn-openable"><a>모임관리</a>
 							<ul>
-								<li><a href="/moyeo/moim/moim_cheif_modify?group_num=${group_num}"><span class="fa fa-caret-right"></span>모임정보관리</a></li>
-								<li><a href="/moyeo/moim/moim_cheif_join?group_num=${group_num}"><span class="fa fa-caret-right"></span>가입신청관리</a></li>
-								<li><a href="/moyeo/moim/moim_cheif_member?group_num=${group_num}"><span class="fa fa-caret-right"></span>모임원관리</a></li>
-								<li><a href="/moyeo/moim/moim_cheif_board?group_num=${group_num}"><span class="fa fa-caret-right"></span>게시물관리</a></li>
+								<li><a href="/moyeo/two/moimJoinManaging?group_num=${group_num}"><span class="fa fa-caret-right"></span>가입신청관리</a></li>
+								<li><a href="/moyeo/two/moimMemberManaging?group_num=${group_num}"><span class="fa fa-caret-right"></span>모임원관리</a></li>
+								<li><a href="/moyeo/two/moimBoardManaging?group_num=${group_num}"><span class="fa fa-caret-right"></span>게시물관리</a></li>
 							</ul>
 						</li>
 					</ul>   
