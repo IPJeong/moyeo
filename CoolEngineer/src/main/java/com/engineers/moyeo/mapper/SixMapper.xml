@@ -491,13 +491,18 @@
  	</select>
  	
  	<!--  모임사이드-일반회원들 아이디 불러오기 -->
- 	<select id="moimMemberLoadA" parameterType="int" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
+ 	<select id="moimMemberLoadA" parameterType="int" resultType="String">
  		SELECT mem_id FROM my_group WHERE group_num = #{group_num} AND group_per = 3
  	</select>
  	
  	<!--  모임사이드-일반회원들 정보 불러오기 -->
  	<select id="moimMemberLoadB" parameterType="String" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
  		SELECT * FROM member_info WHERE mem_id = #{mem_id}
+ 	</select>
+ 	
+ 	<!-- 모임-최근접속일 -->
+ 	<select id="lastConnect" parameterType="Map" resultType="java.sql.Timestamp">
+ 		SELECT MAX(present_date) FROM check_present WHERE mem_id = #{mem_id} AND group_num=#{group_num}
  	</select>
  	
 </mapper>
