@@ -104,9 +104,17 @@
     
     <!-- 모임후기의 댓글을 불러옴 -->
     <select id="getPostReplys" parameterType="int" resultType="com.engineers.moyeo.five.dto.PostReplyDTO">
-    	SELECT * 
+    	<!-- SELECT * 
     	  FROM meeting_post_reply
     	 WHERE post_num = #{post_num}
+    	  -->
+    	  SELECT *
+    	 FROM(
+	    	 SELECT mpr.POSTREP_NUM, mpr.REPLY_CONTENT, mpr.WRITE_DATE, mpr.MEM_ID, mpr.POST_NUM, mi.propic_path, mi.propic_name
+	    	   FROM meeting_post_reply mpr, member_info mi
+	          WHERE mpr.post_num = #{post_num} 
+	            AND mpr.mem_id = mi.mem_id
+            )
     </select>
     
     <!-- 해당모임 후기를 삭제시킴 -->
@@ -159,9 +167,18 @@
     
     <!-- 모임후기 댓글 조회 -->
     <select id="getPostReply" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostReplyDTO">
-    	SELECT * 
+    	<!-- SELECT * 
     	  FROM meeting_post_reply 
-    	 WHERE mem_id = #{mem_id} AND post_num = #{post_num} AND write_date = #{write_date}
+    	 WHERE mem_id = #{mem_id} AND post_num = #{post_num} AND write_date = #{write_date} -->
+    	 SELECT *
+    	 FROM(
+	    	 SELECT mpr.POSTREP_NUM, mpr.REPLY_CONTENT, mpr.WRITE_DATE, mpr.MEM_ID, mpr.POST_NUM, mi.propic_path, mi.propic_name
+	    	   FROM meeting_post_reply mpr, member_info mi
+	          WHERE mpr.mem_id = #{mem_id} 
+	            AND mpr.post_num = #{post_num} 
+	            AND mpr.write_date = #{write_date} 
+	            AND mpr.mem_id = mi.mem_id
+            )
     </select>
     
     <!-- 모임후기 댓글 삭제 -->

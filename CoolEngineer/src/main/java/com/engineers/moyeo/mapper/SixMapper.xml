@@ -422,7 +422,7 @@
  	
  	<!-- 모임사이드-모임정보수정처리 -->
  	<update id="moimModifyPro" parameterType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		UPDATE group_list group_name = #{group_name}, group_mem_cnt = #{group_mem_cnt}, group_inte1 = #{group_inte1}, group_inte2 = #{group_inte2}, group_location = #{group_location}, group_intro = #{group_intro} WHERE group_num = #{group_num}
+ 		UPDATE group_list SET group_name = #{group_name}, group_mem_cnt = #{group_mem_cnt}, group_inte1 = #{group_inte1}, group_inte2 = #{group_inte2}, group_location = #{group_location}, group_intro = #{group_intro} WHERE group_num = #{group_num}
  	</update>
  	
  	<!-- 모임사이드-모임삭제 -->

@@ -14,6 +14,10 @@ public class PostReplyDTO {
 	private String mem_id;
 	// 달린 댓글의 모임후기 번호
 	private int post_num;
+	// 작성한 회원의 사진 경로
+	private String propic_path;
+	// 작성한 회원의 사진 이름
+	private String propic_name;
 	
 	public int getPostrep_num() {
 		return postrep_num;
@@ -45,5 +49,18 @@ public class PostReplyDTO {
 	public void setPost_num(int post_num) {
 		this.post_num = post_num;
 	}
+	public String getPropic_path() {
+		return propic_path;
+	}
+	public void setPropic_path(String propic_path) {
+		this.propic_path = propic_path;
+	}
+	public String getPropic_name() {
+		return propic_name;
+	}
+	public void setPropic_name(String propic_name) {
+		this.propic_name = propic_name;
+	}
+	
 	
 }

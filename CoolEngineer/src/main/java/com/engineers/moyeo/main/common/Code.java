@@ -27,7 +27,7 @@ public interface Code {
 	// 회원 프로필사진 이름(남성)
 	public final static String profileDefNameM = "manDef.jpg";
 	// 회원 프로필사진 이름(여성)
-	public final static String profileDefNameW = "womanFef.jpg";
+	public final static String profileDefNameW = "womanDef.jpg";
 	
 	// 장소사진의 저장경로
 	public final static String placeImgPath = "placeImg\\";

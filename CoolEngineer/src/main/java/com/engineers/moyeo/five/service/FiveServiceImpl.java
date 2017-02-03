@@ -150,7 +150,7 @@ public class FiveServiceImpl implements FiveService{
 
 		// 모임후기 리스트를 가져옴
 		List<MeetingPostDTO> dtos = fiveDao.getPostList(map);
-
+		
 		req.setAttribute("dtos", dtos);
 
 		startPage = (currentPage / pageBlock) * pageBlock + 1;	// (5 / 3) * 3 + 1 = 4
@@ -325,7 +325,7 @@ public class FiveServiceImpl implements FiveService{
 		// JSP로부터 데이터 받아오는 부분
 		String title = req.getParameter("post_title");
 		String content= req.getParameter("post_content");
-		String memId = (String)req.getSession().getAttribute("memId");
+		String memId = (String)req.getSession().getAttribute("mem_id");
 		String post_tag = req.getParameter("post_tag");
 		
 		Timestamp post_date = new Timestamp(System.currentTimeMillis());
@@ -516,6 +516,10 @@ public class FiveServiceImpl implements FiveService{
 
 		// 모임후기의 댓글을 불러옴
 		List<PostReplyDTO> replyDtos = fiveDao.getPostReplys(post_num);
+		for(PostReplyDTO dto : replyDtos) {
+			System.out.println(dto.getPropic_path());
+			System.out.println(dto.getPropic_path());
+		}
 		model.addAttribute("replyDtos", replyDtos);
 
 		// 모임후기 상세정보
