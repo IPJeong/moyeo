@@ -94,22 +94,22 @@ img {
 							</div>
 
 							<div style="width: 47%; height: 45px; float: left;">
-								<input type="button"
+								<input type="button" class="btn btn-warning"
 									value="사진등록"
 									style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb','','menubar=no, toolbar=no, width=450, height=170, left=950, top=150')"> 
 
-								<a href="../moim/moim_cheif_member.jsp">
-								<input type="button"
+								<a href="../../two/moimJoinForm">
+								<input type="button" class="btn btn-warning"
 									value="모임가입"
 									style="width: 20%; height: 40px; font-size: 13px"></a> 
 								<a
-									href="../moim/moim_schedule.jsp">
-								<input type="button"
+									href="../../two/moimWithdraw">
+								<input type="button" class="btn btn-warning"
 									value="모임탈퇴"
 									style="width: 20%; height: 40px; font-size: 13px"></a> 
 								<a>
 								<input
-									type="button" value="모임신고"
+									type="button" value="모임신고" class="btn btn-warning"
 									style="width: 20%; height: 40px; font-size: 13px">
 								</a>
 							</div>
