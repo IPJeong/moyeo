@@ -118,6 +118,10 @@
 	             		<input type="button" class="btn btn-primary pull-right" value="삭제" onclick="delChk();">
 	             	</c:if>
 	             	
+	             	<c:if test="${sessionScope.authority=='manager'}">
+	             		<input type="button" class="btn btn-primary pull-right" value="삭제" onclick="delChk();">
+	             	</c:if>
+	             	
 	             	<c:if test="${sessionScope.mem_id==dto.mem_id}"> 
 	             		<input type="button" class="btn btn-primary pull-right" value="수정"
 	             		  	 onclick="window.location='qnaModifyForm?qboard_num=${dto.qboard_num}&pageNum=${pageNum}&number=${number}'">                      

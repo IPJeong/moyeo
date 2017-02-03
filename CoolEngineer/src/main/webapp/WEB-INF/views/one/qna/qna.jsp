@@ -220,7 +220,7 @@ tr {
 				
 			</div>
 		</div>
-		<a href="/moyeo/one/qnaWrite"><input type="button" class="button" value="글 쓰기"></a>
+		<a href="/moyeo/one/qnaWrite"><input type="button" class="button" value="글쓰기"></a>
 		<ul
 			class="pagination pagination-sm pull-right push-down-20 push-up-20"
 			style="align: center;">
