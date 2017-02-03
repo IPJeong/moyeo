@@ -32,6 +32,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faq") //FAQ진입
 	public String faq(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		viewPage = threeService.faq(model);
 		System.out.println("faq()");
 		
@@ -40,6 +41,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqCategory") //카테고리 생성폼으로 이동
 	public String faqCategory(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		/*String viewPage = threeService.faq(model);*/
 		System.out.println("faq()");
 		
@@ -48,6 +50,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqInsertForm") // FAQ 입력 폼
 	public String faqInsertForm(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		viewPage = threeService.faqInsertForm(model);
 		System.out.println("faqInsertForm()");
 		
@@ -56,6 +59,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqCtgInput") //카테고리 생성 처리
 	public String faqCtgInput(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.faqCtgInput(model);
 		System.out.println("faqCtgInput()");
@@ -65,6 +69,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqInsert") //FAQ입력 처리
 	public String faqInsert(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.faqInsert(model);
 		System.out.println("faqInsert()");
@@ -74,6 +79,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqCtgModify") //카테고리 수정
 	public String faqCtgModify(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		viewPage = threeService.faqCtgModify(model);
 		System.out.println("faqCtgModify()");
 		
@@ -82,6 +88,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqCtgModifyPro") //카테고리 수정 처리
 	public String faqCtgModifyPro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.faqCtgModifyPro(model);
 		System.out.println("faqInput()");
@@ -91,6 +98,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqModifyForm") //FAQ 수정 폼
 	public String faqModifyForm(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.faqModifyForm(model);
 		System.out.println("faqModifyForm()");
@@ -100,6 +108,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqModify") //FAQ 수정 처리
 	public String faqModify(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.faqModify(model);
 		System.out.println("faqModify()");
@@ -109,6 +118,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqCtgDelete") //카테고리 삭제
 	public String faqCtgDelete(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.faqCtgDelete(model);
 		System.out.println("faqCtgDelete()");
@@ -118,6 +128,7 @@ public class ThreeController {
 	
 	@RequestMapping("/faqDelete") //FAQ 삭제
 	public String faqDelete(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.faqDelete(model);
 		System.out.println("faqDelete()");
@@ -126,7 +137,8 @@ public class ThreeController {
 	}
 	
 	@RequestMapping("/ing_event") //이벤트 페이지
-	public String ing_event(HttpServletRequest req, Model model) {		
+	public String ing_event(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.ing_event(model);
 		System.out.println("ing_event()");
@@ -136,7 +148,7 @@ public class ThreeController {
 	
 	@RequestMapping("/eventInsert") //이벤트 입력
 	public String eventInsert(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
 		viewPage = threeService.eventInsert(model);
@@ -147,6 +159,7 @@ public class ThreeController {
 	
 	@RequestMapping("/registration") //회원가입
 	public String registration(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		/*String viewPage = threeService.faq(model);*/
 		System.out.println("registration()");
 		
@@ -155,6 +168,7 @@ public class ThreeController {
 	
 	@RequestMapping(value="/duplication")
 	public ModelAndView duplication(HttpServletRequest req) {
+		
 		mav = new ModelAndView("JSON");		
 		System.out.println("아이디중복여부 요청");
 		try {
@@ -171,7 +185,7 @@ public class ThreeController {
 	
 	@RequestMapping("/registMember") //이벤트 입력
 	public String registMember(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
 		viewPage = threeService.registMember(model);
