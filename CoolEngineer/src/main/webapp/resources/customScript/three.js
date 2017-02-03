@@ -1,3 +1,12 @@
+var updateError = "수정에 실패하였습니다. \n 잠시후 다시 시도하세요";
+var insertError ="입력에 실패했습니다. \n잠시후 다시 시도하세요!"
+var meminputError = "회원가입에 실패했습니다. \n잠시후 다시 시도하세요!"
+	
+function errorAlert(msg) {
+	alert(msg);
+	window.history.back();
+}
+
 //아이디중복 확인
 function duplication() {
 	
