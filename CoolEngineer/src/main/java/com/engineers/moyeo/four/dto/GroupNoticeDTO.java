@@ -56,7 +56,5 @@ public class GroupNoticeDTO {
 	public void setGroup_num(int group_num) {
 		this.group_num = group_num;
 	} 
-	
-	
 
 }
