@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.engineers.moyeo.one.dto.ManagerDTO;
 import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
 
 public interface OneDAO {
-	// �쉶�썝 寃뚯떆�뙋 �벑濡�,�닔�젙,�궘�젣
+	
 	public int getCount();
 	public ArrayList<QnaBoardDTO> getArticles(Map<String, Integer> daoMap); // 寃뚯떆湲� 紐⑸줉
 	public int insert(QnaBoardDTO dto);
@@ -21,7 +22,6 @@ public interface OneDAO {
 	public int deleteAnws(int reply_num);
 
 	
-	// 愿�由ъ옄 寃뚯떆�뙋�뿉 �떟蹂� �벑濡�
 	public int insertReply(QnaReplyDTO dto);
 	public int updateStatus(QnaBoardDTO dto);
 	public List<QnaReplyDTO> getReArticle(int qboard_num);
@@ -36,11 +36,27 @@ public interface OneDAO {
 	public MoimReportDTO getMoimContentArticle(int report_num);
 	public int updateReport(MoimReportDTO dto);
 	
-	// 관리자게시판
+	
+	////////////////////////////// 관리자게시판 //////////////////////////////////////
 	public int getManagerCount();
 	public ArrayList<MemberInformDTO> gerMemberArticles(Map<String, Integer> daoMap);
 	public MemberInformDTO getMemberInformArticle(String mem_id);
 	
-	// 회원 강퇴
+	// 관리자 권한에서 회원 강퇴
 	public int deleteInfo(String mem_id);
+	
+	// 관리자 권한에서 관리자 임명
+	public int insertManager(ManagerDTO dto);
+	
+	// 관리자 권한에서 관리자 삭제
+	public int getManagerDeleteCount();
+	
+	// 권한이 master인 관리자만 조회
+	public ArrayList<ManagerDTO> getManagerArticles(Map<String, Integer> daoMap);
+	
+	// 권한이 manager인 관리자만 조회
+	public ArrayList<ManagerDTO> getManagerArticles2(Map<String, Integer> daoMap);
+
+	// 모든 관리자 조회
+	public ArrayList<ManagerDTO> getManagerArticles3(Map<String, Integer> daoMap);
 }
