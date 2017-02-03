@@ -395,7 +395,7 @@ public class FiveServiceImpl implements FiveService{
 
 		return "five/postPro";
 	}
-
+	
 	// 모임후기의 상세정보를 조회
 	@Override
 	public String postDetail(Model model) throws NumberFormatException, NullPointerException {
@@ -611,6 +611,159 @@ public class FiveServiceImpl implements FiveService{
 		mav.addObject("picDtos", picDtos);
 		// 모임후기 동영상을 삽입
 		mav.addObject("videoDtos", videoDtos);
+	}
+	
+	// 모임후기 수정 프로세스
+	@Override
+	public String modifyPostPro(Model model) {
+
+		// 모임후기의 수정 결과를 반환하는 숫자값
+		int cnt = 0;
+
+		// model에 담아온 객체를 꺼내기 위해 map으로 전환
+		Map<String, Object> map = model.asMap();
+		// 업로드 파일 객체를 꺼냄
+		FileForm fileForm = (FileForm)map.get("fileForm");
+		// request객체를 꺼냄
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int group_num = (Integer)req.getSession().getAttribute("group_num");
+		
+		//-- 사이드바 적용 영역
+
+		//사이드에 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("group_name", open_dto.getGroup_name());
+		model.addAttribute("group_inte1", open_dto.getGroup_inte1());
+		model.addAttribute("group_inte2", open_dto.getGroup_inte2());
+
+		model.addAttribute("group_intro", open_dto.getGroup_intro());
+
+		//사이드에 들어갈 대표사진 개수 구하기
+		int cntA = sixDao.moimImageCount(group_num);
+
+		//모임 대표사진이 있는 경우만 대표사진 불러오기
+		if(cntA > 0) {
+			ArrayList<MainPictureDTO> dtos = new ArrayList<MainPictureDTO>();
+			dtos = sixDao.moimImageView(group_num);
+
+			String main_pic_nameA = dtos.get(0).getMain_pic_name();
+			String main_pic_pathA = dtos.get(0).getMain_pic_path();
+
+			model.addAttribute("main_pic_nameA", main_pic_nameA);
+			model.addAttribute("main_pic_pathA", main_pic_pathA);
+		}
+
+		//사이드에 들어갈 모임장정보 불러오기
+		MemberInfoDTO leader_dto = new MemberInfoDTO();
+
+		leader_dto = sixDao.moimLeaderLoad(group_num);
+
+		model.addAttribute("leader_id", leader_dto.getMem_id());
+		model.addAttribute("leader_name", leader_dto.getName());
+		model.addAttribute("leader_pic_name", leader_dto.getPropic_name());
+		model.addAttribute("leader_pic_path", leader_dto.getPropic_path());
+
+		//사이드용 운영진들 아이디 불러오기
+		ArrayList<String> subLeaderA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+
+		//사이드용 운영진들 정보 불러오기
+		ArrayList<MemberInfoDTO> subLeaderB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<subLeaderA_dtos.size(); i++) {
+			String subLeader_id = subLeaderA_dtos.get(i);
+			MemberInfoDTO subLeaderC_dto = sixDao.moimSubLeaderLoadB(subLeader_id);
+			subLeaderB_dtos.add(i, subLeaderC_dto);
+		}
+		model.addAttribute("subLeader_dtos", subLeaderB_dtos);
+
+		//사이드용 일반 멤버들 아이디 불러오기
+		ArrayList<String> memberA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+
+		//사이드용 일반 멤버들 정보불러오기
+		ArrayList<MemberInfoDTO> memberB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<memberA_dtos.size(); i++) {
+			String member_id = memberA_dtos.get(i);
+			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
+			memberB_dtos.add(i, memberC_dto);
+		}
+		model.addAttribute("member_dtos", memberB_dtos);
+
+		//-- 사이드바 적용 영역
+
+		// JSP로부터 데이터 받아오는 부분
+		String title = req.getParameter("post_title");
+		String content= req.getParameter("post_content");
+		String memId = (String)req.getSession().getAttribute("memId");
+		String post_tag = req.getParameter("post_tag");
+		
+		Timestamp post_date = new Timestamp(System.currentTimeMillis());
+
+		// DTO생성하여 데이터 수정
+		MeetingPostDTO dto = new MeetingPostDTO();
+		dto.setPost_title(title);
+		dto.setPost_content(content);
+		dto.setPost_date(post_date);
+		dto.setGroup_num(group_num);
+		dto.setLike_num(0);
+		dto.setMem_id(memId);
+		dto.setPost_tag(post_tag);
+		dto.setPost_hit(0);
+		cnt = fiveDao.updatePost(dto);
+
+		Map<String, Object> dataMap = new HashMap<>();
+		dataMap.put("group_num", group_num);
+		dataMap.put("post_date", post_date);
+
+		int post_num = fiveDao.getPostNum(dataMap);
+
+		// 업로드파일 관리
+		List<MultipartFile> files = fileForm.getFiles();
+
+		// 업로드 파일 확인 후 추가
+		for (MultipartFile multipartFile : files) {
+			// 업로드된 파일 이름을 받아옴
+			String fileName = multipartFile.getOriginalFilename();
+
+			if(fileName.trim().length()>4){
+
+				String rootPath = Code.rootPath;
+				// 모임후기 이미지 저장경로
+				String imgPath = Code.postImgPath;
+				// 모임후기 동영상 저장경로
+				String videoPath = Code.postVideoPath;
+				// 파일의 타입을 확인하여 가져옴
+				int type = FileManager.checkFileType(fileName);
+				String filename = null;
+
+				if(type == 1) {
+					// 파일을 저장 후 저장된 파일명을 반환
+					filename = FileManager.saveFile(multipartFile, rootPath + imgPath, fileName);
+					PostPictureDTO picDto = new PostPictureDTO();
+					picDto.setPic_path(Code.postImgPathS);
+					picDto.setPic_name(filename);
+					picDto.setGroup_num(group_num);
+					picDto.setMem_id(memId);
+					picDto.setPost_num(post_num);
+					fiveDao.insertPostPic(picDto);
+
+				} else if(type == 2) {
+					filename = FileManager.saveFile(multipartFile, rootPath + videoPath, fileName);
+					PostVideoDTO videoDto = new PostVideoDTO();
+					videoDto.setVideo_path(Code.postVideoPathS);
+					videoDto.setVideo_name(filename);
+					videoDto.setMem_id(memId);
+					videoDto.setGroup_num(group_num);
+					videoDto.setPost_num(post_num);
+					fiveDao.insertPostVideo(videoDto);
+				}
+			}
+		}
+		
+//		String[]
+//
+//		model.addAttribute("cnt", cnt);
+
+		return "five/modifyPostPro";
 	}
 
 	// 모임후기 삭제

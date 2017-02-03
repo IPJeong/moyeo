@@ -68,7 +68,6 @@ public class FiveController {
 		
 		System.out.println("모임후기 작성 프로세스 요청");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
-		req.getSession().setAttribute("memId", "guest");
 		// 모델에 req객체를 삽입
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
@@ -113,6 +112,21 @@ public class FiveController {
 			System.out.println(Code.nullPoExceptionMsg);
 		}
 		return mav;
+	}
+	
+	// 모임후기수정 프로세스
+	@RequestMapping("/modifyPostPro")
+	public String modifyPostPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
+		
+		System.out.println("모임후기 작성 프로세스 요청");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		// 모델에 req객체를 삽입
+		model.addAttribute("req", req);
+		model.addAttribute("fileForm", fileForm);
+		// 모임후기등록 프로세스
+		viewPage = fiveService.postPro(model);
+		
+		return viewPage;
 	}
 	
 	// 모임후기 삭제

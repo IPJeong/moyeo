@@ -36,6 +36,12 @@ public interface FiveDAO {
 	public int likeCheck(Map<String, Object> likeMap);
 	// 모임후기의 댓글을 불러옴
 	public List<PostReplyDTO> getPostReplys(int post_num);
+	// 모임후기 수정
+	public int updatePost(MeetingPostDTO dto);
+	// 모임후기 사진삭제
+	public int updatePostPic(PostPictureDTO dto);
+	// 모임후기 동영상삭제
+	public int updatePostVideo(PostVideoDTO dto);
 	// 모임후기 삭제
 	public int deletePost(int post_num);
 	// 모임후기 좋아요 추가

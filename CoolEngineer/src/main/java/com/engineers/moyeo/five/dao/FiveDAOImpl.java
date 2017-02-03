@@ -115,6 +115,24 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
 		return fiveDao.deletePost(post_num);
 	}
+	
+	@Override
+	public int updatePost(MeetingPostDTO dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updatePostPic(PostPictureDTO dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updatePostVideo(PostVideoDTO dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	// 모임후기 좋아요 추가
 	@Override

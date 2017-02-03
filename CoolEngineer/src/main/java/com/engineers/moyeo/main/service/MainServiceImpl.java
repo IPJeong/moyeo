@@ -48,7 +48,8 @@ public class MainServiceImpl implements MainService{
 		
 		String mem_id = req.getParameter("mem_id");
 		String passwd = req.getParameter("passwd");
-
+		String beforeurl = req.getParameter("beforeurl");
+		
 		Map<String, String> daoMap = new HashMap<String, String>(); 
 		daoMap.put("mem_id", mem_id);
 		daoMap.put("passwd", passwd);
@@ -58,6 +59,7 @@ public class MainServiceImpl implements MainService{
 		if(cnt == 1) {
 			req.getSession().setAttribute("mem_id", mem_id);
 			model.addAttribute("cnt", cnt);
+			model.addAttribute("beforeurl", beforeurl);
 			return "main/memberLoginPro";
 		} else {
 			model.addAttribute("cnt", cnt);

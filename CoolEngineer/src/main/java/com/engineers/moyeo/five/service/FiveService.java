@@ -16,6 +16,9 @@ public interface FiveService {
 	// 모임후기 등록 프로세스
 	public String postPro(Model model) throws NumberFormatException, NullPointerException;
 	
+	// 모임후기 수정 프로세스
+	public String modifyPostPro(Model model) throws NumberFormatException, NullPointerException;
+	
 	// 모임후기 상세보기
 	public String postDetail(Model model) throws NumberFormatException, NullPointerException;
 	
