@@ -1,5 +1,6 @@
 package com.engineers.moyeo.six.dao;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -309,4 +310,8 @@ public interface SixDAO {
 	
 	//모임사이드-일반멤버들 정보 불러오기
 	public MemberInfoDTO moimMemberLoadB(String mem_id);
+
+	//최근접속일 불러오기
+	public Timestamp lastConnect(Map<String, Object> daoMap);
+	
 }
