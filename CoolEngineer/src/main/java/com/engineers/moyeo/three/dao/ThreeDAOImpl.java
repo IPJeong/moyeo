@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.three.dto.EventDTO;
+import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Repository
@@ -174,6 +175,19 @@ public class ThreeDAOImpl implements ThreeDAO{
 		int cnt = 0;
 		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.confirmId", map);
 		return cnt;
+	}
+
+	@Override
+	public int memInfoInsert(MemberDTO dto) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.memInfoInsert", dto);
+		return cnt;
+	}
+
+	@Override
+	public void proImgInsert(MemberDTO dto) {
+		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.proImgInsert", dto);
+		
 	}
 	
 }

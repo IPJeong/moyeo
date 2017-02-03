@@ -19,6 +19,7 @@ import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
+import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Service("faq")
@@ -424,12 +425,15 @@ public class ThreeServiceImpl implements ThreeService{
 		mav.addObject("cnt", cnt);
 		
 	}
-
+	
+	//회원가입
 	@Override
 	public String registMember(Model model) {
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		// 업로드 파일 객체를 꺼냄
+		FileForm fileForm = (FileForm)map.get("fileForm");
 		
 		String name = (req.getParameter("firstName")) + " " + (req.getParameter("secondName"));
 		String email = req.getParameter("email");
@@ -438,21 +442,78 @@ public class ThreeServiceImpl implements ThreeService{
 		String address = req.getParameter("loc_category1") + " " + req.getParameter("loc_category2");
 		String tel1 = req.getParameter("tel");
 		String tel = "";
-		String birth = req.getParameter("birthday");
-		
+		Timestamp birth = Timestamp.valueOf(req.getParameter("birth") + " 00:00:00.0");		
+		Timestamp joinDate = new Timestamp(System.currentTimeMillis());
+		String gender = req.getParameter("gender");
 		
 		if(tel1.length() == 10) {
 			tel = tel1.substring(0, 3) + "-" + tel1.substring(3, 6) + "-" + tel1.substring(6);
-		} else if (tel1.length() == 11) {
+		} else if (tel1.length() >= 11) {
 			tel = tel1.substring(0, 3) + "-" + tel1.substring(3, 7) + "-" + tel1.substring(7);
 		} else if (tel1.length() < 10) {
 			tel = tel1.substring(0, 4) + "-" + tel1.substring(4);
 		}
+				
+		String rootPath = Code.rootPath;
+		//프로필 사진 저장 경로
+		String proImgPath = Code.profileImgPath;				
+		//프로필 사진 불러올때 경로
+		String proImgPathS = Code.profileImgPathS;
+		//기본 프로필 사진 경로
+		String proDefPath = Code.profileDefPath;
+		//기본 프로필 사진 이름(남성)
+		String proDefNameM = Code.profileDefNameM;
+		//기본 프로필 사진 이름(여성)
+		String proDefNameW = Code.profileDefNameW;
 		
+		MemberDTO dto = new MemberDTO();
+		dto.setMem_id(memid);
+		dto.setPasswd(passwd);
+		dto.setName(name);
+		dto.setAddress(address);
+		dto.setTel(tel);
+		dto.setBirth(birth);
+		dto.setEmail(email);			
+		dto.setProPicPath(proDefPath);
 		
+		if(gender.equals("man")) {
+			dto.setProPicName(proDefNameM);
+		} else if (gender.equals("woman")) {
+			dto.setProPicName(proDefNameW);
+		}
 		
+		dto.setJoinDate(joinDate);
+		dto.setGender(gender);
 		
-		return null;
+		int cnt = dao.memInfoInsert(dto);				
+		
+		List<MultipartFile> files = fileForm.getFiles();
+		String filename = null;
+		// 업로드 파일 확인
+		for (MultipartFile multipartFile : files) {
+			//업로드 파일 이름을 받아옴			
+			String fileName = multipartFile.getOriginalFilename();			
+						
+			if(fileName.trim().length()>4) {				//사진저장 메인경로
+											
+				int type = FileManager.checkFileType(fileName);					
+				
+				if(type == 1) {						
+					filename = FileManager.saveFile(multipartFile, rootPath + proImgPath, fileName);
+					MemberDTO dto2 = new MemberDTO();
+					dto2.setProPicPath(proImgPathS);
+					dto2.setProPicName(filename);
+					dto2.setMem_id(memid);
+					
+					dao.proImgInsert(dto2);
+				} 
+			}
+			
+		}
+		
+		model.addAttribute("cnt", cnt);		
+		
+		return "/three/member/registMember";
 	}
 	
 	

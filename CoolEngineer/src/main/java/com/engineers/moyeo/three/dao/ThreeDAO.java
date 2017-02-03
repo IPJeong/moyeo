@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.engineers.moyeo.three.dto.EventDTO;
+import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 public interface ThreeDAO {
@@ -33,5 +34,7 @@ public interface ThreeDAO {
 	public ArrayList<EventDTO> getEventPic(Map<String, Integer> map); //진행중인 이벤트 사진
 	
 	public int confirmId(Map<String, Object> map); //아이디 중복 체크
+	public int memInfoInsert(MemberDTO dto); //회원가입	
+	public void proImgInsert(MemberDTO dto); //프로필사진 넣기
 
 }
