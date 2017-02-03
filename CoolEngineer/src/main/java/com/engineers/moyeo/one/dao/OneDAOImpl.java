@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.one.dto.ManagerDTO;
 import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
@@ -240,5 +241,52 @@ public class OneDAOImpl implements OneDAO{
 		cnt= dao.deleteInfo(mem_id);
 		
 		return cnt;
+	}
+
+	@Override
+	public int insertManager(ManagerDTO dto) {
+		
+		int count = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		count = dao.insertManager(dto);
+		
+		return count;
+	}
+	
+	@Override
+	public int getManagerDeleteCount() {
+		int cnt = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.getManagerDeleteCount();
+		return cnt;
+	}
+
+	// 모든 관리자 조회
+	@Override
+	public ArrayList<ManagerDTO> getManagerArticles(Map<String, Integer> daoMap) {
+		
+		ArrayList<ManagerDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getManagerArticles(daoMap);
+		return dtos;
+	}
+
+	// 권한이 manager인 관리자 조회
+	@Override
+	public ArrayList<ManagerDTO> getManagerArticles2(Map<String, Integer> daoMap) {		
+		ArrayList<ManagerDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getManagerArticles2(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<ManagerDTO> getManagerArticles3(Map<String, Integer> daoMap) {
+		ArrayList<ManagerDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getManagerArticles3(daoMap);
+		return dtos;
 	}
 }
