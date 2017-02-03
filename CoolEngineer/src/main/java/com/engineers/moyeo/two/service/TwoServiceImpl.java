@@ -15,7 +15,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.six.dao.SixDAO;
+import com.engineers.moyeo.six.dto.MainPictureDTO;
+import com.engineers.moyeo.six.dto.MemberInfoDTO;
+import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.two.dao.TwoDAO;
+import com.engineers.moyeo.two.dto.Greeting_boardDTO;
+import com.engineers.moyeo.two.dto.Group_noticeDTO;
+import com.engineers.moyeo.two.dto.Join_requestDTO;
+import com.engineers.moyeo.two.dto.Meeting_postDTO;
+import com.engineers.moyeo.two.dto.Moim_infoDTO;
+import com.engineers.moyeo.two.dto.My_groupDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_picDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
@@ -26,6 +36,9 @@ public class TwoServiceImpl implements TwoService{
 
 	@Autowired
 	TwoDAO twoDao;
+	
+	@Autowired
+	SixDAO sixDao;
 
 	@Override
 	public String suggestionInputPro(Model model) {
@@ -92,8 +105,8 @@ public class TwoServiceImpl implements TwoService{
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
 		
-		start = (currentPage - 1) * pageSize + 1; //(5 - 1) * 10 + 1;
-		end = start + pageSize -1; // 41 + 10 - 1 = 50; 
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
 		
 		if(end > cnt) end = cnt;
 
@@ -203,8 +216,8 @@ public class TwoServiceImpl implements TwoService{
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
 		
-		start = (currentPage - 1) * pageSize + 1; //(5 - 1) * 10 + 1;
-		end = start + pageSize -1; // 41 + 10 - 1 = 50; 
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
 		
 		if(end > cnt) end = cnt;
 
@@ -294,8 +307,8 @@ public class TwoServiceImpl implements TwoService{
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
 		
-		start = (currentPage - 1) * pageSize + 1; //(5 - 1) * 10 + 1;
-		end = start + pageSize -1; // 41 + 10 - 1 = 50; 
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
 		
 		if(end > cnt) end = cnt;
 
@@ -375,8 +388,8 @@ public class TwoServiceImpl implements TwoService{
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
 		
-		start = (currentPage - 1) * pageSize + 1; //(5 - 1) * 10 + 1;
-		end = start + pageSize -1; // 41 + 10 - 1 = 50; 
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
 		
 		if(end > cnt) end = cnt;
 
@@ -466,8 +479,8 @@ public class TwoServiceImpl implements TwoService{
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
 		
-		start = (currentPage - 1) * pageSize + 1; //(5 - 1) * 10 + 1;
-		end = start + pageSize -1; // 41 + 10 - 1 = 50; 
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
 		
 		if(end > cnt) end = cnt;
 
@@ -519,19 +532,19 @@ public class TwoServiceImpl implements TwoService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
-		int pageSize = 5; 	//�� �������� ����� �� ����
-		int pageBlock = 3; 	//����� ������ ����
+		int pageSize = 5; 	
+		int pageBlock = 3; 	
 		
-		int cnt = 0;			//�� ����
-		int start = 0;			//���� ������ ���� ��ȣ : rownum
-		int end = 0;			//���� �信�� �� ��ȣ : rownum
-		int place_num = 0;			//����� �� ��ȣ
-		String pageNum = null; 	//������ ��ȣ
-		int currentPage = 0;	//���� ������
+		int cnt = 0;			
+		int start = 0;		
+		int end = 0;			
+		int place_num = 0;		
+		String pageNum = null; 	
+		int currentPage = 0;	
 		
-		int pageCount = 0;		//������ ����
-		int startPage = 0;		//���� ������
-		int endPage = 0;		//������ ������
+		int pageCount = 0;		
+		int startPage = 0;	
+		int endPage = 0;	
 	
 		cnt = twoDao.getPlaceCount();
 	
@@ -544,8 +557,8 @@ public class TwoServiceImpl implements TwoService{
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
 		
-		start = (currentPage - 1) * pageSize + 1; //(5 - 1) * 10 + 1;
-		end = start + pageSize -1; // 41 + 10 - 1 = 50; 
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
 		
 		if(end > cnt) end = cnt;
 		
@@ -569,16 +582,16 @@ public class TwoServiceImpl implements TwoService{
 		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		req.setAttribute("cnt", cnt);
-		req.setAttribute("place_num", place_num); //�۹�ȣ
-		req.setAttribute("pageNum", pageNum);
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("place_num", place_num); //�۹�ȣ
+		model.addAttribute("pageNum", pageNum);
 		
 		if (cnt > 0) {
-			req.setAttribute("currentPage", currentPage);
-			req.setAttribute("startPage", startPage);
-			req.setAttribute("endPage", endPage);
-			req.setAttribute("pageCount", pageCount);
-			req.setAttribute("pageBlock", pageBlock);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
 		}
 
 		return "two/places/placeList";
@@ -624,8 +637,8 @@ public class TwoServiceImpl implements TwoService{
 		currentPage = Integer.parseInt(recPlacePageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
 		
-		start = (currentPage - 1) * pageSize + 1; //(5 - 1) * 10 + 1;
-		end = start + pageSize -1; // 41 + 10 - 1 = 50; 
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
 		
 		if(end > cnt) end = cnt;
 
@@ -1017,7 +1030,7 @@ public class TwoServiceImpl implements TwoService{
 			
 			checkMyPlaceLike = twoDao.checkMyPlaceLike(daoMap);
 			
-			if(checkMyPlaceLike != 0 ) {
+			if(checkMyPlaceLike != 0) {
 				cnt = -1;
 			} else {
 				cnt = twoDao.plusPlaceLike(daoMap);
@@ -1056,4 +1069,796 @@ public class TwoServiceImpl implements TwoService{
 		
 	}
 
+	@Override
+	public String moimInfoManaging(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		Moim_infoDTO dto = twoDao.readMoimInfo(group_num);
+		
+		String[] recpla_category = dto.getGroup_location().split("-");
+	
+		String recpla_category1 = recpla_category[0];
+		String recpla_category2 = recpla_category[1];
+		
+		model.addAttribute("recpla_category1", recpla_category1);
+		model.addAttribute("recpla_category2", recpla_category2);
+		
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("dto", dto);
+		
+		return "two/moim_managing/moimInfoManaging";
+	}
+	
+	@Override
+	public String moimInfoManagingPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+
+		Moim_infoDTO dto = new Moim_infoDTO();
+		
+		dto.setGroup_num(Integer.parseInt(req.getParameter("group_num")));
+		dto.setGroup_name(req.getParameter("moim_title"));
+		dto.setGroup_mem_cnt(Integer.parseInt(req.getParameter("max_person")));
+		dto.setGroup_inte1(req.getParameter("recpla_category1"));
+		dto.setGroup_inte2(req.getParameter("recpla_category2"));
+		
+		String location = req.getParameter("loc_category1")+ "-" + req.getParameter("loc_category2");
+		dto.setGroup_location(location);
+		dto.setGroup_intro(req.getParameter("content"));
+				
+		int cnt = twoDao.modifyMoimInfo(dto);
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("dto", dto);		
+		model.addAttribute("group_num", group_num);
+		
+		return "two/moim_managing/moimInfoManagingPro";
+	}
+	
+	@Override
+	public String moimJoinForm(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int cnt = 0;
+		int group_num = (int) req.getSession().getAttribute("group_num");
+		String mem_id = (String) req.getSession().getAttribute("mem_id");
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("group_num", group_num);
+		daoMap.put("mem_id", mem_id);
+		
+		cnt = twoDao.identifyMoimMember(daoMap);
+
+		Moim_infoDTO dto = twoDao.readMoimInfo(group_num);
+		
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("mem_id", mem_id);
+		model.addAttribute("dto", dto);
+		model.addAttribute("cnt", cnt);
+		
+		return "two/moim_join/moimJoinForm";
+	}
+
+	@Override
+	public String moimJoinPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int cnt = 0;
+		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		String mem_id = req.getParameter("mem_id");
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("group_num", group_num);
+		daoMap.put("mem_id", mem_id);
+		
+		cnt = twoDao.moimJoin(daoMap);
+		
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("cnt", cnt);
+		
+		return "two/moim_join/moimJoinPro";
+	}
+	
+
+	@Override
+	public String moimWithdraw(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int cnt = 0;
+		int group_num = (int) req.getSession().getAttribute("group_num");
+		String mem_id = (String) req.getSession().getAttribute("mem_id");
+
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("group_num", group_num);
+		daoMap.put("mem_id", mem_id);
+		
+
+		My_groupDTO dto = new My_groupDTO();
+		
+		dto = twoDao.getMoimMemberInfo2(daoMap);
+		
+		String group_per = dto.getGroup_per();
+		
+		if(group_per.equals("1")) {
+			cnt = -1;
+		} else {
+			cnt = twoDao.moimWithdraw(daoMap);
+		}
+		
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("cnt", cnt);
+		
+		return "two/moim_join/moimWithdraw";
+	}	
+
+	@Override
+	public String moimJoinManaging(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int pageSize = 10; 	
+		int pageBlock = 3; 	
+		
+		int cnt = 0;			
+		int start = 0;		
+		int end = 0;			
+		int num = 0;		
+		String pageNum = null; 	
+		int currentPage = 0;	
+		int pageCount = 0;		
+		int startPage = 0;	
+		int endPage = 0;
+		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+
+		//사이드에 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("group_name", open_dto.getGroup_name());
+		model.addAttribute("group_inte1", open_dto.getGroup_inte1());
+		model.addAttribute("group_inte2", open_dto.getGroup_inte2());
+		model.addAttribute("group_intro", open_dto.getGroup_intro());
+	
+		//사이드에 들어갈 대표사진 개수 구하기
+		int cntA = sixDao.moimImageCount(group_num);
+		
+		//모임 대표사진이 있는 경우만 대표사진 불러오기
+		if(cntA > 0) {
+			ArrayList<MainPictureDTO> dtos = new ArrayList<MainPictureDTO>();
+			dtos = sixDao.moimImageView(group_num);
+			
+			String main_pic_nameA = dtos.get(0).getMain_pic_name();
+			String main_pic_pathA = dtos.get(0).getMain_pic_path();
+			
+			model.addAttribute("main_pic_nameA", main_pic_nameA);
+			model.addAttribute("main_pic_pathA", main_pic_pathA);
+		}
+		
+		//사이드에 들어갈 모임장정보 불러오기
+		MemberInfoDTO leader_dto = new MemberInfoDTO();
+		
+		leader_dto = sixDao.moimLeaderLoad(group_num);
+			
+		model.addAttribute("leader_id", leader_dto.getMem_id());
+		model.addAttribute("leader_name", leader_dto.getName());
+		model.addAttribute("leader_pic_name", leader_dto.getPropic_name());
+		model.addAttribute("leader_pic_path", leader_dto.getPropic_path());
+	
+		//사이드용 운영진들 아이디 불러오기
+		ArrayList<String> subLeaderA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		//사이드용 운영진들 정보 불러오기
+		ArrayList<MemberInfoDTO> subLeaderB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<subLeaderA_dtos.size(); i++) {
+			String subLeader_id = subLeaderA_dtos.get(i);
+			MemberInfoDTO subLeaderC_dto = sixDao.moimSubLeaderLoadB(subLeader_id);
+			subLeaderB_dtos.add(i, subLeaderC_dto);
+		}
+		model.addAttribute("subLeader_dtos", subLeaderB_dtos);
+		
+		//사이드용 일반 멤버들 아이디 불러오기
+		ArrayList<String> memberA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		//사이드용 일반 멤버들 정보불러오기
+		ArrayList<MemberInfoDTO> memberB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<memberA_dtos.size(); i++) {
+			String member_id = memberA_dtos.get(i);
+			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
+			memberB_dtos.add(i, memberC_dto);
+		}
+		model.addAttribute("member_dtos", memberB_dtos);
+		
+		
+		cnt = twoDao.getMoimJoinCount(group_num);
+	
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; 
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
+		
+		if(end > cnt) end = cnt;
+		
+		num = cnt - (currentPage - 1) * pageSize;
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("start", start);
+		daoMap.put("end", end);
+		daoMap.put("group_num", group_num);
+		
+		if(cnt > 0) {
+			ArrayList<Join_requestDTO> dtos = twoDao.getMoimJoinList(daoMap);
+			model.addAttribute("dtos", dtos);
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1; 
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("num", num); 
+		model.addAttribute("pageNum", pageNum);
+		
+		if (cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		model.addAttribute("group_num", group_num);
+			
+		return "two/moim_managing/moimJoinManaging";
+	}
+	
+
+	@Override
+	public String moimJoinOK(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String[] request_nums = req.getParameterValues("request_num");
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		for(String request_num_str : request_nums) {
+			int request_num = Integer.parseInt(request_num_str);
+			
+			Map<String, Object> daoMap = new HashMap<String, Object>();
+			daoMap.put("request_num", request_num);
+			daoMap.put("status", "승인");
+			
+			twoDao.moimJoinOK(daoMap);
+			
+			Join_requestDTO dto = new Join_requestDTO();
+			dto = twoDao.getMoimJoinInfo(request_num);
+			
+			String group_per = "3";
+			String mem_id = dto.getMem_id();
+			
+			Map<String, Object> daoMap2 = new HashMap<String, Object>();
+			daoMap2.put("group_per", group_per);
+			daoMap2.put("group_num", group_num);
+			daoMap2.put("mem_id", mem_id);
+			
+			twoDao.moimJoinPro(daoMap2);
+		}
+		
+		model.addAttribute("group_num", group_num);
+		
+		return "two/moim_managing/moimJoinOK";
+	}
+
+	@Override
+	public String moimJoinNO(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		String[] request_nums = req.getParameterValues("request_num");
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		for(String request_num_str : request_nums) {
+			int request_num = Integer.parseInt(request_num_str);
+			
+			Map<String, Object> daoMap = new HashMap<String, Object>();
+			daoMap.put("request_num", request_num);
+			daoMap.put("status", "거절");
+			
+			twoDao.moimJoinNO(daoMap);
+		}
+		
+		model.addAttribute("group_num", group_num);
+		
+		return "two/moim_managing/moimJoinNO";
+	}
+
+	@Override
+	public String moimMemberManaging(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int pageSize = 10; 	
+		int pageBlock = 3; 	
+		
+		int cnt = 0;			
+		int start = 0;		
+		int end = 0;			
+		int num = 0;		
+		String pageNum = null; 	
+		int currentPage = 0;	
+		int pageCount = 0;		
+		int startPage = 0;	
+		int endPage = 0;
+		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+
+		//사이드에 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("group_name", open_dto.getGroup_name());
+		model.addAttribute("group_inte1", open_dto.getGroup_inte1());
+		model.addAttribute("group_inte2", open_dto.getGroup_inte2());
+		model.addAttribute("group_intro", open_dto.getGroup_intro());
+	
+		//사이드에 들어갈 대표사진 개수 구하기
+		int cntA = sixDao.moimImageCount(group_num);
+		
+		//모임 대표사진이 있는 경우만 대표사진 불러오기
+		if(cntA > 0) {
+			ArrayList<MainPictureDTO> dtos = new ArrayList<MainPictureDTO>();
+			dtos = sixDao.moimImageView(group_num);
+			
+			String main_pic_nameA = dtos.get(0).getMain_pic_name();
+			String main_pic_pathA = dtos.get(0).getMain_pic_path();
+			
+			model.addAttribute("main_pic_nameA", main_pic_nameA);
+			model.addAttribute("main_pic_pathA", main_pic_pathA);
+		}
+		
+		//사이드에 들어갈 모임장정보 불러오기
+		MemberInfoDTO leader_dto = new MemberInfoDTO();
+		
+		leader_dto = sixDao.moimLeaderLoad(group_num);
+			
+		model.addAttribute("leader_id", leader_dto.getMem_id());
+		model.addAttribute("leader_name", leader_dto.getName());
+		model.addAttribute("leader_pic_name", leader_dto.getPropic_name());
+		model.addAttribute("leader_pic_path", leader_dto.getPropic_path());
+	
+		//사이드용 운영진들 아이디 불러오기
+		ArrayList<String> subLeaderA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		//사이드용 운영진들 정보 불러오기
+		ArrayList<MemberInfoDTO> subLeaderB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<subLeaderA_dtos.size(); i++) {
+			String subLeader_id = subLeaderA_dtos.get(i);
+			MemberInfoDTO subLeaderC_dto = sixDao.moimSubLeaderLoadB(subLeader_id);
+			subLeaderB_dtos.add(i, subLeaderC_dto);
+		}
+		model.addAttribute("subLeader_dtos", subLeaderB_dtos);
+		
+		//사이드용 일반 멤버들 아이디 불러오기
+		ArrayList<String> memberA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		//사이드용 일반 멤버들 정보불러오기
+		ArrayList<MemberInfoDTO> memberB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<memberA_dtos.size(); i++) {
+			String member_id = memberA_dtos.get(i);
+			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
+			memberB_dtos.add(i, memberC_dto);
+		}
+		model.addAttribute("member_dtos", memberB_dtos);
+		
+		cnt = twoDao.getMoimMemberCount(group_num);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; 
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
+		
+		if(end > cnt) end = cnt;
+		
+		num = cnt - (currentPage - 1) * pageSize;
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("start", start);
+		daoMap.put("end", end);
+		daoMap.put("group_num", group_num);
+		
+		if(cnt > 0) {
+			ArrayList<My_groupDTO> dtos = twoDao.getMoimMemberList(daoMap);
+			model.addAttribute("dtos", dtos);
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1; 
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("num", num); 
+		model.addAttribute("pageNum", pageNum);
+		
+		if (cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		model.addAttribute("group_num", group_num);
+			
+		return "two/moim_managing/moimMemberManaging";
+	}
+
+	@Override
+	public String moimMemberRankForm(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int my_group_num = Integer.parseInt(req.getParameter("my_group_num")); 	
+		int group_num = Integer.parseInt(req.getParameter("group_num")); 
+
+		My_groupDTO dto = new My_groupDTO();
+
+		dto = twoDao.getMoimMemberInfo(my_group_num);
+		
+		model.addAttribute("my_group_num", my_group_num);
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("dto", dto);
+		
+		return "two/moim_managing/moimMemberRankForm";
+	}
+
+	@Override
+	public String moimMemberRankPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int cnt = 0;
+		
+		int my_group_num = Integer.parseInt(req.getParameter("my_group_num")); 	
+		int group_num = Integer.parseInt(req.getParameter("group_num")); 
+		String group_per = req.getParameter("group_per");
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("my_group_num", my_group_num);
+		daoMap.put("group_per", group_per);
+		
+		cnt = twoDao.changeMoimMemberRank(daoMap);
+		
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("cnt", cnt);
+		
+		return "two/moim_managing/moimMemberRankPro";
+	}
+
+	@Override
+	public String moimMemberBanish(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int cnt = 0;
+		
+		int my_group_num = Integer.parseInt(req.getParameter("my_group_num")); 	
+		int group_num = Integer.parseInt(req.getParameter("group_num")); 
+		
+		My_groupDTO dto = new My_groupDTO();
+		dto = twoDao.getMoimMemberInfo(my_group_num);
+		
+		String group_per = dto.getGroup_per();
+		
+		if(group_per.equals("1")) {
+			
+			return "two/moim_managing/moimMemberBanishFail";
+		} else {
+			cnt = twoDao.banishMoimMember(my_group_num);
+			
+			model.addAttribute("group_num", group_num);
+			model.addAttribute("cnt", cnt);
+			
+			return "two/moim_managing/moimMemberBanish";
+		}
+		
+	}
+
+	@Override
+	public String moimBoardManaging(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int pageSize = 10; 	
+		int pageBlock = 3; 	
+		
+		int cnt = 0;			
+		int start = 0;		
+		int end = 0;			
+		int num = 0;		
+		String pageNum = null; 	
+		int currentPage = 0;	
+		int pageCount = 0;		
+		int startPage = 0;	
+		int endPage = 0;
+		
+	/*	int group_num = (int) req.getSession().getAttribute("group_num");*/
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		//사이드에 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("group_name", open_dto.getGroup_name());
+		model.addAttribute("group_inte1", open_dto.getGroup_inte1());
+		model.addAttribute("group_inte2", open_dto.getGroup_inte2());
+		model.addAttribute("group_intro", open_dto.getGroup_intro());
+	
+		//사이드에 들어갈 대표사진 개수 구하기
+		int cntA = sixDao.moimImageCount(group_num);
+		
+		//모임 대표사진이 있는 경우만 대표사진 불러오기
+		if(cntA > 0) {
+			ArrayList<MainPictureDTO> dtos = new ArrayList<MainPictureDTO>();
+			dtos = sixDao.moimImageView(group_num);
+			
+			String main_pic_nameA = dtos.get(0).getMain_pic_name();
+			String main_pic_pathA = dtos.get(0).getMain_pic_path();
+			
+			model.addAttribute("main_pic_nameA", main_pic_nameA);
+			model.addAttribute("main_pic_pathA", main_pic_pathA);
+		}
+		
+		//사이드에 들어갈 모임장정보 불러오기
+		MemberInfoDTO leader_dto = new MemberInfoDTO();
+		
+		leader_dto = sixDao.moimLeaderLoad(group_num);
+			
+		model.addAttribute("leader_id", leader_dto.getMem_id());
+		model.addAttribute("leader_name", leader_dto.getName());
+		model.addAttribute("leader_pic_name", leader_dto.getPropic_name());
+		model.addAttribute("leader_pic_path", leader_dto.getPropic_path());
+	
+		//사이드용 운영진들 아이디 불러오기
+		ArrayList<String> subLeaderA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		//사이드용 운영진들 정보 불러오기
+		ArrayList<MemberInfoDTO> subLeaderB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<subLeaderA_dtos.size(); i++) {
+			String subLeader_id = subLeaderA_dtos.get(i);
+			MemberInfoDTO subLeaderC_dto = sixDao.moimSubLeaderLoadB(subLeader_id);
+			subLeaderB_dtos.add(i, subLeaderC_dto);
+		}
+		model.addAttribute("subLeader_dtos", subLeaderB_dtos);
+		
+		//사이드용 일반 멤버들 아이디 불러오기
+		ArrayList<String> memberA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		//사이드용 일반 멤버들 정보불러오기
+		ArrayList<MemberInfoDTO> memberB_dtos = new ArrayList<MemberInfoDTO>();
+		for(int i=0; i<memberA_dtos.size(); i++) {
+			String member_id = memberA_dtos.get(i);
+			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
+			memberB_dtos.add(i, memberC_dto);
+		}
+		model.addAttribute("member_dtos", memberB_dtos);
+		
+		
+		
+		String board_category = req.getParameter("board_category");
+		
+		if(board_category != null) {
+			if(req.getParameter("board_category").equals("모임공지")) {
+				System.out.println("group_num : "+group_num);
+				cnt = twoDao.getNoticeBoardCount(group_num);
+				System.out.println("1번");
+				System.out.println("cnt : "+cnt);
+			} else if (board_category.equals("가입인사")) {
+				System.out.println("group_num : "+group_num);
+				cnt = twoDao.getGreetingBoardCount(group_num);
+				System.out.println("2번");
+				System.out.println("cnt : "+cnt);
+			} else if(board_category.equals("모임후기")) {
+				System.out.println("group_num : "+group_num);
+				cnt = twoDao.getPostBoardCount(group_num);
+				System.out.println("3번");
+				System.out.println("cnt : "+cnt);
+			} else {
+				System.out.println("group_num : "+group_num);
+				cnt = twoDao.getNoticeBoardCount(group_num);
+				System.out.println("4번");
+				System.out.println("cnt : "+cnt);
+			}
+		} else {
+			System.out.println("group_num : "+group_num);
+			cnt = twoDao.getNoticeBoardCount(group_num);
+			System.out.println("5번");
+			System.out.println("cnt : "+cnt);
+		}
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; 
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1; 
+		end = start + pageSize -1; 
+		
+		if(end > cnt) end = cnt;
+		
+		num = cnt - (currentPage - 1) * pageSize;
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("start", start);
+		daoMap.put("end", end);
+		daoMap.put("group_num", group_num);
+		
+		System.out.println("cnt : "+cnt);
+		if(cnt == 0) {
+			if(board_category == null) {
+				model.addAttribute("board_category", "모임공지");
+			} else {
+				model.addAttribute("board_category", board_category);
+			}	
+		}
+		
+		if(cnt > 0) {
+			if(board_category != null) {
+				if(board_category.equals("모임공지")) {
+					ArrayList<Group_noticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
+					model.addAttribute("dtos", dtos);
+					System.out.println("dtos : "+ dtos);
+					model.addAttribute("board_category", "모임공지");
+				} else if (board_category.equals("가입인사")) {
+					ArrayList<Greeting_boardDTO> dtos = twoDao.getGreetingBoardArticles(daoMap);
+					model.addAttribute("dtos", dtos);
+					System.out.println("dtos : "+ dtos);
+					model.addAttribute("board_category", "가입인사");
+				} else if(board_category.equals("모임후기")) {
+					ArrayList<Meeting_postDTO> dtos = twoDao.getPostBoardArticles(daoMap);
+					model.addAttribute("dtos", dtos);
+					System.out.println("dtos : "+ dtos);
+					model.addAttribute("board_category", "모임후기");
+				} else {
+					ArrayList<Group_noticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
+					model.addAttribute("dtos", dtos);
+					System.out.println("dtos : "+ dtos);
+					model.addAttribute("board_category", "모임공지");
+				}
+			} else {
+				ArrayList<Group_noticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
+				model.addAttribute("dtos", dtos);
+				System.out.println("dtos : "+ dtos);
+				model.addAttribute("board_category", "모임공지");
+			}	
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1; 
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("num", num); 
+		model.addAttribute("pageNum", pageNum);
+		
+		if (cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		model.addAttribute("group_num", group_num);
+		
+		return "two/moim_managing/moimBoardManaging";
+	}
+
+	@Override
+	public String deleteNoticeBoardArticle(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int cnt = 0;
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		String board_category = req.getParameter("board_category");
+		String[] group_noti_nums = req.getParameterValues("group_noti_num");
+		
+		System.out.println("board_category : "+ board_category);
+		
+		for(String group_noti_num_str : group_noti_nums) {
+			int group_noti_num = Integer.parseInt(group_noti_num_str);
+			
+			Map<String, Object> daoMap = new HashMap<String, Object>();
+			daoMap.put("group_noti_num", group_noti_num);
+			daoMap.put("group_num", group_num);
+			
+			cnt = twoDao.deleteNoticeBoardArticle(daoMap);
+		}
+		
+		
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("cnt", cnt);
+		
+		return "two/moim_managing/moimBoardDeleteArticle";
+	}
+
+	@Override
+	public String deleteGreetingBoardArticle(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int cnt = 0;
+		int group_num = Integer.parseInt(req.getParameter("group_num")); 
+		String board_category = req.getParameter("board_category");
+		String[] greeting_nums = req.getParameterValues("greeting_num");
+		
+		System.out.println("board_category : "+ board_category);
+		
+		for(String greeting_num_str : greeting_nums) {
+			int greeting_num = Integer.parseInt(greeting_num_str);
+			
+			Map<String, Object> daoMap = new HashMap<String, Object>();
+			daoMap.put("greeting_num", greeting_num);
+			daoMap.put("group_num", group_num);
+			
+			cnt = twoDao.deleteGreetingBoardArticle(daoMap);
+		}
+		
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("cnt", cnt);
+		return "two/moim_managing/moimBoardDeleteArticle";
+	}
+
+	@Override
+	public String deletePostBoardArticle(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int cnt = 0;
+		int group_num = Integer.parseInt(req.getParameter("group_num")); 
+		String board_category = req.getParameter("board_category");
+		String[] post_nums = req.getParameterValues("post_num");
+		
+		System.out.println("board_category : "+ board_category);
+		
+		for(String post_num_str : post_nums) {
+			int post_num = Integer.parseInt(post_num_str);
+			
+			Map<String, Object> daoMap = new HashMap<String, Object>();
+			daoMap.put("post_num", post_num);
+			daoMap.put("group_num", group_num);
+			
+			cnt = twoDao.deletePostBoardArticle(daoMap);
+		}
+		
+		model.addAttribute("group_num", group_num);
+		model.addAttribute("cnt", cnt);
+		return "two/moim_managing/moimBoardDeleteArticle";
+	}
 }
