@@ -118,14 +118,14 @@
 
 	}
 	
-	function dateChk() {
+	function dateChk() { //시작일 선택시 종료일과 발표일 동기화
 		if(eventInsertForm.startDate.value != eventInsertForm.endDate.value) {
 			document.eventInsertForm.endDate.value = document.eventInsertForm.startDate.value;
 			document.eventInsertForm.notiDate.value = document.eventInsertForm.startDate.value;
 		};
 	}
 	
-	function dateChk2() {
+	function dateChk2() { //종료일이 시작일보다 빠르지 않게, 종료일 선택시 발표일과 동기화
 		if(eventInsertForm.endDate.value != eventInsertForm.notiDate.value)	{
 			document.eventInsertForm.notiDate.value = document.eventInsertForm.endDate.value;
 		};
@@ -136,15 +136,26 @@
 		}
 	}
 	
-	function dateChk3() {		
+	function dateChk3() { //발표일이 종료일보다 빠르지 않게		
 		if(eventInsertForm.notiDate.value < eventInsertForm.endDate.value) {
 			alert("당첨자발표일이 종료일 보다 빠를수는 없습니다.");			
 			document.eventInsertForm.notiDate.value = document.eventInsertForm.endDate.value;
 		}
 	}
 	
+	function participate(id, eventNum) {		
+		if(id == null) {
+			alert("로그인이 필요합니다.");
+			window.location="/moyeo/main/memberLoginForm";
+		} else if(id != 'admin') {
+			window.location='eParticipate?=' + eventNum;
+		} else {
+			alert("관리자는 참여할 수 없습니다.");
+		}
+	}
+	
+	
 </script>
-
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb push-down-0">
 	<li><a href="#">Home</a></li>
@@ -156,11 +167,11 @@
 <!-- PAGE CONTENT TABBED -->
 <div class="page-tabs">
 	<a href="#first-tab" class="active">진행중인 이벤트</a> 
-	<a href="#second-tab">당첨자 발표</a>
+	<a href="#second-tab"> 당첨자 발표</a>
 </div>
 
 <div class="page-content-wrap page-tabs-item active" id="first-tab">
-	<%-- <c:if test="${sessionScope.memId == 'admin'}"> --%>
+	<c:if test="${sessionScope.mem_id == 'admin'}">
 		<div class="form-group"> 
 			<div class="col-md-6-3" style="width:70%;">                                       
 		        <div class="col-md-2" style="float:right;">
@@ -168,8 +179,8 @@
 		        </div>
 		    </div>
 	    </div>
-    <%-- </c:if> --%>
-    <div class="col-md-6-3" style="width:70%;">
+    </c:if>
+    <div class="col-md-6-3 " style="width:70%;">
     	<div class="col-md-12">
 	    <table style="width:100%;">
 	    	<thead>
@@ -189,7 +200,7 @@
 				                             <div class="panel-body" style="height:100%">
 				                                  <div class="text-center" id="user_image" style="width:100%;height:100%;padding:3px;">
 				                                  		<a href="#" data-toggle="modal" data-target="#${dto.eventNum}" style="text-decoration:none;">
-				                                  			<img src="${dto.picPath}/${dto.picName}" style="width:100%; width:270px; height:180px;">
+				                                  			<img src="${dto.picPath}/${dto.picName}" style="width:100%;height:100%;">
 				                                  		</a>
 				                                  </div>
 				                             </div>
@@ -204,20 +215,26 @@
 								    		</div>								    		
 								    		<div class="panel-body form-group-separated" style="height:80%;">
 								    			<div class="form-group" style="height:60%;">
-							    				<label class="col-md-12 col-xs-12 line-height-30">${dto.eventCon}</label>
+							    				<label class="col-md-12 col-xs-12 line-height-15" style="max-height:31px;">${dto.eventCon}</label>
 								    			</div>
 								    			<div class="form-group" style="height:40%;">	
-								    				<label class="col-md-12 col-xs-12 line-height-15">기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;간&nbsp;&nbsp;
+								    				<label class="col-md-10 col-xs-12 line-height-15">기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;간&nbsp;&nbsp;
 								    				<fmt:formatDate type="both" pattern="yy-MM-dd" value="${dto.startDate}"/>&nbsp;~
 								    				<fmt:formatDate type="both" pattern="yy-MM-dd" value="${dto.endDate}"/><br>당첨자발표&nbsp;&nbsp;
-								    				<font color="#8BC34A"><fmt:formatDate type="both" pattern="yy-MM-dd" value="${dto.notiDate}"/></font></label>				    				
+								    				<font color="#8BC34A"><fmt:formatDate type="both" pattern="yy-MM-dd" value="${dto.notiDate}"/></font></label>
+								    				<c:if test="${sessionScope.mem_id == 'admin'}">
+								    				<div class="col-md-2">
+								    					<button class="btn btn-success btn-block" data-toggle="modal" data-target="#partic" data-backdrop="static">참여자</button>
+								    				</div>
+								    				</c:if>				    				
 								    			</div>
 								    		</div>
 							    		</div>
-					    			</div>					    					    			
-			    					<div class="modal animated fadeIn" id="${dto.eventNum}" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+					    			</div>
+					    			<!-- 이벤트 상세 페이지 모달 -->					    					    			
+			    					<div class="modal animated fadeIn" id="${dto.eventNum}" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true" >
 										<div class="modal-dialog">
-										    <div class="modal-content" style="overflow-y:scroll;">
+										    <div class="modal-content" style="max-height:85%;">
 										        <div class="modal-header">
 										            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 										            <h4 class="modal-title" id="smallModalHead" style="font-weight:bold;">${dto.eventTitle}</h4>
@@ -226,12 +243,12 @@
 										            <div class="form-group col-md-12" style="padding:0px;">
 										                <div class="col-md-3" style="width:30%">
 										                	<div class="text-center" id="user_image" style="width:100%;height:100%;padding:3px;">
-							                                	<img src="${dto.picPath}/${dto.picName}" style="width:100%">
+							                                	<img src="${dto.picPath}/${dto.picName}" style="width:100%;height:100%;">
 							                                </div>
 										                </div>
 										                <div class="col-md-9" style="width:70%;padding:0px;">
 										                	<div class="form-group" style="height:50%;">
-										                    	<label class="col-md-12 col-xs-12 line-height-30">등록자 : ${dto.adminId}</label>
+										                    	<label class="col-md-12 col-xs-12 line-height-30">등록자 : ${dto.adminId}</label>										                    	
 										                    </div>
 										                    <div class="form-group" style="height:50%;">	
 											    				<label class="col-md-12 col-xs-12 line-height-15" style="margin:0px;">기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;간&nbsp;&nbsp;
@@ -245,22 +262,41 @@
 										            	<c:forEach var="dto2" items="${dtos2}">
 											            	<c:if test="${dto2.eventNum2 == dto.eventNum}">
 											            		<div class="col-md-12">
-											            			<div class="col-md-8" style="margin:auto;width:80%;">
+											            			<div class="col-md-8" style="margin:auto;width:80%;float:none;">
 											            				<img src="${dto2.picPath2}/${dto2.picName2}" style="width:100%;">
 											            			</div>
 											            		</div>
 											            	</c:if>
 										            	</c:forEach>										            	
 										            	${dto.eventCon}										            	
-										            </div>														            
+										            </div>										           														            
 										             <div class="modal-footer">
-										                <button type="submit" class="btn btn-danger">등록</button>
+										                <button type="button" class="btn btn-danger" onclick="participate(${sessionScope.mem_id}, ${dto.eventNum});">참여</button><!--  -->
 										                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 										             </div>													        
 										        </div>
 										    </div>
 										</div>
-									</div>																	
+									</div>
+									<!-- 이벤트 상세 페이지 모달 -->
+									<!-- 참여자 리스트 모달 -->
+									<div class="modal animated fadeIn" id="partic" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+										<div class="modal-dialog">
+										    <div class="modal-content">
+										        <div class="modal-header">
+										            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+										            <h4 class="modal-title" id="smallModalHead" style="font-weight:bold;">참여자 리스트</h4>
+										        </div>
+										        <div class="modal-body" style="height:120px;overflow-y:scroll;">
+										        </div>
+										        <div class="modal-footer">
+									                <button type="button" class="btn btn-danger" onclick="window.location='eParticipate'">선정</button><!-- participate(<%-- <%= memId %> --%>); -->
+									                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+									             </div>	
+										     </div>
+										</div>
+									</div>
+									<!-- 참여자 리스트 모달 -->																		
 				    			</td>
 				    		</tr>
 			    		</c:if>
