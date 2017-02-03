@@ -8,9 +8,11 @@
 
 -->
 <mapper namespace="com.engineers.moyeo.four.dao.FourDAO">  <!-- 인터페이스 -->
+   
+    <!-- 1. 공지사항 게시판 -->
     <!-- 글개수 세기 -->
-    <select id="getCount" resultType="int">
-  		SELECT count(*) FROM group_notice
+    <select id="getCount" parameterType="int"   resultType="int">
+  		SELECT count(*) FROM group_notice WHERE group_num = #{group_num}
    </select>	
     
     
@@ -18,7 +20,9 @@
     <select id="getArticles" parameterType="Map" resultType="com.engineers.moyeo.four.dto.GroupNoticeDTO"> <!-- 결과타입 Arraylist 아님 -->
   		SELECT *  
 		  FROM (SELECT group_noti_num, group_noti_title, group_noti_content, group_noti_date, hit, mem_id, group_num, rownum rnum  
-				 FROM (SELECT * FROM group_notice 
+				 FROM (SELECT * 
+				         FROM group_notice
+				        WHERE group_num = #{group_num} 
 						ORDER BY group_noti_num DESC)
 				)		  
           WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
@@ -28,7 +32,7 @@
 	<!-- 글 한줄 넣기 -->
    <insert id="insert"  parameterType="com.engineers.moyeo.four.dto.GroupNoticeDTO"> 
    		INSERT INTO group_notice(group_noti_num, group_noti_title, group_noti_content, group_noti_date, hit, mem_id, group_num)
-			VALUES (group_notice_seq.nextval, #{group_noti_title}, #{group_noti_content}, #{group_noti_date}, #{hit}, #{mem_id}, #{group_num}) 
+			VALUES (group_notice_seq.nextval, #{group_noti_title}, #{group_noti_content}, #{group_noti_date}, #{hit}, #{mem_id}, #{group_num})
    </insert>
     
     <!-- 글 상세내역 -->
@@ -53,17 +57,20 @@
    		UPDATE group_notice SET group_noti_title=#{group_noti_title}, group_noti_content=#{group_noti_content} WHERE group_noti_num=#{group_noti_num}
   	</update>
   	 
+  	<!-- 가입인사 게시판 -->
   	<!-- 가입인사 글 개수 세기 -->
   	  <select id="greetingGetCount" resultType="int">
-  		SELECT count(*) FROM  greeting_board
+  		SELECT count(*) FROM  greeting_board WHERE group_num = #{group_num}
    </select>	
    
    
+   <!-- 2. 가입인사 게시판 -->
    <!-- 가입인사 글 목록 보여주기  -->
    <select id="greetingGetArticles" parameterType="Map" resultType="com.engineers.moyeo.four.dto.GreetingBoardDTO"> <!-- 결과타입 Arraylist 아님 -->
   		SELECT *  
 		  FROM (SELECT greeting_num, greeting_title, greeting_content, greeting_date, greeting_hit, like_num, mem_id, group_num, rownum rnum  
 				 FROM (SELECT * FROM greeting_board 
+				 		WHERE group_num = #{group_num} 
 						ORDER BY greeting_num DESC)
 				)		  
           WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
@@ -119,4 +126,12 @@
    <select id="getRepleyCnt" parameterType="int" resultType="int">
    		SELECT COUNT(*) FROM greeting_reply WHERE greeting_num = #{greeting_num}
    </select>
+   
+ 	<!-- 좋아요 등록 -->
+   <update id="likecacount" parameterType="int" >
+   		UPDATE greeting_board SET like_num = like_num+1 WHERE greeting_num=#{greeting_num}
+   </update> 
+   
+   
+   
 </mapper>
