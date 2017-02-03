@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
+import com.engineers.moyeo.four.dto.like_greetingDTO;
+import com.engineers.moyeo.four.dto.post_picturesDTO;
 
 @Repository
 public class FourDAOImpl implements FourDAO{
@@ -23,10 +25,10 @@ public class FourDAOImpl implements FourDAO{
 
 	//공지사항 글 개수 세기
 	@Override
-	public int getCount() {
+	public int getCount(int group_num) {
 		int cnt = 0;
 		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
-		cnt = dao.getCount();
+		cnt = dao.getCount(group_num);
 		
 		return cnt;
 	}
@@ -87,10 +89,10 @@ public class FourDAOImpl implements FourDAO{
 	}
 	//가입인사 글 세기
 	@Override
-	public int greetingGetCount() {
+	public int greetingGetCount(int group_num) {
 		int cnt = 0;
 		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
-		cnt = dao.greetingGetCount();
+		cnt = dao.greetingGetCount(group_num);
 		return cnt;
 	}
 	//가입인사 글 목록보여주기
@@ -167,4 +169,23 @@ public class FourDAOImpl implements FourDAO{
 		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
 		return dao.getRepleyCnt(num);
 	}
+	/*@Override
+	public int pictureGetCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public ArrayList<post_picturesDTO> pictureGetArticles(Map<String, Integer> daoMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+	
+	@Override
+	public void likecacount(int num) {
+		
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		dao.likecacount(num);
+		
+	}
+	
 }

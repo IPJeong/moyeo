@@ -6,10 +6,12 @@ import java.util.Map;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
+import com.engineers.moyeo.four.dto.like_greetingDTO;
+import com.engineers.moyeo.four.dto.post_picturesDTO;
 
 public interface FourDAO {
 	
-	public int getCount();
+	public int getCount(int group_num);
 	//글라인 목록
 	public ArrayList<GroupNoticeDTO> getArticles(Map<String, Integer> daoMap);
 	
@@ -31,7 +33,7 @@ public interface FourDAO {
 	
 	
 	//가입인사 게시판
-	public int greetingGetCount();
+	public int greetingGetCount(int group_num);
 	
 	public ArrayList<GreetingBoardDTO> greetingGetArticles(Map<String, Integer> daoMap);
 	
@@ -58,5 +60,15 @@ public interface FourDAO {
 	public int repledelete(int num);
 	// 댓글개수 카운트
 	public int getRepleyCnt(int num);
+	
+	
+	//좋아요 
+	public void likecacount(int num);
+	
+	//사진첩 
+	/*public int pictureGetCount(); //글개수 세기
+	
+	public ArrayList<post_picturesDTO> pictureGetArticles(Map<String, Integer> daoMap);
+	*/
 	
 }
