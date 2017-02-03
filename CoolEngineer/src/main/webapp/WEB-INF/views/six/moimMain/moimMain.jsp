@@ -108,9 +108,7 @@ img {
 									value="모임탈퇴"
 									style="width: 20%; height: 40px; font-size: 13px"></a> 
 								<a>
-								<input
-									type="button" value="모임신고" class="btn btn-warning"
-									style="width: 20%; height: 40px; font-size: 13px">
+								<input class="btn btn-warning"	type="button" value="모임신고" onclick="window.location='/moyeo/one/moimReportMain?group_num='+${group_num}" style="width: 20%; height: 40px; font-size: 13px">
 								</a>
 							</div>
 						</div>
