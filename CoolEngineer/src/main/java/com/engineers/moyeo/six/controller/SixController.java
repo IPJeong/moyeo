@@ -19,7 +19,7 @@ import com.engineers.moyeo.main.model.FileForm;
 @RequestMapping("/six")
 @Controller
 public class SixController {
-	
+//멋진 정일품
 	@Autowired
 	com.engineers.moyeo.six.service.SixService sixService;
 
@@ -308,8 +308,6 @@ public class SixController {
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimMain(model);
-		// 모임 공지사항 불러옴
-		sixService.getNoticeBoardList(model);
 		
 		return "six/moimMain/moimMain";
 	}
@@ -395,13 +393,35 @@ public class SixController {
 	
 	//모임-모임채팅
 	@RequestMapping("/moimChat/moimChat")
-	public String moimAddImageProb(HttpServletRequest req, Model model) {
+	public String moimChat(HttpServletRequest req, Model model) {
 		System.out.println("/moimChat/moimChat");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
-		sixService.moimChat(model);
+		
 		
 		return "six/moimChat/moimChat";
+	}
+	
+	//모임-모임통계
+	@RequestMapping("/moimStatistics/moimStatistics")
+	public String moimAddImageProb(HttpServletRequest req, Model model) {
+		System.out.println("/moimStatistics/moimStatistics");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		
+		
+		return "six/moimStatistics/moimStatistics";
+	}
+	
+	//모임-모임멤버 상세보기
+	@RequestMapping("/moimMain/moimMemberDetail")
+	public String moimMemberDetail(HttpServletRequest req, Model model) {
+		System.out.println("/moimMain/moimMemberDetail");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.moimMemberDetail(model);
+		
+		return "six/moimMain/moimMemberDetail";
 	}
 }
 
