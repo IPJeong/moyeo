@@ -76,7 +76,7 @@ li {
 	    <!-- START PHOTO BLOCK -->
 		<div class="col-md-56" style="margin-top: 10px;">
 			<div class="panel panel-default">     
-	           <form:form class="form-horizontal" action="postPro" method="post" modelAttribute="uploadForm" enctype="multipart/form-data">
+	           <form:form class="form-horizontal" action="modifyPostPro" method="post" modelAttribute="uploadForm" enctype="multipart/form-data">
 	               <div class="panel panel-default">
 	                   <div class="panel-heading">
 	                       <h3 class="panel-title"><strong>모임후기 수정</strong></h3>
@@ -129,7 +129,7 @@ li {
 			                       		<c:forEach var="picDto" items="${picDtos}">
 			                       			<tr>
 			                       				<td>
-			                       					<input type="hidden" name="pic_name" value="${picDto.pic_name}">
+			                       					<input type="hidden" name="pic_name" value="${picDto.pic_name}" videoName>
 			                       					<img src="${picDto.pic_path}/${picDto.pic_name}" style="width:220px; height:220px;">
 			                       				</td>
 			                       				<td>
