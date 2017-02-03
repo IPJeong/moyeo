@@ -19,6 +19,7 @@
 <div class="col-md-12">
      <form:form class="form-horizontal" action="moimReportPro" method="post" modelAttribute="uploadForm" enctype="multipart/form-data">
      	<input type="hidden" name="group_num" value="${group_num}">
+     	<input type="hidden" name="group_name" value="${dto.group_name}">
      <div class="panel panel-default">
          <div class="panel-heading">
              <h3 class="panel-title"><strong>모임신고</strong> 불순한 모임을 신고하세요!</h3>
@@ -44,7 +45,7 @@
                  <div class="col-md-6 col-xs-12">                                            
                      <div class="input-group">
                          <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                         <input type="text" class="form-control" name="report_title"/>
+                         <input type="text" class="form-control" name="report_title" maxlength="40" required/>
                      </div>                                            
                      <span class="help-block">This is sample of text field</span>
                  </div>
@@ -53,7 +54,7 @@
              <div class="form-group">
                  <label class="col-md-3 col-xs-12 control-label">신고내용</label>
                  <div class="col-md-6 col-xs-12">                                            
-                     <textarea class="form-control" rows="5" name="report_content"></textarea>
+                     <textarea class="form-control" rows="5" name="report_content" maxlength="1000" required></textarea>
                      <span class="help-block">Default textarea field</span>
                  </div>
              </div>

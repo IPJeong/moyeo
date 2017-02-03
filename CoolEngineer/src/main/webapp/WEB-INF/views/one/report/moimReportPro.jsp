@@ -14,6 +14,6 @@
 	<c:if test="${cnt != 0}">
 	<script type="text/javascript">
 		alert("등록 성공");
-		window.location='/moyeo/one/moimMain';
+		window.location='/moyeo/six/moimMain/moimMain?group_num=' + ${group_num};
 	</script>
 	</c:if>

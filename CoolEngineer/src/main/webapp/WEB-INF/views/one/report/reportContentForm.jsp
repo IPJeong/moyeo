@@ -25,6 +25,7 @@
            <br><br>
            <div style="margin-top:15%">
            <div class="timeline-body">
+           	   <font size="6" color="blue">모임번호 --- <a href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">${dto.group_num}</a> </font><br><br>
            	   <font size="5">${dto.report_title}</font>
                <img src="${dto.pic_path}/${dto.pic_name}" class="img-text" width="300" height="300" align="left" onclick="window.open(this.src)" alt="클릭하시면 사진이 커집니다." hspace="0"/>
                <br><br>
