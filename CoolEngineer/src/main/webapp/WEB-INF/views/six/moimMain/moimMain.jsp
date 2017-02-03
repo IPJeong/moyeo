@@ -124,17 +124,16 @@ img {
 						style="height: 10px;">
 
 						<div class="chart-hodler"
-							style="width: 97%; height: 420px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 65px">
+							style="width: 97%; height: 420px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px ; margin-top: 65px">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<div class="panel-title-box">
 										<h3>공지사항 게시판</h3>
 									</div>
 								</div>
-								<div class="" style="text-align: center; font-size: 25px">
+								<div class="" style="text-align: center; font-size: 25px; ">
 									<div class="chart-holder" id="dashboard-bar-1"
-										style="height: 10px;">
-										<br> <br> <br>
+										style="height: 10px; margin-top:10px;">
 										<div>
 											<table class="table table-striped table-hover" style="width: 90%; margin-left: 5%;">
 												<thead>
