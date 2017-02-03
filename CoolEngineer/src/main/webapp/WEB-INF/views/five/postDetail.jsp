@@ -208,7 +208,8 @@ html, body {
 				                            <div class="messages messages-img" id="reply${replyDto.postrep_num}">
 					                            <div class="item">
 					                                <div class="image">
-					                                    <img src="/moyeo/resources/resource/img/custom/manDef.jpg" alt="훈남입니다.">
+<!-- 					                                    <img src="/moyeo/resources/resource/img/custom/manDef.jpg" alt="훈남입니다."> -->
+					                                    <img src="${replyDto.propic_path}/${replyDto.propic_name}" alt="훈남입니다.">
 					                                </div>                                
 					                                <div class="text">
 					                                    <div class="heading">
