@@ -37,7 +37,7 @@
 
          <!-- START BREADCRUMB -->
                 <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
+                    <li><a href="/moyeo/main/home">Home</a></li>
                     <li class="active">로그인</li>
                 </ul>
                <!-- END BREADCRUMB -->                                                
@@ -85,15 +85,15 @@
 						</div>
 						<div class="form-group">
 							<div class="col-md-6">
-								<a href="../member/forgetpassword.jsp">비밀번호를 잃어버리셨나요?</a>
+								<a href="/moyeo/member/forgetpassword.jsp">비밀번호를 잃어버리셨나요?</a>
 							</div>
 							<div class="col-md-6 text-right">
-								<a href="../member/registration.jsp">회원가입을 해보세요.</a>
+								<a href="/moyeo/member/registration.jsp">회원가입을 해보세요.</a>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-12">
-								<button class="btn btn-primary btn-lg btn-block">로그인</button>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
 							</div>
 						</div>
 					</form>
