@@ -17,7 +17,7 @@
 			<br><br><br><br>
 			<div>
 				<button class="btn btn-primary btn-block" value="버튼" onclick="window.location='adminAppoint'">관리자 임명</button><br>
-				<button class="btn btn-primary btn-block" value="버튼">관리자 삭제</button>
+				<button class="btn btn-primary btn-block" value="버튼" onclick="window.location='adminDelete'">관리자 삭제</button>
 			</div>
 				<div class="chart-holder" id="dashboard-bar-1"
 					style="height: 200px;"></div>
@@ -60,7 +60,7 @@
 			<img src="/moyeo/resources/resource/assets/images/gallery/moim.png" style="margin-left:32%; width:250px; height:200px;">
 			<br><br><br><br>
 			<div>
-				<button class="btn btn-primary btn-block" value="버튼">모임조회</button><br>
+				<button class="btn btn-primary btn-block" value="버튼" onclick="window.location='moimCheck'">모임조회</button><br>
 				<button class="btn btn-primary btn-block" value="버튼">모임 강제탈퇴</button>
 			</div>
 				<div class="chart-holder" id="dashboard-bar-1"
@@ -80,7 +80,7 @@
 			<img src="/moyeo/resources/resource/assets/images/gallery/notice.png" style="margin-left:32%; width:250px; height:200px;">
 			<br><br><br><br>
 			<div>
-				<button class="btn btn-primary btn-block" value="버튼">나중에</button><br>
+				<button class="btn btn-primary btn-block" value="버튼" onclick="window.location='moimReportHandleMain'">모임신고 내역</button><br>
 				<button class="btn btn-primary btn-block" value="버튼">나중에</button>
 			</div>
 				<div class="chart-holder" id="dashboard-bar-1"

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ㅋ<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../../etc/header.jsp"%>
@@ -32,7 +32,7 @@
 							<div class="profile-controls form-group">
 								<a href="" onclick="return getInfo('${dto.mem_id}')" class="profile-control-left">
 								<span class="fa fa-info" style="margin-top:5px"></span></a> 
-								<a onclick="if(confirm('정말 삭제하시겠습니까?'))
+								<a onclick="if(confirm('정말 탈퇴처리를 하시겠습니까?'))
         						window.location='/moyeo/one/guestDelete?mem_id=${dto.mem_id}&pageNum=${pageNum}'" class="profile-control-right">
 								<span class="fa fa-bitbucket" style="margin-top:5px"></span></a>
 							</div>
