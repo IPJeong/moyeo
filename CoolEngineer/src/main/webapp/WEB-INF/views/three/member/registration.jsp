@@ -35,7 +35,7 @@
 <style>
 .registration-container {
 	background: url(/moyeo/resources/resource/img/bg.png) left top repeat #efeeee;
-	height:900px;
+	height:100%;
 }
 
 .registration-container .registration-box .registration-body .form-control:focus {
@@ -110,6 +110,7 @@
 					                            			                           		
 					            </div>
 		                    </div>
+		                    <h4>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</h4> 
 	                    	<div class="form-group">                                            
                                  <div class="col-md-12">                                                                                
                                      <select name="loc_category1" class="form-control select" style="color:#212121;" onchange="select_loc_category()">
@@ -141,6 +142,7 @@
                                       </select>
                                  </div>
                              </div>
+                             <h4>휴대폰 번호</h4> 
                              <div class="form-group">
 		                        <div class="col-md-12">
 		                            <input type="text" class="form-control" name="tel" placeholder="tel" 
@@ -148,29 +150,32 @@
 		                            style="color:#212121;" required/>		                            
 		                        </div>
 		                    </div>
+		                    <h4>생&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일</h4> 
 		                    <div class="form-group">                                
                                 <div class="col-md-12">
                                     <div class="input-group date">
                                     	<label class="col-md-3 control-label"></label>
-                                        <input type="text" id="dp-3" class="form-control datepicker" placeholder="birthday" required/>
+                                        <input type="text" id="dp-3" name="birth" class="form-control datepicker" placeholder="birthday" required/>
                                     </div>
                                 </div>
                             </div>
+                            <h4>프로필 사진</h4>
                             <div class="form-group">                                
                                 <div class="col-md-12">
                                     <input type="file" class="fileinput" name="files[0]" id="filename1" onchange="chkType('files[0]')"/>
                                 </div>
                             </div>
+                            <h4>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</h4>
                             <div class="form-group">
 	                            <div class="col-md-12">
 	                                <label class="radio-material">
 	                                    <input id="radio1" type="radio" name="gender" value="man">
-	                                    <span class="outer"><span class="inner"></span></span> Male
+	                                    <span class="outer"><span class="inner"></span></span> 남
 	                                </label>
 	                                &nbsp;&nbsp;                                            
 	                                <label class="radio-material">
 	                                    <input id="radio2" type="radio" name="gender" value="woman">
-	                                    <span class="outer"><span class="inner"></span></span> Female
+	                                    <span class="outer"><span class="inner"></span></span> 여
 	                                </label>
 	                            </div>
                             </div>
