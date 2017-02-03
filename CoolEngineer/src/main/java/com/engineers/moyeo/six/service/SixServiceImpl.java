@@ -18,8 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
-import com.engineers.moyeo.four.dao.FourDAO;
-import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
@@ -50,9 +48,6 @@ public class SixServiceImpl implements SixService{
 	
 	@Autowired
 	OneDAO oneDao;
-	
-	@Autowired
-	FourDAO fourDao;
 
 	//공지-메인
 	@Override
@@ -1099,7 +1094,8 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("subLeader_dtos", subLeaderB_dtos);
 		
 		//사이드용 일반 멤버들 아이디 불러오기
-		ArrayList<String> memberA_dtos = sixDao.moimSubLeaderLoadA(group_num);
+		
+		ArrayList<String> memberA_dtos = sixDao.moimMemberLoadA(group_num);
 		
 		//사이드용 일반 멤버들 정보불러오기
 		ArrayList<MemberInfoDTO> memberB_dtos = new ArrayList<MemberInfoDTO>();
@@ -1108,6 +1104,8 @@ public class SixServiceImpl implements SixService{
 			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
 			memberB_dtos.add(i, memberC_dto);
 		}
+		
+		
 		model.addAttribute("member_dtos", memberB_dtos);
 
 		//소개사진 개수 구하기
@@ -1155,19 +1153,6 @@ public class SixServiceImpl implements SixService{
 				}
 			}
 		}
-	}
-	
-	//모임 - 공지사항을 불러옴
-	@Override
-	public void getNoticeBoardList(Model model) {
-		
-		Map<String, Integer> daoMap = new HashMap<String, Integer>();
-		daoMap.put("start", 1);
-		daoMap.put("end", 5);
-		ArrayList<GroupNoticeDTO> dtos = fourDao.getArticles(daoMap);
-		model.addAttribute("dtos", dtos);
-		model.addAttribute("number", dtos.size());
-		
 	}
 
 	//모임-모임정보수정(기존내용 읽어오기)
@@ -1379,6 +1364,32 @@ public class SixServiceImpl implements SixService{
 			memberB_dtos.add(i, memberC_dto);
 		}
 		model.addAttribute("member_dtos", memberB_dtos);
+	}
+	
+	//모임멤버 상세보기-사이드바용
+	public void moimMemberDetail(Model model){
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		String member_id = req.getParameter("mem_id");
 		
+		MemberInfoDTO dto = sixDao.moimMemberLoadB(member_id);
+		String birthA = String.valueOf(dto.getBirth());
+		String[] birthB = birthA.split(" ");
+		String birth = birthB[0];
+		
+		model.addAttribute("birth", birth);
+		model.addAttribute("dto", dto);
+		
+		Map<String, Object> daoMap = model.asMap();
+		daoMap.put("mem_id", member_id);
+		daoMap.put("group_num", group_num);
+		
+		String lastConnectA = String.valueOf(sixDao.lastConnect(daoMap));
+		String[] lastConnectB = lastConnectA.split(" ");
+		String lastConnect = lastConnectB[0];
+		
+		model.addAttribute("lastConnect", lastConnect);
 	}
 }
