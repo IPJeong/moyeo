@@ -22,7 +22,7 @@ public class FourController {
 	@Autowired
 	FourService fourService;
 	
-		
+	//공지사항 게시판 목록	
 	@RequestMapping("/moim_notice_board")
 	public String moim_gongji_list(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_board 시작");
@@ -31,6 +31,7 @@ public class FourController {
 		return viewPage;
 	}
 	
+	//공지사항 게시판 글쓰기 폼	
 	@RequestMapping("/moim_notice_write_form")
 	public String moim_notice_write_form(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_write_form 실행");
@@ -39,6 +40,7 @@ public class FourController {
 		return viewPage;
 	}
 	
+	//공지사항 게시판 글쓰기 처리 
 	@RequestMapping("/moim_notice_writepro")
 	public String moim_notice_writepro(HttpServletRequest req, Model model){
 		model.addAttribute("req", req);
@@ -48,6 +50,7 @@ public class FourController {
 		
 	}
 	
+	//공지사항 게시판 글내용 보는 곳
 	@RequestMapping("moim_notice_contentform")
 	public String moim_notice_contentform(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_contentform 내용 보기 실행");
@@ -56,7 +59,7 @@ public class FourController {
 		return viewPage;
 	}
 	
-	//공지사항 삭제
+	//공지사항 글삭제
 	@RequestMapping("moim_notice_delete")
 	public String moim_notice_deleteForm(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_delete 삭제 실행");
@@ -64,7 +67,7 @@ public class FourController {
 		String viewPage=fourService.moimDeleteExecute(model);
 		return viewPage;
 	}
-	//공지사항 삭제 처리
+	//공지사항 글삭제 처리
 	@RequestMapping("moim_notice_deletePro")
 	public String moim_notice_deletePro(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_delete 삭제 실행");
@@ -73,7 +76,7 @@ public class FourController {
 		return viewPage;
 	}
 	
-	//공지사항 수정
+	//공지사항 글수정
 	@RequestMapping("moim_notice_modifyForm")
 	public String moim_notice_modifyForm(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_modifyForm 수정 실행");
@@ -83,7 +86,7 @@ public class FourController {
 	}
 	
 	
-	
+	//공지사항 게시판 글 수정 보기
 	@RequestMapping("moim_notice_modifyView")
 	public String moim_notice_modifyView(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_modifyView 수정 실행");
@@ -92,7 +95,7 @@ public class FourController {
 		return viewPage;
 	}
 	
-	
+	//공지사항 게시판 글 수정 처리
 	@RequestMapping("moim_notice_modifypro")
 	public String moim_notice_modifypro(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_modifypro 수정 실행");
@@ -102,7 +105,7 @@ public class FourController {
 	}
 	
 	
-	// 가입인사 게시판
+	// 가입인사 게시판 목록
 	@RequestMapping("/moim_greeting_board")	
 	public String moim_greeting_list(HttpServletRequest req, Model model) {
 		model.addAttribute("req", req);
@@ -110,7 +113,7 @@ public class FourController {
 		return viewPage;
 	
 	}
-	//가입인사 글쓰는 메소드
+	//가입인사 글쓰기 폼
 	@RequestMapping("/moim_greeting_write_form")
 	public String moim_greeting_write_form(HttpServletRequest req, Model model) {
 		model.addAttribute("req", req);
@@ -125,7 +128,7 @@ public class FourController {
 		String viewPage=fourService.greetintwriteProExecute(model);
 		return viewPage;
 	}
-	
+	//가입인사 게시판 글 내용 보기
 	@RequestMapping("moim_greeting_contentform")
 	public String moim_greeting_contentform(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_contentform 내용 보기 실행");
@@ -134,6 +137,7 @@ public class FourController {
 		return viewPage;
 	}
 	
+	//가입인사 게시판 글 삭제 폼
 	@RequestMapping("moim_greeting_delete")
 	public String moim_greeting_deleteForm(HttpServletRequest req, Model model) {
 		System.out.println("moim_greeting_delete 삭제 실행");
@@ -142,6 +146,8 @@ public class FourController {
 		return viewPage;
 	}
 	
+	
+	//가입인사 게시판 글 삭제 처리
 	@RequestMapping("moim_greeting_deletePro")
 	public String moim_greeting_deletePro(HttpServletRequest req, Model model) {
 		System.out.println("moim_greeting_delete 삭제 실행");
@@ -151,6 +157,7 @@ public class FourController {
 		return viewPage;
 	}
 	
+	//가입인사 게시판 글 수정 보기
 	@RequestMapping("moim_greeting_modifyView")
 	public String moim_greeting_modifyView(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_modifyView 수정 실행");
@@ -159,6 +166,7 @@ public class FourController {
 		return viewPage;
 	}
 	
+	//가입인사 게시판 글 수정 처리
 	@RequestMapping("moim_greeting_modifypro")
 	public String moim_greeting_modifypro(HttpServletRequest req, Model model) {
 		System.out.println("moim_greeting_modifypro 수정 실행");
@@ -167,6 +175,7 @@ public class FourController {
 		return viewPage;
 	}
 	
+	//가입인사 게시판 글 댓글 입력
 	@RequestMapping("greeting_reple")
 	public String greeting_reple(HttpServletRequest req, Model model) {
 		System.out.println("greeting_reple 댓글입력 실행");
@@ -175,6 +184,7 @@ public class FourController {
 		return viewPage;
 	}
 	
+	//가입인사 게시판 글 댓글 삭제
 	@RequestMapping("repledelete")
 	public String repledelete(HttpServletRequest req, Model model) {
 		System.out.println("repledelete 댓글삭제 실행");
@@ -182,5 +192,23 @@ public class FourController {
 		String viewPage=fourService.repledeleteExecute(model);
 		return viewPage;
 	}
+	
+	//좋아요 +1하는 메소드
+	@RequestMapping("likeyo")
+	public String likeyo(HttpServletRequest req, Model model) {
+		System.out.println("likeyo  실행");
+		model.addAttribute("req", req);
+		String viewPage=fourService.likeyoPlusExecute(model);
+		return viewPage;
+	}
+	
+	
+	@RequestMapping("gallery")
+	public String gallery(HttpServletRequest req, Model model) {
+		System.out.println("gallery  실행");
+		model.addAttribute("req", req);
 		
+		return "/gallery/gallery";
+	}
+	
 }
