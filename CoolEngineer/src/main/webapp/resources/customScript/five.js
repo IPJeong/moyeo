@@ -322,7 +322,7 @@ function addPostReply() {
 				var msg = '<div class="messages messages-img" id="reply' + data.dto.postrep_num + '">' +
 				'<div class="item item-visible">' +
 				'<div class="image">' +
-				'<img src="/moyeo/resources/resource/img/custom/manDef.jpg" alt="훈남입니다.">' +
+				'<img src="'+data.dto.propic_path+'/'+data.dto.propic_name+'" alt="훈남입니다.">' +
 				'</div>' +                                
 				'<div class="text">' +
 				'<div class="heading">' + 
