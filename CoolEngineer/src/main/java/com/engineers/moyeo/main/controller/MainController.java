@@ -44,7 +44,7 @@ public class MainController {
 	}
 	
 	// 회원로그인 프로세스
-	@RequestMapping("/memberLoginPro")
+	@RequestMapping(value="/memberLoginPro")
 	public String loginPro(HttpServletRequest req, Model model) {
 		System.out.println("로그인 프로세스 호출");
 		model.addAttribute("req", req);

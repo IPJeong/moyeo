@@ -44,22 +44,25 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public String memberLoginPro(Model model) {
 		Map<String, Object> map = model.asMap();
-		HttpServletRequest req = (HttpServletRequest) map.get("req");
 		
+		HttpServletRequest req = (HttpServletRequest) map.get("req");
 		String mem_id = req.getParameter("mem_id");
 		String passwd = req.getParameter("passwd");
-		String beforeurl = req.getParameter("beforeurl");
+//		String beforeurl = req.getParameter("beforeurl");
 		
 		Map<String, String> daoMap = new HashMap<String, String>(); 
 		daoMap.put("mem_id", mem_id);
 		daoMap.put("passwd", passwd);
+		
+		System.out.println(mem_id);
+		System.out.println(passwd);
 		
 		int cnt = mainDao.pwdCheck(daoMap);
 		
 		if(cnt == 1) {
 			req.getSession().setAttribute("mem_id", mem_id);
 			model.addAttribute("cnt", cnt);
-			model.addAttribute("beforeurl", beforeurl);
+//			model.addAttribute("beforeurl", beforeurl);
 			return "main/memberLoginPro";
 		} else {
 			model.addAttribute("cnt", cnt);
