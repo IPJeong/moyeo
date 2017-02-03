@@ -4,11 +4,11 @@ import java.sql.Timestamp;
 
 public class QnaReplyDTO {
 	
-	private int reply_num;
-	private String reply_content;
-	private String manager_id;
-	private Timestamp write_date;
-	private int qboard_num;
+	private int reply_num; // 댓글키
+	private String reply_content; // 댓글내용
+	private String manager_id; // 관리자아이디
+	private Timestamp write_date; // 작성일
+	private int qboard_num; // 게시판키
 	
 	public int getReply_num() {
 		return reply_num;

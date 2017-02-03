@@ -4,19 +4,19 @@ import java.sql.Timestamp;
 
 public class MoimReportDTO {
 	
-	private int report_num; // �Ű�Ű
-	private String report_title; // �Ű�����
-	private String report_content; // �Ű����
-	private Timestamp report_date; // �ۼ���
-	private String sol_content; // ó������
- 	private String sol_status; // ó������
-	private Timestamp sol_date; // ó����¥
-	private String manager_id; // �����ھ��̵�
-	private String pic_path; // �������
-	private String pic_name; // �����̸�
-	private String mem_id; // �Ű��� ���̵�
-	private int group_num; // ���ӹ�ȣ
-	private String group_name; // ���� �̸�
+	private int report_num; // 신고키
+	private String report_title; // 신고제목
+	private String report_content; // 신고사유
+	private Timestamp report_date; // 작성일
+	private String sol_content; // 처리내용
+ 	private String sol_status; // 처리여부
+	private Timestamp sol_date; // 처리날짜
+	private String manager_id; // 관리자 아이디
+	private String pic_path; // 사진경로
+	private String pic_name; // 사진이름
+	private String mem_id; // 신고자 아이디
+	private int group_num; // 모임번호
+	private String group_name; // 그룹이름
 	
 	
 	public int getReport_num() {

@@ -4,17 +4,17 @@ import java.sql.Timestamp;
 
 public class MemberInformDTO {
 
-	private String mem_id;
-	private String passwd;
-	private String name;
-	private String address;
-	private String tel;
-	private Timestamp birth;
-	private String email;
-	private String propic_path;
-	private String propic_name;
-	private Timestamp join_date;
-	private String gender;
+	private String mem_id; // 아이디
+	private String passwd; // 비밀번호
+	private String name;   // 이름 
+	private String address; // 주소
+	private String tel;  // 전화번호
+	private Timestamp birth; // 생년월일
+	private String email;  // 이메일
+	private String propic_path; // 프사경로 
+	private String propic_name; // 프사이름
+	private Timestamp join_date; // 가입날짜
+	private String gender; // 성별
 	
 	public Timestamp getJoin_date() {
 		return join_date;
