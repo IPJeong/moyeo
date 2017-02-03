@@ -26,8 +26,6 @@ public interface SixService {
 	
 	
 	
-	
-	
 	//모인일정-메인
 	public void moimSchedule(Model model);
 	
@@ -85,9 +83,6 @@ public interface SixService {
 	//모임-메인
 	public void moimMain(Model model);
 	
-	//모임-메인 공지사항
-	public void getNoticeBoardList(Model model);
-	
 	//모임-정보수정
 	public void moimModify(Model model);
 	
@@ -105,4 +100,7 @@ public interface SixService {
 	
 	//모임채팅
 	public void moimChat(Model model);
+	
+	//모임멤버 상세보기
+	public void moimMemberDetail(Model model);
 }
