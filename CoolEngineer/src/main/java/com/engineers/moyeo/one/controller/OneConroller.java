@@ -38,17 +38,11 @@ public class OneConroller {
 	@Autowired
 	OneManagerService oneManagerService;
 	
-	// 고객지원 홈
-	@RequestMapping("/cusSupMain")
-	public String cusSupMain() {
-		viewPage = "one/qna/cusSupMain";
-		return viewPage;
-	}
-	
 	// Q&A 게시판 홈
-	@RequestMapping("/qna")
+	@RequestMapping(value="/qna", method=RequestMethod.GET)
 	public String qna(HttpServletRequest req, Model model) {
-		System.out.println("Q&A �솃");
+		System.out.println("Q&A 메인");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		req.getSession().setAttribute("authority", "manager");
 		
@@ -60,9 +54,10 @@ public class OneConroller {
 	}
 	
 	// Q&A에서 질문 입력하는 폼
-	@RequestMapping("/qnaWrite")
+	@RequestMapping(value="/qnaWrite", method=RequestMethod.GET)
 	public String qnaWrite(HttpServletRequest req, Model model) {
-		req.getSession().setAttribute("mem_id", "guest");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -72,9 +67,11 @@ public class OneConroller {
 	}
 	
 	// Q&A 질문 입력 등록요청
-	@RequestMapping("/qnaWritePro")
+	@RequestMapping(value="/qnaWritePro", method=RequestMethod.POST)
 	public String qnaWritePro(HttpServletRequest req, Model model) {
-		System.out.println("Q&A 吏덈Ц �엯�젰 �솗�씤");
+		System.out.println("Q&A 질문입력 요청");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -82,10 +79,11 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// Q&A 질문 세부내용
-	@RequestMapping("/qnaContentForm")
+	// Q&A 질문 세부내용 확인
+	@RequestMapping(value="/qnaContentForm", method=RequestMethod.GET)
 	public String qnaContentForm(HttpServletRequest req, Model model) {
-		req.getSession().setAttribute("mem_id", "guest");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -94,8 +92,10 @@ public class OneConroller {
 	}
 	
 	// Q&A 질문 수정 폼
-	@RequestMapping("/qnaModifyForm")
+	@RequestMapping(value="/qnaModifyForm", method=RequestMethod.GET)
 	public String qnaModifyForm(HttpServletRequest req, Model model) {
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -105,8 +105,9 @@ public class OneConroller {
 	}
 	
 	// Q&A 질문 수정요청
-	@RequestMapping("/qnaModifyPro")
+	@RequestMapping(value="/qnaModifyPro", method=RequestMethod.POST)
 	public String qnaModifyPro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -116,8 +117,9 @@ public class OneConroller {
 	}
 	
 	// Q&A 질문 삭제요청
-	@RequestMapping("/qnaDeletePro")
+	@RequestMapping(value="/qnaDeletePro", method=RequestMethod.GET)
 	public String qnaDeletePro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -127,8 +129,9 @@ public class OneConroller {
 	}
 	
 	// Q&A 관리자가 질문 삭제
-	@RequestMapping("/qnaAnsDelPro")
+	@RequestMapping(value="/qnaAnsDelPro", method=RequestMethod.GET)
 	public String qnaAnsDelPro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -138,8 +141,9 @@ public class OneConroller {
 	}
 	
 	// Q&A 관리자가 질문에 대한 답변하는 폼
-	@RequestMapping("/qnaAnswerForm")
+	@RequestMapping(value="/qnaAnswerForm", method=RequestMethod.GET)
 	public String qnaAnswerForm(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		req.getSession().setAttribute("manager_id", "admin");
 		
@@ -151,8 +155,9 @@ public class OneConroller {
 	}
 	
 	// Q&A 관리자가 답변 등록요청
-	@RequestMapping("/qnaAnswerPro")
+	@RequestMapping(value="/qnaAnswerPro", method=RequestMethod.POST)
 	public String qnaAnswerPro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		req.getSession().setAttribute("manager_id", "admin");
 		
@@ -163,22 +168,10 @@ public class OneConroller {
 		return viewPage;
 	}
 	
-	// 모임메인 화면
-	@RequestMapping("/moimMain")
-	public String moimMain(HttpServletRequest req, Model model) {
-		
-		model.addAttribute("req", req);
-		
-		viewPage = oneReportService.moimMain(model);
-		return viewPage;
-	}
-	
 	// 모임신고 폼
-	@RequestMapping("/moimReportMain")
+	@RequestMapping(value="/moimReportMain", method=RequestMethod.GET)
 	public String moimReport(HttpServletRequest req, Model model) {
-		
-		req.getSession().setAttribute("group_num", "1");
-		req.getSession().setAttribute("mem_id", "member2");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -189,6 +182,7 @@ public class OneConroller {
 	// 모임신고 등록요청
 	@RequestMapping(value="/moimReportPro", method=RequestMethod.POST)
 	public String moimReportPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		System.out.println("모임신고 등록요청");
 		
 		model.addAttribute("req", req);
@@ -200,9 +194,9 @@ public class OneConroller {
 	}
 	
 	// 모임신고 관리자확인
-	@RequestMapping("/moimReportHandleMain")
+	@RequestMapping(value="/moimReportHandleMain")
 	public String moimReportHandleMain(HttpServletRequest req, Model model) {
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		
 		viewPage = oneReportService.moimReportHandleMain(model);
@@ -210,9 +204,9 @@ public class OneConroller {
 	}
 	
 	// 모임신고 세부사항 관리자 확인
-	@RequestMapping("/reportContentForm")
+	@RequestMapping(value="/reportContentForm")
 	public String reportContentForm(HttpServletRequest req, Model model) {
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		req.getSession().setAttribute("manager_id", "admin");
 		
@@ -221,9 +215,9 @@ public class OneConroller {
 	}
 	
 	// 모임신고 관리자 답변
-	@RequestMapping("/reportAnswerPro")
+	@RequestMapping(value="/reportAnswerPro")
 	public String reportAnswerPro(HttpServletRequest req, Model model) {
-		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		req.getSession().setAttribute("manager_id", "admin");
 		
 		model.addAttribute("req", req);
@@ -234,9 +228,12 @@ public class OneConroller {
 	}
 	
 ////////////////// 관리자 화면 ///////////////////////
-	@RequestMapping("/managerMain")
+	// 관리자 메인 화면
+	@RequestMapping(value="/managerMain")
 	public String managerMain(HttpServletRequest req, Model model) {
 		System.out.println("관리자 메인화면");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -246,9 +243,11 @@ public class OneConroller {
 	}
 	
 	// 회원리스트 불러오기
-	@RequestMapping("/guestList")
+	@RequestMapping(value="/guestList")
 	public String guestList(HttpServletRequest req, Model model) {
 		System.out.println("회원리스트 불러오는 화면");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -258,9 +257,11 @@ public class OneConroller {
 	}
 	
 	// 회원리스트중 회원상세정보 불러오기
-	@RequestMapping("/guestInform")
+	@RequestMapping(value="/guestInform")
 	public String guestInform(HttpServletRequest req, Model model) {
 		System.out.println("회원리스트 상세정보 조회");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -270,9 +271,11 @@ public class OneConroller {
 	}
 	
 	// 회원리스트중 회원탈퇴 시키기
-	@RequestMapping("/guestDelete")
+	@RequestMapping(value="/guestDelete")
 	public String guestDelete(HttpServletRequest req, Model model) {
 		System.out.println("회원리스트 강퇴하는 화면");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -282,13 +285,55 @@ public class OneConroller {
 	}
 	
 	// 관리자 임명 폼
-	@RequestMapping("/adminAppoint")
+	@RequestMapping(value="/adminAppoint")
 	public String adminAppoint(HttpServletRequest req, Model model) {
-		System.out.println("관리자 임명 폼");
+		System.out.println("관리자임명 폼");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
 		viewPage = oneManagerService.adminAppoint(model);
+		
+		return viewPage;
+	}
+	
+	// 관리자 임명요청
+	@RequestMapping(value="/adminAppointPro")
+	public String adminAppointPro(HttpServletRequest req, Model model) {
+		System.out.println("관리자임명 요청");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.adminAppointPro(model);
+		
+		return viewPage;
+	}
+	
+	// 관리자 삭제
+	@RequestMapping(value="/adminDelete", method=RequestMethod.GET)
+	public String adminDelete(HttpServletRequest req, Model model) {
+		System.out.println("관리자삭제 페이지");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.adminDelete(model);
+		
+		return viewPage;
+	}
+	
+	// 전체모임 조회
+	@RequestMapping(value="/moimCheck", method=RequestMethod.GET)
+	public String moimCheck(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.moimCheck(model);
 		
 		return viewPage;
 	}
