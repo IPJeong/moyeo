@@ -52,4 +52,11 @@ public interface FourService {
 	public String greeting_repleExecute(Model model);
 	//댓글 삭제
 	public String repledeleteExecute(Model model);
+	
+
+	
+	//좋아요 등록
+	public String likeyoPlusExecute(Model model);
+	
+	
 }

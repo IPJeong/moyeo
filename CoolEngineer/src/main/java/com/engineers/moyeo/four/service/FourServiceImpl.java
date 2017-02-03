@@ -15,6 +15,8 @@ import com.engineers.moyeo.four.dao.FourDAO;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
+import com.engineers.moyeo.four.dto.like_greetingDTO;
+import com.engineers.moyeo.four.dto.post_picturesDTO;
 
 @Service
 public class FourServiceImpl implements FourService{
@@ -34,7 +36,8 @@ public class FourServiceImpl implements FourService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req= (HttpServletRequest)map.get("req");
 		
-		int pageSize = 5;//한 페이지당 출력할 글 개수
+		int group_num = (Integer)req.getSession().getAttribute("group_num"); 
+		int pageSize = 10;//한 페이지당 출력할 글 개수
 		int pageBlock = 3; //출력할 페이지 개수
 		
 		int cnt = 0; 		//글 개수
@@ -54,7 +57,7 @@ public class FourServiceImpl implements FourService{
 		
 		//1. db메소드 실행
 		//글 개수 구하기
-		cnt = fourDao.getCount();
+		cnt = fourDao.getCount(group_num);
 		
 		System.out.println("cnt: " + cnt);
 		
@@ -81,6 +84,7 @@ public class FourServiceImpl implements FourService{
 			Map<String, Integer> daoMap = new HashMap<String, Integer>();
 			daoMap.put("start", start);
 			daoMap.put("end", end);
+			daoMap.put("group_num", group_num);
 			
 			ArrayList<GroupNoticeDTO> dtos = fourDao.getArticles(daoMap);
 			System.out.println("dtos: " + dtos);
@@ -144,12 +148,14 @@ public class FourServiceImpl implements FourService{
 		//2. 입력받은 내용을 작은 바구니에 담는다.
 		System.out.println(req.getParameter("writer"));
 		
+		String mem_id = (String) req.getSession().getAttribute("mem_id");
+		
 		//not null인건 모두 데이터 셋팅
 		dto.setGroup_noti_title(req.getParameter("title"));
 		dto.setGroup_noti_content(req.getParameter("content"));
 		dto.setGroup_noti_date(new Timestamp(System.currentTimeMillis()));
-		dto.setMem_id("guest");
-		dto.setGroup_num(41);
+		dto.setMem_id(mem_id);
+		dto.setGroup_num((Integer)req.getSession().getAttribute("group_num"));
 		
 		//3. dao객체 생성(싱긑톤, 다형성 적용)
 		//BoardDAO dao = BoardDAOImpl.getInstance();
@@ -161,7 +167,6 @@ public class FourServiceImpl implements FourService{
 
 		return "/four/notice/moim_notice_writepro";
 	}
-
 	
 	
 	// 글 내용 보는 메소드
@@ -243,7 +248,8 @@ public class FourServiceImpl implements FourService{
 	    
 	    int pageNum = Integer.parseInt(req.getParameter("pageNum"));
 		
-	    
+	    String mem_id = (String) req.getSession().getAttribute("mem_id");
+	    int group_num = (int) req.getSession().getAttribute("group_num");
 	    
 	    GroupNoticeDTO dto = new GroupNoticeDTO();
 	    //2. 입력받은 내용을 작은 바구니에 담는다.
@@ -254,8 +260,8 @@ public class FourServiceImpl implements FourService{
 	    dto.setGroup_noti_title(req.getParameter("title"));
 	    dto.setGroup_noti_content(req.getParameter("content"));
 	    dto.setGroup_noti_date(new Timestamp(System.currentTimeMillis()));
-	    dto.setMem_id("guest");
-	    dto.setGroup_num(1);
+	    dto.setMem_id(mem_id);
+	    dto.setGroup_num(group_num);
 	    
 	    //3. dao객체 생성(싱긑톤, 다형성 적용)
 	    //BoardDAO dao = BoardDAOImpl.getInstance();
@@ -316,8 +322,8 @@ public class FourServiceImpl implements FourService{
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req= (HttpServletRequest)map.get("req");
-		
-		int pageSize = 5;//한 페이지당 출력할 글 개수
+		int group_num = (Integer)req.getSession().getAttribute("group_num"); 
+		int pageSize = 10;//한 페이지당 출력할 글 개수
 		int pageBlock = 3; //출력할 페이지 개수
 		
 		int cnt = 0; 		//글 개수
@@ -336,7 +342,7 @@ public class FourServiceImpl implements FourService{
 		
 		//1. db메소드 실행
 		//글 개수 구하기
-		cnt = fourDao.greetingGetCount();
+		cnt = fourDao.greetingGetCount(group_num);
 		
 		System.out.println("cnt: " + cnt);
 		
@@ -363,6 +369,7 @@ public class FourServiceImpl implements FourService{
 			Map<String, Integer> daoMap = new HashMap<String, Integer>();
 			daoMap.put("start", start);
 			daoMap.put("end", end);
+			daoMap.put("group_num", group_num);
 			
 			ArrayList<GreetingBoardDTO> dtos = fourDao.greetingGetArticles(daoMap);
 			System.out.println("dtos: " + dtos);
@@ -421,12 +428,15 @@ public class FourServiceImpl implements FourService{
 		GreetingBoardDTO dto = new GreetingBoardDTO();
 		//2. 입력받은 내용을 작은 바구니에 담는다.
 		
+		String mem_id = (String) req.getSession().getAttribute("mem_id");
+		int group_num = (int) req.getSession().getAttribute("group_num");
+		
 		//not null인건 모두 데이터 셋팅
 		dto.setGreeting_title(req.getParameter("title"));
 	    dto.setGreeting_content(req.getParameter("content"));
 	    dto.setGreeting_date(new Timestamp(System.currentTimeMillis()));
-	    dto.setMem_id("guest");
-	    dto.setGroup_num(1);
+	    dto.setMem_id(mem_id);
+	    dto.setGroup_num(group_num);
 	    
 		
 		//3. dao객체 생성(싱긑톤, 다형성 적용)
@@ -553,7 +563,9 @@ public class FourServiceImpl implements FourService{
 	    
 	    GreetingBoardDTO dto = new GreetingBoardDTO();
 	    //2. 입력받은 내용을 작은 바구니에 담는다.
-	  
+	   
+	    String mem_id = (String) req.getSession().getAttribute("mem_id");
+	    int group_num = (int) req.getSession().getAttribute("group_num");
 	    
 	    
 	    //not null인건 모두 데이터 셋팅
@@ -561,8 +573,8 @@ public class FourServiceImpl implements FourService{
 	    dto.setGreeting_title(req.getParameter("title"));
 	    dto.setGreeting_content(req.getParameter("content"));
 	    dto.setGreeting_date(new Timestamp(System.currentTimeMillis()));
-	    dto.setMem_id("guest");
-	    dto.setGroup_num(1);
+	    dto.setMem_id(mem_id);
+	    dto.setGroup_num(group_num);
 	    
 	    
 	    
@@ -578,7 +590,8 @@ public class FourServiceImpl implements FourService{
 		
 		return "/four/greeting_board/moim_greeting_modifypro";
 	}
-
+	
+	//댓글 등록 
 	@Override
 	public String greeting_repleExecute(Model model) {
 		Map<String, Object> map = model.asMap();
@@ -629,4 +642,33 @@ public class FourServiceImpl implements FourService{
 		
 		return "redirect:/four/moim_greeting_contentform?num="+num+"&pageNum="+pageNum+"&number="+number;
 	}
+
+
+	@Override
+	public String likeyoPlusExecute(Model model) {
+		Map<String, Object> map = model.asMap();
+	    HttpServletRequest req= (HttpServletRequest)map.get("req");
+	    
+	    int num = Integer.parseInt(req.getParameter("num"));
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		int number = Integer.parseInt(req.getParameter("number"));
+		int greeting_num = Integer.parseInt(req.getParameter("greeting_num"));
+		
+		
+		
+		
+		GreetingBoardDTO dto = new GreetingBoardDTO();
+		dto.setGreeting_num(greeting_num);
+		
+		System.out.println("1번" + req.getParameter("likename"));
+		
+		//FourDAO dao = FourDAOImpl.getInstance();
+		fourDao.likecacount(num);
+		
+		
+		return "redirect:/four/moim_greeting_contentform?num="+num+"&pageNum="+pageNum+"&number="+number;
+	}
+	
+	
+	
 }
