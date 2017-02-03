@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 <%@ include file="../../etc/header.jsp"%>
+
+<script type="text/javascript">
+function suggestionCheck() {
+	var sug_status = document.suggestioncontentform.sug_status.value;
+	
+	if(sug_status == "Y") {
+		alert("이미 처리한 건의사항입니다.");
+		return false;
+	}
+}
+
+</script>
 
 <style>
 
@@ -111,7 +121,8 @@ li {
 				<br><br>
 				<div style="width:80%; margin-left: 80px;">
 
-					<form action="suggestionCheckPro" method="post" class="form-horizontal">
+					<form action="suggestionCheckPro" method="post" name="suggestioncontentform" class="form-horizontal" onsubmit="return suggestionCheck()">
+						<input type="hidden" name="sug_status" value="${dto.sug_status}">
 						<input type="hidden" name="sug_num" value="${dto.sug_num}">
 						<div class="form-group">
 							<h3>&nbsp;&nbsp;건의사항 처리 내용 입력</h3>

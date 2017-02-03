@@ -147,7 +147,7 @@ li {
 									${dtos.sug_title}
 								</td>		
 								<td style="border:0;" align="center">
-									${dtos.sug_date}}
+									<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dtos.sug_date}" />
 								</td>
 								<td style="border:0;" align="center">
 									${dtos.re_email}
@@ -162,7 +162,7 @@ li {
 									${dtos.manager_id}
 								</td>
 								<td style="border:0;" align="center">
-									${dtos.sol_date}"
+									<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dtos.sol_date}" />
 								</td>
 							</tr>
 						</c:forEach>
