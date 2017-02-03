@@ -109,7 +109,7 @@
     	SELECT count(*) FROM member_info
     </select>
     
-     <select id="gerMemberArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    <select id="gerMemberArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
     	SELECT * 
     			FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
     					FROM (SELECT * FROM member_info
@@ -126,4 +126,33 @@
     <delete id="deleteInfo" parameterType="String">
     	DELETE FROM member_info WHERE mem_id=#{mem_id}
     </delete>
+    
+    <insert id="insertManager" parameterType="com.engineers.moyeo.one.dto.ManagerDTO">
+    	INSERT INTO manager_info(manager_id, passwd, name, authority)
+    				VALUES(#{manager_id}, #{passwd}, #{name}, #{authority}) 
+    </insert>
+    
+    <select id="getManagerDeleteCount" resultType="int">
+    	SELECT count(*) FROM manager_info
+    </select>
+ 
+	<!-- 권한이 master인 관리자 조회 -->   
+    <select id="getManagerArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ManagerDTO">
+    	SELECT * 
+    			FROM (SELECT manager_id, passwd, name, authority, rownum rnum
+    					FROM (SELECT * FROM manager_info
+    						  ORDER BY authority DESC)
+    				  )  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND authority='MASTER'
+    </select>
+    
+    <!-- 권한이 manager인 관리자 조회 -->
+    <select id="getManagerArticles2" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ManagerDTO">
+    	SELECT * FROM manager_info WHERE authority='MANAGER'
+    </select>
+    
+    <!-- 모든 관리자 조회 -->
+    <select id="getManagerArticles3" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ManagerDTO">
+    	SELECT * FROM manager_info
+    </select>
 </mapper>
