@@ -30,12 +30,7 @@ public class OneReportServiceImpl implements OneReportService{
 	@Autowired
 	OneDAO oneDao;
 	
-	@Override
-	public String moimMain(Model model) {
-		
-		return "one/report/moimMain";
-	}
-	
+	// 모임신고 폼
 	@Override
 	public String moimReport(Model model) {
 		
@@ -43,7 +38,7 @@ public class OneReportServiceImpl implements OneReportService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
-		int group_num = 1;
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
 		
 		MoimReportDTO dto = oneDao.getMoimArticle(group_num);
 		
@@ -55,6 +50,7 @@ public class OneReportServiceImpl implements OneReportService{
 		return "one/report/moimReportMain";
 	}
 
+	// 모임신고 성공요청
 	@Override
 	public String moimReportPro(Model model) {
 		
@@ -84,12 +80,16 @@ public class OneReportServiceImpl implements OneReportService{
 					filename = FileManager.saveFile(multipartFile, rootPath + imgPath, fileName);
 					String report_title = req.getParameter("report_title");
 					String report_content = req.getParameter("report_content");
-					
+					String group_name = req.getParameter("group_name");
+				
+					System.out.println(req.getParameter("group_name"));
 					dto.setReport_title(report_title);
 					dto.setReport_content(report_content);
 					dto.setGroup_num(Integer.parseInt(req.getParameter("group_num")));
+					System.out.println("group_num: " + req.getParameter("group_num"));
 					dto.setReport_date(new Timestamp(System.currentTimeMillis()));
 					dto.setMem_id((String)req.getSession().getAttribute("mem_id"));
+					dto.setGroup_name(group_name);
 					dto.setPic_path(Code.reportImgPathS);
 					dto.setPic_name(filename);
 				
@@ -107,6 +107,7 @@ public class OneReportServiceImpl implements OneReportService{
 		return "one/report/moimReportPro";
 	}
 
+	// 모임신고 확인(관리자)
 	@Override
 	public String moimReportHandleMain(Model model) {
 
@@ -179,6 +180,7 @@ public class OneReportServiceImpl implements OneReportService{
 		return "one/report/moimReportHandleMain";
 	}
 
+	// 모임신고 세부내용확인(관리자)
 	@Override
 	public String reportContentForm(Model model) {
 		
@@ -190,20 +192,22 @@ public class OneReportServiceImpl implements OneReportService{
 		int number = Integer.parseInt(req.getParameter("number"));
 		String manager_id = req.getParameter("manager_id");
 		
-		MoimReportDTO dto = oneDao.getMoimContentArticle(report_num);
+		MoimReportDTO dto = oneDao.getMoimContentArticle(report_num);	
 		
 		model.addAttribute("report_num", report_num);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("number", number);
 		model.addAttribute("dto", dto);
 		model.addAttribute("manager_id", manager_id);
-		
+		System.out.println(dto);
 		System.out.println("manager_id: " + manager_id);
+		
 		
 		return "one/report/reportContentForm";
 
 	}
 
+	// 모임신고 답변(관리자)
 	@Override
 	public String reportAnswerPro(Model model) {
 		

@@ -18,4 +18,13 @@ public interface OneManagerService {
 	
 	// 관리자 임명하기
 	public String adminAppoint(Model model);
+	
+	// 관리자 임명요청
+	public String adminAppointPro(Model model);
+	
+	// 관리자 삭제
+	public String adminDelete(Model model);
+	
+	// 관리자가 모든 모임 조회
+	public String moimCheck(Model model);
 }

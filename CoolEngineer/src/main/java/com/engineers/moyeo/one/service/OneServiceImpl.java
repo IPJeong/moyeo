@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.one.dao.OneDAO;
+import com.engineers.moyeo.one.dto.ManagerDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
 
@@ -24,27 +24,28 @@ public class OneServiceImpl implements OneService{
 	@Autowired
 	OneDAO oneDao;
 
+	// qna 메인화면
 	@Override
 	public String qna(Model model) {
 		
-		int pageSize = 10; 	// �븳 �럹�씠吏��떦 異쒕젰�븷 湲� 媛��닔
-		int pageBlock = 3; 	// 異쒕젰�븷 �럹�씠吏� 媛쒖닔
+		int pageSize = 10; 	
+		int pageBlock = 3; 
 		
-		int cnt = 0;       	// 湲� 媛쒖닔
-		int start = 0;      // �쁽�옱 �럹�씠吏� �떆�옉踰덊샇 : rownum
-		int end = 0;        // �쁽�옱 �럹�씠吏� �걹 踰덊샇 : rownum
-		int number = 0;     // 異쒕젰�븳 湲� 踰덊샇
-		String pageNum = null; // �럹�씠吏� 踰덊샇
-		int currentPage = 0;   // �쁽�옱 �럹�씠吏�
+		int cnt = 0;       
+		int start = 0;      
+		int end = 0;        
+		int number = 0;     
+		String pageNum = null; 
+		int currentPage = 0;  
 		
-		int pageCount = 0;     // �럹�씠吏� 媛쒖닔
-		int startPage = 0;     // �떆�옉 �럹�씠吏�
-		int endPage = 0;       // 留덉�留� �럹�씠吏�
+		int pageCount = 0;    
+		int startPage = 0;     
+		int endPage = 0;      
 		
-		// 紐⑤뜽濡쒕��꽣 Map�쓣 媛��졇�삩�떎. Map�쓽 �궎濡� �젒洹쇳빐�꽌 req 媛믪쓣 媛��졇�삤湲� �쐞�븿
+	
 		Map<String, Object> map = model.asMap();
 		
-		// Map�뿉�꽌 媛��졇�삩 媛믪쓣 req 蹂��닔�뿉 �떞�뒗�떎.
+
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
 		cnt = oneDao.getCount();
@@ -99,6 +100,7 @@ public class OneServiceImpl implements OneService{
 		return "one/qna/qna";
 	}
 
+	// qna 질문 폼
 	@Override
 	public String qnaWrite(Model model) {
 		
@@ -116,6 +118,7 @@ public class OneServiceImpl implements OneService{
 		return "one/qna/qnaWrite";
 	}
 
+	// qna 질문 확정요청
 	@Override
 	public String qnaWritePro(Model model) {
 		
@@ -140,7 +143,8 @@ public class OneServiceImpl implements OneService{
 		
 		return "one/qna/qnaWritePro";
 	}
-
+	
+	// qna 질문 세부사항
 	@Override
 	public String qnaContentForm(Model model) {
 		
@@ -154,6 +158,8 @@ public class OneServiceImpl implements OneService{
 		QnaBoardDTO dto = oneDao.getArticle(qboard_num);
 		
 		List<QnaReplyDTO> bdtos = oneDao.getReArticle(qboard_num);
+		Map<String, Integer> daoMap = new HashMap<String, Integer>();
+		List<ManagerDTO> mdtos = oneDao.getManagerArticles3(daoMap);
 		
 		oneDao.addReadCnt(qboard_num);
 		
@@ -162,10 +168,12 @@ public class OneServiceImpl implements OneService{
 		model.addAttribute("number", number);
 		model.addAttribute("dto", dto);
 		model.addAttribute("bdtos", bdtos);
-		
+		model.addAttribute("mdtos", mdtos);
+	
 		return "one/qna/qnaContentForm";
 	}
 
+	// qna 질문 수정폼
 	@Override
 	public String qnaModifyForm(Model model) {
 		
@@ -189,6 +197,7 @@ public class OneServiceImpl implements OneService{
 		return "one/qna/qnaModifyForm";
 	}
 
+	// qna 질문수정 확정요청
 	@Override
 	public String qnaModifyPro(Model model) {
 		
@@ -218,7 +227,8 @@ public class OneServiceImpl implements OneService{
 		
 		return "one/qna/qnaModifyPro";
 	}
-
+	
+	// qna 질문삭제 확정요청
 	@Override
 	public String qnaDeletePro(Model model) {
 		
@@ -248,6 +258,7 @@ public class OneServiceImpl implements OneService{
 		
 	}
 	
+	// qna 관리자 답변삭제 확정요청
 	@Override
 	public String qnaAnsDelPro(Model model) {
 		Map<String, Object> map = model.asMap();
@@ -269,6 +280,7 @@ public class OneServiceImpl implements OneService{
 		return "one/qna/qnaAnsDelPro";
 	}
 
+	// qna 관리자 답변폼
 	@Override
 	public String qnaAnswerForm(Model model) {
 		
@@ -292,6 +304,7 @@ public class OneServiceImpl implements OneService{
 		return "one/qna/qnaAnswerForm";
 	}
 
+	// qna 관리자 답변확정 폼
 	@Override
 	public String qnaAnswerPro(Model model) {
 		
