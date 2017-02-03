@@ -199,70 +199,48 @@
 			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
 	
-	<select id="getPlaceLikeCount" parameterType="Map" resultType="int">
-		SELECT COUNT(*)
-			  FROM(SELECT place_num,
-		                  place_name,
-	                      place_address
-				       FROM 
-				        (SELECT i.place_num,
-                      	i.place_name,
-                        i.place_address
-				           FROM place_info i,
-				                place_pic p,
-                        rec_place r,
-                        place_like l
-				          WHERE i.place_num = p.place_num
-		                    AND r.place_num = i.place_num
-		                    AND l.recpla_num = r.recpla_num
-	              )
-	         )
+	<select id="getPlaceLikeCount" resultType="int">
+		SELECT count(*)
+		      FROM (SELECT COUNT(pl.plalike_num) as cnt, pl.recpla_num as recpla_num
+		             FROM place_like pl, rec_place rp, place_info pi, place_pic pp
+		             WHERE pl.recpla_num = rp.recpla_num
+		               AND rp.place_num = pi.place_num
+		               AND pi.place_num = pp.place_num
+		             GROUP BY pl.recpla_num) cc, rec_place rp, PLACE_INFO pi
+		       WHERE cc.recpla_num = rp.recpla_num
+		       AND   rp.place_num = pi.place_num
+		      ORDER BY cc.cnt DESC
 	</select>
 	
-	<select id="getPlaceLikeList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">		
-		SELECT *
-			  FROM(SELECT place_num,
-		                  place_name,
-	                      place_address,
-	                      rownum rnum 
-				       FROM 
-				        (SELECT i.place_num,
-                      	i.place_name,
-                        i.place_address
-				           FROM place_info i,
-				                place_pic p,
-                        rec_place r,
-                        place_like l
-				          WHERE i.place_num = p.place_num
-		                    AND r.place_num = i.place_num
-		                    AND l.recpla_num = r.recpla_num
-		                  ORDER BY l.plalike_num DESC
-	              )
-	         )
-		  	WHERE rnum &gt;= 1 AND rnum &lt;= 5
+	<select id="getPlaceLikeList" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">		
+		 SELECT place_num, place_name, place_address 
+		   FROM (SELECT cc.cnt, cc.recpla_num, pi.place_num, pi.place_name, pi.place_address
+		        FROM (SELECT COUNT(pl.plalike_num) as cnt, pl.recpla_num as recpla_num
+		               FROM place_like pl, rec_place rp, place_info pi, place_pic pp
+		               WHERE pl.recpla_num = rp.recpla_num
+		                 AND rp.place_num = pi.place_num
+		                 AND pi.place_num = pp.place_num
+		               GROUP BY pl.recpla_num) cc, rec_place rp, PLACE_INFO pi
+		         WHERE cc.recpla_num = rp.recpla_num
+		         AND   rp.place_num = pi.place_num
+		        ORDER BY cc.cnt DESC)
+		  WHERE rownum &gt;= 1 AND rownum &lt;= 5   
 	</select>
 	
-	<select id="getPlaceLikePictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
-		 SELECT *
-			  FROM(SELECT place_num,
-		                  place_pic_name,
-		                  place_pic_path,
-				          rownum rnum 
-				       FROM 
-				        (SELECT i.place_num,
-			  			   		p.place_pic_name,
-	                  p.place_pic_path
-				           FROM place_info i,
-				                place_pic p,
-                        rec_place r,
-                        place_like l
-				          WHERE i.place_num = p.place_num
-		                    AND r.place_num = i.place_num
-		                    AND l.recpla_num = r.recpla_num
-		                  ORDER BY l.plalike_num DESC
-	              )
-	         )
-		  	WHERE rnum &gt;= 1 AND rnum &lt;= 5
+	<select id="getPlaceLikePictureList" resultType="com.engineers.moyeo.two.dto.Place_picDTO">		
+		 SELECT place_num, place_pic_path, place_pic_name       
+		  FROM(SELECT cc.cnt, cc.recpla_num, pp.place_num, pp.place_pic_path, pp.place_pic_name
+		      FROM (SELECT COUNT(pl.plalike_num) as cnt, pl.recpla_num as recpla_num
+		             FROM place_like pl, rec_place rp, place_info pi, place_pic pp
+		             WHERE pl.recpla_num = rp.recpla_num
+		               AND rp.place_num = pi.place_num
+		               AND pi.place_num = pp.place_num
+		             GROUP BY pl.recpla_num) cc, rec_place rp, place_info pi, place_pic pp 
+		       WHERE cc.recpla_num = rp.recpla_num
+		         AND rp.place_num = pi.place_num
+		         AND pi.place_num = pp.place_num
+		        ORDER BY cc.cnt DESC)
+		  WHERE rownum &gt;= 1 AND rownum &lt;= 5
 	</select>
 	
 	<select id="readPlace" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
@@ -351,4 +329,140 @@
 	<delete id="minusPlaceLike" parameterType="int">
 		DELETE FROM place_like WHERE plalike_num = #{plalike_num}
 	</delete>
+	
+	<!-- 모임-메인화면 -->
+ 	<select id="readMoimInfo" parameterType="int" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
+ 		SELECT * FROM group_list WHERE group_num = #{group_num}
+ 	</select>
+ 	
+ 	<!-- 모임-모임정보수정처리 -->
+ 	<update id="modifyMoimInfo" parameterType="com.engineers.moyeo.two.dto.Moim_infoDTO">
+ 		UPDATE group_list SET group_name = #{group_name}, group_mem_cnt = #{group_mem_cnt}, group_inte1 = #{group_inte1}, group_inte2 = #{group_inte2}, group_location = #{group_location}, group_intro = #{group_intro} WHERE group_num = #{group_num}
+ 	</update>
+ 	
+ 	<select id="identifyMoimMember" parameterType="Map" resultType="int">
+ 		SELECT COUNT(*) FROM my_group WHERE group_num = #{group_num} AND mem_id = #{mem_id}
+ 	</select>
+ 	
+ 	<insert id="moimJoin" parameterType="Map">
+		INSERT INTO join_request (request_num, request_date, status, mem_id, group_num) VALUES (join_request_seq.NEXTVAL, SYSDATE, '대기', #{mem_id}, #{group_num})
+	</insert>
+	
+	<delete id="moimWithdraw" parameterType="Map">
+		DELETE FROM my_group WHERE group_num = #{group_num} AND mem_id = #{mem_id}
+	</delete>
+	
+	<select id="getMoimJoinCount" parameterType="int" resultType="int">
+		SELECT count(*) FROM join_request WHERE group_num = #{group_num} AND status= '대기'
+	</select>
+	
+	<select id="getMoimJoinList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Join_requestDTO">
+ 		SELECT * 
+		FROM (SELECT request_num, request_date, status, mem_id, group_num, rownum rnum 
+			  FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '대기' ORDER BY request_num DESC)
+			 ) 
+ 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	
+	<select id="getMoimJoinInfo" parameterType="int" resultType="com.engineers.moyeo.two.dto.Join_requestDTO">
+		SELECT * FROM join_request WHERE request_num = #{request_num}
+	</select>
+
+	<update id="moimJoinOK" parameterType="Map">
+		UPDATE join_request SET status= #{status} WHERE request_num = #{request_num}
+	</update>
+	
+	<insert id="moimJoinPro" parameterType="Map">
+		Insert INTO my_group (my_group_num, group_per, group_num, mem_id) VALUES (my_group_seq.NEXTVAL, #{group_per}, #{group_num}, #{mem_id})
+	</insert>
+	
+	<update id="moimJoinNO" parameterType="Map">
+		UPDATE join_request SET status= #{status} WHERE request_num = #{request_num}  
+	</update>
+	
+	<select id="getMoimMemberCount" parameterType="int" resultType="int">
+		SELECT count(*) FROM my_group WHERE group_num = #{group_num}
+	</select>
+	
+	<select id="getMoimMemberList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.My_groupDTO">
+ 		SELECT * 
+		FROM (SELECT my_group_num, group_per, group_num, mem_id, rownum rnum 
+			  FROM (SELECT * FROM my_group WHERE group_num = #{group_num} ORDER BY my_group_num DESC)
+			 ) 
+ 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	
+	<select id="getMoimMemberInfo" parameterType="Map" resultType="com.engineers.moyeo.two.dto.My_groupDTO">
+		SELECT * FROM my_group WHERE my_group_num = #{my_group_num}
+	</select>
+	
+	<select id="getMoimMemberInfo2" parameterType="Map" resultType="com.engineers.moyeo.two.dto.My_groupDTO">
+		SELECT * FROM my_group WHERE group_num = #{group_num} AND mem_id = #{mem_id}
+	</select>
+	
+	<update id="changeMoimMemberRank" parameterType="Map">
+		UPDATE my_group SET group_per = #{group_per} WHERE my_group_num = #{my_group_num}
+	</update>
+
+	<delete id="banishMoimMember" parameterType="int">
+		DELETE FROM my_group WHERE my_group_num = #{my_group_num}
+	</delete>
+	
+	<select id="getNoticeBoardCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM group_notice WHERE group_num = #{group_num}
+	</select>
+	
+	<select id="getGreetingBoardCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM greeting_board WHERE group_num = #{group_num}
+	</select>
+	
+	<select id="getPostBoardCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM meeting_post WHERE group_num = #{group_num}
+	</select>
+	
+	<select id="getNoticeBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Group_noticeDTO">
+  		SELECT *  
+		  FROM (SELECT group_noti_num, group_noti_title, group_noti_content, group_noti_date, hit, mem_id, group_num, rownum rnum  
+				 FROM (SELECT * 
+				 		 FROM group_notice
+				 		WHERE group_num = #{group_num} 
+						ORDER BY group_noti_num DESC)
+				)		  
+          WHERE rnum BETWEEN #{start} AND #{end}
+    </select>
+    
+    <select id="getGreetingBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Greeting_boardDTO"> 
+  		SELECT *  
+		  FROM (SELECT greeting_num, greeting_title, greeting_content, greeting_date, greeting_hit, like_num, mem_id, group_num, rownum rnum  
+				 FROM (SELECT * 
+				 		 FROM greeting_board
+				 		WHERE group_num = #{group_num}  
+						ORDER BY greeting_num DESC)
+				)		  
+          WHERE rnum BETWEEN #{start} AND #{end}
+   </select>
+   
+   <select id="getPostBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Meeting_postDTO">
+    	SELECT *
+    	  FROM (SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, post_hit, rownum as rnum
+    	  		  FROM (SELECT * 
+    	  		          FROM meeting_post
+    	  		         WHERE group_num = #{group_num} 
+    	  		         ORDER BY post_num DESC
+    	  		        )
+    	  		)
+    	 WHERE rnum BETWEEN #{start} AND #{end} 
+    </select>
+    
+    <delete id="deleteNoticeBoardArticle" parameterType="Map">
+    	DELETE FROM group_notice WHERE group_noti_num = #{group_noti_num} AND group_num = #{group_num}
+    </delete>
+    
+    <delete id="deleteGreetingBoardArticle" parameterType="Map">
+    	DELETE FROM greeting_board WHERE greeting_num = #{greeting_num} AND group_num = #{group_num}
+    </delete>
+    
+    <delete id="deletePostBoardArticle" parameterType="Map">
+    	DELETE FROM meeting_post WHERE post_num = #{post_num} AND group_num = #{group_num}
+    </delete>
 </mapper>
