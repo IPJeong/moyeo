@@ -23,4 +23,6 @@ public interface ThreeService {
 	//아이디중복 여부확인
 	public void duplication(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
 	public String registMember(Model model); //회원가입
+	public String memInterest(Model model);//관심사 선택
+	public String memInterestInput(Model model); //관심사 입력처리
 }

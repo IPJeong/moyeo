@@ -28,23 +28,24 @@ public class ThreeServiceImpl implements ThreeService{
 	
 	@Autowired
 	ThreeDAO dao;
-
+	
+	//FAQ페이지
 	@Override
 	public String faq(Model model) {				
 		
 		int cnt = 0;
 		int cnt2 = 0;
 		
-		cnt = dao.getCount();
-		cnt2 = dao.getCount2();
+		cnt = dao.getCount(); //등록된 FAQ카테고리 개수
+		cnt2 = dao.getCount2(); //등록된 FAQ개수
 		
 		if(cnt > 0) {
-			ArrayList<ThreeDTO> dtos = dao.getCategory();
+			ArrayList<ThreeDTO> dtos = dao.getCategory(); //등록된 FAQ카테고리 리스트 불러오기
 			model.addAttribute("dtos", dtos);			
 		}	
 		
 		if(cnt2 > 0) {
-			ArrayList<ThreeDTO> dtos2 = dao.getQuestions();
+			ArrayList<ThreeDTO> dtos2 = dao.getQuestions(); //등록된 FAQ리스트 불러오기
 			model.addAttribute("dtos2", dtos2);
 		}				
 		
@@ -53,16 +54,17 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/faq/faq";
 	}
-
+	
+	//FAQ입력
 	@Override
 	public String faqInsertForm(Model model) {
 		
 		int cnt = 0;		
 		
-		cnt = dao.getCount();		
+		cnt = dao.getCount(); //등록된 FAQ카테고리 개수
 		
 		if(cnt > 0) {
-			ArrayList<ThreeDTO> dtos = dao.getCategory();
+			ArrayList<ThreeDTO> dtos = dao.getCategory(); //등록된 FAQ카테고리 리스트 가져오기
 			model.addAttribute("dtos", dtos);			
 		}					
 		
@@ -70,7 +72,8 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/faq/faqInsertForm";
 	}
-
+	
+	//FAQ카테고리 입력
 	@Override
 	public String faqCtgInput(Model model) {
 		
@@ -83,10 +86,10 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		dto.setCtgName(ctgName);
 		int cnt = 0;
-		int cnt2 = dao.ctgCheck(dto);
+		int cnt2 = dao.ctgCheck(dto); //FAQ카테고리 중복 확인
 		
 		if(cnt2 == 0) {
-			cnt = dao.insert(dto);			
+			cnt = dao.insert(dto); //FAQ카테고리 입력	
 		} else {
 			cnt = -1;
 		}
@@ -95,7 +98,8 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/faq/faqCtgInput";
 	}
-
+	
+	//FAQ 입력
 	@Override
 	public String faqInsert(Model model) {
 		
@@ -116,22 +120,23 @@ public class ThreeServiceImpl implements ThreeService{
 		dto.setAdminId(adminId);
 		dto.setCtgName(ctgName);
 		
-		int cnt = dao.insertFaq(dto);
+		int cnt = dao.insertFaq(dto); //FAQ 입력
 		
 		model.addAttribute("cnt", cnt);		
 				
 		return "/three/faq/faqInsert";
 	}
-
+	
+	//FAQ카테고리 수정 폼
 	@Override
 	public String faqCtgModify(Model model) {
 		
 		int cnt = 0;		
 		
-		cnt = dao.getCount();		
+		cnt = dao.getCount(); //등록된 FAQ카테고리 가져오기 		
 		
 		if(cnt > 0) {
-			ArrayList<ThreeDTO> dtos = dao.getCategory();
+			ArrayList<ThreeDTO> dtos = dao.getCategory(); //FAQ카테고리 리스트 불러오기
 			model.addAttribute("dtos", dtos);			
 		}					
 		
@@ -140,7 +145,8 @@ public class ThreeServiceImpl implements ThreeService{
 		return "/three/faq/faqCtgModify";
 		
 	}
-
+	
+	//FAQ카테고리 수정 처리
 	@Override
 	public String faqCtgModifyPro(Model model) {
 				
@@ -157,7 +163,7 @@ public class ThreeServiceImpl implements ThreeService{
 		dto.setCtgName(ctgName);
 		dto.setCtgName2(ctgName2);
 		
-		cnt = dao.update(dto);		
+		cnt = dao.update(dto);	//FAQ카테고리 수정 처리
 		
 		model.addAttribute("cnt", cnt);	
 		
@@ -177,10 +183,10 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		model.addAttribute("dto", dto);		
 		
-		cnt = dao.getCount();		
+		cnt = dao.getCount(); //등록된 FAQ 개수 가져오기	
 		
 		if(cnt > 0) {
-			ArrayList<ThreeDTO> dtos = dao.getCategory();
+			ArrayList<ThreeDTO> dtos = dao.getCategory(); //FAQ카테고리 리스트 가져오기
 			model.addAttribute("dtos", dtos);			
 		}					
 		
@@ -188,7 +194,8 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/faq/faqModifyForm";
 	}
-
+	
+	//FAQ수정
 	@Override
 	public String faqModify(Model model) {
 		
@@ -208,13 +215,14 @@ public class ThreeServiceImpl implements ThreeService{
 		dto.setCtgName(ctgName);
 		dto.setFaqNum(faqNum);
 		
-		int cnt = dao.updateFaq(dto);
+		int cnt = dao.updateFaq(dto); //FAQ수정하기
 		
 		model.addAttribute("cnt", cnt);
 		
 		return "/three/faq/faqModify";
 	}
 
+	//FAQ카테고리 삭제
 	@Override
 	public String faqCtgDelete(Model model) {
 		
@@ -229,12 +237,13 @@ public class ThreeServiceImpl implements ThreeService{
 		dto.setCtgNum(ctgNum);
 		dto.setCtgName(ctgName);
 		
-		int cnt = dao.delete(dto);
+		int cnt = dao.delete(dto); //FAQ 카테고리 삭제
 		model.addAttribute("cnt", cnt);
 		
 		return "/three/faq/faqCtgDelete";
 	}
-
+	
+	//FAQ삭제
 	@Override
 	public String faqDelete(Model model) {
 
@@ -247,13 +256,14 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		dto.setFaqNum(faqNum);
 		
-		int cnt = dao.deleteFaq(dto);
+		int cnt = dao.deleteFaq(dto); //FAQ삭제하기
 		
 		model.addAttribute("cnt", cnt);
 		
 		return "/three/faq/faqDelete";
 	}
-
+	
+	//이벤트 등록하기
 	@Override
 	public String eventInsert(Model model) {
 		
@@ -287,9 +297,9 @@ public class ThreeServiceImpl implements ThreeService{
 		dto.setPicPath(pp);
 		dto.setPicName(pn);
 		
-		int cnt = dao.eventInsert(dto);				
+		int cnt = dao.eventInsert(dto);	//이벤트 등록
 				
-		int eventNum = dao.getEventNum(regDate);
+		int eventNum = dao.getEventNum(regDate); //이벤트 번호 가져오기
 		
 		// 업로드파일 관리
 		List<MultipartFile> files = fileForm.getFiles();		
@@ -320,7 +330,7 @@ public class ThreeServiceImpl implements ThreeService{
 					dto.setPicName(filename);
 					dto.setEventNum(eventNum);	
 					
-					dao.eventImgInsert(dto);
+					dao.eventImgInsert(dto); //썸네일 이미지 넣기
 					
 				} else if(type == 1 && imgName.equals("files[1]")) {
 					
@@ -330,7 +340,7 @@ public class ThreeServiceImpl implements ThreeService{
 					dto.setPicName2(filename);					
 					dto.setEventNum(eventNum);
 					
-					dao.eventImgsInsert(dto);
+					dao.eventImgsInsert(dto); //이벤트 이미지 넣기
 				}
 			}
 			
@@ -340,7 +350,8 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/event/eventInsert";
 	}
-
+	
+	//이벤트 페이지
 	@Override
 	public String ing_event(Model model) {
 		
@@ -361,7 +372,7 @@ public class ThreeServiceImpl implements ThreeService{
 		int startPage = 0;		// 시작 페이지
 		int endPage = 0;		// 마지막 페이지
 		
-		cnt = dao.getEventCount();
+		cnt = dao.getEventCount(); //등록된 이벤트 개수 가져오기
 		
 		pageNum = req.getParameter("pageNum");
 		
@@ -384,8 +395,8 @@ public class ThreeServiceImpl implements ThreeService{
 		dataMap.put("end", end);
 		
 		if(cnt > 0) {
-			ArrayList<EventDTO> dtos = dao.getEventList(dataMap);
-			ArrayList<EventDTO> dtos2 = dao.getEventPic(dataMap);
+			ArrayList<EventDTO> dtos = dao.getEventList(dataMap); //이벤트 리스트 불러오기
+			ArrayList<EventDTO> dtos2 = dao.getEventPic(dataMap); //이벤트 이미지 불러오기
 			req.setAttribute("dtos", dtos);
 			req.setAttribute("dtos2", dtos2);
 		}
@@ -420,7 +431,7 @@ public class ThreeServiceImpl implements ThreeService{
 		Map<String, Object> map = new HashMap<>();
 		map.put("memid", memid);
 		
-		int cnt = dao.confirmId(map);		
+		int cnt = dao.confirmId(map); //중복체크	
 		
 		mav.addObject("cnt", cnt);
 		
@@ -485,7 +496,7 @@ public class ThreeServiceImpl implements ThreeService{
 		dto.setJoinDate(joinDate);
 		dto.setGender(gender);
 		
-		int cnt = dao.memInfoInsert(dto);				
+		int cnt = dao.memInfoInsert(dto); //회원정보 입력		
 		
 		List<MultipartFile> files = fileForm.getFiles();
 		String filename = null;
@@ -505,15 +516,71 @@ public class ThreeServiceImpl implements ThreeService{
 					dto2.setProPicName(filename);
 					dto2.setMem_id(memid);
 					
-					dao.proImgInsert(dto2);
+					dao.proImgInsert(dto2); //프로필 사진 입력
 				} 
 			}
 			
 		}
 		
 		model.addAttribute("cnt", cnt);		
-		
+		model.addAttribute("memid", memid);
 		return "/three/member/registMember";
+	}
+	
+	//관심지역, 관심사 입력 페이지
+	@Override
+	public String memInterest(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String mem_id = (String) req.getSession().getAttribute("mem_id");
+		
+		if(mem_id == null) {
+			mem_id = req.getParameter("memid");
+		}
+		
+		model.addAttribute("memid", mem_id);
+
+		return "/three/member/memInterest";
+	}
+	
+	//관심지역, 관심사 입력 페이지 처리
+	@Override
+	public String memInterestInput(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String memid = req.getParameter("memid");
+		String place1 = req.getParameter("loc_category1");
+		String place2 = req.getParameter("loc_category2");
+		String category1 = req.getParameter("recpla_category1");
+		String category2 = req.getParameter("recpla_category2");
+		
+		Map<String, Object>	iMap = new HashMap<>();
+		iMap.put("memid", memid);
+		iMap.put("place1", place1);
+		iMap.put("place2", place2);
+		
+		int cnt = dao.placeInsert(iMap); //관심지역 넣기
+		
+		Map<String, Object>	iMap2 = new HashMap<>();
+		iMap2.put("memid", memid);
+		iMap2.put("category1", category1);
+		iMap2.put("category2", category2);
+		
+		int cnt2 = dao.cateInsert(iMap2); //관심사 넣기
+		
+		int cnt3 = 0;
+		
+		if(cnt == 1 && cnt2 == 1) {
+			cnt3 = 1;
+		}
+		
+		model.addAttribute("cnt", cnt3);		
+		
+		return "/three/member/memInterestInput";
 	}
 	
 	
