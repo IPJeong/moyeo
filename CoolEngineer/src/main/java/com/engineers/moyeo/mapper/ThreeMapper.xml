@@ -137,5 +137,15 @@
 	<update id="proImgInsert" parameterType="com.engineers.moyeo.three.dto.MemberDTO">
 		UPDATE member_info SET propic_path = #{proPicPath}, propic_name = #{proPicName} WHERE mem_id = #{mem_id}
 	</update>
+	<!-- 관심 지역 입력 -->
+	<insert id="placeInsert" parameterType="map">
+		INSERT INTO interest_location
+			VALUES (interest_location_seq.NEXTVAL, #{place1}, #{place2}, #{memid})
+	</insert>
+	<!-- 관심사 입력 -->
+	<insert id="cateInsert" parameterType="map">
+		INSERT INTO interest_cat
+			VALUES (interest_category_seq.NEXTVAL, #{category1}, #{category2}, #{memid})
+	</insert>
 <!-- 회원 -->
 </mapper>
