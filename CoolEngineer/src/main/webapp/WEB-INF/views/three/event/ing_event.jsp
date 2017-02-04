@@ -232,9 +232,9 @@
 							    		</div>
 					    			</div>
 					    			<!-- 이벤트 상세 페이지 모달 -->					    					    			
-			    					<div class="modal animated fadeIn" id="${dto.eventNum}" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true" >
+			    					<div class="modal animated fadeIn" id="${dto.eventNum}" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
 										<div class="modal-dialog">
-										    <div class="modal-content" style="max-height:85%;">
+										    <div class="modal-content" style="max-height:85%;border-width:0px;">
 										        <div class="modal-header">
 										            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 										            <h4 class="modal-title" id="smallModalHead" style="font-weight:bold;">${dto.eventTitle}</h4>
@@ -281,13 +281,13 @@
 									<!-- 이벤트 상세 페이지 모달 -->
 									<!-- 참여자 리스트 모달 -->
 									<div class="modal animated fadeIn" id="partic" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
-										<div class="modal-dialog">
-										    <div class="modal-content">
+										<div class="modal-dialog" style="width:25%;">
+										    <div class="modal-content" style="border-width:0px;">
 										        <div class="modal-header">
 										            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 										            <h4 class="modal-title" id="smallModalHead" style="font-weight:bold;">참여자 리스트</h4>
 										        </div>
-										        <div class="modal-body" style="height:120px;overflow-y:scroll;">
+										        <div class="modal-body" style="width:100%;height:200px;">
 										        </div>
 										        <div class="modal-footer">
 									                <button type="button" class="btn btn-danger" onclick="window.location='eParticipate'">선정</button><!-- participate(<%-- <%= memId %> --%>); -->
@@ -433,9 +433,9 @@
 </div>
 <!-- 모달창 -->
 <!-- 이벤트 등록 -->
-<div class="modal animated fadeIn" id="modal_change_password" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+<div class="modal animated fadeIn" id="modal_change_password" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true" style="border-width:0px;">
 	<div class="modal-dialog">
-	    <div class="modal-content">
+	    <div class="modal-content" style="border-width:0px;">
 	        <div class="modal-header">
 	            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	            <h4 class="modal-title" id="smallModalHead">EVENT 등록</h4>

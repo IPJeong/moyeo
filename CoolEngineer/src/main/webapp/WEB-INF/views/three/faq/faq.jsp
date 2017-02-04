@@ -110,7 +110,7 @@
 		</div>
 		<div class="col-md-6-4">
 			<div class="col-md-6-5">
-				<%-- <c:if test="${sessionScope.memId == 'admin'}"> --%>				
+				<c:if test="${sessionScope.mem_id == 'admin'}">				
 					<div class="panel panel-default">
 	                     <div class="panel-heading">
 	                     	  <div class="form-group">
@@ -152,10 +152,10 @@
 	                     </div>
 	                </div>
                 
-                <%-- </c:if>
-                <c:if test="${sessionScope.memId != 'admin'}">
+                </c:if>
+                <c:if test="${sessionScope.mem_id != 'admin'}">
                 
-                </c:if>  --%>               
+                </c:if>                
 				<c:if test="${cnt > 0}">
 					<c:forEach var="dto" items="${dtos}">										
 							<div class="panel panel-default">

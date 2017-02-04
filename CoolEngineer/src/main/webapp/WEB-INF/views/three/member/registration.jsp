@@ -3,34 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 
 <%@ include file="../../etc/header.jsp"%>
-<!-- START PLUGINS -->
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
-<!-- END PLUGINS -->
-
-<!-- START THIS PAGE PLUGINS-->
-<script type='text/javascript'
-	src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/highlight/jquery.highlight-4.js"></script>
-<!-- END THIS PAGE PLUGINS-->
-
-<!-- START TEMPLATE -->
-<script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
-
-<script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>
-<script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>
-<script type="text/javascript" src="/moyeo/resources/resource/js/faq.js"></script>
-<script type="text/javascript" src="/moyeo/resources/resource/js/jquery-1.12.4.js"></script>
 
 <style>
 .registration-container {
@@ -160,9 +132,10 @@
                                 </div>
                             </div>
                             <h4>프로필 사진</h4>
-                            <div class="form-group">                                
-                                <div class="col-md-12">
-                                    <input type="file" class="fileinput" name="files[0]" id="filename1" onchange="chkType('files[0]')"/>
+                            <div class="form-group">
+                            	<label class="col-md-2 control-label"></label>                           	                                
+                                <div class="col-md-12">                               	                            	
+                                    <input type="file" class="fileinput btn-info" name="files[0]" id="filename2" onchange="chkType('files[0]')" style="" title="프로필 사진"/>
                                 </div>
                             </div>
                             <h4>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</h4>
@@ -206,5 +179,12 @@
 </html>
 
 <script src="/moyeo/resources/customScript/three.js" type="text/javascript"></script>
+
 <script type="text/javascript" src="/moyeo/resources/customScript/five.js"></script> 
 <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+
+<script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
+<script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script> 

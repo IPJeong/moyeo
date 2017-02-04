@@ -9,8 +9,11 @@
 </c:if>
 
 <c:if test="${cnt != 0}">
+	<form action="memInterest" name="form" method="post">
+		<input type="hidden" name="memid" value="${memid}">	
+	</form>
 	<script type="text/javascript">
-		alert("회원가입 되었습니다.");
-		window.location='/moyeo/main/memberLoginForm';
+		alert("회원가입 되었습니다.\n관심사를 입력 하십시오.");
+		document.form.submit();
 	</script>
 </c:if>
