@@ -36,5 +36,7 @@ public interface ThreeDAO {
 	public int confirmId(Map<String, Object> map); //아이디 중복 체크
 	public int memInfoInsert(MemberDTO dto); //회원가입	
 	public void proImgInsert(MemberDTO dto); //프로필사진 넣기
+	public int placeInsert(Map<String, Object> map); //관심지역 넣기
+	public int cateInsert(Map<String, Object> map);//관심사 넣기
 
 }

@@ -189,5 +189,19 @@ public class ThreeDAOImpl implements ThreeDAO{
 		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.proImgInsert", dto);
 		
 	}
+
+	@Override
+	public int placeInsert(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.placeInsert", map);
+		return cnt;
+	}
+
+	@Override
+	public int cateInsert(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.cateInsert", map);
+		return cnt;
+	}
 	
 }
