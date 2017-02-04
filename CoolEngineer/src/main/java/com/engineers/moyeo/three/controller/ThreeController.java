@@ -165,7 +165,7 @@ public class ThreeController {
 		return "three/member/registration";
 	}
 	
-	@RequestMapping(value="/duplication")
+	@RequestMapping(value="/duplication") //아이디 중복 체크
 	public ModelAndView duplication(HttpServletRequest req) {
 		
 		mav = new ModelAndView("JSON");		
@@ -192,8 +192,23 @@ public class ThreeController {
 		return viewPage;
 	}
 	
-	@RequestMapping("/test") //이벤트 입력
-	public String test() {
-		return "three/test";
+	@RequestMapping("/memInterest") //관심사 선택
+	public String memInterest(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.memInterest(model);
+		System.out.println("memInterest()");
+		
+		return viewPage;
+	}	
+	
+	@RequestMapping("/memInterestInput") //관심사 선택
+	public String memInterestInput(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.memInterestInput(model);
+		System.out.println("memInterestInput()");
+		
+		return viewPage;
 	}
 }
