@@ -1,6 +1,5 @@
 package com.engineers.moyeo.main.service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 
 import com.engineers.moyeo.main.dao.MainDAO;
 import com.engineers.moyeo.six.dao.SixDAO;
-import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 
 @org.springframework.stereotype.Service

@@ -65,6 +65,7 @@
     	SELECT *
           FROM post_pictures 
          WHERE post_num = #{post_num}
+         ORDER BY pic_num
     </select>
     
     <!-- 해당 모임후기의 동영상을 조회하는 쿼리-->
@@ -72,6 +73,7 @@
     	SELECT * 
     	  FROM post_video 
     	 WHERE post_num = #{post_num}
+    	 ORDER BY video_num
     </select>
     
     <!-- 해당모임 후기의 조회수를 증가시키는 쿼리 -->
