@@ -79,32 +79,30 @@ li {
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
 <body>
-<%@include file="../etc/moim_header.jsp" %>
+<%@include file="../../etc/moim_header.jsp" %>
     
     <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
     
-	    <%@include file="../etc/moim_side.jsp" %>
+	    <%@include file="../../etc/moim_side.jsp" %>
 	    
 	     <!-- START RESPONSIVE TABLES -->
-      <div style="margin-top:12px; width:1250px; height:860px;" class="panel panel-default">
+      <div style="margin-top:12px; width:1050px; height:860px;" class="panel panel-default">
           <div class="panel-heading">
               <h3 class="panel-title">모임후기 게시판</h3>
           </div>
           
           <div class="panel-body panel-body-table">
-
               <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable">
                       <thead>
                           <tr>
                               <th width="50">순번</th>
-                              <th width="">후기제목</th>
+                              <th width="300">후기제목</th>
                               <th width="100">조회수</th>
                               <th width="100">좋아요</th>
                               <th width="200">작성일</th>
-                              <th width="120">관리</th>
                           </tr>
                       </thead>
                       <tbody>               
@@ -120,14 +118,10 @@ li {
 	                               <c:set var="number" value="${number-1}"/>
 	                              <%-- <td><strong><a href="" data-toggle="modal" data-target="#myModal" id="postTitle" onclick="getPost('${dto.post_num }');">${dto.post_title}</a></strong></td> --%>
 								  <%-- <td><strong><a href="/moyeo/five/postDetail?post_num=${dto.post_num }" id="postTitle"  data-toggle="modal" data-target="#myModal" data-backdrop="static" >${dto.post_title}</a></strong></td> --%>
-	                              <td><strong><a href="/moyeo/five/postDetail?post_num=${dto.post_num }" id="postTitle" >${dto.post_title}</a></strong></td>
+	                              <td><strong><a href="/moyeo/five/postDetail?post_num=${dto.post_num}&pageNum=${pageNum}" id="postTitle" >${dto.post_title}</a></strong></td>
 	                              <td><span class="badge badge-success">${dto.post_hit}</span></td>
 	                              <td><span class="badge badge-info">${dto.like_num}</span></td>
 	                              <td>${dto.post_date}</td>
-	                              <td>
-	                                  <button class="btn btn-default btn-rounded btn-condensed btn-sm" type="button" onclick="window.location='modifyPost?post_num=${dto.post_num}'" ><span class="fa fa-pencil"></span></button>
-	                                  <button class="btn btn-danger btn-rounded btn-condensed btn-sm" type="button" onclick="deletePost('${dto.post_num}');"><span class="fa fa-times"></span></button>
-	                              </td>
 	                          </tr>
 	                      </c:forEach>   
                       </tbody>
@@ -136,7 +130,7 @@ li {
 			  <div>
 			  	<input id="writeBtn" class="btn btn-primary btn-rounded" type="button" value="글쓰기" onclick="window.location='postForm'">
 			  	<!-- 게시판 페이지 리스트 -->
-			  	<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+			  	<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="margin-left: 30px; margin-right: 40%;">
 					<c:if test="${cnt > 0}">
 						<c:if test="${startPage > pageBlock}">
 							<li class=""><a href="/moyeo/five/postList?pageNum=${startPage - pageBlock}"><font

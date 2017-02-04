@@ -66,13 +66,13 @@ li {
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
 <body>
-<%@include file="../etc/moim_header.jsp" %>
+<%@include file="../../etc/moim_header.jsp" %>
     
     <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
     
-	    <%@include file="../etc/moim_side.jsp" %>
+	    <%@include file="../../etc/moim_side.jsp" %>
 	    <!-- START PHOTO BLOCK -->
 		<div class="col-md-56" style="margin-top: 10px;">
 			<div class="panel panel-default">     

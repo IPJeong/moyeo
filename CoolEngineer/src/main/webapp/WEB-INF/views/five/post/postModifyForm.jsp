@@ -66,23 +66,24 @@ li {
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
 <body>
-<%@include file="../etc/moim_header.jsp" %>
+<%@include file="../../etc/moim_header.jsp" %>
     
     <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
     
-	    <%@include file="../etc/moim_side.jsp" %>
+	    <%@include file="../../etc/moim_side.jsp" %>
 	    <!-- START PHOTO BLOCK -->
 		<div class="col-md-56" style="margin-top: 10px;">
 			<div class="panel panel-default">     
 	           <form:form class="form-horizontal" action="modifyPostPro" method="post" modelAttribute="uploadForm" enctype="multipart/form-data">
+	               <input type="hidden" name="post_num" value="${postDto.post_num}">
+	               <input type="hidden" name="pageNum" value="${pageNum}">
 	               <div class="panel panel-default">
 	                   <div class="panel-heading">
 	                       <h3 class="panel-title"><strong>모임후기 수정</strong></h3>
 	                   </div>
-	                   <div class="panel-body">                                                                        
-	                       
+	                   <div class="panel-body" >                                                                        
 	                       <div style="float:left; width:65%; height:600px; margin-bottom:30px; margin-top:30px; overflow:auto;">
 	                       		<div class="form-group">
 		                           <label class="col-md-3 col-xs-12 control-label">제목</label>
@@ -112,7 +113,7 @@ li {
 		                           <label class="col-md-3 col-xs-12 control-label">첨부파일</label>
 		                           <input class="btn btn-info btn-rounded" id="addFile" type="button" value="파일추가" />
 		                           <div class="col-md-6 col-xs-12">
-		                           	   <span class="help-block">사진 & 동영상을 선택하세요.</span>
+		                           	   <span class="help-block">사진 & 동영상을 추가해보세요.</span>
 		                           	   <div id="fileview">
 		                               		<input class="btn btn-warning btn-rounded" id="file0" type="file" name="files[0]" onchange="chkType('file0')" />
 		                               </div>
@@ -133,9 +134,9 @@ li {
 			                       					<img src="${picDto.pic_path}/${picDto.pic_name}" style="width:220px; height:220px;">
 			                       				</td>
 			                       				<td>
-			                       					<select class="form-control" style="margin-left:10px; width:50px;">
-			                       						<option value="1">유지</option>
-			                       						<option value="2">삭제</option>
+			                       					<select class="form-control" style="margin-left:10px; width:50px;" name="pic_deletes">
+			                       						<option value="0">유지</option>
+			                       						<option value="${picDto.pic_num}">삭제</option>
 			                       					</select>
 			                       				</td>
 			                       			</tr>
@@ -144,12 +145,14 @@ li {
 			                       			<tr>
 			                       				<td>
 			                       					<input type="hidden" name="video_name" value="${videoDto.video_name}">
-			                       					<img src="${videoDto.video_path}/${videoDto.video_name}" style="width:160px; height:160px;">
+			                       					<video style="width:160px; height:160px;" controls>
+			                       						<source src="${videoDto.video_path}/${videoDto.video_name}" >
+			                       					</video>
 			                       				</td>
 			                       				<td>
-			                       					<select class="form-control">
-			                       						<option value="1">유지</option>
-			                       						<option value="2">삭제</option>
+			                       					<select class="form-control" style="margin-left:10px; width:50px;" name="video_deletes">
+			                       						<option value="0">유지</option>
+			                       						<option value="${videoDto.video_num}">삭제</option>
 			                       					</select>
 			                       				</td>
 			                       			</tr>
@@ -157,11 +160,12 @@ li {
 			                       	</table>
 		                       	</div>
 		                   </div>
-	                   <div class="panel-footer">
-	                       <button class="btn btn-default" type="button" onclick="window.location='postList'">취소</button>                                    
-	                       <button class="btn btn-primary pull-right" type="submit">작성</button>
 	                   </div>
 	               </div>
+	               <div class="panel-footer">
+	                       <button class="btn btn-default" type="button" onclick="window.location='postList'">취소</button>                                    
+	                       <button class="btn btn-primary pull-right" type="submit">수정</button>
+                   </div>
           		</form:form>
              </div>
          </div>                    

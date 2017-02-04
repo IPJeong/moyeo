@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -113,12 +114,12 @@ html, body {
 <script src="/moyeo/resources/resource/customScript/five/postDetailTop.js" type="text/javascript"></script>
 </head>
 <body onload="imgSlide(); timestampToDateLoad();">
-	<%@include file="../etc/moim_header.jsp"%>
+	<%@include file="../../etc/moim_header.jsp"%>
 
 	<!-- START ROW -->
 	<div class="row">
 		<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
-			<%@include file="../etc/moim_side.jsp"%>
+			<%@include file="../../etc/moim_side.jsp"%>
 			<!-- START PHOTO BLOCK -->
 			<div class="col-md-56" style="margin-top: 10px;">
 				<div class="panel panel-default">
@@ -128,18 +129,23 @@ html, body {
 							<strong>후기제목 : ${dto.post_title}</strong>
 						</h3>
 					</div>
-					<div class="panel-body" style="overflow:auto;">
+					<div class="panel-body" style="overflow:auto; height:750px;">
 						<div style="float: left; width: 50%; height: 100%;">
 							<div style="margin: 10px auto; height: 50%;" id="mainImg">
 								<!-- 사진&동영상 데이터 입력창 -->
 								<c:if test="${picDtos != null}">
 									<img style="margin-left: 50px; margin-top:50px; width: 400px; height: 400px;" src="${picDtos.get(0).pic_path }/${picDtos.get(0).pic_name}">
 								</c:if>
-								<c:if test="${picDtos == null && videoDtos == null}">
-									<img style="margin-left: 50px auto; width: 400px; height: 400px;" src="/moyeo/resources/resource/img/common/noimage.jpg">
+								<c:if test="${fn:length(picDtos) == 0 && fn:length(videoDtos) > 0}">
+									<video style="margin-left: 50px; margin-top:50px; width: 400px; height: 400px;" >
+										<source src="${videoDtos.get(0).video_path }/${videoDtos.get(0).video_name}"/>
+									</video>	
+								</c:if>
+								<c:if test="${fn:length(picDtos) == 0 && fn:length(videoDtos) == 0}">
+									<img style="margin-left: 50px auto; width: 400px; height: 400px;" src="/moyeo/resources/resource/img/custom/noimages.jpg">
 								</c:if>
 							</div>
-							<div style="margin: 10px auto; height: 50%;" id="sliderDiv">
+							<div style="margin: 10px auto; height: 50%; " id="sliderDiv;">
 								<!-- 슬라이드 이미지가 삽입되는 부분 -->
 								<section class="regular slider">
 									<c:forEach var="picDto" items="${picDtos}">
@@ -244,6 +250,16 @@ html, body {
 							</div>
 						</div>
 					</div>
+					
+					<div class="panel-footer" style="margin-top: 1px;">
+	                    <button style="margin-right:20px; height:40px;" class="btn btn-info btn-rounded btn-condensed btn-sm pull-right" type="button" onclick="window.location='postList?pageNum=${pageNum}'"><span class="glyphicon glyphicon-th-list"></span>목록으로</button>
+	                    <c:if test="${sessionScope.mem_id == dto.mem_id || sessionScope.group_per == 1 || sessionScope.group_per == 2 }">
+	                    	<button style="margin-right:10px; height:40px;" class="btn btn-danger btn-rounded btn-condensed btn-sm pull-right" type="button" onclick="window.location='deletePost?post_num=${dto.post_num}&pageNum=${pageNum}'"><span class="fa fa-times"></span>삭제</button>
+	                    </c:if>
+	                    <c:if test="${sessionScope.mem_id == dto.mem_id}">
+	                    	<button style="margin-right:10px; height:40px;" class="btn btn-success btn-rounded btn-condensed btn-sm pull-right" type="button" onclick="window.location='modifyPost?post_num=${dto.post_num}&pageNum=${pageNum}'" ><span class="fa fa-pencil"></span>수정</button>
+                    	</c:if>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -262,7 +278,7 @@ html, body {
 		<!-- END PAGE PLUGINS -->     
 
         <!-- START TEMPLATE -->
-        <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
+        <!-- <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script> -->
         
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
         <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>

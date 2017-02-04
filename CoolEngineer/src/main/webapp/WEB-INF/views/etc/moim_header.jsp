@@ -88,8 +88,8 @@
 						<li><a href="/moyeo/six/moimSchedule/moimSchedule?group_num=${group_num}">모임일정</a></li>
 						<li class="xn-openable"><a href="#">모임갤러리</a>
 							<ul>
-								<li><a href="/moyeo/moim/moim_picture?group_num=${group_num}"><span class="fa fa-caret-right"></span>사진보기</a></li>
-								<li><a href="/moyeo/moim/moim_movie?group_num=${group_num}"><span class="fa fa-caret-right"></span>동영상보기</a></li>
+								<li><a href="/moyeo/five/group_pictures?group_num=${group_num}"><span class="fa fa-caret-right"></span>사진보기</a></li>
+								<li><a href="/moyeo/five/group_videos?group_num=${group_num}"><span class="fa fa-caret-right"></span>동영상보기</a></li>
 							</ul>
 						</li>
 						<li class="xn-openable"><a href="#">모임게시판</a>
