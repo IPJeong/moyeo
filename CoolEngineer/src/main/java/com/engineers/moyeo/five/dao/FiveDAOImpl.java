@@ -116,22 +116,25 @@ public class FiveDAOImpl implements FiveDAO{
 		return fiveDao.deletePost(post_num);
 	}
 	
+	// 모임후기 수정
 	@Override
 	public int updatePost(MeetingPostDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.updatePost(dto);
 	}
 
+	// 모임후기 사진삭제
 	@Override
-	public int updatePostPic(PostPictureDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deletePostPic(int pic_num) {
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.deletePostPic(pic_num);
 	}
 
+	// 모임후기 동영상 삭제
 	@Override
-	public int updatePostVideo(PostVideoDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deletePostVideo(int video_num) {
+		FiveDAO fiveDao = sqlSession.getMapper(FiveDAO.class);
+		return fiveDao.deletePostVideo(video_num);
 	}
 
 	// 모임후기 좋아요 추가
@@ -189,6 +192,22 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
 		return dao.deletePostReply(postrep_num);
 	}
+
+	// 모임의 사진리스트를 불러옴
+	@Override
+	public List<PostPictureDTO> getGroupPics(int group_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getGroupPics(group_num);
+	}
+
+	// 모임의 동영상리스트를 불러옴
+	@Override
+	public List<PostVideoDTO> getGroupVideos(int group_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getGroupVideos(group_num);
+	}
+	
+	
 	
 	
 }

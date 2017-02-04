@@ -17,19 +17,6 @@
     </select>
     
     <!-- 모임후기 리스트를 반환하는 메서드 -->
-<!--     <select id="getPostList" parameterType="map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
-    	SELECT mp.post_num, mp.post_title, mp.post_content, mp.post_tag, mp.post_date, mp.like_num, mp.mem_id, mp.group_num
-    	  FROM (SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, rownum as rnum
-    	  		  FROM (SELECT * 
-    	  		          FROM meeting_post
-    	  		         WHERE group_num = #{group_num} 
-    	  		         ORDER BY post_num DESC
-    	  		        )
-    	  		) mp , post_pic pp
-    	 WHERE mp.rnum BETWEEN #{start} AND #{end} 
-    	 	   AND mp.post_num = (SELECT post_num
-    	 	   					    FROM ) 
-    </select> -->
     <select id="getPostList" parameterType="map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
     	SELECT *
     	  FROM (SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, post_hit, rownum as rnum
@@ -120,8 +107,31 @@
     <!-- 해당모임 후기를 삭제시킴 -->
     <delete id="deletePost" parameterType="int">
     	DELETE 
-    	  from meeting_post 
+    	  FROM meeting_post 
     	 WHERE post_num = #{post_num}  
+    </delete>
+    
+    <!-- 모임후기를 수정하는 쿼리 -->
+    <update id="updatePost" parameterType="com.engineers.moyeo.five.dto.MeetingPostDTO">
+    	UPDATE meeting_post
+    	   SET post_title = #{post_title},
+    	   	   post_content = #{post_content},
+    	   	   post_tag = #{post_tag}
+    	 WHERE post_num = #{post_num}  	   
+    </update>
+    
+    <!-- 모임후기 사진을 삭제하는 쿼리 -->
+    <delete id="deletePostPic" parameterType="int">
+    	DELETE 
+    	  FROM post_pictures
+    	 WHERE pic_num = #{pic_num}  
+    </delete>
+    
+    <!-- 모임후기 동영상을 삭제하는 쿼리 -->
+    <delete id="deletePostVideo" parameterType="int">
+    	DELETE 
+    	  FROM post_video
+    	 WHERE video_num = #{video_num} 
     </delete>
     
     <!-- 모임후기의 좋아요 추가 -->
@@ -187,4 +197,23 @@
     	  FROM meeting_post_reply
     	 WHERE postrep_num = #{postrep_num}
     </delete>
+    
+    <!-- 모임의 사진리스트를 불러옴 -->
+    <select id="getGroupPics" parameterType="int" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
+    	SELECT pp.pic_num, pp.pic_path, pp.pic_name, pp.mem_id, pp.group_num, pp.post_num
+    	  FROM meeting_post mp, post_pictures pp
+    	 WHERE mp.post_num = pp.post_num
+    	   AND mp.group_num = #{group_num}
+    	 ORDER BY pp.pic_num DESC
+    </select>
+    
+    <!-- 모임의 동영상리스트를 불러옴 -->
+    <select id="getGroupVideos" parameterType="int" resultType="com.engineers.moyeo.five.dto.PostVideoDTO">
+    	SELECT pv.video_num, pv.video_path, pv.video_name, pv.mem_id, pv.group_num, pv.post_num
+    	  FROM meeting_post mp, post_video pv
+    	 WHERE mp.post_num = pv.post_num
+    	   AND mp.group_num = #{group_num}
+    	 ORDER BY pv.video_num DESC
+    </select>
+    
 </mapper>

@@ -39,9 +39,9 @@ public interface FiveDAO {
 	// 모임후기 수정
 	public int updatePost(MeetingPostDTO dto);
 	// 모임후기 사진삭제
-	public int updatePostPic(PostPictureDTO dto);
+	public int deletePostPic(int pic_num);
 	// 모임후기 동영상삭제
-	public int updatePostVideo(PostVideoDTO dto);
+	public int deletePostVideo(int video_num);
 	// 모임후기 삭제
 	public int deletePost(int post_num);
 	// 모임후기 좋아요 추가
@@ -60,4 +60,9 @@ public interface FiveDAO {
 	public PostReplyDTO getPostReply(Map<String, Object> map);
 	// 모임후기 댓글 삭제
 	public int deletePostReply(int postrep_num);
+	
+	// 모임의 사진리스트를 불러옴
+	public List<PostPictureDTO> getGroupPics(int group_num);
+	// 모임의 동영상리스트를 불러옴
+	public List<PostVideoDTO> getGroupVideos(int group_num);
 }

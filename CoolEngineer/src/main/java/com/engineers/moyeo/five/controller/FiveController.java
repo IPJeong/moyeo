@@ -29,11 +29,11 @@ public class FiveController {
 	private String viewPage;
 	
 	// 모임후기 게시판
-	@RequestMapping("/postList")
+	@RequestMapping(value="/postList")
 	public String postList(HttpServletRequest req, Model model) {
 		
 		System.out.println("모임후기 리스트 페이지 요청");
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		try {
 			// 모임후기 리스트 로드 프로세스 실행
@@ -47,15 +47,15 @@ public class FiveController {
 			System.out.println(Code.nullPoExceptionMsg);
 		}
 		
-		return "five/postList";
+		return viewPage;
 	}
 	
 	// 모임후기작성 페이지
-	@RequestMapping("/postForm")
+	@RequestMapping(value="/postForm")
 	public String postForm(Model model, HttpServletRequest req) {
 		
 		System.out.println("모임후기 작성 페이지 요청");
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = fiveService.postForm(model);
 		return viewPage;
@@ -63,11 +63,11 @@ public class FiveController {
 		
 
 	// 모임후기작성 프로세스
-	@RequestMapping("/postPro")
+	@RequestMapping(value="/postPro")
 	public String postPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
 		
 		System.out.println("모임후기 작성 프로세스 요청");
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		// 모델에 req객체를 삽입
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
@@ -81,7 +81,7 @@ public class FiveController {
 	@RequestMapping(value="/postDetail")
 	public String postDetail(Model model, HttpServletRequest req) {
 		System.out.println("모임후기 상세보기 페이지 요청");
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		try {
 			// 모임후기 상세보기 프로세스 실행
@@ -96,14 +96,13 @@ public class FiveController {
 		return viewPage;
 	}
 	
-	// 모임후기 수정
+	// 모임후기 수정폼 로드
 	@RequestMapping(value="/modifyPost")
-	public ModelAndView modifyPost(@RequestParam String post_num, HttpServletRequest req) {
-		mav = new ModelAndView("five/postModifyForm");
+	public String modifyPost(Model model, HttpServletRequest req) {
 		System.out.println("모임후기 수정폼 요청");
-		mav.addObject("post_num", post_num);
+		model.addAttribute("req", req);
 		try {
-			fiveService.modifyPost(mav, req);
+			viewPage = fiveService.modifyPost(model);
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
 			System.out.println(Code.numForExceptionMsg);
@@ -111,32 +110,31 @@ public class FiveController {
 			e.printStackTrace();
 			System.out.println(Code.nullPoExceptionMsg);
 		}
-		return mav;
+		return viewPage;
 	}
 	
 	// 모임후기수정 프로세스
-	@RequestMapping("/modifyPostPro")
+	@RequestMapping(value="/modifyPostPro")
 	public String modifyPostPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
 		
 		System.out.println("모임후기 작성 프로세스 요청");
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		// 모델에 req객체를 삽입
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
 		// 모임후기등록 프로세스
-		viewPage = fiveService.postPro(model);
+		viewPage = fiveService.modifyPostPro(model);
 		
 		return viewPage;
 	}
 	
 	// 모임후기 삭제
 	@RequestMapping(value="/deletePost")
-	public ModelAndView deletePost(@RequestParam String post_num) {
-		mav = new ModelAndView("JSON");
+	public String deletePost(Model model, HttpServletRequest req) {
 		System.out.println("모임후기 삭제 요청");
-		mav.addObject("post_num", post_num);
+		model.addAttribute("req", req);
 		try {
-			fiveService.deletePost(mav);
+			viewPage = fiveService.deletePost(model);
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
 			System.out.println(Code.numForExceptionMsg);
@@ -144,7 +142,7 @@ public class FiveController {
 			e.printStackTrace();
 			System.out.println(Code.nullPoExceptionMsg);
 		}
-		return mav;
+		return viewPage;
 	}
 	
 	// 모임후기 좋아요
@@ -197,4 +195,31 @@ public class FiveController {
 		}
 		return mav;
 	}
+	
+	// 모임사진첩
+	@RequestMapping(value="/group_pictures")
+	public String getGroupPictures(Model model, HttpServletRequest req) {
+		
+		System.out.println("모임사진첩 리스트 요청");
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		fiveService.getGroupPictures(model);
+		
+		return "five/gallery/groupPictures";
+	}
+	
+	// 모임사진첩
+	@RequestMapping(value="/group_videos")
+	public String getGroupVideos(Model model, HttpServletRequest req) {
+		
+		System.out.println("모임동영상 리스트 요청");
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		fiveService.getGroupVideos(model);
+		
+		return "five/gallery/groupVideos";
+	}
+	
 }

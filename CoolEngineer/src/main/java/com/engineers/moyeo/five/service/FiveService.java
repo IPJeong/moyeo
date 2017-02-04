@@ -22,11 +22,11 @@ public interface FiveService {
 	// 모임후기 상세보기
 	public String postDetail(Model model) throws NumberFormatException, NullPointerException;
 	
-	// 모임후기 수정하기
-	public void modifyPost(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
+	// 모임후기 수정폼 로드
+	public String modifyPost(Model model) throws NumberFormatException, NullPointerException;
 	
 	// 모임후기 삭제하기
-	public void deletePost(ModelAndView mav) throws NumberFormatException, NullPointerException;
+	public String deletePost(Model model) throws NumberFormatException, NullPointerException;
 	
 	// 모임후기 좋아요 / 좋아요 취소
 	public void likePost(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
@@ -37,4 +37,9 @@ public interface FiveService {
 	// 모임후기 댓글 삭제
 	public void deletePostReply(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
 	
+	// 모임후기 사진리스트 조회
+	public String getGroupPictures(Model model) throws NumberFormatException, NullPointerException;
+	
+	// 모임후기 사진리스트 조회
+	public String getGroupVideos(Model model) throws NumberFormatException, NullPointerException;
 }
