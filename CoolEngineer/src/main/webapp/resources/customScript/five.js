@@ -55,7 +55,7 @@ function imgChk(extension) {
 
 //동영상파일 확장자
 function videoChk(extension) {
-	var vedios = ['mpg', 'mpeg', 'mpe', 'wmv', 'asf', 'asx', 'flv', 'rm', 'mov', 'dat', 'avi', 'mp4'];
+	var vedios = ['mpg', 'mpeg', 'mp4'];
 	for(var i=0; i<vedios.length; i++){
 		if(vedios[i] == extension.toLowerCase()){
 			return true;
