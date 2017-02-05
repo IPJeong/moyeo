@@ -204,4 +204,20 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 	
+	//이벤트 참여 여부
+	@Override
+	public int eveChk(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.eveChk", map);
+		return cnt;
+	}
+	
+	//이벤트 참여
+	@Override
+	public int eveParticipate(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.eveParticipate", map);
+		return cnt;
+	}
+	
 }

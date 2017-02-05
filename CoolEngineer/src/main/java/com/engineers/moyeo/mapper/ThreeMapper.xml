@@ -122,6 +122,15 @@
 		     		)
 			  	 )						
 	</select>
+	<!-- 이벤트 참석 여부 -->
+	<select id="eveChk" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM evejoin_list WHERE event_num=#{evenum} AND mem_id=#{memid}
+	</select>
+	<!-- 이벤트 참여 -->
+	<insert id="eveParticipate" parameterType="map">
+		INSERT INTO evejoin_list
+			VALUES (evejoin_list_seq.NEXTVAL, #{memid}, #{evenum})
+	</insert>	
 <!-- 이벤트 -->
 <!-- 회원 -->
 	<!-- 아이디 중복체크 -->

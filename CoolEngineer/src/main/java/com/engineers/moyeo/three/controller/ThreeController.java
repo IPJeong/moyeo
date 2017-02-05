@@ -211,4 +211,15 @@ public class ThreeController {
 		
 		return viewPage;
 	}
+	
+	@RequestMapping("/eventParticipate") //관심사 선택
+	public String eventParticipate(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.eventParticipate(model);
+		System.out.println("eventParticipate()");
+		
+		return viewPage;
+	}
+	
 }

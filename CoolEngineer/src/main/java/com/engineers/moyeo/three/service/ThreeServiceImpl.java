@@ -582,6 +582,33 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/member/memInterestInput";
 	}
+
+	@Override
+	public String eventParticipate(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String memid = req.getParameter("memid");
+		int evenum = Integer.parseInt(req.getParameter("evenum"));
+		int cnt = 0;
+		
+		Map<String, Object> datamap = new HashMap<>();
+		datamap.put("memid", memid);
+		datamap.put("evenum", evenum);
+		
+		int chk = dao.eveChk(datamap); //이벤트 참여 여부
+		
+		if(chk == 0) {
+			cnt = dao.eveParticipate(datamap); //이벤트 참여
+		} else if(chk == 1){
+			cnt = -1;
+		}
+		
+		model.addAttribute("cnt", cnt);		
+		
+		return "/three/event/eventParticipate";
+	}
 	
 	
 	
