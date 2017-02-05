@@ -221,4 +221,11 @@ public class FiveController {
 		return "five/gallery/groupVideos";
 	}
 	
+	//워드클라우드 예제
+	@RequestMapping(value="/wordCloud")
+	public String wordCloud() {
+		System.out.println("워드 클라우드 로드");
+		return "five/wordCloud/wordCloud";
+	}
+	
 }

@@ -1,5 +1,6 @@
 package com.engineers.moyeo.main.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -7,6 +8,8 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.engineers.moyeo.main.dto.WordDTO;
 
 
 @Repository
@@ -27,6 +30,7 @@ public class MainDAOImpl implements MainDAO{
 		return cnt;
 	}
 
+	// 로그인 비밀번호 확인
 	@Override
 	public int pwdCheck(Map<String, String> map) {
 		int cnt = 0;
@@ -52,4 +56,33 @@ public class MainDAOImpl implements MainDAO{
 		
 		return cnt;
 	}
+
+	// 워드클라우드 모델을 가져옴
+	@Override
+	public List<WordDTO> getWordCloudModel() {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.getWordCloudModel();
+	}
+
+	// 워드클라우드 단어가 존재하는지 확인
+	@Override
+	public int checkWordCloud(String word) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.checkWordCloud(word);
+	}
+
+	// 워드클라우드 단어 추가
+	@Override
+	public int addWordCloud(Map<String, Object> map) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.addWordCloud(map);
+	}
+
+	// 워드클라우드 단어 카운트 업데이트
+	@Override
+	public int updateWordCloud(Map<String, Object> map) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.updateWordCloud(map);
+	}
+	
 }

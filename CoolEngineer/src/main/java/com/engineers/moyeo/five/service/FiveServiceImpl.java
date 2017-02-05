@@ -24,6 +24,7 @@ import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
@@ -37,6 +38,8 @@ public class FiveServiceImpl implements FiveService{
    FiveDAO fiveDao;
    @Autowired
    SixDAO sixDao;
+   @Autowired
+   MainService mainService;
 
    // 모임후기 리스트 출력 프로세스
    @Override
@@ -199,13 +202,13 @@ public class FiveServiceImpl implements FiveService{
       dto.setPost_tag(post_tag);
       dto.setPost_hit(0);
       cnt = fiveDao.insertPost(dto);
-
+      
       Map<String, Object> dataMap = new HashMap<>();
       dataMap.put("group_num", group_num);
       dataMap.put("post_date", post_date);
 
       int post_num = fiveDao.getPostNum(dataMap);
-
+      
       // 업로드파일 관리
       List<MultipartFile> files = fileForm.getFiles();
 
@@ -248,6 +251,8 @@ public class FiveServiceImpl implements FiveService{
             }
          }
       }
+      
+      mainService.wordExtractAndAnalyze(title +" " + content + " " + post_tag);
 
       model.addAttribute("cnt", cnt);
 

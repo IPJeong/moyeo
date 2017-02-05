@@ -16,9 +16,6 @@ import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
-import com.engineers.moyeo.six.dto.MainPictureDTO;
-import com.engineers.moyeo.six.dto.MemberInfoDTO;
-import com.engineers.moyeo.six.dto.MoimOpenDTO;
 
 @Service
 public class FourServiceImpl implements FourService{
@@ -121,7 +118,7 @@ public class FourServiceImpl implements FourService{
 
 		}
 		
-		//-- 사이드바 적용 영역
+		/*//-- 사이드바 적용 영역
 
 		//사이드에 모임명, 모임카테고리 불러오기
 		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
@@ -182,7 +179,7 @@ public class FourServiceImpl implements FourService{
 		model.addAttribute("member_dtos", memberB_dtos);
 
 		//-- 사이드바 적용 영역
-		
+*/		
 		return "/four/notice/moim_notice_board";
 	}
 
@@ -459,7 +456,7 @@ public class FourServiceImpl implements FourService{
 
 		}
 		
-		//-- 사이드바 적용 영역
+		/*//-- 사이드바 적용 영역
 
 		//사이드에 모임명, 모임카테고리 불러오기
 		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
@@ -520,7 +517,7 @@ public class FourServiceImpl implements FourService{
 		model.addAttribute("member_dtos", memberB_dtos);
 
 		//-- 사이드바 적용 영역
-		
+*/		
 		return "/four/greeting_board/moim_greeting_board";
 	}
 
