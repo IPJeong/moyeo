@@ -97,7 +97,7 @@
     	  FROM meeting_post_reply
     	 WHERE post_num = #{post_num}
     	  -->
-    	  SELECT *
+    	SELECT *
     	 FROM(
 	    	 SELECT mpr.POSTREP_NUM, mpr.REPLY_CONTENT, mpr.WRITE_DATE, mpr.MEM_ID, mpr.POST_NUM, mi.propic_path, mi.propic_name
 	    	   FROM meeting_post_reply mpr, member_info mi

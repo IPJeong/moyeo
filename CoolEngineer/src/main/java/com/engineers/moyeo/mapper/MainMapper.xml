@@ -10,15 +10,47 @@
 <mapper namespace="com.engineers.moyeo.main.dao.MainDAO">  <!-- 인터페이스 -->
     
     <insert id="insertTest" parameterType="com.engineers.moyeo.six.dto.MemberInfoDTO">
-    	INSERT INTO member_info (mem_id, passwd, name, address, tel, birth, email) values (#{mem_id}, #{passwd}, #{name}, #{address}, #{tel}, #{birth}, #{email})
+    	INSERT INTO member_info (mem_id, passwd, name, address, tel, birth, email) 
+    				     values (#{mem_id}, #{passwd}, #{name}, #{address}, #{tel}, #{birth}, #{email})
     </insert>
     
     <select id="idCheck" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM member_info WHERE mem_id= #{mem_id}
+		SELECT COUNT(*) 
+		  FROM member_info 
+		 WHERE mem_id= #{mem_id}
 	</select>
 	
 	<select id="pwdCheck" parameterType="Map" resultType="int">
-		Select COUNT(*) FROM member_info WHERE mem_id= #{mem_id} AND passwd = #{passwd}
+		SELECT COUNT(*) 
+		  FROM member_info 
+		 WHERE mem_id= #{mem_id} AND passwd = #{passwd}
 	</select>
+	
+	<select id="getWordCloudModel" resultType="com.engineers.moyeo.main.dto.WordDTO">
+		SELECT word, count
+	      FROM (
+				SELECT word, count, rownum as rm 
+				  FROM wordcloud_list
+				 ORDER BY count DESC
+			   )
+		WHERE rm BETWEEN 1 AND 30	 	  
+	</select>
+	
+	<select id="checkWordCloud" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		  FROM wordcloud_list
+		 WHERE word = #{word}
+	</select>
+	
+	<insert id="addWordCloud" parameterType="Map">
+		INSERT INTO wordcloud_list (word, count)
+							VALUES (#{word}, #{count})
+	</insert>
+	
+	<update id="updateWordCloud" parameterType="Map">
+		UPDATE wordcloud_list
+		   SET count = count + #{count}
+		 WHERE word = #{word}   
+	</update>
 	
 </mapper>
