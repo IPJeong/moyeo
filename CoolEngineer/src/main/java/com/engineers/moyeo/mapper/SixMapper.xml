@@ -51,8 +51,6 @@
 		SELECT * FROM noti_board ORDER BY noti_num DESC
 	</select>
 	
-	
-	
 	<!-- 모임일정-글 개수 구하기 -->
 	<select id="moimScheduleCount" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM meeting_list WHERE group_num = #{group_num}
@@ -132,8 +130,16 @@
  		INSERT INTO my_group VALUES(my_group_seq.NEXTVAL, 1, #{group_num}, #{mem_id})
  	</insert>
  	
+ 	<!-- 모임 기본 사진 설정(사이드) -->
+ 	<insert id="moimSidePhoto" parameterType="int">
+ 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, '/moyeo/resources/resource/assets/images/moimImg', 'side.jpg', #{group_num})
+ 	</insert>
  	
- 	
+ 	<!-- 모임 기본 사진 설정(메인) -->
+ 	<insert id="moimMainPhoto" parameterType="int">
+ 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, '/moyeo/resources/resource/assets/images/moimImg-', 'main.jpg', #{group_num})
+ 	</insert>
+ 		
  	<!-- 카테고리-관심사별(아웃도어/여행) -->
  	<select id="categoryHobbyA" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
  		SELECT * FROM group_list WHERE group_inte1 = '아웃도어/여행' ORDER BY group_num DESC
@@ -422,7 +428,7 @@
  	
  	<!-- 모임사이드-모임정보수정처리 -->
  	<update id="moimModifyPro" parameterType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		UPDATE group_list SET group_name = #{group_name}, group_mem_cnt = #{group_mem_cnt}, group_inte1 = #{group_inte1}, group_inte2 = #{group_inte2}, group_location = #{group_location}, group_intro = #{group_intro} WHERE group_num = #{group_num}
+ 		UPDATE group_list group_name = #{group_name}, group_mem_cnt = #{group_mem_cnt}, group_inte1 = #{group_inte1}, group_inte2 = #{group_inte2}, group_location = #{group_location}, group_intro = #{group_intro} WHERE group_num = #{group_num}
  	</update>
  	
  	<!-- 모임사이드-모임삭제 -->
@@ -435,14 +441,9 @@
  		INSERT INTO main_picture VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
  	</insert>
  	
- 	<!-- 모임사이드-대표사진 개수 구하기 -->
- 	<select id="moimImageCount" parameterType="int" resultType="int">
- 		SELECT COUNT(*) FROM main_picture WHERE main_pic_path = '/groupImgPath' AND group_num = #{group_num}
- 	</select>
- 	
  	<!-- 모임사이드-대표사진 불러오기 -->
  	<select id="moimImageView" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		select * from main_picture WHERE main_pic_path = '/groupImgPath' AND group_num = #{group_num} ORDER BY main_pic_num DESC
+ 		SELECT * FROM main_picture WHERE main_pic_num = (SELECT MAX(main_pic_num) FROM main_picture WHERE group_num=#{group_num} AND main_pic_path='/groupImgPath')
  	</select>
  	
  	<!-- 모임-소개사진 등록 -->
@@ -450,12 +451,7 @@
  		INSERT INTO main_picture VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
  	</insert>
  	
- 	<!-- 모임-소개사진 개수 구하기 -->
- 	<select id="moimImageCountB" parameterType="int" resultType="int">
- 		SELECT COUNT(*) FROM main_picture WHERE main_pic_path = '/groupImgPath-' AND group_num = #{group_num}
- 	</select>
- 	
- 	<!-- 모임-소개사진 불러오기 -->
+  	<!-- 모임-소개사진 불러오기 -->
  	<select id="moimImageViewB" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
  		SELECT * FROM main_picture WHERE main_pic_path = '/groupImgPath-' AND group_num = #{group_num} ORDER BY main_pic_num DESC
  	</select>
@@ -475,28 +471,18 @@
  		INSERT INTO check_present VALUES(check_present_seq.NEXTVAL, #{present_date}, #{mem_id}, #{group_num})
  	</insert>
  	
- 	<!-- 모임사이드-모임장정보 불러오기 -->
- 	<select id="moimLeaderLoad" parameterType="int" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
- 		SELECT mem_id, name, propic_path, propic_name FROM member_info WHERE mem_id = (SELECT mem_id FROM my_group WHERE group_num = #{group_num} AND group_per = 1)
+ 	<!-- 모임-회원권한 설정 -->
+ 	<select id="groupPer" parameterType="Map" resultType="int">
+ 		SELECT group_per FROM my_group WHERE mem_id = #{mem_id} AND group_num = #{group_num}
+ 	</select> 
+ 	
+ 	<!-- 모임사이드-모임멤버리스트 불러오기 -->
+ 	<select id="memberList" parameterType="int" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
+		 SELECT i.*, m.* FROM member_info i, my_group m WHERE i.mem_id = m.mem_id AND m.group_num = #{group_num} ORDER BY m.group_per, i.name
  	</select>
  	
-	<!-- 모임사이드-운영진들 아이디 불러오기 -->
- 	<select id="moimSubLeaderLoadA" parameterType="int" resultType="String">
- 		SELECT mem_id FROM my_group WHERE group_num = #{group_num} AND group_per = 2
- 	</select>
- 	
- 	<!-- 모임사이드-운영진들 정보 불러오기 -->
- 	<select id="moimSubLeaderLoadB" parameterType="String" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
- 		SELECT * FROM member_info WHERE mem_id = #{mem_id}
- 	</select>
- 	
- 	<!--  모임사이드-일반회원들 아이디 불러오기 -->
- 	<select id="moimMemberLoadA" parameterType="int" resultType="String">
- 		SELECT mem_id FROM my_group WHERE group_num = #{group_num} AND group_per = 3
- 	</select>
- 	
- 	<!--  모임사이드-일반회원들 정보 불러오기 -->
- 	<select id="moimMemberLoadB" parameterType="String" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
+ 	<!--  모임사이드-모임멤버 상세정보 -->
+ 	<select id="moimMemberDetail" parameterType="String" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
  		SELECT * FROM member_info WHERE mem_id = #{mem_id}
  	</select>
  	
