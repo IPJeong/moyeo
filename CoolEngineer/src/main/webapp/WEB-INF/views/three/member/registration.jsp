@@ -142,12 +142,12 @@
                             <div class="form-group">
 	                            <div class="col-md-12">
 	                                <label class="radio-material">
-	                                    <input id="radio1" type="radio" name="gender" value="man">
+	                                    <input id="radio1" type="radio" name="gender" value="man" required>
 	                                    <span class="outer"><span class="inner"></span></span> 남
 	                                </label>
 	                                &nbsp;&nbsp;                                            
 	                                <label class="radio-material">
-	                                    <input id="radio2" type="radio" name="gender" value="woman">
+	                                    <input id="radio2" type="radio" name="gender" value="woman" required>
 	                                    <span class="outer"><span class="inner"></span></span> 여
 	                                </label>
 	                            </div>

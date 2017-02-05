@@ -271,7 +271,7 @@
 										            	${dto.eventCon}										            	
 										            </div>										           														            
 										             <div class="modal-footer">
-										                <button type="button" class="btn btn-danger" onclick="participate(${sessionScope.mem_id}, ${dto.eventNum});">참여</button><!--  -->
+										                <button type="button" class="btn btn-danger" onclick="window.location='eventParticipate?memid=${sessionScope.mem_id}&evenum=${dto.eventNum}'">참여</button><!--  -->
 										                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 										             </div>													        
 										        </div>
@@ -280,14 +280,107 @@
 									</div>
 									<!-- 이벤트 상세 페이지 모달 -->
 									<!-- 참여자 리스트 모달 -->
-									<div class="modal animated fadeIn" id="partic" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
-										<div class="modal-dialog" style="width:25%;">
+									<div class="modal animated fadeIn" id="partic" tabindex="-1" role="dialog" style="height:50%;overflow:hidden;" aria-labelledby="smallModalHead" aria-hidden="true">
+										<div class="modal-dialog" style="width:25%;max-height:50%;">
 										    <div class="modal-content" style="border-width:0px;">
 										        <div class="modal-header">
 										            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 										            <h4 class="modal-title" id="smallModalHead" style="font-weight:bold;">참여자 리스트</h4>
 										        </div>
-										        <div class="modal-body" style="width:100%;height:200px;">
+										        <div class="modal-body" style="width:100%;max-height:50%;padding:0px;">
+										        	<div class="panel-body panel-body-table" style="display:block;height:50%;">                                
+					                                    <table class="table table-bordered" style="width:50%;overflow:hidden;">
+					                                        <thead style="width:100%;">
+					                                            <tr>					                                                
+					                                                <th>First Name</th>
+					                                                <th>Last Name</th>
+					                                                <th>Username</th>
+					                                            </tr>
+					                                        </thead>
+					                                        <tbody style="display:block;width:100%;height:50%;overflow-y:auto;">
+					                                            <tr>					                                                
+					                                                <td style="width">Mark</td>
+					                                                <td>Otto</td>
+					                                                <td>@mdo</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Jacob</td>
+					                                                <td>Thornton</td>
+					                                                <td>@fat</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                             <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                             <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                             <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                             <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                             <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                            <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                             <tr>					                                                
+					                                                <td>Larry</td>
+					                                                <td>the Bird</td>
+					                                                <td>@twitter</td>
+					                                            </tr>
+					                                        </tbody>
+					                                    </table>                                
+					                                </div>
 										        </div>
 										        <div class="modal-footer">
 									                <button type="button" class="btn btn-danger" onclick="window.location='eParticipate'">선정</button><!-- participate(<%-- <%= memId %> --%>); -->

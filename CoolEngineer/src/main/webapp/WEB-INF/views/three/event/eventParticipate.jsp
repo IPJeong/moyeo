@@ -8,9 +8,16 @@
 	</script>
 </c:if>
 
-<c:if test="${cnt != 0}">
+<c:if test="${cnt == 1}">
 	<script type="text/javascript">
-		alert("이벤트가 등록되었습니다.");
+		alert("이벤트에 참여하였습니다.");
+		window.location='ing_event';
+	</script>
+</c:if>
+
+<c:if test="${cnt == -1}">
+	<script type="text/javascript">
+		alert("이미 이벤트에 참여 하셨습니다.");
 		window.location='ing_event';
 	</script>
 </c:if>
