@@ -131,13 +131,13 @@
  	</insert>
  	
  	<!-- 모임 기본 사진 설정(사이드) -->
- 	<insert id="moimSidePhoto" parameterType="int">
- 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, '/moyeo/resources/resource/assets/images/moimImg', 'side.jpg', #{group_num})
+ 	<insert id="moimSidePhoto" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
  	</insert>
  	
  	<!-- 모임 기본 사진 설정(메인) -->
- 	<insert id="moimMainPhoto" parameterType="int">
- 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, '/moyeo/resources/resource/assets/images/moimImg-', 'main.jpg', #{group_num})
+ 	<insert id="moimMainPhoto" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
  	</insert>
  		
  	<!-- 카테고리-관심사별(아웃도어/여행) -->
@@ -454,6 +454,11 @@
   	<!-- 모임-소개사진 불러오기 -->
  	<select id="moimImageViewB" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
  		SELECT * FROM main_picture WHERE main_pic_path = '/groupImgPath-' AND group_num = #{group_num} ORDER BY main_pic_num DESC
+ 	</select>
+ 	
+ 	<!-- 모임-소개사진 불러오기 -->
+ 	<select id="moimImagesView" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		SELECT * FROM main_picture WHERE group_num = #{group_num} ORDER BY main_pic_path ASC
  	</select>
  	
  	<!-- 모임가입여부 확인 -->
