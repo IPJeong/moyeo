@@ -100,7 +100,13 @@ public interface SixService {
 	
 	//모임채팅
 	public void moimChat(Model model);
-	
+
 	//모임멤버 상세보기
 	public void moimMemberDetail(Model model);
+
+	//모임사진첩
+	public void moimPhoto(Model model);
+	
+	//모임동영상
+	public void moimMovie(Model model);
 }
