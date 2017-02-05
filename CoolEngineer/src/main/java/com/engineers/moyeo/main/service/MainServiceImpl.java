@@ -2,6 +2,7 @@ package com.engineers.moyeo.main.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import com.engineers.moyeo.main.dao.MainDAO;
+import com.engineers.moyeo.main.dto.WordDTO;
+import com.engineers.moyeo.main.twitterKoreanParser.KoreanParser;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 
@@ -21,6 +24,12 @@ public class MainServiceImpl implements MainService{
 
 	@Autowired
 	SixDAO sixDao;
+	
+	// 워드클라우드 모델 객체
+//	private static WordModel wordModel;
+	// 워드클라우드 리스트
+	private static List<WordDTO> wordDtos;
+	
 
 	//메인페이지에 공지사항 글 연동
 	@Override
@@ -31,11 +40,20 @@ public class MainServiceImpl implements MainService{
 
 		int cnt = sixDao.getCount();
 		
+		if(wordDtos == null) {
+			setWordList();
+			System.out.println("WordCloud word set");
+		}
+		
+		req.setAttribute("wordDtos", wordDtos);
+		
 		if(cnt > 0) {
 			ArrayList<NoticeDTO> dtos = sixDao.getArticles_main();
 			req.setAttribute("dtos", dtos);
 			req.setAttribute("pageNum", 1);
 		}
+		
+		
 	}
 	
 	// 로그인 프로세스
@@ -67,4 +85,46 @@ public class MainServiceImpl implements MainService{
 			return "main/memberLoginPro";	
 		}
 	}
+
+	// 형태소 분석된 결과를 데이터베이스에 저장하는 프로세스
+	@Override
+	public void wordExtractAndAnalyze(String text) {
+		System.out.println("WordCloud 분석 시작");
+		new Runnable() {
+			public void run() {
+				
+				Map<String, Integer> wordMap = KoreanParser.getWordsMap(text);
+				
+				for(Map.Entry<String, Integer> map : wordMap.entrySet()) {
+					
+					String word = map.getKey();
+					int count = map.getValue();
+					
+					Map<String, Object> wcMap = new HashMap<>();
+					
+					wcMap.put("word", word);
+					wcMap.put("count", count);
+					
+					// 기존에 있는 단어일 경우 카운트 업데이트
+					if(mainDao.checkWordCloud(word) == 1) {
+						mainDao.updateWordCloud(wcMap);
+					// 기존에 없는 단어일 경우 단어와 카운트 추가	
+					} else {
+						mainDao.addWordCloud(wcMap);
+					}
+				}
+				// 워드 클라우드 모델을 재정비해줌
+				setWordList();
+				System.out.println("WordCloud 분석 종료");
+			}
+		}.run();
+	}
+
+	// 워드클라우드 단어를 가져옴
+//	@Override
+	public synchronized void setWordList() {
+		System.out.println("Word Cloud 단어 삽입 요청");
+		wordDtos = mainDao.getWordCloudModel();
+	}
+	
 }
