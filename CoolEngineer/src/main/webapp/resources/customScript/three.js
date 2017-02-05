@@ -635,3 +635,7 @@ $(function(){
     //End Datepicker
 });
 
+//이벤트 참여 버튼
+function participate(memid, evenum) {
+	window.location="eventParticipate?memid=" + memid + "&evenum=" + evenum;
+}
