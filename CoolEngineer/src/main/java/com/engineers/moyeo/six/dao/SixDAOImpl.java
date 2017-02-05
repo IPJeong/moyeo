@@ -261,6 +261,18 @@ public class SixDAOImpl implements SixDAO{
 		dao.moimLeaderRegister(dto);
 	}
 	
+	//모임-기본 사진 설정(사이드)
+	public void moimSidePhoto(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.moimSidePhoto(group_num);
+	}
+
+	//모임-기본 사진 설정(메인)
+	public void moimMainPhoto(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.moimMainPhoto(group_num);
+	}
+	
 	
 	//카테고리-관심사별(아웃도어/여행)
 	@Override
@@ -783,24 +795,22 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;
 	}
 	
-	//모임사이드-대표사진 개수 구하기
-	@Override
-	public int moimImageCount(int group_num) {
-		int cnt = 0;
-		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		cnt = dao.moimImageCount(group_num);
-		
-		return cnt;
-	}
-	
 	//모임사이드-대표사진 불러오기
 	@Override
-	public ArrayList<MainPictureDTO> moimImageView(int group_num) {
-		ArrayList<MainPictureDTO> dtos = null;
+	public MainPictureDTO moimImageView(int group_num) {
+		MainPictureDTO dto = null;
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		dtos = dao.moimImageView(group_num);
+		dto = dao.moimImageView(group_num);
 		
-		return dtos;
+		return dto;
+	}
+	
+	//모임사이드-모임멤버 상세보기
+	@Override
+	public MemberInfoDTO moimMemberDetail(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		MemberInfoDTO dto = dao.moimMemberDetail(mem_id);
+		return dto;
 	}
 	
 	//모임-소개사진 등록
@@ -858,49 +868,20 @@ public class SixDAOImpl implements SixDAO{
 		dao.checkPresent(dto);
 	}
 	
-	//모임사이드-모임장정보 불러오기
-	@Override
-	public MemberInfoDTO moimLeaderLoad(int group_num) {
+	//모임-회원 권한 설정
+	public int groupPer(Map<String, Object> perMap) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		MemberInfoDTO dto = dao.moimLeaderLoad(group_num);
-		
-		return dto;
+		int cnt = dao.groupPer(perMap);
+		return cnt;
 	}
 	
-	//모임사이드-운영진들 아이디 불러오기
+	//모임사이드-모임멤버 리스트 불러오기
 	@Override
-	public ArrayList<String> moimSubLeaderLoadA(int group_num) {
+	public ArrayList<MemberInfoDTO> memberList(int group_num) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		ArrayList<String> dtos = dao.moimSubLeaderLoadA(group_num);
+		ArrayList<MemberInfoDTO> dtos = dao.memberList(group_num);
 		
 		return dtos;
-	}
-	
-	//모임사이드-운영진들 정보 불러오기
-	@Override
-	public MemberInfoDTO moimSubLeaderLoadB(String mem_id) {
-		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		MemberInfoDTO dto = dao.moimSubLeaderLoadB(mem_id);
-		
-		return dto;
-	}
-	
-	//모임사이드-일반멤버들 아이디 불러오기
-	@Override
-	public ArrayList<String> moimMemberLoadA(int group_num) {
-		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		ArrayList<String> dtos = dao.moimMemberLoadA(group_num);
-		
-		return dtos;
-	}
-	
-	//모임사이드-회원정보불러오기
-	@Override
-	public MemberInfoDTO moimMemberLoadB(String mem_id) {
-		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		MemberInfoDTO dto = dao.moimMemberLoadB(mem_id);
-		
-		return dto;
 	}
 
 	//최근접속일 불러오기
