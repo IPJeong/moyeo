@@ -166,6 +166,15 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
+		
+		<!-- 형태소 분석기 -->
+		<!-- https://mvnrepository.com/artifact/com.twitter.penguin/korean-text -->
+		<dependency>
+		    <groupId>com.twitter.penguin</groupId>
+		    <artifactId>korean-text</artifactId>
+		    <version>4.4.4</version>
+		</dependency>
+				
 	</dependencies>
     <build>
         <plugins>
