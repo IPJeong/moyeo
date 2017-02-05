@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 
 public class MemberInfoDTO {
 
+	//모임권한
+	private String group_per;
+	
 	//아이디
 	private String mem_id;
 	
@@ -123,6 +126,14 @@ public class MemberInfoDTO {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getGroup_per() {
+		return group_per;
+	}
+
+	public void setGroup_per(String group_per) {
+		this.group_per = group_per;
 	}
 	
 }
