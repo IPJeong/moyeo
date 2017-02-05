@@ -47,9 +47,10 @@ li {
 					<span>설명</span>
 				</div>
 			</div>
-			<div class="panel-body padding-0">
-				<div class="chart-holder" id="dashboard-bar-1"
-					style="height: 200px;"></div>
+			<div class="panel-body padding-0" style="height:85%;">
+				<%@ include file="../five/wordCloud/wordCloud.jsp" %>
+<!-- 				<div class="chart-holder" id="dashboard-bar-1" -->
+<!-- 					style="height: 200px;"></div> -->
 			</div>
 		</div>
 	</div>
