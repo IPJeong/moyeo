@@ -60,7 +60,7 @@ public class FileManager {
 	// 리턴 2 : 동영상
 	public static int checkFileType(String filename) {
 		
-		String[] imgs = {"jpg", "png", "gif", "bmp", "rel", "psd", "pdd", "tif", "pdf", "raw", "pct", "pic"};
+		String[] imgs = {"jpg", "png", "gif", "bmp", "rel", "psd", "pdd", "tif", "pdf", "raw", "pct", "pic", "jpeg"};
 		String[] videos = {"mpg", "mpeg", "mpe", "mp4"};
 		
 		String extension = filename.substring(filename.lastIndexOf(".")+1);

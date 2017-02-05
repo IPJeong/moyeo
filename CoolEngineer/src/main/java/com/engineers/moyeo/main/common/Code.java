@@ -37,6 +37,19 @@ public interface Code {
 	
 	
 	
+	// 모임의 기본사진 위치(모임생성시 기본사진 입력용)
+	public final static String groupDefSideImgPath = "/moyeo/resources/resource/assets/images/moimImg";
+	
+	// 모임의 기본소개사진 위치(모임생성시 기본소개사진 입력용)
+	public final static String groupDefIntroImgPath = "/moyeo/resources/resource/assets/images/moimImg-";
+	
+	// 모임의 기본소개사진 이름(모임생성시 소개사진 입력용)
+	public final static String groupDefSideImgName = "side.jpg";
+	
+	// 모임의 기본소개사진 이름(모임생성시 소개사진 입력용)
+	public final static String groupDefIntroImgName = "main.jpg";
+	
+	
 	// 모임후기 사진저장경로
 	public final static String postImgPathS = "/postImgPath";
 	// 모임후기 동영상저장경로
