@@ -216,7 +216,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("open_dto", open_dto);
 		
 		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImageView(group_num);
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
@@ -225,10 +225,12 @@ public class SixServiceImpl implements SixService{
 	//--사이드 끝
 		
 		//모임- 소개사진 불러오기
-		ArrayList<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
-		dtosB = sixDao.moimImageViewB(group_num);
-		String main_pic_nameB = dtosB.get(0).getMain_pic_name();
-		String main_pic_path = dtosB.get(0).getMain_pic_path();
+		List<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
+		//----수정
+		dtosB = sixDao.moimImagesView(group_num);
+		String main_pic_nameB = dtosB.get(1).getMain_pic_name();
+		String main_pic_path = dtosB.get(1).getMain_pic_path();
+		//--수정
 		String[] main_pic_pathb = main_pic_path.split("-");
 		String main_pic_pathB =main_pic_pathb[0];
 		model.addAttribute("main_pic_name", main_pic_nameB);
@@ -268,7 +270,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("open_dto", open_dto);
 		
 		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImageView(group_num);
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
@@ -375,7 +377,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("open_dto", open_dto);
 		
 		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImageView(group_num);
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
@@ -435,7 +437,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("open_dto", open_dto);
 		
 		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImageView(group_num);
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
@@ -603,11 +605,19 @@ public class SixServiceImpl implements SixService{
 			group_dto.setMem_id((String)(req.getSession().getAttribute("mem_id")));
 			sixDao.moimLeaderRegister(group_dto);
 			
-			//기본 사진 설정(사이드)
-			sixDao.moimSidePhoto(moimNum);
+			// 모임기본사진 등록(사이드바)
+			MainPictureDTO mainPicDto = new MainPictureDTO();
+			mainPicDto.setGroup_num(moimNum);
+			mainPicDto.setMain_pic_path(Code.groupDefSideImgPath);
+			mainPicDto.setMain_pic_name(Code.groupDefSideImgName);
 			
+			//기본 사진 저장(사이드)
+			sixDao.moimSidePhoto(mainPicDto);
+			
+			mainPicDto.setMain_pic_path(Code.groupDefIntroImgPath);
+			mainPicDto.setMain_pic_name(Code.groupDefIntroImgName);
 			//기본 사진 설정(메인)
-			sixDao.moimMainPhoto(moimNum);
+			sixDao.moimMainPhoto(mainPicDto);
 		}
 	}
 
@@ -809,7 +819,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("open_dto", open_dto);
 		
 		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImageView(group_num);
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
@@ -818,10 +828,18 @@ public class SixServiceImpl implements SixService{
 	//--사이드 끝
 		
 		//모임-소개사진 불러오기
-		ArrayList<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
-		dtosB = sixDao.moimImageViewB(group_num);
-		String main_pic_nameB = dtosB.get(0).getMain_pic_name();
-		String main_pic_path = dtosB.get(0).getMain_pic_path();
+		List<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
+		
+		
+		//-----변경
+		//dtosB = sixDao.moimImageViewB(group_num);
+		dtosB = sixDao.moimImagesView(group_num);
+		String main_pic_nameB = dtosB.get(1).getMain_pic_name();
+		String main_pic_path = dtosB.get(1).getMain_pic_path();
+		
+		//-----변경
+		
+		
 		String[] main_pic_pathb = main_pic_path.split("-");
 		String main_pic_pathB =main_pic_pathb[0];
 	
@@ -1017,7 +1035,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("open_dto", open_dto);
 		
 		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImageView(group_num);
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
@@ -1068,7 +1086,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("open_dto", open_dto);
 		
 		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImageView(group_num);
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
@@ -1092,7 +1110,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("open_dto", open_dto);
 		
 		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImageView(group_num);
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
