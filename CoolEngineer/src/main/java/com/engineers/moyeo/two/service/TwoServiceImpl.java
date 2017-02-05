@@ -1219,7 +1219,7 @@ public class TwoServiceImpl implements TwoService{
 		
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
 
-		//사이드에 모임명, 모임카테고리 불러오기
+		/*//사이드에 모임명, 모임카테고리 불러오기
 		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
 		model.addAttribute("group_name", open_dto.getGroup_name());
 		model.addAttribute("group_inte1", open_dto.getGroup_inte1());
@@ -1273,7 +1273,7 @@ public class TwoServiceImpl implements TwoService{
 			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
 			memberB_dtos.add(i, memberC_dto);
 		}
-		model.addAttribute("member_dtos", memberB_dtos);
+		model.addAttribute("member_dtos", memberB_dtos);*/
 		
 		
 		cnt = twoDao.getMoimJoinCount(group_num);
@@ -1414,7 +1414,7 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("group_inte2", open_dto.getGroup_inte2());
 		model.addAttribute("group_intro", open_dto.getGroup_intro());
 	
-		//사이드에 들어갈 대표사진 개수 구하기
+		/*//사이드에 들어갈 대표사진 개수 구하기
 		int cntA = sixDao.moimImageCount(group_num);
 		
 		//모임 대표사진이 있는 경우만 대표사진 불러오기
@@ -1461,7 +1461,7 @@ public class TwoServiceImpl implements TwoService{
 			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
 			memberB_dtos.add(i, memberC_dto);
 		}
-		model.addAttribute("member_dtos", memberB_dtos);
+		model.addAttribute("member_dtos", memberB_dtos);*/
 		
 		cnt = twoDao.getMoimMemberCount(group_num);
 		
@@ -1613,7 +1613,7 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("group_inte2", open_dto.getGroup_inte2());
 		model.addAttribute("group_intro", open_dto.getGroup_intro());
 	
-		//사이드에 들어갈 대표사진 개수 구하기
+		/*//사이드에 들어갈 대표사진 개수 구하기
 		int cntA = sixDao.moimImageCount(group_num);
 		
 		//모임 대표사진이 있는 경우만 대표사진 불러오기
@@ -1660,7 +1660,7 @@ public class TwoServiceImpl implements TwoService{
 			MemberInfoDTO memberC_dto = sixDao.moimMemberLoadB(member_id);
 			memberB_dtos.add(i, memberC_dto);
 		}
-		model.addAttribute("member_dtos", memberB_dtos);
+		model.addAttribute("member_dtos", memberB_dtos);*/
 		
 		
 		
