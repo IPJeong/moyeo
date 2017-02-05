@@ -2,6 +2,7 @@ package com.engineers.moyeo.six.dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
@@ -89,10 +90,10 @@ public interface SixDAO {
 	public void moimLeaderRegister(MyGroupDTO dto);
 	
 	//모임-기본 사진 설정(사이드)
-	public void moimSidePhoto(int group_num);
+	public void moimSidePhoto(MainPictureDTO dto);
 
 	//모임-기본 사진 설정(메인)
-	public void moimMainPhoto(int group_num);
+	public void moimMainPhoto(MainPictureDTO dto);
 	
 	//카테고리-관심사별(아웃도어/여행)
 	public ArrayList<MoimOpenDTO> categoryHobbyA();
@@ -277,10 +278,15 @@ public interface SixDAO {
 	public int moimAddImagePro(MainPictureDTO dto);
 	
 	//모임사이드-대표사진 불러오기
-	public MainPictureDTO moimImageView(int group_num);
+	//public MainPictureDTO moimImageView(int group_num);
 	
 	//모임사이드-모임멤버 상세보기
 	public MemberInfoDTO moimMemberDetail(String mem_id);
+	
+	//-------추가
+	//모임-사이드, 대표사진 불러오기
+	public List<MainPictureDTO> moimImagesView(int group_num);
+	//-------추가
 	
 	//모임-소개사진 등록
 	public int moimAddImageProB(MainPictureDTO dto);
@@ -289,7 +295,7 @@ public interface SixDAO {
 	public int moimImageCountB(int group_num);
 	
 	//모임-소개사진 불러오기
-	public ArrayList<MainPictureDTO> moimImageViewB(int group_num);
+	//public ArrayList<MainPictureDTO> moimImageViewB(int group_num);
 	
 	//모임-가입여부확인
 	public int memberCheck(CheckPresentDTO dto);

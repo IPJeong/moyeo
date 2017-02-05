@@ -2,6 +2,7 @@ package com.engineers.moyeo.six.dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -262,15 +263,15 @@ public class SixDAOImpl implements SixDAO{
 	}
 	
 	//모임-기본 사진 설정(사이드)
-	public void moimSidePhoto(int group_num) {
+	public void moimSidePhoto(MainPictureDTO dto) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		dao.moimSidePhoto(group_num);
+		dao.moimSidePhoto(dto);
 	}
 
 	//모임-기본 사진 설정(메인)
-	public void moimMainPhoto(int group_num) {
+	public void moimMainPhoto(MainPictureDTO dto) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		dao.moimMainPhoto(group_num);
+		dao.moimMainPhoto(dto);
 	}
 	
 	
@@ -796,14 +797,14 @@ public class SixDAOImpl implements SixDAO{
 	}
 	
 	//모임사이드-대표사진 불러오기
-	@Override
+	/*@Override
 	public MainPictureDTO moimImageView(int group_num) {
 		MainPictureDTO dto = null;
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		dto = dao.moimImageView(group_num);
 		
 		return dto;
-	}
+	}*/
 	
 	//모임사이드-모임멤버 상세보기
 	@Override
@@ -812,6 +813,17 @@ public class SixDAOImpl implements SixDAO{
 		MemberInfoDTO dto = dao.moimMemberDetail(mem_id);
 		return dto;
 	}
+	
+	//----------------추가
+	// 모임 대표사진, 소개사진 불러오기
+	@Override
+	public List<MainPictureDTO> moimImagesView(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		return dao.moimImagesView(group_num);
+	}
+
+	//----------------추가
+	
 	
 	//모임-소개사진 등록
 	@Override
@@ -834,14 +846,14 @@ public class SixDAOImpl implements SixDAO{
 		}
 	
 	//모임-소개사진 불러오기
-	@Override
+	/*@Override
 	public ArrayList<MainPictureDTO> moimImageViewB(int group_num) {
 		ArrayList<MainPictureDTO> dtos = null;
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		dtos = dao.moimImageViewB(group_num);
 		
 		return dtos;
-	}
+	}*/
 
 	//모임-가입여부확인
 	@Override
