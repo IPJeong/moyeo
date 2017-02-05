@@ -87,8 +87,12 @@ public interface SixDAO {
 	
 	//모임-모임장등록
 	public void moimLeaderRegister(MyGroupDTO dto);
-
 	
+	//모임-기본 사진 설정(사이드)
+	public void moimSidePhoto(int group_num);
+
+	//모임-기본 사진 설정(메인)
+	public void moimMainPhoto(int group_num);
 	
 	//카테고리-관심사별(아웃도어/여행)
 	public ArrayList<MoimOpenDTO> categoryHobbyA();
@@ -271,12 +275,12 @@ public interface SixDAO {
 	
 	//모임사이드-대표사진 등록
 	public int moimAddImagePro(MainPictureDTO dto);
-
-	//모임사이드-대표사진 개수 구하기
-	public int moimImageCount(int group_num);
 	
 	//모임사이드-대표사진 불러오기
-	public ArrayList<MainPictureDTO> moimImageView(int group_num);
+	public MainPictureDTO moimImageView(int group_num);
+	
+	//모임사이드-모임멤버 상세보기
+	public MemberInfoDTO moimMemberDetail(String mem_id);
 	
 	//모임-소개사진 등록
 	public int moimAddImageProB(MainPictureDTO dto);
@@ -296,20 +300,11 @@ public interface SixDAO {
 	//모임-출석체크 입력
 	public void checkPresent(CheckPresentDTO dto);
 	
-	//모임사이드-모임장정보 불러오기
-	public MemberInfoDTO moimLeaderLoad(int group_num);
-
-	//모임사이드-운영진들 아이디 불러오기
-	public ArrayList<String> moimSubLeaderLoadA(int group_num);
-
-	//모임사이드-운영진들 정보 불러오기
-	public MemberInfoDTO moimSubLeaderLoadB(String mem_id);
+	//모임-회원 권한 설정
+	public int groupPer(Map<String, Object> perMap);
 	
-	//모임사이드-일반멤버들 아이디 불러오기
-	public ArrayList<String> moimMemberLoadA(int group_num);
-	
-	//모임사이드-일반멤버들 정보 불러오기
-	public MemberInfoDTO moimMemberLoadB(String mem_id);
+	//모임사이드-모임멤버 리스트 불러오기
+	public ArrayList<MemberInfoDTO> memberList(int group_num);
 
 	//최근접속일 불러오기
 	public Timestamp lastConnect(Map<String, Object> daoMap);
