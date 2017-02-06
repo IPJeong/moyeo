@@ -15,6 +15,13 @@ public class ErrorPageHandler {
 		return "error/error400";
 	}
 	
+	// 404에러 페이지
+	@RequestMapping(value="/error404")
+	public String error404() {
+		System.out.println("404에러 발생");
+		return "error/error404";
+	}
+	
 	// 405에러 페이지
 	@RequestMapping(value="/error405")
 	public String error405() {
@@ -22,10 +29,18 @@ public class ErrorPageHandler {
 		return "error/error405";
 	}
 	
-	// 404에러 페이지
-	@RequestMapping(value="/error404")
-	public String error404() {
-		System.out.println("404에러 발생");
-		return "error/error404";
+	// 500에러 페이지
+	@RequestMapping(value="/error500")
+	public String error500() {
+		System.out.println("500에러 발생");
+		return "error/error500";
+	}
+	
+	// 502에러 페이지
+	@RequestMapping(value="/error502")
+	public String error502() {
+		System.out.println("502에러 발생");
+		return "error/error502";
 	}
 }
+
