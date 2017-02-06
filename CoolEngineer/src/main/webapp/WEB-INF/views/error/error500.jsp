@@ -32,7 +32,7 @@ body {
 }
 </style>
 <div id="error">
-	<img src="/moyeo/resources/resource/assets/images/error/400.png" id="errorimg">
+	<img src="/moyeo/resources/resource/assets/images/error/500.png" id="errorimg">
 	<div id="back">
 		<a onclick="window.history.back();"><img src="/moyeo/resources/resource/assets/images/error/back.png" id="backimg"></a>
 	</div>
