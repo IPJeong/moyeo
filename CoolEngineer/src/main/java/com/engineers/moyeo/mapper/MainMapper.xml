@@ -29,11 +29,13 @@
 	<select id="getWordCloudModel" resultType="com.engineers.moyeo.main.dto.WordDTO">
 		SELECT word, count
 	      FROM (
-				SELECT word, count, rownum as rm 
-				  FROM wordcloud_list
-				 ORDER BY count DESC
-			   )
-		WHERE rm BETWEEN 1 AND 30	 	  
+				SELECT word, count, rownum as rn
+				  FROM (SELECT *
+                  FROM wordcloud_list
+                 ORDER BY count DESC)				 
+         
+         		)
+    	 WHERE rn BETWEEN 1 AND 30 
 	</select>
 	
 	<select id="checkWordCloud" parameterType="String" resultType="int">
