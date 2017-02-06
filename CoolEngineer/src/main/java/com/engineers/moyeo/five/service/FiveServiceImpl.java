@@ -252,7 +252,7 @@ public class FiveServiceImpl implements FiveService{
          }
       }
       
-      mainService.wordExtractAndAnalyze(title +" " + content + " " + post_tag);
+      mainService.wordAnalyzer(title, content, post_tag);
 
       model.addAttribute("cnt", cnt);
 

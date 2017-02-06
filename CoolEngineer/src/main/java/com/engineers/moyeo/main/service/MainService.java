@@ -9,6 +9,9 @@ public interface MainService {
 	
 	// 로그인 처리
 	public String memberLoginPro(Model model);
+
+	// 단어 형태소 분석을 처리하는 메서드
+	public void wordAnalyzer(String title, String content, String tag);
 	
 	// 단어 형태소 분석 후 DB 저장
 	public void wordExtractAndAnalyze(String text);

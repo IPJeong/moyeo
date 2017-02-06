@@ -21,8 +21,8 @@ public interface MainDAO {
 	public List<WordDTO> getWordCloudModel();
 	
 	// 분석된 워드 클라우드 단어를 추가
-	public int addWordCloud(Map<String, Object> map);
+	public int addWordCloud(WordDTO dto);
 	
 	// 분석된 워드 클라우드 단어수 업데이트
-	public int updateWordCloud(Map<String, Object> map);
+	public int updateWordCloud(WordDTO dto);
 }

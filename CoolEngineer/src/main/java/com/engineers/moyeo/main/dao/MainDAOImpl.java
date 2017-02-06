@@ -73,16 +73,16 @@ public class MainDAOImpl implements MainDAO{
 
 	// 워드클라우드 단어 추가
 	@Override
-	public int addWordCloud(Map<String, Object> map) {
+	public int addWordCloud(WordDTO dto) {
 		MainDAO dao = sqlSession.getMapper(MainDAO.class);
-		return dao.addWordCloud(map);
+		return dao.addWordCloud(dto);
 	}
 
 	// 워드클라우드 단어 카운트 업데이트
 	@Override
-	public int updateWordCloud(Map<String, Object> map) {
+	public int updateWordCloud(WordDTO dto) {
 		MainDAO dao = sqlSession.getMapper(MainDAO.class);
-		return dao.updateWordCloud(map);
+		return dao.updateWordCloud(dto);
 	}
 	
 }

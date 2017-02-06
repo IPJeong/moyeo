@@ -27,13 +27,13 @@
 	</select>
 	
 	<select id="getWordCloudModel" resultType="com.engineers.moyeo.main.dto.WordDTO">
-		SELECT word, count
+		SELECT *
 	      FROM (
-				SELECT word, count, rownum as rn
+				SELECT word, count, part_of_speech, update_date, reg_date, rownum as rn
 				  FROM (SELECT *
-                  FROM wordcloud_list
-                 ORDER BY count DESC)				 
-         
+                          FROM wordcloud_list
+                 		 ORDER BY count DESC, update_date DESC
+                        )				 
          		)
     	 WHERE rn BETWEEN 1 AND 30 
 	</select>
@@ -44,14 +44,15 @@
 		 WHERE word = #{word}
 	</select>
 	
-	<insert id="addWordCloud" parameterType="Map">
-		INSERT INTO wordcloud_list (word, count)
-							VALUES (#{word}, #{count})
+	<insert id="addWordCloud" parameterType="com.engineers.moyeo.main.dto.WordDTO">
+		INSERT INTO wordcloud_list (word, count, part_of_speech, update_date, reg_date) 
+							VALUES (#{word}, #{count}, #{part_of_speech}, #{update_date}, #{reg_date})
 	</insert>
 	
-	<update id="updateWordCloud" parameterType="Map">
+	<update id="updateWordCloud" parameterType="com.engineers.moyeo.main.dto.WordDTO">
 		UPDATE wordcloud_list
 		   SET count = count + #{count}
+		   SET update_date = #{update_date}
 		 WHERE word = #{word}   
 	</update>
 	
