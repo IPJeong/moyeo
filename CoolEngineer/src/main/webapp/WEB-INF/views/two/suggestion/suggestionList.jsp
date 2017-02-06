@@ -156,7 +156,7 @@ li {
 									${dtos.mem_id}
 								</td>
 								<td style="border:0;" align="center">
-									${dtos.sug_status}
+									<span style="color:red;">${dtos.sug_status}</span>
 								</td>
 								<td style="border:0;" align="center">
 									${dtos.manager_id}
