@@ -27,6 +27,18 @@ public class TextMessage {
 		return post_title + " 후기에 " + mem_id + " 님께서 댓글을 작성하셨습니다.";
 	}
 	
+	// 회원가입한 회원의 축하 이메일 제목 메시지
+	public static String congJoinMsgTitle(String id) {
+		return "[Moyeo] " + id + "님 회원가입을 진심으로 축하합니다.";
+	}
+	
+	// 회원가입한 회원의 축하 이메일 내용 메시지
+	public static String congJoinMsgContent(String id) {
+		return "안녕하세요. Moyeo팀 입니다. \n" + 
+				id + "님의 회원가입을 진심으로 축하드립니다. \n" +
+				"앞으로 활발한 활동을 부탁드리며 Moyeo에서 좋은 인연 찾아서 좋은 모임활동 하시길 바라겠습니다.";
+	}
+	
 	// 비밀번호 분실 이메일 발송문의 제목 메시지
 	public final static String pwSearchEmailMsg(String id) {
 		return "[Moyeo] " + id + "님께서 문의하신 비밀번호 분실관련 이메일 입니다.";
