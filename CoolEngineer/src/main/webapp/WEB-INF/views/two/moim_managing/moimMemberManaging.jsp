@@ -167,14 +167,34 @@ li {
 						<br> <br>
 						
 						<div>
+						
+						<c:if test="${cnt == 0}">
 							<table class="table table-striped table-hover"
-								style="width: 90%; margin-left: 5%;">
+								style="width:90%; margin-left: 5%;">
+								<tr class="info">
+									<td align="center" style="width:7.5%">선택</td>
+									<td align="center" style="width:27.5%">아이디</td>
+									<td align="center" style="width:15%">회원등급</td>
+									<td align="center" style="width:15%">이름</td>
+									<td align="center" style="width:20%">출생년도</td>
+									<td align="center" style="width:15%">성별</td>
+								</tr>
+								<tr>
+									<td colspan="6" align="center" style="height:40px">
+										회원이 존재하지 않습니다.
+									</td>
+								</tr>
+							</table>
+						</c:if>
+						
+						<c:if test="${cnt > 0}">
+							<table class="table table-striped table-hover"
+								style="width:45%; float:left; margin-left: 5%;">
 								<tr class="info">
 									<td align="center" style="width:15%">선택</td>
 									<td align="center" style="width:55%">아이디</td>
 									<td align="center" style="width:30%">회원등급</td>
 								</tr>
-						<c:if test="${cnt > 0}">
 							<c:forEach var="dtos" items="${dtos}">
 								<tr style="border:0;">
 									<td style="border:0;" align="center">
@@ -196,17 +216,33 @@ li {
 									</td>	
 								</tr>
 							</c:forEach>
-						</c:if>
-
-							<c:if test="${cnt == 0}">
-								<tr>
-									<td colspan="3" align="center" style="height:40px">
-										회원이 존재하지 않습니다.
-									</td>
+						</table>
+					</c:if>
+					
+					<c:if test="${cnt > 0}">
+							<table class="table table-striped table-hover"
+								style="width:45%; float:right; margin-right: 5%;">
+								<tr class="info">
+									<td align="center" style="width:30%">이름</td>
+									<td align="center" style="width:40%">출생년도</td>
+									<td align="center" style="width:30%">성별</td>
 								</tr>
-							</c:if>
+								<c:forEach var="mifdtos" items="${mifdtos}">
+									<tr style="border:0;">
+										<td style="border:0;">
+											${mifdtos.name}
+										</td>
+										<td style="border:0;" align="center">
+											<fmt:formatDate type="both" pattern="yyyy" value="${mifdtos.birth}" />
+										</td>	
+										<td style="border:0;" align="center">
+											${mifdtos.gender}
+										</td>	
+									</tr>
+								</c:forEach>
 							</table>
-					 </div>
+				     	</c:if>
+				</div>
 	
 						
 					    <div style="float:right; margin-right:50%;">	

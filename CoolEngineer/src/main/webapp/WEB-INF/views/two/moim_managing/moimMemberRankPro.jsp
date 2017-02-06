@@ -5,9 +5,19 @@
 
 <html>
 <body>
+	<c:if test="${cnt == -1}">
+		<script type="text/javascript">
+			alert("모임장의 등급을 변경할 수 없습니다.");
+			opener.location.reload();//새로고침
+			window.close();
+		</script>
+	</c:if>
+
 	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
 			alert("모임원 등급 변경을 실패했습니다.");
+			opener.location.reload();//새로고침
+			window.close();
 		</script>
 	</c:if>
 	

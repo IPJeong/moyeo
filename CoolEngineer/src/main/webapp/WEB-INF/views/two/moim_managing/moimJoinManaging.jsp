@@ -122,14 +122,12 @@ li {
 				
 			<br><br><br><br><br>
 					<h2><center>가입신청 관리</center></h2>
-			<br><br>		
+			<br>	
 					
 			<div class="panel-body padding-0" style="text-align:center; font-size: 15px;" >
 				<div class="chart-holder" id="dashboard-bar-1"
 					style="height:70px; margin:15px;">
 			
-			
-				<br><br><br>
 
 				
 				<div>
@@ -142,15 +140,35 @@ li {
 						<br> <br>
 						
 						<div>
+						<c:if test="${cnt == 0}">	
 							<table class="table table-striped table-hover"
-								style="width: 90%; margin-left: 5%;">
+								style="width:90%; float:left; margin-left: 5%;">
+								<tr>
+									<td align="center" style="width:6%">선택</td>
+									<td align="center" style="width:30%">아이디</td>
+									<td align="center" style="width:20%">신청 날짜</td>
+									<td align="center" style="width:10%">상태</td>
+									<td align="center" style="width:10%">이름</td>
+									<td align="center" style="width:14%">출생년도</td>
+									<td align="center" style="width:10%">성별</td>
+								</tr>
+								<tr>
+									<td colspan="7" align="center" style="height:40px">
+											가입 신청한 사람이 없습니다.
+									</td>
+								</tr>
+							</table>
+						</c:if>	
+						
+						<c:if test="${cnt > 0}">	
+							<table class="table table-striped table-hover"
+								style="width:60%; float:left; margin-left: 5%;">
 								<tr class="info">
 									<td align="center" style="width:10%">선택</td>
 									<td align="center" style="width:45%">아이디</td>
 									<td align="center" style="width:30%">신청 날짜</td>
 									<td align="center" style="width:15%">상태</td>
 								</tr>
-						<c:if test="${cnt > 0}">
 							<c:forEach var="dtos" items="${dtos}">
 								<tr style="border:0;">
 									<td style="border:0;" align="center">
@@ -167,17 +185,34 @@ li {
 									</td>	
 								</tr>
 							</c:forEach>
-						</c:if>
-						
-							<c:if test="${cnt == 0}">
-								<tr>
-									<td colspan="4" align="center" style="height:40px">
-										가입 신청한 사람이 없습니다.
-									</td>
-								</tr>
-							</c:if>
 							</table>
-					 </div>
+						</c:if>	
+
+						<c:if test="${cnt > 0}">
+							<table class="table table-striped table-hover"
+								style="width: 30%; float:right; margin-right: 5%;">
+								<tr class="info">
+									<td align="center" style="width:30%">이름</td>
+									<td align="center" style="width:40%">출생년도</td>
+									<td align="center" style="width:30%">성별</td>
+								</tr>
+								<c:forEach var="mifdtos" items="${mifdtos}">
+									<tr style="border:0;">
+										<td style="border:0;">
+											${mifdtos.name}
+										</td>
+										<td style="border:0;" align="center">
+											<fmt:formatDate type="both" pattern="yyyy" value="${mifdtos.birth}" />
+										</td>	
+										<td style="border:0;" align="center">
+											${mifdtos.gender}
+										</td>	
+									</tr>
+								</c:forEach>
+							</table>
+				     	</c:if>
+			     </div>
+	
 	
 						
 					    <div style="float:right; margin-right:50%;">	
