@@ -13,6 +13,7 @@ import com.engineers.moyeo.two.dto.Greeting_boardDTO;
 import com.engineers.moyeo.two.dto.Group_noticeDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
 import com.engineers.moyeo.two.dto.Meeting_postDTO;
+import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
 import com.engineers.moyeo.two.dto.My_groupDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
@@ -331,14 +332,6 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public int modifyMoimInfo(Moim_infoDTO dto) {
-		int cnt = 0;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		cnt = dao.modifyMoimInfo(dto);	
-		return cnt;
-	}
-	
-	@Override
 	public int identifyMoimMember(Map<String, Object> daoMap) {
 		int cnt = 0;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
@@ -346,6 +339,13 @@ public class TwoDAOImpl implements TwoDAO{
 		return cnt;
 	}
 
+	@Override
+	public int moimJoinCheck(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.moimJoinCheck(daoMap);	
+		return cnt;
+	}
 
 	@Override
 	public int moimJoin(Map<String, Object> daoMap) {
@@ -376,6 +376,14 @@ public class TwoDAOImpl implements TwoDAO{
 		ArrayList<Join_requestDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getMoimJoinList(daoMap);
+		return dtos;
+	}
+	
+	@Override
+	public ArrayList<Member_infoDTO> getMoimJoinMemberInfoList(Map<String, Object> daoMap) {
+		ArrayList<Member_infoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimJoinMemberInfoList(daoMap);
 		return dtos;
 	}
 	
@@ -422,6 +430,14 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
+	public ArrayList<Member_infoDTO> getMoimMemberInfoList(Map<String, Object> daoMap) {
+		ArrayList<Member_infoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimMemberInfoList(daoMap);
+		return dtos;
+	}
+
+	@Override
 	public My_groupDTO getMoimMemberInfo(int my_group_num) {
 		My_groupDTO dto = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
@@ -436,6 +452,14 @@ public class TwoDAOImpl implements TwoDAO{
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dto = dao.getMoimMemberInfo2(daoMap);
 		return dto;
+	}
+	
+	@Override
+	public String checkMoimMemberRank(int my_group_num) {
+		String group_per = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		group_per = dao.checkMoimMemberRank(my_group_num);
+		return group_per;
 	}
 
 	@Override

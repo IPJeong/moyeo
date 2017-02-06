@@ -27,9 +27,7 @@ public interface TwoService {
 	public String recPlaceModifyPro(Model model); //추천장소 게시글 수정 처리
 	public String plusPlaceLike(Model model); //추천장소 게시글에 추천 누름
 	public String minusPlaceLike(Model model); //추천장소 게시글에서 추천을 취소함
-	
-	public String moimInfoManaging(Model model);
-	public String moimInfoManagingPro(Model model);
+
 	public String moimJoinForm(Model model);
 	public String moimJoinPro(Model model);
 	public String moimWithdraw(Model model);

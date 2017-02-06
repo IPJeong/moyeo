@@ -7,6 +7,7 @@ import com.engineers.moyeo.two.dto.Greeting_boardDTO;
 import com.engineers.moyeo.two.dto.Group_noticeDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
 import com.engineers.moyeo.two.dto.Meeting_postDTO;
+import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
 import com.engineers.moyeo.two.dto.My_groupDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
@@ -58,21 +59,24 @@ public interface TwoDAO {
 	public int checkPlalikeNum(Map<String, Object> daoMap); //장소좋아요 테이블에서 내가 누른 추천의 plalike_num을 확인함
 	public int minusPlaceLike(int plalike_num); //추천을 취소함
 	
-	public Moim_infoDTO readMoimInfo(int group_num);
-	public int modifyMoimInfo(Moim_infoDTO dto);
+	public Moim_infoDTO readMoimInfo(int group_num); //어떤 모임 하나의 모임 정보를 불러옴 
 	public int identifyMoimMember(Map<String, Object> daoMap);
+	public int moimJoinCheck(Map<String, Object> daoMap);
 	public int moimJoin(Map<String, Object> daoMap);
 	public int moimWithdraw(Map<String, Object> daoMap);
 	public int getMoimJoinCount(int group_num);
 	public ArrayList<Join_requestDTO> getMoimJoinList(Map<String, Object> daoMap);
+	public ArrayList<Member_infoDTO> getMoimJoinMemberInfoList(Map<String, Object> daoMap);
 	public Join_requestDTO getMoimJoinInfo(int request_num);
 	public void moimJoinOK(Map<String, Object> daoMap);
 	public void moimJoinPro(Map<String, Object> daoMap);
 	public void moimJoinNO(Map<String, Object> daoMap);
 	public int getMoimMemberCount(int group_num);
 	public ArrayList<My_groupDTO> getMoimMemberList(Map<String, Object> daoMap);
+	public ArrayList<Member_infoDTO> getMoimMemberInfoList(Map<String, Object> daoMap);
 	public My_groupDTO getMoimMemberInfo(int my_group_num);
 	public My_groupDTO getMoimMemberInfo2(Map<String, Object> daoMap);
+	public String checkMoimMemberRank(int my_group_num);
 	public int changeMoimMemberRank(Map<String, Object> daoMap);
 	public int banishMoimMember(int my_group_num);
 	public int getNoticeBoardCount(int group_num);
