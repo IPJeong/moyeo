@@ -113,7 +113,6 @@ html, body {
 <script src="/moyeo/resources/resource/customScript/five/postDetailTop.js" type="text/javascript"></script>
 </head>
 <body onload="imgSlide(); timestampToDateLoad();">
-	<%@include file="../../etc/moim_header.jsp"%>
 
 	<!-- START ROW -->
 	<div class="row">

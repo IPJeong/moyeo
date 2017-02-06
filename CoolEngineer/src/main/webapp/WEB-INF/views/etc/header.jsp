@@ -49,7 +49,7 @@
 <script type='text/javascript'
 	src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
 <script type='text/javascript'
-	src='/moyeo/resources/resource/s/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+	src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
 <script type='text/javascript'
 	src='/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js'></script>
 <script type="text/javascript"
@@ -118,7 +118,7 @@
 								<li><a href="/moyeo/six/category/category_scale"><span class="fa fa-caret-right"></span>
 										규모별 </a></li>
 							</ul></li>
-						<li class="xn-openable"><a href="#">잠깐모여</a>
+						<!-- <li class="xn-openable"><a href="#">잠깐모여</a>
 							<ul>								
 								<li><a><span class="fa fa-caret-right"></span>
 										지역별</a></li>
@@ -126,7 +126,7 @@
 										관심사별</a></li>								
 								<li><a><span class="fa fa-caret-right"></span>
 										시간대별 </a></li>
-							</ul></li>
+							</ul></li> -->
 						<li class="xn-openable"><a href="#">샵</a></li>
 						<li class="xn-openable"><a href="#">추천장소</a>
 							<ul>
