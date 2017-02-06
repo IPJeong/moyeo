@@ -38,8 +38,6 @@ public class KoreanParser {
 		
 		for(KoreanTokenJava tokenJava : koreanTokenJava) {
 			
-			System.out.println("tokenJava : " + tokenJava);
-			
 			String pos = tokenJava.getPos().toString();
 			if(pos.equals("Noun") || pos.equals("ProperNoun") || pos.equals("Hashtag") || pos.equals("Verb")) {
 				String word = tokenJava.getText();

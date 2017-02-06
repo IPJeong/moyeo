@@ -26,4 +26,10 @@ public class TextMessage {
 	public static String postReplyMsg(String post_title, String mem_id) {
 		return post_title + " 후기에 " + mem_id + " 님께서 댓글을 작성하셨습니다.";
 	}
+	
+	// 비밀번호 분실 이메일 발송문의 제목 메시지
+	public final static String pwSearchEmailMsg(String id) {
+		return "[Moyeo] " + id + "님께서 문의하신 비밀번호 분실관련 이메일 입니다.";
+	}
+
 }

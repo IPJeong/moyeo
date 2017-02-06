@@ -98,4 +98,5 @@ public interface Code {
 	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
 	// 널값 예외 발생 메시지
 	public final static String nullPoExceptionMsg = "========== NullPoint Exception ==========";
+	
 }
