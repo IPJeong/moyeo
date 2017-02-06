@@ -241,7 +241,7 @@ function select_recpla_category() {
 	                <option value="가족/결혼">가족/결혼</option>
 	                <option value="자유주제">자유주제</option>
 	            </select>
-	            <select name="recpla_category2" class="form-control-1 select" style="width:49%; margin-left:0.35%;" required>
+	            <select name="recpla_category2" class="form-control-1 select" style="width:49%; margin-left:0.35%;">
 	            	<option value="">선택하세요</option>
 	            </select>
 	            </div>
@@ -285,7 +285,7 @@ function select_recpla_category() {
 					        </ul>	
 				        </c:forEach>
 				   </div>
-				   <div class="info" style="float:right; margin-top:20px; margin-right:5%; width:50%; height:300px;">  
+				   <div class="info" style="float:right; margin-top:30px; margin-right:5%; width:50%; height:300px;">  
 				        <br>
 				        <c:forEach var="lpidtos" items="${lpidtos}">
 				        	<div style="width:80%; height:145px; margin-top:20px;"> 
@@ -296,7 +296,11 @@ function select_recpla_category() {
 						         <br>
 							        <li>
 							            <strong>주소</strong> &nbsp; ${lpidtos.place_address}
-							        </li>  
+							        </li>
+							     <br>
+							        <li>
+							        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpidtos.place_like_count}
+							        </li>   
 								</ul>
 							</div>
 					    </c:forEach>
