@@ -85,14 +85,13 @@ public class EmailSender {
              
             //third part for displaying image in the email body
             bodyPart = new MimeBodyPart();
-//            bodyPart.setContent("<h1>Attached Image</h1>" + "<img src='cid:image_id' style='width:700px; height:500px;'>", "text/html");
-            bodyPart.setContent("", "text/html");
+            bodyPart.setContent("<!doctype html><h1>Attached Image</h1>" + "<img src='cid:image_id' style='width:700px; height:500px;'><html>", "text/html;charset=" + "EUC-KR");
+//            bodyPart.setContent("", "text/html");
             multipart.addBodyPart(bodyPart);
              
             // 이메일 메시지의 내용에 Multipart를 붙인다.
             msg.setContent(multipart);
             Transport.send(msg);
-            System.out.println("path : " + path);
             result = true;
         } catch(MessagingException e) {
         	e.printStackTrace();
