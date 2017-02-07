@@ -1,6 +1,9 @@
 package com.engineers.moyeo.six.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 public interface SixService {
 	//공지-메인
@@ -98,15 +101,19 @@ public interface SixService {
 	//모임-소개사진등록
 	public void moimAddImageProb(Model model);
 	
+	//모임채팅참석폼
+	public void moimChatForm(Model model);
+	
 	//모임채팅
 	public void moimChat(Model model);
+	
+	//채팅내용입력
+	public void addChat(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
 
+	//채팅내용출력
+	public void getChat(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException; 
+	
 	//모임멤버 상세보기
 	public void moimMemberDetail(Model model);
 
-	//모임사진첩
-	public void moimPhoto(Model model);
-	
-	//모임동영상
-	public void moimMovie(Model model);
 }

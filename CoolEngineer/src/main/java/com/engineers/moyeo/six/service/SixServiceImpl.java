@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.engineers.moyeo.four.dao.FourDAO;
+import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
@@ -26,6 +29,7 @@ import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
@@ -40,7 +44,10 @@ public class SixServiceImpl implements SixService{
 	
 	@Autowired
 	OneDAO oneDao;
-
+	
+	@Autowired
+	FourDAO fourDao;
+	
 	//공지-메인
 	@Override
 	public void notice(Model model) {
@@ -224,15 +231,15 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("member_dtos", member_dtos);	
 	//--사이드 끝
 		
-		//모임- 소개사진 불러오기
+		//모임-소개사진 불러오기
 		List<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
-		//----수정
-		dtosB = sixDao.moimImagesView(group_num);
-		String main_pic_nameB = dtosB.get(1).getMain_pic_name();
-		String main_pic_path = dtosB.get(1).getMain_pic_path();
-		//--수정
+		dtosB = sixDao.moimImageViewB(group_num);
+		String main_pic_nameB = dtosB.get(0).getMain_pic_name();
+		String main_pic_path = dtosB.get(0).getMain_pic_path();
+		
 		String[] main_pic_pathb = main_pic_path.split("-");
 		String main_pic_pathB =main_pic_pathb[0];
+	
 		model.addAttribute("main_pic_name", main_pic_nameB);
 		model.addAttribute("main_pic_path", main_pic_pathB);
 
@@ -595,6 +602,8 @@ public class SixServiceImpl implements SixService{
 			String location = req.getParameter("loc_category1")+ "-" + req.getParameter("loc_category2");
 			dto.setGroup_location(location);
 			dto.setGroup_intro(req.getParameter("content"));
+			dto.setReg_date(new Timestamp(System.currentTimeMillis()));
+			
 			
 			int cnt = sixDao.moimOpenPro(dto);
 			model.addAttribute("cnt", cnt);
@@ -616,8 +625,12 @@ public class SixServiceImpl implements SixService{
 			
 			mainPicDto.setMain_pic_path(Code.groupDefIntroImgPath);
 			mainPicDto.setMain_pic_name(Code.groupDefIntroImgName);
+			
 			//기본 사진 설정(메인)
 			sixDao.moimMainPhoto(mainPicDto);
+			
+			//모임채팅방 개설
+			sixDao.moimChatRegister(moimNum);
 		}
 	}
 
@@ -829,16 +842,9 @@ public class SixServiceImpl implements SixService{
 		
 		//모임-소개사진 불러오기
 		List<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
-		
-		
-		//-----변경
-		//dtosB = sixDao.moimImageViewB(group_num);
-		dtosB = sixDao.moimImagesView(group_num);
-		String main_pic_nameB = dtosB.get(1).getMain_pic_name();
-		String main_pic_path = dtosB.get(1).getMain_pic_path();
-		
-		//-----변경
-		
+		dtosB = sixDao.moimImageViewB(group_num);
+		String main_pic_nameB = dtosB.get(0).getMain_pic_name();
+		String main_pic_path = dtosB.get(0).getMain_pic_path();
 		
 		String[] main_pic_pathb = main_pic_path.split("-");
 		String main_pic_pathB =main_pic_pathb[0];
@@ -846,10 +852,70 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("main_pic_name", main_pic_nameB);
 		model.addAttribute("main_pic_path", main_pic_pathB);
 
+	//공지사항글 불러오기
+		
+		int pageSize = 5;//한 페이지당 출력할 글 개수
+		int pageBlock = 1; //출력할 페이지 개수
+		
+		int cnt = 0; 		//글 개수
+		int start = 0; 		//현재 페이지 시작번호 : rownum
+		int end = 0;		//현재 페이지 끝번호 : rownum
+		int number = 0;		//출력할 글 번호
+		String pageNum = null; //페이지 번호
+		int currentPage = 0; //현재 페이지
+		
+		int pageCount = 0; //페이지 개수
+		int startPage = 0; //시작 페이지
+		int endPage = 0; //마지막 페이지
+		
+		//1. db메소드 실행
+		//글 개수 구하기
+		cnt = fourDao.getCount(group_num);
+		
+		//2. 		
+		pageNum = req.getParameter("pageNum");
+		if(pageNum == null) { //페이지 번호가 없으면, 1로 주겠다
+			pageNum = "1"; // 첫 페이지를 1로 주겠다.
+		}
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt/pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+										//0보다 크면 1로 주고, 아니면 0을 준다.
+										//반올림해서 값 맞추기 위함
+		start = (currentPage - 1) * pageSize + 1; //(5 - 1) * 10 + 1;
+		end = start + pageSize -1; // 41번 + 10 - 1 = 50; 
+		
+		if(end > cnt) end = cnt;
+		
+		
+		// 글번호
+		number = cnt- (currentPage - 1) * pageSize;
+		if(cnt > 0) {
+			
+			Map<String, Integer> notiMap = new HashMap<String, Integer>();
+			notiMap.put("start", start);
+			notiMap.put("end", end);
+			notiMap.put("group_num", group_num);
+			
+			ArrayList<GroupNoticeDTO> dtos = fourDao.getArticles(notiMap);
+			model.addAttribute("dtos", dtos);
+	
+		}
+		startPage =(currentPage / pageBlock) * pageBlock + 1; //(5/3)*3+1 = 4
+		if(currentPage % pageBlock == 0) startPage -= pageBlock; //(5 % 3)
+		
+		endPage = startPage + pageBlock - 1; //4 + 3 -1 = 6;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number);
+		model.addAttribute("pageNum", pageNum);
+		
 		//모임-출석체크
 		String present_date_A = String.valueOf((new Timestamp(System.currentTimeMillis())));
 		String present_date_B[] = present_date_A.split(" ");
 		Timestamp present_date = Timestamp.valueOf(present_date_B[0] + " 00:00:00");
+		
 		CheckPresentDTO present_dto = new CheckPresentDTO();
 		present_dto.setPresent_date(present_date);
 		present_dto.setMem_id((String)(req.getSession().getAttribute("mem_id")));
@@ -858,7 +924,11 @@ public class SixServiceImpl implements SixService{
 		//로그인 한경우에만 실행
 		if(mem_id != null) {
 			//모임가입여부 확인
-			int check_cnt = sixDao.memberCheck(present_dto);
+			Map<String, Object> daoMap = model.asMap(); 
+			daoMap.put("mem_id", mem_id);
+			daoMap.put("group_num", group_num);
+			int check_cnt = sixDao.memberCheck(daoMap);
+			
 			//모임가입된 경우에만 실행
 			if(check_cnt != 0) {
 				//출석체크 중복여부 확인
@@ -1021,7 +1091,43 @@ public class SixServiceImpl implements SixService{
 		}
 	}
 	
-	//모임채팅
+	//모임채팅참석폼
+	public void moimChatForm(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		String mem_id = req.getParameter("mem_id");
+	//--사이드 시작	
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+				
+		//사이드- 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("open_dto", open_dto);
+		
+		//사이드 - 대표사진 불러오기
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
+		model.addAttribute("picture_dto", picture_dto);
+		
+		//사이드 - 모임원리스트 불러오기
+		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
+		model.addAttribute("member_dtos", member_dtos);	
+	//--사이드 끝
+		
+		//모임채팅번호 받기
+		int chat_room_num = sixDao.moimChatNum(group_num);
+		req.getSession().setAttribute("chat_room_num", chat_room_num);
+	
+		//모임가입여부 체크
+		Map<String, Object> daoMap = model.asMap(); 
+		daoMap.put("mem_id", mem_id);
+		daoMap.put("group_num", group_num);
+		int check_cnt = sixDao.memberCheck(daoMap);
+		model.addAttribute("check_cnt", check_cnt);
+		
+	}
+	
+	//모임채팅실행창
 	public void moimChat(Model model) {
 		
 		Map<String, Object> map = model.asMap();
@@ -1042,6 +1148,57 @@ public class SixServiceImpl implements SixService{
 		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
 		model.addAttribute("member_dtos", member_dtos);	
 	//--사이드 끝
+		
+	}
+	
+	//채팅내용입력
+	public void addChat(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException {
+		
+		int chat_room_num = Integer.parseInt(req.getParameter("chat_room_num"));
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		String msg_content = req.getParameter("msg_content");
+		Timestamp msg_date = new Timestamp(System.currentTimeMillis());
+
+		MsgListDTO dto = new MsgListDTO();
+		dto.setChat_room_num(chat_room_num);
+		dto.setMem_id(mem_id);
+		dto.setMsg_content(msg_content);
+		dto.setMsg_date(msg_date);
+	
+		System.out.println(dto.getChat_room_num());
+		System.out.println(dto.getMem_id());
+		System.out.println(dto.getMsg_content());
+		System.out.println(dto.getMsg_date());
+		
+		int cnt = sixDao.addMsg(dto);
+		
+		if(cnt == 1) {
+			Map<String, Object> map = new HashMap<>();
+
+			map.put("msg_date", msg_date);
+			map.put("mem_id", mem_id);
+			dto = sixDao.getMsg(map);
+			mav.addObject("dto", dto);
+		}
+		mav.addObject("cnt", cnt);
+	}
+	
+	//채팅내용 출력
+	public void getChat(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException {
+		int chat_room_num = (Integer)(req.getSession().getAttribute("chat_room_num"));
+		Timestamp msg_date = new Timestamp(System.currentTimeMillis());
+		Timestamp t2 = new Timestamp(System.currentTimeMillis() - 300);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("msg_date", msg_date);
+		map.put("chat_room_num", chat_room_num);
+		map.put("t2", t2);
+		
+		ArrayList<MsgListDTO> dtos = new ArrayList<MsgListDTO>();
+		
+		dtos = sixDao.getChat(map);
+		System.out.println(dtos);
+		mav.addObject("dtos", dtos);
 	}
 	
 	//모임멤버 상세보기-사이드바용
@@ -1071,51 +1228,4 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("lastConnect", lastConnect);
 	}
 
-	//모임사진첩
-	@Override
-	public void moimPhoto(Model model) {
-		
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest req = (HttpServletRequest)map.get("req");
-
-	//--사이드 시작	
-		int group_num = Integer.parseInt(req.getParameter("group_num"));
-				
-		//사이드- 모임명, 모임카테고리 불러오기
-		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
-		model.addAttribute("open_dto", open_dto);
-		
-		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
-		model.addAttribute("picture_dto", picture_dto);
-		
-		//사이드 - 모임원리스트 불러오기
-		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
-		model.addAttribute("member_dtos", member_dtos);	
-	//--사이드 끝
-	}
-
-	//모임동영상
-	@Override
-	public void moimMovie(Model model) {
-	
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest req = (HttpServletRequest)map.get("req");
-
-	//--사이드 시작	
-		int group_num = Integer.parseInt(req.getParameter("group_num"));
-				
-		//사이드- 모임명, 모임카테고리 불러오기
-		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
-		model.addAttribute("open_dto", open_dto);
-		
-		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
-		model.addAttribute("picture_dto", picture_dto);
-		
-		//사이드 - 모임원리스트 불러오기
-		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
-		model.addAttribute("member_dtos", member_dtos);	
-	//--사이드 끝
-	}
 }
