@@ -1,5 +1,7 @@
  package com.engineers.moyeo.main.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
 
 public interface MainService {
@@ -16,7 +18,7 @@ public interface MainService {
 	// 단어 형태소 분석 후 DB 저장
 	public void wordExtractAndAnalyze(String text);
 	
-	// 워드클라우드 단어를 가져옴
-//	public Map<String, Integer> getWordMap();
+	// 워드클라우드 재검색 요청
+	public String wordcloudRefresh(HttpServletRequest req);
 	
 }

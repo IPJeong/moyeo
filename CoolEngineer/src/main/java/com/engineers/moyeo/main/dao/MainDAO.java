@@ -25,4 +25,7 @@ public interface MainDAO {
 	
 	// 분석된 워드 클라우드 단어수 업데이트
 	public int updateWordCloud(WordDTO dto);
+	
+	// 워드카운트 검색
+	public List<WordDTO> searchWordcloud(Map<String, Object> map);
 }

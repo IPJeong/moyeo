@@ -20,12 +20,14 @@
 		 WHERE mem_id= #{mem_id}
 	</select>
 	
+	<!-- 비밀번호 체크 -->
 	<select id="pwdCheck" parameterType="Map" resultType="int">
 		SELECT COUNT(*) 
 		  FROM member_info 
 		 WHERE mem_id= #{mem_id} AND passwd = #{passwd}
 	</select>
 	
+	<!-- 워드 클라우드 단어를 가져옴 -->
 	<select id="getWordCloudModel" resultType="com.engineers.moyeo.main.dto.WordDTO">
 		SELECT *
 	      FROM (
@@ -38,17 +40,20 @@
     	 WHERE rn BETWEEN 1 AND 30 
 	</select>
 	
+	<!-- 워드 클라우드 단어를 확인 -->
 	<select id="checkWordCloud" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		  FROM wordcloud_list
 		 WHERE word = #{word}
 	</select>
 	
+	<!-- 워드 클라우드 단어를 삽입 시킴 -->
 	<insert id="addWordCloud" parameterType="com.engineers.moyeo.main.dto.WordDTO">
 		INSERT INTO wordcloud_list (word, count, part_of_speech, update_date, reg_date) 
 							VALUES (#{word}, #{count}, #{part_of_speech}, #{update_date}, #{reg_date})
 	</insert>
 	
+	<!-- 워드 클라우드 단어를 업데이트 시킴 -->
 	<update id="updateWordCloud" parameterType="com.engineers.moyeo.main.dto.WordDTO">
 		UPDATE wordcloud_list
 		   SET count = count + #{count}
@@ -56,4 +61,42 @@
 		 WHERE word = #{word}   
 	</update>
 	
+	<!-- 워드클라우드 단어 검색 -->
+	<select id="searchWordcloud" parameterType="Map" resultType="com.engineers.moyeo.main.dto.WordDTO">
+		SELECT *
+	      FROM (
+				SELECT word, count, part_of_speech, update_date, reg_date, rownum as rn
+				  FROM (
+				  		SELECT *
+                          FROM wordcloud_list
+                 		 ORDER BY count DESC, update_date DESC
+                        )
+                  WHERE 
+                  <if test="type == 1">
+                  	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun'
+                  </if>
+                  <if test="type == 2">
+                  	part_of_speech = 'Verb'
+                  </if>
+                  <if test="type == 3">
+                  	part_of_speech = 'Hashtag'
+                  </if>
+                  <if test="type == 4">
+                  	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb'
+                  </if>
+                  <if test="type == 5">
+                  	part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
+                  </if>
+                  <if test="type == 6">
+                  	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Hashtag'
+                  </if>
+                  <if test="type == 7">
+                  	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
+                  </if>
+                  <if test="strDate != null">
+                  	AND update_date &gt; = to_timestamp(#{strDate}, 'YYYY-MM-DD') AND update_date &lt;= to_timestamp(#{endDate}, 'YYYY-MM-DD')
+                  </if>
+         		)
+    	 WHERE rn BETWEEN 1 AND 30 
+	</select>
 </mapper>

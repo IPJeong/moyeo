@@ -34,8 +34,6 @@ public class SixDAOImpl implements SixDAO{
 		int cnt = 0;
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		cnt = dao.getCount();	
-		System.out.println(cnt);
-
 		return cnt;
 	}
 

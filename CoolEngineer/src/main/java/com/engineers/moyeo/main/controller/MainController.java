@@ -88,4 +88,13 @@ public class MainController {
 		return viewPage;
 	}
 	
+	// 메인화면의 워드클라우드 재검색
+	@RequestMapping(value="refreshWordcloud")
+	public String refreshWordcloud(HttpServletRequest req) {
+		
+		System.out.println("워드클라우드 재검색 요청");
+		viewPage = mainService.wordcloudRefresh(req);
+		return viewPage;
+	}
+	
 }
