@@ -20,7 +20,7 @@
 	<c:if test="${cnt != 0 }">
 		<script type="text/javascript">
 			alert("모임일정을 삭제했습니다!");
-			window.location = 'moimScheduleDetail?group_num=${group_num}';
+			window.location = 'moimSchedule?group_num=${group_num}';
 		</script>
 	</c:if>
 </body>

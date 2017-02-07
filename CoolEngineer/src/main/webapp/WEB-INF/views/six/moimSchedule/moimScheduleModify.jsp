@@ -139,7 +139,7 @@ img {
 									style="margin-left: 0px; margin-top: 10px; width: 100px; height: 35px; font-size: 13px;">
 								<input type="reset" value="취소"
 									style="margin-left: 0px; margin-top: 10px; width: 100px; height: 35px; font-size: 13px;"
-									onclick="window.location='moimScheduleDetail?group_num=${group_num}'">
+									onclick="window.location='moimSchedule?group_num=${group_num}'">
 							</div>
 						</form>
 

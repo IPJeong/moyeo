@@ -13,13 +13,13 @@
 	<c:if test="${cnt2 == 1}">
 		<script type="text/javascript">
 			alert("참석취소가 완료되었습니다");
-			window.location = 'moimScheduleDetail?group_num=${group_num}';
+			window.location = 'moimSchedule?group_num=${group_num}';
 		</script>
 	</c:if>
 	<c:if test="${cnt2 != 1}">
 		<script type="text/javascript">
 			alert("참석취소에 실패했습니다.\n 잠시후 다시 시도하세요.");
-			window.location = 'moimScheduleDetail?group_num=${group_num}';
+			window.location = 'moimSchedule?group_num=${group_num}';
 			</script>
 	</c:if>
 	

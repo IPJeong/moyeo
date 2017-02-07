@@ -134,7 +134,7 @@ function chaMain() {
 		<div style="height:400px; width:45%; float:right;">
 			<form name="contents">
 				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">모임명 :</font> ${dto.meeting_title}</p>
-				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">시간 :</font> ${dto.meeting_date}</p>
+				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">시간 :</font> ${date}</p>
 				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">참가비 :</font> <input type="text" id="price" style="width:200px; border:0px; background:#eeeeed;"value="${dto.meeting_cost}"></p>
 				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">인원 :</font> ${dto.meeting_pernum} 명</p>
 				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">상세설명 :</font> ${dto.meeting_detail}</p>

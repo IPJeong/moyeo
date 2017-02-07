@@ -140,7 +140,7 @@ img {
 											<p style="text-align: left; margin-left: 20px; font-size: 20px; margin-top: 15px;"><font color="#1d1f21">모임명 :</font>
 												${dtos[stat.index].meeting_title}</p>
 											<p style="text-align: left; margin-left: 20px; font-size: 20px;"><font color="#1d1f21">일시 :</font>
-												${dtos[stat.index].meeting_date}</p>
+												${date_dtos[stat.index]}</p>
 											<p style="text-align: left; margin-left: 20px; font-size: 20px;"><font color="#1d1f21">장소 :</font>
 												${dtos[stat.index].loc_detail}</p>
 											<p style="text-align: left; margin-left: 20px; font-size: 20px;"><font color="#1d1f21">인원 :</font> ${dtos2[stat.index]} /
@@ -148,31 +148,22 @@ img {
 										</div>
 
 										<div style="width: 20%; height: 100%; float: left">
-<!-- 											<script type="text/javascript">
-												function del() {
-													if(confirm("정말로 삭제하겠습니까?")) {
-														location.replace('moinScheduleDelete?meeting_num='+${dto.meeting_num});
-													} else {
-														return; 
-													}
-												}
-												
-												function modify() {
-													if(confirm("수정하시겠습니까?")) {
-														location.replace('moimScheduleModify?meeting_num='+${dto.meeting_num});
-													} else {
-														return;
-													}
-												}
-											</script>
- -->											<input type="button" value="상세보기" class="btn btn-success"
-												style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 18%; float:left; " onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=950, height=500, left=300, top=100')"> 
-											<input
-												type="button" class="btn btn-success" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; "
-												onclick="window.location='moimScheduleModify?meeting_num=${dtos[stat.index].meeting_num}&group_num=${group_num}'"> 
-											<input type="button"
-												value="모임삭제" class="btn btn-success" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; " onclick="window.location='moimScheduleDelete?meeting_num=${dtos[stat.index].meeting_num}'">
-
+      											<input type="button" value="상세보기" class="btn btn-success"
+													style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 18%; float:left; " onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=950, height=500, left=300, top=100')"> 
+											<c:if test="${group_per == 1}">
+												<input
+													type="button" class="btn btn-success" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; "
+													onclick="window.location='moimScheduleModify?meeting_num=${dtos[stat.index].meeting_num}&group_num=${group_num}'"> 
+												<input type="button"
+													value="모임삭제" class="btn btn-success" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; " onclick="window.location='moimScheduleDelete?meeting_num=${dtos[stat.index].meeting_num}'">
+											</c:if>
+											<c:if test="${group_per == 2}">
+												<input
+													type="button" class="btn btn-success" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; "
+													onclick="window.location='moimScheduleModify?meeting_num=${dtos[stat.index].meeting_num}&group_num=${group_num}'"> 
+												<input type="button"
+													value="모임삭제" class="btn btn-success" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; " onclick="window.location='moimScheduleDelete?meeting_num=${dtos[stat.index].meeting_num}'">
+											</c:if>
 										</div>
 										<c:if test ="${dtos3[stat.index] eq 1}">
 											<input type="button" class="btn btn-info" value="참석취소"
@@ -202,9 +193,14 @@ img {
 								</c:forEach>
 						
 							</c:if>
-
-							<a href="moimRegister?group_num=${group_num}"><input type="button" class="btn btn-info" value="모임만들기"
-								style="width: 100px; height: 40px; font-size: 13px; left: 900px"></a>
+							<c:if test="${group_per == 1}">
+								<a href="moimRegister?group_num=${group_num}"><input type="button" class="btn btn-info" value="모임만들기"
+									style="width: 100px; height: 40px; font-size: 13px; left: 900px"></a>
+								</c:if>	
+							<c:if test="${group_per == 2}">
+								<a href="moimRegister?group_num=${group_num}"><input type="button" class="btn btn-info" value="모임만들기"
+									style="width: 100px; height: 40px; font-size: 13px; left: 900px"></a>
+							</c:if>	
 							  <div style="align:center;">
 								<ul 
 									class="pagination pagination-sm pull-right push-down-20 push-up-20"
@@ -214,23 +210,23 @@ img {
 									<c:if test="${cnt > 0}">
 	
 										<c:if test="${startPage > pageBlock}">
-											<li class="" style="align: center;"><a href="moimScheduleDetail?pageNum=${startPage - pageBlock}&group_num=${group_num}"><font
+											<li class="" style="align: center;"><a href="moimSchedule?pageNum=${startPage - pageBlock}&group_num=${group_num}"><font
 												size="3"> «</font></a></li>
 										</c:if>
 	
 	
 										<c:forEach var="i" begin="${startPage}" end="${endPage}">
 											<c:if test="${i == currentPage}">
-												<li style="align: center;"><a href="moimScheduleDetail?pageNum=${i}&group_num=${group_num}"><font size="3">${i}</font></a></li>
+												<li style="align: center;"><a href="moimSchedule?pageNum=${i}&group_num=${group_num}"><font size="3">${i}</font></a></li>
 											</c:if>
 	
 											<c:if test="${i != currentPage}">
-												<li style="align: center;"><a href="moimScheduleDetail?pageNum=${i}&group_num=${group_num}"><font size="3">${i}</font></a></li>
+												<li style="align: center;"><a href="moimSchedule?pageNum=${i}&group_num=${group_num}"><font size="3">${i}</font></a></li>
 											</c:if>
 	
 										</c:forEach>
 										<c:if test="${pageCount > endPage}">
-											<li style="align: center;"><a href="moimScheduleDetail?pageNum=${startPage + pageBlock}&group_num=${group_num}"><font
+											<li style="align: center;"><a href="moimSchedule?pageNum=${startPage + pageBlock}&group_num=${group_num}"><font
 												size="3">»</font></a></li>
 										</c:if>
 									</c:if>
