@@ -68,24 +68,80 @@ img {
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
+	//데이트형 타입으로 변환 (예. 2017년 2월 2월 -> 2017/2/2)
+	function toDate(timestamp) {
+		var date = new Date(timestamp);
+		var year = date.getFullYear();
+		var month = date.getMonth();
+		month = month+1;
+		var day = date.getDate();
+		var hour = date.getHours();
+		var minutes = date.getMinutes();
+		var fullDate = year+"년 "+month+"월 "+day+"일  " + hour + ":" + minutes;
+		return fullDate;
+	}
+
+
+
 	$(document).ready(function(){
-		
-		var weeks = document.getElementsByName("week");
-		var days = document.getElementsByName("day");
-		
-		for(var i=0; i<weeks.length; i++) {
-		
-			var sDate = weeks[i].value;
-			var yy = parseInt(sDate.substr(0, 4), 10); 
-			var mm = parseInt(sDate.substr(5, 2), 10); 
-			var dd = parseInt(sDate.substr(8), 10); 
-			var d = new Date(yy,mm - 1, dd); 
-			var weekday=new Array(7); weekday[0]="일"; weekday[1]="월"; weekday[2]="화"; weekday[3]="수"; weekday[4]="목"; weekday[5]="금"; weekday[6]="토"; 
-			weeks[i].value = weekday[d.getDay()]+"요일"; 
-			days[i].value = dd;
-		
-		}
+	    setInterval(readAjax, 300); 
 	});
+	
+	function readAjax(compareTime){
+	    $.ajax({
+	        method: "POST",
+	        url: "/moyeo/six/moimChat/getChat",
+	        dataType: "json",
+	        cache: false,
+	        async: false,
+	        data: {
+	         
+	        },
+	        success: function(data) {
+	          
+	                $.each(data.dtos, function(index, dto){
+	                	var fullDate = toDate(dto.msg_date);
+	                	
+	                	if(dto.mem_id == $('#mem_id').val()) {
+		                	var msg = '<div class="item item-visible" style="width:750px;" id="reply' + dto.msg_num +'">' +
+		                		'<div class="image">' + 
+				                '<img src="' + dto.propic_path +'/' + dto.propic_name + '" >' +
+				            '</div>' +                                
+				            '<div class="text">' + 
+				                '<div class="heading">' + 
+				                    '<a href="#">' + dto.mem_id + '</a>' +
+				                    '<span class="date">' + fullDate + '</span>' +
+				                '</div>'+                                    
+				                dto.msg_content +
+				            '</div>'+
+				          '</div>';
+				          $('#msgBox').append(msg);
+		                  $("#msgBox").scrollTop($("#msgBox")[0].scrollHeight); // 스크롤바 항상 맨 밑으로 유지
+	                	}
+	                	
+	                	if(dto.mem_id != $('#mem_id').val()) {
+		                	var msg = '<div class="item in item-visible" style="width:750px;" id="reply' + dto.msg_num +'">' +
+		                		'<div class="image">' + 
+				                '<img src="' + dto.propic_path +'/' + dto.propic_name + '" >' +
+				            '</div>' +                                
+				            '<div class="text">' + 
+				                '<div class="heading">' + 
+				                    '<a href="#">' + dto.mem_id + '</a>' +
+				                    '<span class="date">' + fullDate + '</span>' +
+				                '</div>'+                                    
+				                dto.msg_content +
+				            '</div>'+
+				          '</div>';
+				          $('#msgBox').append(msg);
+		                  $("#msgBox").scrollTop($("#msgBox")[0].scrollHeight); // 스크롤바 항상 맨 밑으로 유지
+	                	}
+	                	
+	               });
+	         } 
+	       
+	    });
+	}
+
 </script>
 
 <!-- START BREADCRUMB -->
@@ -112,8 +168,73 @@ img {
 						<h3>모임채팅</h3>
 					</div>
 				</div>
-				<div class="panel-body padding-0"
-					style="text-align: center; font-size: 25px;">
+				<div class="panel-body padding-0">
+				<input type="hidden" id="chat_num" value="${chat_room_num}">
+				<input type="hidden" id="mem_id" value="${mem_id}">
+					<div class="page-content">
+		               <div class="content-frame">                                    
+		                    
+		                    <!-- START CONTENT FRAME RIGHT -->
+		                    <div class="content-frame-right" style="width:25%;">
+		                        <c:forEach var="member_dto" items="${member_dtos}">
+		                        <div class="list-group list-group-contacts border-bottom push-down-10">
+		                           
+			                            <a href="#" class="list-group-item">                                 
+			                                <div class="list-group-status status-online"></div>
+			                                <img src="${member_dto.propic_path}/${member_dto.propic_name}" class="pull-left" >
+			                                <span class="contacts-title">${member_dto.mem_id}</span>
+			                                <p>${member_dto.name}</p>
+			                            </a>                                
+		         
+		                        </div>
+		                        </c:forEach>
+
+		                        
+		                    </div>
+		                    <!-- END CONTENT FRAME RIGHT -->
+		                
+		                    <!-- START CONTENT FRAME BODY -->
+		                    <div class="content-frame-body content-frame-body-left" style="width:75%; height:776px; padding: 10px;">
+		                        	
+		                        <div class="messages messages-img" id="msgBox" style="overflow:auto; width:100%; height: 720px;">
+		                           	<a>채팅방에 입장했습니다.</a><br><br>
+			                            <c:forEach var = "dto" items="${dtos}">
+				                            <div class="item" style="width:600px;">
+				                                <div class="image">
+				                                    <img src="/moyeo/resources/resource/assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
+				                                </div>                                
+				                                <div class="text">
+				                                    <div class="heading">
+				                                        <a href="#">${dto.mem_id}</a>
+				                                        <span class="date">${dto.msg_date}</span>
+				                                    </div>                                    
+				                                    ${dto.msg_content}
+				                                </div>
+				                            </div>
+			                            </c:forEach>
+	   
+		                        </div>                        
+		                        
+		                        <div class="panel panel-default push-up-10" style="height:50px;">
+		                            <div class="panel-body panel-body-search">
+		                                <div class="input-group">
+		                                    <input type="text" class="form-control" id="msg_content" placeholder="Your message..." onkeypress="keycheck(event);"/>
+		                                    <div class="input-group-btn">
+		                                        <button class="btn btn-default" id="enter_chat" onclick="addChat()">Send</button>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        
+		                    </div>
+		                    <!-- END CONTENT FRAME BODY -->      
+		                </div>
+					</div>
+
+
+
+
+
 
 
 				</div>
@@ -124,5 +245,28 @@ img {
 	</div>
 </div>
 <!-- END ROW -->
+
+    <!-- START SCRIPTS -->
+        <!-- START PLUGINS -->
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>        
+        <!-- END PLUGINS -->
+
+        <!-- THIS PAGE PLUGINS -->
+        <script type='text/javascript' src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+		<!-- END PAGE PLUGINS -->     
+
+        <!-- START TEMPLATE -->
+        <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
+        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>        
+        
+        <script src="/moyeo/resources/customScript/six.js" type="text/javascript"></script>
+        <!-- END TEMPLATE -->
+    <!-- END SCRIPTS --> 
 
 <%@ include file="../../etc/footer.jsp"%>
