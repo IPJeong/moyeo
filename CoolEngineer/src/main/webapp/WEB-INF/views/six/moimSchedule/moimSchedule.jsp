@@ -92,7 +92,7 @@ img {
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
 	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
 	<li class="active">모임 일정</li>
 </ul>
 <!-- END BREADCRUMB -->
@@ -119,18 +119,18 @@ img {
 						<div style="height: 100%;">
 							<img
 								src="${main_pic_path}/${main_pic_name}"
-								width="55%" height="240px" style="float: left;">
+								width="50%" height="240px" style="float: left;">
 							<div style="width: 40%; height: 200px; float: left;"><br>${dto.group_intro}</div>
 						
 							<div style="width:40%; height:45px; float:left;">
 								
 									<a href="../moim/moim_cheif_member.jsp">
-										<input type="button"
+										<input type="button" class="btn btn-warning"
 											value="모임원관리"
 											style="width: 26%; height: 40px; font-size: 13px;">
 									</a> 
 									<a href="../moim/moim_schedule.jsp">
-										<input type="button"
+										<input type="button" class="btn btn-warning"
 											value="일정관리"
 											style="width: 26%; height: 40px; font-size: 13px;">
 									</a> 
@@ -200,7 +200,7 @@ img {
 
 							<a href="../moimSchedule/moimRegister?group_num=${group_num}"
 								style="position: relative; align: center;"><input
-								type="button" value="모임만들기"
+								type="button" class="btn btn-info" value="모임만들기"
 								style="width: 100px; height: 35px; font-size: 15px;"></a> <a
 								href="../moimSchedule/moimScheduleDetail?group_num=${group_num}"
 								style="position: relative; left: 350px; font-size: 17px;"> +

@@ -84,7 +84,7 @@ img {
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
 	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
 	<li class="active">모임 일정</li>
 </ul>
 <!-- END BREADCRUMB -->
@@ -160,13 +160,13 @@ img {
 													}
 												}
 											</script>
- -->											<input type="button" value="상세보기"
+ -->											<input type="button" value="상세보기" class="btn btn-default"
 												style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 25%; float:left; " onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=950, height=500, left=300, top=100')"> 
 											<input
-												type="button" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; "
+												type="button" class="btn btn-default" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; "
 												onclick="window.location='moimScheduleModify?meeting_num=${dtos[stat.index].meeting_num}&group_num=${group_num}'"> 
 											<input type="button"
-												value="모임삭제" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; " onclick="window.location='moimScheduleDelete?meeting_num=${dtos[stat.index].meeting_num}'">
+												value="모임삭제" class="btn btn-default" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; " onclick="window.location='moimScheduleDelete?meeting_num=${dtos[stat.index].meeting_num}'">
 
 										</div>
 										<c:if test ="${dtos3[stat.index] eq 1}">
@@ -189,7 +189,7 @@ img {
 										</c:if> 
 										<br>
 										<input type="button" value="참석멤버 보기"
-													style="height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 60px"
+													style="height: 40px; font-size: 13px; width: 100px; position: absolute; left: 760px; margin-top: 60px;"
 													onclick="window.open('moimScheduleMember?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=800, height=500, left=450, top=100')">
 										
 
@@ -198,7 +198,7 @@ img {
 						
 							</c:if>
 
-							<a href="moimRegister?group_num=${group_num}"><input type="button" value="모임만들기"
+							<a href="moimRegister?group_num=${group_num}"><input type="button" class="btn btn-info" value="모임만들기"
 								style="width: 100px; height: 40px; font-size: 13px; left: 900px"></a>
 							<p style="margin-top: 10px; width: 100%;">
 

@@ -61,7 +61,7 @@ img {
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
 	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
 	<li class="active">모임 일정</li>
 </ul>
 <!-- END BREADCRUMB -->
@@ -107,7 +107,7 @@ img {
 									시간 : <input type="time" name="meeting_time"
 											style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top: 30px"
 											required> 
-										<input type="button" name="meeting_loc"
+										<input type="button" name="meeting_loc" class="btn btn-default"
 											value="클릭하여 모임 장소를 선택해주세요."
 											style="width: 550px; font-size: 18px; height: 40px; margin-left: 20px; margin-top: 30px;"
 											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=800, height=450, left=450, top=270')"
@@ -130,9 +130,9 @@ img {
 											required></textarea>
 											</p>
 
-								<input type="submit" value="모임만들기"
+								<input type="submit" value="모임만들기" class="btn btn-info" 
 									style="margin-left: 0px; margin-top: 10px; width: 100px; height: 35px; font-size: 13px;">
-								<input type="reset" value="취소"
+								<input type="reset" value="취소" class="btn btn-default"
 									style="margin-left: 0px; margin-top: 10px; width: 100px; height: 35px; font-size: 13px;"
 									onclick="window.location='moimScheduleDetail?group_num=${group_num}'">
 							</div>
