@@ -272,7 +272,12 @@ public class SixServiceImpl implements SixService{
 			daoMap.put("group_num", group_num);
 			ArrayList<MoimScheduleDTO> dtos = sixDao.moimScheduleDetail(daoMap);
 			model.addAttribute("dtos", dtos);
-			
+			ArrayList<String> date_dtos = new ArrayList<String>();
+			for(int i=0; i<dtos.size(); i++) {
+				String date =String.valueOf(dtos.get(i).getMeeting_date()).split(":17.7")[0];
+				date_dtos.add(i, date);
+			}
+			model.addAttribute("date_dtos", date_dtos);
 			
 			//모임-참석인원 체크
 			ArrayList<Integer> dtos2 = new ArrayList<Integer>(); 
@@ -356,7 +361,7 @@ public class SixServiceImpl implements SixService{
 		
 		dto.setGroup_num((Integer)(req.getSession().getAttribute("group_num")));
 		dto.setMeeting_title(req.getParameter("meeting_title"));
-		Timestamp meeting_date = Timestamp.valueOf(req.getParameter("meeting_date") + " " + req.getParameter("meeting_time") + ":00.0");
+		Timestamp meeting_date = Timestamp.valueOf(req.getParameter("meeting_date") + " " + req.getParameter("meeting_time") + ":17.7");
 		dto.setMeeting_date(meeting_date);
 		dto.setMeeting_loc(req.getParameter("map"));
 		dto.setLoc_detail(req.getParameter("loc_detail"));
@@ -380,6 +385,8 @@ public class SixServiceImpl implements SixService{
 		
 		MoimScheduleDTO dto = sixDao.moimScheduleContents(meeting_num);
 		model.addAttribute("dto", dto);
+		String date = String.valueOf(dto.getMeeting_date()).split(":17.7")[0];
+		model.addAttribute("date", date);
 	}
 	
 	//모임일정-수정페이지
@@ -411,7 +418,7 @@ public class SixServiceImpl implements SixService{
 		String timeStamp = String.valueOf(meeting_dto.getMeeting_date());
 		String[] result = timeStamp.split(" ");
 		String date = result[0];
-		String[] result1 = result[1].split(":00.0");
+		String[] result1 = result[1].split(":17.7");
 		String time = result1[0];
 		model.addAttribute("date", date);
 		model.addAttribute("time", time);
@@ -435,7 +442,7 @@ public class SixServiceImpl implements SixService{
 		dto.setMeeting_cost(Integer.parseInt(req.getParameter("meeting_cost")));
 		dto.setMeeting_pernum(Integer.parseInt(req.getParameter("meeting_pernum")));
 		dto.setMeeting_detail(req.getParameter("meeting_detail"));
-		String meeting_date = req.getParameter("meeting_date") + " " + req.getParameter("meeting_time") + ":00.0";
+		String meeting_date = req.getParameter("meeting_date") + " " + req.getParameter("meeting_time") + ":17.7";
 		dto.setMeeting_date(Timestamp.valueOf(meeting_date));
 			
 		int cnt = sixDao.moimScheduleModify(dto);

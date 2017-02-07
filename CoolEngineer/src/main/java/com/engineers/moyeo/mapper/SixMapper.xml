@@ -58,7 +58,7 @@
 	
 	<!-- 모임일정-일정리스트 -->
 	<select id="moimScheduleDetail" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
-		SELECT * FROM (SELECT meeting_num, meeting_title, meeting_detail, meeting_loc, meeting_date, group_num, meeting_cost, meeting_pernum, loc_detail, rownum rnum 
+		SELECT meeting_num, meeting_title, TO_CHAR(meeting_date, 'yy/mm/dd hh:mm'), loc_detail, meeting_pernum FROM (SELECT meeting_num, meeting_title, meeting_detail, meeting_loc, meeting_date, group_num, meeting_cost, meeting_pernum, loc_detail, rownum rnum 
 		FROM (select * from meeting_list ORDER BY meeting_date ASC) WHERE group_num=#{group_num}) 
 		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} ORDER BY meeting_date ASC
 	</select>
