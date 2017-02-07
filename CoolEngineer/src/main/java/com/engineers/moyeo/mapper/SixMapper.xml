@@ -428,7 +428,7 @@
  	
  	<!-- 모임사이드-모임정보수정처리 -->
  	<update id="moimModifyPro" parameterType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		UPDATE group_list group_name = #{group_name}, group_mem_cnt = #{group_mem_cnt}, group_inte1 = #{group_inte1}, group_inte2 = #{group_inte2}, group_location = #{group_location}, group_intro = #{group_intro} WHERE group_num = #{group_num}
+ 		UPDATE group_list SET group_name = #{group_name}, group_mem_cnt = #{group_mem_cnt}, group_inte1 = #{group_inte1}, group_inte2 = #{group_inte2}, group_location = #{group_location}, group_intro = #{group_intro} WHERE group_num = #{group_num}
  	</update>
  	
  	<!-- 모임사이드-모임삭제 -->
@@ -437,14 +437,14 @@
  	</delete>
  	
  	<!-- 모임사이드-대표사진 등록 -->
- 	<insert id="moimAddImagePro" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
- 	</insert>
+ 	<update id="moimAddImagePro" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		UPDATE main_picture SET main_pic_path = '/groupImgPath', main_pic_name = #{main_pic_name} WHERE group_num = #{group_num} AND main_pic_path NOT LIKE '%-' 
+ 	</update>
  	
  	<!-- 모임-소개사진 등록 -->
- 	<insert id="moimAddImageProB" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
- 	</insert>
+ 	<update id="moimAddImageProB" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
+ 		UPDATE main_picture SET main_pic_path = '/groupImgPath-', main_pic_name = #{main_pic_name} WHERE group_num = #{group_num} AND main_pic_path LIKE '%-' 
+ 	</update>
  	
   	<!-- 모임-소개사진 불러오기 -->
  	<select id="moimImageViewB" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
@@ -457,7 +457,7 @@
  	</select>
  	
  	<!-- 모임가입여부 확인 -->
- 	<select id="memberCheck" parameterType="Map" resultType="int">
+ 	<select id="memberCheck" parameterType="com.engineers.moyeo.six.dto.CheckPresentDTO" resultType="int">
  		SELECT COUNT(*) FROM my_group WHERE mem_id = #{mem_id} AND group_num = #{group_num}
  	</select>
  	
