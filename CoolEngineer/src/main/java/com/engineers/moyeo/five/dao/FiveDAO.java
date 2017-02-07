@@ -8,7 +8,6 @@ import com.engineers.moyeo.five.dto.MeetingPostViewDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
-import com.engineers.moyeo.six.dto.MyGroupDTO;
 
 public interface FiveDAO {
 
@@ -66,7 +65,4 @@ public interface FiveDAO {
 	public List<PostPictureDTO> getGroupPics(int group_num);
 	// 모임의 동영상리스트를 불러옴
 	public List<PostVideoDTO> getGroupVideos(int group_num);
-	
-	// 모임에서의 권한을 확인
-	public int getGroupPer(MyGroupDTO dto);
 }
