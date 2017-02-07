@@ -57,6 +57,26 @@ img {
 }
 </style>
 
+<script type="text/javascript">
+
+function checkDate() {
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth();
+	month = month+1;
+	var day = date.getDate();
+	var fullDate = year+"-"+('0' + (month)).slice(-2)+"-"+('0'+day).slice(-2);
+	var selDate = register.meeting_date.value;
+	if(fullDate > selDate) {
+		alert("모임등록은 금일부터 가능합니다");
+		register.meeting_date.value = fullDate;
+	}	
+}
+
+
+
+</script>
+
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
@@ -101,12 +121,12 @@ img {
 										maxlength="30" style="width: 500px; font-size: 18px; margin-left: 230px; height: 40px; margin-top: -70px"
 										required>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									일자 : <input type="date" name="meeting_date" style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top:"0" required><br>
+									일자 : <input type="date" name="meeting_date" style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top:0px;"  required onchange="checkDate()"><br>
 <!-- 									일자 : <input type="text" class="form-control datepicker" style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top: 30px;" value="2015-08-04" required> -->
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									시간 : <input type="time" name="meeting_time"
+									시간 : <input type="time" name="meeting_time" value="00:00"
 											style="width: 350px; font-size: 18px; height: 40px; margin-left: 0px; margin-top: 30px"
-											required> 
+											required > 
 										<input type="button" name="meeting_loc" class="btn btn-default"
 											value="클릭하여 모임 장소를 선택해주세요."
 											style="width: 550px; border-color: #dcacac; font-size: 18px; height: 40px; margin-left: 20px; margin-top: 30px;"
