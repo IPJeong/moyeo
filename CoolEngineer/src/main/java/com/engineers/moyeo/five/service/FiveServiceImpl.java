@@ -538,7 +538,7 @@ public class FiveServiceImpl implements FiveService{
       model.addAttribute("cnt", cnt);
       //페이지 번호를 삽입
       model.addAttribute("pageNum", req.getParameter("pageNum"));
-      return "five/postDeletePro";
+      return "five/post/postDeletePro";
    }
 
    // 모임후기 좋아요

@@ -9,11 +9,6 @@
 -->
 <mapper namespace="com.engineers.moyeo.main.dao.MainDAO">  <!-- 인터페이스 -->
     
-    <insert id="insertTest" parameterType="com.engineers.moyeo.six.dto.MemberInfoDTO">
-    	INSERT INTO member_info (mem_id, passwd, name, address, tel, birth, email) 
-    				     values (#{mem_id}, #{passwd}, #{name}, #{address}, #{tel}, #{birth}, #{email})
-    </insert>
-    
     <select id="idCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) 
 		  FROM member_info 
@@ -34,7 +29,7 @@
 				SELECT word, count, part_of_speech, update_date, reg_date, rownum as rn
 				  FROM (SELECT *
                           FROM wordcloud_list
-                 		 ORDER BY count DESC, update_date DESC
+                 		 ORDER BY count DESC, update_date DESC, reg_date DESC
                         )				 
          		)
     	 WHERE rn BETWEEN 1 AND 30 
@@ -56,8 +51,8 @@
 	<!-- 워드 클라우드 단어를 업데이트 시킴 -->
 	<update id="updateWordCloud" parameterType="com.engineers.moyeo.main.dto.WordDTO">
 		UPDATE wordcloud_list
-		   SET count = count + #{count}
-		   SET update_date = #{update_date}
+		   SET count = count + #{count},
+		       update_date = #{update_date}
 		 WHERE word = #{word}   
 	</update>
 	
@@ -69,7 +64,7 @@
 				  FROM (
 				  		SELECT *
                           FROM wordcloud_list
-                 		 ORDER BY count DESC, update_date DESC
+                 		 ORDER BY count DESC
                         )
                   WHERE 
                   <if test="type == 1">
@@ -94,7 +89,7 @@
                   	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
                   </if>
                   <if test="strDate != null">
-                  	AND update_date &gt; = to_timestamp(#{strDate}, 'YYYY-MM-DD') AND update_date &lt;= to_timestamp(#{endDate}, 'YYYY-MM-DD')
+                  	AND update_date &gt; = #{strDate} AND update_date &lt;= #{endDate}
                   </if>
          		)
     	 WHERE rn BETWEEN 1 AND 30 

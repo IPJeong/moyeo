@@ -148,10 +148,12 @@ public class MainServiceImpl implements MainService{
 		System.out.println("strDate : " + strDate + ", endDate : " + endDate);
 		if(strDate != null && endDate != null){
 			if(!strDate.equals("")) {
-//				Timestamp stp = Timestamp.valueOf(strDate+" 00:00:00.000000");
-//				Timestamp etp = Timestamp.valueOf(endDate+" 00:00:00.000000");
-				map.put("strDate", strDate);
-				map.put("endDate", endDate);
+				strDate = strDate + " 00:00:01.000000";
+				endDate = endDate + " 23:59:59.000000";
+				Timestamp stp = Timestamp.valueOf(strDate);
+				Timestamp etp = Timestamp.valueOf(endDate);
+				map.put("strDate", stp);
+				map.put("endDate", etp);
 			}
 		}
 		
