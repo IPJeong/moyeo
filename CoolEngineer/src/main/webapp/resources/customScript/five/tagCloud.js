@@ -20,3 +20,18 @@ window.onload = function() {
 		document.getElementById('myCanvasContainer').style.display = 'none';
 	}
 };
+
+//date picker
+$(function(){
+    //Spinner
+    $(".spinner_default").spinner()
+    $(".spinner_decimal").spinner({step: 0.01, numberFormat: "n"});                
+    //End spinner
+    
+    //Datepicker
+    $('#dp-2').datepicker();
+    $('#dp-3').datepicker({startView: 2});
+    $('#dp-4').datepicker({startView: 1});                
+    //End Datepicker
+});
+
