@@ -116,12 +116,16 @@
                                       </select>
                                  </div>
                              </div>
+                             
                              <h4>휴대폰 번호</h4> 
                              <div class="form-group">
-		                        <div class="col-md-12">
+		                        <div class="col-md-12" style="width:80%; float:left">
 		                            <input type="text" class="form-control" name="tel" placeholder="tel" id="tell"
 		                            onkeyup="phoneChk()"		                             
 		                            style="color:#212121;" required/>		                            
+		                        </div>
+		                        <div style="width:20%; float:left">
+		                        	<div id="telMsg"></div>
 		                        </div>
 		                    </div>
 		                    <h4>생&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일</h4> 
