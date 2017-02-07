@@ -6,7 +6,7 @@ public class MyGroupDTO {
 	private int my_group_num;
 	
 	//모임권한
-	private String group_per;
+	private int group_per;
 	
 	//모임번호
 	private int group_num;
@@ -22,11 +22,11 @@ public class MyGroupDTO {
 		this.my_group_num = my_group_num;
 	}
 
-	public String getGroup_per() {
+	public int getGroup_per() {
 		return group_per;
 	}
 
-	public void setGroup_per(String group_per) {
+	public void setGroup_per(int group_per) {
 		this.group_per = group_per;
 	}
 
