@@ -1,5 +1,7 @@
 package com.engineers.moyeo.six.dto;
 
+import java.sql.Timestamp;
+
 public class MoimOpenDTO {
 
 	//모임번호
@@ -22,6 +24,9 @@ public class MoimOpenDTO {
 	
 	//모임소개
 	private String group_intro;
+	
+	//모임등록일
+	private Timestamp reg_date;
 
 	public int getGroup_num() {
 		return group_num;
@@ -77,5 +82,13 @@ public class MoimOpenDTO {
 
 	public void setGroup_intro(String group_intro) {
 		this.group_intro = group_intro;
+	}
+
+	public Timestamp getReg_date() {
+		return reg_date;
+	}
+
+	public void setReg_date(Timestamp reg_date) {
+		this.reg_date = reg_date;
 	}
 }
