@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.util.SystemPropertyUtils;
 
 import com.engineers.moyeo.main.dao.MainDAO;
 import com.engineers.moyeo.main.dto.WordDTO;
@@ -75,6 +74,7 @@ public class MainServiceImpl implements MainService{
 		int cnt = mainDao.pwdCheck(daoMap);
 		
 		if(cnt == 1) {
+			req.getSession().invalidate();
 			req.getSession().setAttribute("mem_id", mem_id);
 			model.addAttribute("cnt", cnt);
 //			model.addAttribute("beforeurl", beforeurl);
@@ -193,8 +193,6 @@ public class MainServiceImpl implements MainService{
 		for(WordDTO dt : words) {
 			System.out.println(dt.toString());
 		}
-		
-		
 		
 		return "redirect:/main/home";
 	}
