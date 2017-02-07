@@ -148,8 +148,8 @@ img {
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
 	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
-	<li class="active">모임 일정</li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+	<li class="active">모임 채팅</li>
 </ul>
 <!-- END BREADCRUMB -->
 
@@ -181,9 +181,9 @@ img {
 		                           
 			                            <a href="#" class="list-group-item">                                 
 			                                <div class="list-group-status status-online"></div>
-			                                <img src="${member_dto.propic_path}/${member_dto.propic_name}" class="pull-left" >
-			                                <span class="contacts-title">${member_dto.mem_id}</span>
-			                                <p>${member_dto.name}</p>
+			                                <div style="height:40px; width:40px; float:left;"><img src="${member_dto.propic_path}/${member_dto.propic_name}" class="pull-left" style="margin:0px;"></div>
+			                                &nbsp;&nbsp;<span class="contacts-title">${member_dto.mem_id}</span>
+			                                <p>&nbsp;&nbsp;${member_dto.name}</p>
 			                            </a>                                
 		         
 		                        </div>
