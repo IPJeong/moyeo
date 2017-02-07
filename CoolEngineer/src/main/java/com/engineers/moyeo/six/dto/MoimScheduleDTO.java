@@ -40,6 +40,8 @@ public class MoimScheduleDTO {
 	//모임일정 참여자 숫자
 	private int join_num;
 	
+	private String date;
+	
 	public int getMeeting_num() {
 		return meeting_num;
 	}
@@ -109,5 +111,15 @@ public class MoimScheduleDTO {
 	public int getJoin_num() {
 		return join_num;
 	}
-
+	
+	public void setJoin_num(int join_num) {
+		this.join_num = join_num;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 }
