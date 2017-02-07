@@ -22,11 +22,14 @@
 						<h3>
 							<center>${open_dto.group_inte1} -> ${open_dto.group_inte2}</center>
 						</h3>
-						<center>
-							<input class="btn btn-default" type="button" style="margin-left:10px;" value="사진등록" onclick="window.open('/moyeo/six/moimMain/moimAddImage','','menubar=no, toolbar=no, width=450, height=170')">
-							<input class="btn btn-info" type="button" style="margin-left:10px;" value="모임정보 수정" onclick="window.location='/moyeo/six/moimMain/moimModify?group_num=${group_num}'">
-							<input class="btn btn-warning" type="button" style="margin-left:10px;" value="모임폐쇄" onclick="window.location='/moyeo/six/moimMain/moimDelete?group_num=${group_num}'">
-						</center>
+						
+						<c:if test="${group_per == 1}">
+							<center>
+								<input class="btn btn-default" type="button" style="margin-left:10px;" value="사진등록" onclick="window.open('/moyeo/six/moimMain/moimAddImage','','menubar=no, toolbar=no, width=450, height=170')">
+								<input class="btn btn-info" type="button" style="margin-left:10px;" value="모임정보 수정" onclick="window.location='/moyeo/six/moimMain/moimModify?group_num=${group_num}'">
+								<input class="btn btn-warning" type="button" style="margin-left:10px;" value="모임폐쇄" onclick="window.location='/moyeo/six/moimMain/moimDelete?group_num=${group_num}'">
+							</center>
+						</c:if>
 
 					</div>
 				</div>
