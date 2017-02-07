@@ -2,8 +2,6 @@ package com.engineers.moyeo.five.dto;
 
 import java.sql.Timestamp;
 
-import org.apache.ibatis.type.Alias;
-
 public class MeetingPostDTO {
 
 	// 모임후기 글넘버
