@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ include file="../../etc/moim_header.jsp" %>
+
 <style>
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
@@ -62,12 +64,10 @@ li {
   <ul class="breadcrumb push-down-0">
       <li><a href="../main/main.jsp">Home</a></li>
       <li><a href="../category/category_hobby.jsp">모임</a></li>
-      <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
+      <li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
       <li class="active">모임갤러리</li>
   </ul>
 <!-- END BREADCRUMB -->  
-
-<%@ include file="../../etc/moim_header.jsp" %>
 
 <!-- START ROW -->
 <div class="row">

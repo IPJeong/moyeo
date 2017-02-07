@@ -39,7 +39,7 @@ li {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<font size="4px;">워드클라우드</font><br>
+					<font size="4px;">Word Cloud</font><br>
 					<span>Moyeo에서 자주 사용되는 용어들 입니다.</span>
 				</div>
 			</div>
@@ -54,16 +54,47 @@ li {
 
 	<!-- START SEARCH BLOCK -->
 	<div class="col-md-23">
+		
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="panel-title-box">
-					<font size="4px;">검색창</font><br>
-					<span>모임, 모임 후기 등 다양한 정보를 한 번에 검색할 수 있습니다.</span>
+			<div class="panel-heading" style="height:30px">
+				<div class="panel-title-box" style="margin-top:-5px;">
+
+					<h3>검색창&nbsp;&nbsp;<span style="font-size:12px;">모임, 모임 후기 등 다양한 정보를 한 번에 검색할 수 있습니다.</span></h3>
+					
 				</div>
 			</div>
 			<div class="panel-body padding-0">
-				<div class="chart-holder" id="dashboard-donut-1"
-					style="height: 200px;"></div>
+				<form name="mainsearchfrom" action="../two/mainSearch" onsubmit="return searchKeywordCheck();">
+					<div class="col-md-6-2" style="float:left; margin-top:7px; width:90%; margin-left:5%;">	
+						<div class="input-group push-down-10" >
+					        <span class="input-group-addon"><span class="fa fa-search"></span></span>
+					        <input type="text" class="form-control" name="search_keyword" placeholder="">
+					        <div class="input-group-btn">
+					            <input type="submit" class="btn btn-primary" value="검색">
+					        </div>
+					    </div>
+					    <div style="float:left; margin-top:0px; margin-left:3px; width:90%;">
+					    	&nbsp;&nbsp;&nbsp;모임 검색&nbsp;&nbsp;&nbsp; | 
+							&nbsp;&nbsp;<input type="radio" name="search_radio1" value="gl1">&nbsp;이름
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio1" value="gl2">&nbsp;소개
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio1" value="gl3">&nbsp;이름+소개
+		                </div>
+		                <div style="float:left; margin-top:5px; width:90%;">
+		                	모임후기 검색&nbsp; | 
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio2" value="mp1">&nbsp;제목
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio2" value="mp2">&nbsp;내용
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio2" value="mp3">&nbsp;제목+내용
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio2" value="mp4">&nbsp;태그
+				    	</div>
+				    	<div style="float:left; margin-top:5px; margin-left:3px; width:90%;">
+		                	&nbsp;&nbsp;&nbsp;장소 검색&nbsp;&nbsp;&nbsp; |
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi1">&nbsp;제목
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi2">&nbsp;설명
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi3">&nbsp;제목+설명
+		                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi4">&nbsp;주소
+				    	</div>
+			    	</div>  
+			    </form>
 			</div>
 		</div>
 	</div>

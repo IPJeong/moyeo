@@ -66,6 +66,15 @@ li {
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 </head>
 <body>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/main">Home</a></li>
+	<li><a href="/moyeo/category/category_hobby">모임</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+	<li class="active">모임동영상</li>
+</ul>
+<!-- END BREADCRUMB -->
     
     <!-- START ROW -->
 <div class="row">
