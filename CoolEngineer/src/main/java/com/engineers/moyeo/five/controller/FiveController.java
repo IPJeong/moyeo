@@ -216,16 +216,17 @@ public class FiveController {
 		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
-		fiveService.getGroupVideos(model);
+		viewPage = fiveService.getGroupVideos(model);
 		
-		return "five/gallery/groupVideos";
+		return viewPage;
 	}
 	
-	//워드클라우드 예제
-	@RequestMapping(value="/wordCloud")
-	public String wordCloud() {
-		System.out.println("워드 클라우드 로드");
-		return "five/wordCloud/wordCloud";
+	// 바탕화면에서 바로 모임후기 조회
+	@RequestMapping(value="/postDetailView")
+	public String postDetailView(Model model, HttpServletRequest req) {
+		System.out.println("post detail view");
+		model.addAttribute("req", req);
+		return fiveService.postDetailView(model);
 	}
 	
 }

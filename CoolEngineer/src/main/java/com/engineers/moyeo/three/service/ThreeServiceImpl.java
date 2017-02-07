@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.engineers.moyeo.main.common.Code;
+import com.engineers.moyeo.main.common.EmailSender;
 import com.engineers.moyeo.main.common.FileManager;
+import com.engineers.moyeo.main.common.TextMessage;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
@@ -521,6 +523,8 @@ public class ThreeServiceImpl implements ThreeService{
 			}
 			
 		}
+		
+		EmailSender.sendEmail(email, TextMessage.congJoinMsgTitle(memid), TextMessage.congJoinMsgContent(memid), req.getSession().getServletContext().getRealPath("/resources/resource/assets/images/gallery/"));
 		
 		model.addAttribute("cnt", cnt);		
 		model.addAttribute("memid", memid);

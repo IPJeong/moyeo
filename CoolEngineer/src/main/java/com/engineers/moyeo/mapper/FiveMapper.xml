@@ -218,4 +218,12 @@
     	 ORDER BY pv.video_num DESC
     </select>
     
+    <!-- 모임에서의 회원 권한 확인 -->
+    <select id="getGroupPer" parameterType="com.engineers.moyeo.six.dto.MyGroupDTO" resultType="int" >
+    	SELECT group_per
+    	  FROM my_group
+    	 WHERE group_num = #{group_num}
+    	   ADN mem_id = #{mem_id}
+    </select>
+    
 </mapper>

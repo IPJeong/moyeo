@@ -29,6 +29,7 @@ import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
+import com.engineers.moyeo.six.dto.MyGroupDTO;
 
 
 @Service
@@ -267,9 +268,14 @@ public class FiveServiceImpl implements FiveService{
       // 모임번호
       int group_num = (Integer)req.getSession().getAttribute("group_num");
       // 리스트 페이지 번호
-      int pageNum = Integer.parseInt(req.getParameter("pageNum"));
-      // 페이지번호를 심어주
-      model.addAttribute("pageNum", pageNum);
+      String page = req.getParameter("pageNum");
+      
+      int pageNum;
+      if(page != null) {
+    	  pageNum = Integer.parseInt(page);
+    	// 페이지번호를 심어줌
+          model.addAttribute("pageNum", pageNum);
+      }
       
    //--사이드 시작
       //사이드- 모임명, 모임카테고리 불러오기
@@ -636,6 +642,7 @@ public class FiveServiceImpl implements FiveService{
       return "five/gallery/groupPictures";
    }
 
+   // 모임후기 동영상 리스트 조회
    @Override
    public String getGroupVideos(Model model) throws NumberFormatException, NullPointerException {
       
@@ -664,6 +671,41 @@ public class FiveServiceImpl implements FiveService{
    //--사이드 끝
       
       return "five/gallery/groupVideos";
+   }
+
+   // 검색에서 모임후기로 바로 접속
+   @Override
+   public String postDetailView(Model model) throws NumberFormatException, NullPointerException {
+   	
+	   HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
+	   
+	   // 검색을 통한 바로 검색인지 여부 확인
+	   String search = req.getParameter("search");
+	   
+	   if(search == null) return null;
+	   if(!search.equals("dsearch"))return null;
+	   
+	   int post_num = Integer.parseInt(req.getParameter("post_num"));
+	   int group_num = Integer.parseInt(req.getParameter("group_num"));
+	   String mem_id = (String)req.getSession().getAttribute("mem_id");
+	   
+	   if(mem_id == null) {
+		   // 회원이 아니고 관리자가 로그인 했을 경우 관리자 아이디를 넣어줌
+		   mem_id = (String)req.getSession().getAttribute("manager_id");
+	   }
+	   
+	   req.getSession().setAttribute("group_num", group_num);
+	   
+	   MyGroupDTO dto = new MyGroupDTO();
+	   dto.setGroup_num(group_num);
+	   dto.setMem_id(mem_id);
+	   int group_per = fiveDao.getGroupPer(dto);
+	   
+	   if(group_per == 0)group_per=4;
+	   
+	   req.getSession().setAttribute("group_per", group_per);
+	   
+	   return "redirect:five/postDetail?post_num="+post_num;
    }
 
 }

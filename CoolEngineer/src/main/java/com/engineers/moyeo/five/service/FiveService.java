@@ -42,4 +42,7 @@ public interface FiveService {
 	
 	// 모임후기 사진리스트 조회
 	public String getGroupVideos(Model model) throws NumberFormatException, NullPointerException;
+	
+	// 모임후기 바로 조회
+	public String postDetailView(Model model) throws NumberFormatException, NullPointerException;
 }
