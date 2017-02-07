@@ -278,16 +278,12 @@ public interface SixDAO {
 	//모임사이드-대표사진 등록
 	public int moimAddImagePro(MainPictureDTO dto);
 	
-	//모임사이드-대표사진 불러오기
-	//public MainPictureDTO moimImageView(int group_num);
-	
 	//모임사이드-모임멤버 상세보기
 	public MemberInfoDTO moimMemberDetail(String mem_id);
 	
-	//-------추가
-	//모임-사이드, 대표사진 불러오기
+	//모임-사이드 사진 불러오기
 	public List<MainPictureDTO> moimImagesView(int group_num);
-	//-------추가
+	
 	
 	//모임-소개사진 등록
 	public int moimAddImageProB(MainPictureDTO dto);
@@ -299,7 +295,7 @@ public interface SixDAO {
 	public ArrayList<MainPictureDTO> moimImageViewB(int group_num);
 	
 	//모임-가입여부확인
-	public int memberCheck(Map<String, Object> chkMap);
+	public int memberCheck(CheckPresentDTO dto);
 	
 	//모임-출석체크 중복체크
 	public int checkPresentCount(CheckPresentDTO dto);

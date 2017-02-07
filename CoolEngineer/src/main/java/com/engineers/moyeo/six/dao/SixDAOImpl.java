@@ -797,16 +797,6 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;
 	}
 	
-	//모임사이드-대표사진 불러오기
-	/*@Override
-	public MainPictureDTO moimImageView(int group_num) {
-		MainPictureDTO dto = null;
-		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		dto = dao.moimImageView(group_num);
-		
-		return dto;
-	}*/
-	
 	//모임사이드-모임멤버 상세보기
 	@Override
 	public MemberInfoDTO moimMemberDetail(String mem_id) {
@@ -815,17 +805,13 @@ public class SixDAOImpl implements SixDAO{
 		return dto;
 	}
 	
-	//----------------추가
-	// 모임 대표사진, 소개사진 불러오기
+	// 모임 대표사진불러오기
 	@Override
 	public List<MainPictureDTO> moimImagesView(int group_num) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		return dao.moimImagesView(group_num);
 	}
 
-	//----------------추가
-	
-	
 	//모임-소개사진 등록
 	@Override
 	public int moimAddImageProB(MainPictureDTO dto) {
@@ -858,9 +844,9 @@ public class SixDAOImpl implements SixDAO{
 
 	//모임-가입여부확인
 	@Override
-	public int memberCheck(Map<String, Object> chkMap) {
+	public int memberCheck(CheckPresentDTO dto) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		int cnt = dao.memberCheck(chkMap);
+		int cnt = dao.memberCheck(dto);
 		
 		return cnt;
 	}
