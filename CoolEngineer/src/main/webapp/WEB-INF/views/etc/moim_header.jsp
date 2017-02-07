@@ -84,7 +84,7 @@
 						<a href="/moyeo/main/home">MoYeo</a>
 					</div>
 					<ul>
-						<li class=""><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">Home</a></li>
+						<li class=""><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">모임메인</a></li>
 						<li><a href="/moyeo/six/moimSchedule/moimSchedule?group_num=${group_num}">모임일정</a></li>
 						<li class="xn-openable"><a href="#">모임갤러리</a>
 							<ul>
