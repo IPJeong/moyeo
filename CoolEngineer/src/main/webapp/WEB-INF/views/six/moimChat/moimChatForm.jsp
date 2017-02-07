@@ -62,13 +62,13 @@ li {
 
 <c:if test="${check_cnt != 0}">
 <!-- START BREADCRUMB -->
-   <ul class="breadcrumb push-down-0">
-       <li><a href="../main/main.jsp">Home</a></li>
-       <li><a href="../category/category_hobby.jsp">모임</a></li>
-       <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-       <li class="active">모임게시판</li>
-   </ul>
-<!-- END BREADCRUMB -->  
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/home">Home</a></li>
+	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+	<li class="active">모임 채팅</li>
+</ul>
+<!-- END BREADCRUMB -->
 
 <!-- START ROW -->
 

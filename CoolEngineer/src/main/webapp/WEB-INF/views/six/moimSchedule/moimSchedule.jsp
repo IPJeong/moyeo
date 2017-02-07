@@ -151,7 +151,7 @@ img {
 							style="width: 860px; height: 480px; margin: 10px; margin-top: 65px">
 							<c:if test="${cnt > 0}">
 
-								<c:forEach begin="0" end="${fn:length(dtos)-1}" varStatus="stat">
+								<c:forEach begin="0" end="1" varStatus="stat">
 									<input type="hidden" name="meeting_num"
 										value="${dtos[stat.index].meeting_num}">
 
@@ -159,7 +159,7 @@ img {
 
 
 									<div class="chart-holder"
-										style="width: 780px; height: 220px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
+										style="width: 780px; height: 200px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
 										<div style="width: 25%; height: 100%; float: left">
 											<div style="width: 100%; height: 100%; magin: 5px 5px;">
 												<form name="left" style="height: 100%;">
@@ -190,8 +190,8 @@ img {
 											</p>
 										</div>
 
-										<input type="button" value="상세보기"
-											style="width: 100px; height: 40px; font-size: 13px; position: absolute; left: 710px; margin-top: 20%;"
+										<input type="button" class="btn btn-success" value="상세보기"
+											style="width: 100px; height: 40px; font-size: 13px; position: absolute; left: 710px; margin-top:20px;"
 											onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=950, height=450, left=300, top=100')"><br>
 										
 									</div>
