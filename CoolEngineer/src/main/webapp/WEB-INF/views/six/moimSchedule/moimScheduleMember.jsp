@@ -11,14 +11,15 @@
 </head>
 <body>
 <table class="table table-striped table-hover" style="width:200px;">
+	<c:if test="${dtos == null}">
+		아직 참석 멤버가 없습니다. 모임에 참석해보세요!
+	</c:if>
 	<c:forEach var="dto" items="${dtos}">
-		
-		<tr class="info">
-			<td style="border:1px solid black; size:14; margin:20px;">
-			${dto.mem_id}
-			</td>
-		</tr>
-		
+			<tr class="info">
+				<td style="border:1px solid black; size:14; margin:20px;">
+				${dto.mem_id}
+				</td>
+			</tr>
 	</c:forEach>
 </table>
 </body>

@@ -109,7 +109,7 @@ img {
 											required> 
 										<input type="button" name="meeting_loc" class="btn btn-default"
 											value="클릭하여 모임 장소를 선택해주세요."
-											style="width: 550px; font-size: 18px; height: 40px; margin-left: 20px; margin-top: 30px;"
+											style="width: 550px; border-color: #dcacac; font-size: 18px; height: 40px; margin-left: 20px; margin-top: 30px;"
 											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=800, height=450, left=450, top=270')"
 											required> <br> 
 										<input type="text"
@@ -126,7 +126,7 @@ img {
 											required> 명 <br>
 										<textarea class="input" rows="10" cols="40"
 											name="meeting_detail" maxlength="50" placeholder="모임에 대한 설명을 입력해주세요."
-											style="width: 800px; font-size: 18px; height: 200px; font-size: 1.0em; margin-left: 7px; margin-top: 30px;"
+											style="width: 800px; font-size: 18px; height: 200px; margin-left: 7px; margin-top: 30px;"
 											required></textarea>
 											</p>
 
