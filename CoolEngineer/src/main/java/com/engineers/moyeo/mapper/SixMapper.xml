@@ -33,7 +33,7 @@
 	
 	<!-- 공지 글작성 -->
 	<insert id="insert" parameterType="com.engineers.moyeo.six.dto.NoticeDTO">
-		INSERT INTO noti_board VALUES(noti_board_seq.NEXTVAL, #{noti_title}, #{noti_content}, #{noti_date}, 0, #{manager_id})	
+		INSERT INTO noti_board (noti_num, noti_title, noti_content, noti_date, noti_hit, manager_id) VALUES(noti_board_seq.NEXTVAL, #{noti_title}, #{noti_content}, #{noti_date}, 0, #{manager_id})	
 	</insert>
 	
 	<!-- 공지 글수정 -->
@@ -75,7 +75,7 @@
 	
 	<!-- 모임일정-등록 -->
 	<insert id="moimRegister" parameterType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
- 		INSERT INTO meeting_list VALUES(meeting_list_seq.NEXTVAL, #{meeting_title}, #{meeting_detail}, #{meeting_loc}, #{meeting_date}, #{group_num}, #{meeting_cost}, #{meeting_pernum}, #{loc_detail})
+ 		INSERT INTO meeting_list (meeting_num, meeting_title, meeting_detail, meeting_loc, meeting_date, group_num, meeting_cost, meeting_pernum, loc_detail) VALUES(meeting_list_seq.NEXTVAL, #{meeting_title}, #{meeting_detail}, #{meeting_loc}, #{meeting_date}, #{group_num}, #{meeting_cost}, #{meeting_pernum}, #{loc_detail})
  	</insert> 
  	
  	<!-- 모임일정-수정 -->
@@ -95,7 +95,7 @@
  	
  	<!-- 모임일정-참석신청 -->
  	<insert id="moimScheduleJoin" parameterType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
- 		INSERT INTO present_per_list VALUES(present_per_list_seq.NEXTVAL , #{mem_id}, #{meeting_num})
+ 		INSERT INTO present_per_list (pre_per_num, mem_id, meeting_num) VALUES(present_per_list_seq.NEXTVAL , #{mem_id}, #{meeting_num})
  	</insert>
  	
  	<!-- 모임일정-참석취소 -->
@@ -122,12 +122,12 @@
  	
  	<!-- 모임개설 -->
  	<insert id="moimOpenPro" parameterType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		INSERT INTO group_list VALUES(#{group_num}, #{group_name}, #{group_mem_cnt}, #{group_inte1}, #{group_inte2}, #{group_location}, #{group_intro})
+ 		INSERT INTO group_list (group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, group_intro, reg_date) VALUES(#{group_num}, #{group_name}, #{group_mem_cnt}, #{group_inte1}, #{group_inte2}, #{group_location}, #{group_intro}, #{reg_date})
  	</insert>
  	
  	<!-- 모임장등록 -->
  	<insert id="moimLeaderRegister" parameterType="com.engineers.moyeo.six.dto.MyGroupDTO">
- 		INSERT INTO my_group VALUES(my_group_seq.NEXTVAL, 1, #{group_num}, #{mem_id})
+ 		INSERT INTO my_group (my_group_num, group_per, group_num, mem_id) VALUES(my_group_seq.NEXTVAL, 1, #{group_num}, #{mem_id})
  	</insert>
  	
  	<!-- 모임 기본 사진 설정(사이드) -->
@@ -438,31 +438,26 @@
  	
  	<!-- 모임사이드-대표사진 등록 -->
  	<insert id="moimAddImagePro" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		INSERT INTO main_picture VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
+ 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
  	</insert>
- 	
- 	<!-- 모임사이드-대표사진 불러오기 -->
- 	<select id="moimImageView" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		SELECT * FROM main_picture WHERE main_pic_num = (SELECT MAX(main_pic_num) FROM main_picture WHERE group_num=#{group_num} AND main_pic_path='/groupImgPath')
- 	</select>
  	
  	<!-- 모임-소개사진 등록 -->
  	<insert id="moimAddImageProB" parameterType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		INSERT INTO main_picture VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
+ 		INSERT INTO main_picture (main_pic_num, main_pic_path, main_pic_name, group_num) VALUES(main_picture_seq.NEXTVAL, #{main_pic_path}, #{main_pic_name}, #{group_num})
  	</insert>
  	
   	<!-- 모임-소개사진 불러오기 -->
  	<select id="moimImageViewB" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		SELECT * FROM main_picture WHERE main_pic_path = '/groupImgPath-' AND group_num = #{group_num} ORDER BY main_pic_num DESC
+ 		SELECT * FROM main_picture WHERE main_pic_path = '/groupImgPath-' OR main_pic_path = '/moyeo/resources/resource/assets/images/moimImg-' AND group_num = #{group_num} ORDER BY main_pic_num DESC
  	</select>
  	
- 	<!-- 모임-소개사진 불러오기 -->
+ 	<!-- 모임-대표사진 불러오기 -->
  	<select id="moimImagesView" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		SELECT * FROM main_picture WHERE group_num = #{group_num} ORDER BY main_pic_path ASC
+ 		SELECT * FROM main_picture WHERE main_pic_path = '/groupImgPath' OR main_pic_path = '/moyeo/resources/resource/assets/images/moimImg' AND group_num = #{group_num} ORDER BY main_pic_num DESC
  	</select>
  	
  	<!-- 모임가입여부 확인 -->
- 	<select id="memberCheck" parameterType="com.engineers.moyeo.six.dto.CheckPresentDTO" resultType="int">
+ 	<select id="memberCheck" parameterType="Map" resultType="int">
  		SELECT COUNT(*) FROM my_group WHERE mem_id = #{mem_id} AND group_num = #{group_num}
  	</select>
  	
@@ -473,7 +468,7 @@
  	
  	<!-- 모임-출석체크 입력 -->
  	<insert id="checkPresent" parameterType="com.engineers.moyeo.six.dto.CheckPresentDTO">
- 		INSERT INTO check_present VALUES(check_present_seq.NEXTVAL, #{present_date}, #{mem_id}, #{group_num})
+ 		INSERT INTO check_present (present_num, present_date, mem_id, group_num) VALUES(check_present_seq.NEXTVAL, #{present_date}, #{mem_id}, #{group_num})
  	</insert>
  	
  	<!-- 모임-회원권한 설정 -->
@@ -496,4 +491,35 @@
  		SELECT MAX(present_date) FROM check_present WHERE mem_id = #{mem_id} AND group_num=#{group_num}
  	</select>
  	
+ 	<!-- 모임채팅방 개설 -->
+ 	<insert id="moimChatRegister" parameterType="int">
+ 		INSERT INTO chat_room_list (chat_room_num, group_num) VALUES(chat_room_list_seq.NEXTVAL, #{group_num})
+ 	</insert>
+ 	
+ 	<!-- 모임채팅방 번호 받아오기 -->
+ 	<select id="moimChatNum" parameterType="int" resultType="int">
+ 		SELECT chat_room_num FROM chat_room_list WHERE group_num = #{group_num}
+ 	</select>
+ 	
+ 	<!-- 모임채팅방 채팅내용 입력 -->
+ 	<insert id="addMsg" parameterType="com.engineers.moyeo.six.dto.MsgListDTO">
+ 		INSERT INTO msg_list (msg_num, mem_id, msg_content, msg_date, chat_room_num) VALUES (msg_list_seq.NEXTVAL, #{mem_id}, #{msg_content}, #{msg_date}, #{chat_room_num}) 
+ 	</insert>
+ 	
+ 	<!-- 모임채팅방 채팅입력내용 출력 -->
+ 	<select id="getMsg" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MsgListDTO">
+ 		SELECT m.msg_num, m.mem_id, m.msg_content, m.msg_date, m.chat_room_num, i.propic_path, i.propic_name FROM msg_list m, member_info i WHERE m.msg_date = #{msg_date} AND i.mem_id = #{mem_id}
+ 	</select>
+ 	
+ 	<!-- 모임채팅방 전체 채팅내용 출력 -->
+ 	<select id="getMsgs" parameterType="int" resultType="com.engineers.moyeo.six.dto.MsgListDTO">
+ 		SELECT m.msg_num, m.mem_id, m.msg_content, m.msg_date, m.chat_room_num, i.propic_path, i.propic_name FROM msg_list m, member_info i WHERE m.chat_room_num = #{chat_room_num} AND i.mem_id = m.mem_id
+ 	</select>
+ 	
+ 	
+ 	<!-- 모임채팅방 전체 채팅내용 실시간 -->
+ 	<select id="getChat" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MsgListDTO">
+ 		SELECT m.msg_num, m.mem_id, m.msg_content, m.msg_date, m.chat_room_num, i.propic_path, i.propic_name FROM msg_list m, member_info i WHERE m.chat_room_num = #{chat_room_num} AND m.msg_date &gt;= #{t2} AND m.msg_date &lt;= #{msg_date} AND i.mem_id = m.mem_id
+ 	</select>
+
 </mapper>
