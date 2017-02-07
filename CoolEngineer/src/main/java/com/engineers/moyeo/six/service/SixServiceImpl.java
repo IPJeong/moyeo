@@ -937,18 +937,20 @@ public class SixServiceImpl implements SixService{
 			
 			//모임가입된 경우에만 실행
 			if(check_cnt != 0) {
+					
+				//회원권한 설정
+				Map<String, Object> perMap = model.asMap();
+				perMap.put("mem_id", mem_id);
+				perMap.put("group_num", group_num);
+				int group_per = sixDao.groupPer(perMap);
+				req.getSession().setAttribute("group_per", group_per);
+				
 				//출석체크 중복여부 확인
 				int present_cnt = sixDao.checkPresentCount(present_dto);
 				//중복이 안된 경우만 출석 인정(1일 1회)
+				
 				if(present_cnt == 0){
 					sixDao.checkPresent(present_dto);
-		
-					//회원권한 설정
-					Map<String, Object> perMap = model.asMap();
-					perMap.put("mem_id", mem_id);
-					perMap.put("group_num", group_num);
-					int group_per = sixDao.groupPer(perMap);
-					req.getSession().setAttribute("group_per", group_per);
 				}
 			} else {
 				req.getSession().setAttribute("group_per", 4);
