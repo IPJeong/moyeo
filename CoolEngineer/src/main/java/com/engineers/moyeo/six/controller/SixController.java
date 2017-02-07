@@ -105,28 +105,15 @@ public class SixController {
 		return "six/notice/noticeDelete";
 	}
 
-	
-	
-	//모임일정-메인
+	//모임일정-리스트
 	@RequestMapping("/moimSchedule/moimSchedule")
 	public String moimSchedule(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimSchedule");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
-		sixService.moimSchedule(model);
-		
-		return "six/moimSchedule/moimSchedule";
-	}
-	
-	//모임일정-리스트
-	@RequestMapping("/moimSchedule/moimScheduleDetail")
-	public String moimScheduleDetail(HttpServletRequest req, Model model) {
-		System.out.println("/moimSchedule/moimScheduleDetail");
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
-		model.addAttribute("req", req);
 		sixService.moimScheduleDetail(model);
 		
-		return "six/moimSchedule/moimScheduleDetail";
+		return "six/moimSchedule/moimSchedule";
 	}
 
 	//모임일정-등록

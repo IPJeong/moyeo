@@ -214,58 +214,6 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("pageNum", pageNum);
 	}
 	
-	//모임일정-메인
-	public void moimSchedule(Model model) {
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest req = (HttpServletRequest)map.get("req");
-
-	//--사이드 시작
-		int group_num = Integer.parseInt(req.getParameter("group_num"));
-		
-		//사이드- 모임명, 모임카테고리 불러오기
-		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
-		model.addAttribute("open_dto", open_dto);
-		
-		//사이드 - 대표사진 불러오기
-		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
-		model.addAttribute("picture_dto", picture_dto);
-		
-		//사이드 - 모임원리스트 불러오기
-		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
-		model.addAttribute("member_dtos", member_dtos);	
-	//--사이드 끝
-		
-		//모임-소개사진 불러오기
-		List<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
-		dtosB = sixDao.moimImageViewB(group_num);
-		String main_pic_nameB = dtosB.get(0).getMain_pic_name();
-		String main_pic_path = dtosB.get(0).getMain_pic_path();
-		
-		String[] main_pic_pathb = main_pic_path.split("-");
-		String main_pic_pathB =main_pic_pathb[0];
-	
-		model.addAttribute("main_pic_name", main_pic_nameB);
-		model.addAttribute("main_pic_path", main_pic_pathB);
-
-		//모임개수 구하기
-		int cnt = sixDao.moimScheduleCount(group_num);
-		model.addAttribute("cnt", cnt);
-		
-		if(cnt > 0) {
-			ArrayList<MoimScheduleDTO> dtos = sixDao.moimSchedule(group_num);
-			model.addAttribute("dtos", dtos);
-			model.addAttribute("pageNum", 1);
-		
-			//모임-참석인원 체크
-			ArrayList<Integer> dtos2 = new ArrayList<Integer>(); 
-			for(int i=0; i<dtos.size(); i++) {
-				int cnt1 = sixDao.moimScheduleCheck(dtos.get(i).getMeeting_num());
-				dtos2.add(i, cnt1);
-			}
-			model.addAttribute("dtos2", dtos2.get(0));
-		}
-	}
-	
 	//모일일정-리스트
 	public void moimScheduleDetail(Model model) {
 	
@@ -324,7 +272,8 @@ public class SixServiceImpl implements SixService{
 			daoMap.put("group_num", group_num);
 			ArrayList<MoimScheduleDTO> dtos = sixDao.moimScheduleDetail(daoMap);
 			model.addAttribute("dtos", dtos);
-		
+			
+			
 			//모임-참석인원 체크
 			ArrayList<Integer> dtos2 = new ArrayList<Integer>(); 
 			for(int i=0; i<dtos.size(); i++) {

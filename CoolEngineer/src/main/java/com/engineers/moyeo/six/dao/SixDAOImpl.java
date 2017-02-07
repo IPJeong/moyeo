@@ -120,15 +120,6 @@ public class SixDAOImpl implements SixDAO{
 		return cnt;	
 	}
 	
-	//모임일정-메인에 일정 리스트 불러오기
-	public ArrayList<MoimScheduleDTO> moimSchedule(int group_num) {
-		ArrayList<MoimScheduleDTO> dtos = null;
-		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		dtos = dao.moimSchedule(group_num);
-		
-		return dtos;
-	}
-	
 	//모임일정-일정 리스트
 	public ArrayList<MoimScheduleDTO> moimScheduleDetail(Map<String, Integer> daoMap) {
 		ArrayList<MoimScheduleDTO> dtos = null;

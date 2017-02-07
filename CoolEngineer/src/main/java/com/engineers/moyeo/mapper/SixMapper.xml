@@ -56,11 +56,6 @@
 		SELECT COUNT(*) FROM meeting_list WHERE group_num = #{group_num}
 	</select>
 	
-	<!-- 모임일정-메인용 일정리스트 -->
-	<select id="moimSchedule" parameterType="int" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
-		SELECT * FROM meeting_list WHERE group_num=#{group_num} ORDER BY meeting_date ASC
-	</select>
-	
 	<!-- 모임일정-일정리스트 -->
 	<select id="moimScheduleDetail" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimScheduleDTO">
 		SELECT * FROM (SELECT meeting_num, meeting_title, meeting_detail, meeting_loc, meeting_date, group_num, meeting_cost, meeting_pernum, loc_detail, rownum rnum 

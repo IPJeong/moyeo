@@ -29,9 +29,6 @@ public interface SixService {
 	
 	
 	
-	//모인일정-메인
-	public void moimSchedule(Model model);
-	
 	//모임일정-조회
 	public void moimScheduleDetail(Model model);
 	

@@ -46,9 +46,6 @@ public interface SixDAO {
 	//모임일정-일정 개수 구하기
 	public int moimScheduleCount(int group_num);
 	
-	//모일일정-메인에 일정리스트 불러오기
-	public ArrayList<MoimScheduleDTO> moimSchedule(int group_num);
-	
 	//모임일정-일정 리스트 
 	public ArrayList<MoimScheduleDTO> moimScheduleDetail(Map<String, Integer> daoMap);
 	
