@@ -16,6 +16,7 @@ import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
+import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 
@@ -846,20 +847,20 @@ public class SixDAOImpl implements SixDAO{
 		}
 	
 	//모임-소개사진 불러오기
-	/*@Override
+	@Override
 	public ArrayList<MainPictureDTO> moimImageViewB(int group_num) {
 		ArrayList<MainPictureDTO> dtos = null;
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		dtos = dao.moimImageViewB(group_num);
 		
 		return dtos;
-	}*/
+	}
 
 	//모임-가입여부확인
 	@Override
-	public int memberCheck(CheckPresentDTO dto) {
+	public int memberCheck(Map<String, Object> chkMap) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		int cnt = dao.memberCheck(dto);
+		int cnt = dao.memberCheck(chkMap);
 		
 		return cnt;
 	}
@@ -904,4 +905,54 @@ public class SixDAOImpl implements SixDAO{
 	
 		return last_connect;
 	}
+	
+	//모임채팅방 개설
+	@Override
+	public void moimChatRegister(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.moimChatRegister(group_num);
+	}
+	
+	//모임채팅방 번호 받아오기
+	@Override
+	public int moimChatNum(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int chat_room_num = dao.moimChatNum(group_num);
+		return chat_room_num;
+	}
+	
+	//모임채팅방 채팅내용 입력
+	public int addMsg(MsgListDTO dto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.addMsg(dto);
+		
+		return cnt;
+	}
+	
+	//모임채팅방 입력한 채팅내용 출력
+	public MsgListDTO getMsg(Map<String, Object> map) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		MsgListDTO dto = dao.getMsg(map);
+		
+		return dto;
+	}
+	
+	//모임채팅방 전체 채팅내용 불러오기
+	public List<MsgListDTO> getMsgs(int chat_room_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		List<MsgListDTO> dtos = dao.getMsgs(chat_room_num);
+		
+		return dtos;
+	}
+
+	
+	//모임채팅방 전체채팅내용 실시간 
+	public ArrayList<MsgListDTO> getChat(Map<String, Object> map){
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<MsgListDTO> dtos = dao.getChat(map);
+		
+		return dtos;
+	}
+
+
 }

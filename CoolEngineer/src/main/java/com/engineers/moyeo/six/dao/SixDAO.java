@@ -10,6 +10,7 @@ import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
+import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 
@@ -295,10 +296,10 @@ public interface SixDAO {
 	public int moimImageCountB(int group_num);
 	
 	//모임-소개사진 불러오기
-	//public ArrayList<MainPictureDTO> moimImageViewB(int group_num);
+	public ArrayList<MainPictureDTO> moimImageViewB(int group_num);
 	
 	//모임-가입여부확인
-	public int memberCheck(CheckPresentDTO dto);
+	public int memberCheck(Map<String, Object> chkMap);
 	
 	//모임-출석체크 중복체크
 	public int checkPresentCount(CheckPresentDTO dto);
@@ -315,4 +316,21 @@ public interface SixDAO {
 	//최근접속일 불러오기
 	public Timestamp lastConnect(Map<String, Object> daoMap);
 	
+	//모임 채팅방 개설
+	public void moimChatRegister(int group_num);
+	
+	//모임채팅방 번호 받아오기
+	public int moimChatNum(int group_num);
+	
+	//모임채팅방 채팅내용 입력
+	public int addMsg(MsgListDTO dto);
+	
+	//모임채팅방 입력한채팅내용 불러오기
+	public MsgListDTO getMsg(Map<String, Object> map);
+	
+	//모임채팅방 전체채팅내용 불러오기
+	public List<MsgListDTO> getMsgs(int chat_room_num);
+
+	//모임채팅방 채팅내용 실시간 불러오기
+	public ArrayList<MsgListDTO> getChat(Map<String, Object> map);
 }
