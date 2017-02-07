@@ -25,10 +25,10 @@
 						<img src="/moyeo/resources/resource/assets/images/users/introduce.png" width="1000px">
 					</div>
 					<div class="tab-pane" id="tab-second">
-						<img src="/moyeo/resources/resource/images/users/introduce2.png" width="1000px">
+						<img src="/moyeo/resources/resource/assets/images/users/introduce2.png" width="1000px">
 					</div>
 					<div class="tab-pane" id="tab-third">
-						<img src="/moyeo/resources/resource/images/users/introduce3.png" width="1000px">
+						<img src="/moyeo/resources/resource/assets/images/users/introduce3.png" width="1000px">
 					</div>
 				</div>
 			</div>
