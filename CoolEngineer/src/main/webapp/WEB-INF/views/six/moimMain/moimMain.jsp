@@ -60,7 +60,7 @@ img {
 <ul class="breadcrumb push-down-0">
 	<li><a href="../main/main.jsp">Home</a></li>
 	<li><a href="../category/category_hobby">모임</a></li>
-	<li class="active">${group_name}</li>
+	<li class="active">${open_dto.group_name}</li>
 
 </ul>
 <!-- END BREADCRUMB -->
@@ -152,7 +152,7 @@ img {
 																<c:set var="number" value="${number-1}" />
 					
 																<td><a
-																	href="moim_notice_contentform?num=${dto.group_noti_num}&pageNum=${pageNum}&number=${number+1}">
+																	href="/moyeo/four/moim_notice_contentform?num=${dto.group_noti_num}&pageNum=${pageNum}&number=${number+1}">
 																		${dto.group_noti_title}</a></td>
 																<td>${dto.mem_id}</td>
 					
