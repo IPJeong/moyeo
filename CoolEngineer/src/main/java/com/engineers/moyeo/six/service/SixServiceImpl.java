@@ -19,6 +19,7 @@ import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
@@ -47,6 +48,9 @@ public class SixServiceImpl implements SixService{
 	
 	@Autowired
 	FourDAO fourDao;
+	
+	@Autowired
+	MainService mainService;
 	
 	//공지-메인
 	@Override
@@ -631,6 +635,8 @@ public class SixServiceImpl implements SixService{
 			
 			//모임채팅방 개설
 			sixDao.moimChatRegister(moimNum);
+			
+			mainService.wordAnalyzer(dto.getGroup_name(), dto.getGroup_intro(), null);
 		}
 	}
 
@@ -833,6 +839,7 @@ public class SixServiceImpl implements SixService{
 		
 		//사이드 - 대표사진 불러오기
 		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
+		
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
@@ -845,6 +852,8 @@ public class SixServiceImpl implements SixService{
 		dtosB = sixDao.moimImageViewB(group_num);
 		String main_pic_nameB = dtosB.get(0).getMain_pic_name();
 		String main_pic_path = dtosB.get(0).getMain_pic_path();
+		
+		System.out.println(main_pic_nameB);
 		
 		String[] main_pic_pathb = main_pic_path.split("-");
 		String main_pic_pathB =main_pic_pathb[0];
@@ -924,10 +933,7 @@ public class SixServiceImpl implements SixService{
 		//로그인 한경우에만 실행
 		if(mem_id != null) {
 			//모임가입여부 확인
-			Map<String, Object> daoMap = model.asMap(); 
-			daoMap.put("mem_id", mem_id);
-			daoMap.put("group_num", group_num);
-			int check_cnt = sixDao.memberCheck(daoMap);
+			int check_cnt = sixDao.memberCheck(present_dto);
 			
 			//모임가입된 경우에만 실행
 			if(check_cnt != 0) {
@@ -1084,7 +1090,7 @@ public class SixServiceImpl implements SixService{
 					dto.setMain_pic_name(filename);
 					dto.setMain_pic_path(Code.groupImgPathS + "-");
 					
-					int cnt = sixDao.moimAddImagePro(dto);
+					int cnt = sixDao.moimAddImageProB(dto);
 					model.addAttribute("cnt", cnt);
 				}
 			}
@@ -1119,10 +1125,11 @@ public class SixServiceImpl implements SixService{
 		req.getSession().setAttribute("chat_room_num", chat_room_num);
 	
 		//모임가입여부 체크
-		Map<String, Object> daoMap = model.asMap(); 
-		daoMap.put("mem_id", mem_id);
-		daoMap.put("group_num", group_num);
-		int check_cnt = sixDao.memberCheck(daoMap);
+		CheckPresentDTO present_dto = new CheckPresentDTO();
+		present_dto.setMem_id(mem_id);
+		present_dto.setGroup_num(group_num);
+		
+		int check_cnt = sixDao.memberCheck(present_dto);
 		model.addAttribute("check_cnt", check_cnt);
 		
 	}
