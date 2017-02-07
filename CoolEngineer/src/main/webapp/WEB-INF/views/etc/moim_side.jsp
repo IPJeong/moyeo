@@ -38,15 +38,15 @@
 		<!-- END LOGIN BLOCK -->
 		
 			<!-- START RECOMMENDATION MEET BLOCK -->
-		<div class="col-md-55" style="margin-top: 10px;">
-			<div class="panel panel-default">
+		<div class="col-md-55" style="margin-top: 10px; height:550px;">
+			<div class="panel panel-default" style="margin-bottom:0px;">
 				<div class="panel-heading">
 					<div class="panel-title-box">
 						<h3>멤버리스트</h3>
 
 					</div>
 				</div>
-				<div class="panel-body padding-0" style="height: 550px;">
+				<div class="panel-body padding-0" style="height: 510px;">
 					<div class="chart-holder" id="dashboard-line-1">
 						<div class="main">
 							
