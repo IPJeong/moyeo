@@ -132,7 +132,9 @@ li {
                   </table>
               </div>                                
 			  <div>
-			  	<input id="writeBtn" class="btn btn-primary btn-rounded" type="button" value="글쓰기" onclick="window.location='postForm'">
+			  	<c:if test="${sessionScope.group_per == 1 || sessionScope.group_per == 2 }">
+			  		<input id="writeBtn" class="btn btn-primary btn-rounded" type="button" value="글쓰기" onclick="window.location='postForm'">
+			  	</c:if>
 			  	<!-- 게시판 페이지 리스트 -->
 			  	<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="margin-left: 30px; margin-right: 40%;">
 					<c:if test="${cnt > 0}">
