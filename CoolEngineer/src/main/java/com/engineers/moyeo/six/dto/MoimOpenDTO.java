@@ -27,7 +27,7 @@ public class MoimOpenDTO {
 	
 	//모임등록일
 	private Timestamp reg_date;
-
+	
 	public int getGroup_num() {
 		return group_num;
 	}
@@ -91,4 +91,5 @@ public class MoimOpenDTO {
 	public void setReg_date(Timestamp reg_date) {
 		this.reg_date = reg_date;
 	}
+	
 }
