@@ -99,7 +99,7 @@
 								<li><a href="/moyeo/five/postList?group_num=${group_num}"><span class="fa fa-caret-right"></span>모임후기 게시판</a></li>
 							</ul>
 						</li>
-						<li><a href="/moyeo/six/moimChat/moimChat?group_num=${group_num}&mem_id=${mem_id}">모임채팅</a></li>
+						<li><a href="/moyeo/six/moimChat/moimChatForm?group_num=${group_num}&mem_id=${mem_id}">모임채팅</a></li>
 						<li><a href="/moyeo/six/moimStatistics/moimStatistics?group_num=${group_num}">모임통계</a></li>
 						<li class="xn-openable"><a>모임관리</a>
 							<ul>
