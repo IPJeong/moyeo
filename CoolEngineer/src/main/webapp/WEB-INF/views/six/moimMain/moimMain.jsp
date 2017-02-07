@@ -90,23 +90,30 @@ img {
 								src="${main_pic_path}/${main_pic_name}"
 								width="100%" height="240px" style="float: left;">
 							</div>
-							<div style="width: 47%; height: 200px; float: left;"><br>${group_intro}
+							<div style="width: 47%; height: 200px; float: left;"><br>${open_dto.group_intro}
 							</div>
-
 							<div style="width: 47%; height: 45px; float: left;">
-								<input type="button" class="btn btn-warning"
-									value="사진등록"
-									style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb','','menubar=no, toolbar=no, width=450, height=170, left=950, top=150')"> 
-
-								<a href="../../two/moimJoinForm">
-								<input type="button" class="btn btn-warning"
-									value="모임가입"
-									style="width: 20%; height: 40px; font-size: 13px"></a> 
-								<a
-									href="../../two/moimWithdraw">
-								<input type="button" class="btn btn-warning"
-									value="모임탈퇴"
-									style="width: 20%; height: 40px; font-size: 13px"></a> 
+								<c:if test="${group_per == 1}">
+									<input type="button" class="btn btn-warning"
+										value="사진등록"
+										style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb','','menubar=no, toolbar=no, width=450, height=170, left=950, top=150')"> 
+								</c:if>
+								
+								<c:if test="${group_per == 4}">
+									<a href="../../two/moimJoinForm">
+									<input type="button" class="btn btn-warning"
+										value="모임가입"
+										style="width: 20%; height: 40px; font-size: 13px"></a> 
+								</c:if>	
+								
+								<c:if test="${group_per != 4}">
+									<a
+										href="../../two/moimWithdraw">
+									<input type="button" class="btn btn-warning"
+										value="모임탈퇴"
+										style="width: 20%; height: 40px; font-size: 13px"></a> 
+								</c:if>
+							
 								<a>
 								<input class="btn btn-warning"	type="button" value="모임신고" onclick="window.location='/moyeo/one/moimReportMain?group_num='+${group_num}" style="width: 20%; height: 40px; font-size: 13px">
 								</a>
