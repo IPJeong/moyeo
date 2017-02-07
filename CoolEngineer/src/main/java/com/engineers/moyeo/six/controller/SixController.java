@@ -7,7 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.model.FileForm;
 
 
@@ -22,7 +26,8 @@ public class SixController {
 //멋진 정일품
 	@Autowired
 	com.engineers.moyeo.six.service.SixService sixService;
-
+	private ModelAndView mav;
+	
 	//공지-메인
 	@RequestMapping("/notice/notice")
 	public String notice(HttpServletRequest req, Model model) {
@@ -385,33 +390,68 @@ public class SixController {
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
-		
 		sixService.moimAddImageProb(model);
 		
 		return "six/moimMain/moimAddImageProb";
 	}
 	
-	//모임-모임채팅
+	//모임-채팅참석폼
+	@RequestMapping("/moimChat/moimChatForm")
+	public String moimChatForm(HttpServletRequest req, Model model) {
+		System.out.println("/moimChat/moimChatForm");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.moimChatForm(model);
+		
+		return "six/moimChat/moimChatForm";
+	}
+	
+	//모임-채팅방
 	@RequestMapping("/moimChat/moimChat")
 	public String moimChat(HttpServletRequest req, Model model) {
 		System.out.println("/moimChat/moimChat");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
-		
+		sixService.moimChat(model);
 		
 		return "six/moimChat/moimChat";
 	}
 	
-	//모임-모임통계
-	@RequestMapping("/moimStatistics/moimStatistics")
-	public String moimAddImageProb(HttpServletRequest req, Model model) {
-		System.out.println("/moimStatistics/moimStatistics");
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
-		model.addAttribute("req", req);
-		
-		
-		return "six/moimStatistics/moimStatistics";
+
+	// 채팅방 내용입력
+	@RequestMapping(value="/moimChat/addChat", method=RequestMethod.POST)
+	public ModelAndView addChat(HttpServletRequest req) {
+		mav = new ModelAndView("JSON");
+		System.out.println("채팅내용입력");
+		try {
+			sixService.addChat(mav, req);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		return mav;
 	}
+	
+	// 채팅방 내용불러오기
+	@RequestMapping(value="/moimChat/getChat", method=RequestMethod.POST)
+	public ModelAndView getChat(HttpServletRequest req) {
+		mav = new ModelAndView("JSON");
+		System.out.println("채팅내용출력");
+		try {
+			sixService.getChat(mav, req);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		return mav;
+	}
+	
 	
 	//모임-모임멤버 상세보기
 	@RequestMapping("/moimMain/moimMemberDetail")
@@ -423,6 +463,6 @@ public class SixController {
 		
 		return "six/moimMain/moimMemberDetail";
 	}
-}
 
+}
 
