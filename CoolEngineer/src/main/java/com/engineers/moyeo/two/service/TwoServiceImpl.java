@@ -1193,59 +1193,6 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("member_dtos", member_dtos);	
 		//--사이드 끝
 			
-			//모임-소개사진 불러오기
-			List<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
-			
-			
-			//-----변경
-			//dtosB = sixDao.moimImageViewB(group_num);
-			dtosB = sixDao.moimImagesView(group_num);
-			String main_pic_nameB = dtosB.get(1).getMain_pic_name();
-			String main_pic_path = dtosB.get(1).getMain_pic_path();
-			
-			//-----변경
-			
-			
-			String[] main_pic_pathb = main_pic_path.split("-");
-			String main_pic_pathB =main_pic_pathb[0];
-		
-			model.addAttribute("main_pic_name", main_pic_nameB);
-			model.addAttribute("main_pic_path", main_pic_pathB);
-
-			//모임-출석체크
-			String present_date_A = String.valueOf((new Timestamp(System.currentTimeMillis())));
-			String present_date_B[] = present_date_A.split(" ");
-			Timestamp present_date = Timestamp.valueOf(present_date_B[0] + " 00:00:00");
-			CheckPresentDTO present_dto = new CheckPresentDTO();
-			present_dto.setPresent_date(present_date);
-			present_dto.setMem_id((String)(req.getSession().getAttribute("mem_id")));
-			present_dto.setGroup_num(group_num);
-			
-			//로그인 한경우에만 실행
-			if(mem_id != null) {
-				//모임가입여부 확인
-				int check_cnt = sixDao.memberCheck(present_dto);
-				//모임가입된 경우에만 실행
-				if(check_cnt != 0) {
-					//출석체크 중복여부 확인
-					int present_cnt = sixDao.checkPresentCount(present_dto);
-					//중복이 안된 경우만 출석 인정(1일 1회)
-					if(present_cnt == 0){
-						sixDao.checkPresent(present_dto);
-			
-						//회원권한 설정
-						Map<String, Object> perMap = model.asMap();
-						perMap.put("mem_id", mem_id);
-						perMap.put("group_num", group_num);
-						int group_per = sixDao.groupPer(perMap);
-						req.getSession().setAttribute("group_per", group_per);
-					}
-				} else {
-					req.getSession().setAttribute("group_per", 4);
-				}
-			}
-		
-			
 		cnt = twoDao.getMoimJoinCount(group_num);
 	
 		pageNum = req.getParameter("pageNum");
@@ -1395,59 +1342,6 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("member_dtos", member_dtos);	
 		//--사이드 끝
 			
-			//모임-소개사진 불러오기
-			List<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
-			
-			
-			//-----변경
-			//dtosB = sixDao.moimImageViewB(group_num);
-			dtosB = sixDao.moimImagesView(group_num);
-			String main_pic_nameB = dtosB.get(1).getMain_pic_name();
-			String main_pic_path = dtosB.get(1).getMain_pic_path();
-			
-			//-----변경
-			
-			
-			String[] main_pic_pathb = main_pic_path.split("-");
-			String main_pic_pathB =main_pic_pathb[0];
-		
-			model.addAttribute("main_pic_name", main_pic_nameB);
-			model.addAttribute("main_pic_path", main_pic_pathB);
-
-			//모임-출석체크
-			String present_date_A = String.valueOf((new Timestamp(System.currentTimeMillis())));
-			String present_date_B[] = present_date_A.split(" ");
-			Timestamp present_date = Timestamp.valueOf(present_date_B[0] + " 00:00:00");
-			CheckPresentDTO present_dto = new CheckPresentDTO();
-			present_dto.setPresent_date(present_date);
-			present_dto.setMem_id((String)(req.getSession().getAttribute("mem_id")));
-			present_dto.setGroup_num(group_num);
-			
-			//로그인 한경우에만 실행
-			if(mem_id != null) {
-				//모임가입여부 확인
-				int check_cnt = sixDao.memberCheck(present_dto);
-				//모임가입된 경우에만 실행
-				if(check_cnt != 0) {
-					//출석체크 중복여부 확인
-					int present_cnt = sixDao.checkPresentCount(present_dto);
-					//중복이 안된 경우만 출석 인정(1일 1회)
-					if(present_cnt == 0){
-						sixDao.checkPresent(present_dto);
-			
-						//회원권한 설정
-						Map<String, Object> perMap = model.asMap();
-						perMap.put("mem_id", mem_id);
-						perMap.put("group_num", group_num);
-						int group_per = sixDao.groupPer(perMap);
-						req.getSession().setAttribute("group_per", group_per);
-					}
-				} else {
-					req.getSession().setAttribute("group_per", 4);
-				}
-			}
-		
-
 		cnt = twoDao.getMoimMemberCount(group_num);
 		
 		pageNum = req.getParameter("pageNum");
@@ -1615,58 +1509,6 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("member_dtos", member_dtos);	
 		//--사이드 끝
 			
-			//모임-소개사진 불러오기
-			List<MainPictureDTO> dtosB = new ArrayList<MainPictureDTO>();
-			
-			
-			//-----변경
-			//dtosB = sixDao.moimImageViewB(group_num);
-			dtosB = sixDao.moimImagesView(group_num);
-			String main_pic_nameB = dtosB.get(1).getMain_pic_name();
-			String main_pic_path = dtosB.get(1).getMain_pic_path();
-			
-			//-----변경
-			
-			
-			String[] main_pic_pathb = main_pic_path.split("-");
-			String main_pic_pathB =main_pic_pathb[0];
-		
-			model.addAttribute("main_pic_name", main_pic_nameB);
-			model.addAttribute("main_pic_path", main_pic_pathB);
-
-			//모임-출석체크
-			String present_date_A = String.valueOf((new Timestamp(System.currentTimeMillis())));
-			String present_date_B[] = present_date_A.split(" ");
-			Timestamp present_date = Timestamp.valueOf(present_date_B[0] + " 00:00:00");
-			CheckPresentDTO present_dto = new CheckPresentDTO();
-			present_dto.setPresent_date(present_date);
-			present_dto.setMem_id((String)(req.getSession().getAttribute("mem_id")));
-			present_dto.setGroup_num(group_num);
-			
-			//로그인 한경우에만 실행
-			if(mem_id != null) {
-				//모임가입여부 확인
-				int check_cnt = sixDao.memberCheck(present_dto);
-				//모임가입된 경우에만 실행
-				if(check_cnt != 0) {
-					//출석체크 중복여부 확인
-					int present_cnt = sixDao.checkPresentCount(present_dto);
-					//중복이 안된 경우만 출석 인정(1일 1회)
-					if(present_cnt == 0){
-						sixDao.checkPresent(present_dto);
-			
-						//회원권한 설정
-						Map<String, Object> perMap = model.asMap();
-						perMap.put("mem_id", mem_id);
-						perMap.put("group_num", group_num);
-						int group_per = sixDao.groupPer(perMap);
-						req.getSession().setAttribute("group_per", group_per);
-					}
-				} else {
-					req.getSession().setAttribute("group_per", 4);
-				}
-			}
-
 			
 		String board_category = req.getParameter("board_category");
 		
