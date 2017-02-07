@@ -13,7 +13,9 @@
 .registration-container .registration-box .registration-body .form-control:focus {
     background: #f8f9fa;
 }
-
+.registration-container .registration-box {  
+    padding-top: 25px;
+}
 </style>
 
          <!-- START BREADCRUMB -->
@@ -117,8 +119,8 @@
                              <h4>휴대폰 번호</h4> 
                              <div class="form-group">
 		                        <div class="col-md-12">
-		                            <input type="text" class="form-control" name="tel" placeholder="tel" 
-		                            onkeyPress="if((event.keyCode<48) || (event.keyCode>57))event.returnValue=false;"		                             
+		                            <input type="text" class="form-control" name="tel" placeholder="tel" id="tell"
+		                            onkeyup="phoneChk()"		                             
 		                            style="color:#212121;" required/>		                            
 		                        </div>
 		                    </div>
