@@ -111,6 +111,7 @@ html, body {
 /* slider css */
 </style>
 <script src="/moyeo/resources/resource/customScript/five/postDetailTop.js" type="text/javascript"></script>
+</script>
 </head>
 <body onload="imgSlide(); timestampToDateLoad();">
 
@@ -273,24 +274,23 @@ html, body {
 	</div>
 	
  <!-- START PLUGINS -->
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>        
-        <!-- END PLUGINS -->
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>        
+<!-- END PLUGINS -->
 
-        <!-- THIS PAGE PLUGINS -->
-        <script type='text/javascript' src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-		<!-- END PAGE PLUGINS -->     
+<!-- THIS PAGE PLUGINS -->
+<script type='text/javascript' src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+<!-- END PAGE PLUGINS -->     
 
-        <!-- START TEMPLATE -->
-        <!-- <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script> -->
-        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
-        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>
-        
-		<script src="/moyeo/resources/resource/js/plugins/slick/slick.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/moyeo/resources/customScript/five.js" type="text/javascript"></script>
+<!-- START TEMPLATE -->
+<!-- <script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script> -->
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
+<script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>
+      
+<script src="/moyeo/resources/resource/js/plugins/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+<script src="/moyeo/resources/customScript/five.js" type="text/javascript"></script><script src="/moyeo/resources/customScript/five/snow.js" type="text/javascript"></script>
 </body>
 </html>
