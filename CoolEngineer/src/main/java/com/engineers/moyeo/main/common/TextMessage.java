@@ -43,5 +43,12 @@ public class TextMessage {
 	public final static String pwSearchEmailMsg(String id) {
 		return "[Moyeo] " + id + "님께서 문의하신 비밀번호 분실관련 이메일 입니다.";
 	}
+	
+	// 비밀번호 분실 이메일 발송문의 내용
+	public final static String pwSearchEmailMsgContent(String id, String pw) {
+		return "안녕하세요. Moyeo팀 입니다. \n" +
+			   id + " 님의 임시 비밀번호는 " + pw + " 입니다." +
+			   "\n로그인 후 비밀번호를 변경해 주시기 바랍니다.";
+	}
 
 }
