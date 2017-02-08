@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,36 +29,22 @@
 <!-- END PLUGINS -->
 
 <!-- START THIS PAGE PLUGINS-->
-<script type='text/javascript'
-	src="/moyeo/resources/resource/js/plugins/icheck/icheck.min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+<script type='text/javascript' src="/moyeo/resources/resource/js/plugins/icheck/icheck.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
 
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/morris/raphael-min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/morris/morris.min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/rickshaw/d3.v3.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/rickshaw/rickshaw.min.js"></script>
-<script type='text/javascript'
-	src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
-<script type='text/javascript'
-	src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
-<script type='text/javascript'
-	src='/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js'></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/owl/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/morris/raphael-min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/morris/morris.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/rickshaw/d3.v3.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/rickshaw/rickshaw.min.js"></script>
+<script type='text/javascript' src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+<script type='text/javascript' src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+<script type='text/javascript' src='/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js'></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/owl/owl.carousel.min.js"></script>
 
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/moment.min.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/moment.min.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- END THIS PAGE PLUGINS-->
 
 <!-- START TEMPLATE -->
@@ -76,7 +62,7 @@
 		<!-- PAGE CONTENT -->
 		<div class="page-content">
 			<!-- PAGE CONTENT WRAPPER -->
-			<div class="page-content-wrap">
+			<div class="page-content-wrap"> --%>
 
 				<!-- TOP BAR START -->
 				<div class="x-content-tabs">
@@ -88,7 +74,7 @@
 							<li><a href="/moyeo/main/memberLoginForm"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
 						</c:if>
 						<c:if test="${sessionScope.mem_id != null || sessionScope.manager_id != null}" >
-							<li><a href="/moyeo/three/myPage"><span class="fa fa-save"></span>${sessionScope.mem_id == null ? sessionScope.manager_id : sessionScope.mem_id}님</a></li>
+							<li><a href="#"><span class="fa fa-save"></span>${sessionScope.mem_id == null ? sessionScope.manager_id : sessionScope.mem_id}님</a></li>
 							<li><a href="/moyeo/main/memberLogout"><span class="fa fa-save"></span>로그아웃</a></li>
 						</c:if>
 					</ul>
