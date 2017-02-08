@@ -90,9 +90,9 @@ public interface Code {
 	public final static String refused = "거절";
 	
 	// 관리자 권한 코드(최고관리자)
-	public final static String authority_1 = "MASTER";
+	public final static String authority_1 = "02";
 	// 관리자 권한 코드(일반관리자)
-	public final static String authority_2 = "MANAGER";
+	public final static String authority_2 = "08";
 	
 	// 숫자타입변환 예외 발생 메시지
 	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
