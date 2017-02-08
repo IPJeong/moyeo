@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +25,7 @@ import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
+import com.engineers.moyeo.six.dto.InterestGroupDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
@@ -278,7 +280,7 @@ public class SixServiceImpl implements SixService{
 				date_dtos.add(i, date);
 			}
 			model.addAttribute("date_dtos", date_dtos);
-			System.out.println(dtos.get(0).getMeeting_date());
+
 			//모임-참석인원 체크
 			ArrayList<Integer> dtos2 = new ArrayList<Integer>(); 
 			for(int i=0; i<dtos.size(); i++) {
@@ -809,8 +811,6 @@ public class SixServiceImpl implements SixService{
 		String main_pic_nameB = dtosB.get(0).getMain_pic_name();
 		String main_pic_path = dtosB.get(0).getMain_pic_path();
 		
-		System.out.println(main_pic_nameB);
-		
 		String[] main_pic_pathb = main_pic_path.split("-");
 		String main_pic_pathB =main_pic_pathb[0];
 	
@@ -912,6 +912,14 @@ public class SixServiceImpl implements SixService{
 				req.getSession().setAttribute("group_per", 4);
 			}
 		}
+		
+		InterestGroupDTO dto = new InterestGroupDTO();
+		dto.setMem_id(mem_id);
+		dto.setGroup_num(Integer.parseInt(req.getParameter("group_num")));
+		
+		int favo_cnt = sixDao.favoriteCheck(dto);
+		
+		model.addAttribute("favo_cnt", favo_cnt);
 	}
 
 	//모임-모임정보수정(기존내용 읽어오기)
@@ -1130,11 +1138,6 @@ public class SixServiceImpl implements SixService{
 		dto.setMsg_content(msg_content);
 		dto.setMsg_date(msg_date);
 	
-		System.out.println(dto.getChat_room_num());
-		System.out.println(dto.getMem_id());
-		System.out.println(dto.getMsg_content());
-		System.out.println(dto.getMsg_date());
-		
 		int cnt = sixDao.addMsg(dto);
 		
 		if(cnt == 1) {
@@ -1162,7 +1165,6 @@ public class SixServiceImpl implements SixService{
 		ArrayList<MsgListDTO> dtos = new ArrayList<MsgListDTO>();
 		
 		dtos = sixDao.getChat(map);
-		System.out.println(dtos);
 		mav.addObject("dtos", dtos);
 	}
 	
@@ -1191,6 +1193,22 @@ public class SixServiceImpl implements SixService{
 		String lastConnect = lastConnectB[0];
 		
 		model.addAttribute("lastConnect", lastConnect);
+	}
+	
+	//관심모임등록
+	public void favorite(ModelAndView mav, HttpServletRequest req) {
+			
+		InterestGroupDTO dto = new InterestGroupDTO();
+		dto.setMem_id((String)(req.getSession().getAttribute("mem_id")));
+		dto.setGroup_num((Integer)(req.getSession().getAttribute("group_num")));
+		
+		int checkCnt = sixDao.favoriteCheck(dto);
+		mav.addObject("checkCnt", checkCnt);
+		if(checkCnt == 0) {
+			sixDao.favoriteInsert(dto);
+		} else {
+			sixDao.favoriteDelete(dto);
+		}
 	}
 
 }

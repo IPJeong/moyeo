@@ -205,7 +205,7 @@ public class SixController {
 	
 	//모임일정-참석취소
 	@RequestMapping("/moimSchedule/moimScheduleCancel")
-	public String moimSheduleCancel(HttpServletRequest req, Model model) {
+	public String moimScheduleCancel(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleCancel");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
@@ -216,7 +216,7 @@ public class SixController {
 	
 	//모임일정-참석자명단보기
 	@RequestMapping("/moimSchedule/moimScheduleMember")
-	public String moimSheduleMember(HttpServletRequest req, Model model) {
+	public String moimScheduleMember(HttpServletRequest req, Model model) {
 		System.out.println("/moimSchedule/moimScheduleMember");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
@@ -261,9 +261,9 @@ public class SixController {
 		return "six/category/category_location";
 	}
 	
-	//모임카테고리-연령별
+	//모임카테고리-규모별
 	@RequestMapping("/category/category_scale")
-	public String categoryAge(HttpServletRequest req, Model model) {
+	public String categoryScale(HttpServletRequest req, Model model) {
 		System.out.println("/category/category_scale");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
@@ -288,8 +288,7 @@ public class SixController {
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		sixService.moimOpenPro(model);
-		/*sixService.*/
-		
+				
 		return "six/category/moimOpenPro";
 	}
 	
@@ -362,7 +361,7 @@ public class SixController {
 	
 	//모임-소개사진 등록
 	@RequestMapping("/moimMain/moimAddImageb")
-	public String moimAddImageb(HttpServletRequest req, Model model) {
+	public String moimAddImageB(HttpServletRequest req, Model model) {
 		System.out.println("/moimMain/moimAddImageb");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
@@ -372,7 +371,7 @@ public class SixController {
 	
 	//모임-소개사진 등록처리
 	@RequestMapping("/moimMain/moimAddImageProb")
-	public String moimAddImageProb(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
+	public String moimAddImageProB(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
 		System.out.println("/moimMain/moimAddImageProb");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
@@ -406,7 +405,7 @@ public class SixController {
 	
 
 	// 채팅방 내용입력
-	@RequestMapping(value="/moimChat/addChat", method=RequestMethod.POST)
+	@RequestMapping("/moimChat/addChat")
 	public ModelAndView addChat(HttpServletRequest req) {
 		mav = new ModelAndView("JSON");
 		System.out.println("채팅내용입력");
@@ -449,6 +448,16 @@ public class SixController {
 		sixService.moimMemberDetail(model);
 		
 		return "six/moimMain/moimMemberDetail";
+	}
+	
+	//모임-관심모임 등록삭제처리
+	@RequestMapping("/moimMain/favorite")
+	public ModelAndView favorite(HttpServletRequest req) {
+		mav = new ModelAndView("JSON");
+		System.out.println("/moimMain/favorite");
+		sixService.favorite(mav, req);
+		
+		return mav;
 	}
 
 }

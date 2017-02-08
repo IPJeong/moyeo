@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
+import com.engineers.moyeo.six.dto.InterestGroupDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
@@ -326,4 +327,13 @@ public interface SixDAO {
 
 	//모임채팅방 채팅내용 실시간 불러오기
 	public ArrayList<MsgListDTO> getChat(Map<String, Object> map);
+
+	//관심모임 체크
+	public int favoriteCheck(InterestGroupDTO dto);
+
+	//관심모임 등록
+	public int favoriteInsert(InterestGroupDTO dto);
+	
+	//관심모임 해제
+	public int favoriteDelete(InterestGroupDTO dto);
 }
