@@ -176,7 +176,7 @@ img {
 													onclick="window.location='moimScheduleJoin?meeting_num=${dtos[stat.index].meeting_num}&pageNum=${i}'">
 											</c:if>
 											<c:if test ="${dtos2[stat.index] >= dtos[stat.index].meeting_pernum}">
-												<input type="button" class="btn btn-danger" value="마감"
+												<input type="button" class="btn btn-danger" disabled="disabled" value="마감"
 													style="background:#d27373; color:white; height: 40px; font-size: 13px; width: 110px; position: absolute; left: 850px; margin-top: 40px"
 													>
 											</c:if>

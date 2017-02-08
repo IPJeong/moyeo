@@ -62,4 +62,29 @@ function addChat() {
 	
 	}); 
 }
+$(document).ready(function(){
+	$('#fav').click(function(){
+		jQuery.ajax({
+			type : "POST",
+			url:"/moyeo/six/moimMain/favorite",
+			async : true,
+			dataType : "json",
+			data:{	
+				
+			},
+			success : function(data) {
+				if(data.checkCnt == 0) {
+					var favorite = '<i class="fa fa-heart" style="color:red;"></i>관심모임'
+					$('#fav').html(favorite);
+				} else {
+					var favorite = '<i class="fa fa-heart-o"></i>관심모임'
+					$('#fav').html(favorite);
+				} 
+				
+			},
+		
+		}); 
+	});
+});
+
 

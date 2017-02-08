@@ -98,36 +98,36 @@ img {
 	                	var fullDate = toDate(dto.msg_date);
 	                	
 	                	if(dto.mem_id == $('#mem_id').val()) {
-		                	var msg = '<div class="item item-visible" style="width:750px;" id="reply' + dto.msg_num +'">' +
-		                		'<div class="image">' + 
-				                '<img src="' + dto.propic_path +'/' + dto.propic_name + '" style="height:40px;">' +
-				            '</div>' +                                
-				            '<div class="text">' + 
-				                '<div class="heading">' + 
-				                    '<a>' + dto.mem_id + '</a>' +
-				                    '<span class="date">' + fullDate + '</span>' +
-				                '</div>'+                                    
-				                dto.msg_content +
-				            '</div>'+
+	                		var msg = '<div class="item in item-visible" style="width:750px;" id="reply' + dto.msg_num +'">' +
+	                		'<div class="image">' + 
+			                '<img src="' + dto.propic_path +'/' + dto.propic_name + '" >' +
+			            '</div>' +                                
+			            '<div class="text">' + 
+			                '<div class="heading">' + 
+			                    '<a href="#">' + dto.mem_id + '</a>' +
+			                    '<span class="date">' + fullDate + '</span>' +
+			                '</div>'+                                    
+			                dto.msg_content +
+			            '</div>'+
 				          '</div>';
 				          $('#msgBox').append(msg);
 		                  $("#msgBox").scrollTop($("#msgBox")[0].scrollHeight); // 스크롤바 항상 맨 밑으로 유지
 	                	}
 	                	
 	                	if(dto.mem_id != $('#mem_id').val()) {
-		                	var msg = '<div class="item in item-visible" style="width:750px;" id="reply' + dto.msg_num +'">' +
-		                		'<div class="image">' + 
-				                '<img src="' + dto.propic_path +'/' + dto.propic_name + '" >' +
-				            '</div>' +                                
-				            '<div class="text">' + 
-				                '<div class="heading">' + 
-				                    '<a href="#">' + dto.mem_id + '</a>' +
-				                    '<span class="date">' + fullDate + '</span>' +
-				                '</div>'+                                    
-				                dto.msg_content +
-				            '</div>'+
-				          '</div>';
-				          $('#msgBox').append(msg);
+	                		var msg = '<div class="item item-visible" style="width:750px;" id="reply' + dto.msg_num +'">' +
+	                   		'<div class="image">' + 
+	                        '<img src="' + dto.propic_path +'/' + dto.propic_name + '" style="height:40px;">' +
+	                    '</div>' +                                
+	                    '<div class="text">' + 
+	                        '<div class="heading">' + 
+	                            '<a>' + dto.mem_id + '</a>' +
+	                            '<span class="date">' + fullDate + '</span>' +
+	                        '</div>'+                                    
+	                        dto.msg_content +
+	                    '</div>'+
+		                  '</div>';
+		                  $('#msgBox').append(msg);
 		                  $("#msgBox").scrollTop($("#msgBox")[0].scrollHeight); // 스크롤바 항상 맨 밑으로 유지
 	                	}
 	                	

@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../etc/moim_header.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+ 
 <style>
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
@@ -54,6 +55,8 @@ li {
 img {
 	margin: 10px 10px 10px 10px;
 }
+
+
 </style>
 
 <!-- START BREADCRUMB -->
@@ -64,6 +67,8 @@ img {
 
 </ul>
 <!-- END BREADCRUMB -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/moyeo/resources/customScript/six.js"></script>
 
 <!-- START ROW -->
 <div class="row">
@@ -79,6 +84,14 @@ img {
 				<div class="panel-heading">
 					<div class="panel-title-box">
 						<h3>모임소개</h3>
+					</div>
+					<div class="panel-title-box" style="float:right;">
+						<c:if test="${favo_cnt == 0}">
+							<button id="fav" type="button" class="btn btn-default btn-rounded"><i class="fa fa-heart-o"></i>관심모임</button>
+						</c:if>
+						<c:if test="${favo_cnt == 1}">
+							<button id="fav" type="button" class="btn btn-default btn-rounded"><i class="fa fa-heart" style="color:red;"></i>관심모임</button>
+						</c:if>
 					</div>
 				</div>
 				<div class="panel-body padding-0"
