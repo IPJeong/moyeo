@@ -47,6 +47,7 @@ function duplication() {
 	
 			
 }
+
 //비밀번호 체크
 function passChk() {
 	var passwd = document.registMember.password.value;
@@ -65,6 +66,77 @@ function passChk() {
 		resultPwChk = '';
 		$('#regiMember').attr("disabled", "disabled");
 		$('#passChk').html(resultPwChk);
+	}
+}
+
+//마이페이지 현 비밀번호 체크
+function curPwChk() {	
+	var passwd = document.proPwCng.passwd.value;	
+	if(passwd != ''){
+		jQuery.ajax({
+			type:"POST",
+			url:"/moyeo/three/curPwChk",
+			async : true,
+			dataType : "json",
+			data:{
+				passwd : passwd			
+			},
+			success : function(data) {
+				var cnt = data.cnt;
+				var passwd = data.passwd;
+				var resultConfirm;
+				
+				if(cnt == 0) {
+					resultConfirm = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10px;"></span><font color="#D32F2F">&nbsp;&nbsp;불일치</font>';
+					$('#proPwSub').attr("disabled", "disabled");
+				} else if(cnt == 1) {
+					resultConfirm = '<span class="fa fa-check" style="color:#689F38;padding-left:10px;">&nbsp;&nbsp;일치</span>';
+					$('#proPwSub').removeAttr("disabled");
+				} 
+				$('#curPwChk').html(resultConfirm);
+			},
+			error : function(xhr) {
+				alert("비밀번호확인에 실패하였습니다.");
+				alert("error html = " + xhr.statusText);
+			}
+		})
+		
+	} else {
+		resultConfirm = '';
+		$('#proPwSub').attr("disabled", "disabled");
+		$('#curPwChk').html(resultConfirm);
+	}
+	
+}
+//마이페이지 비밀번호 체크
+function passChk2() {
+	var curPw = document.proPwCng.passwd.value;
+	var passwd = document.proPwCng.password.value;
+	var rePasswd = document.proPwCng.re_password.value;
+	var resultPwChk;
+	if(curPw == passwd) {
+		resultPwChk = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10px;"></span><font color="#D32F2F"> 현 비밀번호와 동일</font>';
+		$('#proPwSub').attr("disabled", "disabled");
+		$('#proPwChk2').html(resultPwChk);
+	} else {
+		resultPwChk = '';
+		$('#proPwSub').attr("disabled", "disabled");
+		$('#proPwChk2').html(resultPwChk)
+		if(!rePasswd == '' || !passwd == '') {
+			if(rePasswd != passwd) {
+				resultPwChk = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10px;"></span><font color="#D32F2F"> 비밀번호 불일치</font>';
+				$('#proPwSub').attr("disabled", "disabled");
+			} else if (rePasswd == passwd) {
+				resultPwChk = '<span class="fa fa-check" style="color:#689F38;">&nbsp;&nbsp;일치</span>';
+				$('#proPwSub').removeAttr("disabled");
+			}
+			$('#proPwChk').html(resultPwChk);
+		} else {
+			resultPwChk = '';
+			$('#proPwSub').attr("disabled", "disabled");
+			$('#proPwChk').html(resultPwChk);
+		}
+		
 	}
 }
 
@@ -836,16 +908,72 @@ function participate(memid, evenum) {
 	window.location="eventParticipate?memid=" + memid + "&evenum=" + evenum;
 }
 
-//휴대폰 번호 유효성
+
+//휴대폰번호 유효성 체크
 function phoneChk() {
-    if ($('#tell').val() != '') {
+
+    var resultConfirm;
+    if (document.registMember.tel.value != '') {
         var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;
-        var strValue = $('#tell').val();
+        var strValue = document.registMember.tel.value;
         var chkFlg = rgEx.test(strValue);
         if (!chkFlg) {
-           /*alert('잘못된번호');*/
+            resultConfirm = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10p' +
+                    'x;"></span><font color="#D32F2F">&nbsp;&nbsp;형식이 맞지 않음</font>';
+            $('#regiMember').attr("disabled", "disabled");
         } else {
-        	alert('잘못된번호');
+            resultConfirm = '<span class="fa fa-check" style="color:#689F38;padding-left:10px;">&nbsp;&nbsp' +
+                    ';형식 일치</span>';
+            $('#regiMember').removeAttr("disabled");
         }
+        $('#telMsg').attr("disabled", "disabled");
+
+    } else {
+        resultConfirm = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10p' +
+                'x;"></span><font color="#D32F2F">&nbsp;&nbsp;휴대폰번호를 입력해주세요.</font>';
+        $('#regiMember').attr("disabled", "disabled");
     }
+    $('#telMsg').html(resultConfirm)
+}
+
+//휴대폰번호 유효성 체크
+function phoneChk2() {
+
+    var resultConfirm;
+    if (document.changeMyInfo.tel.value != '') {
+        var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;
+        var strValue = document.changeMyInfo.tel.value;
+        var chkFlg = rgEx.test(strValue);
+        if (!chkFlg) {
+            resultConfirm = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10p' +
+                    'x;"></span><font color="#D32F2F">&nbsp;&nbsp;형식이 맞지 않음</font>';
+            $('#chnInfo').attr("disabled", "disabled");
+        } else {
+            resultConfirm = '<span class="fa fa-check" style="color:#689F38;padding-left:10px;">&nbsp;&nbsp' +
+                    ';형식 일치</span>';
+            $('#chnInfo').removeAttr("disabled");
+        }
+        $('#telMsg').attr("disabled", "disabled");
+
+    } else {
+        resultConfirm = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10p' +
+                'x;"></span><font color="#D32F2F">&nbsp;&nbsp;휴대폰번호를 입력해주세요.</font>';
+        $('#chnInfo').attr("disabled", "disabled");
+    }
+    $('#telMsg').html(resultConfirm)
+}
+
+//내정보 변경 체크
+function chgMyInfo() {
+	
+	var pro1 = document.myPage.pro1.value;
+	var pro2 = document.myPage.pro2.value;
+	var pro3 = document.myPage.pro3.value;
+	var pro4 = document.myPage.pro4.value;
+	
+	if(pro1 == "x" && pro2 == "x" && pro3 == "x" && pro4 == "x") {
+		alert('입력하신 정보가 없습니다.');
+		return false;
+	}
+	
 }
