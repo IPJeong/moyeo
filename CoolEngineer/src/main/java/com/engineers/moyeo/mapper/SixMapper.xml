@@ -517,4 +517,18 @@
  		SELECT m.msg_num, m.mem_id, m.msg_content, m.msg_date, m.chat_room_num, i.propic_path, i.propic_name FROM msg_list m, member_info i WHERE m.chat_room_num = #{chat_room_num} AND m.msg_date &gt;= #{t2} AND m.msg_date &lt;= #{msg_date} AND i.mem_id = m.mem_id
  	</select>
 
+	<!-- 관심모임 체크 -->
+	<select id="favoriteCheck" parameterType="com.engineers.moyeo.six.dto.InterestGroupDTO" resultType="int">
+		SELECT COUNT(*) FROM interest_group WHERE group_num = #{group_num} AND mem_id = #{mem_id}
+	</select>
+	
+	<!-- 관심모임 등록 -->
+	<insert id="favoriteInsert" parameterType="com.engineers.moyeo.six.dto.InterestGroupDTO">
+		INSERT INTO interest_group (intergroup_num, group_num, mem_id) VALUES (interest_group_seq.NEXTVAL, #{group_num}, #{mem_id})
+	</insert>
+	
+	<delete id="favoriteDelete" parameterType="com.engineers.moyeo.six.dto.InterestGroupDTO">
+		DELETE FROM interest_group WHERE mem_id = #{mem_id} AND group_num = #{group_num}
+	</delete>
+	
 </mapper>
