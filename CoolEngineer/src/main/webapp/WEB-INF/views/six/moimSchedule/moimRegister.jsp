@@ -68,7 +68,7 @@ function checkDate() {
 	var fullDate = year+"-"+('0' + (month)).slice(-2)+"-"+('0'+day).slice(-2);
 	var selDate = register.meeting_date.value;
 	if(fullDate > selDate) {
-		alert("모임등록은 금일부터 가능합니다");
+		alert("모임등록은 오늘 이후부터 가능합니다");
 		register.meeting_date.value = fullDate;
 	}	
 }

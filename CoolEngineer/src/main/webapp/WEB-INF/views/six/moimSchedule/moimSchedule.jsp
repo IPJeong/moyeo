@@ -112,10 +112,8 @@ img {
 				<div class="panel-body padding-0"
 					style="text-align: center; font-size: 25px;">
 					<div class="chart-holder" id="dashboard-bar-1"
-						style="height: 600px;">
+						style="height: 810px;">
 					
-						<div class="chart-hodler"
-							style="width: 870px; height: 810px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 20px">
 							<c:if test="${cnt > 0}">
 							
 								
@@ -124,7 +122,7 @@ img {
 										value="${dtos[stat.index].meeting_num}">
 
 									<div class="chart-holder"
-										style="width: 680px; height: 200px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 50px">
+										style="width: 680px; height: 200px; border-bottom: 3px solid #D5D5D5; border-top: 3px solid #D5D5D5; border-left: 3px solid #D5D5D5; border-right: 3px solid #D5D5D5; margin: 10px; margin-top: 30px; margin-left: 130px">
 										<div style="width: 25%; height: 100%; float: left">
 											<div style="width: 100%; height: 100%; magin: 5px 5px;">
 												<form name="left" style="height: 100%;">
@@ -167,25 +165,25 @@ img {
 										</div>
 										<c:if test ="${dtos3[stat.index] eq 1}">
 											<input type="button" class="btn btn-info" value="참석취소"
-												style="background:rgba(149, 130, 206, 0.8); color:white; height: 40px; font-size: 13px; width: 110px; position: absolute; left: 760px; margin-top: 40px"
+												style="background:rgba(149, 130, 206, 0.8); color:white; height: 40px; font-size: 13px; width: 110px; position: absolute; left: 850px; margin-top: 40px"
 												onclick="window.location='moimScheduleCancel?meeting_num=${dtos[stat.index].meeting_num}'"
 												>
 										</c:if>
 										<c:if test ="${dtos3[stat.index] eq 0}">					
 											<c:if test ="${dtos2[stat.index] < dtos[stat.index].meeting_pernum}">
 												<input type="button" class="btn btn-default btn-rounded" value="참석"
-													style="height: 40px; font-size: 13px; width: 110px; position: absolute; left: 760px; margin-top: 40px"
+													style="height: 40px; font-size: 13px; width: 110px; position: absolute; left: 850px; margin-top: 40px"
 													onclick="window.location='moimScheduleJoin?meeting_num=${dtos[stat.index].meeting_num}&pageNum=${i}'">
 											</c:if>
 											<c:if test ="${dtos2[stat.index] >= dtos[stat.index].meeting_pernum}">
 												<input type="button" class="btn btn-danger" value="마감"
-													style="background:#d27373; color:white; height: 40px; font-size: 13px; width: 110px; position: absolute; left: 760px; margin-top: 40px"
+													style="background:#d27373; color:white; height: 40px; font-size: 13px; width: 110px; position: absolute; left: 850px; margin-top: 40px"
 													>
 											</c:if>
 										</c:if> 
 										<br>
 										<input type="button" class="btn btn-primary btn-rounded" value="참석멤버 보기"
-													style="height: 40px; font-size: 13px; width: 110px; position: absolute; left: 760px; margin-top: 60px;"
+													style="height: 40px; font-size: 13px; width: 110px; position: absolute; left: 850px; margin-top: 60px;"
 													onclick="window.open('moimScheduleMember?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=800, height=500, left=450, top=100')">
 										
 
@@ -234,7 +232,7 @@ img {
 							  </div>
 							</p>
 						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>

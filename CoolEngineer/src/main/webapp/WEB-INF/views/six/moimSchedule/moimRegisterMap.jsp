@@ -88,8 +88,7 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 
 // 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
 daum.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
-	alert('지도에서 클릭한 위치의 좌표는 '
-			+ mouseEvent.latLng.toString() + ' 입니다.');
+	alert('정상적으로 등록되었습니다.');
 	var point = mouseEvent.latLng.toString();
 	opener.document.register.meeting_loc.value = point;
 	opener.document.register.map.value = point;
@@ -199,8 +198,7 @@ function displayPlaces(places) {
             
             daum.maps.event.addListener(marker, 'rightclick', function(mouseEvent) {
                 infowindow.close();
-                alert('지도에서 클릭한 위치의 좌표는 '
-            			+ mouseEvent.latLng.toString() + ' 입니다.');
+                alert('정상적으로 등록되었습니다.');
             	var point = mouseEvent.latLng.toString();
                 opener.document.register.meeting_loc.value = point;
                 opener.document.register.map.value = point;
@@ -271,14 +269,6 @@ function addMarker(position, idx, title) {
             image: markerImage 
         });
     
-		daum.maps.event.addListener(marker, 'rightclick', function() {
-			alert('지도에서 클릭한 위치의 좌표는 '
-					+ marker.getPosition().toString() + ' 입니다.');
-			var point = marker.getPosition().toString();
-			opener.document.register.meeting_loc.value = point;
-			opener.document.register.map.value = point;
-			self.close();
-		});
 
     marker.setMap(map); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
