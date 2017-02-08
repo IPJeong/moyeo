@@ -278,7 +278,7 @@ public class SixServiceImpl implements SixService{
 				date_dtos.add(i, date);
 			}
 			model.addAttribute("date_dtos", date_dtos);
-			
+			System.out.println(dtos.get(0).getMeeting_date());
 			//모임-참석인원 체크
 			ArrayList<Integer> dtos2 = new ArrayList<Integer>(); 
 			for(int i=0; i<dtos.size(); i++) {
