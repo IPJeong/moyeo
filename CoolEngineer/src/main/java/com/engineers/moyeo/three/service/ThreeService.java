@@ -32,5 +32,10 @@ public interface ThreeService {
 	//현 비밀번호 체크
 	public void curPwChk(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
 	public String changePw(Model model); //비밀번호 변경
-	public String changeMyInfo(Model model); //내 정보 변경	
+	public String changeMyInfo(Model model); //내 정보 변경
+	//회원탈퇴시 비밀번호 체크
+	public void deleteMem(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
+	public String delMem(Model model); //회원탈퇴
+	public String findPw(Model model); //비밀번호 찾기
+	public String chgPw(Model model); //임시비밀번호 변경
 }

@@ -47,6 +47,11 @@ public interface ThreeDAO {
 	public int confirmPw(Map<String, Object> map); //현 비밀번호 체크
 	public int changePw(Map<String, Object> map); //비밀번호 변경
 	public int changeMyInfo(Map<String, Object> map);//내정보 수정
-	
+	public int deleteMem(String mem_id); //회원탈퇴
+	public String getEmail(String mem_id); //이메일 가져오기
+	public int tempIdChk(String mem_id); //임시번호 아이디 체크
+	public int tempInsert(Map<String, Object> map); //임시번호 저장
+	public int tempUpdate(Map<String, Object> map); //임시번호 변경
+	public int tempDelete(String mem_id); //임시번호 삭제
 
 }

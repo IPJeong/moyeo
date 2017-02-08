@@ -22,16 +22,18 @@ public class ThreeDAOImpl implements ThreeDAO{
 	private SqlSession sqlSession;
 	
 	DataSource dataSource;	// 커넥션 객체를 보관
-
+	
+	//카테고리 개수
 	@Override
-	public int getCount() { //카테고리 개수
+	public int getCount() { 
 		int cnt = 0;
 		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getCount");
 		return cnt;
 	}
-
+	
+	//FAQ 질문 개수
 	@Override
-	public int getCount2() { //FAQ 질문 개수
+	public int getCount2() { 
 		int cnt2 = 0;
 		cnt2 = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getCount2");
 		return cnt2;
@@ -245,25 +247,76 @@ public class ThreeDAOImpl implements ThreeDAO{
 		dtos = dao.getGroupList(map);		
 		return dtos;
 	}
-
+	
+	//현 비밀번호 체크
 	@Override
 	public int confirmPw(Map<String, Object> map) {
 		int cnt = 0;
 		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.confirmPw", map);
 		return cnt;
 	}
-
+	
+	//비밀번호 변경
 	@Override
 	public int changePw(Map<String, Object> map) {
 		int cnt = 0;
 		cnt = this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.changePw", map);
 		return cnt;
 	}
-
+	
+	//내 정보 변경
 	@Override
 	public int changeMyInfo(Map<String, Object> map) {
 		int cnt = 0;
 		cnt = this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.changeMyInfo", map);
+		return cnt;
+	}
+	
+	//회원탈퇴
+	@Override
+	public int deleteMem(String mem_id) {
+		System.out.println(mem_id + "2");
+		int cnt = 0;
+		cnt = this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.deleteMem", mem_id);
+		return cnt;
+	}
+	
+	//이메일 가져오기
+	@Override
+	public String getEmail(String mem_id) {
+		String email = "";
+		email = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getEmail", mem_id);
+		return email;
+	}
+	
+	//임시번호 아이디 체크
+	@Override
+	public int tempIdChk(String mem_id) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.tempIdChk", mem_id);
+		return cnt;
+	}
+	
+	//임시번호 입력
+	@Override
+	public int tempInsert(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.tempInsert", map);
+		return cnt;
+	}
+	
+	//임시번호 수정
+	@Override
+	public int tempUpdate(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.tempUpdate", map);
+		return cnt;
+	}
+
+	@Override
+	public int tempDelete(String mem_id) {
+		int cnt = 0;
+		cnt = this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.tempDelete", mem_id);
 		return cnt;
 	}
 	

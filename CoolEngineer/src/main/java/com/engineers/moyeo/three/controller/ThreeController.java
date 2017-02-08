@@ -278,4 +278,67 @@ public class ThreeController {
 		
 		return viewPage;
 	}
+	
+	@RequestMapping(value="/deleteMem") //회원탈퇴 비밀번호 체크
+	public ModelAndView deleteMem(HttpServletRequest req) {
+		
+		mav = new ModelAndView("JSON");		
+		System.out.println("비밀번호 체크 요청");
+		try {
+			threeService.deleteMem(mav, req);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/delMem") //회원탈퇴
+	public String delMem(HttpServletRequest req, Model model) {		
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.delMem(model);
+		System.out.println("delMem()");
+		
+		return viewPage;
+	}	
+	
+	@RequestMapping("/forgetpassword") //비밀번호 찾기 폼
+	public String forgetpassword(HttpServletRequest req, Model model) {		
+		/*String viewPage = threeService.faq(model);*/
+		System.out.println("findPw()");
+		
+		return "three/member/forgetpassword";
+	}
+	
+	@RequestMapping("/findPw") //비밀번호 찾기
+	public String findPw(HttpServletRequest req, Model model) {		
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.findPw(model);
+		System.out.println("findPw()");
+		
+		return viewPage;
+	}	
+	
+	@RequestMapping("/tempPw") //비밀번호 변경 폼
+	public String tempPw(HttpServletRequest req, Model model) {		
+		/*String viewPage = threeService.faq(model);*/
+		System.out.println("tempPw()");
+		
+		return "three/member/tempPw";
+	}
+	
+	@RequestMapping("/chgPw") //비밀번호 찾기
+	public String chgPw(HttpServletRequest req, Model model) {		
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.chgPw(model);
+		System.out.println("chgPw()");
+		
+		return viewPage;
+	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -516,9 +517,7 @@ public class ThreeServiceImpl implements ThreeService{
 			
 		}
 		
-		EmailSender.sendEmail(email, TextMessage.congJoinMsgTitle(memid), 
-		TextMessage.congJoinMsgContent(memid), 
-		req.getSession().getServletContext().getRealPath("/resources/resource/assets/images/gallery/"));
+		EmailSender.sendEmail(email, TextMessage.congJoinMsgTitle(memid),TextMessage.congJoinMsgContent(memid),req.getSession().getServletContext().getRealPath("/resources/resource/assets/images/gallery/"));
 		
 		model.addAttribute("cnt", cnt);		
 		model.addAttribute("memid", memid);
@@ -871,11 +870,135 @@ public class ThreeServiceImpl implements ThreeService{
 		map2.put("email", email);
 		map2.put("tel", tel);
 		
-		int cnt = dao.changeMyInfo(map2);
+		int cnt = dao.changeMyInfo(map2);//내 정보 수정
 		
 		model.addAttribute("cnt", cnt);		
 		
 		return "/three/member/changeMyInfo";
+	}
+	
+	//회원탈퇴 비밀번호체크
+	@Override
+	public void deleteMem(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException {
+		
+		//입력받은 아이디
+		String memid = (String) req.getSession().getAttribute("mem_id");
+		String manageid = (String) req.getSession().getAttribute("manager_id");
+		String mem_id = "";
+		
+		if(memid == null) {
+			mem_id = manageid;
+		} else if(manageid == null) {
+			mem_id = memid;
+		}
+		
+		String passwd = req.getParameter("passwd");
+					
+		Map<String, Object> map = new HashMap<>();
+		map.put("passwd", passwd);
+		map.put("mem_id", mem_id);
+		
+		int cnt = dao.confirmPw(map); //현 비밀번호 체크
+		
+		mav.addObject("cnt", cnt);		
+		
+	}
+	
+	//회원탈퇴
+	@Override
+	public String delMem(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String memid = (String) req.getSession().getAttribute("mem_id");
+		String manageid = (String) req.getSession().getAttribute("manager_id");
+		String mem_id = "";
+		
+		if(memid == null) {
+			mem_id = manageid;
+		} else if(manageid == null) {
+			mem_id = memid;
+		}
+		System.out.println(mem_id);
+		int cnt = dao.deleteMem(mem_id); //회원탈퇴
+		
+		req.getSession().setAttribute("mem_id", null);
+		req.getSession().setAttribute("manager_id", null);
+		
+		model.addAttribute("cnt", cnt);
+		
+		return "/three/member/delMem";
+	}
+	
+	//비밀번호 찾기
+	@Override
+	public String findPw(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String memid = req.getParameter("mem_id");
+		String tempPw = UUID.randomUUID().toString().replaceAll("-", ""); 
+		tempPw = tempPw.substring(0, 15);
+		
+		Map<String, Object> mapId = new HashMap<>();
+		mapId.put("memid", memid);
+		
+		int cnt = dao.confirmId(mapId);
+		
+		if(cnt != 0) {
+						
+			Map<String, Object> chnPw = new HashMap<>();
+			chnPw.put("memid", memid);
+			chnPw.put("passwd", tempPw);
+			
+			String email = dao.getEmail(memid); //이메일 정보 가져오기
+			
+			int cnt2 = dao.tempIdChk(memid);//임시번호 아이디체크
+			
+			if(cnt2 == 0) {
+				cnt = dao.tempInsert(chnPw); //임시번호 입력
+			} else if(cnt2 == 1) {
+				cnt = dao.tempUpdate(chnPw); //임시번호 수정
+			}
+			
+			EmailSender.sendEmail(email, TextMessage.pwSearchEmailMsg(memid),
+					TextMessage.pwSearchEmailMsgContent(memid, tempPw),
+					req.getSession().getServletContext().getRealPath("/resources/resource/assets/images/gallery/"));
+		} else {
+			cnt = -1;
+		}
+		
+		model.addAttribute("cnt", cnt);
+		
+		return "/three/member/findPw";
+	}
+
+	@Override
+	public String chgPw(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String mem_id = (String) req.getSession().getAttribute("mem_id");
+		String passwd = req.getParameter("password");
+		
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("mem_id", mem_id);
+		map2.put("passwd", passwd);
+		
+		int cnt = dao.changePw(map2);
+		
+		if(cnt == 1) {
+			dao.tempDelete(mem_id);			
+		} else {
+			cnt = 0;
+		}
+		
+		model.addAttribute("cnt", cnt);
+		
+		return "/three/member/chgPw";
 	}
 	
 	
