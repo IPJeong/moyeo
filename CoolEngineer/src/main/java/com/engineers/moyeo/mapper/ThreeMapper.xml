@@ -190,5 +190,29 @@
 	<update id="changeMyInfo" parameterType="map">
 		UPDATE member_info SET name = #{name}, address = #{address}, email = #{email}, tel = #{tel} WHERE mem_id = #{mem_id}
 	</update>
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMem" parameterType="String">
+		DELETE FROM member_info WHERE mem_id = #{mem_id}
+	</delete>
+	<!-- 이메일 가져오기 -->
+	<select id="getEmail" parameterType="String" resultType="String">
+		SELECT email FROM member_info WHERE mem_id = #{memid}
+	</select>
+	<!-- 임시번호 아이디 체크 -->
+	<select id="tempIdChk" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM temppasswd_list WHERE mem_id = #{memid}
+	</select>
+	<!-- 임시번호 입력 -->
+	<insert id="tempInsert" parameterType="map">
+		INSERT INTO temppasswd_list	VALUES (#{memid}, #{passwd})
+	</insert>
+	<!-- 임시번호 수정 -->
+	<update id="tempUpdate" parameterType="map">
+		UPDATE temppasswd_list SET temp_passwd = #{passwd} WHERE mem_id = #{memid}
+	</update>
+	<!-- 임시번호 삭제 -->
+	<delete id="tempDelete" parameterType="String">
+		DELETE FROM temppasswd_list WHERE mem_id = #{mem_id}
+	</delete>
 <!-- 회원 -->
 </mapper>
