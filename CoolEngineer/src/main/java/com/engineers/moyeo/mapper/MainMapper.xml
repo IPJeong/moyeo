@@ -92,6 +92,6 @@
                   	AND update_date &gt; = #{strDate} AND update_date &lt;= #{endDate}
                   </if>
          		)
-    	 WHERE rn BETWEEN 1 AND 30 
+    	 WHERE rn BETWEEN 1 AND #{countOfWords} 
 	</select>
 </mapper>
