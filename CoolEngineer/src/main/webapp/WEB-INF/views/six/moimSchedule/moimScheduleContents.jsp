@@ -80,7 +80,7 @@ function chaMain() {
 <title>Insert title here</title>
 </head>
 <body onload=chaMain();>
-	<div style="float:left;  overflow:scroll; width:100%;">
+	<div style="float:left;  overflow:auto; width:100%;">
 		<div style="margin: 10px; border-right:3px solid rgba(155, 143, 255, 0.74); width:51%; height:550px; float:left;">
 			<div id="map" style="width: 100%; height: 60%;">
 	
@@ -131,13 +131,13 @@ function chaMain() {
 				</span>
 			</div>
 		</div>
-		<div style="height:400px; width:45%; float:right;">
+		<div style="height:400px; width:45%; float:left;">
 			<form name="contents">
-				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">모임명 :</font> ${dto.meeting_title}</p>
-				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">시간 :</font> ${date}</p>
-				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">참가비 :</font> <input type="text" id="price" style="width:200px; border:0px; background:#eeeeed;"value="${dto.meeting_cost}"></p>
-				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">인원 :</font> ${dto.meeting_pernum} 명</p>
-				<p style="margin:20px; font-size:30px;"><font color="#1d1f21">상세설명 :</font> ${dto.meeting_detail}</p>
+				<p style="margin:10px; font-size:30px;"><font color="#1d1f21">모임명 :</font> ${dto.meeting_title}</p>
+				<p style="margin:10px; font-size:30px;"><font color="#1d1f21">시간 :</font> ${date}</p>
+				<p style="margin:10px; font-size:30px;"><font color="#1d1f21">참가비 :</font> <input type="text" id="price" style="width:200px; border:0px; background:#eeeeed;"value="${dto.meeting_cost}"></p>
+				<p style="margin:10px; font-size:30px;"><font color="#1d1f21">인원 :</font> ${dto.meeting_pernum} 명</p>
+				<p style="margin:10px; font-size:30px;"><font color="#1d1f21">상세설명 :</font> ${dto.meeting_detail}</p>
 			</form>
 		</div>
 	</div>

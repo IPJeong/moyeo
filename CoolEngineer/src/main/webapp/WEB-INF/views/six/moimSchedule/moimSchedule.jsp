@@ -149,7 +149,7 @@ img {
 
 										<div style="width: 20%; height: 100%; float: left">
       											<input type="button" value="상세보기" class="btn btn-success"
-													style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 18%; float:left; " onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=950, height=500, left=300, top=100')"> 
+													style="width: 100px; height: 40px; font-size: 13px; margin: 7px; margin-top: 18%; float:left; " onclick="window.open('moimScheduleContents?meeting_num='+${dtos[stat.index].meeting_num},'', 'menubar=no, toolbar=no, width=1200, height=600, left=300, top=100')"> 
 											<c:if test="${group_per == 1}">
 												<input
 													type="button" class="btn btn-success" value="모임수정" style="width: 100px; height: 40px; font-size: 13px; margin: 7px; float:left; "

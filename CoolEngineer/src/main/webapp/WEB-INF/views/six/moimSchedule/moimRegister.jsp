@@ -130,7 +130,7 @@ function checkDate() {
 										<input type="button" name="meeting_loc" class="btn btn-default"
 											value="클릭하여 모임 장소를 선택해주세요."
 											style="width: 550px; border-color: #dcacac; font-size: 18px; height: 40px; margin-left: 20px; margin-top: 30px;"
-											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=800, height=450, left=450, top=270')"
+											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=900, height=700, left=450, top=130')"
 											required> <br> 
 										<input type="text"
 											name="loc_detail" maxlength="40" placeholder="모임장소에 대한 설명을 입력해주세요."
