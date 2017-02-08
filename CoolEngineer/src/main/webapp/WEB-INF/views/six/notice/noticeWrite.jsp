@@ -34,7 +34,7 @@ src="/moyeo/resources/resource/js/notice.js"></script>
 }
 
 .x-dashboard .page-container .page-content {
-	background: #e3f8ff;
+	background: #F9FAFB;
 }
 
 table {
@@ -115,7 +115,7 @@ tr {
 	</h2>
 </div>
 
-<div class="row" style="float:left; width:100%; background:#e3f8ff;">
+<div class="row" style="float:left; width:100%; background:#F9FAFB;">
 	<div class="col-md-12">
 		<div class="panel panel-default" style="border-top:0px;">
 			<div class="panel-body">

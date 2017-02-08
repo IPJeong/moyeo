@@ -34,7 +34,7 @@ src="/moyeo/resources/resource/js/notice.js"></script>
 }
 
 .x-dashboard .page-container .page-content {
-	background: #e3f8ff;
+	background: #F9FAFB;
 }
 
 table {

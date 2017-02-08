@@ -112,9 +112,9 @@ img {
 											style="width: 350px; height: 40px; font-size: 18px; margin-left: 0px; margin-top: 30px"
 											required> 
 										<input type="button" name="meeting_loc"
-											value="${meeting_dto.meeting_loc}"
+											value="장소정보를 수정해주세요"
 											style="width: 550px; height: 40px; font-size: 18px; margin-left: 20px; margin-top: 30px;"
-											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=800, height=450, left=450, top=270')"
+											onclick="window.open('moimRegisterMap','','menubar=no, toolbar=no, width=900, height=700, left=450, top=130')"
 											required> <br> 
 										<input type="text"
 											name="loc_detail" value="${meeting_dto.loc_detail}"

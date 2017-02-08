@@ -15,12 +15,7 @@
 	}
 }
 
-@media ( min-width : 1100px) {
-	.col-md-55 {
-		width: 100%;
-		height: 550px;
-	}
-}
+
 
 @media ( min-width : 1100px) {
 	.col-md-56 {
@@ -105,7 +100,7 @@ img {
 	                	if(dto.mem_id == $('#mem_id').val()) {
 		                	var msg = '<div class="item item-visible" style="width:750px;" id="reply' + dto.msg_num +'">' +
 		                		'<div class="image">' + 
-				                '<img src="' + dto.propic_path +'/' + dto.propic_name + '" >' +
+				                '<img src="' + dto.propic_path +'/' + dto.propic_name + '" style="height:40px;">' +
 				            '</div>' +                                
 				            '<div class="text">' + 
 				                '<div class="heading">' + 
@@ -181,7 +176,7 @@ img {
 		                           
 			                            <a class="list-group-item">                                 
 			                                <div class="list-group-status status-online"></div>
-			                                <div style="height:40px; width:40px; float:left;"><img src="${member_dto.propic_path}/${member_dto.propic_name}" class="pull-left" style="margin:0px;"></div>
+			                                <div style="height:40px; width:40px; float:left;"><img src="${member_dto.propic_path}/${member_dto.propic_name}" class="pull-left" style="margin:0px; height:40px;"></div>
 			                                &nbsp;&nbsp;<span class="contacts-title">${member_dto.mem_id}</span>
 			                                <p>&nbsp;&nbsp;${member_dto.name}</p>
 			                            </a>                                

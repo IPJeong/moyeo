@@ -47,9 +47,9 @@
 </head>
 <body>
 <div class="map_wrap">
-    
     <div id="map" style="width: 820px; height: 550px;position:relative; overflow:auto;"></div>
-	
+	<br><br>
+	<div style ="font-size:24px;"> &nbsp;&nbsp;모임위치를 검색한 후, 지도에서 마우스 오른쪽 버튼을 누르면 등록됩니다.</div>
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
@@ -62,12 +62,11 @@
         <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
-    </div><br><br>
-    <div style="font-size:25px">위치 검색 후, 지도에서 마우스 오른쪽 버튼을 클릭하면 장소가 등록됩니다.</div>
+    </div><br>
    
 </div>
 
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=14b379d0fba99fe89520cb90c8c7d849&libraries=services"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=1d9de5615d5151cf4b1b47b6ad88e8ba&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
 var markers = [];
@@ -88,9 +87,9 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 
 // 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
 daum.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
-	alert('정상적으로 등록되었습니다.');
+	alert('장소정보를 등록했습니다.');
 	var point = mouseEvent.latLng.toString();
-	opener.document.register.meeting_loc.value = point;
+	opener.document.register.meeting_loc.value = '장소정보 등록완료';
 	opener.document.register.map.value = point;
 	self.close();
 	
@@ -196,15 +195,6 @@ function displayPlaces(places) {
                 infowindow.close();
             });
             
-            daum.maps.event.addListener(marker, 'rightclick', function(mouseEvent) {
-                infowindow.close();
-                alert('정상적으로 등록되었습니다.');
-            	var point = mouseEvent.latLng.toString();
-                opener.document.register.meeting_loc.value = point;
-                opener.document.register.map.value = point;
-            	self.close();
-            });
-
             
           //검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
            
@@ -269,6 +259,13 @@ function addMarker(position, idx, title) {
             image: markerImage 
         });
     
+		daum.maps.event.addListener(marker, 'rightclick', function() {
+			alert('장소정보를 등록했습니다.');
+			var point = marker.getPosition().toString();
+			opener.document.register.meeting_loc.value = '장소정보 등록완료';
+			opener.document.register.map.value = point;
+			self.close();
+		});
 
     marker.setMap(map); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
