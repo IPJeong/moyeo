@@ -61,7 +61,7 @@ img {
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
 	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
 	<li class="active">모임 일정</li>
 </ul>
 <!-- END BREADCRUMB -->
