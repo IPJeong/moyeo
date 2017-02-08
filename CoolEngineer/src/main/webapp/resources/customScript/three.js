@@ -1,7 +1,7 @@
 var updateError = "수정에 실패하였습니다. \n 잠시후 다시 시도하세요";
-var insertError ="입력에 실패했습니다. \n잠시후 다시 시도하세요!"
-var meminputError = "회원가입에 실패했습니다. \n잠시후 다시 시도하세요!"
-	
+var insertError ="입력에 실패했습니다. \n잠시후 다시 시도하세요!";
+var meminputError = "회원가입에 실패했습니다. \n잠시후 다시 시도하세요!";
+var emailError = "비밀번호 찾기에 실패 하였습니다 \n잠시후 다시 시도하세요"	;
 function errorAlert(msg) {
 	alert(msg);
 	window.history.back();
@@ -108,6 +108,47 @@ function curPwChk() {
 	}
 	
 }
+
+//회원탈퇴 비밀번호 체크
+function curPwChk2() {	
+	var passwd = document.deleteMem.passwd.value;	
+	if(passwd != ''){
+		jQuery.ajax({
+			type:"POST",
+			url:"/moyeo/three/deleteMem",
+			async : true,
+			dataType : "json",
+			data:{
+				passwd : passwd			
+			},
+			success : function(data) {
+				var cnt = data.cnt;
+				var passwd = data.passwd;
+				var resultConfirm;
+				
+				if(cnt == 0) {
+					resultConfirm = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10px;"></span><font color="#D32F2F">&nbsp;&nbsp;불일치</font>';
+					$('#delSub').attr("disabled", "disabled");
+				} else if(cnt == 1) {
+					resultConfirm = '<span class="fa fa-check" style="color:#689F38;padding-left:10px;">&nbsp;&nbsp;일치</span>';
+					$('#delSub').removeAttr("disabled");
+				} 
+				$('#curPwChk2').html(resultConfirm);
+			},
+			error : function(xhr) {
+				alert("비밀번호확인에 실패하였습니다.");
+				alert("error html = " + xhr.statusText);
+			}
+		})
+		
+	} else {
+		resultConfirm = '';
+		$('#delSub').attr("disabled", "disabled");
+		$('#curPwChk2').html(resultConfirm);
+	}
+	
+}
+
 //마이페이지 비밀번호 체크
 function passChk2() {
 	var curPw = document.proPwCng.passwd.value;
@@ -127,7 +168,7 @@ function passChk2() {
 				resultPwChk = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10px;"></span><font color="#D32F2F"> 비밀번호 불일치</font>';
 				$('#proPwSub').attr("disabled", "disabled");
 			} else if (rePasswd == passwd) {
-				resultPwChk = '<span class="fa fa-check" style="color:#689F38;">&nbsp;&nbsp;일치</span>';
+				resultPwChk = '<span class="fa fa-check" style="color:#689F38;padding-left:10px;">&nbsp;&nbsp;일치</span>';
 				$('#proPwSub').removeAttr("disabled");
 			}
 			$('#proPwChk').html(resultPwChk);
@@ -138,6 +179,30 @@ function passChk2() {
 		}
 		
 	}
+}
+
+//임시번호 변경 비밀번호 체크
+function passChk3() {	
+	var passwd = document.chgPw.password.value;
+	var rePasswd = document.chgPw.re_password.value;
+	var resultPwChk;
+		
+	if(!rePasswd == '' || !passwd == '') {
+		if(rePasswd != passwd) {
+			resultPwChk = '<span class="glyphicon glyphicon-remove" style="color:#D32F2F;padding-left:10px;"></span><font color="#D32F2F"> 비밀번호 불일치</font>';
+			$('#proPwSub').attr("disabled", "disabled");
+		} else if (rePasswd == passwd) {
+			resultPwChk = '<span class="fa fa-check" style="color:#689F38;padding-left:10px;">&nbsp;&nbsp;일치</span>';
+			$('#proPwSub').removeAttr("disabled");
+		}
+		$('#passChk3').html(resultPwChk);
+	} else {
+		resultPwChk = '';
+		$('#proPwSub').attr("disabled", "disabled");
+		$('#passChk3').html(resultPwChk);
+	}
+		
+	
 }
 
 //지역선택
@@ -976,4 +1041,12 @@ function chgMyInfo() {
 		return false;
 	}
 	
+}
+
+function chkDel() {
+	if(confirm('회원탈퇴 하시겠습니까?')) {
+		window.location='/moyeo/three/delMem';
+	} else {
+		return false;
+	}
 }
