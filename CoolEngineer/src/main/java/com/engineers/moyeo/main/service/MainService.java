@@ -19,6 +19,6 @@ public interface MainService {
 	public void wordExtractAndAnalyze(String text);
 	
 	// 워드클라우드 재검색 요청
-	public String wordcloudRefresh(HttpServletRequest req);
+	public String wordcloudRefresh(Model model);
 	
 }

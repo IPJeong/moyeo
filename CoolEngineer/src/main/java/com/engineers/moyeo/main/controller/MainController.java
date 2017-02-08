@@ -1,12 +1,16 @@
 package com.engineers.moyeo.main.controller;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @기능 홈페이지의 메인페이지 관련 기능을 수행하는 컨트롤러
@@ -89,11 +93,15 @@ public class MainController {
 	}
 	
 	// 메인화면의 워드클라우드 재검색
-	@RequestMapping(value="refreshWordcloud")
-	public String refreshWordcloud(HttpServletRequest req) {
+	@ResponseBody
+	@RequestMapping(value="/refreshWordcloud", produces = "application/json; charset=utf8")
+	public String refreshWordcloud(Model model, HttpServletRequest req, HttpServletResponse res) {
 		
 		System.out.println("워드클라우드 재검색 요청");
-		viewPage = mainService.wordcloudRefresh(req);
+		model.addAttribute("req", req);
+		
+		viewPage = mainService.wordcloudRefresh(model);
+		
 		return viewPage;
 	}
 	

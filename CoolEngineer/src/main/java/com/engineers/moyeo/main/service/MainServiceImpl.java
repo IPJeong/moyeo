@@ -27,8 +27,6 @@ public class MainServiceImpl implements MainService{
 	@Autowired
 	SixDAO sixDao;
 	
-	// 워드클라우드 모델 객체
-//	private static WordModel wordModel;
 	// 워드클라우드 리스트
 	private static List<WordDTO> wordDtos;
 	
@@ -41,11 +39,13 @@ public class MainServiceImpl implements MainService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
 		int cnt = sixDao.getCount();
-		
+	
 		if(wordDtos == null) {
 			setWordList();
 			System.out.println("WordCloud word set");
 		}
+		
+		System.out.println("Private Wordcloud word set");
 		
 		req.setAttribute("wordDtos", wordDtos);
 		
@@ -138,14 +138,18 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public String wordcloudRefresh(HttpServletRequest req) {
+	public String wordcloudRefresh(Model model) {
+		
+		HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
 		
 		String strDate = req.getParameter("strDate");
 		String endDate = req.getParameter("endDate");
-		String[] wordOps = req.getParameterValues("wordOps");
-		
+		String[] wordOps = req.getParameter("wordOps").split(",");
+		String printMsg = "";
+		int countOfWords = Integer.parseInt(req.getParameter("countOfWords"));
 		Map<String, Object> map = new HashMap<>();
-		System.out.println("strDate : " + strDate + ", endDate : " + endDate);
+		
+		printMsg = "strDate : " + strDate + ", endDate : " + endDate +", 요청단어수 : " + countOfWords;
 		if(strDate != null && endDate != null){
 			if(!strDate.equals("")) {
 				strDate = strDate + " 00:00:01.000000";
@@ -163,39 +167,51 @@ public class MainServiceImpl implements MainService{
 			List<String> list = Arrays.asList(wordOps);
 			if(list.contains("Noun") && list.contains("Verb") && list.contains("Hashtag")){
 				type = 6;
-				System.out.println("명사, 동사, 해시태그 검색요청");
+				printMsg += ", | 명사, 동사, 해시태그 검색요청";
 			} else if(list.contains("Noun") && list.contains("Verb")) {
 				type = 4;
-				System.out.println("명사, 동사 검색요청");
+				printMsg += ", | 명사, 동사 검색요청";
 			} else if(list.contains("Noun") && list.contains("Hashtag")) {
 				type = 7;
-				System.out.println("명사, 해시태그 검색요청");
+				printMsg += ", | 명사, 해시태그 검색요청";
 			} else if(list.contains("Hashtag") && list.contains("Verb")) {
 				type = 5;
-				System.out.println("해시태그, 동사 검색요청");
+				printMsg += ", | 해시태그, 동사 검색요청";
 			} else if(list.contains("Noun")) {
 				type = 1;
-				System.out.println("명사 검색요청");
+				printMsg += ", | 명사 검색요청";
 			} else if(list.contains("Verb")) {
 				type = 2;
-				System.out.println("동사 검색요청");
+				printMsg += ", | 동사 검색요청";
 			} else if(list.contains("Hashtag")) {
 				type = 3;
-				System.out.println("해시태그 검색요청");
+				printMsg += ", | 해시태그 검색요청";
 			}
 		} else {
 			type = 6;
-			System.out.println("명사, 동사, 해시태그 전체검색 요청");
+			printMsg += ", | 명사, 동사, 해시태그 전체검색 요청";
 		}
+		
+		System.out.println(printMsg);
 		
 		map.put("type", type);
+		map.put("countOfWords", countOfWords);
 		
-		List<WordDTO> words = mainDao.searchWordcloud(map);
+		List<WordDTO> wordList = mainDao.searchWordcloud(map);
 		
-		for(WordDTO dt : words) {
-			System.out.println(dt.toString());
+		String resultMsg = "<ul>";
+		System.out.println(wordList);
+		for(WordDTO dto : wordList) {
+			resultMsg += "<li><a href='#' target='_blank'>" + dto.getWord() + "</a></li>";
 		}
+		if(wordList.isEmpty())resultMsg += "<li><a href='#' target='_blank'>단어가 없습니다.</a></li>";
+		resultMsg += "</ul>";
 		
-		return "redirect:/main/home";
+		System.out.println(resultMsg);
+		
+//		model.addAttribute("wordList", wordList);
+//		model.addAttribute("listSize", wordList.size());
+		
+		return resultMsg;
 	}
 }
