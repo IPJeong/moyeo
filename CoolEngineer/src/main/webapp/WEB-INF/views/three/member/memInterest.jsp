@@ -13,25 +13,6 @@
 	.x-dashboard .page-container .page-content {
 	    margin-left: 0px;
 	    background: linear-gradient( to top, #fbfeff, #E1F5FE ,#B3E5FC, #81D4FA);
-	}
-	.selectC {
-		font-family: inherit;
-		height:30px;
-		border:1px solid #E0E0E0;
-		border-radius:5px;
-		-webkit-appearance: none;  /* 네이티브 외형 감추기 */
-	    -moz-appearance: none;
-	    appearance: none;
-	    background: url(이미지 경로) no-repeat 95% 50%;
-		
-	}
-	
-	
-	
-	.selectC option {
-		height:30px;
-		border:1px solid gray;
-	}
 	
 </style>
 <div class="col-md-9" style="position: absolute;left:25%;top:25%;width:50%;margin:auto;">

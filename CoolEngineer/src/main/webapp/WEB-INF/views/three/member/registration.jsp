@@ -25,24 +25,18 @@
                 </ul>
                <!-- END BREADCRUMB -->       
         
-         <div class="registration-container registration-extended">            
-            <div class="registration-box animated fadeInDown" style="width:45%">
+         <div class="registration-container ">            
+            <div class="registration-box animated fadeInDown" >
                 <div class="registration-logo"></div>
                 <div class="registration-body">
-                <div class="row">                	
 	                <form:form class="form-horizontal" action="registMember" method="post" name="registMember" modelAttribute="uploadForm" enctype="multipart/form-data">
-		                <div class="col-md-6">
+		                
 		                    <div class="registration-title"><strong>Registration</strong>, MoYeo</div>
 		                    <div class="registration-subtitle">Best Meetings, Social Sites </div>
-		                    <h4>간단 정보</h4>
+		                    <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 간단 정보</h4>
 		                    <div class="form-group">
 		                        <div class="col-md-12">
-		                            <input type="text" class="form-control" name="firstName" placeholder="First Name" style="color:#212121;" required/>
-		                        </div>
-		                    </div>
-		                    <div class="form-group">
-		                        <div class="col-md-12">
-		                            <input type="text" class="form-control" name="secondName" placeholder="Secondname" style="color:#212121;" required/>
+		                            <input type="text" class="form-control" name="name" placeholder="Name" style="color:#212121;" required/>
 		                        </div>
 		                    </div>
 		                    <div class="form-group">
@@ -50,9 +44,8 @@
 		                            <input type="email" class="form-control" name="email" style="color:#212121;" placeholder="E-mail" required/>
 		                        </div>
 		                    </div>       
-		                </div>		                
-	                    <div class="col-md-6">
-		                    <h4>상세 정보</h4>                    
+		                
+		                    <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 상세 정보</h4>                    
 		                    <div class="form-group" style="max-height:40px;">
 		                        <div class="col-md-12" style="max-height:40px;">
 		                        	<table style="border:0px;width:100%;">
@@ -84,10 +77,10 @@
 					                            			                           		
 					            </div>
 		                    </div>
-		                    <h4>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</h4> 
+		                    <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</h4> 
 	                    	<div class="form-group">                                            
                                  <div class="col-md-12">                                                                                
-                                     <select name="loc_category1" class="form-control select" style="color:#212121;" onchange="select_loc_category()">
+                                     <select name="loc_category1" class="form-control select" style="color:#212121;" onchange="select_loc_category()" required>
                                          	<option value="">선택하세요</option>
                                          	<option value="서울특별시">서울특별시</option>
 							                <option value="부산광역시">부산광역시</option>
@@ -111,13 +104,13 @@
                              </div>
                            	 <div class="form-group">
                                  <div class="col-md-12"> 
-                                      <select name="loc_category2" style="color:#212121;" class="form-control select">
+                                      <select name="loc_category2" style="color:#212121;" class="form-control select" required>
                                       		<option value="">선택하세요</option>
                                       </select>
                                  </div>
                              </div>
                              
-                             <h4>휴대폰 번호</h4> 
+                             <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 휴대폰 번호</h4> 
                              <div class="form-group">
 		                        <div class="col-md-12" style="width:80%; float:left">
 		                            <input type="text" class="form-control" name="tel" placeholder="tel" id="tell"
@@ -128,7 +121,7 @@
 		                        	<div id="telMsg"></div>
 		                        </div>
 		                    </div>
-		                    <h4>생&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일</h4> 
+		                    <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 생&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일</h4> 
 		                    <div class="form-group">                                
                                 <div class="col-md-12">
                                     <div class="input-group date">
@@ -144,7 +137,7 @@
                                     <input type="file" class="fileinput btn-info" name="files[0]" id="filename2" onchange="chkType('files[0]')" style="" title="프로필 사진"/>
                                 </div>
                             </div>
-                            <h4>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</h4>
+                            <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</h4>
                             <div class="form-group">
 	                            <div class="col-md-12">
 	                                <label class="radio-material">
@@ -166,9 +159,8 @@
 		                            <button type="submit" id="regiMember" class="btn btn-danger btn-block">회원가입</button>
 		                        </div>
 		                    </div>
-	                    </div>
+	                    
 	                    </form:form>
-	                </div>
                 </div>
                 <div class="registration-footer">
                     <div class="pull-left">
