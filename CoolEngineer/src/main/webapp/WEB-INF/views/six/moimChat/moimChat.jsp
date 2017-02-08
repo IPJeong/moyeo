@@ -109,7 +109,7 @@ img {
 				            '</div>' +                                
 				            '<div class="text">' + 
 				                '<div class="heading">' + 
-				                    '<a href="#">' + dto.mem_id + '</a>' +
+				                    '<a>' + dto.mem_id + '</a>' +
 				                    '<span class="date">' + fullDate + '</span>' +
 				                '</div>'+                                    
 				                dto.msg_content +
@@ -179,7 +179,7 @@ img {
 		                        <c:forEach var="member_dto" items="${member_dtos}">
 		                        <div class="list-group list-group-contacts border-bottom push-down-10">
 		                           
-			                            <a href="#" class="list-group-item">                                 
+			                            <a class="list-group-item">                                 
 			                                <div class="list-group-status status-online"></div>
 			                                <div style="height:40px; width:40px; float:left;"><img src="${member_dto.propic_path}/${member_dto.propic_name}" class="pull-left" style="margin:0px;"></div>
 			                                &nbsp;&nbsp;<span class="contacts-title">${member_dto.mem_id}</span>
