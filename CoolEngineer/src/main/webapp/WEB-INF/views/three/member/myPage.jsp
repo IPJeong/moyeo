@@ -124,13 +124,18 @@ $(document).ready(function() {
           <div class="panel panel-default">                                
               <div class="panel-body">
               	  <div class="col-md-12" style="margin:0px;padding:0px;">
-              	  	  <div class="col-md-10" style="margin:0px;padding:0px;width:88%;">
+              	  	  <div class="col-md-10" style="margin:0px;padding:0px;width:76%;">
 		                  <h3><span class="fa fa-user"></span> ID : ${dto.mem_id}</h3>
 		                  <p style="margin:0px;">가입일 | <fmt:formatDate type="both" pattern="yyyy-MM-dd" value="${dto.joinDate}"/></p>
 		                  <p>생일 | <fmt:formatDate type="both" pattern="yyyy-MM-dd" value="${dto.birth}"/></p>
 		              </div>
-	                  <div class="col-md-1" style="margin:0px;padding:0px;width:12%;">
-	                  	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_change_pw">비밀번호변경</button>
+		              <div class="col-md-2" style="margin:0px;padding:0px;width:24%;">
+		                  <div class="col-md-6" style="margin:0px;padding:0px;padding-left:3px;">
+		                  	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_change_pw" style="width:100%">비밀번호변경</button>
+		                  </div>
+		                  <div class="col-md-6" style="margin:0px;padding:0px;padding-left:3px;">
+		                  	<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal_delete" style="width:100%">회원탈퇴</button>
+		                  </div>
 	                  </div>
                   </div>
                   <div class="text-center" id="user_image">
@@ -270,37 +275,35 @@ $(document).ready(function() {
 		           </table>                                
 		       </div>
 			</div>
-          
-      </div>
- 
-	<div class="col-md-6">
-          <div class="col-md-12">
+          	<div class="col-md-12">
               <ul class="pagination pagination-sm pull-right push-down-10 push-up-10">
               	<c:if test="${cnt > 0}">
-				<!-- 처음[◀◀] 이전[◀]-->
-				<c:if test="${startPage > pageBlock}">
-					<li><a href="myPage">«</a></li>
-					<li><a href="myPage?pageNum=${startPage - pageBlock}" >‹</a></li>
-				</c:if>
-				
-				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<c:if test="${i == currentPage}">
-						<li class="active"><a href="#">${i}</a></li>
+					<!-- 처음[◀◀] 이전[◀]-->
+					<c:if test="${startPage > pageBlock}">
+						<li><a href="myPage">«</a></li>
+						<li><a href="myPage?pageNum=${startPage - pageBlock}" >‹</a></li>
 					</c:if>
-					<c:if test="${i != currentPage}">
-						<li><a href="myPage?pageNum=${i}">${i}</a></li>
+					
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<c:if test="${i == currentPage}">
+							<li class="active"><a href="#">${i}</a></li>
+						</c:if>
+						<c:if test="${i != currentPage}">
+							<li><a href="myPage?pageNum=${i}">${i}</a></li>
+						</c:if>
+					</c:forEach>
+					
+					<!-- 다음[▶] 끝[▶▶] -->
+					<c:if test="${pageCount > endPage}">				
+						<li><a href="myPage?pageNum=${startPage + pageBlock}" >›</a></li>
+						<li><a href="myPage?pageNum=${pageCount}" >»</a></li>
 					</c:if>
-				</c:forEach>
-				
-				<!-- 다음[▶] 끝[▶▶] -->
-				<c:if test="${pageCount > endPage}">				
-					<li><a href="myPage?pageNum=${startPage + pageBlock}" >›</a></li>
-					<li><a href="myPage?pageNum=${pageCount}" >»</a></li>
-				</c:if>
-			</c:if>                    
+				</c:if>                    
               </ul>                            
           </div>
       </div>
+ 		
+
 
 <!-- 모달 -->
  <div class="modal animated fadeIn" id="modal_change_photo" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
@@ -308,7 +311,7 @@ $(document).ready(function() {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="smallModalHead">Change photo</h4>
+                <h4 class="modal-title" id="smallModalHead">프로필 사진 변경</h4>
             </div>                    
             
             <div class="modal-body">
@@ -376,6 +379,35 @@ $(document).ready(function() {
             </div>            
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success" id="proPwSub" disabled>비밀번호변경</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            </div>
+            </form:form>
+        </div>
+    </div>
+</div>
+
+<!-- 회원탈퇴 모달 -->
+<div class="modal animated fadeIn" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="smallModalHead">회원탈퇴</h4>
+            </div>
+            <form:form class="form-horizontal" action="delMem" method="post" name="deleteMem" onsubmit="return chkDel();">
+            <div class="modal-body form-horizontal form-group-separated">                
+                <div class="form-group">
+                    <label class="col-md-4 control-label">비밀번호</label>
+                    <div class="col-md-4">
+                        <input type="password" name="passwd" class="form-control" onkeyup="curPwChk2()" required/>
+                    </div>
+                    <div class="col-md-4" id="curPwChk2" style="border:0px;">
+                    	
+                    </div>                           
+                </div>                                         
+            </div>            
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" id="delSub" disabled>회원탈퇴</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
             </div>
             </form:form>
