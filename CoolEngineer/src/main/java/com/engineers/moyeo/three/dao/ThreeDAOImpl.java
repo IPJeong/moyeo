@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
+import com.engineers.moyeo.three.dto.MygroupDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Repository
@@ -219,5 +220,52 @@ public class ThreeDAOImpl implements ThreeDAO{
 		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.eveParticipate", map);
 		return cnt;
 	}
+	
+	//마이페이지
+	@Override
+	public MemberDTO getMyInfo(Map<String, Object> map) {
+		MemberDTO dto = null;
+		dto = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getMyInfo", map);
+		return dto;
+	}
+	
+	//가입한 모임 개수
+	@Override
+	public int getGroupCnt(String memid) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getGroupCnt", memid);
+		return cnt;
+	}
+	
+	//가입한 모임 리스트
+	@Override
+	public ArrayList<MygroupDTO> getGroupList(Map<String, Object> map) {
+		ArrayList<MygroupDTO> dtos = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getGroupList(map);		
+		return dtos;
+	}
+
+	@Override
+	public int confirmPw(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.confirmPw", map);
+		return cnt;
+	}
+
+	@Override
+	public int changePw(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.changePw", map);
+		return cnt;
+	}
+
+	@Override
+	public int changeMyInfo(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.changeMyInfo", map);
+		return cnt;
+	}
+	
 	
 }

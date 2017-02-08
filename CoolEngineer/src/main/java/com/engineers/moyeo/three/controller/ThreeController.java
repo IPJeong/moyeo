@@ -18,7 +18,7 @@ import com.engineers.moyeo.three.service.ThreeService;
  * @기능 FAQ와 이벤트관련기능을 수행하는 컨트롤러
  * @author 홍현호
  * @최초작성일 2017.01.20
- * @최종수정일 2017.01.21
+ * @최종수정일 2017.02.08
  *
  */
 @RequestMapping("/three")
@@ -182,7 +182,7 @@ public class ThreeController {
 		return mav;
 	}
 	
-	@RequestMapping("/registMember") //이벤트 입력
+	@RequestMapping("/registMember") //회원가입
 	public String registMember(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {		
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
@@ -222,4 +222,60 @@ public class ThreeController {
 		return viewPage;
 	}
 	
+	@RequestMapping("/myPage") //마이페이지
+	public String myPage(HttpServletRequest req, Model model) {		
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.myPage(model);
+		System.out.println("myPage()");
+		
+		return viewPage;
+	}
+	
+	@RequestMapping("/changeProImg") //프로필 사진 변경
+	public String changeProImg(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {		
+		model.addAttribute("req", req);
+		model.addAttribute("fileForm", fileForm);
+		viewPage = threeService.changeProImg(model);
+		System.out.println("changeProImg()");
+		
+		return viewPage;
+	}
+	
+	@RequestMapping(value="/curPwChk") //비밀번호 변경시 현 비밀번호 체크
+	public ModelAndView curPwChk(HttpServletRequest req) {
+		
+		mav = new ModelAndView("JSON");		
+		System.out.println("현 비밀번호 체크 요청");
+		try {
+			threeService.curPwChk(mav, req);
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println(Code.numForExceptionMsg);
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Code.nullPoExceptionMsg);
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/changePw") //비밀번호 변경
+	public String changePw(HttpServletRequest req, Model model) {		
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.changePw(model);
+		System.out.println("changePw()");
+		
+		return viewPage;
+	}
+	
+	@RequestMapping("/changeMyInfo") //내 정보 변경
+	public String changeMyInfo(HttpServletRequest req, Model model) {		
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.changeMyInfo(model);
+		System.out.println("changeMyInfo()");
+		
+		return viewPage;
+	}
 }

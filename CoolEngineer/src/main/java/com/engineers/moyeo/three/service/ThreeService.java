@@ -27,4 +27,10 @@ public interface ThreeService {
 	public String registMember(Model model); //회원가입
 	public String memInterest(Model model);//관심사 선택
 	public String memInterestInput(Model model); //관심사 입력처리
+	public String myPage(Model model); //마이페이지
+	public String changeProImg(Model model); //프로필 사진 변경
+	//현 비밀번호 체크
+	public void curPwChk(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
+	public String changePw(Model model); //비밀번호 변경
+	public String changeMyInfo(Model model); //내 정보 변경	
 }

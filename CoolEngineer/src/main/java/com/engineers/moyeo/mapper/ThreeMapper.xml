@@ -9,14 +9,15 @@
 -->
 <mapper namespace="com.engineers.moyeo.three.dao.ThreeDAO">  <!-- 인터페이스 -->
 <!-- FAQ -->
+	<!-- FAQ카테고리 개수 -->	
     <select id="getCount" resultType="int">
 		SELECT count(*) FROM faq_category
 	</select>
-	
+	<!-- FAQ개수 -->
 	<select id="getCount2" resultType="int">
 		SELECT count(*) FROM faq
 	</select>
-	
+	<!-- FAQ카테고리 가져오기 -->
 	<select id="getCategory" resultType="com.engineers.moyeo.three.dto.ThreeDTO">
 		SELECT * 
 			FROM (SELECT category_num as ctgNum, category_name as ctgName
@@ -25,7 +26,7 @@
 		           	 	 )
 			  	 )			
 	</select>	
-	
+	<!-- FAQ가져오기 -->
 	<select id="getQuestions" resultType="com.engineers.moyeo.three.dto.ThreeDTO">
 		SELECT * 
 			FROM (SELECT faq_title as faqTitle, faq_content as faqContent, category_name as ctgName2, faq_num as faqNum
@@ -34,47 +35,47 @@
 		           	 	 )
 			  	 )			
 	</select>
-	
+	<!-- FAQ카테고리 중복 확인 -->
 	<select id="ctgCheck" parameterType="com.engineers.moyeo.three.dto.ThreeDTO" resultType="int">
 		SELECT count(*) FROM faq_category WHERE category_name = #{ctgName}
 	</select>
-	
+	<!-- FAQ카테고리 입력 -->
 	<insert id="insert" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		INSERT INTO faq_category
 		VALUES (faq_category_seq.NEXTVAL, #{ctgName})
 	</insert>
-	
+	<!-- FAQ 입력 -->
 	<insert id="insertFaq" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		INSERT INTO faq
 		VALUES (faq_seq.NEXTVAL, #{faqTitle}, #{faqContent}, #{faqDate}, #{adminId}, #{ctgName})
 	</insert>
-	
+	<!-- FAQ카테고리 수정 처리 -->
 	<update id="update" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		UPDATE faq_category SET category_name=#{ctgName2} WHERE category_name = #{ctgName}
 	</update>
-	
+	<!-- FAQ수정하기 -->
 	<update id="update2" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		UPDATE faq SET category_name=#{ctgName2} WHERE category_name = #{ctgName}
 	</update>
-	
+	<!-- FAQ값 가져오기 -->
 	<select id="getInfo" parameterType="int" resultType="com.engineers.moyeo.three.dto.ThreeDTO">
 		SELECT faq_title as faqTitle, faq_content as faqContent, faq_num as faqNum, category_name as ctgName2
 		  FROM faq
 		 WHERE faq_Num = #{faqNum}	           	 	 		
 	</select>
-	
+	<!-- FAQ수정하기 -->
 	<update id="updateFaq" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		UPDATE faq SET category_name=#{ctgName}, faq_title=#{faqTitle}, faq_content=#{faqContent} WHERE faq_num = #{faqNum}
 	</update>
-	
+	<!-- FAQ 카테고리 삭제 -->
 	<delete id="delete" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		DELETE FROM faq_category WHERE category_num = #{ctgNum}
 	</delete>
-	
+	<!-- FAQ 카테고리와 관련된 FAQ삭제 -->
 	<delete id="delete2" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		DELETE FROM faq WHERE category_name = #{ctgName}
 	</delete>
-	
+	<!-- FAQ삭제하기 -->
 	<delete id="deleteFaq" parameterType="com.engineers.moyeo.three.dto.ThreeDTO">
 		DELETE FROM faq WHERE faq_num = #{faqNum}
 	</delete>
@@ -156,5 +157,38 @@
 		INSERT INTO interest_cat
 			VALUES (interest_category_seq.NEXTVAL, #{category1}, #{category2}, #{memid})
 	</insert>
+	<!-- 마이페이지 -->
+	<select id="getMyInfo" parameterType="map" resultType="com.engineers.moyeo.three.dto.MemberDTO">
+		SELECT mem_id, passwd, name, address, tel, birth, email, propic_path as proPicPath, propic_name as proPicName, join_date as joinDate, gender 
+			FROM member_info WHERE mem_id=#{mem_id}
+	</select>
+	<!-- 가입한 모임 개수 -->
+	<select id="getGroupCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM my_group WHERE mem_id=#{mem_id} 
+	</select>
+	<!-- 가입한 모임 리스트 -->
+	<select id="getGroupList" parameterType="map" resultType="com.engineers.moyeo.three.dto.MygroupDTO">
+		SELECT *                   
+		      FROM(SELECT gl.group_num as groupNum, gl.group_name as groupName, gl.group_inte1 as groupInte1, gl.group_inte2 as groupInte2, gl.group_location as groupLoca, rownum rnum 
+		            FROM group_list gl,
+		                 (SELECT group_num
+		                                  FROM my_group m
+		                                 WHERE mem_id = #{mem_id}) g
+		            WHERE gl.group_num = g.group_num
+		            ORDER BY gl.group_name ASC)
+		     WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	</select>
+	<!-- 현 비밀번호 체크 -->
+	<select id="confirmPw" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM member_info WHERE mem_id = #{mem_id} AND passwd = #{passwd}
+	</select>
+	<!-- 비밀번호 변경 -->
+	<update id="changePw" parameterType="map">
+		UPDATE member_info SET passwd = #{passwd} WHERE mem_id = #{mem_id}
+	</update>
+	<!-- 내 정보 변경 -->
+	<update id="changeMyInfo" parameterType="map">
+		UPDATE member_info SET name = #{name}, address = #{address}, email = #{email}, tel = #{tel} WHERE mem_id = #{mem_id}
+	</update>
 <!-- 회원 -->
 </mapper>

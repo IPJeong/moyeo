@@ -22,6 +22,7 @@ import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
+import com.engineers.moyeo.three.dto.MygroupDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Service("faq")
@@ -181,7 +182,7 @@ public class ThreeServiceImpl implements ThreeService{
 		int faqNum = Integer.parseInt(req.getParameter("faqNum"));
 		int cnt = 0;
 		
-		ThreeDTO dto = dao.getInfo(faqNum);
+		ThreeDTO dto = dao.getInfo(faqNum); //FAQ값 가져오기
 		
 		model.addAttribute("dto", dto);		
 		
@@ -448,24 +449,15 @@ public class ThreeServiceImpl implements ThreeService{
 		// 업로드 파일 객체를 꺼냄
 		FileForm fileForm = (FileForm)map.get("fileForm");
 		
-		String name = (req.getParameter("firstName")) + " " + (req.getParameter("secondName"));
+		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		String memid = req.getParameter("memid");
 		String passwd = req.getParameter("password");
 		String address = req.getParameter("loc_category1") + " " + req.getParameter("loc_category2");
-		String tel1 = req.getParameter("tel");
-		String tel = "";
+		String tel = req.getParameter("tel");		
 		Timestamp birth = Timestamp.valueOf(req.getParameter("birth") + " 00:00:00.0");		
 		Timestamp joinDate = new Timestamp(System.currentTimeMillis());
-		String gender = req.getParameter("gender");
-		
-		if(tel1.length() == 10) {
-			tel = tel1.substring(0, 3) + "-" + tel1.substring(3, 6) + "-" + tel1.substring(6);
-		} else if (tel1.length() >= 11) {
-			tel = tel1.substring(0, 3) + "-" + tel1.substring(3, 7) + "-" + tel1.substring(7);
-		} else if (tel1.length() < 10) {
-			tel = tel1.substring(0, 4) + "-" + tel1.substring(4);
-		}
+		String gender = req.getParameter("gender");		
 				
 		String rootPath = Code.rootPath;
 		//프로필 사진 저장 경로
@@ -524,7 +516,9 @@ public class ThreeServiceImpl implements ThreeService{
 			
 		}
 		
-		EmailSender.sendEmail(email, TextMessage.congJoinMsgTitle(memid), TextMessage.congJoinMsgContent(memid), req.getSession().getServletContext().getRealPath("/resources/resource/assets/images/gallery/"));
+		EmailSender.sendEmail(email, TextMessage.congJoinMsgTitle(memid), 
+		TextMessage.congJoinMsgContent(memid), 
+		req.getSession().getServletContext().getRealPath("/resources/resource/assets/images/gallery/"));
 		
 		model.addAttribute("cnt", cnt);		
 		model.addAttribute("memid", memid);
@@ -586,7 +580,8 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/member/memInterestInput";
 	}
-
+	
+	//이벤트 참여
 	@Override
 	public String eventParticipate(Model model) {
 		
@@ -612,6 +607,275 @@ public class ThreeServiceImpl implements ThreeService{
 		model.addAttribute("cnt", cnt);		
 		
 		return "/three/event/eventParticipate";
+	}
+	
+	//마이 페이지
+	@Override
+	public String myPage(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String memid = (String) req.getSession().getAttribute("mem_id");
+		String manageid = (String) req.getSession().getAttribute("manager_id");
+		String mem_id = "";
+		
+		int pageSize = 5;		//	한 페이지당 출력한 글 개수
+		int pageBlock = 5;		//	출력할 페이지 개수
+		
+		int cnt = 0;			// 글 개수
+		int start = 0;			// 현재 페이지 시작번호 : rownum
+		int end	= 0;			// 현재 페이지지 끝번호 : rownum
+		int number = 0;			// 출력할 글 번호
+		String pageNum = null;	// 페이지 번호
+		int currentPage = 0;	// 현재 페이지
+		
+		int pageCount = 0;		// 페이지 개수
+		int startPage = 0;		// 시작 페이지
+		int endPage = 0;		// 마지막 페이지
+		
+		if(memid == null) {
+			mem_id = manageid;
+		} else if(manageid == null) {
+			mem_id = memid;
+		}
+		
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("mem_id", mem_id);
+		
+		MemberDTO dto = dao.getMyInfo(map2); //내 정보 가져오기
+		
+		model.addAttribute("dto", dto);
+		
+		
+		cnt = dao.getGroupCnt(mem_id); //가입한 모임 개수 가져오기
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1; // (5 - 1) * 10 + 1;
+		end = start + pageSize - 1; //41 + 10 - 1 = 50;
+		
+		if(end > cnt) end = cnt;
+				
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		Map<String, Object> dataMap = new HashMap<>();
+		dataMap.put("start", start);
+		dataMap.put("end", end);
+		dataMap.put("mem_id", mem_id);
+		
+		if(cnt > 0) {
+			ArrayList<MygroupDTO> dtos = dao.getGroupList(dataMap); //가입한 모임 리스트 불러오기			
+			req.setAttribute("dtos", dtos);
+			
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		req.setAttribute("cnt", cnt);
+		req.setAttribute("number", number); 
+		req.setAttribute("pageNum", pageNum);		
+		
+		if(cnt > 0) {
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("startPage", startPage);
+			req.setAttribute("endPage", endPage);
+			req.setAttribute("pageCount", pageCount);
+			req.setAttribute("pageBlock", pageBlock);
+		}		
+		
+		return "/three/member/myPage";
+	}
+	
+	//프로필 사진 변경
+	@Override
+	public String changeProImg(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		FileForm fileForm = (FileForm)map.get("fileForm");
+		
+		String memid = (String) req.getSession().getAttribute("mem_id");
+		String manageid = (String) req.getSession().getAttribute("manager_id");
+		String mem_id = "";
+		
+		if(memid == null) {
+			mem_id = manageid;
+		} else if(manageid == null) {
+			mem_id = memid;
+		}
+		
+		String gender = req.getParameter("noImg");
+		
+		int cnt = 0;
+		
+		String rootPath = Code.rootPath;
+		//프로필 사진 저장 경로
+		String proImgPath = Code.profileImgPath;				
+		//프로필 사진 불러올때 경로
+		String proImgPathS = Code.profileImgPathS;
+		//기본 프로필 사진 경로
+		String proDefPath = Code.profileDefPath;
+		//기본 프로필 사진 이름(남성)
+		String proDefNameM = Code.profileDefNameM;
+		//기본 프로필 사진 이름(여성)
+		String proDefNameW = Code.profileDefNameW;
+		
+		if(gender != null) {
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setMem_id(mem_id);			
+			dto.setProPicPath(proDefPath);		
+			if(gender.equals("man")) {
+				dto.setProPicName(proDefNameM);
+			} else if (gender.equals("woman")) {
+				dto.setProPicName(proDefNameW);
+			}
+			
+			dao.proImgInsert(dto);
+			
+			cnt = 1;
+			
+		} else {
+			cnt = -1;
+			List<MultipartFile> files = fileForm.getFiles();
+			String filename = null;
+			// 업로드 파일 확인
+			for (MultipartFile multipartFile : files) {
+				//업로드 파일 이름을 받아옴			
+				String fileName = multipartFile.getOriginalFilename();			
+							
+				if(fileName.trim().length()>4) {				//사진저장 메인경로
+												
+					int type = FileManager.checkFileType(fileName);					
+					
+					if(type == 1) {						
+						filename = FileManager.saveFile(multipartFile, rootPath + proImgPath, fileName);
+						MemberDTO dto2 = new MemberDTO();
+						dto2.setProPicPath(proImgPathS);
+						dto2.setProPicName(filename);
+						dto2.setMem_id(mem_id);
+						
+						dao.proImgInsert(dto2); //프로필 사진 입력
+						
+						cnt = 2;
+					} 
+				}
+				
+			}
+		
+		}
+		model.addAttribute("cnt", cnt);
+		
+		return "/three/member/changeProImg";
+	}
+	
+	//현 비밀번호 체크
+	@Override
+	public void curPwChk(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException {
+		//입력받은 아이디
+		String memid = (String) req.getSession().getAttribute("mem_id");
+		String manageid = (String) req.getSession().getAttribute("manager_id");
+		String mem_id = "";
+		
+		if(memid == null) {
+			mem_id = manageid;
+		} else if(manageid == null) {
+			mem_id = memid;
+		}
+		
+		String passwd = req.getParameter("passwd");
+					
+		Map<String, Object> map = new HashMap<>();
+		map.put("passwd", passwd);
+		map.put("mem_id", mem_id);
+		
+		int cnt = dao.confirmPw(map); //현 비밀번호 체크
+		
+		mav.addObject("cnt", cnt);
+		
+	}
+	
+	//비밀번호 변경
+	@Override
+	public String changePw(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String memid = (String) req.getSession().getAttribute("mem_id");
+		String manageid = (String) req.getSession().getAttribute("manager_id");
+		String mem_id = "";
+		
+		if(memid == null) {
+			mem_id = manageid;
+		} else if(manageid == null) {
+			mem_id = memid;
+		}
+		
+		String passwd = req.getParameter("password");
+		
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("passwd", passwd);
+		map2.put("mem_id", mem_id);
+		
+		int cnt = dao.changePw(map2); //비밀번호 변경
+		
+		model.addAttribute("cnt", cnt);
+		
+		return "/three/member/changePw";
+	}
+	
+	//내 정보 변경
+	@Override
+	public String changeMyInfo(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String memid = (String) req.getSession().getAttribute("mem_id");
+		String manageid = (String) req.getSession().getAttribute("manager_id");
+		String mem_id = "";
+		
+		if(memid == null) {
+			mem_id = manageid;
+		} else if(manageid == null) {
+			mem_id = memid;
+		}
+		
+		String name = req.getParameter("name");		
+		String address = req.getParameter("address");		
+		if (address == null) {
+			address = req.getParameter("loc_category1") + " " + req.getParameter("loc_category2");
+		} 
+		
+		String email = req.getParameter("email");
+		String tel = req.getParameter("tel");
+		
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("mem_id", mem_id);
+		map2.put("name", name);
+		map2.put("address", address);
+		map2.put("email", email);
+		map2.put("tel", tel);
+		
+		int cnt = dao.changeMyInfo(map2);
+		
+		model.addAttribute("cnt", cnt);		
+		
+		return "/three/member/changeMyInfo";
 	}
 	
 	
