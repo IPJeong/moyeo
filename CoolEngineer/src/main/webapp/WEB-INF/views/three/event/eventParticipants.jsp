@@ -1,0 +1,125 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<html>
+<head>
+<!-- META SECTION -->
+<title>MoYeo-새로운 만남의 시작</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="icon" href="/moyeo/resources/resource/favicon.ico"
+	type="image/x-icon" />
+<!-- END META SECTION -->
+
+<!-- CSS INCLUDE -->
+<link rel="stylesheet" type="text/css" id="theme"
+	href="/moyeo/resources/resource/css/theme-default.css" />
+<!-- EOF CSS INCLUDE -->
+<style>
+
+.panel {
+	height: auto;
+}
+
+
+</style>
+</head>
+
+<body class="x-dashboard">
+	<!-- START PAGE CONTAINER -->
+	<script>
+      document.body.style.overflow='hidden';  
+      if (navigator.userAgent.indexOf('Chrome')>-1) {  
+			    window.resizeTo(450, 550);   
+      }
+    </script>
+
+	<div class="page-container">
+
+		<!-- PAGE CONTENT -->
+		<div class="page-content">
+			<!-- PAGE CONTENT WRAPPER -->
+			<div class="page-content-wrap">
+
+				<div class="panel panel-default">
+					<div class="panel-heading" >
+						<h3 class="panel-title">참여자 리스트</h3>
+					</div>
+					<div class="panel-body panel-body-table">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>아이디</th>
+									<th>당첨</th>									
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>								
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- START SCRIPTS -->
+	<!-- START PLUGINS -->
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
+	<!-- END PLUGINS -->
+
+	<!-- START THIS PAGE PLUGINS-->
+	<script type='text/javascript'
+		src="/moyeo/resources/resource/js/plugins/icheck/icheck.min.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/morris/raphael-min.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/morris/morris.min.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/rickshaw/d3.v3.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/rickshaw/rickshaw.min.js"></script>
+	<script type='text/javascript'
+		src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+	<script type='text/javascript'
+		src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+	<script type='text/javascript'
+		src='/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js'></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/owl/owl.carousel.min.js"></script>
+
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/moment.min.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/daterangepicker/daterangepicker.js"></script>
+	<!-- END THIS PAGE PLUGINS-->
+
+	<!-- START TEMPLATE -->
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/actions.js"></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script>
+	<!-- END TEMPLATE -->
+	<!-- END SCRIPTS -->
+</body>
+</html>

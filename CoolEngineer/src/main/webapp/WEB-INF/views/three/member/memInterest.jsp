@@ -132,4 +132,4 @@
 <script type="text/javascript" src="/moyeo/resources/resource/js/jquery-1.12.4.js"></script> -->
 <!-- END TEMPLATE -->
 
-<%@ include file="../../etc/footer.jsp"%>
+<%@ include file="../../etc/footer2.jsp"%>
