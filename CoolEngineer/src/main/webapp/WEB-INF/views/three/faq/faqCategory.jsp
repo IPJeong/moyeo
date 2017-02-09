@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../etc/header.jsp"%>
+<%@ include file="../../etc/header2.jsp"%>
 <div class="col-md-6-6">
 	<div class="panel panel-default">
 	    <div class="panel-body">
@@ -22,4 +22,4 @@
 	</div>
 </div>    
 
-<%@ include file="../../etc/footer.jsp"%>
+<%@ include file="../../etc/footer2.jsp"%>
