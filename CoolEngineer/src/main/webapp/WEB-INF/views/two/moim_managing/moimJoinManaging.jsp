@@ -8,16 +8,19 @@
 <script type="text/javascript">
 
 function joinOK() {
+	var askJoinOK = confirm("정말 가입 승인하겠습니까?");
 	
-	$('#request_num').each(function(index) {
-		if($(this).prop("checked")){
-			document.forms['moimjoinform'].action = "moimJoinOK"; 
-			document.forms['moimjoinform'].submit(); 
-		} else {
-			alert("항목을 체크하세요.");
-			return false;
-		}
-	})
+	if (askJoinOK == true) {
+		$('#request_num').each(function(index) {
+			if($(this).prop("checked")){
+				document.forms['moimjoinform'].action = "moimJoinOK"; 
+				document.forms['moimjoinform'].submit(); 
+			} else {
+				alert("항목을 체크하세요.");
+				return false;
+			}
+		})
+	}
 }
 
 function joinNO() {
@@ -29,15 +32,19 @@ function joinNO() {
 		}
 	})
 	 */
-	$('#request_num').each(function(index) {
-		if($(this).prop("checked")){
-			document.forms['moimjoinform'].action = "moimJoinNO"; 
-			document.forms['moimjoinform'].submit(); 
-		} else {
-			alert("항목을 체크하세요.");
-			return false;
-		}
-	})
+	var askJoinNO = confirm("정말 가입 거절하겠습니까?");
+	
+	if (askJoinNO == true) { 
+		$('#request_num').each(function(index) {
+			if($(this).prop("checked")){
+				document.forms['moimjoinform'].action = "moimJoinNO"; 
+				document.forms['moimjoinform'].submit(); 
+			} else {
+				alert("항목을 체크하세요.");
+				return false;
+			}
+		})
+	}
 }
 
 </script>
@@ -94,24 +101,25 @@ li {
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
 	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
 	<li class="active">모임 관리</li>
 </ul>
 <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
+<c:if test="${sessionScope.group_per != 1 && sessionScope.group_per != 2}">
+<script type="text/javascript">
+	window.location='/moyeo/two/moimManagerLoginConfirm?group_num=${group_num}';
+</script>	
+</c:if>
 
-
-<!-- 모임 사이드바 시작 -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
-		<!-- START LOGIN BLOCK -->
-	
+
 		<!-- 모임페이지 사이드바 시작 -->
 		<%@include file="../../etc/moim_side.jsp"%>
 		<!-- 모임페이지 사이드바 종료 -->
-		
-		<!-- START PHOTO BLOCK -->
+
 		<div class="col-md-56" style="margin-top: 10px;">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -120,15 +128,13 @@ li {
 					</div>
 				</div>
 				
-			<br><br><br><br><br>
+			<br><br><br><br>
 					<h2><center>가입신청 관리</center></h2>
 			<br>	
 					
-			<div class="panel-body padding-0" style="text-align:center; font-size: 15px;" >
+			<div class="panel panel-default" style="text-align:center; height:750px; font-size:15px;">
 				<div class="chart-holder" id="dashboard-bar-1"
 					style="height:70px; margin:15px;">
-			
-
 				
 				<div>
 					<form name="moimjoinform">
@@ -144,8 +150,8 @@ li {
 							<table class="table table-striped table-hover"
 								style="width:90%; float:left; margin-left: 5%;">
 								<tr>
-									<td align="center" style="width:6%">선택</td>
-									<td align="center" style="width:30%">아이디</td>
+									<td align="center" style="width:8%">선택</td>
+									<td align="center" style="width:28%">아이디</td>
 									<td align="center" style="width:20%">신청 날짜</td>
 									<td align="center" style="width:10%">상태</td>
 									<td align="center" style="width:10%">이름</td>
@@ -254,11 +260,11 @@ li {
 				
 				
 			</div>
-			<!-- END PHOTO BLOCK -->
 
 		</div>
 	</div>
 <!-- END ROW -->
+</div>
 </div>
 
 <%@ include file="../../etc/footer.jsp"%>

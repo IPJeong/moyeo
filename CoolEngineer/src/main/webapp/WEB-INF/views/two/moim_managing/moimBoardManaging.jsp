@@ -27,39 +27,51 @@ function boardCategorySelect() {
 }
 
 function deleteNoticeBoardArticle() {
-	$('#group_noti_num').each(function(index) {
-		if($(this).prop("checked")){
-			document.forms['moimboardform'].action = "deleteNoticeBoardArticle"; 
-			document.forms['moimboardform'].submit(); 
-		} else {
-			alert("항목을 체크하세요.");
-			return false;
-		}
-	})
+	var askDelete = confirm("정말 삭제하시겠습니까?");
+	
+	if (askDelete == true) {
+		$('#group_noti_num').each(function(index) {
+			if($(this).prop("checked")){
+				document.forms['moimboardform'].action = "deleteNoticeBoardArticle"; 
+				document.forms['moimboardform'].submit(); 
+			} else {
+				alert("항목을 체크하세요.");
+				return false;
+			}
+		})
+	}
 }
 
 function deleteGreetingBoardArticle() {
-	$('#greeting_num').each(function(index) {
-		if($(this).prop("checked")){
-			document.forms['moimboardform'].action = "deleteGreetingBoardArticle"; 
-			document.forms['moimboardform'].submit(); 
-		} else {
-			alert("항목을 체크하세요.");
-			return false;
-		}
-	})
+	var askDelete = confirm("정말 삭제하시겠습니까?");
+	
+	if (askDelete == true) {
+		$('#greeting_num').each(function(index) {
+			if($(this).prop("checked")){
+				document.forms['moimboardform'].action = "deleteGreetingBoardArticle"; 
+				document.forms['moimboardform'].submit(); 
+			} else {
+				alert("항목을 체크하세요.");
+				return false;
+			}
+		})
+	}	
 }
 
 function deletePostBoardArticle() {
-	$('#post_num').each(function(index) {
-		if($(this).prop("checked")){
-			document.forms['moimboardform'].action = "deletePostBoardArticle"; 
-			document.forms['moimboardform'].submit(); 
-		} else {
-			alert("항목을 체크하세요.");
-			return false;
-		}
-	})
+	var askDelete = confirm("정말 삭제하시겠습니까?");
+	
+	if (askDelete == true) {
+		$('#post_num').each(function(index) {
+			if($(this).prop("checked")){
+				document.forms['moimboardform'].action = "deletePostBoardArticle"; 
+				document.forms['moimboardform'].submit(); 
+			} else {
+				alert("항목을 체크하세요.");
+				return false;
+			}
+		})
+	}	
 }
 </script>
 
@@ -112,27 +124,30 @@ li {
 </style>
 
 <!-- START BREADCRUMB -->
-<ul class="breadcrumb push-down-0">
-	<li><a href="/moyeo/main/home">Home</a></li>
-	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
-	<li class="active">모임 관리</li>
-</ul>
+	<ul class="breadcrumb push-down-0">
+		<li><a href="/moyeo/main/home">Home</a></li>
+		<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+		<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+		<li class="active">모임 관리</li>
+	</ul>
 <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
+<c:if test="${sessionScope.group_per != 1 && sessionScope.group_per != 2}">
+<script type="text/javascript">
+	window.location='/moyeo/two/moimManagerLoginConfirm?group_num=${group_num}';
+</script>	
+</c:if>
 
-
-<!-- 모임 사이드바 시작 -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
-		<!-- START LOGIN BLOCK -->
+
 	
 		<!-- 모임페이지 사이드바 시작 -->
 		<%@include file="../../etc/moim_side.jsp"%>
 		<!-- 모임페이지 사이드바 종료 -->
 		
-		<!-- START PHOTO BLOCK -->
+
 		<div class="col-md-56" style="margin-top: 10px;">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -141,18 +156,14 @@ li {
 					</div>
 				</div>
 				
-			<br><br><br><br><br>
+			<br><br><br><br>
 					<h2><center>게시판 관리</center></h2>
-			<br><br>		
+			<br>		
 					
-			<div class="panel-body padding-0" style="text-align:center; font-size: 15px;" >
+			<div class="panel panel-default" style="text-align:center; height:750px; font-size:15px;">
 				<div class="chart-holder" id="dashboard-bar-1"
 					style="height:70px; margin:15px;">
-			
-			
-				<br><br><br>
 
-				
 				<div>
 					<form name="moimboardform">
 						<input type="hidden" name="group_num" value="${group_num}">
@@ -322,14 +333,13 @@ li {
 
 				</div>
 			</div>
-				
-				
-				
-			</div>
-			<!-- END PHOTO BLOCK -->
 
+		
 		</div>
-	</div>
+
+</div>
+</div>
+</div>
 <!-- END ROW -->
 </div>
 

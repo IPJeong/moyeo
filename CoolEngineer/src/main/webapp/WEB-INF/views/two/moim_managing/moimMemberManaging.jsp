@@ -33,12 +33,20 @@ function moimMemberRank() {
 function moimMemberBanish() {
 	var chk = false;
 	
+	var askMemberBanish = confirm("정말 강제탈퇴 시키겠습니까?");
+	
 	if(document.moimmemberform.my_group_num.checked == true) {
 		chk = true;
+		
+		if(askMemberBanish == true) {
+			
+		} else {
+			return false;
+		}
 	}
 	
 	for(var i=0; i<document.moimmemberform.my_group_num.length; i++){
-		if(document.moimmemberform.my_group_num[i].checked == true) {		
+		if(document.moimmemberform.my_group_num[i].checked == true) {	
 			chk = true;
 			var my_group_num = document.moimmemberform.my_group_num.value;
 			var group_num = document.moimmemberform.group_num.value;
@@ -51,7 +59,6 @@ function moimMemberBanish() {
 		return false;
 	}
 }
-
 </script>
 
 <style>
@@ -106,24 +113,26 @@ li {
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
 	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
-	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${group_name}</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
 	<li class="active">모임 관리</li>
 </ul>
 <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
-
+<c:if test="${sessionScope.group_per != 1}">
+<script type="text/javascript">
+	window.location='/moyeo/two/moimManagerLoginConfirm2?group_num=${group_num}';
+</script>	
+</c:if>
 
 <!-- 모임 사이드바 시작 -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
-		<!-- START LOGIN BLOCK -->
-	
+
 		<!-- 모임페이지 사이드바 시작 -->
 		<%@include file="../../etc/moim_side.jsp"%>
 		<!-- 모임페이지 사이드바 종료 -->
 		
-		<!-- START PHOTO BLOCK -->
 		<div class="col-md-56" style="margin-top: 10px;">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -132,11 +141,11 @@ li {
 					</div>
 				</div>
 				
-			<br><br><br><br><br>
-					<h2><center>모임원 관리</center></h2>
-			<br>	
+			<br><br><br><br>
+					<h2><center>모임원 관리</center></h2>	
+			<br>
 					
-			<div class="panel-body padding-0" style="text-align:center; font-size: 15px;" >
+			<div class="panel panel-default" style="text-align:center; height:750px; font-size:15px;">
 				<div class="chart-holder" id="dashboard-bar-1"
 					style="height:70px; margin:15px;">
 			<!-- 
@@ -154,10 +163,8 @@ li {
 			 -->
 				<br>
 				
-				
-				
 				<div>
-					<form name="moimmemberform">
+					<form name="moimmemberform" style="margin-top:-20px;">
 						<input type="hidden" name="group_num" value="${group_num}">
 						<div style="float:right; margin-right:5%;">
 								해당 모임원을
@@ -170,10 +177,10 @@ li {
 						
 						<c:if test="${cnt == 0}">
 							<table class="table table-striped table-hover"
-								style="width:90%; margin-left: 5%;">
+								style="width:90%; margin-left:5%;">
 								<tr class="info">
-									<td align="center" style="width:7.5%">선택</td>
-									<td align="center" style="width:27.5%">아이디</td>
+									<td align="center" style="width:10%">선택</td>
+									<td align="center" style="width:25%">아이디</td>
 									<td align="center" style="width:15%">회원등급</td>
 									<td align="center" style="width:15%">이름</td>
 									<td align="center" style="width:20%">출생년도</td>
@@ -189,10 +196,10 @@ li {
 						
 						<c:if test="${cnt > 0}">
 							<table class="table table-striped table-hover"
-								style="width:45%; float:left; margin-left: 5%;">
+								style="width:46%; float:left; margin-left:5%;">
 								<tr class="info">
-									<td align="center" style="width:15%">선택</td>
-									<td align="center" style="width:55%">아이디</td>
+									<td align="center" style="width:25%">선택</td>
+									<td align="center" style="width:45%">아이디</td>
 									<td align="center" style="width:30%">회원등급</td>
 								</tr>
 							<c:forEach var="dtos" items="${dtos}">
@@ -201,7 +208,9 @@ li {
 										<input type="radio" name="my_group_num" value="${dtos.my_group_num}">
 									</td>
 									<td style="border:0;">
-										${dtos.mem_id}
+										<a href="#" onclick="window.open('/moyeo/six/moimMain/moimMemberDetail?mem_id=${dtos.mem_id}&group_num=${dtos.group_num}', '모임멤버보기', 'width=700, height=700, top=100, left=500')">
+											${dtos.mem_id}
+										</a>
 									</td>
 									<td style="border:0;" align="center">
 										<c:if test="${dtos.group_per == 1}">
@@ -221,7 +230,7 @@ li {
 					
 					<c:if test="${cnt > 0}">
 							<table class="table table-striped table-hover"
-								style="width:45%; float:right; margin-right: 5%;">
+								style="width:44%; float:right; margin-right:5%;">
 								<tr class="info">
 									<td align="center" style="width:30%">이름</td>
 									<td align="center" style="width:40%">출생년도</td>
@@ -284,10 +293,10 @@ li {
 				
 				
 			</div>
-			<!-- END PHOTO BLOCK -->
 
-		</div>
+	</div>		
 	</div>
+</div>
 <!-- END ROW -->
 </div>
 

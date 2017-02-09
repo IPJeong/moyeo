@@ -4,8 +4,10 @@
 <html>
 <body>
 <script type="text/javascript">
-	alert("모임장은 탈퇴시킬 수 없습니다.");
+	alert("모임장은 강제탈퇴시킬 수 없습니다.");
 	history.back();
 </script>
+</body>
+</html>
 </body>
 </html>
