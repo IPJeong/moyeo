@@ -270,7 +270,7 @@ li {
 
 </style>
 
-<%@ include file="../../etc/header.jsp"%>
+<%@ include file="../../etc/header2.jsp"%>
 
          <!-- START BREADCRUMB -->
                 <ul class="breadcrumb push-down-0">
@@ -435,4 +435,4 @@ li {
 </div>
 <!-- END ROW -->
            
-<%@ include file="../../etc/footer.jsp"%>
+<%@ include file="../../etc/footer2.jsp"%>

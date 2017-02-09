@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>    
 <script type="text/javascript" src="/moyeo/resources/customScript/two.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<%@ include file="../../etc/header.jsp"%>       
+<%@ include file="../../etc/header2.jsp"%>       
 <!-- START SCRIPTS -->
 <!--         START PLUGINS -->
         <script type="text/javascript" src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
@@ -260,4 +260,4 @@ li {
 		</div>
 	</div>
 <!-- END ROW -->
-<%@ include file="../../etc/footer.jsp"%>
+<%@ include file="../../etc/footer2.jsp"%>

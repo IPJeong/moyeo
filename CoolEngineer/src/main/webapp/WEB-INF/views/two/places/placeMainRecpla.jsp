@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>    
 <script type="text/javascript" src="/moyeo/resources/customScript/two.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<%@ include file="../../etc/header.jsp"%>  
+<%@ include file="../../etc/header2.jsp"%>  
 
 <script type="text/javascript">
 function select_recpla_category() {
