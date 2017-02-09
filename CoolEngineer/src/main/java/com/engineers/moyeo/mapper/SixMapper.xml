@@ -527,8 +527,50 @@
 		INSERT INTO interest_group (intergroup_num, group_num, mem_id) VALUES (interest_group_seq.NEXTVAL, #{group_num}, #{mem_id})
 	</insert>
 	
+	<!-- 관심모임 삭제 -->
 	<delete id="favoriteDelete" parameterType="com.engineers.moyeo.six.dto.InterestGroupDTO">
 		DELETE FROM interest_group WHERE mem_id = #{mem_id} AND group_num = #{group_num}
 	</delete>
+	
+	<!-- 인기모임 조회(회원수, 모임후기수, 출석체크수, 가입인사수, 모임공지수, 모임일정수) -->
+	<select id="hotMoim" resultType="com.engineers.moyeo.six.dto.HotMoimDTO">
+		SELECT mpcnt + cpcnt + mgcnt + gbcnt + gncnt + mlcnt AS cnt, group_num, group_name, group_inte1, group_inte2, group_location
+		 FROM 
+		 (SELECT NVL(a.mpcnt, 0) AS mpcnt, NVL(b.cpcnt, 0) AS cpcnt, NVL(c.mgcnt, 0) AS mgcnt, NVL(d.gbcnt, 0) AS gbcnt, 
+		  NVL(e.gncnt, 0) AS gncnt, NVL(f.mlcnt, 0) AS mlcnt, b.group_num, m.group_name, m.group_inte1, m.group_inte2, m.group_location
+		    FROM(SELECT COUNT(mp.post_num) AS mpcnt, gl.group_num AS group_num
+		          FROM (SELECT group_num 
+		            FROM group_list) gl, meeting_post mp
+		            WHERE gl.group_num = mp.group_num
+		            GROUP BY gl.group_num) a,
+		        (SELECT COUNT(cp.present_num) AS cpcnt, gl.group_num AS group_num
+		          FROM (SELECT group_num 
+		            FROM group_list) gl, check_present cp
+		            WHERE gl.group_num = cp.group_num
+		            GROUP BY gl.group_num) b,
+		        (SELECT COUNT(mg.my_group_num) AS mgcnt, gl.group_num AS group_num
+		          FROM (SELECT group_num
+		            FROM group_list) gl, my_group mg
+		            WHERE gl.group_num = mg.group_num
+		            GROUP BY gl.group_num) c,
+		        (SELECT COUNT(gb.greeting_num) AS gbcnt, gl.group_num AS group_num
+		          FROM (SELECT group_num
+		            FROM group_list) gl, greeting_board gb
+		            WHERE gl.group_num = gb.group_num
+		            GROUP BY gl.group_num) d,
+		        (SELECT COUNT(gn.group_noti_num) AS gncnt, gl.group_num AS group_num
+		          FROM (SELECT group_num
+		            FROM group_list) gl, group_notice gn
+		            WHERE gl.group_num = gn.group_num
+		            GROUP BY gl.group_num) e,
+		        (SELECT COUNT(ml.meeting_num) AS mlcnt, gl.group_num AS group_num
+		          FROM (SELECT group_num
+		            FROM group_list) gl, meeting_list ml
+		            WHERE gl.group_num = ml.group_num
+		            GROUP BY gl.group_num) f,
+		        group_list m    
+		WHERE a.group_num(+) = b.group_num AND b.group_num = c.group_num(+) AND b.group_num = d.group_num(+) AND b.group_num = e.group_num(+)
+		 AND b.group_num = f.group_num(+) AND b.group_num = m.group_num) ORDER BY cnt DESC, group_num
+	</select>
 	
 </mapper>

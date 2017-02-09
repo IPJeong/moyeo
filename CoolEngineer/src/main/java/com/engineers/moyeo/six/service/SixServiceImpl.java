@@ -25,6 +25,7 @@ import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
+import com.engineers.moyeo.six.dto.HotMoimDTO;
 import com.engineers.moyeo.six.dto.InterestGroupDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
@@ -656,6 +657,8 @@ public class SixServiceImpl implements SixService{
 		ArrayList<MoimOpenDTO> dtos18 = sixDao.categoryHobbyR();
 		model.addAttribute("dtos18", dtos18);
 	
+		ArrayList<HotMoimDTO> hotDtos = sixDao.hotMoim();
+		model.addAttribute("hotDtos", hotDtos);
 	}
 
 	//모임카테고리-지역별
@@ -712,6 +715,8 @@ public class SixServiceImpl implements SixService{
 
 		ArrayList<MoimOpenDTO> dtos17 = sixDao.categoryLocationQ();
 		model.addAttribute("dtos17", dtos17);
+		
+		
 	}
 
 	//모임카테고리-규모별

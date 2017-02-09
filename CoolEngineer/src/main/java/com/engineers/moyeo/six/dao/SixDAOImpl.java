@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
+import com.engineers.moyeo.six.dto.HotMoimDTO;
 import com.engineers.moyeo.six.dto.InterestGroupDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
@@ -948,9 +949,17 @@ public class SixDAOImpl implements SixDAO{
 	
 	//관심모임 해제
 	public int favoriteDelete(InterestGroupDTO dto) {
-		SixDAO dao =this.sqlSession.getMapper(SixDAO.class);
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		int cnt = dao.favoriteDelete(dto);
 		
 		return cnt;
+	}
+	
+	//인기모임 목록 조회
+	public ArrayList<HotMoimDTO> hotMoim() {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<HotMoimDTO> dtos = dao.hotMoim();
+		
+		return dtos;
 	}
 }

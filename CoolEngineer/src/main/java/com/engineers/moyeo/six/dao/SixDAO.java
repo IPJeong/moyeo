@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
+import com.engineers.moyeo.six.dto.HotMoimDTO;
 import com.engineers.moyeo.six.dto.InterestGroupDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
@@ -336,4 +337,7 @@ public interface SixDAO {
 	
 	//관심모임 해제
 	public int favoriteDelete(InterestGroupDTO dto);
+	
+	//인기모임 목록 조회
+	public ArrayList<HotMoimDTO> hotMoim();
 }
