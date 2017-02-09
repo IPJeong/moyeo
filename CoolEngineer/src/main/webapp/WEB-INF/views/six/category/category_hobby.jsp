@@ -78,6 +78,10 @@
 	border-color: #4e7aa2;
 	color: #3c44ab;
 }
+a{
+	text-decoration:none;
+}
+
 </style>
 </head>
 <body class="x-dashboard">
@@ -537,7 +541,20 @@
 												</div>
 												<div class="panel-body padding-0">
 													<div class="chart-holder" id="dashboard-bar-1"
-														style="height: 200px;"></div>
+														style="height: 200px;">
+														<c:forEach var="dto" items="${hotDtos}" begin="0" end="17" >
+														<div class="panel-body padding-0" style="height:33px; width:480px; float:left;">
+															<ul>
+																<li
+																	style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
+																	<a
+																	href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
+																		${dto.group_name} <div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2} , ${dto.group_location})</div></a>
+																</li>
+															</ul>
+														</div>
+														</c:forEach>
+													</div>
 												</div>
 
 											</div>
