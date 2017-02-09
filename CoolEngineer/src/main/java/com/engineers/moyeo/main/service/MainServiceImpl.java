@@ -152,6 +152,8 @@ public class MainServiceImpl implements MainService{
 		String endDate = req.getParameter("endDate");
 		String[] wordOps = req.getParameter("wordOps").split(",");
 		String printMsg = "";
+		String cow = req.getParameter("countOfWords");
+		if(cow == null)cow = "30";
 		int countOfWords = Integer.parseInt(req.getParameter("countOfWords"));
 		Map<String, Object> map = new HashMap<>();
 		
