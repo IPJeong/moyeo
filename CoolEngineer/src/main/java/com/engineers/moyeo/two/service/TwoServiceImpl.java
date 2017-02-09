@@ -1,6 +1,5 @@
 package com.engineers.moyeo.two.service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,25 +12,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.engineers.moyeo.five.dto.MeetingPostDTO;
+import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.four.dto.GreetingBoardDTO;
+import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.six.dao.SixDAO;
-import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.two.dao.TwoDAO;
-import com.engineers.moyeo.two.dto.Greeting_boardDTO;
-import com.engineers.moyeo.two.dto.Group_noticeDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
-import com.engineers.moyeo.two.dto.Meeting_postDTO;
 import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
+import com.engineers.moyeo.two.dto.Moim_pictureDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_picDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
+import com.engineers.moyeo.two.dto.StatisticsDTO;
 import com.engineers.moyeo.two.dto.SuggestionDTO;
 
 @Service
@@ -89,7 +90,7 @@ public class TwoServiceImpl implements TwoService{
 		int cnt = 0;			
 		int start = 0;	//rownum
 		int end = 0;	//rownum
-		int sug_num = 0;		
+		int num = 0;		
 		String pageNum = null; 	
 		int currentPage = 0;
 		
@@ -113,7 +114,7 @@ public class TwoServiceImpl implements TwoService{
 		
 		if(end > cnt) end = cnt;
 
-		sug_num = cnt - (currentPage - 1) * pageSize;
+		num = cnt - (currentPage - 1) * pageSize;
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("start", start);
@@ -125,14 +126,14 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("dtos", dtos);
 		}
 
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		
-		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
+		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
 		model.addAttribute("cnt", cnt);
-		model.addAttribute("sug_num", sug_num); 
+		model.addAttribute("num", num); 
 		model.addAttribute("pageNum", pageNum);
 		
 		if (cnt > 0) {
@@ -172,6 +173,7 @@ public class TwoServiceImpl implements TwoService{
 		int sug_num = Integer.parseInt(req.getParameter("sug_num"));
 		String manager_id = (String) req.getSession().getAttribute("manager_id"); 
 		String sol_content = req.getParameter("sol_content");
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
 		
 		SuggestionDTO dto = new SuggestionDTO();
 		
@@ -182,6 +184,7 @@ public class TwoServiceImpl implements TwoService{
 		int cnt = twoDao.checkSuggestion(dto);
 		
 		model.addAttribute("cnt", cnt);
+		model.addAttribute("pageNum", pageNum);
 		
 		return "two/suggestion/suggestionCheckPro";
 	}
@@ -246,10 +249,10 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("lppdtos", lppdtos);
 		}
 
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		
-		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
+		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
 		model.addAttribute("cnt", cnt);
@@ -336,10 +339,10 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("lppdtos", lppdtos);
 		}
 
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		
-		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
+		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
 		model.addAttribute("cnt", cnt);
@@ -418,10 +421,10 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("lppdtos", lppdtos);
 		}
 
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		
-		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
+		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
 		model.addAttribute("cnt", cnt);
@@ -508,10 +511,10 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("lppdtos", lppdtos);
 		}
 
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		
-		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
+		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
 		model.addAttribute("cnt", cnt);
@@ -579,10 +582,10 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("ppdtos", ppdtos);
 		}
 
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		
-		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
+		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
 		model.addAttribute("cnt", cnt);
@@ -657,10 +660,10 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("rpdtos", rpdtos);
 		}
 
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		startPage = (currentPage / pageBlock) * pageBlock + 1; 
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		
-		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
+		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
 		model.addAttribute("cnt", cnt);
@@ -806,25 +809,25 @@ public class TwoServiceImpl implements TwoService{
 		for (MultipartFile multipartFile : files) {
 			// 업로드된 파일 이름을 받아옴
 			String uploadFileName = multipartFile.getOriginalFilename();
-						
+					
 			if(uploadFileName.trim().length()>4){
-							
-				// 장소사진의 저장경로
+						
 				String rootPath = Code.rootPath;
+				// 장소사진의 저장경로
 				String imgPath = Code.placeImgPath;
 
 				// 파일의 타입을 확인하여 가져옴
 				int type = FileManager.checkFileType(uploadFileName);
 
 				String fileName = null;
-			
+					
 				if(type == 1) {
 					// 파일을 저장 후 저장된 파일명을 반환
 					fileName = FileManager.saveFile(multipartFile, rootPath + imgPath, uploadFileName);
 					Place_picDTO ppdto = new Place_picDTO();
-					ppdto.setPlace_pic_path(imgPath);
+					ppdto.setPlace_pic_path(Code.placeImgPathS);
 					ppdto.setPlace_pic_name(fileName);
-					ppdto.setPlace_num(place_num);
+					ppdto.setPlace_num(place_num);					
 					twoDao.modifyPictures(ppdto);
 				}
 			}			
@@ -1078,9 +1081,23 @@ public class TwoServiceImpl implements TwoService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
 		int cnt = 0;
-		int group_num = (int) req.getSession().getAttribute("group_num");
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
 		String mem_id = (String) req.getSession().getAttribute("mem_id");
 		
+		//--사이드 시작
+		//사이드- 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("open_dto", open_dto);
+		
+		//사이드 - 대표사진 불러오기
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
+		model.addAttribute("picture_dto", picture_dto);
+		
+		//사이드 - 모임원리스트 불러오기
+		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
+		model.addAttribute("member_dtos", member_dtos);	
+		//--사이드 끝
+
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("group_num", group_num);
 		daoMap.put("mem_id", mem_id);
@@ -1112,11 +1129,16 @@ public class TwoServiceImpl implements TwoService{
 		daoMap.put("mem_id", mem_id);
 		
 		int join_check = twoDao.moimJoinCheck(daoMap);
+		int banish_check = twoDao.moimBanishCheck(daoMap);
 		
-		if (join_check > 0) {
-			cnt = -1;
+		if (banish_check == 0) {
+			if (join_check > 0) {
+				cnt = -1;
+			} else {
+				cnt = twoDao.moimJoin(daoMap);
+			}
 		} else {
-			cnt = twoDao.moimJoin(daoMap);
+			cnt = -2;
 		}
 		
 		model.addAttribute("group_num", group_num);
@@ -1131,24 +1153,27 @@ public class TwoServiceImpl implements TwoService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
 		int cnt = 0;
-		int group_num = (int) req.getSession().getAttribute("group_num");
+		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
 		String mem_id = (String) req.getSession().getAttribute("mem_id");
 
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("group_num", group_num);
-		daoMap.put("mem_id", mem_id);
-		
+		daoMap.put("mem_id", mem_id);	
 
 		MyGroupDTO dto = new MyGroupDTO();
 		
 		dto = twoDao.getMoimMemberInfo2(daoMap);
 		
 		int group_per = dto.getGroup_per();
-		
+
 		if(group_per == Code.moimJang) {
 			cnt = -1;
 		} else {
 			cnt = twoDao.moimWithdraw(daoMap);
+			
+			daoMap.put("status", "탈퇴");
+			twoDao.moimJoinOut(daoMap);
 		}
 		
 		model.addAttribute("group_num", group_num);
@@ -1177,9 +1202,7 @@ public class TwoServiceImpl implements TwoService{
 		
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
 		
-		
 		//--사이드 시작
-		String mem_id = (String)req.getSession().getAttribute("mem_id");
 			//사이드- 모임명, 모임카테고리 불러오기
 			MoimOpenDTO open_dto = sixDao.moimMain(group_num);
 			model.addAttribute("open_dto", open_dto);
@@ -1325,11 +1348,10 @@ public class TwoServiceImpl implements TwoService{
 		int endPage = 0;
 		
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
-		
+
 		
 		//--사이드 시작
 			//사이드- 모임명, 모임카테고리 불러오기
-			String mem_id = (String)req.getSession().getAttribute("mem_id");
 			MoimOpenDTO open_dto = sixDao.moimMain(group_num);
 			model.addAttribute("open_dto", open_dto);
 			
@@ -1341,7 +1363,7 @@ public class TwoServiceImpl implements TwoService{
 			ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
 			model.addAttribute("member_dtos", member_dtos);	
 		//--사이드 끝
-			
+		
 		cnt = twoDao.getMoimMemberCount(group_num);
 		
 		pageNum = req.getParameter("pageNum");
@@ -1457,19 +1479,27 @@ public class TwoServiceImpl implements TwoService{
 		dto = twoDao.getMoimMemberInfo(my_group_num);
 		
 		int group_per = dto.getGroup_per();
-		
+		String mem_id = dto.getMem_id();
+
 		if(group_per == Code.moimJang) {
-			
+			cnt = -1;
+			model.addAttribute("cnt", cnt);
 			return "two/moim_managing/moimMemberBanishFail";
 		} else {
 			cnt = twoDao.banishMoimMember(my_group_num);
-			
+				
+			Map<String, Object> daoMap = new HashMap<String, Object>();
+			daoMap.put("group_num", group_num);
+			daoMap.put("mem_id", mem_id);
+			daoMap.put("status", "강제탈퇴");
+			twoDao.moimJoinOut(daoMap);
+				
 			model.addAttribute("group_num", group_num);
 			model.addAttribute("cnt", cnt);
-			
+				
 			return "two/moim_managing/moimMemberBanish";
 		}
-		
+			
 	}
 
 	@Override
@@ -1490,13 +1520,10 @@ public class TwoServiceImpl implements TwoService{
 		int startPage = 0;	
 		int endPage = 0;
 		
-	/*	int group_num = (int) req.getSession().getAttribute("group_num");*/
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
-		
-		
+			
 		//--사이드 시작
 			//사이드- 모임명, 모임카테고리 불러오기
-			String mem_id = (String)req.getSession().getAttribute("mem_id");
 			MoimOpenDTO open_dto = sixDao.moimMain(group_num);
 			model.addAttribute("open_dto", open_dto);
 			
@@ -1508,8 +1535,7 @@ public class TwoServiceImpl implements TwoService{
 			ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
 			model.addAttribute("member_dtos", member_dtos);	
 		//--사이드 끝
-			
-			
+		
 		String board_category = req.getParameter("board_category");
 		
 		if(board_category != null) {
@@ -1574,28 +1600,28 @@ public class TwoServiceImpl implements TwoService{
 		if(cnt > 0) {
 			if(board_category != null) {
 				if(board_category.equals("모임공지")) {
-					ArrayList<Group_noticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
+					ArrayList<GroupNoticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
 					model.addAttribute("dtos", dtos);
 					System.out.println("dtos : "+ dtos);
 					model.addAttribute("board_category", "모임공지");
 				} else if (board_category.equals("가입인사")) {
-					ArrayList<Greeting_boardDTO> dtos = twoDao.getGreetingBoardArticles(daoMap);
+					ArrayList<GreetingBoardDTO> dtos = twoDao.getGreetingBoardArticles(daoMap);
 					model.addAttribute("dtos", dtos);
 					System.out.println("dtos : "+ dtos);
 					model.addAttribute("board_category", "가입인사");
 				} else if(board_category.equals("모임후기")) {
-					ArrayList<Meeting_postDTO> dtos = twoDao.getPostBoardArticles(daoMap);
+					ArrayList<MeetingPostDTO> dtos = twoDao.getPostBoardArticles(daoMap);
 					model.addAttribute("dtos", dtos);
 					System.out.println("dtos : "+ dtos);
 					model.addAttribute("board_category", "모임후기");
 				} else {
-					ArrayList<Group_noticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
+					ArrayList<GroupNoticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
 					model.addAttribute("dtos", dtos);
 					System.out.println("dtos : "+ dtos);
 					model.addAttribute("board_category", "모임공지");
 				}
 			} else {
-				ArrayList<Group_noticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
+				ArrayList<GroupNoticeDTO> dtos = twoDao.getNoticeBoardArticles(daoMap);
 				model.addAttribute("dtos", dtos);
 				System.out.println("dtos : "+ dtos);
 				model.addAttribute("board_category", "모임공지");
@@ -1707,4 +1733,445 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("cnt", cnt);
 		return "two/moim_managing/moimBoardDeleteArticle";
 	}
+
+	@Override
+	public String mainSearch(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int mscnt = 0;
+		int pageSize1 = 5; 	
+		int pageBlock1 = 3; 
+		int start1 = 0;	//rownum
+		int end1 = 0;	//rownum
+		int num1 = 0;		
+		String pageNum1 = null; 	
+		int currentPage1 = 0;
+		int pageCount1 = 0;	
+		int startPage1 = 0;	
+		int endPage1 = 0;
+
+		int mpscnt = 0;
+		int pageSize2 = 5; 	
+		int pageBlock2 = 3; 
+		int start2 = 0;	//rownum
+		int end2 = 0;	//rownum
+		int num2= 0;		
+		String pageNum2 = null; 	
+		int currentPage2 = 0;
+		int pageCount2 = 0;	
+		int startPage2 = 0;	
+		int endPage2 = 0;
+		
+		int picnt = 0;
+		int pageSize3 = 5; 	
+		int pageBlock3 = 3; 
+		int start3 = 0;	//rownum
+		int end3 = 0;	//rownum
+		int num3= 0;		
+		String pageNum3 = null; 	
+		int currentPage3 = 0;
+		int pageCount3 = 0;	
+		int startPage3 = 0;	
+		int endPage3 = 0;
+		
+		String search_keyword = req.getParameter("search_keyword");
+		
+		String search_radio1 = null;
+		String search_radio2 = null;
+		String search_radio3 = null;
+		
+		if(req.getParameter("search_radio1") != null) {
+			search_radio1 =  req.getParameter("search_radio1");
+		} else {
+			search_radio1 = "gl0";
+		}
+		
+		if(req.getParameter("search_radio2") != null) {
+			search_radio2 =  req.getParameter("search_radio2");
+		} else {
+			search_radio2 = "mp0";
+		}
+		
+		if(req.getParameter("search_radio3") != null) {
+			search_radio3 =  req.getParameter("search_radio3");
+		} else {
+			search_radio3 = "pi0";
+		}
+		
+		System.out.println("search_radio3 : "+search_radio3);
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		if(search_radio1.equals("gl1")) {
+			daoMap.put("group_name", search_keyword);
+			daoMap.put("group_intro", "");
+			mscnt = twoDao.getMoimSearchCount(daoMap);
+		} else if(search_radio1.equals("gl2")) {
+			daoMap.put("group_name", "");
+			daoMap.put("group_intro", search_keyword);
+			mscnt = twoDao.getMoimSearchCount(daoMap);
+		} else if(search_radio1.equals("gl3")) {
+			daoMap.put("group_name", search_keyword);
+			daoMap.put("group_intro", search_keyword);
+			mscnt = twoDao.getMoimSearchCount(daoMap);
+		} else if(search_radio1.equals("gl0")) {
+			daoMap.put("group_name", "1aq2ws3zx4cd8ty9hn0");
+			daoMap.put("group_intro", "1aq2ws3zx4cd8ty9hn0");
+			twoDao.getMoimSearchCount(daoMap);
+			mscnt = 0;
+		}
+		
+		if(search_radio2.equals("mp1")) {
+			daoMap.put("post_title", search_keyword);
+			daoMap.put("post_content", "");
+			mpscnt = twoDao.getMoimPostSearchCount(daoMap);
+		} else if(search_radio2.equals("mp2")) {
+			daoMap.put("post_title", "");
+			daoMap.put("post_content", search_keyword);
+			mpscnt = twoDao.getMoimPostSearchCount(daoMap);
+		} else if(search_radio2.equals("mp3")) {
+			daoMap.put("post_title", search_keyword);
+			daoMap.put("post_content", search_keyword);
+			mpscnt = twoDao.getMoimPostSearchCount(daoMap);
+		} else if(search_radio2.equals("mp4")) {
+			daoMap.put("post_tag", search_keyword);
+			mpscnt = twoDao.getMoimPostByTagSearchCount(daoMap);
+		} else if(search_radio2.equals("mp0")) {
+			daoMap.put("post_title", "1aq2ws3zx4cd8ty9hn0");
+			daoMap.put("post_content", "1aq2ws3zx4cd8ty9hn0");
+			twoDao.getMoimPostSearchCount(daoMap);
+			mpscnt = 0;
+		}
+		
+		if(search_radio3.equals("pi1")) {
+			daoMap.put("place_name", search_keyword);
+			daoMap.put("place_detail", "");
+			picnt = twoDao.getPlaceSearchCount(daoMap);
+		} else if(search_radio3.equals("pi2")) {
+			daoMap.put("place_name", "");
+			daoMap.put("place_detail", search_keyword);
+			picnt = twoDao.getPlaceSearchCount(daoMap);
+		} else if(search_radio3.equals("pi3")) {
+			daoMap.put("place_name", search_keyword);
+			daoMap.put("place_detail", search_keyword);
+			picnt = twoDao.getPlaceSearchCount(daoMap);
+		} else if(search_radio3.equals("pi4")) {
+			daoMap.put("place_address", search_keyword);
+			picnt = twoDao.getPlaceByAddressSearchCount(daoMap);
+		} else if(search_radio3.equals("pi0")) {
+			daoMap.put("place_name", "1aq2ws3zx4cd8ty9hn0");
+			daoMap.put("place_detail", "1aq2ws3zx4cd8ty9hn0");
+			twoDao.getPlaceSearchCount(daoMap);
+			picnt = 0;
+		}
+		
+		System.out.println("picnt : "+picnt);
+		
+		pageNum1 = req.getParameter("pageNum1");
+		if(pageNum1 == null) {
+			pageNum1 = "1";
+		}
+		
+		pageNum2 = req.getParameter("pageNum2");
+		if(pageNum2 == null) {
+			pageNum2 = "1";
+		}
+		
+		pageNum3 = req.getParameter("pageNum3");
+		if(pageNum3 == null) {
+			pageNum3 = "1";
+		}
+		
+		currentPage1 = Integer.parseInt(pageNum1);
+		if(mscnt > 0) {
+			pageCount1 = (mscnt / pageSize1) + (mscnt % pageSize1> 0 ? 1 : 0);
+		}
+		
+		currentPage2 = Integer.parseInt(pageNum2);
+		if(mpscnt > 0) {
+			pageCount2 = (mpscnt / pageSize2) + (mpscnt % pageSize2 > 0 ? 1 : 0);
+		}
+		
+		currentPage3 = Integer.parseInt(pageNum3);
+		if(picnt > 0) {
+			pageCount3 = (picnt / pageSize3) + (picnt % pageSize3 > 0 ? 1 : 0);
+		}
+		
+		start1 = (currentPage1 - 1) * pageSize1 + 1; 
+		end1 = start1 + pageSize1 -1;
+		
+		start2 = (currentPage2 - 1) * pageSize2 + 1; 
+		end2 = start2 + pageSize2 -1; 
+		
+		start3 = (currentPage3 - 1) * pageSize3 + 1; 
+		end3 = start3 + pageSize3 -1; 
+		
+		if(mscnt > 0) {
+			if(end1 > mscnt) end1 = mscnt;
+	
+			num1 = mscnt - (currentPage1 - 1) * pageSize1;
+		}
+		
+		if(mpscnt > 0 ) {
+			if(end2 > mpscnt) end2 = mpscnt;
+			
+			num2 = mpscnt - (currentPage2 - 1) * pageSize2;
+		}
+		
+		if(picnt > 0 ) {
+			if(end3 > picnt) end3 = picnt;
+			
+			num3 = picnt - (currentPage3 - 1) * pageSize3;
+		}
+		
+		Map<String, Object> daoMap2 = new HashMap<String, Object>();
+		daoMap2.put("start1", start1);
+		daoMap2.put("end1", end1);
+		if(mscnt > 0) {
+			if(search_radio1.equals("gl1")) {
+				daoMap2.put("group_name", search_keyword);
+				daoMap2.put("group_intro", "");
+				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);	
+				model.addAttribute("moidtos", moidtos);
+				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
+				model.addAttribute("mopdtos", mopdtos);
+			} else if(search_radio1.equals("gl2")) {
+				daoMap2.put("group_name", "");
+				daoMap2.put("group_intro", search_keyword);
+				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);
+				model.addAttribute("moidtos", moidtos);
+				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
+				model.addAttribute("mopdtos", mopdtos);
+			} else if(search_radio1.equals("gl3")) {
+				daoMap2.put("group_name", search_keyword);
+				daoMap2.put("group_intro", search_keyword);
+				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);	
+				model.addAttribute("moidtos", moidtos);
+				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
+				model.addAttribute("mopdtos", mopdtos);
+			} 
+		}
+		
+		Map<String, Object> daoMap3 = new HashMap<String, Object>();
+		daoMap3.put("start2", start2);
+		daoMap3.put("end2", end2);
+		if(mpscnt > 0) {
+			if(search_radio2.equals("mp1")) {
+				daoMap3.put("post_title", search_keyword);
+				daoMap3.put("post_content", "");
+				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);	
+				model.addAttribute("mpdtos", mpdtos);
+				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
+				model.addAttribute("ppdtos", ppdtos);
+			} else if(search_radio2.equals("mp2")) {
+				daoMap3.put("post_title", "");
+				daoMap3.put("post_content", search_keyword);
+				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);		
+				model.addAttribute("mpdtos", mpdtos);
+				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
+				model.addAttribute("ppdtos", ppdtos);
+			} else if(search_radio2.equals("mp3")) {
+				daoMap3.put("post_title", search_keyword);
+				daoMap3.put("post_content", search_keyword);
+				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);
+				model.addAttribute("mpdtos", mpdtos);
+				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
+				model.addAttribute("ppdtos", ppdtos);
+			} else if(search_radio2.equals("mp4")) {
+				daoMap3.put("post_tag", search_keyword);
+				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostByTagSearchList(daoMap3);
+				model.addAttribute("mpdtos", mpdtos);
+				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureByTagSearchList(daoMap3);
+				model.addAttribute("ppdtos", ppdtos);
+			}
+		}
+		
+		Map<String, Object> daoMap4 = new HashMap<String, Object>();
+		daoMap4.put("start3", start3);
+		daoMap4.put("end3", end3);
+		System.out.println("start3 : "+start3);
+		System.out.println("end3 : "+end3);
+		if(picnt > 0) {
+			if(search_radio3.equals("pi1")) {
+				System.out.println("pi1");
+				System.out.println("search_keyword :"+search_keyword);
+				daoMap4.put("place_name", search_keyword);
+				daoMap4.put("place_detail", "");
+				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
+				model.addAttribute("plainfodtos", plainfodtos);
+				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+				System.out.println("plainfodtos" + plainfodtos);
+				System.out.println("plapicdtos" + plapicdtos);
+				model.addAttribute("plapicdtos", plapicdtos);
+			} else if(search_radio3.equals("pi2")) {
+				System.out.println("pi2");
+				System.out.println("search_keyword :"+search_keyword);
+				daoMap4.put("place_name", "");
+				daoMap4.put("place_detail", search_keyword);
+				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
+				model.addAttribute("plainfodtos", plainfodtos);
+				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+				System.out.println("plainfodtos" + plainfodtos);
+				System.out.println("plapicdtos" + plapicdtos);
+				model.addAttribute("plapicdtos", plapicdtos);
+			} else if(search_radio3.equals("pi3")) {
+				System.out.println("pi3");
+				System.out.println("search_keyword :"+search_keyword);
+				daoMap4.put("place_name", search_keyword);
+				daoMap4.put("place_detail", search_keyword);
+				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
+				model.addAttribute("plainfodtos", plainfodtos);
+				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+				System.out.println("plainfodtos" + plainfodtos);
+				System.out.println("plapicdtos" + plapicdtos);
+				model.addAttribute("plapicdtos", plapicdtos);
+			} else if(search_radio3.equals("pi4")) {
+				System.out.println("pi4");
+				System.out.println("search_keyword :"+search_keyword);
+				daoMap4.put("place_address", search_keyword);
+				picnt = twoDao.getPlaceByAddressSearchCount(daoMap4);
+				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceByAddressSearchList(daoMap4);
+				model.addAttribute("plainfodtos", plainfodtos);
+				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureByAddressSearchList(daoMap4);
+				model.addAttribute("plapicdtos", plapicdtos);
+				System.out.println("plainfodtos" + plainfodtos);
+				System.out.println("plapicdtos" + plapicdtos);
+			}  	
+		}
+		
+		startPage1 = (currentPage1 / pageBlock1) * pageBlock1 + 1; 
+		if(currentPage1 % pageBlock1 == 0) startPage1 -= pageBlock1;
+		
+		endPage1 = startPage1 + pageBlock1 - 1; 
+		if(endPage1 > pageCount1) endPage1 = pageCount1;
+		
+		startPage2 = (currentPage2 / pageBlock2) * pageBlock2 + 1; 
+		if(currentPage2 % pageBlock2 == 0) startPage2 -= pageBlock2;
+		
+		endPage2 = startPage2 + pageBlock2 - 1; 
+		if(endPage2 > pageCount2) endPage2 = pageCount2;
+		
+		startPage3 = (currentPage3 / pageBlock3) * pageBlock3 + 1; 
+		if(currentPage3 % pageBlock3 == 0) startPage3 -= pageBlock3;
+		
+		endPage3 = startPage3 + pageBlock3 - 1; 
+		if(endPage3 > pageCount3) endPage3 = pageCount3;
+		
+		model.addAttribute("mscnt", mscnt);
+		model.addAttribute("mpscnt", mpscnt);
+		model.addAttribute("picnt", picnt);
+		model.addAttribute("num1", num1); 
+		model.addAttribute("pageNum1", pageNum1);
+		model.addAttribute("num2", num2); 
+		model.addAttribute("pageNum2", pageNum2);
+		model.addAttribute("num3", num3); 
+		model.addAttribute("pageNum3", pageNum3);
+		
+		if (mscnt > 0) {
+			model.addAttribute("currentPage1", currentPage1);
+			model.addAttribute("startPage1", startPage1);
+			model.addAttribute("endPage1", endPage1);
+			model.addAttribute("pageCount1", pageCount1);
+			model.addAttribute("pageBlock1", pageBlock1);
+		}
+		
+		if (mpscnt > 0) {
+			model.addAttribute("currentPage2", currentPage2);
+			model.addAttribute("startPage2", startPage2);
+			model.addAttribute("endPage2", endPage2);
+			model.addAttribute("pageCount2", pageCount2);
+			model.addAttribute("pageBlock2", pageBlock2);
+		}
+		
+		if (picnt > 0) {
+			model.addAttribute("currentPage3", currentPage3);
+			model.addAttribute("startPage3", startPage3);
+			model.addAttribute("endPage3", endPage3);
+			model.addAttribute("pageCount3", pageCount3);
+			model.addAttribute("pageBlock3", pageBlock3);
+		}
+		
+		model.addAttribute("search_keyword", search_keyword);
+		model.addAttribute("search_radio1", search_radio1);
+		model.addAttribute("search_radio2", search_radio2);
+		model.addAttribute("search_radio3", search_radio3);
+		
+		return "two/main_search/mainSearchResult";
+	}
+
+	@Override
+	public String moimStatistics(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		//--사이드 시작
+		//사이드- 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("open_dto", open_dto);
+				
+		//사이드 - 대표사진 불러오기
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
+		model.addAttribute("picture_dto", picture_dto);
+				
+		//사이드 - 모임원리스트 불러오기
+		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
+		model.addAttribute("member_dtos", member_dtos);	
+		//--사이드 끝
+		
+		int man_cnt = 0;
+		int woman_cnt = 0;
+		 
+		StatisticsDTO dto = new StatisticsDTO();
+		
+		dto = twoDao.chartByGender(group_num);
+		
+		man_cnt = dto.getMan_cnt();
+		woman_cnt = dto.getWoman_cnt();
+		
+		model.addAttribute("man_cnt", man_cnt);
+		model.addAttribute("woman_cnt", woman_cnt); 
+
+		dto = twoDao.chartByAge(group_num);
+		
+		int teen_cnt = 0;
+		int twenty_cnt = 0;
+		int thirty_cnt = 0;
+		int fourty_cnt = 0;
+		int fifty_cnt = 0;
+		int sixty_cnt = 0;
+		
+		teen_cnt = dto.getTeen_cnt();
+		twenty_cnt = dto.getTwenty_cnt();
+		thirty_cnt = dto.getThirty_cnt();
+		fourty_cnt = dto.getFirty_cnt();
+		fifty_cnt = dto.getFifty_cnt();
+		sixty_cnt = dto.getSixty_cnt();
+		
+		model.addAttribute("teen_cnt", teen_cnt);
+		model.addAttribute("twenty_cnt", twenty_cnt); 
+		model.addAttribute("thirty_cnt", thirty_cnt);
+		model.addAttribute("fourty_cnt", fourty_cnt);
+		model.addAttribute("fifty_cnt", fifty_cnt);
+		model.addAttribute("sixty_cnt", sixty_cnt);
+		
+		model.addAttribute("group_num", group_num); 
+		
+		return "two/moim_statistics/moimStatistics";
+	}
+
+	@Override
+	public String moimStatisticsPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		model.addAttribute("group_num", group_num); 
+		
+		return "two/moim_statistics/moimStatistics";
+	}
+	
+	
 }

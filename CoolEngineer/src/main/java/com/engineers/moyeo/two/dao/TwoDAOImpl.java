@@ -9,16 +9,19 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.five.dto.MeetingPostDTO;
+import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.four.dto.GreetingBoardDTO;
+import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
-import com.engineers.moyeo.two.dto.Greeting_boardDTO;
-import com.engineers.moyeo.two.dto.Group_noticeDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
-import com.engineers.moyeo.two.dto.Meeting_postDTO;
 import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
+import com.engineers.moyeo.two.dto.Moim_pictureDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_picDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
+import com.engineers.moyeo.two.dto.StatisticsDTO;
 import com.engineers.moyeo.two.dto.SuggestionDTO;
 
 @Repository
@@ -346,6 +349,15 @@ public class TwoDAOImpl implements TwoDAO{
 		cnt = dao.moimJoinCheck(daoMap);	
 		return cnt;
 	}
+	
+
+	@Override
+	public int moimBanishCheck(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.moimBanishCheck(daoMap);	
+		return cnt;
+	}
 
 	@Override
 	public int moimJoin(Map<String, Object> daoMap) {
@@ -477,6 +489,13 @@ public class TwoDAOImpl implements TwoDAO{
 		cnt = dao.banishMoimMember(my_group_num);
 		return cnt;
 	}
+	
+
+	@Override
+	public void moimJoinOut(Map<String, Object> daoMap) {
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dao.moimJoinOut(daoMap);
+	}
 
 	@Override
 	public int getNoticeBoardCount(int group_num) {
@@ -503,24 +522,24 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<Group_noticeDTO> getNoticeBoardArticles(Map<String, Object> daoMap) {
-		ArrayList<Group_noticeDTO> dtos = null;
+	public ArrayList<GroupNoticeDTO> getNoticeBoardArticles(Map<String, Object> daoMap) {
+		ArrayList<GroupNoticeDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getNoticeBoardArticles(daoMap);
 		return dtos;
 	}
 
 	@Override
-	public ArrayList<Greeting_boardDTO> getGreetingBoardArticles(Map<String, Object> daoMap) {
-		ArrayList<Greeting_boardDTO> dtos = null;
+	public ArrayList<GreetingBoardDTO> getGreetingBoardArticles(Map<String, Object> daoMap) {
+		ArrayList<GreetingBoardDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getGreetingBoardArticles(daoMap);
 		return dtos;
 	}
 
 	@Override
-	public ArrayList<Meeting_postDTO> getPostBoardArticles(Map<String, Object> daoMap) {
-		ArrayList<Meeting_postDTO> dtos = null;
+	public ArrayList<MeetingPostDTO> getPostBoardArticles(Map<String, Object> daoMap) {
+		ArrayList<MeetingPostDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getPostBoardArticles(daoMap);
 		return dtos;
@@ -548,6 +567,142 @@ public class TwoDAOImpl implements TwoDAO{
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		cnt = dao.deletePostBoardArticle(daoMap);
 		return cnt;
+	}
+
+	@Override
+	public int getMoimSearchCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getMoimSearchCount(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int getMoimPostSearchCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getMoimPostSearchCount(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int getMoimPostByTagSearchCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getMoimPostByTagSearchCount(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<Moim_infoDTO> getMoimSearchList(Map<String, Object> daoMap) {
+		ArrayList<Moim_infoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Moim_pictureDTO> getMoimPictureSearchList(Map<String, Object> daoMap) {
+		ArrayList<Moim_pictureDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimPictureSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<MeetingPostDTO> getMoimPostSearchList(Map<String, Object> daoMap) {
+		ArrayList<MeetingPostDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimPostSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<PostPictureDTO> getMoimPostPictureSearchList(Map<String, Object> daoMap) {
+		ArrayList<PostPictureDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimPostPictureSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<MeetingPostDTO> getMoimPostByTagSearchList(Map<String, Object> daoMap) {
+		ArrayList<MeetingPostDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimPostByTagSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<PostPictureDTO> getMoimPostPictureByTagSearchList(Map<String, Object> daoMap) {
+		ArrayList<PostPictureDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getMoimPostPictureByTagSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public int getPlaceSearchCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getPlaceSearchCount(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int getPlaceByAddressSearchCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getPlaceByAddressSearchCount(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<Place_infoDTO> getPlaceSearchList(Map<String, Object> daoMap) {
+		ArrayList<Place_infoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlaceSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Place_picDTO> getPlacePictureSearchList(Map<String, Object> daoMap) {
+		ArrayList<Place_picDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlacePictureSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Place_infoDTO> getPlaceByAddressSearchList(Map<String, Object> daoMap) {
+		ArrayList<Place_infoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlaceByAddressSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Place_picDTO> getPlacePictureByAddressSearchList(Map<String, Object> daoMap) {
+		ArrayList<Place_picDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getPlacePictureByAddressSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public StatisticsDTO chartByGender(int group_num) {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.chartByGender(group_num);
+		return dto;
+	}
+
+	@Override
+	public StatisticsDTO chartByAge(int group_num) {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.chartByAge(group_num);
+		return dto;
 	}
 
 }

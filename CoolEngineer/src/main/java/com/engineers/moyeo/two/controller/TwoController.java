@@ -266,7 +266,7 @@ public class TwoController {
 		return viewPage;
 	}
 
-	//
+	//모임가입 페이지
 	@RequestMapping("/moimJoinForm")
 	public String moimJoinForm(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -276,7 +276,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임가입 처리
 	@RequestMapping("/moimJoinPro")
 	public String moimJoinPro(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -286,7 +286,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임탈퇴 처리
 	@RequestMapping("/moimWithdraw")
 	public String moimWithdraw(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -296,7 +296,21 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임장, 운영진 이외 회원의 모임관리 기능 이용 제한
+	@RequestMapping("/moimManagerLoginConfirm")
+	public String moimManagerLoginConfirm(HttpServletRequest req, Model model) {
+		viewPage = "/two/moim_managing/moimManagerLoginConfirm";
+		return viewPage;
+	}
+	
+	//모임장 이외 회원의 모임관리 기능 이용 제한
+	@RequestMapping("/moimManagerLoginConfirm2")
+	public String moimManagerLoginConfirm2(HttpServletRequest req, Model model) {
+		viewPage = "/two/moim_managing/moimManagerLoginConfirm2";
+		return viewPage;
+	}
+	
+	//모임가입 관리 페이지(모임장)
 	@RequestMapping("/moimJoinManaging")
 	public String moimJoinManaging(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -306,7 +320,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임가입 수락(모임장)
 	@RequestMapping("/moimJoinOK")
 	public String moimJoinOK(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -316,7 +330,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임가입 거절(모임장)
 	@RequestMapping("/moimJoinNO")
 	public String moimJoinNO(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -326,7 +340,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임원 관리 페이지(모임장)
 	@RequestMapping("/moimMemberManaging")
 	public String moimMemberManaging(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -336,7 +350,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임원 등급변경 페이지(모임장)
 	@RequestMapping("/moimMemberRankForm")
 	public String moimMemberRankForm(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -346,7 +360,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임원 등급변경 처리(모임장)
 	@RequestMapping("/moimMemberRankPro")
 	public String moimMemberRankPro(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -356,7 +370,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임원 강제탈퇴(모임장)
 	@RequestMapping("/moimMemberBanish")
 	public String moimMemberBanish(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -366,7 +380,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임 게시판 관리 페이지(모임장)
 	@RequestMapping("/moimBoardManaging")
 	public String moimBoardManaging(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -376,7 +390,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임공지 게시판의 게시글 삭제(모임장)
 	@RequestMapping("/deleteNoticeBoardArticle")
 	public String deleteNoticeBoardArticle(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -386,7 +400,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//가입인사 게시판의 게시글 삭제(모임장)
 	@RequestMapping("/deleteGreetingBoardArticle")
 	public String deleteGreetingBoardArticle(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -396,7 +410,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//
+	//모임후기 게시판의 게시글 삭제(모임장)
 	@RequestMapping("/deletePostBoardArticle")
 	public String deletePostBoardArticle(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -406,4 +420,33 @@ public class TwoController {
 		return viewPage;
 	}
 	
+	//메인페이지 검색
+	@RequestMapping("/mainSearch")
+	public String mainSearch(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+			
+		model.addAttribute("req", req);
+		viewPage = twoService.mainSearch(model);
+		return viewPage;
+	}
+	
+	//모임 통계 페이지
+	@RequestMapping("/moimStatistics")
+	public String moimStatistics(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+			
+		model.addAttribute("req", req);
+		viewPage = twoService.moimStatistics(model);
+		return viewPage;
+	}
+	
+	//모임 통계 처리
+	@RequestMapping("/moimStatisticsPro")
+	public String moimStatisticsPro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+				
+		model.addAttribute("req", req);
+		viewPage = twoService.moimStatisticsPro(model);
+		return viewPage;
+	}
 }

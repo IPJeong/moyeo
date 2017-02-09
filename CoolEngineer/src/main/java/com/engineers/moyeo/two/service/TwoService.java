@@ -28,19 +28,24 @@ public interface TwoService {
 	public String plusPlaceLike(Model model); //추천장소 게시글에 추천 누름
 	public String minusPlaceLike(Model model); //추천장소 게시글에서 추천을 취소함
 
-	public String moimJoinForm(Model model);
-	public String moimJoinPro(Model model);
-	public String moimWithdraw(Model model);
-	public String moimJoinManaging(Model model);
-	public String moimJoinOK(Model model);
-	public String moimJoinNO(Model model);
-	public String moimMemberManaging(Model model);
-	public String moimMemberRankForm(Model model);
-	public String moimMemberRankPro(Model model);
-	public String moimMemberBanish(Model model);
-	public String moimBoardManaging(Model model);
-	public String deleteNoticeBoardArticle(Model model);
-	public String deleteGreetingBoardArticle(Model model);
-	public String deletePostBoardArticle(Model model);
+	public String moimJoinForm(Model model); //모임가입 페이지
+	public String moimJoinPro(Model model); //모임가입 처리
+	public String moimWithdraw(Model model); //모임탈퇴 처리
+	public String moimJoinManaging(Model model); //모임가입 관리 페이지(모임장)
+	public String moimJoinOK(Model model); //모임가입 수락(모임장)
+	public String moimJoinNO(Model model); //모임가입 거절(모임장)
+	public String moimMemberManaging(Model model); //모임원 관리 페이지(모임장)
+	public String moimMemberRankForm(Model model); //모임원 등급변경 페이지(모임장)
+	public String moimMemberRankPro(Model model); //모임원 등급변경 처리(모임장)
+	public String moimMemberBanish(Model model); //모임원 강제탈퇴(모임장)
+	public String moimBoardManaging(Model model); //모임 게시판 관리 페이지(모임장)
+	public String deleteNoticeBoardArticle(Model model); //모임공지 게시판의 게시글 삭제(모임장)
+	public String deleteGreetingBoardArticle(Model model); //가입인사 게시판의 게시글 삭제(모임장)
+	public String deletePostBoardArticle(Model model); //모임후기 게시판의 게시글 삭제(모임장)
+	
+	public String mainSearch(Model model); //메인페이지 검색기능
+	
+	public String moimStatistics(Model model);
+	public String moimStatisticsPro(Model model);
 
 }
