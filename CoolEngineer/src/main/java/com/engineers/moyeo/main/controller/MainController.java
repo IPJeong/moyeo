@@ -32,6 +32,7 @@ public class MainController {
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		mainService.main_notice(model);
+		mainService.hotMoim(model);
 				
 		return "main/main";
 	}
