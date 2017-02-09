@@ -3,13 +3,13 @@ package com.engineers.moyeo.two.dao;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.two.dto.Greeting_boardDTO;
 import com.engineers.moyeo.two.dto.Group_noticeDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
 import com.engineers.moyeo.two.dto.Meeting_postDTO;
 import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
-import com.engineers.moyeo.two.dto.My_groupDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_picDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
@@ -72,10 +72,10 @@ public interface TwoDAO {
 	public void moimJoinPro(Map<String, Object> daoMap);
 	public void moimJoinNO(Map<String, Object> daoMap);
 	public int getMoimMemberCount(int group_num);
-	public ArrayList<My_groupDTO> getMoimMemberList(Map<String, Object> daoMap);
+	public ArrayList<MyGroupDTO> getMoimMemberList(Map<String, Object> daoMap);
 	public ArrayList<Member_infoDTO> getMoimMemberInfoList(Map<String, Object> daoMap);
-	public My_groupDTO getMoimMemberInfo(int my_group_num);
-	public My_groupDTO getMoimMemberInfo2(Map<String, Object> daoMap);
+	public MyGroupDTO getMoimMemberInfo(int my_group_num);
+	public MyGroupDTO getMoimMemberInfo2(Map<String, Object> daoMap);
 	public String checkMoimMemberRank(int my_group_num);
 	public int changeMoimMemberRank(Map<String, Object> daoMap);
 	public int banishMoimMember(int my_group_num);

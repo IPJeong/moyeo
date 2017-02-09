@@ -9,13 +9,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.two.dto.Greeting_boardDTO;
 import com.engineers.moyeo.two.dto.Group_noticeDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
 import com.engineers.moyeo.two.dto.Meeting_postDTO;
 import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
-import com.engineers.moyeo.two.dto.My_groupDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_picDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
@@ -422,8 +422,8 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<My_groupDTO> getMoimMemberList(Map<String, Object> daoMap) {
-		ArrayList<My_groupDTO> dtos = null;
+	public ArrayList<MyGroupDTO> getMoimMemberList(Map<String, Object> daoMap) {
+		ArrayList<MyGroupDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getMoimMemberList(daoMap);
 		return dtos;
@@ -438,8 +438,8 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public My_groupDTO getMoimMemberInfo(int my_group_num) {
-		My_groupDTO dto = null;
+	public MyGroupDTO getMoimMemberInfo(int my_group_num) {
+		MyGroupDTO dto = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dto = dao.getMoimMemberInfo(my_group_num);
 		return dto;
@@ -447,8 +447,8 @@ public class TwoDAOImpl implements TwoDAO{
 	
 
 	@Override
-	public My_groupDTO getMoimMemberInfo2(Map<String, Object> daoMap) {
-		My_groupDTO dto = null;
+	public MyGroupDTO getMoimMemberInfo2(Map<String, Object> daoMap) {
+		MyGroupDTO dto = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dto = dao.getMoimMemberInfo2(daoMap);
 		return dto;
