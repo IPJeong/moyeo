@@ -14,13 +14,13 @@
     	SELECT count(*) FROM qna
     </select>
     
+    <!-- Q&A 질문정보 구하기 -->
     <select id="getArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaBoardDTO">
     	SELECT * 
     			FROM (SELECT qboard_num, title, content, write_date, hit, status, mem_id, rownum rnum
     					FROM (SELECT * FROM qna
     						  ORDER BY qboard_num DESC)
     				  )  
-    	         
     	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
     </select>
     
@@ -31,26 +31,35 @@
     				VALUES(qna_seq.NEXTVAL, #{title}, #{content},#{write_date}, 0, null, #{mem_id}) 
     </insert>
     
+    <!-- Q&A게시판 게시판키를 이용하여 해당 질문정보 가져오기 -->
     <select id="getArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaBoardDTO">
-    	SELECT * FROM qna WHERE qboard_num = #{qboard_num}
+    	SELECT qna.qboard_num, qna.title, qna.content, qna.write_date, qna.hit, qna.status, qna.mem_id, member_info.propic_path, member_info.propic_name
+    	  FROM qna , member_info
+    	 WHERE qna.qboard_num = #{qboard_num}
+    	   AND qna.mem_id=member_info.mem_id
     </select>
     
+    <!-- Q&A게시판 조회수 증가 -->
     <update id="addReadCnt" parameterType="int">
     	UPDATE qna SET hit = hit+1 WHERE qboard_num=#{qboard_num}
     </update>
     
+    <!-- Q&A게시판 질문내용 수정 -->
     <update id = "update" parameterType="com.engineers.moyeo.one.dto.QnaBoardDTO">
     	UPDATE qna SET title=#{title}, content=#{content} WHERE qboard_num=#{qboard_num} 
     </update>
     
+    <!-- Q&A게시판 질문내용 삭제 -->
     <delete id="delete" parameterType="int">
     	DELETE FROM qna WHERE qboard_num=#{qboard_num}
     </delete>
     
+    <!-- Q&A 게시판 관리자가 답변한 내용 삭제 -->
     <delete id="deleteRe" parameterType="int">
     	DELETE FROM qna_reply WHERE qboard_num=#{qboard_num}
     </delete>
     
+    <!-- Q&A 게시판 답변내용 삭제 -->
     <delete id="deleteAnws" parameterType="int">
     	DELETE FROM qna_reply WHERE reply_num=#{reply_num}
     </delete>
@@ -61,32 +70,40 @@
   					VALUES(qna_reply_seq.NEXTVAL, #{reply_content}, #{manager_id}, #{write_date}, #{qboard_num})
     </insert>
     
+    <!-- Q&A 게시판 답변정보 구하기 -->
     <select id="getReArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaReplyDTO">
     	SELECT * FROM qna_reply WHERE qboard_num = #{qboard_num}
     </select>
     
+    <!-- Q&A 게시판 답변여부 체크 -->
     <update id="updateStatus" parameterType="int">
     	UPDATE qna SET status='YES' WHERE qboard_num=#{qboard_num}
     </update>
     
+    <!-- Q&A 게시판 답변정보 구하기 -->
     <select id="getArtReply" parameterType="Map" resultType="com.engineers.moyeo.one.dto.QnaReplyDTO">
     	SELECT * FROM qna_reply WHERE qboard_num = #{qboard_num}
     </select>
     
+    <!-- group_num을 이용하여 해당 모임의 정보를 출력 -->
     <select id="getMoimArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MoimReportDTO">
     	SELECT * FROM group_list WHERE group_num = #{group_num}
     </select>
     
+    <!-- 모임을 신고한 내용을 insert -->
     <insert id="MoimReportInsert" parameterType="com.engineers.moyeo.one.dto.MoimReportDTO">
     	INSERT INTO report_group(report_num, report_title, report_content, report_date, sol_content, sol_status, sol_date, manager_id, pic_path, pic_name, mem_id, group_num)
     				VALUES(report_group_seq.NEXTVAL, #{report_title}, #{report_content}, #{report_date}, null , null, null, null, #{pic_path}, #{pic_name}, #{mem_id}, #{group_num}) 
     </insert>
     
+    
+
     <!-- 모임신고 글갯수 구하기 -->
     <select id="getReportCount" resultType="int">
     	SELECT count(*) FROM report_group
     </select>
     
+    <!-- 신고한 모든 모임 정보 불러오기 -->
     <select id="getReportArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MoimReportDTO">
     	SELECT * 
     			FROM (SELECT report_num, report_title, report_content, report_date, sol_content, sol_status, sol_date, manager_id, pic_path, pic_name, mem_id, group_num, rownum rnum
@@ -96,10 +113,12 @@
     	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
     </select>
     
+    <!-- report_num을 통하여 해당 모임 정보 가져오기 -->
     <select id="getMoimContentArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MoimReportDTO">
     	SELECT * FROM report_group WHERE report_num = #{report_num}
     </select>
     
+    <!-- 답변여부 바꾸기 -->
     <update id="updateReport" parameterType="com.engineers.moyeo.one.dto.MoimReportDTO">
     	UPDATE report_group SET sol_content=#{sol_content}, sol_status='YES', sol_date=#{sol_date}, manager_id=#{manager_id} WHERE report_num=#{report_num} 
     </update>
@@ -109,6 +128,7 @@
     	SELECT count(*) FROM member_info
     </select>
     
+    <!-- 모든 회원정보 가져오기 -->
     <select id="gerMemberArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
     	SELECT * 
     			FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
@@ -127,11 +147,23 @@
     	DELETE FROM member_info WHERE mem_id=#{mem_id}
     </delete>
     
+    <!-- 해당 회원이 모임장으로 있는 모임정보 삭제 -->
+    <delete id="deleteGroup" parameterType="String">
+    	DELETE 
+		  FROM group_list
+		 WHERE group_num in (SELECT group_num 
+                               FROM my_group
+                              WHERE mem_id = #{mem_id}
+                                AND group_per = 1)
+    </delete>
+    
+    <!-- 관리자 권한에서 관리자 임명 -->
     <insert id="insertManager" parameterType="com.engineers.moyeo.one.dto.ManagerDTO">
     	INSERT INTO manager_info(manager_id, passwd, name, authority)
     				VALUES(#{manager_id}, #{passwd}, #{name}, #{authority}) 
     </insert>
     
+    <!-- 관리자 권한에서 관리자 삭제 -->
     <select id="getManagerDeleteCount" resultType="int">
     	SELECT count(*) FROM manager_info
     </select>
@@ -143,16 +175,131 @@
     					FROM (SELECT * FROM manager_info
     						  ORDER BY authority DESC)
     				  )  
-    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND authority='MASTER'
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND authority='02'
     </select>
     
     <!-- 권한이 manager인 관리자 조회 -->
     <select id="getManagerArticles2" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ManagerDTO">
-    	SELECT * FROM manager_info WHERE authority='MANAGER'
+    	SELECT * 
+    			 FROM (SELECT manager_id, passwd, name, authority, rownum rnum
+    					FROM (SELECT * FROM manager_info WHERE authority='08'
+    						  ORDER BY authority DESC)
+    				  )  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
     </select>
     
     <!-- 모든 관리자 조회 -->
     <select id="getManagerArticles3" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ManagerDTO">
     	SELECT * FROM manager_info
     </select>
+    
+    <!-- 관리자 아이디 체크 -->
+    <select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM manager_info WHERE manager_id= #{manager_id}
+	</select>
+	
+    <!-- 관리자 비밀번호 체크 -->
+    <select id="pwdCheck" parameterType="Map" resultType="int">
+		Select COUNT(*) FROM manager_info WHERE manager_id= #{manager_id} AND passwd = #{passwd}
+	</select>
+	
+	<!-- 관리자 권한 확인 -->
+	<select id="getAuthority" parameterType="Map" resultType="String">
+    	SELECT authority FROM manager_info WHERE manager_id = #{manager_id}
+    </select>
+    
+    <!-- 권리자 권한에서 모든 모임 조회 -->
+    <select id="getGroupArticles" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+    	SELECT * 
+    			FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, group_intro, rownum rnum
+    					FROM (SELECT * FROM group_list
+    						  ORDER BY group_num DESC)
+    				  )  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+    </select>
+	
+	<!-- 관리자 권한에서 모임 상세보기 -->
+	<select id="getGroupInformArticle" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+    	SELECT * FROM group_list WHERE group_num = #{group_num}
+    </select>
+    
+    <!-- 모임에 등록한 메인사진 가져오기 -->
+    <select id="getMainPicture" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
+    	SELECT * FROM main_picture WHERE main_pic_num = (SELECT MAX(main_pic_num) FROM main_picture WHERE group_num=#{group_num})
+    </select>
+  
+  	<!-- 모임 갯수 구하기 -->
+  	<select id="getGroupCount" resultType="int">
+    	SELECT count(*) FROM group_list
+    </select>
+    
+    <!-- 모임의 모임장 구하기 -->
+    <select id="moimGroupLeader" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MyGroupDTO">
+    	SELECT * FROM my_group WHERE group_num = #{group_num} AND group_per = 1
+    </select>
+
+	<!-- 모임의 모든 멤버 구하기 -->
+	<select id="moimGroupMember" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MyGroupDTO">
+    	SELECT * FROM my_group WHERE group_num = #{group_num} AND group_per = 3
+    </select>
+    
+    <!-- 모임원 명수 구하기 -->
+    <select id="getMemberCount" resultType="int">
+    	SELECT count(*) FROM my_group WHERE group_num=#{group_num}
+    </select>
+    
+    <!-- 모든 멤버 구하기 -->
+    <select id="getMemberArticles" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MyGroupDTO">
+    	SELECT * 
+    			FROM (SELECT my_group_num, group_per, group_num, mem_id, rownum rnum
+    					FROM (SELECT * FROM my_group
+    						  ORDER BY my_group_num DESC)
+    					  WHERE group_per=3
+    				  )  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+    </select>
+    
+    <!-- 관리자 권한에서 모임 폐쇄 -->
+    <delete id="groupDelete" parameterType="int">
+    	DELETE FROM group_list WHERE group_num=#{group_num}
+    </delete>
+    
+    <!-- 하위관리자가 몇명인지 구하기 -->
+	<select id="getLowManagerCount" resultType="int">
+    	SELECT count(*) FROM manager_info
+    </select>
+    
+    <!-- 최고 관리자 권한에서 하위 관리자 탈퇴시키기 -->
+    <delete id="deleteManager" parameterType="String">
+    	DELETE FROM manager_info WHERE manager_id=#{manager_id}
+    </delete>
+    
+    <select id="getSearchNameCount" parameterType="Map" resultType="int">
+    	SELECT COUNT(*) FROM member_info WHERE mem_id LIKE '%'||#{mem_id}||'%'
+    </select>
+    
+    <select id="getMemberList" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    	 SELECT * 
+    		FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
+    				FROM (SELECT * FROM member_info
+                  WHERE mem_id LIKE '%'||#{mem_id}||'%'
+    				ORDER BY join_date DESC)
+    			  )  
+   		  WHERE rnum BETWEEN #{start} AND #{end}
+    </select>
+    
+    <select id="getSearchGroupCount" parameterType="Map" resultType="int">
+    	SELECT COUNT(*) FROM group_list WHERE group_name LIKE '%'||#{group_name}||'%'
+    </select>
+    
+    <select id="getGroupList" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+    	 SELECT * 
+    		FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, group_intro, rownum rnum
+    				FROM (SELECT * FROM group_list
+                  WHERE group_name LIKE '%'||#{group_name}||'%'
+    				ORDER BY group_num DESC)
+    			  )  
+   		  WHERE rnum BETWEEN #{start} AND #{end}
+    </select>
+   
 </mapper>

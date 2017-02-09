@@ -101,7 +101,7 @@ public class MainServiceImpl implements MainService{
 		if(tag != null) {
 			String[] tags = tag.split(",");
 			for(String ta : tags) {
-				ta = "#"+ta.replaceAll(" ", "");
+				ta = "#"+ta.replaceAll(" ", "") +" ";
 				sb.append(ta);
 			}
 		}

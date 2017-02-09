@@ -253,13 +253,6 @@ public class FiveServiceImpl implements FiveService {
          }
       }
       
-      String[] tags = post_tag.split(",");
-      post_tag = "";
-      for(String tag : tags) {
-    	  System.out.println("tag : " + tag);
-    	  post_tag += "#"+tag.replaceAll(" ", "")+" ";
-      }
-      
       mainService.wordAnalyzer(title, content, post_tag);
 
       model.addAttribute("cnt", cnt);

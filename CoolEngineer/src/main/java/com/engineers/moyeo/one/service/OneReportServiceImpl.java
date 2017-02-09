@@ -38,8 +38,10 @@ public class OneReportServiceImpl implements OneReportService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
+		// 모임번호를 가져온다.
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
 		
+		// 모임번호를 이용하여 해당 모임정보를 가져온다.
 		MoimReportDTO dto = oneDao.getMoimArticle(group_num);
 		
 		model.addAttribute("group_num", group_num);
@@ -128,6 +130,7 @@ public class OneReportServiceImpl implements OneReportService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
+		// 신고된 모든 건수를 cnt에 가져온다.
 		cnt = oneDao.getReportCount();
 		
 		System.out.println("cnt: " + cnt);
@@ -153,6 +156,7 @@ public class OneReportServiceImpl implements OneReportService{
 			daoMap.put("start", start);
 			daoMap.put("end", end);
 			
+			// 신고된 정보를 ArrayaList에 불러온다.
 			ArrayList<MoimReportDTO> dtos = oneDao.getReportArticles(daoMap);
 			model.addAttribute("dtos", dtos);
 		}
@@ -187,11 +191,14 @@ public class OneReportServiceImpl implements OneReportService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
+		// 신고당한 해당 모임번호
 		int report_num = Integer.parseInt(req.getParameter("report_num"));
 		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
 		int number = Integer.parseInt(req.getParameter("number"));
+		// 처리한 매니저 아이디
 		String manager_id = req.getParameter("manager_id");
 		
+		// 신고번호를 통하여 신고내용을 불러온다.
 		MoimReportDTO dto = oneDao.getMoimContentArticle(report_num);	
 		
 		model.addAttribute("report_num", report_num);

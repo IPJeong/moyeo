@@ -85,7 +85,7 @@ public class OneServiceImpl implements OneService{
 		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("number", number);
-		model.addAttribute("pageNum", pageNum)	;
+		model.addAttribute("pageNum", pageNum);
 		
 		System.out.println("cnt: " + cnt);
 		
@@ -113,6 +113,7 @@ public class OneServiceImpl implements OneService{
 			qboard_num = Integer.parseInt(req.getParameter("num"));
 		}
 		
+		// 게시판키를 담는다.
 		model.addAttribute("qboard_num", qboard_num);
 		
 		return "one/qna/qnaWrite";
@@ -125,18 +126,29 @@ public class OneServiceImpl implements OneService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
+		// qna 질문시 제목
 		String title = req.getParameter("title");
+		// qna 질문시 내용
 		String content = req.getParameter("content");
 		
 		QnaBoardDTO dto = new QnaBoardDTO();
 		
+		// dto에 질문제목을 담는다.
 		dto.setTitle(title);
+		
+		// dto에 질문내용을 담는다.
 		dto.setContent(content);
 		
+		// dto에 게시판키를 담는다.
 		dto.setQboard_num(Integer.parseInt(req.getParameter("qboard_num")));
+		
+		// dto에 작성일을 담는다.
 		dto.setWrite_date(new Timestamp(System.currentTimeMillis()));
+		
+		// dto에 아이디를 담는다.
 		dto.setMem_id((String)req.getSession().getAttribute("mem_id"));
 		
+		// dto에 담은 내용으로 Q&A게시판에 추가
 		int cnt = oneDao.insert(dto);
 		
 		model.addAttribute("cnt", cnt);
