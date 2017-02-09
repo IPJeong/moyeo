@@ -659,6 +659,7 @@ public class SixServiceImpl implements SixService{
 	
 		ArrayList<HotMoimDTO> hotDtos = sixDao.hotMoim();
 		model.addAttribute("hotDtos", hotDtos);
+	
 	}
 
 	//모임카테고리-지역별
@@ -716,7 +717,8 @@ public class SixServiceImpl implements SixService{
 		ArrayList<MoimOpenDTO> dtos17 = sixDao.categoryLocationQ();
 		model.addAttribute("dtos17", dtos17);
 		
-		
+		ArrayList<HotMoimDTO> hotDtos = sixDao.hotMoim();
+		model.addAttribute("hotDtos", hotDtos);
 	}
 
 	//모임카테고리-규모별
@@ -782,6 +784,9 @@ public class SixServiceImpl implements SixService{
 		
 		ArrayList<MoimOpenDTO> dtos20 = sixDao.categoryScaleT();
 		model.addAttribute("dtos20", dtos20);
+
+		ArrayList<HotMoimDTO> hotDtos = sixDao.hotMoim();
+		model.addAttribute("hotDtos", hotDtos);
 	}
 
 	//모임-메인
