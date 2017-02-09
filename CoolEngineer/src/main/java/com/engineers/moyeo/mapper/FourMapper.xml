@@ -59,7 +59,7 @@
   	 
   	<!-- 가입인사 게시판 -->
   	<!-- 가입인사 글 개수 세기 -->
-  	  <select id="greetingGetCount" resultType="int">
+  	<select id="greetingGetCount" resultType="int">
   		SELECT count(*) FROM  greeting_board WHERE group_num = #{group_num}
    </select>	
    
@@ -127,11 +127,40 @@
    		SELECT COUNT(*) FROM greeting_reply WHERE greeting_num = #{greeting_num}
    </select>
    
- 	<!-- 좋아요 등록 -->
+   <!-- 추천했는지 확인 -->
+   <select id="checkGreetingLike" parameterType="map" resultType="int">
+   		SELECT COUNT(*) FROM like_greeting WHERE mem_id = #{mem_id} AND greeting_num = #{greeting_num}
+   </select>
+   
+ 	<!-- 가입인사 테이블 내 좋아요컬럼 +1 등록 -->
    <update id="likecacount" parameterType="int" >
    		UPDATE greeting_board SET like_num = like_num+1 WHERE greeting_num=#{greeting_num}
    </update> 
    
+   <!-- 좋아요 테이블 내 좋아요컬럼+1 새롭게-->
+   <insert id="likeInsert" parameterType="map">
+   		 INSERT INTO like_greeting (gre_like_num, mem_id, greeting_num)
+  	      values(like_greeting_seq.nextval, #{mem_id}, #{greeting_num})
+   </insert>
    
+    
+    <!-- 샵  -->
+    
+    
+    <!-- 샵 게시판 글 개수 세기 -->
+    <select id="shopGetCount" resultType="int">
+  		SELECT count(*) FROM  product_info
+   </select>	
+    
+    
+    <!-- 제품 등록 -->
+   <insert id="productInsert" parameterType="com.engineers.moyeo.four.dto.productInfoDTO">
+   		 INSERT INTO product_info (product_num, product_name, product_price, product_qty, product_detail, seller_id)
+  	      values(product_info_seq.nextval, #{product_name}, #{product_price}, #{product_qty}, #{product_detail}, #{seller_id} )
+   </insert>
    
+
+	
+	
+	   
 </mapper>
