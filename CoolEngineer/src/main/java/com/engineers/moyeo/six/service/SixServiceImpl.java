@@ -876,6 +876,7 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("number", number);
 		model.addAttribute("pageNum", pageNum);
 		
+		
 		//모임-출석체크
 		String present_date_A = String.valueOf((new Timestamp(System.currentTimeMillis())));
 		String present_date_B[] = present_date_A.split(" ");
@@ -883,34 +884,37 @@ public class SixServiceImpl implements SixService{
 		
 		CheckPresentDTO present_dto = new CheckPresentDTO();
 		present_dto.setPresent_date(present_date);
-		present_dto.setMem_id((String)(req.getSession().getAttribute("mem_id")));
+		
+		if(mem_id==null && req.getSession().getAttribute("manager_id")!=null) {
+			mem_id = (String)req.getSession().getAttribute("manager_id");
+		}
+		
+		present_dto.setMem_id(mem_id);
 		present_dto.setGroup_num(group_num);
 		
-		//로그인 한경우에만 실행
-		if(mem_id != null) {
-			//모임가입여부 확인
-			int check_cnt = sixDao.memberCheck(present_dto);
+		//로그인| req.getSession()) {
+		//모임가입여부 확인
+		int check_cnt = sixDao.memberCheck(present_dto);
+		
+		//모임가입된 경우에만 실행
+		if(check_cnt != 0) {
+				
+			//회원권한 설정
+			Map<String, Object> perMap = model.asMap();
+			perMap.put("mem_id", mem_id);
+			perMap.put("group_num", group_num);
+			int group_per = sixDao.groupPer(perMap);
+			req.getSession().setAttribute("group_per", group_per);
 			
-			//모임가입된 경우에만 실행
-			if(check_cnt != 0) {
-					
-				//회원권한 설정
-				Map<String, Object> perMap = model.asMap();
-				perMap.put("mem_id", mem_id);
-				perMap.put("group_num", group_num);
-				int group_per = sixDao.groupPer(perMap);
-				req.getSession().setAttribute("group_per", group_per);
-				
-				//출석체크 중복여부 확인
-				int present_cnt = sixDao.checkPresentCount(present_dto);
-				//중복이 안된 경우만 출석 인정(1일 1회)
-				
-				if(present_cnt == 0){
-					sixDao.checkPresent(present_dto);
-				}
-			} else {
-				req.getSession().setAttribute("group_per", 4);
+			//출석체크 중복여부 확인
+			int present_cnt = sixDao.checkPresentCount(present_dto);
+			//중복이 안된 경우만 출석 인정(1일 1회)
+			
+			if(present_cnt == 0){
+				sixDao.checkPresent(present_dto);
 			}
+		} else {
+			req.getSession().setAttribute("group_per", 4);
 		}
 		
 		InterestGroupDTO dto = new InterestGroupDTO();
