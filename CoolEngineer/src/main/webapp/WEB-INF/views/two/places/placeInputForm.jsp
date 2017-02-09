@@ -272,33 +272,17 @@ li {
 
 <%@ include file="../../etc/header2.jsp"%>
 
-         <!-- START BREADCRUMB -->
+         		<!-- START BREADCRUMB -->
                 <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li><a href="../categoryory/categoryory_hobby.jsp">모임</a></li>
-                    <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-                    <li class="active">모임관리</li>
+                    <li><a href="/moyeo/main/home">Home</a></li>
+                    <li><a href="/moyeo/two/placeMainLoc">추천장소 메인</a></li>
+                    <li class="active">장소정보</li>
                 </ul>
                <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
 <div class="row">
-		<!-- START LOGIN BLOCK -->
 
-		<!-- START RECOMMENDATION MEET BLOCK -->
-	
-	<!-- END LOGIN BLOCK -->
-
-
-	<!-- START SEARCH BLOCK -->
-
-	<!-- END SEARCH BLOCK -->
-
-	<!-- START NOTICE BLOCK -->
-
-	<!-- END NOTICE BLOCK -->
-
-	<!-- START PHOTO BLOCK -->
 	<div class="col-md-56" style="margin-top:30px; margin-bottom:30px; margin-left:20%; height:820px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -317,7 +301,7 @@ li {
 						<div class="form-group">
 							<label class="col-lg-2 control-label">장소명</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" name="place_name" maxlength="40"
+								<input type="text" class="form-control" name="place_name" maxlength="20"
 									placeholder="" required>
 							</div>
 						</div>
@@ -354,7 +338,7 @@ li {
 						<div class="form-group">
 							<label class="col-lg-2 control-label">상세 주소</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" name="place_address" maxlength="80"
+								<input type="text" class="form-control" name="place_address" maxlength="40"
 									placeholder="" required>
 							</div>
 						</div>
@@ -362,7 +346,7 @@ li {
 						<div class="form-group">
 							<label class="col-lg-2 control-label">장소설명</label>
 							<div class="col-lg-10">
-								<textarea class="form-control" rows="17" name="place_detail" maxlength="2000"></textarea>
+								<textarea class="form-control" rows="17" name="place_detail" maxlength="1000"></textarea>
 								<span class="help-block"></span>
 							</div>
 						</div>
@@ -370,7 +354,7 @@ li {
 						<div class="form-group">
 							<label class="col-lg-2 control-label">링크</label>
 							<div class="col-lg-10">
-								<input type="url" class="form-control" name="place_link" maxlength="120"
+								<input type="url" class="form-control" name="place_link" maxlength="30"
 									placeholder="">
 							</div>
 						</div>
@@ -380,8 +364,7 @@ li {
 	                           <div class="col-md-6 col-xs-12">
 	                           	   <span class="help-block">사진을 선택하세요.</span>
 	                           	   <div id="fileview">
-	                               		<input class="btn btn-warning btn-rounded" id="file0" type="file" name="files[0]" style="float:left;" onchange="chkType('file0')" required/>
-	                               		<input class="btn btn-info btn-rounded" id="addFile" type="button" value="파일추가" style="float:left; margin-left:1%;"/>	
+	                               		<input class="btn btn-warning btn-rounded" id="file0" type="file" name="files[0]" style="float:left;" onchange="chkType('file0')" required/>	
 	                               </div>
 	                           </div>
 	                       </div>
@@ -399,39 +382,7 @@ li {
 			</div>
 		</div>
 	</div>
-
-	<!-- END PHOTO BLOCK -->
-
-
-
-
-
-	<!-- END RECOMMENDATION MEET BLOCK -->
-
-
-	<!-- START MOVIE BLOCK -->
-
-	<!-- END MOVIE BLOCK -->
-
-	<!-- START REALTIME MEET BLOCK -->
-
-	<!-- END REALTIME MEET BLOCK -->
-
-	<!-- START RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- END RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- START EVENT BLOCK -->
-
-	<!-- END EVENT BLOCK -->
-
-	<!-- START ADVERTISE BLOCK -->
-
-	<!-- END ADVERTISE BLOCK -->
-
-	<!-- START REVIEW BLOCK -->
-
-	<!-- END REVIEW BLOCK -->
+	
 </div>
 <!-- END ROW -->
            

@@ -77,38 +77,15 @@ li {
 
          <!-- START BREADCRUMB -->
                 <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li><a href="../category/category_hobby.jsp">모임</a></li>
-                    <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-                    <li class="active">모임관리</li>
+                    <li><a href="/moyeo/main/home">Home</a></li>
+                    <li><a href="/moyeo/two/placeMainLoc">추천장소 메인</a></li>
+                    <li class="active">장소정보</li>
                 </ul>
                <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
 <div class="row">
-		<!-- START LOGIN BLOCK -->
 
-		<!-- START RECOMMENDATION MEET BLOCK -->
-	
-	<!-- END LOGIN BLOCK -->
-
-
-	<!-- START SEARCH BLOCK -->
-
-	<!-- END SEARCH BLOCK -->
-
-	<!-- START NOTICE BLOCK -->
-
-	<!-- END NOTICE BLOCK -->
-
-	<!-- START PHOTO BLOCK -->
-	
-	
-<!-- 
-그림 불러오는 방법
-<img src="/placeImgPath/${dto.imgPath}${dto.imgName}"> 
--->
-	
 	<div class="col-md-56" style="margin-top:30px; margin-bottom:30px; margin-left:15%; height:1200px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -155,6 +132,7 @@ li {
             <br>
                 <form name="placecontentform">
                 	<input type="hidden" name="place_num" value="${place_num}">
+                	<input type="hidden" name="pageNum" value="${pageNum}">
 					<div style="float: right; margin-right:20%;">
 						<input type="button" class="btn btn-info" value="수정" onclick="placeModify()">
 						<input type="button" class="btn btn-info" value="삭제" onclick="placeDelete()">
@@ -254,33 +232,6 @@ li {
 		</div>
 	</div>
 
-	<!-- END PHOTO BLOCK -->
-
-	<!-- END RECOMMENDATION MEET BLOCK -->
-
-
-	<!-- START MOVIE BLOCK -->
-
-	<!-- END MOVIE BLOCK -->
-
-	<!-- START REALTIME MEET BLOCK -->
-
-	<!-- END REALTIME MEET BLOCK -->
-
-	<!-- START RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- END RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- START EVENT BLOCK -->
-
-	<!-- END EVENT BLOCK -->
-
-	<!-- START ADVERTISE BLOCK -->
-
-	<!-- END ADVERTISE BLOCK -->
-
-	<!-- START REVIEW BLOCK -->
-
-	<!-- END REVIEW BLOCK -->
 </div>
 <!-- END ROW -->
+<%@ include file="../../etc/footer2.jsp"%>

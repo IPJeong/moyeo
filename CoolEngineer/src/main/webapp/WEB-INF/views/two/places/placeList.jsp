@@ -85,32 +85,15 @@ li {
 
 </style>
 
-         <!-- START BREADCRUMB -->
+         		<!-- START BREADCRUMB -->
                 <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li><a href="../category/category_hobby.jsp">모임</a></li>
-                    <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-                    <li class="active">모임관리</li>
+                    <li><a href="/moyeo/main/home">Home</a></li>
+                    <li><a href="/moyeo/two/placeMainLoc">추천장소 메인</a></li>
+                    <li class="active">장소정보</li>
                 </ul>
                <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
-		<!-- START LOGIN BLOCK -->
-
-		<!-- START RECOMMENDATION MEET BLOCK -->
-	
-	<!-- END LOGIN BLOCK -->
-
-
-	<!-- START SEARCH BLOCK -->
-
-	<!-- END SEARCH BLOCK -->
-
-	<!-- START NOTICE BLOCK -->
-
-	<!-- END NOTICE BLOCK -->
-
-	<!-- START PHOTO BLOCK -->
 	<div class="col-md-56" style="margin-top:20px; margin-left:10%; height:1220px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -135,13 +118,14 @@ li {
 					<br>
 					
 					<div>
+					<c:if test="${cnt > 0}">
 						<table class="table table-striped table-hover"
 							style="width:50%; margin-left: 10%; float:left;">
 							<tr class="info">
 								<td style="width:3%;" align="center">장소번호</td>
 								<td style="width:10%;" align="center">장소명</td>
 							</tr>
-					<c:if test="${cnt > 0}">
+					
 						<c:forEach var="pidtos" items="${pidtos}">
 							<tr style="border:0;">
 <!-- 								<td style="border:0; height:150px;" align="center"> -->
@@ -158,7 +142,9 @@ li {
 								</td>
 							</tr>	
 						</c:forEach>
-						
+						</table>
+					</c:if>
+					<c:if test="${cnt > 0}">		
 						<table class="table table-striped table-hover"
 							style="width:30%; float:right; margin-right:10%;">	
 							<tr class="info">	
@@ -174,15 +160,22 @@ li {
 						</table>
 					</c:if>
 					
-						<c:if test="${cnt == 0}">
-							<tr class="info">	
-								<td colspan="3" align="center" style="height:40px">
-									등록된 장소가 없습니다.
-								</td>
+				   <c:if test="${cnt == 0}">
+					   <table class="table table-striped table-hover"
+					   		style="width:80%; margin-left:10%; float:left;">
+					   		<tr class="info">
+								<td style="width:10%;" align="center">장소번호</td>
+								<td style="width:45%;" align="center">장소명</td>
+								<td style="width:45%;" align="center">장소사진</td>
 							</tr>
-						</c:if>
-						</table>
-				 </div>
+						   <tr class="info">	
+							   <td colspan="3" align="center" style="height:40px">
+							      등록된 장소가 없습니다.
+							   </td>
+						   </tr>
+					   </table>
+				   </c:if>
+			   </div>
 					<br><br>
 					
 					
@@ -225,39 +218,8 @@ li {
 			  </div>
 			  <br>
 		</div>
-	<!-- END PHOTO BLOCK -->
 
-
-
-
-
-	<!-- END RECOMMENDATION MEET BLOCK -->
-
-
-	<!-- START MOVIE BLOCK -->
-
-	<!-- END MOVIE BLOCK -->
-
-	<!-- START REALTIME MEET BLOCK -->
-
-	<!-- END REALTIME MEET BLOCK -->
-
-	<!-- START RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- END RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- START EVENT BLOCK -->
-
-	<!-- END EVENT BLOCK -->
-
-	<!-- START ADVERTISE BLOCK -->
-
-	<!-- END ADVERTISE BLOCK -->
-
-	<!-- START REVIEW BLOCK -->
-
-	<!-- END REVIEW BLOCK -->
-		</div>
 	</div>
+</div>
 <!-- END ROW -->
 <%@ include file="../../etc/footer2.jsp"%>

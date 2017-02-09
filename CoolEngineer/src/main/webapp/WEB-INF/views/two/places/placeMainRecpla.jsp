@@ -202,10 +202,16 @@ function select_recpla_category() {
 
 </script>
 
+<style>
+div .page-content {
+	height:1100px;
+}
+
+</style> 
          <!-- START BREADCRUMB -->
                 <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li class="active">추천장소</li>
+                    <li><a href="/moyeo/main/home">Home</a></li>
+                    <li class="active">추천장소 메인 (관심사별)</li>
                 </ul>
                <!-- END BREADCRUMB -->     
 
@@ -264,7 +270,7 @@ function select_recpla_category() {
 
 
 <div class="col-md-13-3">
-	<div class="panel panel-default" style="float:right; margin-top:20px; width:38%; height:900px;">
+	<div class="panel panel-default" style="float:right; margin-top:10px; width:38%; height:900px;">
 		<div class="panel-heading">
 			<div class="panel-title-box">
 				<h3>지금 뜨는 장소</h3>										
@@ -285,7 +291,7 @@ function select_recpla_category() {
 					        </ul>	
 				        </c:forEach>
 				   </div>
-				   <div class="info" style="float:right; margin-top:30px; margin-right:5%; width:50%; height:300px;">  
+				   <div class="info" style="float:right; margin-top:20px; margin-right:5%; width:50%; height:300px;">  
 				        <br>
 				        <c:forEach var="lpidtos" items="${lpidtos}">
 				        	<div style="width:80%; height:145px; margin-top:20px;"> 
@@ -299,7 +305,7 @@ function select_recpla_category() {
 							        </li>
 							     <br>
 							        <li>
-							        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpidtos.place_like_count}
+							        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpidtos.place_like_count}</span>
 							        </li>   
 								</ul>
 							</div>
@@ -312,20 +318,34 @@ function select_recpla_category() {
 	</div>
 </div>
 
-
-<div class="col-md-13-3" style="margin-top:-40px; width:50%; height:770px; float:left; margin-left:8.5%;">
+<div class="col-md-13-3" style="margin-top:-50px; width:50%; height:770px; float:left; margin-left:8.5%;">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="panel-title-box" style="font-size:14px">
 				<strong style="text-align:left;">장소 검색 결과</strong>
-				<a href="placeList" style="text-align:right; font-size:12px">+ 더 보기</a>								
+				<a href="placeList" style="text-align:right; font-size:12px">+ 장소 전체보기</a>								
 			</div>
 		</div>
-		
+	
 		<div class="panel panel-default">
+			<c:if test="${cnt == 0}">
+				<div style="width:80%; font-size:15px; text-align:left; margin-top:50px; margin-left:20px;">
+					<h2>장소 검색결과가 존재하지 않습니다.</h2>
+					<br>
+					&nbsp;&nbsp;&nbsp;단어의 철자가 정확한지 확인해 보세요.<br>
+					&nbsp;&nbsp;&nbsp;한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br>
+					&nbsp;&nbsp;&nbsp;검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.<br>
+					&nbsp;&nbsp;&nbsp;두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.<br>
+					&nbsp;&nbsp;&nbsp;검색 옵션을 변경해서 다시 검색해 보세요.<br>
+					<br><br>
+					&nbsp;&nbsp;&nbsp;찾고자 하는 장소가 존재하지 않는다면 새로운 장소를 등록해보세요.
+					&nbsp;→&nbsp;<a href="placeInputForm">장소 등록</a><br>
+				</div>
+			</c:if>
+			
 			<c:if test="${cnt > 0}">
 				<div class="inner">
-		            <div class="info" style="float:left; margin-top:10px; margin-left:13%; width:35%; height:250px;">
+		            <div class="info" style="float:left; margin-top:10px; margin-left:7%; width:30%; height:250px;">
 				        <c:forEach var="ppdtos" items="${ppdtos}">
 					        <ul style="list-style:none; margin-top:20px;">
 					        	<li>
@@ -336,11 +356,11 @@ function select_recpla_category() {
 					        </ul>	
 				        </c:forEach>
 				   </div>
-				   <div class="info" style="float:right; margin-top:20px; margin-right:20%; width:27%; height:250px;">  
+				   <div class="info" style="float:right; margin-top:10px; margin-right:18%; width:40%; height:250px;">  
 				        <br>
 				        <c:forEach var="pidtos" items="${pidtos}">
-				        	<div style="width:80%; height:120px; margin-top:20px;"> 
-					       		<ul style="list-style:none; margin-top:20px;">
+				        	<div style="width:80%; height:120px; margin-top:10px;"> 
+					       		<ul style="list-style:none; margin-top:10px;">
 							        <li>
 							        	<strong>이름</strong> &nbsp; ${pidtos.place_name}
 							        </li> 
@@ -386,5 +406,7 @@ function select_recpla_category() {
 							
 				</ul>
 			</div>
+	
 </div> 
 	
+<%@ include file="../../etc/footer2.jsp"%>
