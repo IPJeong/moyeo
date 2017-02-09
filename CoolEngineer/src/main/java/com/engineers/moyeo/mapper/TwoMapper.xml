@@ -4,10 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <!--  
-<mapper namespace="?⑦궎吏紐??명꽣?섏씠??>
+<mapper namespace="패키지명.인터페이스">
 
 -->
-<mapper namespace="com.engineers.moyeo.two.dao.TwoDAO">  <!-- ?명꽣?섏씠??-->
+<mapper namespace="com.engineers.moyeo.two.dao.TwoDAO">  <!-- 인터페이스 -->
 
     <insert id="writeSuggestion" parameterType="com.engineers.moyeo.two.dto.SuggestionDTO">
 		INSERT INTO suggestion(sug_num, sug_title, sug_content, sug_date, re_email, sug_status, manager_id, sol_content, sol_date, mem_id) 
@@ -330,7 +330,7 @@
 		DELETE FROM place_like WHERE plalike_num = #{plalike_num}
 	</delete>
 	
-	<!-- ?대뼡 紐⑥엫 ?섎굹??紐⑥엫 ?뺣낫瑜?遺덈윭??-->
+	<!-- 어떤 모임 하나의 모임 정보를 불러옴 -->
  	<select id="readMoimInfo" parameterType="int" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
  		SELECT * FROM group_list WHERE group_num = #{group_num}
  	</select>
@@ -340,15 +340,15 @@
  	</select>
  	
  	<select id="moimJoinCheck" parameterType="Map" resultType="int">
- 		SELECT COUNT(*) FROM join_request WHERE group_num = #{group_num} AND mem_id = #{mem_id} AND (status = '?뱀씤' OR status = '?湲?)
+ 		SELECT COUNT(*) FROM join_request WHERE group_num = #{group_num} AND mem_id = #{mem_id} AND (status = '승인' OR status = '대기')
  	</select>
  	
  	<select id="moimBanishCheck" parameterType="Map" resultType="int">
- 		SELECT COUNT(*) FROM join_request WHERE group_num = #{group_num} AND mem_id = #{mem_id} AND status = '媛뺤젣?덊눜'
+ 		SELECT COUNT(*) FROM join_request WHERE group_num = #{group_num} AND mem_id = #{mem_id} AND status = '강제탈퇴'
  	</select>
  	
  	<insert id="moimJoin" parameterType="Map">
-		INSERT INTO join_request (request_num, request_date, status, mem_id, group_num) VALUES (join_request_seq.NEXTVAL, SYSDATE, '?湲?, #{mem_id}, #{group_num})
+		INSERT INTO join_request (request_num, request_date, status, mem_id, group_num) VALUES (join_request_seq.NEXTVAL, SYSDATE, '대기', #{mem_id}, #{group_num})
 	</insert>
 	
 	<delete id="moimWithdraw" parameterType="Map">
@@ -356,14 +356,14 @@
 	</delete>
 	
 	<select id="getMoimJoinCount" parameterType="int" resultType="int">
-		SELECT count(*) FROM join_request WHERE group_num = #{group_num} AND status= '?湲?
+		SELECT count(*) FROM join_request WHERE group_num = #{group_num} AND status= '대기'
 	</select>
 	
 	<select id="getMoimJoinList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Join_requestDTO">
  		SELECT *
 		  FROM (SELECT request_num, request_date, status, group_num, mem_id, rownum rnum
 		          FROM (SELECT jmi.request_num, jmi.request_date, jmi.status, mi.mem_id, jmi.group_num, mi.name, mi.birth, mi.gender 
-		                FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '?湲? ORDER BY request_num DESC) jmi, member_info mi
+		                FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '대기' ORDER BY request_num DESC) jmi, member_info mi
 		                WHERE jmi.mem_id = mi.mem_id))
 		 WHERE rnum BETWEEN #{start} AND #{end} 
 	</select>
@@ -372,7 +372,7 @@
  		SELECT *
 		  FROM (SELECT mem_id, name, birth, gender, rownum rnum
 		          FROM (SELECT jmi.request_num, jmi.request_date, jmi.status, mi.mem_id, jmi.group_num, mi.name, mi.birth, mi.gender 
-		                FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '?湲? ORDER BY request_num DESC) jmi, member_info mi
+		                FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '대기' ORDER BY request_num DESC) jmi, member_info mi
 		                WHERE jmi.mem_id = mi.mem_id))
 		 WHERE rnum BETWEEN #{start} AND #{end} 
 	</select>
