@@ -37,7 +37,7 @@
 
 .panel .panel-body {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .col-md-25 {

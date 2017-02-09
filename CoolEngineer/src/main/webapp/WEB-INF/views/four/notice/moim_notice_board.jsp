@@ -37,7 +37,7 @@
 
 .panel .panel-body {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .col-md-25 {
@@ -54,13 +54,13 @@ left: -3px;
 </style>
 
 <!-- START BREADCRUMB -->
-   <ul class="breadcrumb push-down-0">
-       <li><a href="../main/main.jsp">Home</a></li>
-       <li><a href="../category/category_hobby.jsp">모임</a></li>
-       <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-       <li class="active">모임게시판</li>
-   </ul>
-<!-- END BREADCRUMB -->  
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/home">Home</a></li>
+	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+	<li class="active">모임공지 게시판</li>
+</ul>
+<!-- END BREADCRUMB -->
 
 <!-- START ROW -->
 
@@ -78,14 +78,14 @@ left: -3px;
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="panel-title-box">
-						<h3>공지사항 게시판</h3>
+						<h3>모임공지 게시판</h3>
 					</div>
 				</div>
 				<div class="panel-body padding-0" style="text-align:center; font-size: 25px" >
 					<div class="chart-holder" id="dashboard-bar-1"
 						style="height: 10px;">
 						<br>
-						<h2>공지사항 게시판</h2>
+						<h2>모임공지 게시판</h2>
 						<br>
 						<form action="" name="">
 							<div style="float:right; margin-right:5%;">
@@ -161,23 +161,7 @@ left: -3px;
 						</ul>
 							
 						</div>   
-						<div class="panel-body padding-0" style="text-align:center; font-size: 15px" >
-							<div class="chart-holder" id="dashboard-bar-1" style="height:15px; margin-left:5%">
-												
-								<form class="navbar-form navbar-left" role="search">
-									<select name="">
-										<option value="1">ID</option>
-										<option value="2">닉네임</option>
-										<option value="3">IP</option>
-									</select>
-									
-				       				<div class="form-group">
-				        				<input class="form-control" type="text" placeholder="Search">
-				        	  		</div>
-				       					<button class="btn btn-default" type="submit">입력</button>
-				     		    </form>
-				     		</div>
-		     		    </div>
+
 					</div>
 			</div>
 		</div>

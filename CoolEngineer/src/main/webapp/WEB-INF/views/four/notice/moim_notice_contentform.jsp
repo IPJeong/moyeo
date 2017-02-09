@@ -38,7 +38,7 @@
 
 .panel .panel-body {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .col-md-25 {
@@ -53,13 +53,14 @@ left: -3px;
 
 </style>
 
-  <ul class="breadcrumb push-down-0">
-      <li><a href="../main/main.jsp">Home</a></li>
-      <li><a href="../category/category_hobby.jsp">모임</a></li>
-      <li><a href="../moim/moim_main.jsp">중앙2팀</a></li>
-      <li><a href="../moim/moim_main.jsp">모임공지 게시판</a></li>
-      <li class="active">게시글 보기</li>
-  </ul>
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/home">Home</a></li>
+	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+	<li class="active">모임공지 게시판</li>
+</ul>
+<!-- END BREADCRUMB -->
 
 <!-- START ROW -->
 <div class="row">
@@ -74,7 +75,7 @@ left: -3px;
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="panel-title-box">
-						<h3>게시글 보기</h3>
+						<h3>모임공지 게시글 보기</h3>
 					</div>
 				</div>
 				<br><br><br><br>
@@ -107,7 +108,8 @@ left: -3px;
 				
 					<div style="float:right; margin-right:5%;">
 								<!-- 로그인 되어 있으면, -->
-								<c:if test="${sessionScope.mem_id != null}">
+								
+								<c:if test="${sessionScope.mem_id == dto.mem_id}">
 								<input class="btn btn-default" value="수정" type="button" onclick="location.href='moim_notice_modifyView?num=${dto.group_noti_num}&pageNum=${pageNum}'">
 								<input class="btn btn-default" value="삭제" type="button"  onclick="location.href='moim_notice_delete?num=${dto.group_noti_num}&pageNum=${pageNum}'">
 								</c:if>

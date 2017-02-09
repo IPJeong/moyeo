@@ -38,7 +38,7 @@
 
 .panel .panel-body {
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .col-md-25 {
@@ -59,13 +59,14 @@ li {
 }
 
 </style>
-   <ul class="breadcrumb push-down-0">
-      <li><a href="../main/main.jsp">Home</a></li>
-      <li><a href="../category/category_hobby.jsp">모임</a></li>
-      <li><a href="../moim/moim_main.jsp">중앙2팀</a></li>
-      <li><a href="../moim/moim_main.jsp">모임공지 게시판</a></li>
-      <li class="active">글쓰기</li>
-   </ul>
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/home">Home</a></li>
+	<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+	<li class="active">모임공지 게시판</li>
+</ul>
+<!-- END BREADCRUMB -->
 <!-- START ROW -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
@@ -79,7 +80,7 @@ li {
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="panel-title-box">
-						<h3>글쓰기</h3>
+						<h3>모임공지 글쓰기</h3>
 					</div>
 				</div>
 	
