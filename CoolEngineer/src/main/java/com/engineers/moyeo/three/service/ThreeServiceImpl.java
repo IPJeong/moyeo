@@ -473,7 +473,7 @@ public class ThreeServiceImpl implements ThreeService{
 		String proDefNameW = Code.profileDefNameW;
 		
 		MemberDTO dto = new MemberDTO();
-		dto.setMem_id(memid);
+		dto.setMem_id(memid.toLowerCase());
 		dto.setPasswd(passwd);
 		dto.setName(name);
 		dto.setAddress(address);
