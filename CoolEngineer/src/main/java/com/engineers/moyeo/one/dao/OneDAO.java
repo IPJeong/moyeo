@@ -146,16 +146,21 @@ public interface OneDAO {
 	// 관리자 권한에서 하위관리자 강퇴
 	public int deleteManager(String manager_id);
 	
-	// 관리자 권한에서 회원리스트 검색
 	public int getSearchNameCount(Map<String, Object> daoMap);
 	
-	// 검색결과에 따른 회원멤버 리스트
+	public int getSearchIdCount(Map<String, Object> daoMap);
+	
+	// 관리자 권한에서 회원리스트 검색(아이디)
 	public ArrayList<MemberInformDTO> getMemberList(Map<String, Object> daoMap);
-
+	
+	// 관리자 권한에서 회원리스트 검색(아이디)
+	public ArrayList<MemberInformDTO> getMemberList2(Map<String, Object> daoMap);
+	
 	// 관리자 권한에서 모임리스트 검색
 	public int getSearchGroupCount(Map<String, Object> daoMap);
 	
 	// 검색결과에 따른 모임 리스트
 	public ArrayList<MoimOpenDTO> getGroupList(Map<String, Object> daoMap);
+	
 	
 }

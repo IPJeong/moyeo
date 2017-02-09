@@ -275,15 +275,31 @@
     </delete>
     
     <select id="getSearchNameCount" parameterType="Map" resultType="int">
-    	SELECT COUNT(*) FROM member_info WHERE mem_id LIKE '%'||#{mem_id}||'%'
+    	SELECT COUNT(*) FROM member_info 
+    	WHERE name LIKE '%'||#{search}||'%'
+    </select>
+    
+    <select id="getSearchIdCount" parameterType="Map" resultType="int">
+    	SELECT COUNT(*) FROM member_info 
+    	WHERE mem_id LIKE '%'||#{search}||'%'
     </select>
     
     <select id="getMemberList" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
     	 SELECT * 
     		FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
     				FROM (SELECT * FROM member_info
-                  WHERE mem_id LIKE '%'||#{mem_id}||'%'
+   				   WHERE name LIKE '%'||#{search}||'%'
     				ORDER BY join_date DESC)
+    			  )  
+   		  WHERE rnum BETWEEN #{start} AND #{end}
+    </select>
+    
+    <select id="getMemberList2" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    	 SELECT * 
+    		FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
+    				FROM (SELECT * FROM member_info
+   				   WHERE mem_id LIKE '%'||#{search}||'%'
+    			   ORDER BY join_date DESC)
     			  )  
    		  WHERE rnum BETWEEN #{start} AND #{end}
     </select>

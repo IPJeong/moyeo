@@ -478,7 +478,17 @@ public class OneDAOImpl implements OneDAO{
 		cnt = dao.getSearchNameCount(daoMap);
 		return cnt;
 	}
+	
+	// 관리자 권한에서 회원리스트 검색
+	@Override
+	public int getSearchIdCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.getSearchIdCount(daoMap);
+		return cnt;
+	}
 
+	// 관리자 권한에서 회원 검색
 	@Override
 	public ArrayList<MemberInformDTO> getMemberList(Map<String, Object> daoMap) {
 		ArrayList<MemberInformDTO> dtos = null;
@@ -486,7 +496,16 @@ public class OneDAOImpl implements OneDAO{
 		dtos = dao.getMemberList(daoMap);
 		return dtos;
 	}
-
+	
+	// 관리자 권한에서 회원 검색
+	@Override
+	public ArrayList<MemberInformDTO> getMemberList2(Map<String, Object> daoMap) {
+		ArrayList<MemberInformDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getMemberList2(daoMap);
+		return dtos;
+	}
+	
 	@Override
 	public int getSearchGroupCount(Map<String, Object> daoMap) {
 		int cnt = 0;
@@ -502,4 +521,5 @@ public class OneDAOImpl implements OneDAO{
 		dtos = dao.getGroupList(daoMap);
 		return dtos;
 	}
+	
 }

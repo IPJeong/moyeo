@@ -596,11 +596,21 @@ public class OneManagerServiceImpl implements OneManagerService {
 		int cnt = 0;
 		
 		String search_name = req.getParameter("search_name");
+		String type = req.getParameter("type");
+		System.out.println("type: " + type);
+		System.out.println("search_name: " + search_name);
+		search_name = search_name.toLowerCase();
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
-		daoMap.put("mem_id", search_name);
 		
-		cnt = oneDao.getSearchNameCount(daoMap);
+		daoMap.put("search", search_name);
+		
+		if(type.equals("name")){
+			cnt = oneDao.getSearchNameCount(daoMap);
+		} else {
+			cnt = oneDao.getSearchIdCount(daoMap);
+		}
+		
 		
 		pageNum = req.getParameter("pageNum");
 		
@@ -622,7 +632,14 @@ public class OneManagerServiceImpl implements OneManagerService {
 		daoMap.put("end", end);
 		
 		if(cnt > 0) {
-			ArrayList<MemberInformDTO> dtos = oneDao.getMemberList(daoMap);
+			ArrayList<MemberInformDTO> dtos = null;
+			if(type.equals("name")){
+				dtos = oneDao.getMemberList(daoMap);
+			} else {
+				dtos = oneDao.getMemberList2(daoMap);
+			}
+			
+					
 			model.addAttribute("dtos", dtos);
 		}
 		
