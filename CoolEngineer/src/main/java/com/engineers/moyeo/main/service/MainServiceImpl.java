@@ -16,6 +16,7 @@ import com.engineers.moyeo.main.dao.MainDAO;
 import com.engineers.moyeo.main.dto.WordDTO;
 import com.engineers.moyeo.main.twitterKoreanParser.KoreanParser;
 import com.engineers.moyeo.six.dao.SixDAO;
+import com.engineers.moyeo.six.dto.HotMoimDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 
 @org.springframework.stereotype.Service
@@ -101,7 +102,7 @@ public class MainServiceImpl implements MainService{
 		if(tag != null) {
 			String[] tags = tag.split(",");
 			for(String ta : tags) {
-				ta = "#"+ta.replaceAll(" ", "") +" ";
+				ta = "#"+ta.replaceAll(" ", "");
 				sb.append(ta);
 			}
 		}
@@ -221,5 +222,12 @@ public class MainServiceImpl implements MainService{
 //		model.addAttribute("listSize", wordList.size());
 		
 		return resultMsg;
+	}
+
+	@Override
+	public void hotMoim(Model model) {
+	
+		ArrayList<HotMoimDTO> hotDtos = sixDao.hotMoim();
+		model.addAttribute("hotDtos", hotDtos);
 	}
 }

@@ -21,4 +21,6 @@ public interface MainService {
 	// 워드클라우드 재검색 요청
 	public String wordcloudRefresh(Model model);
 	
+	//메인페이지에 인기모임 불러오기
+	public void hotMoim(Model model);
 }
