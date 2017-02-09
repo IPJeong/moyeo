@@ -78,8 +78,12 @@
 	border-color: #4e7aa2;
 	color: #3c44ab;
 }
-a{
+a {
 	text-decoration:none;
+}
+
+.panel-default .panel-heading {
+	background-color: rgba(255, 152, 0, 0.31);
 }
 
 </style>
@@ -117,7 +121,7 @@ a{
 								<div class="col-md-6-1"
 									style="width: 95%; height: 50px; margin: 20px 0px 5px 0px;">
 									<div class="col-md-6" style="width: 20%; margin-left: 50px;">
-										<input type="button" class="btn btn-primary btn-block"
+										<input type="button" class="btn btn-info btn-rounded" style="width:150px; height:30px; font-size:12pt; margin-top:5px; margin-left:5px;"
 											value="모임만들기" onclick="window.location='moimOpen'">
 									</div>
 
@@ -147,7 +151,7 @@ a{
 													<div style="width: 100%; height: 250px;">
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>아웃도어/여행</h3>
 																</div>
@@ -167,7 +171,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>운동/스포츠</h3>
 																</div>
@@ -187,7 +191,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>인문학/책/글</h3>
 																</div>
@@ -207,7 +211,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>외국/언어</h3>
 																</div>
@@ -227,7 +231,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>문화/공연</h3>
 																</div>
@@ -249,7 +253,7 @@ a{
 													<div style="width: 100%; height: 250px;">
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>음악/악기</h3>
 																</div>
@@ -269,7 +273,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>공예/만들기</h3>
 																</div>
@@ -289,7 +293,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>댄스/무용</h3>
 																</div>
@@ -309,7 +313,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>봉사활동</h3>
 																</div>
@@ -329,7 +333,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>사교/인맥</h3>
 																</div>
@@ -352,7 +356,7 @@ a{
 													<div style="width: 100%; height: 250px;">
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>차/오토바이</h3>
 																</div>
@@ -373,7 +377,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>사진</h3>
 																</div>
@@ -394,7 +398,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>야구관람</h3>
 																</div>
@@ -415,7 +419,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>게임/오락</h3>
 																</div>
@@ -436,7 +440,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>요리/제조</h3>
 																</div>
@@ -459,7 +463,7 @@ a{
 													<div style="width: 100%; height: 250px;">
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>반려동물</h3>
 																</div>
@@ -480,7 +484,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>가족/결혼</h3>
 																</div>
@@ -501,7 +505,7 @@ a{
 														</div>
 														<div class="panel panel-default"
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
-															<div class="panel-heading" style="background: #8ff9ff">
+															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
 																	<h3>자유주제</h3>
 																</div>
@@ -541,7 +545,7 @@ a{
 												</div>
 												<div class="panel-body padding-0">
 													<div class="chart-holder" id="dashboard-bar-1"
-														style="height: 200px;">
+														style="height: 210px;">
 														<c:forEach var="dto" items="${hotDtos}" begin="0" end="17" >
 														<div class="panel-body padding-0" style="height:33px; width:480px; float:left;">
 															<ul>
@@ -549,7 +553,7 @@ a{
 																	style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
 																	<a
 																	href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-																		${dto.group_name} <div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2} , ${dto.group_location})</div></a>
+																		${dto.group_name} <font color="#373a3e"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2} , ${dto.group_location})</div></font></a>
 																</li>
 															</ul>
 														</div>

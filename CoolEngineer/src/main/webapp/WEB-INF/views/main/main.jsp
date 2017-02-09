@@ -47,7 +47,9 @@
 <!-- <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script> -->
 <!-- <script type="text/javascript" src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script> -->
 <!-- END TEMPLATE -->
-<!-- END SCRIPTS -->	
+<!-- END SCRIPTS -->
+
+	
 <style>
 li {
 	float: left;
@@ -168,12 +170,12 @@ li {
 							<div class="panel-body padding-0" style="padding:0px;">
 								<div class="chart-holder" id="dashboard-donut-1"
 									style="height: 200px;">
-									<ul style="padding:0px;">
+									<ul style="padding:0px; margin-left:15px;">
 										<c:forEach var="dto" items="${dtos}" begin="0" end="5">
 											<li style="float:none; font-size:13px; margin:10px;">
-												<a href="../six/notice/noticeContent?noti_num=${dto.noti_num}&pageNum=${pageNum}">
+												<a href="../six/notice/noticeContent?noti_num=${dto.noti_num}&pageNum=${pageNum}"><font color="#373a3e">
 													${dto.noti_title}
-												</a>
+												</font></a>
 											</li>
 										</c:forEach>
 									</ul>
@@ -266,18 +268,31 @@ li {
 					<!-- END MOVIE BLOCK -->
 				
 					<!-- START REALTIME MEET BLOCK -->
-					<div class="col-md-28">
+					<div class="col-md-28" style="height:562px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
-									<font size="4px;">실시간모임</font>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a class="fa fa-plus-square-o" href="#"><font size="2">더보기</font></a><br>
-									<span>번개같은 만남. 실시간 모임 입니다.</span>
+									<font size="4px;">인기모임</font>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a class="fa fa-plus-square-o" href="/moyeo/six/category/category_hobby"><font size="2">더보기</font></a><br>
+									<span>회원들의 활동이 가장 활발한 모임들입니다.</span>
 								</div>
 							</div>
-							<div class="panel-body padding-0">
+							<div class="panel-body padding-0" style="overflow:auto;">
 								<div class="chart-holder" id="dashboard-line-1"
-									style="height: 200px;"></div>
+									style="height: 200px;">
+									<c:forEach var="dto" items="${hotDtos}" begin="0" end="11" >
+										<div class="panel-body padding-0" style="height:36px; width:100%; float:left; margin-bottom:5px;">
+											<ul>
+												<li
+													style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
+													<a
+													href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
+														${dto.group_name} <font color="#373a3e"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2})</div></font></a>
+												</li>
+											</ul>
+										</div>
+									</c:forEach>	
+								</div>
 							</div>
 						</div>
 					</div>
@@ -339,7 +354,7 @@ li {
 					<!-- END ADVERTISE BLOCK -->
 				
 					<!-- START REVIEW BLOCK -->
-					<div class="col-md-32">
+					<div class="col-md-32" style="height:240px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
