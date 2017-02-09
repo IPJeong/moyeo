@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -76,6 +78,9 @@
 						<c:if test="${sessionScope.mem_id != null || sessionScope.manager_id != null}" >
 							<li><a href="/moyeo/three/myPage"><span class="fa fa-save"></span>${sessionScope.mem_id == null ? sessionScope.manager_id : sessionScope.mem_id}님</a></li>
 							<li><a href="/moyeo/main/memberLogout"><span class="fa fa-save"></span>로그아웃</a></li>
+							<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}" >
+							<li><a href="/moyeo/one/managerMain"><span class="fa fa-save"></span>관리자 홈</a></li>
+							</c:if>
 						</c:if>
 					</ul>
 				</div>
@@ -113,7 +118,7 @@
 								<li><a><span class="fa fa-caret-right"></span>
 										시간대별 </a></li>
 							</ul></li> -->
-						<li class="xn-openable"><a href="/moyeo/four/moyeoShop">샵</a></li>
+						<li class="xn-openable"><a href="#">샵</a></li>
 						<li class="xn-openable"><a href="#">추천장소</a>
 							<ul>
 								<li><a href="/moyeo/two/placeMainLoc"><span class="fa fa-caret-right"></span> 지역별</a></li>
