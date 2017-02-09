@@ -393,7 +393,7 @@
 		SELECT count(*) FROM my_group WHERE group_num = #{group_num}
 	</select>
 	
-	<select id="getMoimMemberList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.My_groupDTO">
+	<select id="getMoimMemberList" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MyGroupDTO">
  		SELECT * 
 		  FROM (SELECT my_group_num, group_per, group_num, mem_id, rownum rnum
 		    FROM (SELECT gmi.my_group_num, gmi.group_per, gmi.group_num, mi.mem_id, mi.name, mi.birth, mi.gender 
@@ -411,11 +411,11 @@
  		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
 	
-	<select id="getMoimMemberInfo" parameterType="Map" resultType="com.engineers.moyeo.two.dto.My_groupDTO">
+	<select id="getMoimMemberInfo" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MyGroupDTO">
 		SELECT * FROM my_group WHERE my_group_num = #{my_group_num}
 	</select>
 	
-	<select id="getMoimMemberInfo2" parameterType="Map" resultType="com.engineers.moyeo.two.dto.My_groupDTO">
+	<select id="getMoimMemberInfo2" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MyGroupDTO">
 		SELECT * FROM my_group WHERE group_num = #{group_num} AND mem_id = #{mem_id}
 	</select>
 	
