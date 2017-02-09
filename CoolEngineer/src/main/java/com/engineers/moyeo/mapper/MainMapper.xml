@@ -22,6 +22,13 @@
 		 WHERE mem_id= #{mem_id} AND passwd = #{passwd}
 	</select>
 	
+	<!-- 임시비밀번호 체크 -->
+	<select id="tempPwdCheck" parameterType="Map" resultType="int">
+		SELECT COUNT(*) 
+		  FROM temppasswd_list 
+		 WHERE mem_id= #{mem_id} AND temp_passwd = #{passwd}
+	</select>
+	
 	<!-- 워드 클라우드 단어를 가져옴 -->
 	<select id="getWordCloudModel" resultType="com.engineers.moyeo.main.dto.WordDTO">
 		SELECT *

@@ -14,6 +14,9 @@ public interface MainDAO {
 	// 로그인시 비밀번호 체크
 	public int pwdCheck(Map<String, String> map);
 	
+	// 로그인시 임시비밀번호 체크
+	public int tempPwdCheck(Map<String, String> map);
+	
 	// 워드클라우드 단어가 이미 존재하는지 확인
 	public int checkWordCloud(String word);
 	

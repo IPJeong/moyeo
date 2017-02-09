@@ -56,6 +56,14 @@ public class MainDAOImpl implements MainDAO{
 		
 		return cnt;
 	}
+	
+	// 임시번호 존재하는지 확인
+	@Override
+	public int tempPwdCheck(Map<String, String> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.main.dao.MainDAO.tempPwdCheck", map);
+		return cnt;
+	}
 
 	// 워드클라우드 모델을 가져옴
 	@Override

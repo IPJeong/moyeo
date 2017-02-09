@@ -80,6 +80,12 @@ public class MainServiceImpl implements MainService{
 //			model.addAttribute("beforeurl", beforeurl);
 			return "main/memberLoginPro";
 		} else {
+			int cnt2 = mainDao.tempPwdCheck(daoMap);
+			if (cnt2 == 1) {
+				req.getSession().invalidate();
+				req.getSession().setAttribute("mem_id", mem_id);
+				cnt = 2;				
+			}
 			model.addAttribute("cnt", cnt);
 			return "main/memberLoginPro";	
 		}
