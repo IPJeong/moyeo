@@ -22,25 +22,25 @@
 
 <!-- START SCRIPTS -->
 <!-- START PLUGINS -->
-<script type="text/javascript"
+<!-- <script type="text/javascript"
 	src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript"
 	src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
 <script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script> -->
 <!-- END PLUGINS -->
 
 <!-- START THIS PAGE PLUGINS-->
-<script type='text/javascript'
+<!-- <script type='text/javascript'
 	src="/moyeo/resources/resource/js/plugins/icheck/icheck.min.js"></script>
 <script type="text/javascript"
 	src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
 <script type="text/javascript"
 	src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 <script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+	src="/moyeo/resources/resource/js/plugins/scrolltotop/scrolltopcontrol.js"></script> -->
 
-<script type="text/javascript"
+<!-- <script type="text/javascript"
 	src="/moyeo/resources/resource/js/plugins/morris/raphael-min.js"></script>
 <script type="text/javascript"
 	src="/moyeo/resources/resource/js/plugins/morris/morris.min.js"></script>
@@ -55,21 +55,30 @@
 <script type='text/javascript'
 	src='/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js'></script>
 <script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/owl/owl.carousel.min.js"></script>
+	src="/moyeo/resources/resource/js/plugins/owl/owl.carousel.min.js"></script> -->
 
-<script type="text/javascript"
+<!-- <script type="text/javascript"
 	src="/moyeo/resources/resource/js/plugins/moment.min.js"></script>
 <script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins/daterangepicker/daterangepicker.js"></script>
+	src="/moyeo/resources/resource/js/plugins/daterangepicker/daterangepicker.js"></script> -->
 <!-- END THIS PAGE PLUGINS-->
 
 <!-- START TEMPLATE -->
-<script type="text/javascript"
+<!-- <script type="text/javascript"
 	src="/moyeo/resources/resource/js/plugins.js"></script>
 <script type="text/javascript"
 	src="/moyeo/resources/resource/js/actions.js"></script>
 <script type="text/javascript"
-	src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script>
+	src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script> -->
+	
+<script type="text/javascript">
+	function chk() {
+		if(document.guestListSearch.search_name.value.trim()=='') {
+			alert("공백은 검색할 수 없습니다.");
+			return false;
+		}
+	}
+</script>
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->
 
@@ -85,7 +94,7 @@
 
 				<%@ include file="../../etc/header.jsp"%>
 
-				<form name="guestListSearch" action="guestListSearch">
+				<form name="guestListSearch" action="guestListSearch" onsubmit="return chk();">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="panel-title-box">
@@ -95,8 +104,12 @@
 						</div>
 						<div style="margin-left: 83%; width: 15%">
 							<div style="float: left; width: 200px; margin-right: 10px;">
+							 	<select name="type">
+							 		<option value="name">이름</option>
+							 		<option value="id">아이디</option>
+							 	</select>
 								<input type="text" style="width: 100%" class="form-control"
-									name="search_name" placeholder="검색할 아이디를 입력하세요" />
+									name="search_name" placeholder="이름 / 아이디를 입력하세요"  required/>
 							</div>
 							<div style="float: left;">
 								<input class="btn btn-primary" type="submit" value="검색">
@@ -186,34 +199,7 @@
 					</div>
 				</form>
 
-				<!-- START SCRIPTS -->
-				<!-- START PLUGINS -->
-				<script type="text/javascript"
-					src="/moyeo/resources/resource/js/plugins/jquery.min.js"></script>
-				<script type="text/javascript"
-					src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
-				<script type="text/javascript"
-					src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
-				<!-- END PLUGINS -->
-
-				<!-- START THIS PAGE PLUGINS-->
-				<script type='text/javascript'
-					src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
-				<script type="text/javascript"
-					src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
-				<script type="text/javascript"
-					src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-				<!-- END THIS PAGE PLUGINS-->
-
-				<!-- START TEMPLATE -->
-				<script type="text/javascript"
-					src="/moyeo/resources/resource/js/settings.js"></script>
-
-				<script type="text/javascript"
-					src="/moyeo/resources/resource/js/plugins.js"></script>
-				<script type="text/javascript"
-					src="/moyeo/resources/resource/js/actions.js"></script>
-				<!-- END TEMPLATE -->
+			
 
 				<script type="text/javascript">
 					function getInfo(mem_id, pageNum) {
