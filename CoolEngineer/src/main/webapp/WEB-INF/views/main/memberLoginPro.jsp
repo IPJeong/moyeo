@@ -31,5 +31,13 @@
 			window.location='/moyeo/main/home';
 		</script>
 	</c:if>
+	
+	<c:if test="${cnt == 2}">
+		<script type="text/javascript">
+			alert("임시비밀번호를 변경 하십시오.");
+<%-- 			window.location='<%=request.getParameter("beforeurl")%>'; --%>
+			window.location='/moyeo/three/tempPw';
+		</script>
+	</c:if>
 </body>
 </html>
