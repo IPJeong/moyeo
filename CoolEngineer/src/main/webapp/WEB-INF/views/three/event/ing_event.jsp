@@ -168,8 +168,13 @@ a.cbtn:hover {
 		}
 	}
 	
-	function openPart() {
-		window.open('eventParticipants', 'evePart', 'width=450, height=550');
+	function openPart(evNum) {
+		var windowW = 300;  // 창의 가로 길이
+        var windowH = 70;  // 창의 세로 길이
+        var left = Math.ceil((window.screen.width - windowW)/2);
+        var top = Math.ceil((window.screen.height - windowH)/2);
+
+		window.open('eventParticipants?event_num=' + evNum, 'evePart', 'width=450, height=550, left=' + left + 'top=' + top);
 	}
 </script>
 <!-- START BREADCRUMB -->
@@ -257,9 +262,9 @@ a.cbtn:hover {
 																	pattern="yy-MM-dd" value="${dto.notiDate}" /></font>
 														</label>
 														<c:if test="${sessionScope.mem_id == 'admin'}">
-															<div class="col-md-2">
+															<div class="col-md-2" style="border:0px;">
 																<button type="button" class="btn btn-success btn-block"
-																	onclick="openPart()">참여자</button>
+																	onclick="openPart(${dto.eventNum})">참여자</button>
 															</div>
 														</c:if>
 													</div>

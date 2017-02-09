@@ -43,10 +43,16 @@
 			<div class="page-content-wrap">
 
 				<div class="panel panel-default">
-					<div class="panel-heading" >
-						<h3 class="panel-title">참여자 리스트</h3>
+					<div class="panel-heading col-md-12" style="height:51px;position:fixed;top:0px;left:0px;z-index:999;">
+						<div class="col-md-8" style="margin:0px;padding:0px;">
+							<h3 class="panel-title">참여자 리스트</h3>
+						</div>
+						<div class="col-md-4" style="margin:0px;padding:0px;padding-left:280px;">
+							<button type="button" class="btn btn-danger">선정</button>
+							<button type="button" class="btn btn-default" onclick="window.close()">닫기</button>
+						</div>
 					</div>
-					<div class="panel-body panel-body-table">
+					<div class="panel-body panel-body-table" style="margin-top:51px;">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -60,7 +66,48 @@
 									<td>1</td>
 									<td>Mark</td>
 									<td>Otto</td>									
-								</tr>								
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>Mark</td>
+									<td>Otto</td>									
+								</tr>
+																
 							</tbody>
 						</table>
 					</div>
