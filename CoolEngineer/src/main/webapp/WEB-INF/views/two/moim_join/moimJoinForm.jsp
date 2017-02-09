@@ -63,21 +63,17 @@ li {
 <c:if test="${cnt == 0}">
 <!-- START BREADCRUMB -->
    <ul class="breadcrumb push-down-0">
-       <li><a href="../main/main.jsp">Home</a></li>
-       <li><a href="../category/category_hobby.jsp">모임</a></li>
-       <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-       <li class="active">모임게시판</li>
-   </ul>
+		<li><a href="/moyeo/main/home">Home</a></li>
+		<li><a href="/moyeo/six/category/category_hobby">모임</a></li>
+		<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+		<li class="active">모임 가입</li>
+	</ul>
 <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
-
-
-<!-- 모임 사이드바 시작 -->
 <div class="row">
 	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
-		<!-- START LOGIN BLOCK -->
-	
+
 		<!-- 모임페이지 사이드바 시작 -->
 		<%@include file="../../etc/moim_side.jsp"%>
 		<!-- 모임페이지 사이드바 종료 -->
@@ -112,11 +108,10 @@ li {
 			</div>
 				
 			</div>
-			<!-- END PHOTO BLOCK -->
 
 		</div>
 	</div>
 <!-- END ROW -->
 </div>
 </c:if>
-<%@ include file="../../etc/footer.jsp"%>
+<%@ include file="../../etc/footer2.jsp"%>

@@ -4,6 +4,12 @@
 
 <html>
 <body>
+	<c:if test="${cnt == -2}">
+		<script type="text/javascript">
+			alert("강제탈퇴되어 다시 가입할 수 없습니다.");
+			history.back();	
+		</script>
+	</c:if>
 
 	<c:if test="${cnt == -1}">
 		<script type="text/javascript">
