@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ include file="../../etc/header.jsp"%>
+<%@ include file="../../etc/header2.jsp"%>
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb push-down-0">
 	<li><a href="/moyeo/main/home">Home</a></li>
@@ -469,4 +469,4 @@
 
 
 
-<%@ include file="../../etc/footer.jsp"%>
+<%@ include file="../../etc/footer2.jsp"%>
