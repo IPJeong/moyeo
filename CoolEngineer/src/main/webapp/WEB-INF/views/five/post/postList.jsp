@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%@include file="../../etc/moim_header.jsp" %>
@@ -104,14 +105,13 @@ li {
                           <tr>
                               <th width="50">순번</th>
                               <th width="300">후기제목</th>
-                              <th width="100">조회수</th>
-                              <th width="100">좋아요</th>
-                              <th width="200">작성일</th>
+                              <th width="40">조회수</th>
+                              <th width="40">좋아요</th>
+                              <th width="120">작성일</th>
                           </tr>
                       </thead>
                       <tbody>               
 	                      <c:forEach var="dto" items="${dtos}">
-	                          
 	                      	  <c:if test="${dto.post_hit >= 10 || dto.like_num >= 10}">                             
 	                         	 <tr id="trow_1" class="danger">
 	                          </c:if>
@@ -125,7 +125,7 @@ li {
 	                              <td><strong><a href="/moyeo/five/postDetail?post_num=${dto.post_num}&pageNum=${pageNum}" id="postTitle" >${dto.post_title}</a></strong></td>
 	                              <td><span class="badge badge-success">${dto.post_hit}</span></td>
 	                              <td><span class="badge badge-info">${dto.like_num}</span></td>
-	                              <td>${dto.post_date}</td>
+	                              <td><fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dto.post_date}" /></td>
 	                          </tr>
 	                      </c:forEach>   
                       </tbody>
