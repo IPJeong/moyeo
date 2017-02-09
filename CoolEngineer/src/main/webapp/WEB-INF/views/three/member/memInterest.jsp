@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../etc/header.jsp"%>
+<%@ include file="../../etc/header2.jsp"%>
 <head>        
         <!-- META SECTION -->
         <title>Atlant - Responsive Bootstrap Admin Template</title>            

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 
-<%@ include file="../../etc/header.jsp"%>
+<%@ include file="../../etc/header2.jsp"%>
 
 <style>
 .registration-container {

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<%@ include file="../../etc/header.jsp"%>
+<%@ include file="../../etc/header2.jsp"%>
 
 <style>
 .registration-container {
