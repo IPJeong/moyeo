@@ -33,7 +33,7 @@ import com.engineers.moyeo.six.dto.MyGroupDTO;
 
 
 @Service
-public class FiveServiceImpl implements FiveService{
+public class FiveServiceImpl implements FiveService {
 
    @Autowired
    FiveDAO fiveDao;
@@ -44,7 +44,7 @@ public class FiveServiceImpl implements FiveService{
 
    // 모임후기 리스트 출력 프로세스
    @Override
-   public String postList(Model model) throws NumberFormatException, NullPointerException{
+   public String postList(Model model) throws NumberFormatException, NullPointerException {
 
       HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
       // 모임번호를 받아옴
@@ -251,6 +251,13 @@ public class FiveServiceImpl implements FiveService{
                fiveDao.insertPostVideo(videoDto);
             }
          }
+      }
+      
+      String[] tags = post_tag.split(",");
+      post_tag = "";
+      for(String tag : tags) {
+    	  System.out.println("tag : " + tag);
+    	  post_tag += "#"+tag.replaceAll(" ", "")+" ";
       }
       
       mainService.wordAnalyzer(title, content, post_tag);
