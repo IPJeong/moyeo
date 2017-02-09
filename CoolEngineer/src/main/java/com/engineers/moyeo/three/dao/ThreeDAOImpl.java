@@ -10,9 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
-import com.engineers.moyeo.three.dto.MygroupDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Repository
@@ -241,8 +241,8 @@ public class ThreeDAOImpl implements ThreeDAO{
 	
 	//가입한 모임 리스트
 	@Override
-	public ArrayList<MygroupDTO> getGroupList(Map<String, Object> map) {
-		ArrayList<MygroupDTO> dtos = null;
+	public ArrayList<MoimOpenDTO> getGroupList(Map<String, Object> map) {
+		ArrayList<MoimOpenDTO> dtos = null;
 		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
 		dtos = dao.getGroupList(map);		
 		return dtos;

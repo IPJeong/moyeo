@@ -204,7 +204,7 @@ public class ThreeController {
 	
 	@RequestMapping("/memInterestInput") //관심사 선택
 	public String memInterestInput(HttpServletRequest req, Model model) {
-		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.memInterestInput(model);
 		System.out.println("memInterestInput()");
@@ -212,9 +212,9 @@ public class ThreeController {
 		return viewPage;
 	}
 	
-	@RequestMapping("/eventParticipate") //관심사 선택
+	@RequestMapping("/eventParticipate") //이벤트 참여
 	public String eventParticipate(HttpServletRequest req, Model model) {
-		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.eventParticipate(model);
 		System.out.println("eventParticipate()");
@@ -224,7 +224,7 @@ public class ThreeController {
 	
 	@RequestMapping("/myPage") //마이페이지
 	public String myPage(HttpServletRequest req, Model model) {		
-		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.myPage(model);
 		System.out.println("myPage()");
@@ -233,7 +233,8 @@ public class ThreeController {
 	}
 	
 	@RequestMapping("/changeProImg") //프로필 사진 변경
-	public String changeProImg(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {		
+	public String changeProImg(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
 		viewPage = threeService.changeProImg(model);
@@ -261,7 +262,7 @@ public class ThreeController {
 	
 	@RequestMapping("/changePw") //비밀번호 변경
 	public String changePw(HttpServletRequest req, Model model) {		
-		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.changePw(model);
 		System.out.println("changePw()");
@@ -271,7 +272,7 @@ public class ThreeController {
 	
 	@RequestMapping("/changeMyInfo") //내 정보 변경
 	public String changeMyInfo(HttpServletRequest req, Model model) {		
-		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.changeMyInfo(model);
 		System.out.println("changeMyInfo()");
@@ -298,7 +299,7 @@ public class ThreeController {
 	
 	@RequestMapping("/delMem") //회원탈퇴
 	public String delMem(HttpServletRequest req, Model model) {		
-		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.delMem(model);
 		System.out.println("delMem()");
@@ -334,11 +335,19 @@ public class ThreeController {
 	
 	@RequestMapping("/chgPw") //비밀번호 찾기
 	public String chgPw(HttpServletRequest req, Model model) {		
-		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.chgPw(model);
 		System.out.println("chgPw()");
 		
 		return viewPage;
+	}
+	
+	@RequestMapping("/eventParticipants") //비밀번호 변경 폼
+	public String eventParticipants(HttpServletRequest req, Model model) {		
+		/*String viewPage = threeService.faq(model);*/
+		System.out.println("eventParticipants()");
+		
+		return "three/event/eventParticipants";
 	}
 }

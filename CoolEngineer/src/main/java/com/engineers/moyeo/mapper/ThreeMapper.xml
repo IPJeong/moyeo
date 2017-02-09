@@ -167,9 +167,9 @@
 		SELECT COUNT(*) FROM my_group WHERE mem_id=#{mem_id} 
 	</select>
 	<!-- 가입한 모임 리스트 -->
-	<select id="getGroupList" parameterType="map" resultType="com.engineers.moyeo.three.dto.MygroupDTO">
+	<select id="getGroupList" parameterType="map" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
 		SELECT *                   
-		      FROM(SELECT gl.group_num as groupNum, gl.group_name as groupName, gl.group_inte1 as groupInte1, gl.group_inte2 as groupInte2, gl.group_location as groupLoca, rownum rnum 
+		      FROM(SELECT gl.group_num as group_num, gl.group_name as group_name, gl.group_inte1 as group_inte1, gl.group_inte2 as group_inte2, gl.group_location as group_location, rownum rnum 
 		            FROM group_list gl,
 		                 (SELECT group_num
 		                                  FROM my_group m
