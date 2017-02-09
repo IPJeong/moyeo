@@ -12,8 +12,9 @@ import org.springframework.stereotype.Repository;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
-import com.engineers.moyeo.four.dto.like_greetingDTO;
-import com.engineers.moyeo.four.dto.post_picturesDTO;
+
+import com.engineers.moyeo.four.dto.productInfoDTO;
+
 
 @Repository
 public class FourDAOImpl implements FourDAO{
@@ -103,7 +104,7 @@ public class FourDAOImpl implements FourDAO{
 		dtos = dao.greetingGetArticles(daoMap);
 		return dtos;
 	}
-	
+	//가입인사 글 등록하는 메소드
 	@Override
 	public int greetingInsert(GreetingBoardDTO dto) {
 		int cnt = 0;
@@ -111,7 +112,7 @@ public class FourDAOImpl implements FourDAO{
 		cnt = dao.greetingInsert(dto);
 		return cnt;
 	}
-	
+	//가입인사 글 한줄 불러오는 메소드
 	@Override
 	public GreetingBoardDTO greetingGetArticle(int greeting_num) {
 		GreetingBoardDTO dto = null;
@@ -120,13 +121,13 @@ public class FourDAOImpl implements FourDAO{
 		return dto;
 	}
 	
-
+	//가입인사 조회수 증가하는 메소드
 	@Override
 	public void greetingAddReadCnt(int num) {
 		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
 		dao.greetingAddReadCnt(num);
 	}
-	
+	//가입인사 글 수정하는 메소드
 	@Override
 	public int greetingUpdate(GreetingBoardDTO dto) {
 		int cnt = 0;
@@ -134,6 +135,7 @@ public class FourDAOImpl implements FourDAO{
 		cnt = dao.greetingUpdate(dto);
 		return cnt;
 	}
+	//가입인사 글 삭제하는 메소드
 	@Override
 	public int greetingDelete(int num) {
 		int cnt = 0;
@@ -141,15 +143,17 @@ public class FourDAOImpl implements FourDAO{
 		cnt = dao.greetingDelete(num);
 		return cnt;
 	}
+	
+	//가입인사 댓글 등록하는 메소드
 	@Override
 	public int repleInsert(GreetingReplyDTO dto) {
 		int cnt = 0;
 		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
 		cnt = dao.repleInsert(dto);
 		return cnt;
-
-		
 	}
+	
+	//가입인사 댓글 불러오는 메소드
 	@Override
 	public ArrayList<GreetingReplyDTO> replegGetArticles(int greeting_num) {
 		ArrayList<GreetingReplyDTO> dtos = null;
@@ -157,6 +161,8 @@ public class FourDAOImpl implements FourDAO{
 		dtos = dao.replegGetArticles(greeting_num);
 		return dtos;
 	}
+	
+	//가입인사 댓글 삭제하는 메소드
 	@Override
 	public int repledelete(int num) {
 		int cnt = 0;
@@ -164,28 +170,50 @@ public class FourDAOImpl implements FourDAO{
 		cnt = dao.repledelete(num);
 		return cnt;
 	}
+	
+	//가입인사 댓글 수 세는 메소드
 	@Override
 	public int getRepleyCnt(int num) {
 		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
 		return dao.getRepleyCnt(num);
 	}
-	/*@Override
-	public int pictureGetCount() {
-		// TODO Auto-generated method stub
-		return 0;
+
+	// 좋아요 개수 세는 메소드
+	@Override
+	public void likecacount(int greeting_num) {
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		dao.likecacount(greeting_num);
+		
 	}
 	@Override
-	public ArrayList<post_picturesDTO> pictureGetArticles(Map<String, Integer> daoMap) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+	public int likeInsert(Map<String, Object> daoMap) {
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.likeInsert(daoMap);
+		return cnt;
+	}
 	
 	@Override
-	public void likecacount(int num) {
-		
+	public int checkGreetingLike(Map<String, Object> daoMap) {
+		int cnt = 0;
 		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
-		dao.likecacount(num);
-		
+		cnt = dao.checkGreetingLike(daoMap);
+		return cnt;
 	}
+	@Override
+	public int productInsert(productInfoDTO dto) {
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.productInsert(dto);
+		return cnt;
+	}
+	@Override
+	public int shopGetCount() {
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.shopGetCount();
+		return cnt;
+	}
+	
 	
 }

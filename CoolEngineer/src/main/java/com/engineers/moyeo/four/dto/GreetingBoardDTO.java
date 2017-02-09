@@ -4,14 +4,14 @@ import java.sql.Timestamp;
 
 public class GreetingBoardDTO {
 	//가입인사 게시판 컬럼들
-	private int greeting_num; 
-	private String greeting_title; 
-	private String greeting_content;
-	private Timestamp greeting_date;
-	private int greeting_hit; 
-	private int like_num; 
-	private String mem_id; 
-	private int group_num;
+	private int greeting_num; //가입인사 글번호
+	private String greeting_title; //가입인사 글제목 
+	private String greeting_content; //가입인사 글 내용
+	private Timestamp greeting_date; //가입인사 글쓴 날짜
+	private int greeting_hit; //가입인사 조회수 
+	private int like_num;  //가입인사 좋아요
+ 	private String mem_id; //회원 ID 
+	private int group_num; //모임 고유번호
 	
 	public int getGreeting_num() {
 		return greeting_num;

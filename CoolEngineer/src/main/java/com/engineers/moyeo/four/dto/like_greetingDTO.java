@@ -1,9 +1,10 @@
 package com.engineers.moyeo.four.dto;
 
 public class like_greetingDTO {
-	int gre_like_num;
-	String mem_id;
-	int greeting_num;
+	
+	int gre_like_num; //좋아요 수
+	String mem_id; //회원ID
+	int greeting_num; //모임 고유 번호
 	
 	public int getGre_like_num() {
 		return gre_like_num;

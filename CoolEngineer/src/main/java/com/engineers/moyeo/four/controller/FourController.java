@@ -34,6 +34,8 @@ public class FourController {
 	@RequestMapping("/moim_notice_write_form")
 	public String moim_notice_write_form(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_write_form 실행");
+		
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage = fourService.writeExecute(model);
 		return viewPage;
@@ -42,6 +44,7 @@ public class FourController {
 	//공지사항 게시판 글쓰기 처리 
 	@RequestMapping("/moim_notice_writepro")
 	public String moim_notice_writepro(HttpServletRequest req, Model model){
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		System.out.println("moim_notice_writepro 글쓰기 처리 실행");
 		String viewPage = fourService.writeproExecute(model);
@@ -52,7 +55,9 @@ public class FourController {
 	//공지사항 게시판 글내용 보는 곳
 	@RequestMapping("moim_notice_contentform")
 	public String moim_notice_contentform(HttpServletRequest req, Model model) {
+		
 		System.out.println("moim_notice_contentform 내용 보기 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.moimContentExecute(model);
 		return viewPage;
@@ -62,6 +67,7 @@ public class FourController {
 	@RequestMapping("moim_notice_delete")
 	public String moim_notice_deleteForm(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_delete 삭제 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.moimDeleteExecute(model);
 		return viewPage;
@@ -70,6 +76,7 @@ public class FourController {
 	@RequestMapping("moim_notice_deletePro")
 	public String moim_notice_deletePro(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_delete 삭제 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.moimDeleteproExecute(model);
 		return viewPage;
@@ -79,6 +86,7 @@ public class FourController {
 	@RequestMapping("moim_notice_modifyForm")
 	public String moim_notice_modifyForm(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_modifyForm 수정 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.moimModifyFormExecute(model);
 		return viewPage;
@@ -89,6 +97,7 @@ public class FourController {
 	@RequestMapping("moim_notice_modifyView")
 	public String moim_notice_modifyView(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_modifyView 수정 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.moimModifyViewExecute(model);
 		return viewPage;
@@ -98,6 +107,7 @@ public class FourController {
 	@RequestMapping("moim_notice_modifypro")
 	public String moim_notice_modifypro(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_modifypro 수정 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.moimModifyProExecute(model);
 		return viewPage;
@@ -107,6 +117,7 @@ public class FourController {
 	// 가입인사 게시판 목록
 	@RequestMapping("/moim_greeting_board")	
 	public String moim_greeting_list(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetinglistExecute(model);
 		return viewPage;
@@ -115,6 +126,7 @@ public class FourController {
 	//가입인사 글쓰기 폼
 	@RequestMapping("/moim_greeting_write_form")
 	public String moim_greeting_write_form(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetintwriteExecute(model);
 		return viewPage;
@@ -123,6 +135,7 @@ public class FourController {
 	//가입인사 글쓰기 처리 메소드
 	@RequestMapping("/moim_greeting_writepro")
 	public String moim_greeting_writePro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetintwriteProExecute(model);
 		return viewPage;
@@ -130,7 +143,8 @@ public class FourController {
 	//가입인사 게시판 글 내용 보기
 	@RequestMapping("moim_greeting_contentform")
 	public String moim_greeting_contentform(HttpServletRequest req, Model model) {
-		System.out.println("moim_notice_contentform 내용 보기 실행");
+		System.out.println("moim_greeting_contentform 내용 보기 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetingContentExecute(model);
 		return viewPage;
@@ -140,6 +154,7 @@ public class FourController {
 	@RequestMapping("moim_greeting_delete")
 	public String moim_greeting_deleteForm(HttpServletRequest req, Model model) {
 		System.out.println("moim_greeting_delete 삭제 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetingDeleteExecute(model);
 		return viewPage;
@@ -150,6 +165,7 @@ public class FourController {
 	@RequestMapping("moim_greeting_deletePro")
 	public String moim_greeting_deletePro(HttpServletRequest req, Model model) {
 		System.out.println("moim_greeting_delete 삭제 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		
 		String viewPage=fourService.greetingDeleteProExecute(model);
@@ -160,6 +176,7 @@ public class FourController {
 	@RequestMapping("moim_greeting_modifyView")
 	public String moim_greeting_modifyView(HttpServletRequest req, Model model) {
 		System.out.println("moim_notice_modifyView 수정 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetingModifyViewExecute(model);
 		return viewPage;
@@ -169,6 +186,7 @@ public class FourController {
 	@RequestMapping("moim_greeting_modifypro")
 	public String moim_greeting_modifypro(HttpServletRequest req, Model model) {
 		System.out.println("moim_greeting_modifypro 수정 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetingModifyProExecute(model);
 		return viewPage;
@@ -178,6 +196,7 @@ public class FourController {
 	@RequestMapping("greeting_reple")
 	public String greeting_reple(HttpServletRequest req, Model model) {
 		System.out.println("greeting_reple 댓글입력 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greeting_repleExecute(model);
 		return viewPage;
@@ -187,27 +206,68 @@ public class FourController {
 	@RequestMapping("repledelete")
 	public String repledelete(HttpServletRequest req, Model model) {
 		System.out.println("repledelete 댓글삭제 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.repledeleteExecute(model);
 		return viewPage;
 	}
 	
-	//좋아요 +1하는 메소드
+	//가입인사 테이블에서 좋아요 +1하는 메소드
 	@RequestMapping("likeyo")
 	public String likeyo(HttpServletRequest req, Model model) {
 		System.out.println("likeyo  실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.likeyoPlusExecute(model);
 		return viewPage;
 	}
 	
-	
-	@RequestMapping("gallery")
-	public String gallery(HttpServletRequest req, Model model) {
-		System.out.println("gallery  실행");
+	//좋아요 테이블에서 좋아요+1하는 메소드
+	@RequestMapping("likeInsert")
+	public String likeInsert(HttpServletRequest req, Model model) {
+		System.out.println("likeInsert 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
-		
-		return "/gallery/gallery";
+		String viewPage=fourService.likeInsertExecute(model);
+		return viewPage;
 	}
+	//cnt를 통해 좋아요 +1를 처리하는 메소드
+	@RequestMapping("moim_greeting_likepro")
+	public String moim_greeting_likepro(HttpServletRequest req, Model model) {
+		System.out.println("likeInsert 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		String viewPage=fourService.likeInsertExecute(model);
+		return viewPage;
+	}
+	// 샵 메인
+	@RequestMapping("moyeoShop")
+	public String moyeoShop(HttpServletRequest req, Model model) {
+		System.out.println("moyeoShop 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		String viewPage=fourService.moyeoShopExecute(model);
+		return viewPage;
+	}
+	//제품 등록 화면
+	@RequestMapping("productInsertForm")
+	public String productInsert(HttpServletRequest req, Model model) {
+		System.out.println("productInsert 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		String viewPage=fourService.productInsertFormExecute(model);
+		return viewPage;
+	}
+	//제품 등록 처리
+	@RequestMapping("productInsertpro")
+	public String productInsertpro(HttpServletRequest req, Model model) {
+		System.out.println("productInsertpro 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		String viewPage=fourService.productInsertproExecute(model);
+		return viewPage;
+	}
+	
+	
 	
 }

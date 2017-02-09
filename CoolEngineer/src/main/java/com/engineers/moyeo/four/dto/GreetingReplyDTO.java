@@ -5,11 +5,11 @@ import java.sql.Timestamp;
 public class GreetingReplyDTO {
 	
 	//가입인사 댓글 테이블 컬럼들
-	private int gre_reply_num; 
-	private String gre_reply_content; 
-	private Timestamp gre_reply_date;
-	private String mem_id; 
-	private int greeting_num;
+	private int gre_reply_num; //가입인사 댓글 번호
+	private String gre_reply_content; //가입인사 댓글 내용
+	private Timestamp gre_reply_date; //가입인사 댓글 날짜
+	private String mem_id; //회원ID
+	private int greeting_num; //가입인사 숫자
 	
 	public int getGre_reply_num() {
 		return gre_reply_num;

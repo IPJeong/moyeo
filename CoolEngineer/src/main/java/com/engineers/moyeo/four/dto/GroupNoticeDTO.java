@@ -5,13 +5,13 @@ import java.sql.Timestamp;
 public class GroupNoticeDTO {
 	
 	//공지사항 게시판 컬럼들
-	private int group_noti_num;
-	private String group_noti_title;
-	private String group_noti_content;
-	private Timestamp group_noti_date;
-	private int hit;
-	private String mem_id;
-	private int group_num;
+	private int group_noti_num; //공지사항 글번호
+	private String group_noti_title; //공지사항 글제목
+	private String group_noti_content; //공지사항 글 내용
+	private Timestamp group_noti_date; //공지사항 글 작성한 날짜
+ 	private int hit; //공지사항 글 조회수
+	private String mem_id; //회원 ID
+	private int group_num; //모임 고유 번호
 	
 	
 	public int getGroup_noti_num() {
