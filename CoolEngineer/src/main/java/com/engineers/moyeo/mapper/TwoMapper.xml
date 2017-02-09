@@ -4,10 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <!--  
-<mapper namespace="패키지명.인터페이스">
+<mapper namespace="?⑦궎吏紐??명꽣?섏씠??>
 
 -->
-<mapper namespace="com.engineers.moyeo.two.dao.TwoDAO">  <!-- 인터페이스 -->
+<mapper namespace="com.engineers.moyeo.two.dao.TwoDAO">  <!-- ?명꽣?섏씠??-->
 
     <insert id="writeSuggestion" parameterType="com.engineers.moyeo.two.dto.SuggestionDTO">
 		INSERT INTO suggestion(sug_num, sug_title, sug_content, sug_date, re_email, sug_status, manager_id, sol_content, sol_date, mem_id) 
@@ -201,15 +201,15 @@
 	
 	<select id="getPlaceLikeCount" resultType="int">
 		SELECT count(*)
-		      FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
-		             FROM place_like pl, rec_place rp, place_info pi, place_pic pp
-		             WHERE pl.recpla_num = rp.recpla_num
-		               AND rp.place_num = pi.place_num
-		               AND pi.place_num = pp.place_num
-		             GROUP BY pl.recpla_num) cc, rec_place rp, PLACE_INFO pi
-		       WHERE cc.recpla_num = rp.recpla_num
-		       AND   rp.place_num = pi.place_num
-		      ORDER BY cc.place_like_count DESC
+		  FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
+		          FROM place_like pl, rec_place rp, place_info pi, place_pic pp
+		        WHERE pl.recpla_num = rp.recpla_num
+		          AND rp.place_num = pi.place_num
+		          AND pi.place_num = pp.place_num
+		       GROUP BY pl.recpla_num) cc, rec_place rp, PLACE_INFO pi
+		WHERE cc.recpla_num = rp.recpla_num
+		  AND   rp.place_num = pi.place_num
+		ORDER BY cc.place_like_count DESC
 	</select>
 	
 	<select id="getPlaceLikeList" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">		
@@ -330,7 +330,7 @@
 		DELETE FROM place_like WHERE plalike_num = #{plalike_num}
 	</delete>
 	
-	<!-- 어떤 모임 하나의 모임 정보를 불러옴 -->
+	<!-- ?대뼡 紐⑥엫 ?섎굹??紐⑥엫 ?뺣낫瑜?遺덈윭??-->
  	<select id="readMoimInfo" parameterType="int" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
  		SELECT * FROM group_list WHERE group_num = #{group_num}
  	</select>
@@ -340,26 +340,30 @@
  	</select>
  	
  	<select id="moimJoinCheck" parameterType="Map" resultType="int">
- 		Select COUNT(*) FROM join_request WHERE group_num = #{group_num} AND mem_id = #{mem_id}
+ 		SELECT COUNT(*) FROM join_request WHERE group_num = #{group_num} AND mem_id = #{mem_id} AND (status = '?뱀씤' OR status = '?湲?)
+ 	</select>
+ 	
+ 	<select id="moimBanishCheck" parameterType="Map" resultType="int">
+ 		SELECT COUNT(*) FROM join_request WHERE group_num = #{group_num} AND mem_id = #{mem_id} AND status = '媛뺤젣?덊눜'
  	</select>
  	
  	<insert id="moimJoin" parameterType="Map">
-		INSERT INTO join_request (request_num, request_date, status, mem_id, group_num) VALUES (join_request_seq.NEXTVAL, SYSDATE, '대기', #{mem_id}, #{group_num})
+		INSERT INTO join_request (request_num, request_date, status, mem_id, group_num) VALUES (join_request_seq.NEXTVAL, SYSDATE, '?湲?, #{mem_id}, #{group_num})
 	</insert>
 	
 	<delete id="moimWithdraw" parameterType="Map">
-		DELETE FROM my_group WHERE group_num = #{group_num} AND mem_id = #{mem_id}
+		DELETE FROM my_group WHERE mem_id = #{mem_id} AND group_num = #{group_num}
 	</delete>
 	
 	<select id="getMoimJoinCount" parameterType="int" resultType="int">
-		SELECT count(*) FROM join_request WHERE group_num = #{group_num} AND status= '대기'
+		SELECT count(*) FROM join_request WHERE group_num = #{group_num} AND status= '?湲?
 	</select>
 	
 	<select id="getMoimJoinList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Join_requestDTO">
  		SELECT *
 		  FROM (SELECT request_num, request_date, status, group_num, mem_id, rownum rnum
 		          FROM (SELECT jmi.request_num, jmi.request_date, jmi.status, mi.mem_id, jmi.group_num, mi.name, mi.birth, mi.gender 
-		                FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '대기' ORDER BY request_num DESC) jmi, member_info mi
+		                FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '?湲? ORDER BY request_num DESC) jmi, member_info mi
 		                WHERE jmi.mem_id = mi.mem_id))
 		 WHERE rnum BETWEEN #{start} AND #{end} 
 	</select>
@@ -368,7 +372,7 @@
  		SELECT *
 		  FROM (SELECT mem_id, name, birth, gender, rownum rnum
 		          FROM (SELECT jmi.request_num, jmi.request_date, jmi.status, mi.mem_id, jmi.group_num, mi.name, mi.birth, mi.gender 
-		                FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '대기' ORDER BY request_num DESC) jmi, member_info mi
+		                FROM (SELECT * FROM join_request WHERE group_num = #{group_num} AND status= '?湲? ORDER BY request_num DESC) jmi, member_info mi
 		                WHERE jmi.mem_id = mi.mem_id))
 		 WHERE rnum BETWEEN #{start} AND #{end} 
 	</select>
@@ -378,7 +382,7 @@
 	</select>
 
 	<update id="moimJoinOK" parameterType="Map">
-		UPDATE join_request SET status= #{status} WHERE request_num = #{request_num}
+		UPDATE join_request SET status= #{status}, request_date = SYSDATE WHERE request_num = #{request_num}
 	</update>
 	
 	<insert id="moimJoinPro" parameterType="Map">
@@ -386,7 +390,7 @@
 	</insert>
 	
 	<update id="moimJoinNO" parameterType="Map">
-		UPDATE join_request SET status= #{status} WHERE request_num = #{request_num}  
+		UPDATE join_request SET status= #{status}, request_date = SYSDATE WHERE request_num = #{request_num}  
 	</update>
 	
 	<select id="getMoimMemberCount" parameterType="int" resultType="int">
@@ -431,6 +435,10 @@
 		DELETE FROM my_group WHERE my_group_num = #{my_group_num}
 	</delete>
 	
+	<update id="moimJoinOut" parameterType="Map">
+		UPDATE join_request SET status= #{status}, request_date = SYSDATE WHERE group_num = #{group_num} AND mem_id = #{mem_id}
+	</update>
+	
 	<select id="getNoticeBoardCount" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM group_notice WHERE group_num = #{group_num}
 	</select>
@@ -443,7 +451,7 @@
 		SELECT COUNT(*) FROM meeting_post WHERE group_num = #{group_num}
 	</select>
 	
-	<select id="getNoticeBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Group_noticeDTO">
+	<select id="getNoticeBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.four.dto.GroupNoticeDTO">
   		SELECT *  
 		  FROM (SELECT group_noti_num, group_noti_title, group_noti_content, group_noti_date, hit, mem_id, group_num, rownum rnum  
 				 FROM (SELECT * 
@@ -454,7 +462,7 @@
           WHERE rnum BETWEEN #{start} AND #{end}
     </select>
     
-    <select id="getGreetingBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Greeting_boardDTO"> 
+    <select id="getGreetingBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.four.dto.GreetingBoardDTO"> 
   		SELECT *  
 		  FROM (SELECT greeting_num, greeting_title, greeting_content, greeting_date, greeting_hit, like_num, mem_id, group_num, rownum rnum  
 				 FROM (SELECT * 
@@ -465,7 +473,7 @@
           WHERE rnum BETWEEN #{start} AND #{end}
    </select>
    
-   <select id="getPostBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Meeting_postDTO">
+   <select id="getPostBoardArticles" parameterType="Map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
     	SELECT *
     	  FROM (SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, post_hit, rownum as rnum
     	  		  FROM (SELECT * 
@@ -488,4 +496,297 @@
     <delete id="deletePostBoardArticle" parameterType="Map">
     	DELETE FROM meeting_post WHERE post_num = #{post_num} AND group_num = #{group_num}
     </delete>
+    
+    <select id="getMoimSearchCount" parameterType="Map" resultType="int">
+    	SELECT COUNT(*)
+		  FROM (SELECT gl.group_num, gl.group_name, gl.group_mem_cnt, gl.group_inte1, gl.group_inte2, gl.group_location, gl.group_intro, mp.main_pic_num, mp.main_pic_path, mp.main_pic_name, rownum rnum
+		          FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, SUBSTR(group_intro, 1, 100) AS group_intro
+		                  FROM group_list
+		                WHERE group_name LIKE '%'||#{group_name}||'%' AND group_intro LIKE '%'||#{group_intro}||'%'
+		                ORDER BY group_num DESC) gl,
+		               (SELECT main_pic_num, main_pic_path, main_pic_name, group_num
+		                  FROM main_picture
+		                WHERE main_pic_path NOT LIKE '%-'
+		                ORDER BY main_pic_num DESC) mp
+		        WHERE gl.group_num = mp.group_num) 	
+    </select>
+    
+    
+    <select id="getMoimPostSearchCount" parameterType="Map" resultType="int">
+    	SELECT COUNT (*)
+		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
+		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
+		                FROM meeting_post
+		              WHERE post_title LIKE '%'||#{post_title}||'%' AND post_content LIKE '%'||#{post_content}||'%'
+		              ORDER BY post_num DESC) mepo,
+		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
+		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
+		              ORDER BY post_num DESC) popi
+		      WHERE mepo.group_num = popi.group_num
+		        AND mepo.post_num = popi.post_num)
+    </select>
+    
+    <select id="getMoimPostByTagSearchCount" parameterType="Map" resultType="int">
+    	SELECT COUNT(*)
+		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
+		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
+		                FROM meeting_post
+		              WHERE post_tag LIKE '%'||#{post_tag}||'%'
+		              ORDER BY post_num DESC) mepo,
+		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
+		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
+		              ORDER BY post_num DESC) popi
+		      WHERE mepo.group_num = popi.group_num
+		        AND mepo.post_num = popi.post_num)
+    </select>
+
+	<select id="getMoimSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
+		SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, group_intro
+		  FROM (SELECT gl.group_num, gl.group_name, gl.group_mem_cnt, gl.group_inte1, gl.group_inte2, gl.group_location, gl.group_intro, mp.main_pic_num, mp.main_pic_path, mp.main_pic_name, rownum rnum
+		          FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, SUBSTR(group_intro, 1, 100) AS group_intro
+		                  FROM group_list
+		                WHERE group_name LIKE '%'||#{group_name}||'%' AND group_intro LIKE '%'||#{group_intro}||'%'
+		                ORDER BY group_num DESC) gl,
+		               (SELECT main_pic_num, main_pic_path, main_pic_name, group_num
+		                  FROM main_picture
+		                WHERE main_pic_path NOT LIKE '%-'
+		                ORDER BY main_pic_num DESC) mp
+		        WHERE gl.group_num = mp.group_num)
+		WHERE rnum BETWEEN #{start1} AND #{end1}
+	</select>
+	
+	<select id="getMoimPictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_pictureDTO">
+		SELECT main_pic_num, main_pic_path, main_pic_name, group_num
+		  FROM (SELECT gl.group_num, gl.group_name, gl.group_mem_cnt, gl.group_inte1, gl.group_inte2, gl.group_location, gl.group_intro, mp.main_pic_num, mp.main_pic_path, mp.main_pic_name, rownum rnum
+		          FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, SUBSTR(group_intro, 1, 100) AS group_intro
+		                  FROM group_list
+		                WHERE group_name LIKE '%'||#{group_name}||'%' AND group_intro LIKE '%'||#{group_intro}||'%'
+		                ORDER BY group_num DESC) gl,
+		               (SELECT main_pic_num, main_pic_path, main_pic_name, group_num
+		                  FROM main_picture
+		                WHERE main_pic_path NOT LIKE '%-'
+		                ORDER BY main_pic_num DESC) mp
+		        WHERE gl.group_num = mp.group_num)
+		WHERE rnum BETWEEN #{start1} AND #{end1}
+	</select>
+	
+	<select id="getMoimPostSearchList" parameterType="Map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
+		SELECT post_num, post_title, post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
+		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
+		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
+		                FROM meeting_post
+		              WHERE post_title LIKE '%'||#{post_title}||'%' AND post_content LIKE '%'||#{post_content}||'%'
+		              ORDER BY post_num DESC) mepo,
+		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
+		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
+		              ORDER BY post_num DESC) popi
+		      WHERE mepo.group_num = popi.group_num
+		        AND mepo.post_num = popi.post_num)
+		WHERE rnum BETWEEN #{start2} AND #{end2}
+	</select>
+	
+	<select id="getMoimPostPictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
+		SELECT pic_num, pic_path, pic_name, post_num, group_num
+		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
+		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
+		                FROM meeting_post
+		              WHERE post_title LIKE '%'||#{post_title}||'%' AND post_content LIKE '%'||#{post_content}||'%'
+		              ORDER BY post_num DESC) mepo,
+		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
+		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
+		              ORDER BY post_num DESC) popi
+		      WHERE mepo.group_num = popi.group_num
+		        AND mepo.post_num = popi.post_num)
+		WHERE rnum BETWEEN #{start2} AND #{end2}
+	</select>
+	
+	<select id="getMoimPostByTagSearchList" parameterType="Map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
+		SELECT post_num, post_title, post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
+		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
+		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
+		                FROM meeting_post
+		              WHERE post_tag LIKE '%'||#{post_tag}||'%'
+		              ORDER BY post_num DESC) mepo,
+		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
+		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
+		              ORDER BY post_num DESC) popi
+		      WHERE mepo.group_num = popi.group_num
+		        AND mepo.post_num = popi.post_num)
+		 WHERE rnum BETWEEN #{start2} AND #{end2}
+	</select>
+	
+	<select id="getMoimPostPictureByTagSearchList" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
+		SELECT pic_num, pic_path, pic_name, post_num, group_num
+		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
+		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
+		                FROM meeting_post
+		              WHERE post_tag LIKE '%'||#{post_tag}||'%'
+		              ORDER BY post_num DESC) mepo,
+		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
+		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
+		              ORDER BY post_num DESC) popi
+		      WHERE mepo.group_num = popi.group_num
+		        AND mepo.post_num = popi.post_num)
+		WHERE rnum BETWEEN #{start2} AND #{end2}
+	</select>
+	
+	<select id="getPlaceSearchCount" parameterType="Map" resultType="int">
+    	SELECT COUNT(*)
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name
+		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
+		                  FROM place_info
+		                WHERE place_name LIKE '%'||#{place_name}||'%' AND place_detail LIKE '%'||#{place_detail}||'%'
+		                ORDER BY place_num DESC) pi,
+		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		                  FROM place_pic
+		                ORDER BY place_pic_num DESC) pp
+		        WHERE pi.place_num = pp.place_num)
+    </select>
+    
+    <select id="getPlaceByAddressSearchCount" parameterType="Map" resultType="int">
+    	SELECT COUNT(*)
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name
+		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
+		                  FROM place_info
+		                WHERE place_address LIKE '%'||#{place_address}||'%'
+		                ORDER BY place_num DESC) pi,
+		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		                  FROM place_pic
+		                ORDER BY place_pic_num DESC) pp
+		        WHERE pi.place_num = pp.place_num)       
+    </select>
+
+    <select id="getPlaceSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
+   		SELECT place_num, place_name, place_address, place_detail, place_link 
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
+		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
+		                  FROM place_info
+		                WHERE place_name LIKE '%'||#{place_name}||'%' AND place_detail LIKE '%'||#{place_detail}||'%'
+		                ORDER BY place_num DESC) pi,
+		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		                  FROM place_pic
+		                ORDER BY place_pic_num DESC) pp
+		        WHERE pi.place_num = pp.place_num)
+		WHERE rnum BETWEEN #{start3} AND #{end3}
+    </select>
+    
+    <select id="getPlacePictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+    	SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
+		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
+		                  FROM place_info
+		                WHERE place_name LIKE '%'||#{place_name}||'%' AND place_detail LIKE '%'||#{place_detail}||'%'
+		                ORDER BY place_num DESC) pi,
+		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		                  FROM place_pic
+		                ORDER BY place_pic_num DESC) pp
+		        WHERE pi.place_num = pp.place_num)
+		WHERE rnum BETWEEN #{start3} AND #{end3}
+    </select>
+    
+    <select id="getPlaceByAddressSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
+    	SELECT place_num, place_name, place_address, place_detail, place_link 
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
+		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
+		                  FROM place_info
+		                WHERE place_address LIKE '%'||#{place_address}||'%'
+		                ORDER BY place_num DESC) pi,
+		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		                  FROM place_pic
+		                ORDER BY place_pic_num DESC) pp
+		        WHERE pi.place_num = pp.place_num)
+		WHERE rnum BETWEEN #{start3} AND #{end3}
+    </select>
+    
+    <select id="getPlacePictureByAddressSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+    	SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
+		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
+		                  FROM place_info
+		                WHERE place_address LIKE '%'||#{place_address}||'%'
+		                ORDER BY place_num DESC) pi,
+		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		                  FROM place_pic
+		                ORDER BY place_pic_num DESC) pp
+		        WHERE pi.place_num = pp.place_num)
+		WHERE rnum BETWEEN #{start3} AND #{end3}
+    </select>
+
+	<select id="chartByGender" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT NVL(COUNT(mi.mem_id), 0) AS man_cnt
+		          FROM (SELECT mem_id, gender
+		                  FROM member_info 
+		                WHERE gender = 'man') mi,
+		               (SELECT mem_id, group_num
+		                  FROM my_group
+		                WHERE group_num = #{group_num}) mg
+		        WHERE mi.mem_id = mg.mem_id),
+		       (SELECT NVL(COUNT(mi.mem_id), 0) AS woman_cnt
+		          FROM (SELECT mem_id, gender
+		                  FROM member_info 
+		                WHERE gender = 'woman') mi,
+		               (SELECT mem_id, group_num
+		                  FROM my_group
+		                WHERE group_num = #{group_num}) mg
+		        WHERE mi.mem_id = mg.mem_id)
+	</select>
+	
+	<select id="chartByAge" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT NVL(COUNT(mg.mem_id), 0) AS teen_cnt
+		          FROM (SELECT TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, birth))/12, 0) AS age, mem_id
+		                  FROM member_info
+		                ORDER BY join_date) ab,
+		               (SELECT mem_id, group_num
+		                  FROM my_group
+		                WHERE group_num = #{group_num}) mg
+		        WHERE ab.mem_id = mg.mem_id
+		           AND age BETWEEN 0 AND 19),
+		       (SELECT NVL(COUNT(mg.mem_id), 0) AS twenty_cnt
+		          FROM (SELECT TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, birth))/12, 0) AS age, mem_id
+		                  FROM member_info
+		                ORDER BY join_date) ab,
+		               (SELECT mem_id, group_num
+		                  FROM my_group
+		                WHERE group_num = #{group_num}) mg
+		        WHERE ab.mem_id = mg.mem_id
+		           AND age BETWEEN 20 AND 29),
+		       (SELECT NVL(COUNT(mg.mem_id), 0) AS thirty_cnt
+		          FROM (SELECT TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, birth))/12, 0) AS age, mem_id
+		                  FROM member_info
+		                ORDER BY join_date) ab,
+		               (SELECT mem_id, group_num
+		                  FROM my_group
+		                WHERE group_num = #{group_num}) mg
+		        WHERE ab.mem_id = mg.mem_id
+		           AND age BETWEEN 30 AND 39),
+		       (SELECT NVL(COUNT(mg.mem_id), 0) AS fourty_cnt
+		          FROM (SELECT TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, birth))/12, 0) AS age, mem_id
+		                  FROM member_info
+		                ORDER BY join_date) ab,
+		               (SELECT mem_id, group_num
+		                  FROM my_group
+		                WHERE group_num = #{group_num}) mg
+		        WHERE ab.mem_id = mg.mem_id
+		           AND age BETWEEN 40 AND 49),
+		       (SELECT NVL(COUNT(mg.mem_id), 0) AS fifty_cnt
+		          FROM (SELECT TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, birth))/12, 0) AS age, mem_id
+		                  FROM member_info
+		                ORDER BY join_date) ab,
+		               (SELECT mem_id, group_num
+		                  FROM my_group
+		                WHERE group_num = #{group_num}) mg
+		        WHERE ab.mem_id = mg.mem_id
+		           AND age BETWEEN 50 AND 59),
+		       (SELECT NVL(COUNT(mg.mem_id), 0) AS sixty_cnt
+		          FROM (SELECT TRUNC(TRUNC(MONTHS_BETWEEN(SYSDATE, birth))/12, 0) AS age, mem_id
+		                  FROM member_info
+		                ORDER BY join_date) ab,
+		               (SELECT mem_id, group_num
+		                  FROM my_group
+		                WHERE group_num = #{group_num}) mg
+		        WHERE ab.mem_id = mg.mem_id
+		           AND age BETWEEN 60 AND 120)
+	</select>
 </mapper>
