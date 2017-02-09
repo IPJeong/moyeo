@@ -21,6 +21,7 @@ import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
+import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.two.dao.TwoDAO;
 import com.engineers.moyeo.two.dto.Greeting_boardDTO;
 import com.engineers.moyeo.two.dto.Group_noticeDTO;
@@ -28,7 +29,6 @@ import com.engineers.moyeo.two.dto.Join_requestDTO;
 import com.engineers.moyeo.two.dto.Meeting_postDTO;
 import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
-import com.engineers.moyeo.two.dto.My_groupDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_picDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
@@ -1139,13 +1139,13 @@ public class TwoServiceImpl implements TwoService{
 		daoMap.put("mem_id", mem_id);
 		
 
-		My_groupDTO dto = new My_groupDTO();
+		MyGroupDTO dto = new MyGroupDTO();
 		
 		dto = twoDao.getMoimMemberInfo2(daoMap);
 		
-		String group_per = dto.getGroup_per();
+		int group_per = dto.getGroup_per();
 		
-		if(group_per.equals("1")) {
+		if(group_per == Code.moimJang) {
 			cnt = -1;
 		} else {
 			cnt = twoDao.moimWithdraw(daoMap);
@@ -1366,7 +1366,7 @@ public class TwoServiceImpl implements TwoService{
 		daoMap.put("group_num", group_num);
 		
 		if(cnt > 0) {
-			ArrayList<My_groupDTO> dtos = twoDao.getMoimMemberList(daoMap);
+			ArrayList<MyGroupDTO> dtos = twoDao.getMoimMemberList(daoMap);
 			ArrayList<Member_infoDTO> mifdtos = twoDao.getMoimMemberInfoList(daoMap);
 			model.addAttribute("dtos", dtos);
 			model.addAttribute("mifdtos", mifdtos);
@@ -1403,7 +1403,7 @@ public class TwoServiceImpl implements TwoService{
 		int my_group_num = Integer.parseInt(req.getParameter("my_group_num")); 	
 		int group_num = Integer.parseInt(req.getParameter("group_num")); 
 
-		My_groupDTO dto = new My_groupDTO();
+		MyGroupDTO dto = new MyGroupDTO();
 
 		dto = twoDao.getMoimMemberInfo(my_group_num);
 		
@@ -1453,12 +1453,12 @@ public class TwoServiceImpl implements TwoService{
 		int my_group_num = Integer.parseInt(req.getParameter("my_group_num")); 	
 		int group_num = Integer.parseInt(req.getParameter("group_num")); 
 		
-		My_groupDTO dto = new My_groupDTO();
+		MyGroupDTO dto = new MyGroupDTO();
 		dto = twoDao.getMoimMemberInfo(my_group_num);
 		
-		String group_per = dto.getGroup_per();
+		int group_per = dto.getGroup_per();
 		
-		if(group_per.equals("1")) {
+		if(group_per == Code.moimJang) {
 			
 			return "two/moim_managing/moimMemberBanishFail";
 		} else {
