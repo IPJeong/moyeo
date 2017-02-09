@@ -121,7 +121,7 @@ left: -3px;
 											
 											
 											<td> 
-				  									<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dto.group_noti_date}" />
+			  									<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dto.group_noti_date}" />
 											</td>
 											<td>${dto.hit}</td>
 										</tr>
