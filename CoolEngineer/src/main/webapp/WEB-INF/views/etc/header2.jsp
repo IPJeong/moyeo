@@ -113,7 +113,7 @@
 								<li><a><span class="fa fa-caret-right"></span>
 										시간대별 </a></li>
 							</ul></li> -->
-						<li class="xn-openable"><a href="#">샵</a></li>
+						<li class="xn-openable"><a href="/moyeo/four/moyeoShop">샵</a></li>
 						<li class="xn-openable"><a href="#">추천장소</a>
 							<ul>
 								<li><a href="/moyeo/two/placeMainLoc"><span class="fa fa-caret-right"></span> 지역별</a></li>
