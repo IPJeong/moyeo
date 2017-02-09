@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,13 +10,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link rel="icon" href="/moyeo/resources/resource/favicon.ico"
-	type="image/x-icon" />
+<link rel="icon" href="/moyeo/resources/resource/favicon.ico" type="image/x-icon" />
 <!-- END META SECTION -->
 
 <!-- CSS INCLUDE -->
-<link rel="stylesheet" type="text/css" id="theme"
-	href="/moyeo/resources/resource/css/theme-default.css" />
+<link rel="stylesheet" type="text/css" id="theme" href="/moyeo/resources/resource/css/theme-default.css" />
 <!-- EOF CSS INCLUDE -->
 </head>
 
@@ -64,92 +62,81 @@
 <!-- END THIS PAGE PLUGINS-->
 
 <!-- START TEMPLATE -->
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/plugins.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/actions.js"></script>
-<script type="text/javascript"
-	src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script>
+<script type="text/javascript" src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script>
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->
 
 <body class="x-dashboard">
 	<!-- START PAGE CONTAINER -->
-
+	
 	<div class="page-container">
 
 		<!-- PAGE CONTENT -->
 		<div class="page-content">
 			<!-- PAGE CONTENT WRAPPER -->
 			<div class="page-content-wrap">
+			
+<%@ include file="../../etc/header.jsp"%>  	
 
-				<%@ include file="../../etc/header.jsp"%>
+<div class="row">
+	<div class="col-md-12">
+	
+		<div class="login-container login-v2" style="height:880px">
 
-				<div class="col-md-12">
-					<form class="form-horizontal" action="adminAppointPro"
-						method="post">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<strong>관리자임명</strong>
-								</h3>
-								<ul class="panel-controls">
-									<li><a href="#" class="panel-remove"><span
-											class="fa fa-times"></span></a></li>
-								</ul>
-							</div>
-
-							<div class="panel-body form-group-separated">
-
-								<div class="form-group">
-									<label class="col-md-3 col-xs-12 control-label">관리자 아이디</label>
-									<div class="col-md-6 col-xs-12">
-										<div class="input-group">
-											<span class="input-group-addon"><span
-												class="fa fa-pencil"></span></span> <input type="text"
-												class="form-control" name="manager_id" />
-										</div>
-										<span class="help-block">관리자 아이디를 입력하세요</span>
+			<div class="login-box animated fadeInDown">
+				<div class="login-body">
+					<div class="login-title">
+						<h2><strong>환영합니다.</strong></h2> 
+						<h3>관리자아이디로 로그인해주세요.</h3>
+					</div>
+					<form action="managerLoginPro" class="form-horizontal" method="post" name="loginform">
+						<input type="hidden" name="beforeurl" value="">
+						<div class="form-group">
+							<div class="col-md-12">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<span class="fa fa-user"></span>
 									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-md-3 col-xs-12 control-label">비밀번호</label>
-									<div class="col-md-6 col-xs-12">
-										<div class="input-group">
-											<span class="input-group-addon"><span
-												class="fa fa-unlock-alt"></span></span> <input type="password"
-												class="form-control" name="passwd" />
-										</div>
-										<span class="help-block">비밀번호를 입력하세요</span>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-md-3 col-xs-12 control-label">이름</label>
-									<div class="col-md-6 col-xs-12">
-										<div class="input-group">
-											<span class="input-group-addon"><span
-												class="fa fa-unlock-alt"></span></span> <input type="text"
-												class="form-control" name="name" />
-										</div>
-										<span class="help-block">이름을 입력하세요</span>
-									</div>
+									<input type="text" name="manager_id" class="form-control" placeholder="아이디 입력" />
 								</div>
 							</div>
-							<div class="panel-footer">
-
-								<button class="btn btn-primary pull-right" type="submit">관리자
-									생성</button>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<span class="fa fa-lock"></span>
+									</div>
+									<input type="password" name="passwd" class="form-control"
+										placeholder="패스워드 입력" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-6">
+								<a href="/moyeo/member/forgetpassword.jsp">비밀번호를 잃어버리셨나요?</a>
+							</div>
+							<div class="col-md-6 text-right">
+								
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12">
+								<button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
 							</div>
 						</div>
 					</form>
-
 				</div>
 			</div>
-		</div>
-	</div>
 
-	<%@ include file="../../etc/footer.jsp"%>
+		</div>
+
+	</div>
+</div>
+
+</div></div></div>
+<%@ include file="../../etc/footer.jsp"%>
 </body>
 </html>
