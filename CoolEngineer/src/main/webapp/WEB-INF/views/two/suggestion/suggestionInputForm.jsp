@@ -52,32 +52,16 @@ li {
 </style>
 
          <!-- START BREADCRUMB -->
-                <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li><a href="../category/category_hobby.jsp">모임</a></li>
-                    <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-                    <li class="active">모임관리</li>
-                </ul>
+                <ul class="breadcrumb">
+					<li><a href="/moyeo/main/home">Home</a></li>
+					<li><a href="/moyeo/six/cusSupMain">고객지원</a></li>
+					<li class="active">건의사항</li>
+				</ul>
                <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
 <div class="row">
-		<!-- START LOGIN BLOCK -->
 
-		<!-- START RECOMMENDATION MEET BLOCK -->
-	
-	<!-- END LOGIN BLOCK -->
-
-
-	<!-- START SEARCH BLOCK -->
-
-	<!-- END SEARCH BLOCK -->
-
-	<!-- START NOTICE BLOCK -->
-
-	<!-- END NOTICE BLOCK -->
-
-	<!-- START PHOTO BLOCK -->
 	<div class="col-md-56" style="margin-top:30px; margin-bottom:30px; margin-left:20%; height:800px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -131,38 +115,6 @@ li {
 		</div>
 	</div>
 
-	<!-- END PHOTO BLOCK -->
-
-
-
-
-
-	<!-- END RECOMMENDATION MEET BLOCK -->
-
-
-	<!-- START MOVIE BLOCK -->
-
-	<!-- END MOVIE BLOCK -->
-
-	<!-- START REALTIME MEET BLOCK -->
-
-	<!-- END REALTIME MEET BLOCK -->
-
-	<!-- START RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- END RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- START EVENT BLOCK -->
-
-	<!-- END EVENT BLOCK -->
-
-	<!-- START ADVERTISE BLOCK -->
-
-	<!-- END ADVERTISE BLOCK -->
-
-	<!-- START REVIEW BLOCK -->
-
-	<!-- END REVIEW BLOCK -->
 </div>
 <!-- END ROW -->
 

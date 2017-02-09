@@ -68,32 +68,16 @@ li {
 </style>
 
          <!-- START BREADCRUMB -->
-                <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li><a href="../category/category_hobby.jsp">모임</a></li>
-                    <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-                    <li class="active">모임관리</li>
-                </ul>
+                <ul class="breadcrumb">
+					<li><a href="/moyeo/main/home">Home</a></li>
+					<li><a href="/moyeo/six/cusSupMain">고객지원</a></li>
+					<li class="active">건의사항</li>
+				</ul>
                <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
 <div class="row">
-		<!-- START LOGIN BLOCK -->
 
-		<!-- START RECOMMENDATION MEET BLOCK -->
-	
-	<!-- END LOGIN BLOCK -->
-
-
-	<!-- START SEARCH BLOCK -->
-
-	<!-- END SEARCH BLOCK -->
-
-	<!-- START NOTICE BLOCK -->
-
-	<!-- END NOTICE BLOCK -->
-
-	<!-- START PHOTO BLOCK -->
 	<div class="col-md-56" style="margin-top:20px; margin-bottom:20px; margin-left:10%; height:750px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -111,43 +95,60 @@ li {
 					
 					<div>
 						<table class="table table-striped table-hover"
-							style="width: 90%; margin-left: 5%;">
+							style="width:90%; margin-left: 5%;">
 							<tr class="info">
-								<td style="width:3%">선택</td>
-								<td style="width:3%">건의번호</td>
-								<td style="width:5%">건의제목</td>
-								<td style="width:7%">작성일</td>
-								<td style="width:5%">회신이메일</td>
-								<td style="width:5%">회원아이디</td>
-								<td style="width:5%">								
+								<td style="width:5%">&nbsp;</td>
+								<td style="width:8%">								
 									<select class="form-control" id="test" name="sug_status_select" onchange="sugStatusSelect()">
-										<option value="">처리여부 선택</option>
-										<option value="N">처리 안 됨</option>
-										<option value="Y">처리 됨</option>
+										<option value="">선택</option>
+										<option value="N">처리 X</option>
+										<option value="Y">처리 O</option>
 									</select>
 								</td>
-								<td style="width:5%">관리자아이디</td>
-								<td style="width:7%">처리날짜</td>
+								<td style="width:8%">건의번호</td>
+								<td style="width:22%">제목</td>
+								<td style="width:9%">작성일</td>
+								<td style="width:17%">회신이메일</td>
+								<td style="width:11%">회원아이디</td>
+								<td style="width:11%">관리자</td>
+								<td style="width:9%">처리일</td>
 							</tr>
 					<c:if test="${cnt > 0}">
 						<c:forEach var="dtos" items="${dtos}">
 							<tr style="border:0;">
 								<td style="border:0;" align="center">
-									<a href="suggestionContentForm?sug_num=${dtos.sug_num}&pageNum=${pageNum}">
-										<button class="btn btn-default">
-											건의 처리
-										</button>
-									</a>
+									<c:if test="${dtos.sug_status == 'N'}">
+										<a href="suggestionContentForm?sug_num=${dtos.sug_num}&pageNum=${pageNum}">
+											<button class="btn btn-default">
+												처리
+											</button>
+										</a>
+									</c:if>
+									<c:if test="${dtos.sug_status == 'Y'}">
+										<a href="suggestionContentForm?sug_num=${dtos.sug_num}&pageNum=${pageNum}">
+											<button class="btn btn-default">
+												열람
+											</button>
+										</a>
+									</c:if>
 								</td>
 								<td style="border:0;" align="center">
-									${sug_num}
+									<c:if test="${dtos.sug_status == 'N'}">
+										<span style="color:red;">처리 안 됨</span>
+									</c:if>
+									<c:if test="${dtos.sug_status == 'Y'}">
+										<span style="color:red;">처리 됨</span>
+									</c:if>
 								</td>
-								<c:set var="sug_num" value="${sug_num-1}" />
+								<td style="border:0;" align="center">
+									${dtos.sug_num}
+								</td>
+								<c:set var="num" value="${num-1}" />
 								<td style="border:0;" align="center">
 									${dtos.sug_title}
 								</td>		
 								<td style="border:0;" align="center">
-									<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dtos.sug_date}" />
+									<fmt:formatDate type="both" pattern="yyyy-MM-dd" value="${dtos.sug_date}" />
 								</td>
 								<td style="border:0;" align="center">
 									${dtos.re_email}
@@ -156,19 +157,15 @@ li {
 									${dtos.mem_id}
 								</td>
 								<td style="border:0;" align="center">
-									<span style="color:red;">${dtos.sug_status}</span>
-								</td>
-								<td style="border:0;" align="center">
 									${dtos.manager_id}
 								</td>
 								<td style="border:0;" align="center">
-									<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dtos.sol_date}" />
+									<fmt:formatDate type="both" pattern="yyyy-MM-dd" value="${dtos.sol_date}" />
 								</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					
-					<!-- 책이 없으면 -->
 						<c:if test="${cnt == 0}">
 							<tr>
 								<td colspan="9" align="center" style="height:40px">
@@ -207,44 +204,13 @@ li {
 						</c:if>
 							
 					</ul>
-			  </div>
+			  	</div>
 				  			
 		</div>
 	</div>
-	<!-- END PHOTO BLOCK -->
 
-
-
-
-
-	<!-- END RECOMMENDATION MEET BLOCK -->
-
-
-	<!-- START MOVIE BLOCK -->
-
-	<!-- END MOVIE BLOCK -->
-
-	<!-- START REALTIME MEET BLOCK -->
-
-	<!-- END REALTIME MEET BLOCK -->
-
-	<!-- START RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- END RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- START EVENT BLOCK -->
-
-	<!-- END EVENT BLOCK -->
-
-	<!-- START ADVERTISE BLOCK -->
-
-	<!-- END ADVERTISE BLOCK -->
-
-	<!-- START REVIEW BLOCK -->
-
-	<!-- END REVIEW BLOCK -->
-		</div>
-	</div>
+</div>
+</div>
 <!-- END ROW -->
 </div>
 <%@ include file="../../etc/footer2.jsp"%>

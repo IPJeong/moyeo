@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../../etc/header2.jsp"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
 function suggestionCheck() {
 	var sug_status = document.suggestioncontentform.sug_status.value;
@@ -64,33 +65,17 @@ li {
 </style>
 
          <!-- START BREADCRUMB -->
-                <ul class="breadcrumb push-down-0">
-                    <li><a href="../main/main.jsp">Home</a></li>
-                    <li><a href="../category/category_hobby.jsp">모임</a></li>
-                    <li><a href="../moim/moim_main.jsp">영등포 볼링</a></li>
-                    <li class="active">모임관리</li>
-                </ul>
+                <ul class="breadcrumb">
+					<li><a href="/moyeo/main/home">Home</a></li>
+					<li><a href="/moyeo/six/cusSupMain">고객지원</a></li>
+					<li class="active">건의사항</li>
+				</ul>
                <!-- END BREADCRUMB -->  
 
 <!-- START ROW -->
 <div class="row">
-		<!-- START LOGIN BLOCK -->
-
-		<!-- START RECOMMENDATION MEET BLOCK -->
-	
-	<!-- END LOGIN BLOCK -->
-
-
-	<!-- START SEARCH BLOCK -->
-
-	<!-- END SEARCH BLOCK -->
-
-	<!-- START NOTICE BLOCK -->
-
-	<!-- END NOTICE BLOCK -->
-
-	<!-- START PHOTO BLOCK -->
-	<div class="col-md-56" style="margin-top:50px; margin-left:20%; height:750px;">
+<c:if test="${dto.sug_status == 'N'}">
+	<div class="col-md-56" style="margin-top:30px; margin-left:20%; height:730px;">
 		<div class="panel panel-default">
 			<div class="panel-heading" style="padding-top: 10px;">
 				<div class="panel-title-box">
@@ -99,7 +84,7 @@ li {
 			</div>
 			
 			<div class="panel panel-default">
-				<div style="width: 870px; margin-left: 80px;">
+				<div style="width:80%; margin-left:10%;">
 					<br><br>
 					<h3>&nbsp;건의사항 상세보기</h3>
 					<br>
@@ -108,7 +93,7 @@ li {
 							<td width="15%">아이디  : ${dto.mem_id}</td>
 							<td width="60%">제목 :  ${dto.sug_title}</td>
 							<td width="25%" style="text-align:right;">
-								날짜 : ${dto.sug_date}
+								날짜 : <fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dto.sug_date}" />
 							</td>
 						</tr>
 
@@ -119,7 +104,7 @@ li {
 					</table>
 				</div>
 				<br><br>
-				<div style="width:80%; margin-left: 80px;">
+				<div style="width:80%; margin-left:10%;">
 
 					<form action="suggestionCheckPro" method="post" name="suggestioncontentform" class="form-horizontal" onsubmit="return suggestionCheck()">
 						<input type="hidden" name="sug_status" value="${dto.sug_status}">
@@ -137,43 +122,58 @@ li {
 								style="float: right;">입력</button>
 						</div>
 					</form>
+				</div>		
+			</div>
+		</div>
+	</div>
+</c:if>
+<c:if test="${dto.sug_status == 'Y'}">
+<!--<div class="col-md-56" style="margin-top:30px; margin-left:20%; height:650px;"> -->
+	<div class="col-md-56" style="margin-top:30px; margin-left:20%; height:730px;">
+		<div class="panel panel-default">
+			<div class="panel-heading" style="padding-top: 10px;">
+				<div class="panel-title-box">
+					<h3>건의사항 상세보기 페이지</h3>
 				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div style="width:80%; margin-left:10%;">
+					<br><br>
+					<h3>&nbsp;건의사항 상세보기</h3>
+					<br>
+					<table class="table table-striped table-hover" style="padding-top:10px;">
+						<tr>
+							<td width="15%">아이디  : ${dto.mem_id}</td>
+							<td width="60%">제목 :  ${dto.sug_title}</td>
+							<td width="25%" style="text-align:right;">
+								날짜 : <fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${dto.sug_date}" />
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="3" style="height:300px;">${dto.sug_content}</td>
+						</tr>
+						
+					</table>
+				</div>
+				<br><br>
+				<div style="width:80%; margin-left:10%;">
+					<h3>&nbsp;건의처리 내용</h3>
+					<br>
+					<table class="table table-striped table-hover" style="padding-top:10px; height:150px;">
+						<tr>
+							<td style="background:#fff6d5;">${dto.sol_content}</td>
+						</tr>	
+					</table>
+				</div>
+				
 				
 			</div>
 		</div>
 	</div>
-	<!-- END PHOTO BLOCK -->
 
-
-
-
-
-	<!-- END RECOMMENDATION MEET BLOCK -->
-
-
-	<!-- START MOVIE BLOCK -->
-
-	<!-- END MOVIE BLOCK -->
-
-	<!-- START REALTIME MEET BLOCK -->
-
-	<!-- END REALTIME MEET BLOCK -->
-
-	<!-- START RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- END RECOMMENDATION LOCATION BLOCK -->
-
-	<!-- START EVENT BLOCK -->
-
-	<!-- END EVENT BLOCK -->
-
-	<!-- START ADVERTISE BLOCK -->
-
-	<!-- END ADVERTISE BLOCK -->
-
-	<!-- START REVIEW BLOCK -->
-
-	<!-- END REVIEW BLOCK -->
+</c:if>
 </div>
 <!-- END ROW -->
 

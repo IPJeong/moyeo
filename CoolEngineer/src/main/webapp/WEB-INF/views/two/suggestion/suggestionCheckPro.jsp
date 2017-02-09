@@ -5,8 +5,6 @@
     
 <html>
 <body>
-	<h2><center>건의사항 확인 처리 완료</center></h2>
-	
 	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
 			alert("건의사항을 확인 처리하지 못 했습니다.");
@@ -17,7 +15,7 @@
 	<c:if test="${cnt != 0}">
 		<script type="text/javascript">
 			alert("건의사항을 확인 처리했습니다.!");
-			window.location='suggestionList';
+			window.location='suggestionList?pageNum=' + ${pageNum};
 		</script>
 	</c:if>
 </body>
