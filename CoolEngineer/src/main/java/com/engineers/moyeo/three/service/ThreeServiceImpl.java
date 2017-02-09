@@ -20,10 +20,10 @@ import com.engineers.moyeo.main.common.EmailSender;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.common.TextMessage;
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
-import com.engineers.moyeo.three.dto.MygroupDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Service("faq")
@@ -671,7 +671,7 @@ public class ThreeServiceImpl implements ThreeService{
 		dataMap.put("mem_id", mem_id);
 		
 		if(cnt > 0) {
-			ArrayList<MygroupDTO> dtos = dao.getGroupList(dataMap); //가입한 모임 리스트 불러오기			
+			ArrayList<MoimOpenDTO> dtos = dao.getGroupList(dataMap); //가입한 모임 리스트 불러오기			
 			req.setAttribute("dtos", dtos);
 			
 		}
@@ -974,7 +974,8 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/member/findPw";
 	}
-
+	
+	//비밀번호 변경 & 임시번호 삭제
 	@Override
 	public String chgPw(Model model) {
 		
