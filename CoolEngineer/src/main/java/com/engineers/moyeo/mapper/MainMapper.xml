@@ -101,4 +101,66 @@
          		)
     	 WHERE rn BETWEEN 1 AND #{countOfWords} 
 	</select>
+	
+	<!-- 모임후기 사진 조회 -->
+	<select id="">
+		SELECT * 
+		  FROM (
+		        SELECT post_num, replyCnt, likeCnt, total, pic_path, pic_name, rownum as rn
+		          FROM (
+		                SELECT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, pic_path, pic_name
+		                  FROM (
+		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total
+		                          FROM (
+		                                SELECT mpr.post_num, replyCnt, likeCnt, (replyCnt + likeCnt) as total
+		                                  FROM (SELECT COUNT(postrep_num) as replyCnt, mp.post_num
+		                                         FROM meeting_post_reply mpr, meeting_post mp
+		                                        WHERE mp.post_num = mpr.post_num(+)
+		                                        GROUP BY mp.post_num) mpr,
+		                                        (SELECT COUNT(post_like_num) as likeCnt, mp.post_num
+		                                           FROM meeting_post_like mpl, meeting_post mp
+		                                          WHERE mpl.post_num(+) = mp.post_num
+		                                          GROUP BY mp.post_num) mpl
+		                                  WHERE mpr.post_num = mpl.post_num                    
+		                                ) fina, post_pictures pp
+		                          WHERE fina.post_num = pp.post_num
+		                      ) fin, post_pictures pp
+		                 WHERE fin.post_num = pp.post_num
+		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.replyCnt DESC
+		                 )
+		           )
+		  WHERE rn BETWEEN 1 AND 10
+		  ORDER BY rn ASC;
+	</select>
+	
+	<!-- 모임후기 동영상 조회 -->
+	<select id="">
+		SELECT * 
+		  FROM (
+		        SELECT post_num, replyCnt, likeCnt, total, video_path, video_name, rownum as rn
+		          FROM (
+		                SELECT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, video_path, video_name
+		                  FROM (
+		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total
+		                          FROM (
+		                                SELECT mpr.post_num, replyCnt, likeCnt, (replyCnt + likeCnt) as total
+		                                  FROM (SELECT COUNT(postrep_num) as replyCnt, mp.post_num
+		                                         FROM meeting_post_reply mpr, meeting_post mp
+		                                        WHERE mp.post_num = mpr.post_num(+)
+		                                        GROUP BY mp.post_num) mpr,
+		                                        (SELECT COUNT(post_like_num) as likeCnt, mp.post_num
+		                                           FROM meeting_post_like mpl, meeting_post mp
+		                                          WHERE mpl.post_num(+) = mp.post_num
+		                                          GROUP BY mp.post_num) mpl
+		                                  WHERE mpr.post_num = mpl.post_num                    
+		                                ) fina, post_video pv
+		                          WHERE fina.post_num = pv.post_num
+		                      ) fin, post_video pv
+		                 WHERE fin.post_num = pv.post_num
+		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.replyCnt DESC
+		                 )
+		           )
+		  WHERE rn BETWEEN 1 AND 10
+		  ORDER BY rn ASC;  
+	</select>
 </mapper>
