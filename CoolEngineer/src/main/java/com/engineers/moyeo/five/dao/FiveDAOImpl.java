@@ -14,6 +14,7 @@ import com.engineers.moyeo.five.dto.MeetingPostViewDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
+import com.engineers.moyeo.six.dto.MyGroupDTO;
 
 @Repository
 public class FiveDAOImpl implements FiveDAO{
@@ -206,8 +207,12 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
 		return dao.getGroupVideos(group_num);
 	}
-	
-	
-	
+
+	// 모임의 권한을 조회
+	@Override
+	public int getGroupPer(MyGroupDTO dto) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getGroupPer(dto);
+	}
 	
 }
