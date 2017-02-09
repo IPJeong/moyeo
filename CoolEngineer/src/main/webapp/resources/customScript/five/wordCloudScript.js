@@ -13,6 +13,7 @@ function validChk() {
 	var strDate = document.wordSearchForm.strDate.value;
 	var endDate = document.wordSearchForm.endDate.value;
 	var count = 0;
+	var countOfWords = document.wordSearchForm.countOfWords.value;
 
 	for (i=0; i<document.wordSearchForm.wordOps.length; i++ ) {
 		if (document.wordSearchForm.wordOps[i].checked==true) {
@@ -34,6 +35,12 @@ function validChk() {
 		alert('검색조건을 선택해주세요.');
 		return false;
 	}
+	
+	if(countOfWords == '') {
+		alert('검색할 단어의 수를 입력하세요.');
+		return false;
+	}
+	
 	return true;
 }
 
