@@ -74,7 +74,7 @@
 							<li><a href="/moyeo/main/memberLoginForm"><span class="fa fa-plus">로그인</span><span>로그인</span></a></li>
 						</c:if>
 						<c:if test="${sessionScope.mem_id != null || sessionScope.manager_id != null}" >
-							<li><a href="#"><span class="fa fa-save"></span>${sessionScope.mem_id == null ? sessionScope.manager_id : sessionScope.mem_id}님</a></li>
+							<li><a href="/moyeo/three/myPage"><span class="fa fa-save"></span>${sessionScope.mem_id == null ? sessionScope.manager_id : sessionScope.mem_id}님</a></li>
 							<li><a href="/moyeo/main/memberLogout"><span class="fa fa-save"></span>로그아웃</a></li>
 						</c:if>
 					</ul>
