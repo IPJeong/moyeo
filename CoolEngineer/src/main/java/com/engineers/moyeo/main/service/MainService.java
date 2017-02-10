@@ -28,4 +28,7 @@ public interface MainService {
 	//메인페이지에 추천모임 불러오기
 	public void recommendMoim(Model model);
 	
+	// 메인페이지에서 모임후기 바로가기
+	public void directViewPost(Model model);  
+	
 }
