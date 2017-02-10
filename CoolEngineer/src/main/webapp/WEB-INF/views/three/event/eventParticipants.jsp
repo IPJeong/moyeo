@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <!-- META SECTION -->
@@ -22,7 +23,6 @@
 	height: auto;
 }
 
-
 </style>
 </head>
 
@@ -43,12 +43,14 @@
 			<div class="page-content-wrap">
 
 				<div class="panel panel-default">
+					<form action="winEvent" name="winEve" method="post" onsubmit="return winChk();">
 					<div class="panel-heading col-md-12" style="height:51px;position:fixed;top:0px;left:0px;z-index:999;">
 						<div class="col-md-8" style="margin:0px;padding:0px;">
 							<h3 class="panel-title">참여자 리스트</h3>
 						</div>
 						<div class="col-md-4" style="margin:0px;padding:0px;padding-left:280px;">
-							<button type="button" class="btn btn-danger">선정</button>
+							<input type="hidden" name="event_Num" value="${event_Num}">
+							<button type="submit" class="btn btn-danger">선정</button>
 							<button type="button" class="btn btn-default" onclick="window.close()">닫기</button>
 						</div>
 					</div>
@@ -62,61 +64,38 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>									
-								</tr>
-																
+								<c:if test="${cnt > 0}">
+									<c:forEach var="dto" items="${dtos}">
+										<tr>
+											<td>
+											${start}
+											<c:set var="start" value="${start + 1}"/>
+											</td>
+											<td>											
+											${dto.mem_id}
+											</td>
+											<td>
+											<label class="check" style="margin:0px;"><input
+											type="checkbox" id="mem_id" class="icheckbox" name="mem_id"
+											value="${dto.mem_id}" />당첨</label>
+											</td>									
+										</tr>
+									</c:forEach>
+								</c:if>															
 							</tbody>
 						</table>
 					</div>
+					</form>
 				</div>
-
+			
 			</div>
 		</div>
 	</div>
+	
+	
 	<!-- START SCRIPTS -->
+	
+	<script src="/moyeo/resources/customScript/three.js" type="text/javascript"></script>
 	<!-- START PLUGINS -->
 	<script type="text/javascript"
 		src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
@@ -150,6 +129,8 @@
 		src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
 	<script type='text/javascript'
 		src='/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js'></script>
+	<script type="text/javascript"
+		src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
 	<script type="text/javascript"
 		src="/moyeo/resources/resource/js/plugins/owl/owl.carousel.min.js"></script>
 
