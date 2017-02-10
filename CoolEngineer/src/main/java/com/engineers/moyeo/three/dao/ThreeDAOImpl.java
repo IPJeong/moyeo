@@ -38,7 +38,8 @@ public class ThreeDAOImpl implements ThreeDAO{
 		cnt2 = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getCount2");
 		return cnt2;
 	}
-
+	
+	//FAQ카테고리 가져오기
 	@Override
 	public ArrayList<ThreeDTO> getCategory() {
 		ArrayList<ThreeDTO> dtos = null;
@@ -47,7 +48,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return dtos;
 	}
 	
-
+	//FAQ가져오기
 	@Override
 	public ArrayList<ThreeDTO> getQuestions() {		
 		ArrayList<ThreeDTO> dtos2 = null;
@@ -55,21 +56,24 @@ public class ThreeDAOImpl implements ThreeDAO{
 		dtos2 = dao.getQuestions();
 		return dtos2;
 	}
-
+	
+	//FAQ카테고리 입력
 	@Override
 	public int insert(ThreeDTO dto) {
 		int cnt = 0;
 		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.insert", dto);
 		return cnt;
 	}
-
+	
+	//FAQ 입력
 	@Override
 	public int insertFaq(ThreeDTO dto) {
 		int cnt = 0;
 		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.insertFaq", dto);
 		return cnt;
 	}
-
+	
+	//FAQ카테고리 수정 처리
 	@Override
 	public int update(ThreeDTO dto) {
 		int cnt = 0;
@@ -78,12 +82,14 @@ public class ThreeDAOImpl implements ThreeDAO{
 		dao.update2(dto);
 		return cnt;
 	}
-
+	
+	//FAQ수정하기
 	@Override
 	public void update2(ThreeDTO dto) {
 		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.update2", dto);		
 	}
-
+	
+	//FAQ수정하기
 	@Override
 	public int updateFaq(ThreeDTO dto) {
 		int cnt = 0;
@@ -91,12 +97,14 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 
+	//FAQ값 가져오기
 	@Override
 	public ThreeDTO getInfo(int faqNum) {
 		ThreeDTO dto = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getInfo", faqNum);
 		return dto;
 	}
-
+	
+	//FAQ 카테고리 삭제
 	@Override
 	public int delete(ThreeDTO dto) {
 		int cnt = 0;
@@ -105,19 +113,22 @@ public class ThreeDAOImpl implements ThreeDAO{
 		dao.delete2(dto);
 		return cnt;
 	}
-
+	
+	//FAQ 카테고리와 관련된 FAQ삭제 
 	@Override
 	public void delete2(ThreeDTO dto) {
 		this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.delete2", dto);		
 	}
-
+	
+	//FAQ삭제하기
 	@Override
 	public int deleteFaq(ThreeDTO dto) {		
 		int cnt = 0;
 		cnt = this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.deleteFaq", dto);		
 		return cnt;
 	}
-
+	
+	//FAQ카테고리 중복 확인
 	@Override
 	public int ctgCheck(ThreeDTO dto) {
 		int cnt = 0;
@@ -312,12 +323,30 @@ public class ThreeDAOImpl implements ThreeDAO{
 		cnt = this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.tempUpdate", map);
 		return cnt;
 	}
-
+	
+	//임시번호 삭제
 	@Override
 	public int tempDelete(String mem_id) {
 		int cnt = 0;
 		cnt = this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.tempDelete", mem_id);
 		return cnt;
+	}
+	
+	//이벤트 참여자 수
+	@Override
+	public int eventParticipantsCount(int event_Num) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.eventParticipantsCount", event_Num);
+		return cnt;
+	}
+	
+	//이벤트 참여자 명단
+	@Override
+	public ArrayList<EventDTO> getEvePartList(int event_Num) {
+		ArrayList<EventDTO> dtos = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getEvePartList(event_Num);		
+		return dtos;
 	}
 	
 	

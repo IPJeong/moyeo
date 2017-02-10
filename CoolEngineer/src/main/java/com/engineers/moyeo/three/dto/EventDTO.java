@@ -18,6 +18,7 @@ public class EventDTO {
 	private String picName; //썸네일 이미지 이름
 	private String picPath2; //이벤트 이미지 경로
 	private String picName2; //이벤트 이미지 이름
+	private String mem_id; //이벤트 참가자
 	
 	
 	public int getEventNum2() {
@@ -103,6 +104,12 @@ public class EventDTO {
 	}
 	public void setPicName2(String picName2) {
 		this.picName2 = picName2;
+	}
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
 	} 
 	
 }

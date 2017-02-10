@@ -608,6 +608,32 @@ public class ThreeServiceImpl implements ThreeService{
 		return "/three/event/eventParticipate";
 	}
 	
+	//이벤트 참가자 명단
+		@Override
+		public String eventParticipants(Model model) {
+			
+			Map<String, Object> map = model.asMap();
+			HttpServletRequest req = (HttpServletRequest)map.get("req");
+			
+			int event_Num = Integer.parseInt(req.getParameter("event_num"));					 
+			int start = 1;
+			
+			int cnt = dao.eventParticipantsCount(event_Num); //이벤트 참가자 명수
+			
+			if(cnt != 0) {
+				ArrayList<EventDTO> dtos = dao.getEvePartList(event_Num);//이벤트 참가자 명단
+				model.addAttribute("dtos", dtos);
+				
+			}
+			
+			
+			model.addAttribute("event_Num", event_Num);
+			model.addAttribute("cnt", cnt);
+			model.addAttribute("start", start);
+			
+			return "/three/event/eventParticipants";
+		}
+	
 	//마이 페이지
 	@Override
 	public String myPage(Model model) {
@@ -1001,19 +1027,14 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/member/chgPw";
 	}
-
+	
+	//당첨자 선정
 	@Override
-	public String eventParticipants(Model model) {
-		
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest req = (HttpServletRequest)map.get("req");
-		
-		int event_Num = Integer.parseInt(req.getParameter("event_num"));
-		
-		
-		
+	public String winEvent(Model model) {
+		// TODO Auto-generated method stub
 		return null;
-	}
+	}	
+	
 	
 	
 	

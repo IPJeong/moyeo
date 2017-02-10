@@ -35,6 +35,8 @@ public interface ThreeDAO {
 	public ArrayList<EventDTO> getEventPic(Map<String, Integer> map); //진행중인 이벤트 사진
 	public int eveChk(Map<String, Object> map); //이벤트 참여여부
 	public int eveParticipate(Map<String, Object> map); //이벤트 참여
+	public int eventParticipantsCount(int event_Num); //이벤트 참여자 명수
+	public ArrayList<EventDTO> getEvePartList(int event_Num); //이벤트 참여자 명단
 	
 	public int confirmId(Map<String, Object> map); //아이디 중복 체크
 	public int memInfoInsert(MemberDTO dto); //회원가입	

@@ -157,12 +157,32 @@ public class ThreeController {
 		return viewPage;
 	}
 	
+	@RequestMapping("/eventParticipate") //이벤트 참여
+	public String eventParticipate(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		viewPage = threeService.eventParticipate(model);
+		System.out.println("eventParticipate()");
+		
+		return viewPage;
+	}
+		
 	@RequestMapping("/eventParticipants") //이벤트 참가자 명단
 	public String eventParticipants(HttpServletRequest req, Model model) {		
 		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.eventParticipants(model);
 		System.out.println("eventParticipants()");
+		
+		return viewPage;
+	}
+
+	@RequestMapping("/winEvent") //이벤트 당첨자 선정
+	public String winEvent(HttpServletRequest req, Model model) {		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		viewPage = threeService.winEvent(model);
+		System.out.println("chgPw()");
 		
 		return viewPage;
 	}
@@ -220,17 +240,7 @@ public class ThreeController {
 		System.out.println("memInterestInput()");
 		
 		return viewPage;
-	}
-	
-	@RequestMapping("/eventParticipate") //이벤트 참여
-	public String eventParticipate(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
-		model.addAttribute("req", req);
-		viewPage = threeService.eventParticipate(model);
-		System.out.println("eventParticipate()");
-		
-		return viewPage;
-	}
+	}	
 	
 	@RequestMapping("/myPage") //마이페이지
 	public String myPage(HttpServletRequest req, Model model) {		

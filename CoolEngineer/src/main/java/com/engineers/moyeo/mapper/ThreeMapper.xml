@@ -131,7 +131,21 @@
 	<insert id="eveParticipate" parameterType="map">
 		INSERT INTO evejoin_list
 			VALUES (evejoin_list_seq.NEXTVAL, #{memid}, #{evenum})
-	</insert>	
+	</insert>
+	<!-- 이벤트 참여자 명수 -->
+	<select id="eventParticipantsCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM evejoin_list WHERE event_num = #{event_Num}
+	</select>
+	<!-- 이벤트 참여자 명단 -->
+	<select id="getEvePartList" parameterType="int" resultType="com.engineers.moyeo.three.dto.EventDTO">
+		SELECT *
+			FROM (SELECT mem_id
+					FROM (SELECT * FROM evejoin_list
+						   WHERE event_num = #{event_Num}
+						   ORDER BY evejoin_num ASC 
+						  )
+				  )
+	</select>	
 <!-- 이벤트 -->
 <!-- 회원 -->
 	<!-- 아이디 중복체크 -->
