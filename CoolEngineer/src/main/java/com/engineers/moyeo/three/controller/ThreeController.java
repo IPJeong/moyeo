@@ -157,6 +157,16 @@ public class ThreeController {
 		return viewPage;
 	}
 	
+	@RequestMapping("/eventParticipants") //이벤트 참가자 명단
+	public String eventParticipants(HttpServletRequest req, Model model) {		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		viewPage = threeService.eventParticipants(model);
+		System.out.println("eventParticipants()");
+		
+		return viewPage;
+	}
+	
 	@RequestMapping("/registration") //회원가입
 	public String registration(HttpServletRequest req, Model model) {		
 		/*String viewPage = threeService.faq(model);*/
@@ -204,7 +214,7 @@ public class ThreeController {
 	
 	@RequestMapping("/memInterestInput") //관심사 선택
 	public String memInterestInput(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
 		model.addAttribute("req", req);
 		viewPage = threeService.memInterestInput(model);
 		System.out.println("memInterestInput()");
@@ -341,13 +351,6 @@ public class ThreeController {
 		System.out.println("chgPw()");
 		
 		return viewPage;
-	}
+	}		
 	
-	@RequestMapping("/eventParticipants") //비밀번호 변경 폼
-	public String eventParticipants(HttpServletRequest req, Model model) {		
-		/*String viewPage = threeService.faq(model);*/
-		System.out.println("eventParticipants()");
-		
-		return "three/event/eventParticipants";
-	}
 }

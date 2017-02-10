@@ -21,6 +21,7 @@ public interface ThreeService {
 	public String ing_event(Model model); //이벤트 진입
 	public String eventInsert(Model model); //이벤트 입력
 	public String eventParticipate(Model model); //이벤트 참여
+	public String eventParticipants(Model model); //이벤트 참가자 명단
 	
 	//아이디중복 여부확인
 	public void duplication(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;

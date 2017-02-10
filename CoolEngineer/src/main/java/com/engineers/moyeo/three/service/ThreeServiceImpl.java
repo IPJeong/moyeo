@@ -552,7 +552,7 @@ public class ThreeServiceImpl implements ThreeService{
 		String memid = req.getParameter("memid");
 		String place1 = req.getParameter("loc_category1");
 		String place2 = req.getParameter("loc_category2");
-		String category1 = req.getParameter("recpla_category1");
+		String category1 = req.getParameter("recpla_category1").replace("_", "/");
 		String category2 = req.getParameter("recpla_category2");
 		
 		Map<String, Object>	iMap = new HashMap<>();
@@ -1000,6 +1000,19 @@ public class ThreeServiceImpl implements ThreeService{
 		model.addAttribute("cnt", cnt);
 		
 		return "/three/member/chgPw";
+	}
+
+	@Override
+	public String eventParticipants(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int event_Num = Integer.parseInt(req.getParameter("event_num"));
+		
+		
+		
+		return null;
 	}
 	
 	
