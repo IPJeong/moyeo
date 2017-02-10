@@ -233,7 +233,7 @@ li {
 								<ul>
 									<c:forEach var="picDto" items="${picDtos}">
 										<li>
-											<a href=""><img src="${picDto.pic_path}/${picDto.pic_name}" width="100px" height="75px"></a>
+											<a href="/moyeo/five/postDetailView?group_num=${picDto.group_num}&post_num=${picDto.post_num}&search=dsearch"><img src="${picDto.pic_path}/${picDto.pic_name}" width="100px" height="75px"></a>
 										</li>
 									</c:forEach>
 									<!-- <li>
@@ -274,8 +274,7 @@ li {
 								<ul>
 									<c:forEach var="videoDto" items="${videoDtos}">
 										<li>
-											<a href="">
-											
+											<a href="/moyeo/five/postDetailView?group_num=${videoDto.group_num}&post_num=${videoDto.post_num}&search=dsearch">
 												<video width="200px" height="150px" controls>
 													<source src="${videoDto.video_path}/${videoDto.video_name}" >
 												</video>
