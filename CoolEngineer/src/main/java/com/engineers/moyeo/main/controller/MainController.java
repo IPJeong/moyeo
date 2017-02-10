@@ -24,6 +24,7 @@ public class MainController {
 	@Autowired
 	com.engineers.moyeo.main.service.MainService mainService;
 	String viewPage;
+	com.engineers.moyeo.six.service.SixService sixService;
 	
 	// 모여의 메인페이지를 로드하는 메서드
 	@RequestMapping("/home")
@@ -34,7 +35,8 @@ public class MainController {
 		mainService.main_notice(model);
 		mainService.hotMoim(model);
 		mainService.main_meeting_post(model);
-				
+		mainService.recommendMoim(model);
+		
 		return "main/main";
 	}
 	
