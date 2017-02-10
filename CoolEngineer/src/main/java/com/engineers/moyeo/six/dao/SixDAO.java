@@ -7,7 +7,9 @@ import java.util.Map;
 
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.HotMoimDTO;
+import com.engineers.moyeo.six.dto.InterestCatDTO;
 import com.engineers.moyeo.six.dto.InterestGroupDTO;
+import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
@@ -340,4 +342,16 @@ public interface SixDAO {
 	
 	//인기모임 목록 조회
 	public ArrayList<HotMoimDTO> hotMoim();
+	
+	//회원의 관심카테고리 불러오기
+	public InterestCatDTO inteCate(String mem_id);
+
+	//회원의 관심지역 불러오기
+	public InterestLocationDTO inteLoca(String mem_id);
+
+	//추천모임 개수체크
+	public int recommendMoimChk(Map<String, Object> daoMap);
+	
+	//추천모임
+	public ArrayList<MoimOpenDTO> recommendMoim(Map<String, Object> daoMap);
 }

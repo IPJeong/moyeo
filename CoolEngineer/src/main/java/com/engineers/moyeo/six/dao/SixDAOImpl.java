@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.HotMoimDTO;
+import com.engineers.moyeo.six.dto.InterestCatDTO;
 import com.engineers.moyeo.six.dto.InterestGroupDTO;
+import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
@@ -961,5 +963,37 @@ public class SixDAOImpl implements SixDAO{
 		ArrayList<HotMoimDTO> dtos = dao.hotMoim();
 		
 		return dtos;
+	}
+	
+	//회원의 관심카테고리 불러오기
+	public InterestCatDTO inteCate(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		InterestCatDTO cateDto = dao.inteCate(mem_id);
+		
+		return cateDto;
+	}
+	
+	//회원의 관심지역 불러오기
+	public InterestLocationDTO inteLoca(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		InterestLocationDTO locaDto = dao.inteLoca(mem_id);
+		
+		return locaDto;
+	}
+	
+	//추천모임 개수 체크
+	public int recommendMoimChk(Map<String, Object> daoMap) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.recommendMoimChk(daoMap);
+		
+		return cnt;
+	}
+	
+	//추천모임 리스트
+	public ArrayList<MoimOpenDTO> recommendMoim(Map<String, Object> daoMap) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<MoimOpenDTO> recommendDtos = dao.recommendMoim(daoMap);
+		
+		return recommendDtos;
 	}
 }

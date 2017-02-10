@@ -573,4 +573,24 @@
 		 AND b.group_num = f.group_num(+) AND b.group_num = m.group_num) ORDER BY cnt DESC, group_num
 	</select>
 	
+	<!-- 회원의 관심카테고리 조회 -->
+	<select id="inteCate" parameterType="String" resultType="com.engineers.moyeo.six.dto.InterestCatDTO">
+		SELECT * FROM interest_cat WHERE mem_id = #{mem_id}
+	</select>
+	
+	<!-- 회원의 관심지역 조회 -->
+	<select id="inteLoca" parameterType="String" resultType="com.engineers.moyeo.six.dto.InterestLocationDTO">
+		SELECT * FROM interest_location WHERE mem_id = #{mem_id}
+	</select>
+	
+	<!-- 추천모임유무 -->
+	<select id="recommendMoimChk" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM group_list WHERE group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2} AND group_location = #{group_location}
+	</select>
+	
+	<!-- 추천모임리스트 -->
+	<select id="recommendMoim" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+		SELECT * FROM group_list WHERE group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2} AND group_location = #{group_location}
+	</select>
+	
 </mapper>
