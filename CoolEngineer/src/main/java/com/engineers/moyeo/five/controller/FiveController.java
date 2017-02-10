@@ -195,7 +195,7 @@ public class FiveController {
 		return mav;
 	}
 	
-	// 모임사진첩
+	// 모임갤러리(사진)
 	@RequestMapping(value="/group_pictures")
 	public String getGroupPictures(Model model, HttpServletRequest req) {
 		
@@ -208,7 +208,7 @@ public class FiveController {
 		return "five/gallery/groupPictures";
 	}
 	
-	// 모임사진첩
+	// 모임갤러리(동영상)
 	@RequestMapping(value="/group_videos")
 	public String getGroupVideos(Model model, HttpServletRequest req) {
 		
@@ -219,13 +219,6 @@ public class FiveController {
 		fiveService.getGroupVideos(model);
 		
 		return "five/gallery/groupVideos";
-	}
-	
-	//워드클라우드 예제
-	@RequestMapping(value="/wordCloud")
-	public String wordCloud() {
-		System.out.println("워드 클라우드 로드");
-		return "five/wordCloud/wordCloud";
 	}
 	
 }

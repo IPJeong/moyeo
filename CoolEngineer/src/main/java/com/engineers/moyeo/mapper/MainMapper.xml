@@ -99,7 +99,7 @@
     	 WHERE rn BETWEEN 1 AND #{countOfWords} 
 	</select>
 	
-	<!-- 워드클라우드 단어 검색 -->
+	<!-- 워드클라우드 단어 검색 (날짜포함)-->
 	<select id="searchWordcloud2" parameterType="Map" resultType="com.engineers.moyeo.main.dto.WordDTO">
 		SELECT *
 	      FROM (
@@ -107,30 +107,31 @@
 				  FROM (
 				  		SELECT *
                           FROM wordcloud_list
+                          WHERE update_date BETWEEN #{strDate} AND #{endDate}
                  		 ORDER BY count DESC
                         )
-                  WHERE update_date &gt;= #{strDate} AND update_date &lt;= #{endDate}
                   
+                  WHERE 
                   <if test="type == 1">
-                  	AND part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun'
+                  	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun'
                   </if>
                   <if test="type == 2">
-                  	AND part_of_speech = 'Verb'
+                  	part_of_speech = 'Verb'
                   </if>
                   <if test="type == 3">
-                  	AND part_of_speech = 'Hashtag'
+                  	part_of_speech = 'Hashtag'
                   </if>
                   <if test="type == 4">
-                  	AND part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb'
+                  	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb'
                   </if>
                   <if test="type == 5">
-                  	AND part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
+                  	part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
                   </if>
                   <if test="type == 6">
-                  	AND part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Hashtag'
+                  	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Hashtag'
                   </if>
                   <if test="type == 7">
-                  	AND part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
+                  	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
                   </if>
                   
          		)

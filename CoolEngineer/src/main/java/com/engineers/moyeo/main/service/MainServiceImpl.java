@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
+import com.engineers.moyeo.five.service.FiveService;
 import com.engineers.moyeo.main.dao.MainDAO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
@@ -19,8 +20,6 @@ import com.engineers.moyeo.main.dto.WordDTO;
 import com.engineers.moyeo.main.twitterKoreanParser.KoreanParser;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.HotMoimDTO;
-import com.engineers.moyeo.six.dto.InterestCatDTO;
-import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 
@@ -32,6 +31,9 @@ public class MainServiceImpl implements MainService{
 
 	@Autowired
 	SixDAO sixDao;
+	
+	@Autowired
+	FiveService fiveService;
 	
 	// 워드클라우드 리스트
 	private static List<WordDTO> wordDtos;
@@ -290,5 +292,11 @@ public class MainServiceImpl implements MainService{
 			model.addAttribute("recommendDtos", recommendDtos);
 		}
 	}
+
+	@Override
+	public void directViewPost(Model model) {
+		fiveService.postDetailView(model);
+	}
+	
 
 }
