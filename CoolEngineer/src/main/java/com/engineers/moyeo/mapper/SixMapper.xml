@@ -443,12 +443,12 @@
  	
   	<!-- 모임-소개사진 불러오기 -->
  	<select id="moimImageViewB" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		SELECT * FROM main_picture WHERE main_pic_path = '/groupImgPath-' OR main_pic_path = '/moyeo/resources/resource/assets/images/moimImg-' AND group_num = #{group_num} ORDER BY main_pic_num DESC
+ 		SELECT * FROM main_picture WHERE (main_pic_path = '/groupImgPath-' OR main_pic_path = '/moyeo/resources/resource/assets/images/moimImg-') AND group_num = #{group_num} ORDER BY main_pic_num DESC
  	</select>
  	
  	<!-- 모임-대표사진 불러오기 -->
  	<select id="moimImagesView" parameterType="int" resultType="com.engineers.moyeo.six.dto.MainPictureDTO">
- 		SELECT * FROM main_picture WHERE main_pic_path = '/groupImgPath' OR main_pic_path = '/moyeo/resources/resource/assets/images/moimImg' AND group_num = #{group_num} ORDER BY main_pic_num DESC
+ 		SELECT * FROM main_picture WHERE (main_pic_path = '/groupImgPath' OR main_pic_path = '/moyeo/resources/resource/assets/images/moimImg') AND group_num = #{group_num} ORDER BY main_pic_num DESC
  	</select>
  	
  	<!-- 모임가입여부 확인 -->

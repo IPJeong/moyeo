@@ -694,13 +694,21 @@ public class FiveServiceImpl implements FiveService {
 		   mem_id = (String)req.getSession().getAttribute("manager_id");
 	   }
 	   
+	   System.out.println("memid : " + mem_id);
+	   System.out.println("group_num : " + group_num);
+	   
 	   req.getSession().setAttribute("group_num", group_num);
 	   
 	   MyGroupDTO dto = new MyGroupDTO();
 	   dto.setGroup_num(group_num);
 	   dto.setMem_id(mem_id);
-	   int group_per = fiveDao.getGroupPer(dto);
-	   if(group_per == 0)group_per=4;
+	   String gp = fiveDao.getGroupPer(dto);
+	   
+	   int group_per = 4;
+	   
+	   if(gp != null){
+		   group_per = Integer.parseInt(gp);
+	   }
 	   
 	   req.getSession().setAttribute("group_per", group_per);
 	   return "redirect:postDetail?post_num="+post_num;

@@ -79,7 +79,7 @@ li {
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
-									<font size="4px;">${sessionScope.mem_id}님 로그인됨</font><br> 
+									<a href="/moyeo/three/myPage"><font size="4px;">${sessionScope.mem_id}님 로그인됨</font><br></a>
 									<span></span>
 								</div>
 							</div>
@@ -275,7 +275,7 @@ li {
 									<c:forEach var="videoDto" items="${videoDtos}">
 										<li>
 											<a href="/moyeo/five/postDetailView?group_num=${videoDto.group_num}&post_num=${videoDto.post_num}&search=dsearch">
-												<video width="200px" height="150px" controls>
+												<video style="width:200px; height:150px;" controls>
 													<source src="${videoDto.video_path}/${videoDto.video_name}" >
 												</video>
 											</a>

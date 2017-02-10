@@ -219,11 +219,10 @@
     </select>
     
     <!-- 모임에서의 회원 권한 확인 -->
-    <select id="getGroupPer" parameterType="com.engineers.moyeo.six.dto.MyGroupDTO" resultType="int" >
+    <select id="getGroupPer" parameterType="com.engineers.moyeo.six.dto.MyGroupDTO" resultType="String" >
     	SELECT group_per
     	  FROM my_group
     	 WHERE group_num = #{group_num}
     	   AND mem_id = #{mem_id}
     </select>
-    
 </mapper>

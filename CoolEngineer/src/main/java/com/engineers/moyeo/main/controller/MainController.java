@@ -30,7 +30,7 @@ public class MainController {
 	@RequestMapping("/home")
 	public String home(HttpServletRequest req, Model model) {
 		
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null && req.getSession().getAttribute("manager_id")==null )return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		mainService.main_notice(model);
 		mainService.hotMoim(model);
@@ -70,7 +70,7 @@ public class MainController {
 	// 회사소개 페이지
 	@RequestMapping(value="/introduce/introduce")
 	public String introduce(HttpServletRequest req){
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null && req.getSession().getAttribute("manager_id")==null )return "redirect:/main/memberLoginForm";
 		System.out.println("회사소개 페이지 로드");
 		viewPage = "introduce/introduce";
 		return viewPage;
@@ -79,7 +79,7 @@ public class MainController {
 	// 회사연혁 페이지
 	@RequestMapping(value="/introduce/introduce2")
 	public String introduce2(HttpServletRequest req){
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null && req.getSession().getAttribute("manager_id")==null )return "redirect:/main/memberLoginForm";
 		System.out.println("회사연혁소개 페이지 로드");
 		viewPage = "introduce/introduce2";
 		return viewPage;
@@ -88,7 +88,7 @@ public class MainController {
 	// 회사연혁 페이지
 	@RequestMapping(value="/introduce/introduce3")
 	public String introduce3(HttpServletRequest req){
-		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null && req.getSession().getAttribute("manager_id")==null )return "redirect:/main/memberLoginForm";
 		System.out.println("회사 구성원 소개 페이지 로드");
 		viewPage = "introduce/introduce3";
 		return viewPage;

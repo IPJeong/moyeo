@@ -192,7 +192,7 @@ a.cbtn:hover {
 </div>
 
 <div class="page-content-wrap page-tabs-item active" id="first-tab">
-	<c:if test="${sessionScope.mem_id == 'admin'}">
+	<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
 		<div class="form-group">
 			<div class="col-md-6-3" style="width: 70%;">
 				<div class="col-md-2" style="float: right;">
@@ -261,7 +261,7 @@ a.cbtn:hover {
 															<font color="#8BC34A"><fmt:formatDate type="both"
 																	pattern="yy-MM-dd" value="${dto.notiDate}" /></font>
 														</label>
-														<c:if test="${sessionScope.mem_id == 'admin'}">
+														<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
 															<div class="col-md-2" style="border:0px;">
 																<button type="button" class="btn btn-success btn-block"
 																	onclick="openPart(${dto.eventNum})">참여자</button>
@@ -559,4 +559,4 @@ a.cbtn:hover {
 <!-- 모달창 끝 -->
 <!-- END PAGE CONTENT TABBED -->
 
-<%@ include file="../../etc/footer.jsp"%>
+<%@ include file="../../etc/footer2.jsp"%>

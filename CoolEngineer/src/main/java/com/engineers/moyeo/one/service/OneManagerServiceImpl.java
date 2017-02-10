@@ -461,7 +461,7 @@ public class OneManagerServiceImpl implements OneManagerService {
 		
 		// 모임번호를 이용하여 모임메인사진을 가져온다.
 		MainPictureDTO pdto = oneDao.getMainPicture(group_num);
-		
+		pdto.setMain_pic_path(pdto.getMain_pic_path().replaceAll("-", ""));;
 		model.addAttribute("pdto", pdto);
 		model.addAttribute("dto", dto);
 		model.addAttribute("pageNum", pageNum);
@@ -490,8 +490,10 @@ public class OneManagerServiceImpl implements OneManagerService {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
 		// 해당 모임에 있는 멤버가 몇명인지 cnt에 가져온다.
-		cnt = oneDao.getMemberCount(Integer.parseInt(req.getParameter("group_num")));
+		cnt = oneDao.getMemberCount(group_num);
 		
 		pageNum = req.getParameter("pageNum");
 		
@@ -513,7 +515,7 @@ public class OneManagerServiceImpl implements OneManagerService {
 			Map<String, Integer> daoMap = new HashMap<String, Integer>();
 			daoMap.put("start", start);
 			daoMap.put("end", end);
-			
+			daoMap.put("group_num", group_num);
 			ArrayList<MyGroupDTO> dtos = oneDao.getMemberArticles(daoMap);
 			model.addAttribute("dtos", dtos);
 		}
@@ -540,13 +542,10 @@ public class OneManagerServiceImpl implements OneManagerService {
 			System.out.println("currentPage: " + currentPage);
 		}
 		
-		
-		int group_num = Integer.parseInt(req.getParameter("group_num"));
-		
-		System.out.println("group_num: " + group_num);
-		
 		MyGroupDTO ldto = oneDao.moimGroupLeader(group_num);
 		MainPictureDTO pdto = oneDao.getMainPicture(group_num);
+		
+		pdto.setMain_pic_path(pdto.getMain_pic_path().replaceAll("-", ""));
 		
 		model.addAttribute("ldto", ldto);
 		model.addAttribute("pdto", pdto);

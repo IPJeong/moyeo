@@ -252,9 +252,12 @@
     <select id="getMemberArticles" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MyGroupDTO">
     	SELECT * 
     			FROM (SELECT my_group_num, group_per, group_num, mem_id, rownum rnum
-    					FROM (SELECT * FROM my_group
-    						  ORDER BY my_group_num DESC)
+    					FROM (SELECT * 
+    					        FROM my_group
+    						   WHERE group_num = #{group_num}
+    						   ORDER BY my_group_num DESC)
     					  WHERE group_per=3
+    					  
     				  )  
     	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
     </select>

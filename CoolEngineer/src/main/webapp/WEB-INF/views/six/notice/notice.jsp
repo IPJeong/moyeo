@@ -158,9 +158,9 @@ tr {
 				</div>
 			</div>
 		</div>
-		<input class="btn btn-info" style="font-size: 1.5em;" type="button"
-			value="글쓰기" onclick="window.location='noticeWrite'">
-
+		<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
+			<input class="btn btn-info" style="font-size: 1.5em;" type="button" value="글쓰기" onclick="window.location='noticeWrite'">
+		</c:if>
 		<ul
 			class="pagination pagination-sm pull-right push-down-20 push-up-20"
 			style="align: center;">

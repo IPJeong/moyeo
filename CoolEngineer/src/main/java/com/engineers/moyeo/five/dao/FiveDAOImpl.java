@@ -210,7 +210,7 @@ public class FiveDAOImpl implements FiveDAO{
 
 	// 모임의 권한을 조회
 	@Override
-	public int getGroupPer(MyGroupDTO dto) {
+	public String getGroupPer(MyGroupDTO dto) {
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
 		return dao.getGroupPer(dto);
 	}

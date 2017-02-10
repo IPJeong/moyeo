@@ -84,6 +84,7 @@
 			<div class="page-content-wrap">
 
 				<%@ include file="../../etc/header.jsp"%>
+				
 				<script type="text/javascript">
 					$(function() {
 						$("#fade > #button").fadeToggle(0);
@@ -304,8 +305,7 @@
 								<div class="panel-body profile">
 									<div class="profile-data">
 										<div class="profile-data-name">
-											<a href="/moyeo/three/customer-support/notice.jsp"
-												style="font-size: 17px;">이벤트</a>
+											<a href="/moyeo/three/ing_event" style="font-size: 17px;">이벤트</a>
 										</div>
 
 									</div>

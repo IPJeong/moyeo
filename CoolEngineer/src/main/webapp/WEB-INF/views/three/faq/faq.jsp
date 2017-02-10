@@ -110,7 +110,7 @@
 		</div>
 		<div class="col-md-6-4">
 			<div class="col-md-6-5">
-				<c:if test="${sessionScope.mem_id == 'admin'}">				
+				<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">				
 					<div class="panel panel-default">
 	                     <div class="panel-heading">
 	                     	  <div class="form-group">
@@ -153,7 +153,7 @@
 	                </div>
                 
                 </c:if>
-                <c:if test="${sessionScope.mem_id != 'admin'}">
+                <c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
                 
                 </c:if>                
 				<c:if test="${cnt > 0}">

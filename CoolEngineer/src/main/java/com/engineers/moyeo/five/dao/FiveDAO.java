@@ -67,5 +67,5 @@ public interface FiveDAO {
 	// 모임의 동영상리스트를 불러옴
 	public List<PostVideoDTO> getGroupVideos(int group_num);
 	// 모임의 권한을 조회
-	public int getGroupPer(MyGroupDTO dto);
+	public String getGroupPer(MyGroupDTO dto);
 }
