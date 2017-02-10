@@ -39,7 +39,7 @@ public class OneReportServiceImpl implements OneReportService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
 		// 모임번호를 가져온다.
-		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		int group_num = (Integer)req.getSession().getAttribute("group_num");
 		
 		// 모임번호를 이용하여 해당 모임정보를 가져온다.
 		MoimReportDTO dto = oneDao.getMoimArticle(group_num);
