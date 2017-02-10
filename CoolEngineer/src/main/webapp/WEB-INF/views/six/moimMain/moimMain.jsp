@@ -113,7 +113,7 @@ img {
 								</c:if>
 								
 								<c:if test="${group_per == 4}">
-									<a href="../../two/moimJoinForm">
+									<a href="../../two/moimJoinForm?group_num=${group_num}">
 									<input type="button" class="btn btn-warning"
 										value="모임가입"
 										style="width: 20%; height: 40px; font-size: 13px"></a> 
@@ -121,7 +121,7 @@ img {
 								
 								<c:if test="${group_per != 4}">
 									<a
-										href="../../two/moimWithdraw">
+										href="../../two/moimWithdraw?group_num=${group_num}">
 									<input type="button" class="btn btn-warning"
 										value="모임탈퇴"
 										style="width: 20%; height: 40px; font-size: 13px"></a> 
