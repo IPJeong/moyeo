@@ -233,7 +233,7 @@ li {
 								<ul>
 									<c:forEach var="picDto" items="${picDtos}">
 										<li>
-											<img src="${picDto.pic_path}/${picDto.pic_name}" width="100px" height="75px">
+											<a href=""><img src="${picDto.pic_path}/${picDto.pic_name}" width="100px" height="75px"></a>
 										</li>
 									</c:forEach>
 									<!-- <li>
