@@ -307,6 +307,7 @@ function keycheck(event) {
 //모임후기 댓글등록
 function addPostReply() {
 	
+	alert($('#reply_content').val());
 	if($('#reply_content').val() == ''){
 		alert('내용을 입력해주세요.');
 		return false;

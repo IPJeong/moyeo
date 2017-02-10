@@ -90,7 +90,7 @@ left: -3px;
 						<form action="" name="">
 							<div style="float:right; margin-right:5%;">
 								<!-- 로그인 되어 있으면, -->
-								<c:if test="${sessionScope.mem_id != null}">
+								<c:if test="${sessionScope.group_per == '1' || sessionScope.group_per == '2'}">
 								<input class="btn btn-default" value="글쓰기" type="button" onclick="location.href='moim_notice_write_form'">
 								</c:if>
 							</div>

@@ -670,22 +670,24 @@ public class SixServiceImpl implements SixService{
 		//회원의 관심 카테고리 정보 조회
 		String mem_id = (String)req.getSession().getAttribute("mem_id");
 		InterestCatDTO cateDto = sixDao.inteCate(mem_id);
-		String group_inte1 = cateDto.getInter_first();	
-		String group_inte2 = cateDto.getInter_second();
-		//회원의 관심 지역 정보 조회
-		InterestLocationDTO locaDto = sixDao.inteLoca(mem_id);
-		String group_location = locaDto.getLoc_city() + "-" + locaDto.getLoc_gu();
+		if(cateDto != null){
+			String group_inte1 = cateDto.getInter_first();	
+			String group_inte2 = cateDto.getInter_second();
+			//회원의 관심 지역 정보 조회
+			InterestLocationDTO locaDto = sixDao.inteLoca(mem_id);
+			String group_location = locaDto.getLoc_city() + "-" + locaDto.getLoc_gu();
 
-		//추천모임
-		Map<String, Object> daoMap = model.asMap();
-		daoMap.put("group_inte1", group_inte1);
-		daoMap.put("group_inte2", group_inte2);
-		daoMap.put("group_location", group_location);
-		
-		int cnt = sixDao.recommendMoimChk(daoMap);
-		if (cnt != 0){
-			ArrayList<MoimOpenDTO> recommendDtos = sixDao.recommendMoim(daoMap);
-			model.addAttribute("recommendDtos", recommendDtos);
+			//추천모임
+			Map<String, Object> daoMap = model.asMap();
+			daoMap.put("group_inte1", group_inte1);
+			daoMap.put("group_inte2", group_inte2);
+			daoMap.put("group_location", group_location);
+			
+			int cnt = sixDao.recommendMoimChk(daoMap);
+			if (cnt != 0){
+				ArrayList<MoimOpenDTO> recommendDtos = sixDao.recommendMoim(daoMap);
+				model.addAttribute("recommendDtos", recommendDtos);
+			}
 		}
 	}
 

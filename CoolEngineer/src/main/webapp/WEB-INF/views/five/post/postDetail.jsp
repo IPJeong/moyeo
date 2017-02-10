@@ -250,7 +250,12 @@ html, body {
 	                                    <input type="text" id="reply_content" class="form-control" placeholder="댓글을 남겨보세요." onkeypress="keycheck(event);">
 	                                    </c:if>
 	                                    <div class="input-group-btn">
+	                                    	<c:if test="${sessionScope.group_per == 1 || sessionScope.group_per == 2 || sessionScope.group_per == 3 }">
 	                                        <button class="btn btn-default" onclick="addPostReply();">입력</button>
+	                                        </c:if>
+	                                        <c:if test="${sessionScope.group_per == 4}">
+	                                        <button class="btn btn-default" onclick="addPostReply();" disabled="disabled">입력</button>
+	                                        </c:if>
 	                                    </div>
 	                                </div>
 		                        </div>
