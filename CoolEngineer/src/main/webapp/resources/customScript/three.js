@@ -1043,10 +1043,20 @@ function chgMyInfo() {
 	
 }
 
+//회원탈퇴 확인
 function chkDel() {
 	if(confirm('회원탈퇴 하시겠습니까?')) {
 		window.location='/moyeo/three/delMem';
 	} else {
 		return false;
 	}
+}
+
+//이벤트 당첨
+function winChk() {	
+	if(confirm('이벤트 당첨자를 선정하시겠습니까?')) {
+		
+	} else {
+		return false;
+	}	
 }
