@@ -13,7 +13,7 @@
 	
 	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
-			alert("아이디가 일치하지 않습니다.");
+			alert("가입되지않은 아이디 입니다.");
 			history.back();
 		</script>
 	</c:if>

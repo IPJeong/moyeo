@@ -40,7 +40,7 @@
 	                </div>
 	                <label class="col-md-3 control-label" style="margin-top:20px; width:50px;"><font size="4px;">Count</font></label>
 	                <div class="col-md-4" style="width:100%;">
-	                    <label class="number"><input type="number" class="form-control spinner_default ui-spinner-input" name="countOfWords" value="30" min="10" max="50" placeholder="표시할 word의 수" required/></label>&nbsp;&nbsp;
+	                    <label class="number"><input type="number" class="form-control spinner_default ui-spinner-input" name="countOfWords" value="30" min="10" max="100" placeholder="표시할 word의 수" required/></label>&nbsp;&nbsp;
 	                    <input type="button" class="btn btn-warning btn-rounded" style="margin-top:10px; margin-left: 70%;" id="test" value="검색" onclick="return refreshWords();">
 <!-- 	                    <input type="submit" class="btn btn-warning btn-rounded" style="margin-top:10px;" value="검색"> -->
 	                </div>

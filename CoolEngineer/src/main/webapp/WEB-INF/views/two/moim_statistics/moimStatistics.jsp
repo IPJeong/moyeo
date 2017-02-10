@@ -35,6 +35,11 @@
 	}
 }
 
+.panel .panel-body {
+	height: 100%;
+	overflow: auto;
+}
+
 li {
 	float: left;
 	margin: 1px 1px 1px;

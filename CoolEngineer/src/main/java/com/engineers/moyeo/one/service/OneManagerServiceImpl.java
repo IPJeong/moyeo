@@ -437,6 +437,11 @@ public class OneManagerServiceImpl implements OneManagerService {
 		System.out.println("cnt: " + cnt);
 		model.addAttribute("cnt", cnt);
 		if(cnt == 1) {
+			req.getSession().setAttribute("mem_id", null);
+			req.getSession().setAttribute("manager_id", null);
+			req.getSession().setAttribute("authority", null);
+			req.getSession().setAttribute("group_per", null);
+			
 			req.getSession().setAttribute("authority", authority);
 			req.getSession().setAttribute("manager_id", manager_id);
 		} 

@@ -95,7 +95,11 @@ public class MainServiceImpl implements MainService{
 		int cnt = mainDao.pwdCheck(daoMap);
 		
 		if(cnt == 1) {
-			req.getSession().invalidate();
+			req.getSession().setAttribute("mem_id", null);
+			req.getSession().setAttribute("manager_id", null);
+			req.getSession().setAttribute("authority", null);
+			req.getSession().setAttribute("group_per", null);
+			
 			req.getSession().setAttribute("mem_id", mem_id);
 			model.addAttribute("cnt", cnt);
 //			model.addAttribute("beforeurl", beforeurl);
@@ -103,7 +107,11 @@ public class MainServiceImpl implements MainService{
 		} else {
 			int cnt2 = mainDao.tempPwdCheck(daoMap);
 			if (cnt2 == 1) {
-				req.getSession().invalidate();
+				req.getSession().setAttribute("mem_id", null);
+				req.getSession().setAttribute("manager_id", null);
+				req.getSession().setAttribute("authority", null);
+				req.getSession().setAttribute("group_per", null);
+				
 				req.getSession().setAttribute("mem_id", mem_id);
 				cnt = 2;				
 			}
