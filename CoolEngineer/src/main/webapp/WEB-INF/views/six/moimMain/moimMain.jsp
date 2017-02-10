@@ -109,7 +109,7 @@ img {
 								<c:if test="${group_per == 1}">
 									<input type="button" class="btn btn-warning"
 										value="사진등록"
-										style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb','','menubar=no, toolbar=no, width=450, height=170, left=950, top=150')"> 
+										style="width: 20%; height: 40px; font-size: 13px" onclick="window.open('moimAddImageb?group_num=${group_num}','','menubar=no, toolbar=no, width=450, height=170, left=950, top=150')"> 
 								</c:if>
 								
 								<c:if test="${group_per == 4}">
