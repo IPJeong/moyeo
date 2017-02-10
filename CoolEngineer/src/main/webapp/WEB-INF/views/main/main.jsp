@@ -218,10 +218,12 @@ li {
 							<div class="panel-body padding-0">
 								<div class="chart-holder" id="dashboard-bar-1" style="height: 10px;"></div>
 								<ul>
-									<li>
-										<img src="/moyeo/resources/resource/assets/images/gallery/nature-1.jpg" width="100px" height="75px">
-									</li>
-									<li>
+									<c:forEach var="picDto" items="${picDtos}">
+										<li>
+											<img src="${picDto.pic_path}/${picDto.pic_name}" width="100px" height="75px">
+										</li>
+									</c:forEach>
+									<!-- <li>
 										<img src="/moyeo/resources/resource/assets/images/gallery/music-1.jpg" width="100" height="75">
 									</li>
 									<li>
@@ -238,7 +240,7 @@ li {
 									</li>
 									<li>
 										<img src="/moyeo/resources/resource/assets/images/gallery/music-2.jpg" width="100" height="75">
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>
