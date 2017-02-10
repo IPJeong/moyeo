@@ -19,6 +19,9 @@ import com.engineers.moyeo.main.dto.WordDTO;
 import com.engineers.moyeo.main.twitterKoreanParser.KoreanParser;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.HotMoimDTO;
+import com.engineers.moyeo.six.dto.InterestCatDTO;
+import com.engineers.moyeo.six.dto.InterestLocationDTO;
+import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 
 @org.springframework.stereotype.Service
@@ -249,11 +252,43 @@ public class MainServiceImpl implements MainService{
 		
 		return resultMsg;
 	}
-
+	
+	
+	//메인페이지에 인기모임 불러오기
 	@Override
 	public void hotMoim(Model model) {
 	
 		ArrayList<HotMoimDTO> hotDtos = sixDao.hotMoim();
 		model.addAttribute("hotDtos", hotDtos);
 	}
+
+	//메인페이지에 추천모임 불러오기
+	@Override
+	public void recommendMoim(Model model) {
+		//추천모임
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+	
+		//회원의 관심 카테고리 정보 조회
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		InterestCatDTO cateDto = sixDao.inteCate(mem_id);
+		String group_inte1 = cateDto.getInter_first();	
+		String group_inte2 = cateDto.getInter_second();
+		//회원의 관심 지역 정보 조회
+		InterestLocationDTO locaDto = sixDao.inteLoca(mem_id);
+		String group_location = locaDto.getLoc_city() + "-" + locaDto.getLoc_gu();
+
+		//추천모임
+		Map<String, Object> daoMap = model.asMap();
+		daoMap.put("group_inte1", group_inte1);
+		daoMap.put("group_inte2", group_inte2);
+		daoMap.put("group_location", group_location);
+		
+		int cnt = sixDao.recommendMoimChk(daoMap);
+		if (cnt != 0){
+			ArrayList<MoimOpenDTO> recommendDtos = sixDao.recommendMoim(daoMap);
+			model.addAttribute("recommendDtos", recommendDtos);
+		}
+	}
+
 }
