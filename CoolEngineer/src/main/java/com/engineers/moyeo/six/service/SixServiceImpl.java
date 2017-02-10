@@ -822,19 +822,19 @@ public class SixServiceImpl implements SixService{
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
-		
+		req.getSession().setAttribute("group_num", Integer.parseInt(req.getParameter("group_num")));
 		int group_num = (Integer)(req.getSession().getAttribute("group_num"));
-		req.getSession().setAttribute("group_num", group_num);
 		String mem_id = (String)req.getSession().getAttribute("mem_id");
 	
 	//--사이드 시작
 		//사이드- 모임명, 모임카테고리 불러오기
 		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
 		model.addAttribute("open_dto", open_dto);
-		
+		System.out.println(group_num);
 		//사이드 - 대표사진 불러오기
 		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
-		
+		System.out.println(picture_dto.getMain_pic_name());
+		System.out.println(picture_dto.getMain_pic_path());
 		model.addAttribute("picture_dto", picture_dto);
 		
 		//사이드 - 모임원리스트 불러오기
