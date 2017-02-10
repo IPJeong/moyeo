@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import com.engineers.moyeo.main.dao.MainDAO;
+import com.engineers.moyeo.main.dto.MainPicDTO;
+import com.engineers.moyeo.main.dto.MainVideoDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
 import com.engineers.moyeo.main.twitterKoreanParser.KoreanParser;
 import com.engineers.moyeo.six.dao.SixDAO;
@@ -55,6 +57,21 @@ public class MainServiceImpl implements MainService{
 			req.setAttribute("dtos", dtos);
 			req.setAttribute("pageNum", 1);
 		}
+	}
+	
+	// 메인페이지에 모임후기 사진 및 동영상 연동
+	@Override
+	public void main_meeting_post(Model model) {
+		
+		List<MainPicDTO> picDtos = mainDao.getMainPictures();
+		
+		List<MainVideoDTO> videoDtos = mainDao.getMainVideos();
+		
+		System.out.println("picDtoSize : " + picDtos.size() + ", videoDtoSize : " + videoDtos.size());
+		// 모임후기의 사진 리스트를 불러옴
+		model.addAttribute("picDtos", picDtos);
+		// 모임후기의 동영상 리스트를 불러옴
+		model.addAttribute("videoDtos", videoDtos);
 		
 	}
 	

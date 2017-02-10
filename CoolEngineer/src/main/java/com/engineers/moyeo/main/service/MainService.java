@@ -1,13 +1,14 @@
  package com.engineers.moyeo.main.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.ui.Model;
 
 public interface MainService {
 
-	//메인페이지에 공지사항 글 연동
+	// 메인페이지에 공지사항 글 연동
 	public void main_notice(Model model);
+	
+	// 메인페이지에 모임후기 사진, 동영상, 모임후기 연동
+	public void main_meeting_post(Model model);
 	
 	// 로그인 처리
 	public String memberLoginPro(Model model);

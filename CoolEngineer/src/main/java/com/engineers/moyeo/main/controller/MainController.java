@@ -33,6 +33,7 @@ public class MainController {
 		model.addAttribute("req", req);
 		mainService.main_notice(model);
 		mainService.hotMoim(model);
+		mainService.main_meeting_post(model);
 				
 		return "main/main";
 	}

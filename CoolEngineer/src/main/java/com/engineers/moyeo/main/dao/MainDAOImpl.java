@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.main.dto.MainPicDTO;
+import com.engineers.moyeo.main.dto.MainVideoDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
 
 
@@ -21,6 +23,21 @@ public class MainDAOImpl implements MainDAO{
 	
 	DataSource dataSource;	// 커넥션 객체를 보관
 	
+
+	// 메인페이지 모임후기 사진 리스트
+	@Override
+	public List<MainPicDTO> getMainPictures() {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.getMainPictures();
+	}
+
+	// 메인페이지 모임후기 동영상 리스트
+	@Override
+	public List<MainVideoDTO> getMainVideos() {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.getMainVideos();
+	}
+
 	//중복확인 체크
 	@Override
  	public int idCheck(String mem_id) {

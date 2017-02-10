@@ -3,11 +3,20 @@ package com.engineers.moyeo.main.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.engineers.moyeo.main.dto.MainPicDTO;
+import com.engineers.moyeo.main.dto.MainVideoDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
 
 
 public interface MainDAO {
 
+	
+	// 메인페이지 모임후기 사진 리스트
+	public List<MainPicDTO> getMainPictures();
+	
+	// 메인페이지 모임후기 동영상 리스트
+	public List<MainVideoDTO> getMainVideos();
+	
 	// 로그인시 아이디 체크
 	public int idCheck(String mem_id);
 	

@@ -103,24 +103,24 @@
 	</select>
 	
 	<!-- 모임후기 사진 조회 -->
-	<select id="">
+	<select id="getMainPictures" resultType="com.engineers.moyeo.main.dto.MainPicDTO">
 		SELECT * 
 		  FROM (
-		        SELECT post_num, replyCnt, likeCnt, total, pic_path, pic_name, rownum as rn
+		        SELECT post_num, replyCnt, likeCnt, total, pic_path, pic_name, group_num, rownum as rn
 		          FROM (
-		                SELECT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, pic_path, pic_name
+		                SELECT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, pic_path, pic_name, fin.group_num
 		                  FROM (
-		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total
+		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total, fina.group_num
 		                          FROM (
-		                                SELECT mpr.post_num, replyCnt, likeCnt, (replyCnt + likeCnt) as total
-		                                  FROM (SELECT COUNT(postrep_num) as replyCnt, mp.post_num
+		                                SELECT mpr.post_num, replyCnt, likeCnt, (replyCnt + likeCnt) as total, mpr.group_num
+		                                  FROM (SELECT COUNT(postrep_num) as replyCnt, mp.post_num, mp.group_num
 		                                         FROM meeting_post_reply mpr, meeting_post mp
 		                                        WHERE mp.post_num = mpr.post_num(+)
-		                                        GROUP BY mp.post_num) mpr,
-		                                        (SELECT COUNT(post_like_num) as likeCnt, mp.post_num
+		                                        GROUP BY mp.post_num, mp.group_num) mpr,
+		                                        (SELECT COUNT(post_like_num) as likeCnt, mp.post_num, mp.group_num
 		                                           FROM meeting_post_like mpl, meeting_post mp
 		                                          WHERE mpl.post_num(+) = mp.post_num
-		                                          GROUP BY mp.post_num) mpl
+		                                          GROUP BY mp.post_num, mp.group_num) mpl
 		                                  WHERE mpr.post_num = mpl.post_num                    
 		                                ) fina, post_pictures pp
 		                          WHERE fina.post_num = pp.post_num
@@ -129,25 +129,25 @@
 		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.replyCnt DESC
 		                 )
 		           )
-		  WHERE rn BETWEEN 1 AND 10
-		  ORDER BY rn ASC;
+		  WHERE rn BETWEEN 1 AND 30
+		  ORDER BY rn ASC
 	</select>
 	
 	<!-- 모임후기 동영상 조회 -->
-	<select id="">
+	<select id="getMainVideos" resultType="com.engineers.moyeo.main.dto.MainVideoDTO">
 		SELECT * 
 		  FROM (
-		        SELECT post_num, replyCnt, likeCnt, total, video_path, video_name, rownum as rn
+		        SELECT post_num, replyCnt, likeCnt, total, video_path, video_name, group_num, rownum as rn
 		          FROM (
-		                SELECT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, video_path, video_name
+		                SELECT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, video_path, video_name, fin.group_num
 		                  FROM (
-		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total
+		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total, fina.group_num
 		                          FROM (
-		                                SELECT mpr.post_num, replyCnt, likeCnt, (replyCnt + likeCnt) as total
-		                                  FROM (SELECT COUNT(postrep_num) as replyCnt, mp.post_num
+		                                SELECT mpr.post_num, replyCnt, likeCnt, (replyCnt + likeCnt) as total, mpr.group_num
+		                                  FROM (SELECT COUNT(postrep_num) as replyCnt, mp.post_num, mp.group_num
 		                                         FROM meeting_post_reply mpr, meeting_post mp
 		                                        WHERE mp.post_num = mpr.post_num(+)
-		                                        GROUP BY mp.post_num) mpr,
+		                                        GROUP BY mp.post_num, mp.group_num) mpr,
 		                                        (SELECT COUNT(post_like_num) as likeCnt, mp.post_num
 		                                           FROM meeting_post_like mpl, meeting_post mp
 		                                          WHERE mpl.post_num(+) = mp.post_num
@@ -160,7 +160,7 @@
 		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.replyCnt DESC
 		                 )
 		           )
-		  WHERE rn BETWEEN 1 AND 10
-		  ORDER BY rn ASC;  
+		  WHERE rn BETWEEN 1 AND 6
+		  ORDER BY rn ASC
 	</select>
 </mapper>
