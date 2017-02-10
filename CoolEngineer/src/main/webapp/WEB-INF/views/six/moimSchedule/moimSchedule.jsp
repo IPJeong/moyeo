@@ -171,9 +171,11 @@ img {
 										</c:if>
 										<c:if test ="${dtos3[stat.index] eq 0}">					
 											<c:if test ="${dtos2[stat.index] < dtos[stat.index].meeting_pernum}">
+												<c:if test="${group_per != 4}">
 												<input type="button" class="btn btn-default btn-rounded" value="참석"
 													style="height: 40px; font-size: 13px; width: 110px; position: absolute; left: 850px; margin-top: 40px"
 													onclick="window.location='moimScheduleJoin?meeting_num=${dtos[stat.index].meeting_num}&pageNum=${i}'">
+												</c:if>
 											</c:if>
 											<c:if test ="${dtos2[stat.index] >= dtos[stat.index].meeting_pernum}">
 												<input type="button" class="btn btn-danger" disabled="disabled" value="마감"
