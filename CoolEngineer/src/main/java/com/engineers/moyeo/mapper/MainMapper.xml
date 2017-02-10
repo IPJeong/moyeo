@@ -95,9 +95,44 @@
                   <if test="type == 7">
                   	part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
                   </if>
-                  <if test="strDate != null">
-                  	AND update_date &gt; = #{strDate} AND update_date &lt;= #{endDate}
+         		)
+    	 WHERE rn BETWEEN 1 AND #{countOfWords} 
+	</select>
+	
+	<!-- 워드클라우드 단어 검색 -->
+	<select id="searchWordcloud2" parameterType="Map" resultType="com.engineers.moyeo.main.dto.WordDTO">
+		SELECT *
+	      FROM (
+				SELECT word, count, part_of_speech, update_date, reg_date, rownum as rn
+				  FROM (
+				  		SELECT *
+                          FROM wordcloud_list
+                 		 ORDER BY count DESC
+                        )
+                  WHERE update_date &gt;= #{strDate} AND update_date &lt;= #{endDate}
+                  
+                  <if test="type == 1">
+                  	AND part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun'
                   </if>
+                  <if test="type == 2">
+                  	AND part_of_speech = 'Verb'
+                  </if>
+                  <if test="type == 3">
+                  	AND part_of_speech = 'Hashtag'
+                  </if>
+                  <if test="type == 4">
+                  	AND part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb'
+                  </if>
+                  <if test="type == 5">
+                  	AND part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
+                  </if>
+                  <if test="type == 6">
+                  	AND part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Hashtag'
+                  </if>
+                  <if test="type == 7">
+                  	AND part_of_speech = 'Noun' OR part_of_speech = 'ProperNoun' OR part_of_speech = 'Verb' OR part_of_speech = 'Hashtag'
+                  </if>
+                  
          		)
     	 WHERE rn BETWEEN 1 AND #{countOfWords} 
 	</select>
@@ -108,7 +143,7 @@
 		  FROM (
 		        SELECT post_num, replyCnt, likeCnt, total, pic_path, pic_name, group_num, rownum as rn
 		          FROM (
-		                SELECT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, pic_path, pic_name, fin.group_num
+		                SELECT DISTINCT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, pic_path, pic_name, fin.group_num
 		                  FROM (
 		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total, fina.group_num
 		                          FROM (
@@ -139,7 +174,7 @@
 		  FROM (
 		        SELECT post_num, replyCnt, likeCnt, total, video_path, video_name, group_num, rownum as rn
 		          FROM (
-		                SELECT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, video_path, video_name, fin.group_num
+		                SELECT DISTINCT fin.post_num, fin.replyCnt, fin.likeCnt, fin.total, video_path, video_name, fin.group_num
 		                  FROM (
 		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total, fina.group_num
 		                          FROM (

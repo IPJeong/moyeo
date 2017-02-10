@@ -103,7 +103,7 @@
 							</ul>
 						</li>
 						<li><a href="/moyeo/six/moimChat/moimChatForm?group_num=${group_num}&mem_id=${mem_id}">모임채팅</a></li>
-						<li><a href="/moyeo/six/moimStatistics/moimStatistics?group_num=${group_num}">모임통계</a></li>
+						<li><a href="/moyeo/two/moimStatistics?group_num=${group_num}">모임통계</a></li>
 						<li class="xn-openable"><a>모임관리</a>
 							<ul>
 								<li><a href="/moyeo/two/moimJoinManaging?group_num=${group_num}"><span class="fa fa-caret-right"></span>가입신청관리</a></li>

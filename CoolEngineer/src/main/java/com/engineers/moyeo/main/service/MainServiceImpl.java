@@ -114,7 +114,9 @@ public class MainServiceImpl implements MainService{
 	public void wordAnalyzer(String title, String content, String tag) {
 		StringBuilder sb = new StringBuilder(title);
 		if(content != null) {
-			sb.append(" " + content);
+			if(!content.equals("")){
+				sb.append(" " + content);
+			}
 		}
 		if(tag != null) {
 			String[] tags = tag.split(",");
@@ -134,6 +136,7 @@ public class MainServiceImpl implements MainService{
 			public void run() {
 				
 				List<WordDTO> wordMap = KoreanParser.getWordsMap(text);
+				if(wordMap.isEmpty())return;
 				Timestamp time = new Timestamp(System.currentTimeMillis());
 				for(WordDTO dto : wordMap) {
 					
@@ -176,16 +179,6 @@ public class MainServiceImpl implements MainService{
 		Map<String, Object> map = new HashMap<>();
 		
 		printMsg = "strDate : " + strDate + ", endDate : " + endDate +", 요청단어수 : " + countOfWords;
-		if(strDate != null && endDate != null){
-			if(!strDate.equals("")) {
-				strDate = strDate + " 00:00:01.000000";
-				endDate = endDate + " 23:59:59.000000";
-				Timestamp stp = Timestamp.valueOf(strDate);
-				Timestamp etp = Timestamp.valueOf(endDate);
-				map.put("strDate", stp);
-				map.put("endDate", etp);
-			}
-		}
 		
 		int type = 0;
 		
@@ -218,12 +211,28 @@ public class MainServiceImpl implements MainService{
 			printMsg += ", | 명사, 동사, 해시태그 전체검색 요청";
 		}
 		
-		System.out.println(printMsg);
-		
 		map.put("type", type);
 		map.put("countOfWords", countOfWords);
 		
-		List<WordDTO> wordList = mainDao.searchWordcloud(map);
+		List<WordDTO> wordList = null;
+		
+		if(strDate != null && endDate != null){
+			if(!strDate.equals("")) {
+				strDate = strDate + " 00:00:01.000000";
+				endDate = endDate + " 23:59:59.000000";
+				Timestamp stp = Timestamp.valueOf(strDate);
+				Timestamp etp = Timestamp.valueOf(endDate);
+				map.put("strDate", stp);
+				map.put("endDate", etp);
+				wordList = mainDao.searchWordcloud2(map);
+			} else {
+				wordList = mainDao.searchWordcloud(map);
+			}
+		} else {
+			wordList = mainDao.searchWordcloud(map);
+		}
+		
+		System.out.println(printMsg);
 		
 		String resultMsg = "<ul>";
 		System.out.println(wordList);

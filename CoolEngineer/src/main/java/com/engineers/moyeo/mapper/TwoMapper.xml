@@ -496,13 +496,21 @@
     <delete id="deletePostBoardArticle" parameterType="Map">
     	DELETE FROM meeting_post WHERE post_num = #{post_num} AND group_num = #{group_num}
     </delete>
-    
+
     <select id="getMoimSearchCount" parameterType="Map" resultType="int">
     	SELECT COUNT(*)
 		  FROM (SELECT gl.group_num, gl.group_name, gl.group_mem_cnt, gl.group_inte1, gl.group_inte2, gl.group_location, gl.group_intro, mp.main_pic_num, mp.main_pic_path, mp.main_pic_name, rownum rnum
 		          FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, SUBSTR(group_intro, 1, 100) AS group_intro
 		                  FROM group_list
-		                WHERE group_name LIKE '%'||#{group_name}||'%' AND group_intro LIKE '%'||#{group_intro}||'%'
+		                <if test="type == 1">
+		                WHERE group_name LIKE '%'||#{group_name}||'%'
+		                </if>
+		                <if test="type == 2">
+		                WHERE group_intro LIKE '%'||#{group_intro}||'%' 
+		                </if>
+		                <if test="type == 3">
+		                WHERE group_name LIKE '%'||#{group_name}||'%' OR group_intro LIKE '%'||#{group_intro}||'%'
+		                </if>
 		                ORDER BY group_num DESC) gl,
 		               (SELECT main_pic_num, main_pic_path, main_pic_name, group_num
 		                  FROM main_picture
@@ -511,19 +519,26 @@
 		        WHERE gl.group_num = mp.group_num) 	
     </select>
     
-    
     <select id="getMoimPostSearchCount" parameterType="Map" resultType="int">
     	SELECT COUNT (*)
 		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
 		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
 		                FROM meeting_post
-		              WHERE post_title LIKE '%'||#{post_title}||'%' AND post_content LIKE '%'||#{post_content}||'%'
+		              <if test="type == 1">
+		             	WHERE post_title LIKE '%'||#{post_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE post_content LIKE '%'||#{post_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE post_title LIKE '%'||#{post_title}||'%' OR post_content LIKE '%'||#{post_content}||'%'
+		              </if>
 		              ORDER BY post_num DESC) mepo,
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
 		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
 		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num
-		        AND mepo.post_num = popi.post_num)
+		      WHERE mepo.group_num = popi.group_num(+)
+		        AND mepo.post_num = popi.post_num(+))
     </select>
     
     <select id="getMoimPostByTagSearchCount" parameterType="Map" resultType="int">
@@ -536,8 +551,8 @@
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
 		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
 		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num
-		        AND mepo.post_num = popi.post_num)
+		      WHERE mepo.group_num = popi.group_num(+)
+		        AND mepo.post_num = popi.post_num(+))
     </select>
 
 	<select id="getMoimSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
@@ -545,7 +560,15 @@
 		  FROM (SELECT gl.group_num, gl.group_name, gl.group_mem_cnt, gl.group_inte1, gl.group_inte2, gl.group_location, gl.group_intro, mp.main_pic_num, mp.main_pic_path, mp.main_pic_name, rownum rnum
 		          FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, SUBSTR(group_intro, 1, 100) AS group_intro
 		                  FROM group_list
-		                WHERE group_name LIKE '%'||#{group_name}||'%' AND group_intro LIKE '%'||#{group_intro}||'%'
+		                <if test="type == 1">
+		                WHERE group_name LIKE '%'||#{group_name}||'%'
+		                </if>
+		                <if test="type == 2">
+		                WHERE group_intro LIKE '%'||#{group_intro}||'%' 
+		                </if>
+		                <if test="type == 3">
+		                WHERE group_name LIKE '%'||#{group_name}||'%' OR group_intro LIKE '%'||#{group_intro}||'%'
+		                </if>
 		                ORDER BY group_num DESC) gl,
 		               (SELECT main_pic_num, main_pic_path, main_pic_name, group_num
 		                  FROM main_picture
@@ -560,7 +583,15 @@
 		  FROM (SELECT gl.group_num, gl.group_name, gl.group_mem_cnt, gl.group_inte1, gl.group_inte2, gl.group_location, gl.group_intro, mp.main_pic_num, mp.main_pic_path, mp.main_pic_name, rownum rnum
 		          FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, SUBSTR(group_intro, 1, 100) AS group_intro
 		                  FROM group_list
-		                WHERE group_name LIKE '%'||#{group_name}||'%' AND group_intro LIKE '%'||#{group_intro}||'%'
+		                <if test="type == 1">
+		                WHERE group_name LIKE '%'||#{group_name}||'%'
+		                </if>
+		                <if test="type == 2">
+		                WHERE group_intro LIKE '%'||#{group_intro}||'%' 
+		                </if>
+		                <if test="type == 3">
+		                WHERE group_name LIKE '%'||#{group_name}||'%' OR group_intro LIKE '%'||#{group_intro}||'%'
+		                </if>
 		                ORDER BY group_num DESC) gl,
 		               (SELECT main_pic_num, main_pic_path, main_pic_name, group_num
 		                  FROM main_picture
@@ -575,13 +606,21 @@
 		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
 		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
 		                FROM meeting_post
-		              WHERE post_title LIKE '%'||#{post_title}||'%' AND post_content LIKE '%'||#{post_content}||'%'
+		              <if test="type == 1">
+		             	WHERE post_title LIKE '%'||#{post_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE post_content LIKE '%'||#{post_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE post_title LIKE '%'||#{post_title}||'%' OR post_content LIKE '%'||#{post_content}||'%'
+		              </if>
 		              ORDER BY post_num DESC) mepo,
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
 		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
 		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num
-		        AND mepo.post_num = popi.post_num)
+		      WHERE mepo.group_num = popi.group_num(+)
+		        AND mepo.post_num = popi.post_num(+))
 		WHERE rnum BETWEEN #{start2} AND #{end2}
 	</select>
 	
@@ -590,13 +629,21 @@
 		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
 		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
 		                FROM meeting_post
-		              WHERE post_title LIKE '%'||#{post_title}||'%' AND post_content LIKE '%'||#{post_content}||'%'
+		              <if test="type == 1">
+		             	WHERE post_title LIKE '%'||#{post_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE post_content LIKE '%'||#{post_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE post_title LIKE '%'||#{post_title}||'%' OR post_content LIKE '%'||#{post_content}||'%'
+		              </if>
 		              ORDER BY post_num DESC) mepo,
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
 		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
 		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num
-		        AND mepo.post_num = popi.post_num)
+		      WHERE mepo.group_num = popi.group_num(+)
+		        AND mepo.post_num = popi.post_num(+))
 		WHERE rnum BETWEEN #{start2} AND #{end2}
 	</select>
 	
@@ -610,8 +657,8 @@
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
 		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
 		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num
-		        AND mepo.post_num = popi.post_num)
+		      WHERE mepo.group_num = popi.group_num(+)
+		        AND mepo.post_num = popi.post_num(+))
 		 WHERE rnum BETWEEN #{start2} AND #{end2}
 	</select>
 	
@@ -625,8 +672,8 @@
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
 		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
 		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num
-		        AND mepo.post_num = popi.post_num)
+		      WHERE mepo.group_num = popi.group_num(+)
+		        AND mepo.post_num = popi.post_num(+))
 		WHERE rnum BETWEEN #{start2} AND #{end2}
 	</select>
 	
@@ -635,7 +682,15 @@
 		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name
 		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
 		                  FROM place_info
-		                WHERE place_name LIKE '%'||#{place_name}||'%' AND place_detail LIKE '%'||#{place_detail}||'%'
+		               <if test="type == 1">
+		             	WHERE place_name LIKE '%'||#{place_name}||'%'
+		               </if>
+		               <if test="type == 2">
+		                 WHERE place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
+		               <if test="type == 3">
+		                WHERE place_name LIKE '%'||#{place_name}||'%' OR place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
@@ -661,7 +716,15 @@
 		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
 		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
 		                  FROM place_info
-		                WHERE place_name LIKE '%'||#{place_name}||'%' AND place_detail LIKE '%'||#{place_detail}||'%'
+		               <if test="type == 1">
+		             	WHERE place_name LIKE '%'||#{place_name}||'%'
+		               </if>
+		               <if test="type == 2">
+		                 WHERE place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
+		               <if test="type == 3">
+		                WHERE place_name LIKE '%'||#{place_name}||'%' OR place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
@@ -675,7 +738,15 @@
 		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
 		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
 		                  FROM place_info
-		                WHERE place_name LIKE '%'||#{place_name}||'%' AND place_detail LIKE '%'||#{place_detail}||'%'
+		               <if test="type == 1">
+		             	WHERE place_name LIKE '%'||#{place_name}||'%'
+		               </if>
+		               <if test="type == 2">
+		                 WHERE place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
+		               <if test="type == 3">
+		                WHERE place_name LIKE '%'||#{place_name}||'%' OR place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic

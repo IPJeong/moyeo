@@ -40,6 +40,7 @@ public class KoreanParser {
 			
 			String pos = tokenJava.getPos().toString();
 			if(pos.equals("Noun") || pos.equals("ProperNoun") || pos.equals("Hashtag") || pos.equals("Verb")) {
+				System.out.println("분석 후 단어 : " + tokenJava.toString());
 				String word = tokenJava.getText();
 				if(wordMap.get(word)==null) {
 					wordMap.put(word, 1);

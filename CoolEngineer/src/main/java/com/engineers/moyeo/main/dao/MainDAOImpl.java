@@ -116,4 +116,11 @@ public class MainDAOImpl implements MainDAO{
 		MainDAO dao = sqlSession.getMapper(MainDAO.class);
 		return dao.searchWordcloud(map);
 	}
+	
+	// 워드클라우드 검색
+	@Override
+	public List<WordDTO> searchWordcloud2(Map<String, Object> map) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.searchWordcloud2(map);
+	}
 }

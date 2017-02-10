@@ -259,10 +259,19 @@ li {
 							<div class="panel-body padding-0">
 								<div class="chart-holder" id="dashboard-bar-1" style="height: 10px;"></div>
 								<ul>
+									<c:forEach var="videoDto" items="${videoDtos}">
+										<li>
+											<a href="">
+											
+												<video width="200px" height="150px" controls>
+													<source src="${videoDto.video_path}/${videoDto.video_name}" >
+												</video>
+											</a>
+										</li>
+									</c:forEach>
+									<!-- <li><video src="/moyeo/resources/resource/assets/video/12.mp4" width="200px" height="150px" controls></video></li>
 									<li><video src="/moyeo/resources/resource/assets/video/12.mp4" width="200px" height="150px" controls></video></li>
-									<li><video src="/moyeo/resources/resource/assets/video/12.mp4" width="200px" height="150px" controls></video></li>
-									<li><video src="/moyeo/resources/resource/assets/video/12.mp4" width="200px" height="150px" controls></video></li>
-									<li><video src="/moyeo/resources/resource/assets/video/12.mp4" width="200px" height="150px" controls></video></li>
+									<li><video src="/moyeo/resources/resource/assets/video/12.mp4" width="200px" height="150px" controls></video></li> -->
 								</ul>
 							</div>
 						</div>

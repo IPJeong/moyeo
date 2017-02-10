@@ -430,7 +430,7 @@ public class TwoController {
 		return viewPage;
 	}
 	
-	//모임 통계 페이지
+	//모임 통계 : 모임원 분석
 	@RequestMapping("/moimStatistics")
 	public String moimStatistics(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
@@ -439,14 +439,24 @@ public class TwoController {
 		viewPage = twoService.moimStatistics(model);
 		return viewPage;
 	}
-	
-	//모임 통계 처리
-	@RequestMapping("/moimStatisticsPro")
-	public String moimStatisticsPro(HttpServletRequest req, Model model) {
+
+	//모임 통계 : 게시글 분석
+	@RequestMapping("/moimStatisticsArticle")
+	public String moimStatisticsArticle(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
 				
 		model.addAttribute("req", req);
-		viewPage = twoService.moimStatisticsPro(model);
+		viewPage = twoService.moimStatisticsArticle(model);
+		return viewPage;
+	}
+	
+	//모임 통계 : 방문 분석
+	@RequestMapping("/moimStatisticsPresent")
+	public String moimStatisticsPresent(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+				
+		model.addAttribute("req", req);
+		viewPage = twoService.moimStatisticsPresent(model);
 		return viewPage;
 	}
 }

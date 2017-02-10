@@ -40,4 +40,7 @@ public interface MainDAO {
 	
 	// 워드카운트 검색
 	public List<WordDTO> searchWordcloud(Map<String, Object> map);
+	
+	// 워드카운트 검색
+	public List<WordDTO> searchWordcloud2(Map<String, Object> map);
 }

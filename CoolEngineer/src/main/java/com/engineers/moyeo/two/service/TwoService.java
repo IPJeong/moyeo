@@ -46,6 +46,7 @@ public interface TwoService {
 	public String mainSearch(Model model); //메인페이지 검색기능
 	
 	public String moimStatistics(Model model);
-	public String moimStatisticsPro(Model model);
+	public String moimStatisticsArticle(Model model);
+	public String moimStatisticsPresent(Model model);
 
 }

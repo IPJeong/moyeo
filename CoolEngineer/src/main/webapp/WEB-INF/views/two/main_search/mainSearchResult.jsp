@@ -244,7 +244,12 @@ div.page-content {
 						<div class="inner">
 				            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
 						        <c:forEach var="ppdtos" items="${ppdtos}">
-							        <img src="${ppdtos.pic_path}/${ppdtos.pic_name}" alt="모임후기 사진" style="width:50%; height:80px; margin-top:20px;"> 
+						        	<c:if test="${ppdtos.pic_path != null && ppdtos.pic_name != null}">
+							        	<img src="${ppdtos.pic_path}/${ppdtos.pic_name}" alt="모임후기 사진" style="width:50%; height:80px; margin-top:20px;"> 
+							        </c:if>
+							        <c:if test="${ppdtos.pic_path == null || ppdtos.pic_name == null}">
+							        	<img src="/moyeo/resources/resource/img/custom/noimages.jpg" alt="모임후기 사진" style="width:50%; height:80px; margin-top:20px;"> 
+							        </c:if>
 							        <br>	
 						        </c:forEach>
 						   </div>

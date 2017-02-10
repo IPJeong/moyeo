@@ -1805,63 +1805,63 @@ public class TwoServiceImpl implements TwoService{
 		if(search_radio1.equals("gl1")) {
 			daoMap.put("group_name", search_keyword);
 			daoMap.put("group_intro", "");
+			daoMap.put("type", "1");
 			mscnt = twoDao.getMoimSearchCount(daoMap);
 		} else if(search_radio1.equals("gl2")) {
 			daoMap.put("group_name", "");
 			daoMap.put("group_intro", search_keyword);
+			daoMap.put("type", "2");
 			mscnt = twoDao.getMoimSearchCount(daoMap);
 		} else if(search_radio1.equals("gl3")) {
 			daoMap.put("group_name", search_keyword);
 			daoMap.put("group_intro", search_keyword);
+			daoMap.put("type", "3");
 			mscnt = twoDao.getMoimSearchCount(daoMap);
 		} else if(search_radio1.equals("gl0")) {
-			daoMap.put("group_name", "1aq2ws3zx4cd8ty9hn0");
-			daoMap.put("group_intro", "1aq2ws3zx4cd8ty9hn0");
-			twoDao.getMoimSearchCount(daoMap);
 			mscnt = 0;
 		}
 		
 		if(search_radio2.equals("mp1")) {
 			daoMap.put("post_title", search_keyword);
 			daoMap.put("post_content", "");
+			daoMap.put("type", "1");
 			mpscnt = twoDao.getMoimPostSearchCount(daoMap);
 		} else if(search_radio2.equals("mp2")) {
 			daoMap.put("post_title", "");
 			daoMap.put("post_content", search_keyword);
+			daoMap.put("type", "2");
 			mpscnt = twoDao.getMoimPostSearchCount(daoMap);
 		} else if(search_radio2.equals("mp3")) {
 			daoMap.put("post_title", search_keyword);
 			daoMap.put("post_content", search_keyword);
+			daoMap.put("type", "3");
 			mpscnt = twoDao.getMoimPostSearchCount(daoMap);
 		} else if(search_radio2.equals("mp4")) {
 			daoMap.put("post_tag", search_keyword);
 			mpscnt = twoDao.getMoimPostByTagSearchCount(daoMap);
 		} else if(search_radio2.equals("mp0")) {
-			daoMap.put("post_title", "1aq2ws3zx4cd8ty9hn0");
-			daoMap.put("post_content", "1aq2ws3zx4cd8ty9hn0");
-			twoDao.getMoimPostSearchCount(daoMap);
 			mpscnt = 0;
 		}
 		
 		if(search_radio3.equals("pi1")) {
 			daoMap.put("place_name", search_keyword);
 			daoMap.put("place_detail", "");
+			daoMap.put("type", "1");
 			picnt = twoDao.getPlaceSearchCount(daoMap);
 		} else if(search_radio3.equals("pi2")) {
 			daoMap.put("place_name", "");
 			daoMap.put("place_detail", search_keyword);
+			daoMap.put("type", "2");
 			picnt = twoDao.getPlaceSearchCount(daoMap);
 		} else if(search_radio3.equals("pi3")) {
 			daoMap.put("place_name", search_keyword);
 			daoMap.put("place_detail", search_keyword);
+			daoMap.put("type", "3");
 			picnt = twoDao.getPlaceSearchCount(daoMap);
 		} else if(search_radio3.equals("pi4")) {
 			daoMap.put("place_address", search_keyword);
 			picnt = twoDao.getPlaceByAddressSearchCount(daoMap);
 		} else if(search_radio3.equals("pi0")) {
-			daoMap.put("place_name", "1aq2ws3zx4cd8ty9hn0");
-			daoMap.put("place_detail", "1aq2ws3zx4cd8ty9hn0");
-			twoDao.getPlaceSearchCount(daoMap);
 			picnt = 0;
 		}
 		
@@ -1931,6 +1931,7 @@ public class TwoServiceImpl implements TwoService{
 			if(search_radio1.equals("gl1")) {
 				daoMap2.put("group_name", search_keyword);
 				daoMap2.put("group_intro", "");
+				daoMap2.put("type", "1");
 				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);	
 				model.addAttribute("moidtos", moidtos);
 				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
@@ -1938,6 +1939,7 @@ public class TwoServiceImpl implements TwoService{
 			} else if(search_radio1.equals("gl2")) {
 				daoMap2.put("group_name", "");
 				daoMap2.put("group_intro", search_keyword);
+				daoMap2.put("type", "2");
 				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);
 				model.addAttribute("moidtos", moidtos);
 				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
@@ -1945,6 +1947,7 @@ public class TwoServiceImpl implements TwoService{
 			} else if(search_radio1.equals("gl3")) {
 				daoMap2.put("group_name", search_keyword);
 				daoMap2.put("group_intro", search_keyword);
+				daoMap2.put("type", "3");
 				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);	
 				model.addAttribute("moidtos", moidtos);
 				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
@@ -1959,6 +1962,7 @@ public class TwoServiceImpl implements TwoService{
 			if(search_radio2.equals("mp1")) {
 				daoMap3.put("post_title", search_keyword);
 				daoMap3.put("post_content", "");
+				daoMap3.put("type", "1");
 				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);	
 				model.addAttribute("mpdtos", mpdtos);
 				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
@@ -1966,6 +1970,7 @@ public class TwoServiceImpl implements TwoService{
 			} else if(search_radio2.equals("mp2")) {
 				daoMap3.put("post_title", "");
 				daoMap3.put("post_content", search_keyword);
+				daoMap3.put("type", "2");
 				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);		
 				model.addAttribute("mpdtos", mpdtos);
 				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
@@ -1973,6 +1978,7 @@ public class TwoServiceImpl implements TwoService{
 			} else if(search_radio2.equals("mp3")) {
 				daoMap3.put("post_title", search_keyword);
 				daoMap3.put("post_content", search_keyword);
+				daoMap3.put("type", "3");
 				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);
 				model.addAttribute("mpdtos", mpdtos);
 				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
@@ -1993,49 +1999,36 @@ public class TwoServiceImpl implements TwoService{
 		System.out.println("end3 : "+end3);
 		if(picnt > 0) {
 			if(search_radio3.equals("pi1")) {
-				System.out.println("pi1");
-				System.out.println("search_keyword :"+search_keyword);
 				daoMap4.put("place_name", search_keyword);
 				daoMap4.put("place_detail", "");
+				daoMap4.put("type", "1");
 				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
 				model.addAttribute("plainfodtos", plainfodtos);
 				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
-				System.out.println("plainfodtos" + plainfodtos);
-				System.out.println("plapicdtos" + plapicdtos);
 				model.addAttribute("plapicdtos", plapicdtos);
 			} else if(search_radio3.equals("pi2")) {
-				System.out.println("pi2");
-				System.out.println("search_keyword :"+search_keyword);
 				daoMap4.put("place_name", "");
 				daoMap4.put("place_detail", search_keyword);
+				daoMap4.put("type", "2");
 				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
 				model.addAttribute("plainfodtos", plainfodtos);
 				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
-				System.out.println("plainfodtos" + plainfodtos);
-				System.out.println("plapicdtos" + plapicdtos);
 				model.addAttribute("plapicdtos", plapicdtos);
 			} else if(search_radio3.equals("pi3")) {
-				System.out.println("pi3");
-				System.out.println("search_keyword :"+search_keyword);
 				daoMap4.put("place_name", search_keyword);
 				daoMap4.put("place_detail", search_keyword);
+				daoMap4.put("type", "3");
 				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
 				model.addAttribute("plainfodtos", plainfodtos);
 				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
-				System.out.println("plainfodtos" + plainfodtos);
-				System.out.println("plapicdtos" + plapicdtos);
 				model.addAttribute("plapicdtos", plapicdtos);
 			} else if(search_radio3.equals("pi4")) {
-				System.out.println("pi4");
-				System.out.println("search_keyword :"+search_keyword);
 				daoMap4.put("place_address", search_keyword);
 				picnt = twoDao.getPlaceByAddressSearchCount(daoMap4);
 				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceByAddressSearchList(daoMap4);
 				model.addAttribute("plainfodtos", plainfodtos);
 				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureByAddressSearchList(daoMap4);
 				model.addAttribute("plapicdtos", plapicdtos);
-				System.out.println("plainfodtos" + plainfodtos);
-				System.out.println("plapicdtos" + plapicdtos);
 			}  	
 		}
 		
@@ -2156,13 +2149,16 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("fifty_cnt", fifty_cnt);
 		model.addAttribute("sixty_cnt", sixty_cnt);
 		
+		model.addAttribute("stats_type", "stats_member");
+		
 		model.addAttribute("group_num", group_num); 
+
 		
 		return "two/moim_statistics/moimStatistics";
 	}
 
 	@Override
-	public String moimStatisticsPro(Model model) {
+	public String moimStatisticsArticle(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
@@ -2170,7 +2166,19 @@ public class TwoServiceImpl implements TwoService{
 		
 		model.addAttribute("group_num", group_num); 
 		
-		return "two/moim_statistics/moimStatistics";
+		return "two/moim_statistics/moimStatisticsArticle";
+	}
+
+	@Override
+	public String moimStatisticsPresent(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		model.addAttribute("group_num", group_num); 
+		
+		return "two/moim_statistics/moimStatisticsPresent";
 	}
 	
 	
