@@ -199,7 +199,20 @@ li {
 							</div>
 							<div class="panel-body padding-0">
 								<div class="chart-holder" id="dashboard-line-1"
-									style="height: 200px;"></div>
+									style="height: 200px;">
+									<c:forEach var="dto" items="${recommendDtos}" begin="0" end="11" >
+											<div class="panel-body padding-0" style="height:36px; width:100%; float:left; margin-bottom:5px;">
+												<ul>
+													<li
+														style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
+														<a
+														href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
+															${dto.group_name} <font color="#373a3e"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
+													</li>
+												</ul>
+											</div>
+									</c:forEach>		
+								</div>
 							</div>
 						</div>
 					</div>
