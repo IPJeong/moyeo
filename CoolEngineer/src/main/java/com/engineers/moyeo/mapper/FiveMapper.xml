@@ -223,7 +223,7 @@
     	SELECT group_per
     	  FROM my_group
     	 WHERE group_num = #{group_num}
-    	   ADN mem_id = #{mem_id}
+    	   AND mem_id = #{mem_id}
     </select>
     
 </mapper>

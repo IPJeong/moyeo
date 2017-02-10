@@ -107,12 +107,4 @@ public class MainController {
 		return viewPage;
 	}
 	
-	// 메인화면에서 이미지 혹은 동영상 선택시 모임후기로 바로가기 기능
-	@RequestMapping(value="/directViewPost")
-	public void directViewPost(Model model, HttpServletRequest req) {
-		System.out.println("사진, 이미지 클릭시 바로 모임후기 조회");
-		model.addAttribute("req", req);
-		mainService.directViewPost(model);
-	}
-	
 }

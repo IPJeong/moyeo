@@ -208,6 +208,7 @@ public class FiveController {
 		return "five/gallery/groupPictures";
 	}
 	
+	
 	// 모임갤러리(동영상)
 	@RequestMapping(value="/group_videos")
 	public String getGroupVideos(Model model, HttpServletRequest req) {
@@ -219,6 +220,18 @@ public class FiveController {
 		fiveService.getGroupVideos(model);
 		
 		return "five/gallery/groupVideos";
+	}
+	
+	// 모임후기 바로보기(메인페이지 에서)
+	
+	@RequestMapping(value="/postDetailView")
+	public String meetingPostView(Model model, HttpServletRequest req) {
+		
+		System.out.println("모임후기 바로보기");
+		
+		model.addAttribute("req", req);
+		viewPage = fiveService.postDetailView(model);
+		return viewPage;
 	}
 	
 }

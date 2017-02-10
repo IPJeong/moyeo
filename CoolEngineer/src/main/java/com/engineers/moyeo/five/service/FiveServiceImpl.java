@@ -700,12 +700,10 @@ public class FiveServiceImpl implements FiveService {
 	   dto.setGroup_num(group_num);
 	   dto.setMem_id(mem_id);
 	   int group_per = fiveDao.getGroupPer(dto);
-	   
 	   if(group_per == 0)group_per=4;
 	   
 	   req.getSession().setAttribute("group_per", group_per);
-	   
-	   return "redirect:five/postDetail?post_num="+post_num;
+	   return "redirect:postDetail?post_num="+post_num;
    }
 
 }
