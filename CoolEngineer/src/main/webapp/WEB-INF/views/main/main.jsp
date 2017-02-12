@@ -200,14 +200,14 @@ li {
 							<div class="panel-body padding-0">
 								<div class="chart-holder" id="dashboard-line-1"
 									style="height: 200px;">
-									<c:forEach var="dto" items="${recommendDtos}" begin="0" end="11" >
-											<div class="panel-body padding-0" style="height:36px; width:100%; float:left; margin-bottom:5px;">
+									<c:forEach var="dto" items="${recommendDtos}" begin="0" end="9" >
+											<div class="panel-body padding-0" style="height:36px; width:100%; float:left; margin-bottom:13px;">
 												<ul>
 													<li
 														style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
 														<a
 														href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-															${dto.group_name} <font color="#373a3e"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
+															<font size="3px">${dto.group_name}</font> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
 													</li>
 												</ul>
 											</div>
@@ -300,22 +300,21 @@ li {
 									<span>회원들의 활동이 가장 활발한 모임들입니다.</span>
 								</div>
 							</div>
-							<div class="panel-body padding-0" style="overflow:auto;">
-								<div class="chart-holder" id="dashboard-line-1"
-									style="height: 200px;">
-									<c:forEach var="dto" items="${hotDtos}" begin="0" end="11" >
-										<div class="panel-body padding-0" style="height:36px; width:100%; float:left; margin-bottom:5px;">
+							<div class="panel-body padding-0" style="height:490px;">
+									
+									<c:forEach var="dto" items="${hotDtos}" begin="0" end="9" >
+										<div class="panel-body padding-0" style="height:36px; width:100%; float:left; margin-bottom:15px;">
 											<ul>
 												<li
 													style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
 													<a
 													href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-														${dto.group_name} <font color="#373a3e"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2})</div></font></a>
+														<font size="3px" color="#333">${dto.group_name}</font><br><div style="float:right; margin-right:20px;"><font size="2em;"color="#a7adb5">(${dto.group_inte1}-${dto.group_inte2})</font></div></a>
 												</li>
 											</ul>
 										</div>
 									</c:forEach>	
-								</div>
+								
 							</div>
 						</div>
 					</div>
