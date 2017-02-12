@@ -27,8 +27,7 @@
 
 	<div class="col-md-0">
 
-		<form class="form-horizontal">
-
+	
 			<div class="panel panel-default tabs">
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active"><a href="#tab-first" role="tab"
@@ -42,14 +41,18 @@
 							value="모임만들기" onclick="window.location='moimOpen'">
 					</div>
 
-					<div class="input-group push-down-10"
-						style="width: 40%; float: right;">
-						<span class="input-group-addon"><span class="fa fa-search"></span></span>
-						<input type="text" class="form-control" placeholder="Keywords..." />
-						<div class="input-group-btn">
-							<button class="btn btn-primary">Search</button>
+					<form name="mainsearchfrom" action="/moyeo/two/mainSearch" onsubmit="return searchKeywordCheck();">
+						<div class="input-group push-down-10"
+							style="width: 40%; float: right;">
+							<span class="input-group-addon"><span
+								class="fa fa-search"></span></span> <input type="text"
+								class="form-control" name="search_keyword" placeholder="Keywords..." />
+							<div class="input-group-btn">
+								<input type="hidden" name="search_radio1" value="gl1">
+								<input type="submit" class="btn btn-primary" value="Search">
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 
 
@@ -69,10 +72,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>서울특별시</h3>
+													<h3>서울특별시&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=서울특별시"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos1}" begin="0" end="8">
 														<li
@@ -89,10 +92,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>부산광역시</h3>
+													<h3>부산광역시&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=부산광역시"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos2}" begin="0" end="8">
 														<li
@@ -109,10 +112,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>인천광역시</h3>
+													<h3>인천광역시&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=인천광역시"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos3}" begin="0" end="8">
 														<li
@@ -129,10 +132,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>대구광역시</h3>
+													<h3>대구광역시&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=대구광역시"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos4}" begin="0" end="8">
 														<li
@@ -149,10 +152,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>대전광역시</h3>
+													<h3>대전광역시&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=대전광역시"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos5}" begin="0" end="8">
 														<li
@@ -171,10 +174,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>광주광역시</h3>
+													<h3>광주광역시&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=광주광역시"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos6}" begin="0" end="8">
 														<li
@@ -191,10 +194,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>울산광역시</h3>
+													<h3>울산광역시&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=울산광역시"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos7}" begin="0" end="8">
 														<li
@@ -211,10 +214,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>세종특별자치시</h3>
+													<h3>세종특별자치시&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=세종특별자치시"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos8}" begin="0" end="8">
 														<li
@@ -231,10 +234,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>경기도</h3>
+													<h3>경기도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=경기도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos9}" begin="0" end="8">
 														<li
@@ -251,10 +254,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>강원도</h3>
+													<h3>강원도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=강원도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos10}" begin="0" end="8">
 														<li
@@ -273,10 +276,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>충청북도</h3>
+													<h3>충청북도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=충청북도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos11}" begin="0" end="8">
 														<li
@@ -293,10 +296,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>충청남도</h3>
+													<h3>충청남도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=충청남도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos12}" begin="0" end="8">
 														<li
@@ -313,10 +316,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>경상북도</h3>
+													<h3>경상북도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=경상북도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos13}" begin="0" end="8">
 														<li
@@ -333,10 +336,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>경상남도</h3>
+													<h3>경상남도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=경상남도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos14}" begin="0" end="8">
 														<li
@@ -353,10 +356,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>전라북도</h3>
+													<h3>전라북도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=전라북도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos15}" begin="0" end="8">
 														<li
@@ -375,10 +378,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>전라남도</h3>
+													<h3>전라남도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=전라남도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos16}" begin="0" end="8">
 														<li
@@ -395,10 +398,10 @@
 											style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5;">
 											<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 												<div class="panel-title-box">
-													<h3>제주특별자치도</h3>
+													<h3>제주특별자치도&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=지역별&subject=제주특별자치도"><font size="2">더보기</font></a></h3>
 												</div>
 											</div>
-											<div class="panel-body padding-0">
+											<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 												<ul>
 													<c:forEach var="dto" items="${dtos17}" begin="0" end="8">
 														<li
@@ -470,7 +473,7 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		
 	</div>
 </div>
 

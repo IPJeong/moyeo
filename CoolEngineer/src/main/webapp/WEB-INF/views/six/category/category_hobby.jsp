@@ -110,8 +110,7 @@ a {
 
 					<div class="col-md-0">
 
-						<form class="form-horizontal">
-
+						
 							<div class="panel panel-default tabs">
 								<ul class="nav nav-tabs" role="tablist">
 									<li class="active"><a href="#tab-first" role="tab"
@@ -124,16 +123,18 @@ a {
 										<input type="button" class="btn btn-info btn-rounded" style="width:150px; height:30px; font-size:12pt; margin-top:5px; margin-left:5px;"
 											value="모임만들기" onclick="window.location='moimOpen'">
 									</div>
-
+									<form name="mainsearchfrom" action="/moyeo/two/mainSearch" onsubmit="return searchKeywordCheck();">
 									<div class="input-group push-down-10"
 										style="width: 40%; float: right;">
 										<span class="input-group-addon"><span
 											class="fa fa-search"></span></span> <input type="text"
-											class="form-control" placeholder="Keywords..." />
+											class="form-control" name="search_keyword" placeholder="Keywords..." />
 										<div class="input-group-btn">
-											<button class="btn btn-primary">Search</button>
+											<input type="hidden" name="search_radio1" value="gl1">
+											<input type="submit" class="btn btn-primary" value="Search">
 										</div>
 									</div>
+									</form>
 								</div>
 
 
@@ -153,10 +154,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>아웃도어/여행</h3>
+																	<h3>아웃도어/여행&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=아웃도어/여행"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0" style="">
+															<div class="panel-body padding-0"  style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos1}" begin="0" end="8">
 																		<li
@@ -173,10 +174,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>운동/스포츠</h3>
+																	<h3>운동/스포츠&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=운동/스포츠"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos2}" begin="0" end="8">
 																		<li
@@ -193,10 +194,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>인문학/책/글</h3>
+																	<h3>인문학/책/글&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=인문학/책/글"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos3}" begin="0" end="8">
 																		<li
@@ -213,10 +214,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>외국/언어</h3>
+																	<h3>외국/언어&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=외국/언어"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos4}" begin="0" end="8">
 																		<li
@@ -233,10 +234,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>문화/공연</h3>
+																	<h3>문화/공연&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=문화/공연"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos5}" begin="0" end="8">
 																		<li
@@ -255,10 +256,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>음악/악기</h3>
+																	<h3>음악/악기&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=음악/악기"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos6}" begin="0" end="8">
 																		<li
@@ -275,10 +276,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>공예/만들기</h3>
+																	<h3>공예/만들기&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=공예/만들기"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos7}" begin="0" end="8">
 																		<li
@@ -295,10 +296,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>댄스/무용</h3>
+																	<h3>댄스/무용&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=댄스/무용"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos8}" begin="0" end="8">
 																		<li
@@ -315,10 +316,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>봉사활동</h3>
+																	<h3>봉사활동&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=봉사활동"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos9}" begin="0" end="8">
 																		<li
@@ -335,10 +336,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>사교/인맥</h3>
+																	<h3>사교/인맥&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=사교/인맥"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos10}" begin="0"
 																		end="8">
@@ -358,10 +359,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>차/오토바이</h3>
+																	<h3>차/오토바이&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=차/오토바이"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos11}" begin="0"
 																		end="8">
@@ -379,10 +380,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>사진</h3>
+																	<h3>사진&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=사진"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos12}" begin="0"
 																		end="8">
@@ -400,10 +401,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>야구관람</h3>
+																	<h3>야구관람&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=야구관람"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos13}" begin="0"
 																		end="8">
@@ -421,10 +422,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>게임/오락</h3>
+																	<h3>게임/오락&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=게임/오락"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos14}" begin="0"
 																		end="8">
@@ -442,10 +443,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>요리/제조</h3>
+																	<h3>요리/제조&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=요리/제조"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos15}" begin="0"
 																		end="8">
@@ -465,10 +466,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>반려동물</h3>
+																	<h3>반려동물&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=반려동물"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos16}" begin="0"
 																		end="8">
@@ -486,10 +487,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>가족/결혼</h3>
+																	<h3>가족/결혼&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=가족/결혼"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos17}" begin="0"
 																		end="8">
@@ -507,10 +508,10 @@ a {
 															style="width: 19%; height: 100%; margin: 5px; float: left; border: 1px solid #E5E5E5; overflow: hidden;">
 															<div class="panel-heading" style="background: rgba(255, 219, 34, 0.24);">
 																<div class="panel-title-box">
-																	<h3>자유주제</h3>
+																	<h3>자유주제&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=관심사별&subject=자유주제"><font size="2">더보기</font></a></h3>
 																</div>
 															</div>
-															<div class="panel-body padding-0">
+															<div class="panel-body padding-0" style="overflow:hidden; height:211px;">
 																<ul>
 																	<c:forEach var="dto" items="${dtos18}" begin="0"
 																		end="8">
@@ -579,7 +580,7 @@ a {
 									</div>
 								</div>
 							</div>
-						</form>
+		
 					</div>
 				</div>
 				<!-- END PAGE CONTENT WRAPPER -->

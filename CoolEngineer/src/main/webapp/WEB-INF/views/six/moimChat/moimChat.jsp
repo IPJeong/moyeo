@@ -79,7 +79,9 @@ img {
 
 
 	$(document).ready(function(){
-	    setInterval(readAjax, 300); 
+		$("#msgBox").scrollTop($("#msgBox")[0].scrollHeight);
+		setInterval(readAjax, 300); 
+		
 	});
 	
 	function readAjax(compareTime){
@@ -100,9 +102,9 @@ img {
 	                	if(dto.mem_id == $('#mem_id').val()) {
 	                		var msg = '<div class="item in item-visible" style="width:750px;" id="reply' + dto.msg_num +'">' +
 	                		'<div class="image">' + 
-			                '<img src="' + dto.propic_path +'/' + dto.propic_name + '" >' +
+	                		'<img src="' + dto.propic_path +'/' + dto.propic_name + '" style="height:40px;">' +
 			            '</div>' +                                
-			            '<div class="text">' + 
+			            '<div class="text" style="margin-right:0px;">' + 
 			                '<div class="heading">' + 
 			                    '<a href="#">' + dto.mem_id + '</a>' +
 			                    '<span class="date">' + fullDate + '</span>' +
@@ -192,24 +194,33 @@ img {
 		                    <div class="content-frame-body content-frame-body-left" style="width:75%; height:776px; padding: 10px;">
 		                        	
 		                        <div class="messages messages-img" id="msgBox" style="overflow:auto; width:100%; height: 720px;">
-		                           	<a>채팅방에 입장했습니다.</a><br><br>
-			                            <c:forEach var = "dto" items="${dtos}">
-				                            <div class="item" style="width:600px;">
-				                                <div class="image">
-				                                    <img src="/moyeo/resources/resource/assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
-				                                </div>                                
-				                                <div class="text">
-				                                    <div class="heading">
-				                                        <a href="#">${dto.mem_id}</a>
-				                                        <span class="date">${dto.msg_date}</span>
-				                                    </div>                                    
-				                                    ${dto.msg_content}
-				                                </div>
-				                            </div>
-			                            </c:forEach>
-	   
-		                        </div>                        
-		                        
+		                           	 <c:if test="${cnt == 0}">
+		                           	 	<div style="width:600px;"><a>채팅방에 입장했습니다.</a><br><br></div>
+		                           	 </c:if>  
+		                           	 <c:if test="${cnt != 0}"> 
+		                           	    <c:forEach var = "dto" items="${dtos}">
+				                            <c:if test="${dto.mem_id eq mem_id}">
+					                            <div class="item in item-visible" style="width:600px;">
+					                        </c:if>
+					                        <c:if test="${dto.mem_id ne mem_id}">
+					                        	<div class="item item-visible" style="width:600px;">
+					                        </c:if>
+					                                <div class="image">
+					                                    <img src="${dto.propic_path}/${dto.propic_name}">
+					                                </div>                                
+					                                <div class="text">
+					                                    <div class="heading">
+					                                        <a href="#">${dto.mem_id}</a>
+					                                        <span class="date">${fn:substring(dto.msg_date, 0, 16)}</span>
+					                                    </div>                                    
+					                                    ${dto.msg_content}
+					                                </div>
+					                            </div>
+				                         </c:forEach>
+			                            <div style="width:600px;"><a>여기까지 읽으셨습니다.</a><br><br></div>
+	   						    	</c:if>
+	   						    </div>                        
+		                        	
 		                        <div class="panel panel-default push-up-10" style="height:50px;">
 		                            <div class="panel-body panel-body-search">
 		                                <div class="input-group">

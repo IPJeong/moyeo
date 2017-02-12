@@ -63,26 +63,6 @@ img {
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		
-		var weeks = document.getElementsByName("week");
-		var days = document.getElementsByName("day");
-		
-		for(var i=0; i<weeks.length; i++) {
-		
-			var sDate = weeks[i].value;
-			var yy = parseInt(sDate.substr(0, 4), 10); 
-			var mm = parseInt(sDate.substr(5, 2), 10); 
-			var dd = parseInt(sDate.substr(8), 10); 
-			var d = new Date(yy,mm - 1, dd); 
-			var weekday=new Array(7); weekday[0]="일"; weekday[1]="월"; weekday[2]="화"; weekday[3]="수"; weekday[4]="목"; weekday[5]="금"; weekday[6]="토"; 
-			weeks[i].value = weekday[d.getDay()]+"요일"; 
-			days[i].value = dd;
-		
-		}
-	});
-</script>
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb push-down-0">
@@ -126,10 +106,10 @@ img {
 										<div style="width: 100%; height: 100%; magin: 5px 5px;">
 											<form name="left" style="height: 100%;">
 												<input type="text" name="week"
-													value="${dtos[stat.index].meeting_date}"
-													style="width: 100%; height: 25%; font-size: 130%; border: 0px; text-align: center; background: rgba(236, 181, 60, 0.82);">
-												<input type="text" name="day" value=""
-													style="width: 100%; height: 75%; text-align: center; font-size: 400%; color: black;">
+													value="${yo_dtos[stat.index]}"
+													style="width: 100%; height: 25%; color: red; font-size: 130%; border: 0px; text-align: center; background: rgba(236, 181, 60, 0.82);">
+												<input type="text" name="day" value="${month_dtos[stat.index]}"
+													style="width: 100%; height: 75%; text-align: center; font-size: 270%; color: black;">
 											</form>
 										</div>
 									</div>
