@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -284,6 +283,60 @@ public class SixServiceImpl implements SixService{
 			}
 			model.addAttribute("date_dtos", date_dtos);
 
+			ArrayList<String> yo_dtos = new ArrayList<String>();
+			ArrayList<String> month_dtos = new ArrayList<String>();
+			for(int i=0; i<date_dtos.size(); i++) {
+				int zellerMonth=0;
+				int zellerYear=0;
+				String DOW = null;
+			
+				String[] dd = date_dtos.get(i).split("-");
+				String[] ddd = dd[2].split(" ");
+		
+				int year = Integer.parseInt(dd[0]);
+			    int month = Integer.parseInt(dd[1]);
+			    int day = Integer.parseInt(ddd[0]);
+			    if(month < 3) { // 월값이 3보다 작으면
+			    	zellerMonth = month + 12; // 월 + 12
+			    	zellerYear = year - 1; // 연 - 1
+			    } else { 
+			    	zellerMonth = month;
+			           zellerYear = year;
+			    }
+			    int computation = day + (26 * (zellerMonth + 1)) / 10 + zellerYear + 
+			                      zellerYear / 4 + 6 * (zellerYear / 100) +
+			                      zellerYear / 400;
+			    int dayOfWeek = computation % 7;   
+			    
+			    switch(dayOfWeek) {
+				      case 0:
+				          DOW = "토요일";
+				          break;
+				      case 1:
+				          DOW = "일요일";
+				          break;
+				      case 2:
+				          DOW = "월요일";
+				          break;
+				      case 3:
+				          DOW = "화요일";
+				          break;
+				      case 4:
+				          DOW = "수요일";
+				          break;
+				      case 5:
+				          DOW = "목요일";
+				          break;
+				      case 6:
+				          DOW = "금요일";
+				          break;
+				}  
+			    yo_dtos.add(i, DOW); 
+			    month_dtos.add(i, dd[1]+"."+ddd[0]);
+			}
+			model.addAttribute("yo_dtos", yo_dtos);
+			model.addAttribute("month_dtos", month_dtos);
+		
 			//모임-참석인원 체크
 			ArrayList<Integer> dtos2 = new ArrayList<Integer>(); 
 			for(int i=0; i<dtos.size(); i++) {
@@ -1167,6 +1220,12 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("member_dtos", member_dtos);	
 	//--사이드 끝
 		
+		//채팅전체내용 불러오기
+		int chat_room_num = Integer.parseInt(req.getParameter("chat_room_num"));
+		
+		ArrayList<MsgListDTO> dtos = new ArrayList<MsgListDTO>();
+		dtos = sixDao.getMsgs(chat_room_num);
+		model.addAttribute("dtos", dtos);
 	}
 	
 	//채팅내용입력
@@ -1256,4 +1315,293 @@ public class SixServiceImpl implements SixService{
 		}
 	}
 
+	//모임목록 상세보기
+	public void categoryDetail(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		String category = req.getParameter("category");
+		String subject = req.getParameter("subject");
+	
+		model.addAttribute("category", category);
+		model.addAttribute("subject", subject);
+		
+		if(subject.equals("아웃도어/여행")) {
+	
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyA();
+			model.addAttribute("dtos", dtos);
+			System.out.println(dtos.get(0).getGroup_inte1());
+
+		} else if(subject.equals("운동/스포츠")) {
+		
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyB();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("인문학/책/글")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyC();
+			model.addAttribute("dtos", dtos);
+	
+		} else if(subject.equals("외국/언어")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyD();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("문화/공연")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyE();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("음악/악기")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyF();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("공예/만들기")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyG();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("댄스/무용")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyH();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("봉사활동")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyI();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("사교/인맥")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyJ();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("차/오토바이")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyK();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("사진")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyL();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("야구관람")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyM();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("게임/오락")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyN();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("요리/제조")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyO();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("반려동물")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyP();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("가족/결혼")) {
+		
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyQ();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("자유주제")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyR();
+			model.addAttribute("dtos", dtos);
+		
+		} else if(subject.equals("서울특별시")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationA();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("부산광역시")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationB();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("인천광역시")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationC();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("대구광역시")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationD();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("대전광역시")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationE();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("광주광역시")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationF();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("울산광역시")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationG();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("세종특별자치시")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationH();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("경기도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationI();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("강원도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationJ();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("충청북도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationK();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("충청남도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationL();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("경상북도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationM();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("경상남도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationN();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("전라북도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationO();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("전라남도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationP();
+			model.addAttribute("dtos", dtos);
+
+		} else if(subject.equals("제주특별자치도")) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationQ();
+			model.addAttribute("dtos", dtos);
+			
+		} else if(Integer.parseInt(subject.split("명")[0]) == 5) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleA();
+			model.addAttribute("dtos", dtos);
+			
+		} else if(Integer.parseInt(subject.split("명")[0]) == 10) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleB();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 20) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleC();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 30) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleD();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 40) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleE();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 50) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleF();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 100) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleG();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 150) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleH();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 200) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleI();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 250) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleJ();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 300) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleK();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 350) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleL();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 400) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleM();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 450) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleN();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 500) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleO();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 600) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleP();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 700) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleQ();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 800) {
+			
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleR();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 900) {
+
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleS();
+			model.addAttribute("dtos", dtos);
+
+		} else if(Integer.parseInt(subject.split("명")[0]) == 1000) {
+			
+			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleT();
+			model.addAttribute("dtos", dtos);
+			
+		}
+	}
 }

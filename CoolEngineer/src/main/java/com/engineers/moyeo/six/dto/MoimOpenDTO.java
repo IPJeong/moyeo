@@ -28,6 +28,12 @@ public class MoimOpenDTO {
 	//모임등록일
 	private Timestamp reg_date;
 	
+	//메인사진 등록 경로
+	private String main_pic_path;
+	
+	//메인사진 등록 이름
+	private String main_pic_name;
+	
 	public int getGroup_num() {
 		return group_num;
 	}
@@ -91,5 +97,20 @@ public class MoimOpenDTO {
 	public void setReg_date(Timestamp reg_date) {
 		this.reg_date = reg_date;
 	}
-	
+
+	public String getMain_pic_path() {
+		return main_pic_path;
+	}
+
+	public void setMain_pic_path(String main_pic_path) {
+		this.main_pic_path = main_pic_path;
+	}
+
+	public String getMain_pic_name() {
+		return main_pic_name;
+	}
+
+	public void setMain_pic_name(String main_pic_name) {
+		this.main_pic_name = main_pic_name;
+	}
 }

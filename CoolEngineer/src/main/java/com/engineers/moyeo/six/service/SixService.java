@@ -116,4 +116,6 @@ public interface SixService {
 	//관심모임 등록
 	public void favorite(ModelAndView mav, HttpServletRequest req);
 
+	//모임목록 상세보기
+	public void categoryDetail(Model model);
 }

@@ -460,5 +460,15 @@ public class SixController {
 		return mav;
 	}
 
+	//모임카테고리-상세목록
+	@RequestMapping("/category/category_detail")
+	public String categoryDetail(HttpServletRequest req, Model model) {
+		System.out.println("/category/category_detail");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.categoryDetail(model);
+		
+		return "six/category/category_detail";
+	}	
 }
 

@@ -2,9 +2,16 @@ package com.engineers.moyeo.six.dto;
 
 public class MainPictureDTO {
 
+	//메인사진 등록 번호
 	private int main_pic_num;
+	
+	//메인사진 등록 경로
 	private String main_pic_path;
+	
+	//메인사진 등록 이름
 	private String main_pic_name;
+	
+	//모임번호
 	private int group_num;
 	
 	public int getMain_pic_num() {

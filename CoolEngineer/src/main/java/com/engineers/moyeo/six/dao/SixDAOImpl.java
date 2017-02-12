@@ -917,9 +917,9 @@ public class SixDAOImpl implements SixDAO{
 	}
 	
 	//모임채팅방 전체 채팅내용 불러오기
-	public List<MsgListDTO> getMsgs(int chat_room_num) {
+	public ArrayList<MsgListDTO> getMsgs(int chat_room_num) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		List<MsgListDTO> dtos = dao.getMsgs(chat_room_num);
+		ArrayList<MsgListDTO> dtos = dao.getMsgs(chat_room_num);
 		
 		return dtos;
 	}

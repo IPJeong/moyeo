@@ -137,281 +137,281 @@
  		
  	<!-- 카테고리-관심사별(아웃도어/여행) -->
  	<select id="categoryHobbyA" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '아웃도어/여행' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '아웃도어/여행' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(운동/스포츠) -->
  	<select id="categoryHobbyB" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '운동/스포츠' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '운동/스포츠' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(인문학/책/글) -->
  	<select id="categoryHobbyC" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '인문학/책/글' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '인문학/책/글' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(외국/언어) -->
  	<select id="categoryHobbyD" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '외국/언어' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '외국/언어' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(문화/공연) -->
  	<select id="categoryHobbyE" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '문화/공연' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '문화/공연' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(음악/악기) -->
  	<select id="categoryHobbyF" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '음악/악기' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '음악/악기' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(공예/만들기) -->
  	<select id="categoryHobbyG" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '공예/만들기' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '공예/만들기' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(댄스/무용) -->
  	<select id="categoryHobbyH" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '댄스/무용' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '댄스/무용' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(봉사활동) -->
  	<select id="categoryHobbyI" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '봉사활동' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '봉사활동' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(사교/인맥) -->
  	<select id="categoryHobbyJ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '사교/인맥' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '사교/인맥' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(차/오토바이) -->
  	<select id="categoryHobbyK" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '차/오토바이' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '차/오토바이' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(사진) -->
  	<select id="categoryHobbyL" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '사진' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '사진' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(야구관람) -->
  	<select id="categoryHobbyM" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '야구관람' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '야구관람' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(게임/오락) -->
  	<select id="categoryHobbyN" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '게임/오락' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '게임/오락' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(요리/제조) -->
  	<select id="categoryHobbyO" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '요리/제조' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '요리/제조' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(반려동물) -->
  	<select id="categoryHobbyP" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '반려동물' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '반려동물' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(가족/결혼) -->
  	<select id="categoryHobbyQ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '가족/결혼' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '가족/결혼' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-관심사별(자유주제) -->
  	<select id="categoryHobbyR" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_inte1 = '자유주제' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_inte1 = '자유주제' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	
  	
  	<!-- 카테고리-지역별(서울특별시) -->
  	<select id="categoryLocationA" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '서울%' ORDER BY group_num DESC
+ 		SELECT g.*, p.* FROM group_list g, main_picture p WHERE g.group_location LIKE '서울%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(부산광역시) -->
  	<select id="categoryLocationB" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '부산%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '부산%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(인천광역시) -->
  	<select id="categoryLocationC" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '인천%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '인천%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(대구광역시) -->
  	<select id="categoryLocationD" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '대구%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '대구%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(대전광역시) -->
  	<select id="categoryLocationE" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '대전%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '대전%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(광주광역시) -->
  	<select id="categoryLocationF" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '광주%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '광주%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(울산광역시) -->
  	<select id="categoryLocationG" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '울산%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '울산%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(세종특별자치시) -->
  	<select id="categoryLocationH" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '세종%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '세종%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(경기도) -->
  	<select id="categoryLocationI" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '경기%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '경기%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(강원도) -->
  	<select id="categoryLocationJ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '강원%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '강원%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(충청북도) -->
  	<select id="categoryLocationK" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '충청북%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '충청북%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(충청남도) -->
  	<select id="categoryLocationL" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '충청남%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '충청남%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(경상북도) -->
  	<select id="categoryLocationM" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '경상북%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '경상북%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(경상남도) -->
  	<select id="categoryLocationN" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '경상남%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '경상남%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(전라북도) -->
  	<select id="categoryLocationO" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '전라북%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '전라북%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(전라남도) -->
  	<select id="categoryLocationP" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '전라남%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '전라남%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(제주특별자치도) -->
  	<select id="categoryLocationQ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_location LIKE '제주%' ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE g.group_location LIKE '제주%' AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
 
 
 
  	<!-- 카테고리-규모별(5명이하) -->
  	<select id="categoryScaleA" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 5 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 5 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(10명이하) -->
  	<select id="categoryScaleB" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 10 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 10 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(20명이하) -->
  	<select id="categoryScaleC" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 20 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 20 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(30명이하) -->
  	<select id="categoryScaleD" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 30 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 30 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-지역별(40명이하) -->
  	<select id="categoryScaleE" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 40 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 40 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(50명이하) -->
  	<select id="categoryScaleF" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 50 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 50 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(100명이하) -->
  	<select id="categoryScaleG" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 100 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 100 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(150명이하) -->
  	<select id="categoryScaleH" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 150 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 150 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(200명이하) -->
  	<select id="categoryScaleI" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 200 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 200 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(250명이하) -->
  	<select id="categoryScaleJ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 250 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 250 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(300명이하) -->
  	<select id="categoryScaleK" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 300 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 300 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(350명이하) -->
  	<select id="categoryScaleL" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 350 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 350 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(400명이하) -->
  	<select id="categoryScaleM" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 400 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 400 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(450명이하) -->
  	<select id="categoryScaleN" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 450 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 450 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(500명이하) -->
  	<select id="categoryScaleO" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 500 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 500 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(600명이하) -->
  	<select id="categoryScaleP" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 600 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 600 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select>
  	
  	<!-- 카테고리-규모별(700명이하) -->
  	<select id="categoryScaleQ" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 700 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 700 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select> 	
  	
  	<!-- 카테고리-규모별(800명이하) -->
  	<select id="categoryScaleR" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 800 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 800 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select> 
  	
  	<!-- 카테고리-규모별(900명이하) -->
  	<select id="categoryScaleS" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 900 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 900 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select> 
  	
  	<!-- 카테고리-규모별(1000명이하) -->
  	<select id="categoryScaleT" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
- 		SELECT * FROM group_list WHERE group_mem_cnt = 1000 ORDER BY group_num DESC
+ 		SELECT * FROM group_list g, main_picture p WHERE group_mem_cnt = 1000 AND g.group_num = p.group_num AND p.main_pic_path not like '%-' ORDER BY g.group_num DESC
  	</select> 
  	
  	
@@ -508,9 +508,8 @@
  	
  	<!-- 모임채팅방 전체 채팅내용 출력 -->
  	<select id="getMsgs" parameterType="int" resultType="com.engineers.moyeo.six.dto.MsgListDTO">
- 		SELECT m.msg_num, m.mem_id, m.msg_content, m.msg_date, m.chat_room_num, i.propic_path, i.propic_name FROM msg_list m, member_info i WHERE m.chat_room_num = #{chat_room_num} AND i.mem_id = m.mem_id
+ 		SELECT m.msg_num, m.mem_id, m.msg_content, m.msg_date, m.chat_room_num, i.propic_path, i.propic_name FROM msg_list m, member_info i WHERE m.chat_room_num = #{chat_room_num} AND i.mem_id = m.mem_id ORDER BY m.msg_date
  	</select>
- 	
  	
  	<!-- 모임채팅방 전체 채팅내용 실시간 -->
  	<select id="getChat" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MsgListDTO">
