@@ -16,7 +16,6 @@ public class Member_infoDTO {
 	private Timestamp joinDate;
 	private String gender;
 	
-	
 	public String getMem_id() {
 		return mem_id;
 	}

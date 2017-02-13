@@ -17,9 +17,8 @@ import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
 import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
-import com.engineers.moyeo.two.dto.Moim_pictureDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
-import com.engineers.moyeo.two.dto.Place_picDTO;
+import com.engineers.moyeo.two.dto.Place_likeDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
 import com.engineers.moyeo.two.dto.StatisticsDTO;
 import com.engineers.moyeo.two.dto.SuggestionDTO;
@@ -90,8 +89,8 @@ public class TwoDAOImpl implements TwoDAO{
 	
 
 	@Override
-	public ArrayList<Place_picDTO> getPlacePictureList(Map<String, Object> daoMap) {
-		ArrayList<Place_picDTO> dtos = null;
+	public ArrayList<Place_infoDTO> getPlacePictureList(Map<String, Object> daoMap) {
+		ArrayList<Place_infoDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getPlacePictureList(daoMap);
 		return dtos;
@@ -132,8 +131,8 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<Place_picDTO> getPlaceLocPictureList(Map<String, Object> daoMap) {
-		ArrayList<Place_picDTO> dtos = null;
+	public ArrayList<Place_infoDTO> getPlaceLocPictureList(Map<String, Object> daoMap) {
+		ArrayList<Place_infoDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getPlaceLocPictureList(daoMap);
 		return dtos;
@@ -148,26 +147,18 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<Place_picDTO> getPlaceRecplaPictureList(Map<String, Object> daoMap) {
-		ArrayList<Place_picDTO> dtos = null;
+	public ArrayList<Place_infoDTO> getPlaceRecplaPictureList(Map<String, Object> daoMap) {
+		ArrayList<Place_infoDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getPlaceRecplaPictureList(daoMap);
 		return dtos;
 	}
 
 	@Override
-	public ArrayList<Place_infoDTO> getPlaceLikeList() {
-		ArrayList<Place_infoDTO> dtos = null;
+	public ArrayList<Place_likeDTO> getPlaceLikeList() {
+		ArrayList<Place_likeDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getPlaceLikeList();
-		return dtos;
-	}
-
-	@Override
-	public ArrayList<Place_picDTO> getPlaceLikePictureList() {
-		ArrayList<Place_picDTO> dtos = null;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		dtos = dao.getPlaceLikePictureList();
 		return dtos;
 	}
 	
@@ -180,8 +171,8 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public Place_picDTO readPlacePicture(int place_num) {
-		Place_picDTO dto = null;
+	public Place_infoDTO readPlacePicture(int place_num) {
+		Place_infoDTO dto = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dto = dao.readPlacePicture(place_num);
 		return dto;
@@ -196,7 +187,7 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public void inputPictures(Place_picDTO ppdto) {
+	public void inputPictures(Place_infoDTO ppdto) {
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dao.inputPictures(ppdto);
 	}
@@ -232,7 +223,7 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public void modifyPictures(Place_picDTO ppdto) {
+	public void modifyPictures(Place_infoDTO ppdto) {
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dao.modifyPictures(ppdto);
 	}
@@ -586,14 +577,6 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public int getMoimPostByTagSearchCount(Map<String, Object> daoMap) {
-		int cnt = 0;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		cnt = dao.getMoimPostByTagSearchCount(daoMap);
-		return cnt;
-	}
-
-	@Override
 	public ArrayList<Moim_infoDTO> getMoimSearchList(Map<String, Object> daoMap) {
 		ArrayList<Moim_infoDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
@@ -602,8 +585,8 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<Moim_pictureDTO> getMoimPictureSearchList(Map<String, Object> daoMap) {
-		ArrayList<Moim_pictureDTO> dtos = null;
+	public ArrayList<Moim_infoDTO> getMoimPictureSearchList(Map<String, Object> daoMap) {
+		ArrayList<Moim_infoDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getMoimPictureSearchList(daoMap);
 		return dtos;
@@ -626,34 +609,10 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<MeetingPostDTO> getMoimPostByTagSearchList(Map<String, Object> daoMap) {
-		ArrayList<MeetingPostDTO> dtos = null;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		dtos = dao.getMoimPostByTagSearchList(daoMap);
-		return dtos;
-	}
-
-	@Override
-	public ArrayList<PostPictureDTO> getMoimPostPictureByTagSearchList(Map<String, Object> daoMap) {
-		ArrayList<PostPictureDTO> dtos = null;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		dtos = dao.getMoimPostPictureByTagSearchList(daoMap);
-		return dtos;
-	}
-
-	@Override
 	public int getPlaceSearchCount(Map<String, Object> daoMap) {
 		int cnt = 0;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		cnt = dao.getPlaceSearchCount(daoMap);
-		return cnt;
-	}
-
-	@Override
-	public int getPlaceByAddressSearchCount(Map<String, Object> daoMap) {
-		int cnt = 0;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		cnt = dao.getPlaceByAddressSearchCount(daoMap);
 		return cnt;
 	}
 
@@ -666,8 +625,8 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<Place_picDTO> getPlacePictureSearchList(Map<String, Object> daoMap) {
-		ArrayList<Place_picDTO> dtos = null;
+	public ArrayList<Place_infoDTO> getPlacePictureSearchList(Map<String, Object> daoMap) {
+		ArrayList<Place_infoDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getPlacePictureSearchList(daoMap);
 		return dtos;
@@ -680,15 +639,7 @@ public class TwoDAOImpl implements TwoDAO{
 		dtos = dao.getPlaceByAddressSearchList(daoMap);
 		return dtos;
 	}
-
-	@Override
-	public ArrayList<Place_picDTO> getPlacePictureByAddressSearchList(Map<String, Object> daoMap) {
-		ArrayList<Place_picDTO> dtos = null;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		dtos = dao.getPlacePictureByAddressSearchList(daoMap);
-		return dtos;
-	}
-
+	
 	@Override
 	public StatisticsDTO chartByGender(int group_num) {
 		StatisticsDTO dto = null;
@@ -705,4 +656,83 @@ public class TwoDAOImpl implements TwoDAO{
 		return dto;
 	}
 
+	@Override
+	public StatisticsDTO getDate() {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.getDate();
+		return dto;
+	}
+
+	@Override
+	public StatisticsDTO chartByArticleOfMonth(int group_num) {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.chartByArticleOfMonth(group_num);
+		return dto;
+	}
+
+	@Override
+	public StatisticsDTO chartByPresentOfMonth(int group_num) {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.chartByPresentOfMonth(group_num);
+		return dto;
+	}
+
+	@Override
+	public StatisticsDTO chartByJoinOfMonth(int group_num) {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.chartByJoinOfMonth(group_num);
+		return dto;
+	}
+
+	@Override
+	public StatisticsDTO chartByArticleOfYear(int group_num) {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.chartByArticleOfYear(group_num);
+		return dto;
+	}
+
+	@Override
+	public StatisticsDTO chartByPresentOfYear(int group_num) {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.chartByPresentOfYear(group_num);
+		return dto;
+	}
+
+	@Override
+	public StatisticsDTO chartByJoinOfYear(int group_num) {
+		StatisticsDTO dto = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dto = dao.chartByJoinOfYear(group_num);
+		return dto;
+	}
+
+	@Override
+	public int checkBestTenArticle(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.checkBestTenArticle(group_num);
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num) {
+		ArrayList<StatisticsDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getBestTenArticle(group_num);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<StatisticsDTO> getBestTenPresent(int group_num) {
+		ArrayList<StatisticsDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getBestTenPresent(group_num);
+		return dtos;
+	}
 }

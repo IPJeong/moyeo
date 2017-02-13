@@ -37,6 +37,7 @@ public class MainController {
 		mainService.main_meeting_post(model);
 		mainService.recommendMoim(model);
 		mainService.getMeetingPostList(model);
+		mainService.recPlace(model);
 		
 		return "main/main";
 	}

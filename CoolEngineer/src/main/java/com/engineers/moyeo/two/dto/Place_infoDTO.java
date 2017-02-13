@@ -6,7 +6,9 @@ public class Place_infoDTO {
 	public String place_address;
 	public String place_detail;
 	public String place_link;
-	public int place_like_count;
+	public int place_pic_num;
+	public String place_pic_path;
+	public String place_pic_name;
 	
 	public int getPlace_num() {
 		return place_num;
@@ -23,8 +25,14 @@ public class Place_infoDTO {
 	public String getPlace_link() {
 		return place_link;
 	}
-	public int getPlace_like_count() {
-		return place_like_count;
+	public int getPlace_pic_num() {
+		return place_pic_num;
+	}
+	public String getPlace_pic_path() {
+		return place_pic_path;
+	}
+	public String getPlace_pic_name() {
+		return place_pic_name;
 	}
 	public void setPlace_num(int place_num) {
 		this.place_num = place_num;
@@ -41,8 +49,13 @@ public class Place_infoDTO {
 	public void setPlace_link(String place_link) {
 		this.place_link = place_link;
 	}
-	public void setPlace_like_count(int place_like_count) {
-		this.place_like_count = place_like_count;
+	public void setPlace_pic_num(int place_pic_num) {
+		this.place_pic_num = place_pic_num;
 	}
-	
+	public void setPlace_pic_path(String place_pic_path) {
+		this.place_pic_path = place_pic_path;
+	}
+	public void setPlace_pic_name(String place_pic_name) {
+		this.place_pic_name = place_pic_name;
+	}
 }

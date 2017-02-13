@@ -25,6 +25,8 @@ import com.engineers.moyeo.six.dto.InterestCatDTO;
 import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.two.dao.TwoDAO;
+import com.engineers.moyeo.two.dto.Place_likeDTO;
 
 @org.springframework.stereotype.Service
 public class MainServiceImpl implements MainService{
@@ -34,6 +36,9 @@ public class MainServiceImpl implements MainService{
 
 	@Autowired
 	SixDAO sixDao;
+	
+	@Autowired
+	TwoDAO twoDao;
 	
 	// 워드클라우드 리스트
 	private static List<WordDTO> wordDtos;
@@ -318,6 +323,23 @@ public class MainServiceImpl implements MainService{
 				}
 			}
 		}
+	}
+	
+	//메인페이지에 추천장소 불러오기
+	@Override
+	public void recPlace(Model model) {
+		int lcnt = 0;
+		
+		lcnt = twoDao.getPlaceLikeCount();
+		
+		if(lcnt > 0) {
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			System.out.println("lpdtos : " + lpodtos.size());
+			model.addAttribute("lpodtos", lpodtos);
+		}
+		
+		model.addAttribute("lcnt", lcnt);
+		System.out.println("lcnt : "+lcnt);
 	}
 
 }

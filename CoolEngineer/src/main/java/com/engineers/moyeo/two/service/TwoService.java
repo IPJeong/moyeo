@@ -45,8 +45,9 @@ public interface TwoService {
 	
 	public String mainSearch(Model model); //메인페이지 검색기능
 	
-	public String moimStatistics(Model model);
-	public String moimStatisticsArticle(Model model);
-	public String moimStatisticsPresent(Model model);
+	public String moimStatistics(Model model); //모임 통계 : 모임원 분석
+	public String moimStatisticsArticle(Model model); //모임 통계 : 게시글 분석
+	public String moimStatisticsPresent(Model model); //모임 통계 : 방문 분석
+	public String moimStatisticsJoin(Model model); //모임 통계 : 모임가입 분석
 
 }

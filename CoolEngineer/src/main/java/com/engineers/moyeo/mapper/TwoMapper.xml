@@ -46,7 +46,7 @@
  		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
 	
-	<select id="getPlacePictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+	<select id="getPlacePictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
 		SELECT * 
 		FROM (SELECT place_pic_num, place_pic_path, place_pic_name, place_num, rownum rnum 
 			  FROM (SELECT * FROM place_pic ORDER BY place_num DESC)
@@ -96,7 +96,7 @@
 			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
 	
-	<select id="getPlaceLocPictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+	<select id="getPlaceLocPictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
  		 SELECT *
 			FROM
 			  (SELECT place_num,
@@ -171,7 +171,7 @@
 			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
 	
-	<select id="getPlaceRecplaPictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">				
+	<select id="getPlaceRecplaPictureList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">				
 		SELECT *             
 		    FROM(SELECT place_num,
 			             place_name,
@@ -200,54 +200,43 @@
 	</select>
 	
 	<select id="getPlaceLikeCount" resultType="int">
-		SELECT count(*)
-		  FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
-		          FROM place_like pl, rec_place rp, place_info pi, place_pic pp
-		        WHERE pl.recpla_num = rp.recpla_num
-		          AND rp.place_num = pi.place_num
-		          AND pi.place_num = pp.place_num
-		       GROUP BY pl.recpla_num) cc, rec_place rp, PLACE_INFO pi
-		WHERE cc.recpla_num = rp.recpla_num
-		  AND   rp.place_num = pi.place_num
-		ORDER BY cc.place_like_count DESC
-	</select>
-	
-	<select id="getPlaceLikeList" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">		
-		 SELECT place_num, place_name, place_address, place_like_count
-		   FROM (SELECT cc.place_like_count, cc.recpla_num, pi.place_num, pi.place_name, pi.place_address
-		        FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
-		               FROM place_like pl, rec_place rp, place_info pi, place_pic pp
-		               WHERE pl.recpla_num = rp.recpla_num
-		                 AND rp.place_num = pi.place_num
-		                 AND pi.place_num = pp.place_num
-		               GROUP BY pl.recpla_num) cc, rec_place rp, PLACE_INFO pi
-		         WHERE cc.recpla_num = rp.recpla_num
-		         AND   rp.place_num = pi.place_num
-		        ORDER BY cc.place_like_count DESC)
-		  WHERE rownum BETWEEN 1 AND 5
-	</select>
-	
-	<select id="getPlaceLikePictureList" resultType="com.engineers.moyeo.two.dto.Place_picDTO">		
-		 SELECT place_num, place_pic_path, place_pic_name       
-		  FROM(SELECT cc.place_like_count, cc.recpla_num, pp.place_num, pp.place_pic_path, pp.place_pic_name
-		      FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
-		             FROM place_like pl, rec_place rp, place_info pi, place_pic pp
-		             WHERE pl.recpla_num = rp.recpla_num
+		 SELECT COUNT(*)     
+		   FROM (SELECT cc.place_like_count, cc.recpla_num, pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, DENSE_RANK() OVER (ORDER BY cc.place_like_count DESC) AS place_like_order
+                   FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
+		                   FROM place_like pl, rec_place rp, place_info pi, place_pic pp
+		                   WHERE pl.recpla_num = rp.recpla_num
+		                     AND rp.place_num = pi.place_num
+		                     AND pi.place_num = pp.place_num
+		                   GROUP BY pl.recpla_num) cc, rec_place rp, place_info pi, place_pic pp 
+		             WHERE cc.recpla_num = rp.recpla_num
 		               AND rp.place_num = pi.place_num
 		               AND pi.place_num = pp.place_num
-		             GROUP BY pl.recpla_num) cc, rec_place rp, place_info pi, place_pic pp 
-		       WHERE cc.recpla_num = rp.recpla_num
-		         AND rp.place_num = pi.place_num
-		         AND pi.place_num = pp.place_num
-		        ORDER BY cc.place_like_count DESC)
-		  WHERE rownum BETWEEN 1 AND 5
+		              ORDER BY place_like_order)
+	</select>
+	
+	<select id="getPlaceLikeList" resultType="com.engineers.moyeo.two.dto.Place_likeDTO">		
+		 SELECT *
+		   FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum  
+				  FROM(SELECT cc.place_like_count, cc.recpla_num, pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, DENSE_RANK() OVER (ORDER BY cc.place_like_count DESC) AS place_like_order
+		            FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
+		                   FROM place_like pl, rec_place rp, place_info pi, place_pic pp
+		                   WHERE pl.recpla_num = rp.recpla_num
+		                     AND rp.place_num = pi.place_num
+		                     AND pi.place_num = pp.place_num
+		                   GROUP BY pl.recpla_num) cc, rec_place rp, place_info pi, place_pic pp 
+		             WHERE cc.recpla_num = rp.recpla_num
+		               AND rp.place_num = pi.place_num
+		               AND pi.place_num = pp.place_num
+		              ORDER BY place_like_order)
+				 WHERE place_like_order BETWEEN 1 AND 5)
+		 WHERE rnum BETWEEN 1 AND 5
 	</select>
 	
 	<select id="readPlace" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
 		SELECT * FROM place_info WHERE place_num = #{place_num}
 	</select>
 	
-	<select id="readPlacePicture" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+	<select id="readPlacePicture" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
 		SELECT * FROM place_pic WHERE place_num = #{place_num}
 	</select>
 	   
@@ -533,6 +522,9 @@
 		              <if test="type == 3">
 		                WHERE post_title LIKE '%'||#{post_title}||'%' OR post_content LIKE '%'||#{post_content}||'%'
 		              </if>
+		              <if test="type == 4">
+		               WHERE post_tag LIKE '%'||#{post_tag}||'%'
+		              </if>
 		              ORDER BY post_num DESC) mepo,
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
 		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
@@ -541,20 +533,30 @@
 		        AND mepo.post_num = popi.post_num(+))
     </select>
     
-    <select id="getMoimPostByTagSearchCount" parameterType="Map" resultType="int">
+    <select id="getPlaceSearchCount" parameterType="Map" resultType="int">
     	SELECT COUNT(*)
-		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
-		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
-		                FROM meeting_post
-		              WHERE post_tag LIKE '%'||#{post_tag}||'%'
-		              ORDER BY post_num DESC) mepo,
-		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
-		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
-		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num(+)
-		        AND mepo.post_num = popi.post_num(+))
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name
+		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
+		                  FROM place_info
+		               <if test="type == 1">
+		             	WHERE place_name LIKE '%'||#{place_name}||'%'
+		               </if>
+		               <if test="type == 2">
+		                 WHERE place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
+		               <if test="type == 3">
+		                WHERE place_name LIKE '%'||#{place_name}||'%' OR place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
+		               <if test="type == 4">
+		                WHERE place_address LIKE '%'||#{place_address}||'%'
+		               </if>
+		                ORDER BY place_num DESC) pi,
+		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
+		                  FROM place_pic
+		                ORDER BY place_pic_num DESC) pp
+		        WHERE pi.place_num = pp.place_num)
     </select>
-
+   
 	<select id="getMoimSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
 		SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, group_intro
 		  FROM (SELECT gl.group_num, gl.group_name, gl.group_mem_cnt, gl.group_inte1, gl.group_inte2, gl.group_location, gl.group_intro, mp.main_pic_num, mp.main_pic_path, mp.main_pic_name, rownum rnum
@@ -578,7 +580,7 @@
 		WHERE rnum BETWEEN #{start1} AND #{end1}
 	</select>
 	
-	<select id="getMoimPictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_pictureDTO">
+	<select id="getMoimPictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
 		SELECT main_pic_num, main_pic_path, main_pic_name, group_num
 		  FROM (SELECT gl.group_num, gl.group_name, gl.group_mem_cnt, gl.group_inte1, gl.group_inte2, gl.group_location, gl.group_intro, mp.main_pic_num, mp.main_pic_path, mp.main_pic_name, rownum rnum
 		          FROM (SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, SUBSTR(group_intro, 1, 100) AS group_intro
@@ -615,6 +617,9 @@
 		              <if test="type == 3">
 		                WHERE post_title LIKE '%'||#{post_title}||'%' OR post_content LIKE '%'||#{post_content}||'%'
 		              </if>
+		              <if test="type == 4">
+		               WHERE post_tag LIKE '%'||#{post_tag}||'%'
+		              </if>
 		              ORDER BY post_num DESC) mepo,
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
 		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
@@ -630,13 +635,16 @@
 		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
 		                FROM meeting_post
 		              <if test="type == 1">
-		             	WHERE post_title LIKE '%'||#{post_title}||'%'
+		               WHERE post_title LIKE '%'||#{post_title}||'%'
 		              </if>
 		              <if test="type == 2">
-		                WHERE post_content LIKE '%'||#{post_content}||'%'
+		               WHERE post_content LIKE '%'||#{post_content}||'%'
 		              </if>
 		              <if test="type == 3">
-		                WHERE post_title LIKE '%'||#{post_title}||'%' OR post_content LIKE '%'||#{post_content}||'%'
+		               WHERE post_title LIKE '%'||#{post_title}||'%' OR post_content LIKE '%'||#{post_content}||'%'
+		              </if>
+		              <if test="type == 4">
+		               WHERE post_tag LIKE '%'||#{post_tag}||'%'
 		              </if>
 		              ORDER BY post_num DESC) mepo,
 		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
@@ -647,70 +655,6 @@
 		WHERE rnum BETWEEN #{start2} AND #{end2}
 	</select>
 	
-	<select id="getMoimPostByTagSearchList" parameterType="Map" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
-		SELECT post_num, post_title, post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
-		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
-		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
-		                FROM meeting_post
-		              WHERE post_tag LIKE '%'||#{post_tag}||'%'
-		              ORDER BY post_num DESC) mepo,
-		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
-		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
-		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num(+)
-		        AND mepo.post_num = popi.post_num(+))
-		 WHERE rnum BETWEEN #{start2} AND #{end2}
-	</select>
-	
-	<select id="getMoimPostPictureByTagSearchList" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
-		SELECT pic_num, pic_path, pic_name, post_num, group_num
-		  FROM(SELECT mepo.post_num, mepo.post_title, mepo.post_content, mepo.post_tag, mepo.post_date, mepo.like_num, mepo.post_hit, mepo.mem_id, mepo.group_num, popi.pic_num, popi.pic_path, popi.pic_name, rownum rnum
-		        FROM (SELECT post_num, post_title, SUBSTR(post_content, 1, 100) AS post_content, post_tag, post_date, like_num, post_hit, mem_id, group_num
-		                FROM meeting_post
-		              WHERE post_tag LIKE '%'||#{post_tag}||'%'
-		              ORDER BY post_num DESC) mepo,
-		             (SELECT pic_num, pic_path, pic_name, post_num, group_num FROM post_pictures
-		                WHERE rowid IN (SELECT MAX(rowid) FROM post_pictures GROUP BY post_num)
-		              ORDER BY post_num DESC) popi
-		      WHERE mepo.group_num = popi.group_num(+)
-		        AND mepo.post_num = popi.post_num(+))
-		WHERE rnum BETWEEN #{start2} AND #{end2}
-	</select>
-	
-	<select id="getPlaceSearchCount" parameterType="Map" resultType="int">
-    	SELECT COUNT(*)
-		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name
-		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
-		                  FROM place_info
-		               <if test="type == 1">
-		             	WHERE place_name LIKE '%'||#{place_name}||'%'
-		               </if>
-		               <if test="type == 2">
-		                 WHERE place_detail LIKE '%'||#{place_detail}||'%'
-		               </if>
-		               <if test="type == 3">
-		                WHERE place_name LIKE '%'||#{place_name}||'%' OR place_detail LIKE '%'||#{place_detail}||'%'
-		               </if>
-		                ORDER BY place_num DESC) pi,
-		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
-		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp
-		        WHERE pi.place_num = pp.place_num)
-    </select>
-    
-    <select id="getPlaceByAddressSearchCount" parameterType="Map" resultType="int">
-    	SELECT COUNT(*)
-		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name
-		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
-		                  FROM place_info
-		                WHERE place_address LIKE '%'||#{place_address}||'%'
-		                ORDER BY place_num DESC) pi,
-		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
-		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp
-		        WHERE pi.place_num = pp.place_num)       
-    </select>
-
     <select id="getPlaceSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
    		SELECT place_num, place_name, place_address, place_detail, place_link 
 		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
@@ -720,10 +664,13 @@
 		             	WHERE place_name LIKE '%'||#{place_name}||'%'
 		               </if>
 		               <if test="type == 2">
-		                 WHERE place_detail LIKE '%'||#{place_detail}||'%'
+		                WHERE place_detail LIKE '%'||#{place_detail}||'%'
 		               </if>
 		               <if test="type == 3">
 		                WHERE place_name LIKE '%'||#{place_name}||'%' OR place_detail LIKE '%'||#{place_detail}||'%'
+		               </if>
+		               <if test="type == 4">
+		                WHERE place_address LIKE '%'||#{place_address}||'%'
 		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
@@ -733,7 +680,7 @@
 		WHERE rnum BETWEEN #{start3} AND #{end3}
     </select>
     
-    <select id="getPlacePictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
+    <select id="getPlacePictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
     	SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
 		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
@@ -742,39 +689,14 @@
 		             	WHERE place_name LIKE '%'||#{place_name}||'%'
 		               </if>
 		               <if test="type == 2">
-		                 WHERE place_detail LIKE '%'||#{place_detail}||'%'
+		                WHERE place_detail LIKE '%'||#{place_detail}||'%'
 		               </if>
 		               <if test="type == 3">
 		                WHERE place_name LIKE '%'||#{place_name}||'%' OR place_detail LIKE '%'||#{place_detail}||'%'
 		               </if>
-		                ORDER BY place_num DESC) pi,
-		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
-		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp
-		        WHERE pi.place_num = pp.place_num)
-		WHERE rnum BETWEEN #{start3} AND #{end3}
-    </select>
-    
-    <select id="getPlaceByAddressSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
-    	SELECT place_num, place_name, place_address, place_detail, place_link 
-		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
-		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
-		                  FROM place_info
+		               <if test="type == 4">
 		                WHERE place_address LIKE '%'||#{place_address}||'%'
-		                ORDER BY place_num DESC) pi,
-		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
-		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp
-		        WHERE pi.place_num = pp.place_num)
-		WHERE rnum BETWEEN #{start3} AND #{end3}
-    </select>
-    
-    <select id="getPlacePictureByAddressSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_picDTO">
-    	SELECT place_pic_num, place_pic_path, place_pic_name, place_num
-		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
-		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
-		                  FROM place_info
-		                WHERE place_address LIKE '%'||#{place_address}||'%'
+		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
@@ -859,5 +781,433 @@
 		                WHERE group_num = #{group_num}) mg
 		        WHERE ab.mem_id = mg.mem_id
 		           AND age BETWEEN 60 AND 120)
+	</select>
+	
+	<select id="getDate" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT SYSDATE-28 AS four_weeks_ago, SYSDATE-21 AS three_weeks_ago, SYSDATE-14 AS two_weeks_ago, SYSDATE-7 AS a_week_ago, SYSDATE AS today
+  		  FROM dual
+	</select>
+	
+	<select id="chartByArticleOfMonth" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT greeting_hit+notice_hit+post_hit AS first_week
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE TO_CHAR(greeting_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE-21, 'YYYYMMDD')          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE TO_CHAR(group_noti_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE-21, 'YYYYMMDD')
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE TO_CHAR(post_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE-21, 'YYYYMMDD')
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS second_week
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE TO_CHAR(greeting_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-21, 'YYYYMMDD') AND TO_CHAR(SYSDATE-14, 'YYYYMMDD')          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE TO_CHAR(group_noti_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-21, 'YYYYMMDD') AND TO_CHAR(SYSDATE-14, 'YYYYMMDD')
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE TO_CHAR(post_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-21, 'YYYYMMDD') AND TO_CHAR(SYSDATE-14, 'YYYYMMDD')
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS third_week
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE TO_CHAR(greeting_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-14, 'YYYYMMDD') AND TO_CHAR(SYSDATE-7, 'YYYYMMDD')          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE TO_CHAR(group_noti_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-14, 'YYYYMMDD') AND TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE TO_CHAR(post_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-14, 'YYYYMMDD') AND TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS fourth_week
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE TO_CHAR(greeting_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-7, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE TO_CHAR(group_noti_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-7, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE TO_CHAR(post_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-7, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+		                  AND group_num = #{group_num}))
+	</select>
+	
+	<select id="chartByPresentOfMonth" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT NVL(COUNT(*), 0) AS first_week
+		          FROM check_present
+		        WHERE TO_CHAR(present_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE-21, 'YYYYMMDD') 
+		          AND group_num = #{group_num}) one,
+		       (SELECT NVL(COUNT(*), 0) AS second_week
+		          FROM check_present
+		        WHERE TO_CHAR(present_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-21, 'YYYYMMDD') AND TO_CHAR(SYSDATE-14, 'YYYYMMDD')
+		          AND group_num = #{group_num}) two,
+		       (SELECT NVL(COUNT(*), 0) AS third_week
+		          FROM check_present
+		        WHERE TO_CHAR(present_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-14, 'YYYYMMDD') AND TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		          AND group_num = #{group_num}) three,
+		       (SELECT NVL(COUNT(*), 0) AS fourth_week
+		          FROM check_present
+		        WHERE TO_CHAR(present_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-7, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+		          AND group_num = #{group_num}) four
+	</select>
+	
+	<select id="chartByJoinOfMonth" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT NVL(COUNT(*), 0) AS first_week
+		          FROM join_request
+		        WHERE TO_CHAR(request_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE-21, 'YYYYMMDD')
+		          AND status = '승인'
+		          AND group_num = #{group_num}) one,
+		       (SELECT NVL(COUNT(*), 0) AS second_week
+		          FROM join_request
+		        WHERE TO_CHAR(request_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-21, 'YYYYMMDD') AND TO_CHAR(SYSDATE-14, 'YYYYMMDD')
+		          AND status = '승인'
+		          AND group_num = #{group_num}) two,
+		       (SELECT NVL(COUNT(*), 0) AS third_week
+		          FROM join_request
+		        WHERE TO_CHAR(request_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-14, 'YYYYMMDD') AND TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+		          AND status = '승인'
+		          AND group_num = #{group_num}) three,
+		       (SELECT NVL(COUNT(*), 0) AS fourth_week
+		          FROM join_request
+		        WHERE TO_CHAR(request_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-7, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+		          AND status = '승인'
+		          AND group_num = #{group_num}) four
+	</select>
+	
+	<select id="chartByArticleOfYear" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT greeting_hit+notice_hit+post_hit AS month1
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -12)  AND ADD_MONTHS(SYSDATE , -11)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -12)  AND ADD_MONTHS(SYSDATE , -11)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -12)  AND ADD_MONTHS(SYSDATE , -11)
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month2
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -11)  AND ADD_MONTHS(SYSDATE , -10)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -11)  AND ADD_MONTHS(SYSDATE , -10)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -11)  AND ADD_MONTHS(SYSDATE , -10)
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month3
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -10)  AND ADD_MONTHS(SYSDATE , -9)         
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -10)  AND ADD_MONTHS(SYSDATE , -9) 
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -10)  AND ADD_MONTHS(SYSDATE , -9) 
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month4
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -9)  AND ADD_MONTHS(SYSDATE , -8)           
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -9)  AND ADD_MONTHS(SYSDATE , -8) 
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -9)  AND ADD_MONTHS(SYSDATE , -8) 
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month5
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -8)  AND ADD_MONTHS(SYSDATE , -7)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -8)  AND ADD_MONTHS(SYSDATE , -7)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -8)  AND ADD_MONTHS(SYSDATE , -7)
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month6
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -7)  AND ADD_MONTHS(SYSDATE , -6)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -7)  AND ADD_MONTHS(SYSDATE , -6)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -7)  AND ADD_MONTHS(SYSDATE , -6)
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month7
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -6)  AND ADD_MONTHS(SYSDATE , -5)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -6)  AND ADD_MONTHS(SYSDATE , -5)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -6)  AND ADD_MONTHS(SYSDATE , -5)
+		                  AND group_num = #{group_num})), 
+		       (SELECT greeting_hit+notice_hit+post_hit AS month8
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -5)  AND ADD_MONTHS(SYSDATE , -4)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -5)  AND ADD_MONTHS(SYSDATE , -4)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -5)  AND ADD_MONTHS(SYSDATE , -4)
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month9
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -4)  AND ADD_MONTHS(SYSDATE , -3)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -4)  AND ADD_MONTHS(SYSDATE , -3)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -4)  AND ADD_MONTHS(SYSDATE , -3)
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month10
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -3)  AND ADD_MONTHS(SYSDATE , -2)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -3)  AND ADD_MONTHS(SYSDATE , -2)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -3)  AND ADD_MONTHS(SYSDATE , -2)
+		                  AND group_num = #{group_num})),
+		       (SELECT greeting_hit+notice_hit+post_hit AS month11
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -2)  AND ADD_MONTHS(SYSDATE , -1)          
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -2)  AND ADD_MONTHS(SYSDATE , -1)
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -2)  AND ADD_MONTHS(SYSDATE , -1)
+		                  AND group_num = #{group_num})),
+		      (SELECT greeting_hit+notice_hit+post_hit AS month12
+		          FROM (SELECT NVL(SUM(greeting_hit), 0) AS greeting_hit
+		                  FROM greeting_board
+		                WHERE greeting_date BETWEEN ADD_MONTHS(SYSDATE , -1) AND SYSDATE    
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(hit), 0) AS notice_hit
+		                  FROM group_notice
+		                WHERE group_noti_date BETWEEN ADD_MONTHS(SYSDATE , -1) AND SYSDATE
+		                  AND group_num = #{group_num}),
+		               (SELECT NVL(SUM(post_hit), 0) AS post_hit
+		                  FROM meeting_post
+		                WHERE post_date BETWEEN ADD_MONTHS(SYSDATE , -1) AND SYSDATE
+		                  AND group_num = #{group_num}))
+	</select>
+	
+	<select id="chartByPresentOfYear" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT NVL(COUNT(*), 0) AS month1
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -12)  AND ADD_MONTHS(SYSDATE , -11) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month2
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -11)  AND ADD_MONTHS(SYSDATE , -10) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month3
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -10)  AND ADD_MONTHS(SYSDATE , -9) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month4
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -9)  AND ADD_MONTHS(SYSDATE , -8) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month5
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -8)  AND ADD_MONTHS(SYSDATE , -7) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month6
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -7)  AND ADD_MONTHS(SYSDATE , -6) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month7
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -6)  AND ADD_MONTHS(SYSDATE , -5) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month8
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -5)  AND ADD_MONTHS(SYSDATE , -4) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month9
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -4)  AND ADD_MONTHS(SYSDATE , -3) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month10
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -3)  AND ADD_MONTHS(SYSDATE , -2) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month11
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -2)  AND ADD_MONTHS(SYSDATE , -1) 
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month12
+		          FROM check_present
+		        WHERE present_date BETWEEN ADD_MONTHS(SYSDATE , -1)  AND SYSDATE
+		          AND group_num = #{group_num})
+	</select>
+	
+	<select id="chartByJoinOfYear" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT NVL(COUNT(*), 0) AS month1
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -12)  AND ADD_MONTHS(SYSDATE , -11)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month2
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -11)  AND ADD_MONTHS(SYSDATE , -10)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month3
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -10)  AND ADD_MONTHS(SYSDATE , -9)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month4
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -9)  AND ADD_MONTHS(SYSDATE , -8)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month5
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -8)  AND ADD_MONTHS(SYSDATE , -7)
+		          AND group_num = #{group_num}), 
+		       (SELECT NVL(COUNT(*), 0) AS month6
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -7)  AND ADD_MONTHS(SYSDATE , -6)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month7
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -6)  AND ADD_MONTHS(SYSDATE , -5)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month8
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -5)  AND ADD_MONTHS(SYSDATE , -4)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month9
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -4)  AND ADD_MONTHS(SYSDATE , -3)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month10
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -3)  AND ADD_MONTHS(SYSDATE , -2)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month11
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -2)  AND ADD_MONTHS(SYSDATE , -1)
+		          AND group_num = #{group_num}),
+		       (SELECT NVL(COUNT(*), 0) AS month12
+		          FROM join_request
+		        WHERE request_date BETWEEN ADD_MONTHS(SYSDATE , -1)  AND SYSDATE
+		          AND group_num = #{group_num})
+	</select>
+	
+	<select id="checkBestTenArticle" parameterType="int" resultType="int">
+		SELECT greeting_cnt+notice_cnt+post_cnt AS article_cnt
+		  FROM (SELECT COUNT(*) AS greeting_cnt
+		          FROM greeting_board
+		        WHERE TO_CHAR(greeting_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+		           AND group_num = 101),
+		       (SELECT COUNT(*) AS notice_cnt
+		          FROM group_notice
+		        WHERE TO_CHAR(group_noti_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+		          AND group_num = 101),
+		       (SELECT COUNT(*) AS post_cnt
+		          FROM meeting_post
+		        WHERE TO_CHAR(post_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+		          AND group_num = 101)
+	</select>
+	
+	<select id="getBestTenArticle" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+	   SELECT *
+	   	 FROM (SELECT title, hit, reg_date, mem_id, rownum AS hit_rank
+				 FROM (SELECT title, hit, reg_date, mem_id, DENSE_RANK() OVER (ORDER BY hit DESC) AS hit_rank
+				        FROM (SELECT * 
+				                FROM (SELECT greeting_title AS title, greeting_hit AS hit, greeting_date AS reg_date, mem_id
+				                        FROM greeting_board
+				                      WHERE group_num = #{group_num}
+				                      ORDER BY hit)
+				              UNION 
+				              SELECT *
+				                FROM (SELECT group_noti_title AS title, hit AS hit, group_noti_date AS reg_date, mem_id
+				                        FROM group_notice
+				                      WHERE group_num = #{group_num}
+				                      ORDER BY hit)
+				              UNION
+				              SELECT *
+				                FROM (SELECT post_title AS title, post_hit AS hit, post_date AS reg_date, mem_id
+				                        FROM meeting_post
+				                      WHERE group_num = #{group_num}
+				                      ORDER BY hit)
+				              )
+				       )
+				WHERE hit_rank BETWEEN 1 AND 10)
+		WHERE hit_rank BETWEEN 1 AND 10
+	</select>
+	
+	<select id="getBestTenPresent" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
+		SELECT *
+		  FROM (SELECT present_cnt, name, mem_id, birth, gender, rownum AS present_rank
+				  FROM (SELECT cp.present_cnt AS present_cnt, mi.mem_id AS mem_id, mi.name AS name, mi.address AS address, mi.birth AS birth, mi.gender AS gender, DENSE_RANK() OVER (ORDER BY present_cnt DESC) AS present_cnt_rank
+				          FROM (SELECT mem_id, COUNT(*) AS present_cnt
+				                  FROM check_present
+				                WHERE group_num = #{group_num}
+				                GROUP BY mem_id
+				                ORDER BY present_cnt DESC) cp,
+				              (SELECT mem_id, name, address, birth, gender
+				                 FROM member_info) mi
+				       WHERE cp.mem_id = mi.mem_id)
+				WHERE present_cnt_rank BETWEEN 1 AND 10)
+		WHERE present_rank BETWEEN 1 AND 10
 	</select>
 </mapper>

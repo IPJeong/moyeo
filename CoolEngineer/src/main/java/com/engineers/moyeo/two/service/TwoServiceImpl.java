@@ -1,5 +1,6 @@
 package com.engineers.moyeo.two.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
@@ -28,9 +30,8 @@ import com.engineers.moyeo.two.dao.TwoDAO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
 import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
-import com.engineers.moyeo.two.dto.Moim_pictureDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
-import com.engineers.moyeo.two.dto.Place_picDTO;
+import com.engineers.moyeo.two.dto.Place_likeDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
 import com.engineers.moyeo.two.dto.StatisticsDTO;
 import com.engineers.moyeo.two.dto.SuggestionDTO;
@@ -38,6 +39,9 @@ import com.engineers.moyeo.two.dto.SuggestionDTO;
 @Service
 public class TwoServiceImpl implements TwoService{
 
+	@Autowired
+	MainService mainService;
+	
 	@Autowired
 	TwoDAO twoDao;
 	
@@ -237,16 +241,13 @@ public class TwoServiceImpl implements TwoService{
 			ArrayList<Place_infoDTO> pidtos = twoDao.getPlaceList(daoMap);
 			model.addAttribute("pidtos", pidtos);
 			
-			ArrayList<Place_picDTO> ppdtos = twoDao.getPlacePictureList(daoMap);
+			ArrayList<Place_infoDTO> ppdtos = twoDao.getPlacePictureList(daoMap);
 			model.addAttribute("ppdtos", ppdtos);
 		}
 		
 		if(lcnt > 0) {
-			ArrayList<Place_infoDTO> lpidtos = twoDao.getPlaceLikeList();
-			model.addAttribute("lpidtos", lpidtos);
-			
-			ArrayList<Place_picDTO> lppdtos = twoDao.getPlaceLikePictureList();
-			model.addAttribute("lppdtos", lppdtos);
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			model.addAttribute("lpodtos", lpodtos);
 		}
 
 		startPage = (currentPage / pageBlock) * pageBlock + 1; 
@@ -327,16 +328,13 @@ public class TwoServiceImpl implements TwoService{
 			ArrayList<Place_infoDTO> pidtos = twoDao.getPlaceLocList(daoMap);
 			model.addAttribute("pidtos", pidtos);
 			
-			ArrayList<Place_picDTO> ppdtos = twoDao.getPlaceLocPictureList(daoMap);
+			ArrayList<Place_infoDTO> ppdtos = twoDao.getPlaceLocPictureList(daoMap);
 			model.addAttribute("ppdtos", ppdtos);
 		}
 		
 		if(lcnt > 0) {
-			ArrayList<Place_infoDTO> lpidtos = twoDao.getPlaceLikeList();
-			model.addAttribute("lpidtos", lpidtos);
-			
-			ArrayList<Place_picDTO> lppdtos = twoDao.getPlaceLikePictureList();
-			model.addAttribute("lppdtos", lppdtos);
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			model.addAttribute("lpodtos", lpodtos);
 		}
 
 		startPage = (currentPage / pageBlock) * pageBlock + 1; 
@@ -409,16 +407,13 @@ public class TwoServiceImpl implements TwoService{
 			ArrayList<Place_infoDTO> pidtos = twoDao.getPlaceList(daoMap);
 			model.addAttribute("pidtos", pidtos);
 			
-			ArrayList<Place_picDTO> ppdtos = twoDao.getPlacePictureList(daoMap);
+			ArrayList<Place_infoDTO> ppdtos = twoDao.getPlacePictureList(daoMap);
 			model.addAttribute("ppdtos", ppdtos);
 		}
 		
 		if(lcnt > 0) {
-			ArrayList<Place_infoDTO> lpidtos = twoDao.getPlaceLikeList();
-			model.addAttribute("lpidtos", lpidtos);
-			
-			ArrayList<Place_picDTO> lppdtos = twoDao.getPlaceLikePictureList();
-			model.addAttribute("lppdtos", lppdtos);
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			model.addAttribute("lpodtos", lpodtos);
 		}
 
 		startPage = (currentPage / pageBlock) * pageBlock + 1; 
@@ -499,16 +494,13 @@ public class TwoServiceImpl implements TwoService{
 			ArrayList<Place_infoDTO> pidtos = twoDao.getPlaceRecplaList(daoMap);
 			model.addAttribute("pidtos", pidtos);
 			
-			ArrayList<Place_picDTO> ppdtos = twoDao.getPlaceRecplaPictureList(daoMap);
+			ArrayList<Place_infoDTO> ppdtos = twoDao.getPlaceRecplaPictureList(daoMap);
 			model.addAttribute("ppdtos", ppdtos);
 		}
 		
 		if(lcnt > 0) {
-			ArrayList<Place_infoDTO> lpidtos = twoDao.getPlaceLikeList();
-			model.addAttribute("lpidtos", lpidtos);
-			
-			ArrayList<Place_picDTO> lppdtos = twoDao.getPlaceLikePictureList();
-			model.addAttribute("lppdtos", lppdtos);
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			model.addAttribute("lpodtos", lpodtos);
 		}
 
 		startPage = (currentPage / pageBlock) * pageBlock + 1; 
@@ -578,7 +570,7 @@ public class TwoServiceImpl implements TwoService{
 			ArrayList<Place_infoDTO> pidtos = twoDao.getPlaceList(daoMap);
 			model.addAttribute("pidtos", pidtos);
 			
-			ArrayList<Place_picDTO> ppdtos = twoDao.getPlacePictureList(daoMap);
+			ArrayList<Place_infoDTO> ppdtos = twoDao.getPlacePictureList(daoMap);
 			model.addAttribute("ppdtos", ppdtos);
 		}
 
@@ -611,7 +603,7 @@ public class TwoServiceImpl implements TwoService{
 		int place_num = Integer.parseInt(req.getParameter("place_num"));
 
 		Place_infoDTO pidto = new Place_infoDTO();
-		Place_picDTO ppdto = new Place_picDTO();
+		Place_infoDTO ppdto = new Place_infoDTO();
 		
 		pidto = twoDao.readPlace(place_num);
 		ppdto = twoDao.readPlacePicture(place_num);
@@ -730,11 +722,10 @@ public class TwoServiceImpl implements TwoService{
 				if(type == 1) {
 					// 파일을 저장 후 저장된 파일명을 반환
 					fileName = FileManager.saveFile(multipartFile, rootPath + imgPath, uploadFileName);
-					Place_picDTO ppdto = new Place_picDTO();
-					ppdto.setPlace_pic_path(Code.placeImgPathS);
-					ppdto.setPlace_pic_name(fileName);
-					ppdto.setPlace_num(place_num);
-					twoDao.inputPictures(ppdto);
+					pidto.setPlace_pic_path(Code.placeImgPathS);
+					pidto.setPlace_pic_name(fileName);
+					pidto.setPlace_num(place_num);
+					twoDao.inputPictures(pidto);
 				}	
 			}				
 			
@@ -824,11 +815,10 @@ public class TwoServiceImpl implements TwoService{
 				if(type == 1) {
 					// 파일을 저장 후 저장된 파일명을 반환
 					fileName = FileManager.saveFile(multipartFile, rootPath + imgPath, uploadFileName);
-					Place_picDTO ppdto = new Place_picDTO();
-					ppdto.setPlace_pic_path(Code.placeImgPathS);
-					ppdto.setPlace_pic_name(fileName);
-					ppdto.setPlace_num(place_num);					
-					twoDao.modifyPictures(ppdto);
+					pidto.setPlace_pic_path(Code.placeImgPathS);
+					pidto.setPlace_pic_name(fileName);
+					pidto.setPlace_num(place_num);					
+					twoDao.modifyPictures(pidto);
 				}
 			}			
 			
@@ -848,7 +838,7 @@ public class TwoServiceImpl implements TwoService{
 		int recpla_num = Integer.parseInt(req.getParameter("recpla_num"));
 		
 		Place_infoDTO pidto = new Place_infoDTO();
-		Place_picDTO ppdto = new Place_picDTO();
+		Place_infoDTO ppdto = new Place_infoDTO();
 		Rec_placeDTO rpdto = new Rec_placeDTO();
 
 		pidto = twoDao.readPlace(recpla_num);
@@ -927,6 +917,8 @@ public class TwoServiceImpl implements TwoService{
 		dto.setPlace_num(place_num);
 		
 		int cnt = twoDao.writeRecPlace(dto);
+		
+		mainService.wordAnalyzer(recpla_title, recpla_content, recpla_tag);
 		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("place_num", place_num);
@@ -1012,6 +1004,8 @@ public class TwoServiceImpl implements TwoService{
 		
 		int cnt = twoDao.modifyRecPlace(dto);
 		
+		mainService.wordAnalyzer(recpla_title, recpla_content, recpla_tag);
+		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("recpla_num", recpla_num);
 		
@@ -1071,7 +1065,7 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("recpla_num", recpla_num);
 		model.addAttribute("cnt", cnt);
 		
-		return "two/places/recPlaceLikePro";
+		return "two/places/recPlaceLikeFail";
 		
 	}
 	
@@ -1838,7 +1832,8 @@ public class TwoServiceImpl implements TwoService{
 			mpscnt = twoDao.getMoimPostSearchCount(daoMap);
 		} else if(search_radio2.equals("mp4")) {
 			daoMap.put("post_tag", search_keyword);
-			mpscnt = twoDao.getMoimPostByTagSearchCount(daoMap);
+			daoMap.put("type", "4");
+			mpscnt = twoDao.getMoimPostSearchCount(daoMap);
 		} else if(search_radio2.equals("mp0")) {
 			mpscnt = 0;
 		}
@@ -1860,7 +1855,8 @@ public class TwoServiceImpl implements TwoService{
 			picnt = twoDao.getPlaceSearchCount(daoMap);
 		} else if(search_radio3.equals("pi4")) {
 			daoMap.put("place_address", search_keyword);
-			picnt = twoDao.getPlaceByAddressSearchCount(daoMap);
+			daoMap.put("type", "4");
+			picnt = twoDao.getPlaceSearchCount(daoMap);
 		} else if(search_radio3.equals("pi0")) {
 			picnt = 0;
 		}
@@ -1934,7 +1930,7 @@ public class TwoServiceImpl implements TwoService{
 				daoMap2.put("type", "1");
 				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);	
 				model.addAttribute("moidtos", moidtos);
-				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
+				ArrayList<Moim_infoDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
 				model.addAttribute("mopdtos", mopdtos);
 			} else if(search_radio1.equals("gl2")) {
 				daoMap2.put("group_name", "");
@@ -1942,7 +1938,7 @@ public class TwoServiceImpl implements TwoService{
 				daoMap2.put("type", "2");
 				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);
 				model.addAttribute("moidtos", moidtos);
-				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
+				ArrayList<Moim_infoDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
 				model.addAttribute("mopdtos", mopdtos);
 			} else if(search_radio1.equals("gl3")) {
 				daoMap2.put("group_name", search_keyword);
@@ -1950,7 +1946,7 @@ public class TwoServiceImpl implements TwoService{
 				daoMap2.put("type", "3");
 				ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);	
 				model.addAttribute("moidtos", moidtos);
-				ArrayList<Moim_pictureDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
+				ArrayList<Moim_infoDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
 				model.addAttribute("mopdtos", mopdtos);
 			} 
 		}
@@ -1985,9 +1981,10 @@ public class TwoServiceImpl implements TwoService{
 				model.addAttribute("ppdtos", ppdtos);
 			} else if(search_radio2.equals("mp4")) {
 				daoMap3.put("post_tag", search_keyword);
-				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostByTagSearchList(daoMap3);
+				daoMap3.put("type", "4");
+				ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);
 				model.addAttribute("mpdtos", mpdtos);
-				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureByTagSearchList(daoMap3);
+				ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
 				model.addAttribute("ppdtos", ppdtos);
 			}
 		}
@@ -2004,7 +2001,7 @@ public class TwoServiceImpl implements TwoService{
 				daoMap4.put("type", "1");
 				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
 				model.addAttribute("plainfodtos", plainfodtos);
-				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+				ArrayList<Place_infoDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
 				model.addAttribute("plapicdtos", plapicdtos);
 			} else if(search_radio3.equals("pi2")) {
 				daoMap4.put("place_name", "");
@@ -2012,7 +2009,7 @@ public class TwoServiceImpl implements TwoService{
 				daoMap4.put("type", "2");
 				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
 				model.addAttribute("plainfodtos", plainfodtos);
-				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+				ArrayList<Place_infoDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
 				model.addAttribute("plapicdtos", plapicdtos);
 			} else if(search_radio3.equals("pi3")) {
 				daoMap4.put("place_name", search_keyword);
@@ -2020,14 +2017,14 @@ public class TwoServiceImpl implements TwoService{
 				daoMap4.put("type", "3");
 				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
 				model.addAttribute("plainfodtos", plainfodtos);
-				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+				ArrayList<Place_infoDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
 				model.addAttribute("plapicdtos", plapicdtos);
 			} else if(search_radio3.equals("pi4")) {
 				daoMap4.put("place_address", search_keyword);
-				picnt = twoDao.getPlaceByAddressSearchCount(daoMap4);
-				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceByAddressSearchList(daoMap4);
+				daoMap4.put("type", "4");
+				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
 				model.addAttribute("plainfodtos", plainfodtos);
-				ArrayList<Place_picDTO> plapicdtos = twoDao.getPlacePictureByAddressSearchList(daoMap4);
+				ArrayList<Place_infoDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
 				model.addAttribute("plapicdtos", plapicdtos);
 			}  	
 		}
@@ -2149,10 +2146,7 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("fifty_cnt", fifty_cnt);
 		model.addAttribute("sixty_cnt", sixty_cnt);
 		
-		model.addAttribute("stats_type", "stats_member");
-		
 		model.addAttribute("group_num", group_num); 
-
 		
 		return "two/moim_statistics/moimStatistics";
 	}
@@ -2163,8 +2157,99 @@ public class TwoServiceImpl implements TwoService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
+
+		//--사이드 시작
+		//사이드- 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("open_dto", open_dto);
+				
+		//사이드 - 대표사진 불러오기
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
+		model.addAttribute("picture_dto", picture_dto);
+				
+		//사이드 - 모임원리스트 불러오기
+		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
+		model.addAttribute("member_dtos", member_dtos);	
+		//--사이드 끝
+		
+		StatisticsDTO dto = new StatisticsDTO();
+		
+		String term = req.getParameter("term");
+		
+		if(term.equals("month")) {
+			
+			dto = twoDao.getDate();
+			
+			Timestamp four_weeks_ago = dto.getFour_weeks_ago();
+			Timestamp three_weeks_ago = dto.getThree_weeks_ago();
+			Timestamp two_weeks_ago = dto.getTwo_weeks_ago();
+			Timestamp a_week_ago = dto.getA_week_ago();
+			Timestamp today = dto.getToday();
+			
+			dto = twoDao.chartByArticleOfMonth(group_num);
+			
+			int first_week = dto.getFirst_week();
+			int second_week = dto.getSecond_week();
+			int third_week = dto.getThird_week();
+			int fourth_week = dto.getFourth_week();
+			
+			model.addAttribute("four_weeks_ago", four_weeks_ago);
+			model.addAttribute("three_weeks_ago", three_weeks_ago);
+			model.addAttribute("two_weeks_ago", two_weeks_ago);
+			model.addAttribute("a_week_ago", a_week_ago);
+			model.addAttribute("today", today);
+			
+			model.addAttribute("first_week", first_week);
+			model.addAttribute("second_week", second_week);
+			model.addAttribute("third_week", third_week);
+			model.addAttribute("fourth_week", fourth_week);
+			
+		} else if(term.equals("year")) {
+			
+			dto = twoDao.chartByArticleOfYear(group_num);
+			
+			int month1 = dto.getMonth1();
+			int month2 = dto.getMonth2();
+			int month3 = dto.getMonth3();
+			int month4 = dto.getMonth4();
+			int month5 = dto.getMonth5();
+			int month6 = dto.getMonth6();
+			int month7 = dto.getMonth7();
+			int month8 = dto.getMonth8();
+			int month9 = dto.getMonth9();
+			int month10 = dto.getMonth10();
+			int month11 = dto.getMonth11();
+			int month12 = dto.getMonth12();
+
+			model.addAttribute("month1", month1);
+			model.addAttribute("month2", month2);
+			model.addAttribute("month3", month3);
+			model.addAttribute("month4", month4);
+			model.addAttribute("month5", month5);
+			model.addAttribute("month6", month6);
+			model.addAttribute("month7", month7);
+			model.addAttribute("month8", month8);
+			model.addAttribute("month9", month9);
+			model.addAttribute("month10", month10);
+			model.addAttribute("month11", month11);
+			model.addAttribute("month12", month12);
+			
+		} else if(term.equals("best10")) {
+			int cnt = 0;
+			
+			cnt = twoDao.checkBestTenArticle(group_num);
+			
+			if (cnt > 0) {
+				ArrayList<StatisticsDTO> dtos = twoDao.getBestTenArticle(group_num);
+				
+				model.addAttribute("dtos", dtos);
+			}
+			
+			model.addAttribute("cnt", cnt);
+		}
 		
 		model.addAttribute("group_num", group_num); 
+		model.addAttribute("term", term); 
 		
 		return "two/moim_statistics/moimStatisticsArticle";
 	}
@@ -2176,10 +2261,185 @@ public class TwoServiceImpl implements TwoService{
 
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
 		
+		//--사이드 시작
+		//사이드- 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("open_dto", open_dto);
+				
+		//사이드 - 대표사진 불러오기
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
+		model.addAttribute("picture_dto", picture_dto);
+				
+		//사이드 - 모임원리스트 불러오기
+		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
+		model.addAttribute("member_dtos", member_dtos);	
+		//--사이드 끝
+		
+		StatisticsDTO dto = new StatisticsDTO();
+		
+		String term = req.getParameter("term");
+		
+		if(term.equals("month")) {
+			
+			dto = twoDao.getDate();
+			
+			Timestamp four_weeks_ago = dto.getFour_weeks_ago();
+			Timestamp three_weeks_ago = dto.getThree_weeks_ago();
+			Timestamp two_weeks_ago = dto.getTwo_weeks_ago();
+			Timestamp a_week_ago = dto.getA_week_ago();
+			Timestamp today = dto.getToday();
+			
+			dto = twoDao.chartByPresentOfMonth(group_num);
+			
+			int first_week = dto.getFirst_week();
+			int second_week = dto.getSecond_week();
+			int third_week = dto.getThird_week();
+			int fourth_week = dto.getFourth_week();
+			
+			model.addAttribute("four_weeks_ago", four_weeks_ago);
+			model.addAttribute("three_weeks_ago", three_weeks_ago);
+			model.addAttribute("two_weeks_ago", two_weeks_ago);
+			model.addAttribute("a_week_ago", a_week_ago);
+			model.addAttribute("today", today);
+			
+			model.addAttribute("first_week", first_week);
+			model.addAttribute("second_week", second_week);
+			model.addAttribute("third_week", third_week);
+			model.addAttribute("fourth_week", fourth_week);
+			
+		} else if(term.equals("year")) {
+			
+			dto = twoDao.chartByPresentOfYear(group_num);
+			
+			int month1 = dto.getMonth1();
+			int month2 = dto.getMonth2();
+			int month3 = dto.getMonth3();
+			int month4 = dto.getMonth4();
+			int month5 = dto.getMonth5();
+			int month6 = dto.getMonth6();
+			int month7 = dto.getMonth7();
+			int month8 = dto.getMonth8();
+			int month9 = dto.getMonth9();
+			int month10 = dto.getMonth10();
+			int month11 = dto.getMonth11();
+			int month12 = dto.getMonth12();
+
+			model.addAttribute("month1", month1);
+			model.addAttribute("month2", month2);
+			model.addAttribute("month3", month3);
+			model.addAttribute("month4", month4);
+			model.addAttribute("month5", month5);
+			model.addAttribute("month6", month6);
+			model.addAttribute("month7", month7);
+			model.addAttribute("month8", month8);
+			model.addAttribute("month9", month9);
+			model.addAttribute("month10", month10);
+			model.addAttribute("month11", month11);
+			model.addAttribute("month12", month12);
+			
+		} else if(term.equals("best10")) {
+			
+			ArrayList<StatisticsDTO> dtos = twoDao.getBestTenPresent(group_num);
+				
+			model.addAttribute("dtos", dtos);
+
+		}
+		
 		model.addAttribute("group_num", group_num); 
+		model.addAttribute("term", term); 
 		
 		return "two/moim_statistics/moimStatisticsPresent";
 	}
-	
-	
+
+	@Override
+	public String moimStatisticsJoin(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		//--사이드 시작
+		//사이드- 모임명, 모임카테고리 불러오기
+		MoimOpenDTO open_dto = sixDao.moimMain(group_num);
+		model.addAttribute("open_dto", open_dto);
+				
+		//사이드 - 대표사진 불러오기
+		MainPictureDTO picture_dto = sixDao.moimImagesView(group_num).get(0);
+		model.addAttribute("picture_dto", picture_dto);
+				
+		//사이드 - 모임원리스트 불러오기
+		ArrayList<MemberInfoDTO> member_dtos = sixDao.memberList(group_num);
+		model.addAttribute("member_dtos", member_dtos);	
+		//--사이드 끝
+		
+		StatisticsDTO dto = new StatisticsDTO();
+		
+		String term = req.getParameter("term");
+		
+		if(term.equals("month")) {
+			
+			dto = twoDao.getDate();
+			
+			Timestamp four_weeks_ago = dto.getFour_weeks_ago();
+			Timestamp three_weeks_ago = dto.getThree_weeks_ago();
+			Timestamp two_weeks_ago = dto.getTwo_weeks_ago();
+			Timestamp a_week_ago = dto.getA_week_ago();
+			Timestamp today = dto.getToday();
+			
+			dto = twoDao.chartByJoinOfMonth(group_num);
+			
+			int first_week = dto.getFirst_week();
+			int second_week = dto.getSecond_week();
+			int third_week = dto.getThird_week();
+			int fourth_week = dto.getFourth_week();
+			
+			model.addAttribute("four_weeks_ago", four_weeks_ago);
+			model.addAttribute("three_weeks_ago", three_weeks_ago);
+			model.addAttribute("two_weeks_ago", two_weeks_ago);
+			model.addAttribute("a_week_ago", a_week_ago);
+			model.addAttribute("today", today);
+			
+			model.addAttribute("first_week", first_week);
+			model.addAttribute("second_week", second_week);
+			model.addAttribute("third_week", third_week);
+			model.addAttribute("fourth_week", fourth_week);
+			
+		} else if(term.equals("year")) {
+			
+			dto = twoDao.chartByJoinOfYear(group_num);
+			
+			int month1 = dto.getMonth1();
+			int month2 = dto.getMonth2();
+			int month3 = dto.getMonth3();
+			int month4 = dto.getMonth4();
+			int month5 = dto.getMonth5();
+			int month6 = dto.getMonth6();
+			int month7 = dto.getMonth7();
+			int month8 = dto.getMonth8();
+			int month9 = dto.getMonth9();
+			int month10 = dto.getMonth10();
+			int month11 = dto.getMonth11();
+			int month12 = dto.getMonth12();
+
+			model.addAttribute("month1", month1);
+			model.addAttribute("month2", month2);
+			model.addAttribute("month3", month3);
+			model.addAttribute("month4", month4);
+			model.addAttribute("month5", month5);
+			model.addAttribute("month6", month6);
+			model.addAttribute("month7", month7);
+			model.addAttribute("month8", month8);
+			model.addAttribute("month9", month9);
+			model.addAttribute("month10", month10);
+			model.addAttribute("month11", month11);
+			model.addAttribute("month12", month12);
+			
+		}
+		
+		model.addAttribute("group_num", group_num); 
+		model.addAttribute("term", term); 
+		
+		return "two/moim_statistics/moimStatisticsJoin";
+	}
+
 }

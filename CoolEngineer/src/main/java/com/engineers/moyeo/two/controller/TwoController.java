@@ -459,4 +459,15 @@ public class TwoController {
 		viewPage = twoService.moimStatisticsPresent(model);
 		return viewPage;
 	}
+	
+	//모임 통계 : 모임가입 분석
+	@RequestMapping("/moimStatisticsJoin")
+	public String moimStatisticsJoin(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+				
+		model.addAttribute("req", req);
+		viewPage = twoService.moimStatisticsJoin(model);
+		return viewPage;
+	}
+	
 }

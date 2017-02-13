@@ -11,9 +11,8 @@ import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
 import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
-import com.engineers.moyeo.two.dto.Moim_pictureDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
-import com.engineers.moyeo.two.dto.Place_picDTO;
+import com.engineers.moyeo.two.dto.Place_likeDTO;
 import com.engineers.moyeo.two.dto.Rec_placeDTO;
 import com.engineers.moyeo.two.dto.StatisticsDTO;
 import com.engineers.moyeo.two.dto.SuggestionDTO;
@@ -29,25 +28,24 @@ public interface TwoDAO {
 	//장소정보&장소사진
 	public int getPlaceCount(); //장소정보 개수
 	public ArrayList<Place_infoDTO> getPlaceList(Map<String, Object> daoMap); //장소정보 리스트
-	public ArrayList<Place_picDTO> getPlacePictureList(Map<String, Object> daoMap); //장소사진 리스트
+	public ArrayList<Place_infoDTO> getPlacePictureList(Map<String, Object> daoMap); //장소사진 리스트
 	public int getPlaceMainLocCount(Map<String, Object> daoMap); //지역별 장소검색 결과 개수
 	public int getPlaceMainRecplaCount(Map<String, Object> daoMap); //관심사별 장소검색 결과 개수
 	public ArrayList<Place_infoDTO> getPlaceLocList(Map<String, Object> daoMap); //지역별 검색 결과에 따른 장소정보 리스트
-	public ArrayList<Place_picDTO> getPlaceLocPictureList(Map<String, Object> daoMap); //지역별 검색 결과에 따른 장소사진 리스트
+	public ArrayList<Place_infoDTO> getPlaceLocPictureList(Map<String, Object> daoMap); //지역별 검색 결과에 따른 장소사진 리스트
 	public ArrayList<Place_infoDTO> getPlaceRecplaList(Map<String, Object> daoMap); //관심사별 검색 결과에 따른 장소정보 리스트
-	public ArrayList<Place_picDTO> getPlaceRecplaPictureList(Map<String, Object> daoMap); //관심사별 검색 결과에 따른 장소사진 리스트
+	public ArrayList<Place_infoDTO> getPlaceRecplaPictureList(Map<String, Object> daoMap); //관심사별 검색 결과에 따른 장소사진 리스트
 	public int getPlaceLikeCount(); //추천받은 장소정보의 개수
-	public ArrayList<Place_infoDTO> getPlaceLikeList(); //추천받은 장소정보들의 리스트
-	public ArrayList<Place_picDTO> getPlaceLikePictureList(); // 추천받은 장소사진들의 리스트
+	public ArrayList<Place_likeDTO> getPlaceLikeList(); //추천받은 장소정보들의 리스트
 	public Place_infoDTO readPlace(int place_num); //장소정보 상세보기
-	public Place_picDTO readPlacePicture(int place_num); //장소사진 상세보기
+	public Place_infoDTO readPlacePicture(int place_num); //장소사진 상세보기
 	public int inputPlace(Place_infoDTO piDTO); //장소정보 입력
-	public void inputPictures(Place_picDTO ppdto); //장소사진 입력
+	public void inputPictures(Place_infoDTO ppdto); //장소사진 입력
 	public int getPlaceNum(); //장소정보 테이블에서 가장 최근에 등록한 것의 place_num을 불러옴
 	public int deletePlace(int place_num); //장소정보 삭제
 	public void deletePlacePicture(int place_num); //장소사진 삭제
 	public int modifyPlace(Place_infoDTO dto); //장소정보 수정
-	public void modifyPictures(Place_picDTO ppdto); //장소사진 삭제
+	public void modifyPictures(Place_infoDTO ppdto); //장소사진 삭제
 	
 	//추천장소&추천장소 좋아요
 	public int getRecPlaceCount(int place_num); //추천장소 게시글의 개수
@@ -96,21 +94,26 @@ public interface TwoDAO {
 	
 	public int getMoimSearchCount(Map<String, Object> daoMap); //모임 제목, 소개를 검색했을 때 나오는 모임수
 	public int getMoimPostSearchCount(Map<String, Object> daoMap); //모임후기 제목, 내용을 검색했을 때 나오는 모임수
-	public int getMoimPostByTagSearchCount(Map<String, Object> daoMap); //모임후기 태그를 검색했을 때 나오는 모임수
 	public int getPlaceSearchCount(Map<String, Object> daoMap); //장소  제목, 설명을 검색했을 때 나오는 모임수
-	public int getPlaceByAddressSearchCount(Map<String, Object> daoMap); //장소의 주소를  검색했을 때 나오는 모임수
 	public ArrayList<Moim_infoDTO> getMoimSearchList(Map<String, Object> daoMap); //모임 제목, 소개를 검색했을 때 나오는 모임들을 리스트로 보여줌
-	public ArrayList<Moim_pictureDTO> getMoimPictureSearchList(Map<String, Object> daoMap); //모임 제목, 소개를 검색했을 때 나오는 모임들의 side 사진을 리스트로 보여줌
+	public ArrayList<Moim_infoDTO> getMoimPictureSearchList(Map<String, Object> daoMap); //모임 제목, 소개를 검색했을 때 나오는 모임들의 side 사진을 리스트로 보여줌
 	public ArrayList<MeetingPostDTO> getMoimPostSearchList(Map<String, Object> daoMap); //모임후기 제목, 내용을 검색했을 때 나오는 게시글들을 리스트로 보여줌
 	public ArrayList<PostPictureDTO> getMoimPostPictureSearchList(Map<String, Object> daoMap); //모임후기 제목, 내용을 검색했을 때 나오는 게시글들의 사진을 리스트로 보여줌
-	public ArrayList<MeetingPostDTO> getMoimPostByTagSearchList(Map<String, Object> daoMap); //모임후기 태그를 검색했을 때 나오는 게시글들을 리스트로 보여줌
-	public ArrayList<PostPictureDTO> getMoimPostPictureByTagSearchList(Map<String, Object> daoMap); //모임후기 태그를 검색했을 때 나오는 게시글들의 사진을 리스트로 보여줌
 	public ArrayList<Place_infoDTO> getPlaceSearchList(Map<String, Object> daoMap); //장소 제목, 설명을 검색했을 때 나오는 장소 정보들을 리스트로 보여줌
-	public ArrayList<Place_picDTO> getPlacePictureSearchList(Map<String, Object> daoMap); //장소 제목, 설명을 검색했을 때 나오는 장소 정보들의 사진을 리스트로 보여줌
+	public ArrayList<Place_infoDTO> getPlacePictureSearchList(Map<String, Object> daoMap); //장소 제목, 설명을 검색했을 때 나오는 장소 정보들의 사진을 리스트로 보여줌
 	public ArrayList<Place_infoDTO> getPlaceByAddressSearchList(Map<String, Object> daoMap);  //장소 주소를 검색했을 때 나오는 장소 정보들을 리스트로 보여줌
-	public ArrayList<Place_picDTO> getPlacePictureByAddressSearchList(Map<String, Object> daoMap); //장소 주소를 검색했을 때 나오는 장소 정보들의 사진을 리스트로 보여줌
-
+	
 	public StatisticsDTO chartByGender(int group_num);
 	public StatisticsDTO chartByAge(int group_num);
+	public StatisticsDTO getDate();
+	public StatisticsDTO chartByArticleOfMonth(int group_num);
+	public StatisticsDTO chartByPresentOfMonth(int group_num);
+	public StatisticsDTO chartByJoinOfMonth(int group_num);
+	public StatisticsDTO chartByArticleOfYear(int group_num);
+	public StatisticsDTO chartByPresentOfYear(int group_num);
+	public StatisticsDTO chartByJoinOfYear(int group_num);
+	public int checkBestTenArticle(int group_num);
+	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num);
+	public ArrayList<StatisticsDTO> getBestTenPresent(int group_num);
 
 }
