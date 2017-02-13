@@ -589,7 +589,7 @@
 	
 	<!-- 추천모임유무 -->
 	<select id="recommendMoimChk" parameterType="Map" resultType="int">
-		SELECT COUNT(*) FROM group_list WHERE group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2} AND group_location = #{group_location}
+		SELECT COUNT(*) FROM group_list WHERE (group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2} AND group_location = #{group_location}) OR (group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2}) OR (group_location = #{group_location})
 	</select>
 	
 	<!-- 추천모임리스트 -->

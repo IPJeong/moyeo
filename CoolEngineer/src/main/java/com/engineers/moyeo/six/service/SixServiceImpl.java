@@ -1616,6 +1616,7 @@ public class SixServiceImpl implements SixService{
 					}
 				}
 		
+		
 		} else if(Integer.parseInt(subject.split("명")[0]) == 5) {
 
 			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleA();
