@@ -506,6 +506,11 @@
  		SELECT m.msg_num, m.mem_id, m.msg_content, m.msg_date, m.chat_room_num, i.propic_path, i.propic_name FROM msg_list m, member_info i WHERE m.msg_date = #{msg_date} AND i.mem_id = #{mem_id}
  	</select>
  	
+ 	<!-- 모임채팅방 기존 채팅내용 확인 -->
+ 	<select id="msgCheck" parameterType="int" resultType="int">
+ 		SELECT COUNT(*) FROM msg_list WHERE chat_room_num = #{chat_room_num}
+ 	</select>
+ 	
  	<!-- 모임채팅방 전체 채팅내용 출력 -->
  	<select id="getMsgs" parameterType="int" resultType="com.engineers.moyeo.six.dto.MsgListDTO">
  		SELECT m.msg_num, m.mem_id, m.msg_content, m.msg_date, m.chat_room_num, i.propic_path, i.propic_name FROM msg_list m, member_info i WHERE m.chat_room_num = #{chat_room_num} AND i.mem_id = m.mem_id ORDER BY m.msg_date

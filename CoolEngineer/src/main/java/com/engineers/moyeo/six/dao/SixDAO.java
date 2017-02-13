@@ -325,6 +325,9 @@ public interface SixDAO {
 	//모임채팅방 입력한채팅내용 불러오기
 	public MsgListDTO getMsg(Map<String, Object> map);
 
+	//모임채팅방 기존 채팅 유무 확인
+	public int msgCheck(int chat_room_num);
+	
 	//모임채팅방 전체채팅내용 불러오기
 	public ArrayList<MsgListDTO> getMsgs(int chat_room_num);
 

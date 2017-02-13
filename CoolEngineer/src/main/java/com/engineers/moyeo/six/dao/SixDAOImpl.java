@@ -916,6 +916,14 @@ public class SixDAOImpl implements SixDAO{
 		return dto;
 	}
 	
+	//모임채팅방 기존 채팅 유무 확인
+	public int msgCheck(int chat_room_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.msgCheck(chat_room_num);
+		
+		return cnt;
+	}
+	
 	//모임채팅방 전체 채팅내용 불러오기
 	public ArrayList<MsgListDTO> getMsgs(int chat_room_num) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);

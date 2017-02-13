@@ -1220,12 +1220,18 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("member_dtos", member_dtos);	
 	//--사이드 끝
 		
-		//채팅전체내용 불러오기
+		
 		int chat_room_num = Integer.parseInt(req.getParameter("chat_room_num"));
 		
-		ArrayList<MsgListDTO> dtos = new ArrayList<MsgListDTO>();
-		dtos = sixDao.getMsgs(chat_room_num);
-		model.addAttribute("dtos", dtos);
+		//기존 채팅 내용 유무 확인
+		int cnt = sixDao.msgCheck(chat_room_num);
+		model.addAttribute("cnt", cnt);
+		//채팅전체내용 불러오기
+		if(cnt != 0) {
+			ArrayList<MsgListDTO> dtos = new ArrayList<MsgListDTO>();
+			dtos = sixDao.getMsgs(chat_room_num);
+			model.addAttribute("dtos", dtos);
+		}
 	}
 	
 	//채팅내용입력
