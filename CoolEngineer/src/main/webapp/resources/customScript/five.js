@@ -383,3 +383,28 @@ function deleteReply(postrep_num) {
 	});
 	return false;
 }
+
+function delPicture(gal_num, type) {
+	jQuery.ajax({
+		type : "POST",
+		url : "/moyeo/five/deletePicture",
+		async : true,
+		dataType : "json",
+		data : {
+			gal_num : gal_num,
+			type : type
+		},
+		success : function(data) {
+			var cnt = data.cnt;
+			if(cnt == 1) {
+				alert('정사적으로 삭제되었습니다.');
+			} else {
+				alert('삭제에 실패했습니다.\n 잠시후 다시 시도해 주시기 바랍니다.');
+			}
+		},
+		error : function(xhr) {
+			alert("삭제에 실패하였습니다. 서버오류");
+			alert("error html = " + xhr.statusText);
+		}
+	});
+}
