@@ -207,7 +207,7 @@ li {
 														style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
 														<a
 														href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-															<font size="3px">${dto.group_name}</font> <font size="2em;"color="#a7adb5"><br><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
+															<font size="3px">${dto.group_name}</font> <br> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
 													</li>
 												</ul>
 											</div>

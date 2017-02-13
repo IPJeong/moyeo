@@ -195,7 +195,7 @@ img {
 		                        	
 		                        <div class="messages messages-img" id="msgBox" style="overflow:auto; width:100%; height: 720px;">
 		                           	<c:if test="${cnt == 0}">
-		                          	 	<a>모임 채팅방에 오신것을 환영합니다</a>
+		                          	 	<a>모임 채팅방에 오신것을 환영합니다.</a>
 		                           	</c:if>
 		                           	
 		                           	<c:if test="${cnt != 0}">

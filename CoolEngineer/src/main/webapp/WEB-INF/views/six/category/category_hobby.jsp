@@ -541,20 +541,20 @@ a {
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<div class="panel-title-box">
-														<h3>인기모임</h3>
+														<h3>인기모임&nbsp;&nbsp;<a class="fa fa-plus-square-o" href="category_detail?category=인기모임&subject=인기모임"><font size="2">더보기</font></a></h3>
 													</div>
 												</div>
 												<div class="panel-body padding-0">
 													<div class="chart-holder" id="dashboard-bar-1"
 														style="height: 210px;">
-														<c:forEach var="dto" items="${hotDtos}" begin="0" end="17" >
-														<div class="panel-body padding-0" style="height:33px; width:480px; float:left;">
+														<c:forEach var="dto" items="${hotDtos}" begin="0" end="14" >
+														<div class="panel-body padding-0" style="height:33px; width:480px; float:left; margin-bottom: 12px;">
 															<ul>
 																<li
 																	style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
 																	<a
 																	href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-																		${dto.group_name} <font color="#373a3e"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2} , ${dto.group_location})</div></font></a>
+																		<font size="3px">${dto.group_name}</font> <br> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2} , ${dto.group_location})</div></font></a>
 																</li>
 															</ul>
 														</div>

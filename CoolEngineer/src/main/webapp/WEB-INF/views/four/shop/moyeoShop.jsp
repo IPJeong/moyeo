@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ include file="../../etc/header2.jsp"%>
+<%@ include file="../../etc/header.jsp"%>
 
 <style>
 @media only screen and (max-width: 1010px) {
@@ -91,7 +91,9 @@ li {
 							<div style="float: right; margin-right: 5%;">
 								<!-- 로그인 되어 있으면, -->
 								<c:if test="${sessionScope.mem_id != null}">
-								<button type="button" class="btn btn-primary">제품 등록</button>
+								<input class="btn btn-primary" value="제품 등록" type="button" onclick="location.href='productInsertForm'">
+								
+								<button type="button" class="btn btn-primary" onclick="">제품 등록</button>
 								<button type="button" class="btn btn-primary">제품 수정</button>
 								<button type="button" class="btn btn-primary">제품 삭제</button>
 								</c:if>
@@ -105,17 +107,24 @@ li {
 						
 										
 							<!-- 상품 레이아웃 배열 -->
+								
+							<!-- 상품 레이아웃 배열 -->
+							<c:forEach var="dto" items="${dtos}">
+								<!-- 상품 레이아웃 배열 -->
 										 <div class="col-lg-12">
 											<div class="row">
 												<div class="col-lg-3">
 													<div class="box">
 														<div class="box-gray aligncenter">
-															<h4>상품1입니다.</h4>
+															<h4>상품번호 : ${number}</h4>
+															<c:set var="number" value="${number-1}" /> 
 															<div class="icon">
 															<i class="fa fa-desktop fa-3x"></i>
 															</div>
 															<p class="">
-															<br>상품 설명입니다. <br>사고싶지요~?
+															<br>제품명 : ${dto.product_name}
+															<br>가격: ${dto.product_price}원
+															<br>제품설명 : ${product_detail}
 															</p>
 																
 														</div>
@@ -132,7 +141,7 @@ li {
 															<i class="fa fa-pagelines fa-3x"></i>
 															</div>
 															<p class="">
-															<br>상품 설명입니다. <br>사고싶지요~?
+															<br>상품 설명입니다. <br>가격: 얼마
 															</p>
 																
 														</div>
@@ -149,7 +158,7 @@ li {
 															<i class="fa fa-edit fa-3x"></i>
 															</div>
 															<p class="">
-															<br>상품 설명입니다. <br>사고싶지요~?
+															<br>상품 설명입니다. <br>가격: 얼마
 															</p>
 																
 														</div>
@@ -166,7 +175,7 @@ li {
 															<i class="fa fa-code fa-3x"></i>
 															</div>
 															<p class="">
-															<br>상품 설명입니다. <br>사고싶지요~?
+															<br>상품 설명입니다. <br>가격: 얼마
 															</p>
 																
 														</div>
@@ -178,9 +187,8 @@ li {
 											</div>
 										</div>
 										
-								
+							</c:forEach>
 							<!-- 상품 레이아웃 배열 -->
-							
 							
 								
 			
@@ -192,7 +200,7 @@ li {
 							<c:if test="${cnt > 0}">
 				
 								<c:if test="${startPage > pageBlock}">
-									<li class=""><a href="moim_greeting_board?pageNum=${startPage - pageBlock}"><font
+									<li class=""><a href="moyeoShop?pageNum=${startPage - pageBlock}"><font
 											size="3"> «</font></a></li>
 								</c:if>
 				
@@ -203,12 +211,12 @@ li {
 									</c:if>
 				
 									<c:if test="${i != currentPage}">
-										<li class=""><a href="moim_greeting_board?pageNum=${i}"><font size="3">${i}</font></a></li>
+										<li class=""><a href="moyeoShop?pageNum=${i}"><font size="3">${i}</font></a></li>
 									</c:if>
 				
 								</c:forEach>
 								<c:if test="${pageCount > endPage}">
-									<li><a href="moim_greeting_board?pageNum=${startPage + pageBlock}"><font
+									<li><a href="moyeoShop?pageNum=${startPage + pageBlock}"><font
 											size="3">»</font></a></li>
 								</c:if>
 							</c:if>
@@ -221,7 +229,9 @@ li {
 			<!-- END PHOTO BLOCK -->
 		</div>
 	</div>
+	<!-- 
+	-->
 <!-- END ROW -->
 </div>
 
-<%@ include file="../../etc/footer2.jsp"%>
+<%@ include file="../../etc/footer.jsp"%>

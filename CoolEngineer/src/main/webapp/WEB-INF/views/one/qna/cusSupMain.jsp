@@ -226,7 +226,7 @@
 									</div>
 								</div>
 								<div class="panel-body faq"
-									style="text-size: 10px; height: 150px; overflow: scroll;">
+									style="text-size: 10px; height: 150px; overflow: auto;">
 									<div class="contact-info">
 										<c:forEach var="dto" items="${dtos2}" begin="0" end="3">
 											<div class="faq-item" style="padding: 0px; margin: 0px;">

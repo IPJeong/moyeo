@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ include file="../../etc/header2.jsp"%>
+<%@ include file="../../etc/header.jsp"%>
 <!-- <script type="text/javascript">
 	function daetgul() {
 		
@@ -91,7 +91,7 @@ left: -3px;
 				<br>
 				<div class="content-frame-body content-frame-body-left" style="height: 819px;">
  					<div style="margin:auto;"> 
- 					<form action="productInsertpro" method="post">
+ 					<form action="productInsertPro" method="post">
 							<table style="text-align:center;">
 							<tr>
 								<th colspan="2">제품 등록</th>
@@ -113,7 +113,7 @@ left: -3px;
 									</th>
 									
 									<td>
-									<input type="text" name="product_price">
+									<input type="number" name="product_price">
 									</td>
 							</tr>
 							
@@ -155,4 +155,4 @@ left: -3px;
 
 
 
-<%@ include file="../../etc/footer2.jsp"%>
+<%@ include file="../../etc/footer.jsp"%>

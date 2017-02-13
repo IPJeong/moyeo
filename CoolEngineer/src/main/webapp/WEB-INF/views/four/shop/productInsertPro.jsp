@@ -4,9 +4,9 @@
 <body>
 	<c:if test="${cnt > 0}">
 		<script type="text/javascript">
-			alert("책이 등록되었습니다.");
+			alert("제품이 등록되었습니다.");
 		</script>
-		<c:redirect url="/four/shop/moyeoShop" />
+		<c:redirect url="/four/moyeoShop" />
 	</c:if>
 	<c:if test="${cnt <= 0}">
 		<!-- 작성 실패  -->
