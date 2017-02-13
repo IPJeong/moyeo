@@ -336,14 +336,24 @@ li {
 							<div class="panel-heading">
 								<div class="panel-title-box">
 									<font size="4px;">
-										<a href="/moyeo/places/places.jsp">추천장소</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="fa fa-plus-square-o" href="#"><font size="2">더보기</font></a>
+										<a href="/moyeo/two/placeMainLoc">추천장소</a>&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="fa fa-plus-square-o" href="/moyeo/two/placeList"><font size="2">더보기</font></a>
 									</font><br>
 									<span>회원님들이 모임장소로 추천한 곳입니다.</span>
 								</div>
 							</div>
 							<div class="panel-body padding-0">
-								<div class="chart-holder" id="dashboard-bar-1" style="height: 200px;"></div>
+								<div class="chart-holder" id="dashboard-bar-1" style="height: 200px;">
+									<c:if test="${lcnt > 0}">
+										<c:forEach var="lpodtos" items="${lpodtos}">
+											<li>
+												<a href="/moyeo/two/placeContentForm?place_num=${lpodtos.place_num}">
+						        					<img src="${lpodtos.place_pic_path}/${lpodtos.place_pic_name}" alt="장소 사진" style="width:120px; height:150px; margin-top:25px; margin-left:20px;"><br>
+						        				</a>
+											</li>
+										</c:forEach>
+									</c:if>	
+								</div>
 							</div>
 						</div>
 					</div>
