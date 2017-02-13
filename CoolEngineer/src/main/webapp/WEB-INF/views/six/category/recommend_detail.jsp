@@ -150,7 +150,10 @@ a {
 													</div>
 												</div>
 												<div class="panel-body padding-0" style="height:800px; overflow:auto;">
-
+										    	    <c:if test="${empty dtos}">
+														<font size="3px">추천모임이 없습니다. 관심사나 관심지역을 변경해보세요.</font>
+													</c:if>	
+													<c:if test="${!empty dtos}">			
 											            <c:forEach var="dto" items="${dtos}">
 												            <c:if test="${dto.group_inte1 eq group_inte1 && dto.group_inte2 eq group_inte2 && dto.group_location eq group_location}">
 													            <div style="margin-top:10px; margin-bottom:30px;">
@@ -211,7 +214,7 @@ a {
 																</div>
 													    	</c:if>
 													    </c:forEach>
-													   
+													 </c:if>  
 												</div>
 											</div>
 										</div>
