@@ -574,20 +574,26 @@ a {
 												<div class="panel-body padding-0">
 													<div class="chart-holder" id="dashboard-bar-1"
 														style="height: 200px;">
-														<c:forEach var="dto" items="${recommendDtos}" begin="0" end="14" >
-															<c:if test="${dto.group_inte1 eq group_inte1 && dto.group_inte2 eq group_inte2 && dto.group_location eq group_location}">
-															<div class="panel-body padding-0" style="height:33px; width:480px; float:left; margin-bottom: 12px;">
-																<ul>
-																	<li
-																		style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
-																		<a
-																		href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-																			<font size="3px">${dto.group_name}</font> <br> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2} , ${dto.group_location})</div></font></a>
-																	</li>
-																</ul>
-															</div>
-															</c:if>
-														</c:forEach>	
+														<c:if test="${empty recommendDtos}">
+															<font size="3px">추천모임이 없습니다. 관심사나 관심지역을 변경해보세요.</font>
+														</c:if>
+															           
+														<c:if test="${!empty recommendDtos}"> 
+															<c:forEach var="dto" items="${recommendDtos}" begin="0" end="14" >
+																<c:if test="${dto.group_inte1 eq group_inte1 && dto.group_inte2 eq group_inte2 && dto.group_location eq group_location}">
+																	<div class="panel-body padding-0" style="height:33px; width:480px; float:left; margin-bottom: 12px;">
+																		<ul>
+																			<li
+																				style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
+																				<a
+																				href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
+																					<font size="3px">${dto.group_name}</font> <br> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2} , ${dto.group_location})</div></font></a>
+																			</li>
+																		</ul>
+																	</div>
+																</c:if>
+															</c:forEach>	
+														</c:if>	
 													</div>
 												</div>
 											</div>

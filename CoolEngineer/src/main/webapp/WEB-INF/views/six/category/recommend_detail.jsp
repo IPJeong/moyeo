@@ -150,68 +150,68 @@ a {
 													</div>
 												</div>
 												<div class="panel-body padding-0" style="height:800px; overflow:auto;">
-										            
-										            <c:forEach var="dto" items="${dtos}">
-											            <c:if test="${dto.group_inte1 eq group_inte1 && dto.group_inte2 eq group_inte2 && dto.group_location eq group_location}">
-												            <div style="margin-top:10px; margin-bottom:30px;">
-													            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
-														           	<img src="${dto.main_pic_path}/${dto.main_pic_name}" alt="모임 사진" style="width:70%; height:85px;"> 
-																	<br>
+
+											            <c:forEach var="dto" items="${dtos}">
+												            <c:if test="${dto.group_inte1 eq group_inte1 && dto.group_inte2 eq group_inte2 && dto.group_location eq group_location}">
+													            <div style="margin-top:10px; margin-bottom:30px;">
+														            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
+															           	<img src="${dto.main_pic_path}/${dto.main_pic_name}" alt="모임 사진" style="width:70%; height:85px;"> 
+																		<br>
+																	</div>
+																	<div style="width:80%; font-size:15px; height:100px;">
+																	     <a href="../moimMain/moimMain?group_num=${dto.group_num}">
+																	     	 <span style="color:black;">이름 : ${dto.group_name}</span>
+																	     <br>
+																		 소개 : ${dto.group_intro}<br>
+																		 <span style="color:blue;">관심사 (${dto.group_inte1}, ${dto.group_inte2})</span>&nbsp;|&nbsp;<span style="color:green">지역 (${dto.group_location})</span>
+																	     &nbsp;|&nbsp;<span style="color:red;">규모 (${dto.group_mem_cnt}명)</span><br>
+																	     <span style="color:red;">개설일 : ${fn:substring(dto.reg_date, 0, 10)}</span>
+																	     </a>
+																	</div>
 																</div>
-																<div style="width:80%; font-size:15px; height:100px;">
-																     <a href="../moimMain/moimMain?group_num=${dto.group_num}">
-																     	 <span style="color:black;">이름 : ${dto.group_name}</span>
-																     <br>
-																	 소개 : ${dto.group_intro}<br>
-																	 <span style="color:blue;">관심사 (${dto.group_inte1}, ${dto.group_inte2})</span>&nbsp;|&nbsp;<span style="color:green">지역 (${dto.group_location})</span>
-																     &nbsp;|&nbsp;<span style="color:red;">규모 (${dto.group_mem_cnt}명)</span><br>
-																     <span style="color:red;">개설일 : ${fn:substring(dto.reg_date, 0, 10)}</span>
-																     </a>
+													    	</c:if>
+													    </c:forEach>
+	   										            <c:forEach var="dto" items="${dtos}">
+												            <c:if test="${dto.group_inte1 eq group_inte1 && dto.group_inte2 eq group_inte2 && dto.group_location ne group_location}">
+													            <div style="margin-top:10px; margin-bottom:30px;">
+														            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
+															           	<img src="${dto.main_pic_path}/${dto.main_pic_name}" alt="모임 사진" style="width:70%; height:85px;"> 
+																		<br>
+																	</div>
+																	<div style="width:80%; font-size:15px; height:100px;">
+																	     <a href="../moimMain/moimMain?group_num=${dto.group_num}">
+																	     	 <span style="color:black;">이름 : ${dto.group_name}</span>
+																	     <br>
+																		 소개 : ${dto.group_intro}<br>
+																		 <span style="color:blue;">관심사 (${dto.group_inte1}, ${dto.group_inte2})</span>&nbsp;|&nbsp;<span style="color:green">지역 (${dto.group_location})</span>
+																	     &nbsp;|&nbsp;<span style="color:red;">규모 (${dto.group_mem_cnt}명)</span><br>
+																	     <span style="color:red;">개설일 : ${fn:substring(dto.reg_date, 0, 10)}</span>
+																	     </a>
+																	</div>
 																</div>
-															</div>
-												    	</c:if>
-												    </c:forEach>
-   										            <c:forEach var="dto" items="${dtos}">
-											            <c:if test="${dto.group_inte1 eq group_inte1 && dto.group_inte2 eq group_inte2 && dto.group_location ne group_location}">
-												            <div style="margin-top:10px; margin-bottom:30px;">
-													            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
-														           	<img src="${dto.main_pic_path}/${dto.main_pic_name}" alt="모임 사진" style="width:70%; height:85px;"> 
-																	<br>
+													    	</c:if>
+													    </c:forEach>
+	   										            <c:forEach var="dto" items="${dtos}">
+												            <c:if test="${dto.group_inte1 ne group_inte1 && dto.group_inte2 ne group_inte2 && dto.group_location eq group_location}">
+													            <div style="margin-top:10px; margin-bottom:30px;">
+														            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
+															           	<img src="${dto.main_pic_path}/${dto.main_pic_name}" alt="모임 사진" style="width:70%; height:85px;"> 
+																		<br>
+																	</div>
+																	<div style="width:80%; font-size:15px; height:100px;">
+																	     <a href="../moimMain/moimMain?group_num=${dto.group_num}">
+																	     	 <span style="color:black;">이름 : ${dto.group_name}</span>
+																	     <br>
+																		 소개 : ${dto.group_intro}<br>
+																		 <span style="color:blue;">관심사 (${dto.group_inte1}, ${dto.group_inte2})</span>&nbsp;|&nbsp;<span style="color:green">지역 (${dto.group_location})</span>
+																	     &nbsp;|&nbsp;<span style="color:red;">규모 (${dto.group_mem_cnt}명)</span><br>
+																	     <span style="color:red;">개설일 : ${fn:substring(dto.reg_date, 0, 10)}</span>
+																	     </a>
+																	</div>
 																</div>
-																<div style="width:80%; font-size:15px; height:100px;">
-																     <a href="../moimMain/moimMain?group_num=${dto.group_num}">
-																     	 <span style="color:black;">이름 : ${dto.group_name}</span>
-																     <br>
-																	 소개 : ${dto.group_intro}<br>
-																	 <span style="color:blue;">관심사 (${dto.group_inte1}, ${dto.group_inte2})</span>&nbsp;|&nbsp;<span style="color:green">지역 (${dto.group_location})</span>
-																     &nbsp;|&nbsp;<span style="color:red;">규모 (${dto.group_mem_cnt}명)</span><br>
-																     <span style="color:red;">개설일 : ${fn:substring(dto.reg_date, 0, 10)}</span>
-																     </a>
-																</div>
-															</div>
-												    	</c:if>
-												    </c:forEach>
-   										            <c:forEach var="dto" items="${dtos}">
-											            <c:if test="${dto.group_inte1 ne group_inte1 && dto.group_inte2 ne group_inte2 && dto.group_location eq group_location}">
-												            <div style="margin-top:10px; margin-bottom:30px;">
-													            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
-														           	<img src="${dto.main_pic_path}/${dto.main_pic_name}" alt="모임 사진" style="width:70%; height:85px;"> 
-																	<br>
-																</div>
-																<div style="width:80%; font-size:15px; height:100px;">
-																     <a href="../moimMain/moimMain?group_num=${dto.group_num}">
-																     	 <span style="color:black;">이름 : ${dto.group_name}</span>
-																     <br>
-																	 소개 : ${dto.group_intro}<br>
-																	 <span style="color:blue;">관심사 (${dto.group_inte1}, ${dto.group_inte2})</span>&nbsp;|&nbsp;<span style="color:green">지역 (${dto.group_location})</span>
-																     &nbsp;|&nbsp;<span style="color:red;">규모 (${dto.group_mem_cnt}명)</span><br>
-																     <span style="color:red;">개설일 : ${fn:substring(dto.reg_date, 0, 10)}</span>
-																     </a>
-																</div>
-															</div>
-												    	</c:if>
-												    </c:forEach>
-												    
+													    	</c:if>
+													    </c:forEach>
+													   
 												</div>
 											</div>
 										</div>

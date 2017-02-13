@@ -150,24 +150,31 @@ a {
 													</div>
 												</div>
 												<div class="panel-body padding-0" style="height:800px; overflow:auto;">
-										            <c:forEach var="dto" items="${dtos}">
-											            <div style="margin-top:10px; margin-bottom:30px;">
-												            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
-													           	<img src="${dto.main_pic_path}/${dto.main_pic_name}" alt="모임 사진" style="width:70%; height:85px;"> 
-																<br>
+										    	    <c:if test="${empty dtos}">
+														<font size="3px">&nbsp;'${subject}' 분야에 개설된 모임이 없습니다. <br> &nbsp;모임을 개설해보세요.</font>
+													</c:if>
+										        
+										        
+										        	<c:if test="${!empty dtos}">
+											            <c:forEach var="dto" items="${dtos}">
+												            <div style="margin-top:10px; margin-bottom:30px;">
+													            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
+														           	<img src="${dto.main_pic_path}/${dto.main_pic_name}" alt="모임 사진" style="width:70%; height:85px;"> 
+																	<br>
+																</div>
+																<div style="width:80%; font-size:15px; height:100px;">
+																     <a href="../moimMain/moimMain?group_num=${dto.group_num}">
+																     	 <span style="color:black;">이름 : ${dto.group_name}</span>
+																     <br>
+																	 소개 : ${dto.group_intro}<br>
+																	 <span style="color:blue;">관심사 (${dto.group_inte1}, ${dto.group_inte2})</span>&nbsp;|&nbsp;<span style="color:green">지역 (${dto.group_location})</span>
+																     &nbsp;|&nbsp;<span style="color:red;">규모 (${dto.group_mem_cnt}명)</span><br>
+																     <span style="color:red;">개설일 : ${fn:substring(dto.reg_date, 0, 10)}</span>
+																     </a>
+																</div>
 															</div>
-															<div style="width:80%; font-size:15px; height:100px;">
-															     <a href="../moimMain/moimMain?group_num=${dto.group_num}">
-															     	 <span style="color:black;">이름 : ${dto.group_name}</span>
-															     <br>
-																 소개 : ${dto.group_intro}<br>
-																 <span style="color:blue;">관심사 (${dto.group_inte1}, ${dto.group_inte2})</span>&nbsp;|&nbsp;<span style="color:green">지역 (${dto.group_location})</span>
-															     &nbsp;|&nbsp;<span style="color:red;">규모 (${dto.group_mem_cnt}명)</span><br>
-															     <span style="color:red;">개설일 : ${fn:substring(dto.reg_date, 0, 10)}</span>
-															     </a>
-															</div>
-														</div>
-												    </c:forEach>
+													    </c:forEach>
+												    </c:if>
 												</div>
 											</div>
 										</div>
