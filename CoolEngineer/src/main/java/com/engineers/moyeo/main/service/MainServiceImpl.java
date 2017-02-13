@@ -3,6 +3,7 @@ package com.engineers.moyeo.main.service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
+import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.main.dao.MainDAO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
@@ -78,6 +80,20 @@ public class MainServiceImpl implements MainService{
 		
 	}
 	
+	// 메인페이지에 모임후기 연동
+	@Override
+	public void getMeetingPostList(Model model) {
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -1);
+		String date = cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH))+"-"+cal.get(Calendar.DATE);
+		
+		List<MeetingPostDTO> postDtos = mainDao.getMeetingPost(date);
+		System.out.println("미팅후기 수 : " + postDtos.size());
+		model.addAttribute("postDtos", postDtos);
+		
+	}
+
 	// 로그인 프로세스
 	@Override
 	public String memberLoginPro(Model model) {
@@ -132,9 +148,10 @@ public class MainServiceImpl implements MainService{
 		if(tag != null) {
 			String[] tags = tag.split(",");
 			for(String ta : tags) {
-				ta = "#"+ta.replaceAll(" ", "");
+				ta = " #"+ta.replaceAll(" ", "");
 				sb.append(ta);
 			}
+			System.out.println("sb : " + sb.toString());
 		}
 		wordExtractAndAnalyze(sb.toString());
 	}

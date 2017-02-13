@@ -19,6 +19,11 @@ import scala.collection.Seq;
  */
 public class KoreanParser {
 
+	public static void main(String[] args) {
+		getWordsMap("모임후우기 후후기기 #후기 #후후기기 #후루루루기");
+		
+	}
+	
 	// 텍스트를 형태소 분석해서 word map으로 리턴해주는 메서드
 	public synchronized static List<WordDTO> getWordsMap(String text) {
 		
@@ -39,6 +44,7 @@ public class KoreanParser {
 		for(KoreanTokenJava tokenJava : koreanTokenJava) {
 			
 			String pos = tokenJava.getPos().toString();
+			System.out.println(tokenJava.getText()+" / " + tokenJava.getPos());
 			if(pos.equals("Noun") || pos.equals("ProperNoun") || pos.equals("Hashtag") || pos.equals("Verb")) {
 				System.out.println("분석 후 단어 : " + tokenJava.toString());
 				String word = tokenJava.getText();

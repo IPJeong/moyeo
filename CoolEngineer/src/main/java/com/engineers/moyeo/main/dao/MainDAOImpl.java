@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
@@ -36,6 +37,13 @@ public class MainDAOImpl implements MainDAO{
 	public List<MainVideoDTO> getMainVideos() {
 		MainDAO dao = sqlSession.getMapper(MainDAO.class);
 		return dao.getMainVideos();
+	}
+	
+	// 메인페이지 모임후기 리스트
+	@Override
+	public List<MeetingPostDTO> getMeetingPost(String last_day) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.getMeetingPost(last_day);
 	}
 
 	//중복확인 체크

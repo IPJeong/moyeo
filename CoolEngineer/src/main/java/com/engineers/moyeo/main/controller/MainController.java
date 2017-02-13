@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @기능 홈페이지의 메인페이지 관련 기능을 수행하는 컨트롤러
  * @author JIP
  * @최초작성일 2017.01.19
- * @최종수정일 2017.01.19
+ * @최종수정일 2017.02.13
  */
 
 @RequestMapping("/main")
@@ -36,6 +36,7 @@ public class MainController {
 		mainService.hotMoim(model);
 		mainService.main_meeting_post(model);
 		mainService.recommendMoim(model);
+		mainService.getMeetingPostList(model);
 		
 		return "main/main";
 	}
@@ -101,7 +102,6 @@ public class MainController {
 		
 		System.out.println("워드클라우드 재검색 요청");
 		model.addAttribute("req", req);
-		
 		viewPage = mainService.wordcloudRefresh(model);
 		
 		return viewPage;
