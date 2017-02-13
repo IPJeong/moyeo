@@ -470,5 +470,17 @@ public class SixController {
 		
 		return "six/category/category_detail";
 	}	
+
+	//모임카테고리-추천모임상세목록
+	@RequestMapping("/category/recommend_detail")
+	public String recommendDetail(HttpServletRequest req, Model model) {
+		System.out.println("/category/recommend_detail");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.categoryDetail(model);
+		
+		return "six/category/recommend_detail";
+	}
+	
 }
 

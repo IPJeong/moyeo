@@ -730,7 +730,10 @@ public class SixServiceImpl implements SixService{
 				//회원의 관심 지역 정보 조회
 				InterestLocationDTO locaDto = sixDao.inteLoca(mem_id);
 				String group_location = locaDto.getLoc_city() + "-" + locaDto.getLoc_gu();
-
+				model.addAttribute("group_inte1", group_inte1);
+				model.addAttribute("group_inte2", group_inte2);
+				model.addAttribute("group_location", group_location);
+				
 				//추천모임
 				Map<String, Object> daoMap = model.asMap();
 				daoMap.put("group_inte1", group_inte1);
@@ -801,8 +804,41 @@ public class SixServiceImpl implements SixService{
 		ArrayList<MoimOpenDTO> dtos17 = sixDao.categoryLocationQ();
 		model.addAttribute("dtos17", dtos17);
 		
+		//인기모임
 		ArrayList<HotMoimDTO> hotDtos = sixDao.hotMoim();
 		model.addAttribute("hotDtos", hotDtos);
+
+		//추천모임
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+	
+		//회원의 관심 카테고리 정보 조회
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		if(mem_id != null){
+			InterestCatDTO cateDto = sixDao.inteCate(mem_id);
+			if(cateDto != null){
+				String group_inte1 = cateDto.getInter_first();	
+				String group_inte2 = cateDto.getInter_second();
+				//회원의 관심 지역 정보 조회
+				InterestLocationDTO locaDto = sixDao.inteLoca(mem_id);
+				String group_location = locaDto.getLoc_city() + "-" + locaDto.getLoc_gu();
+				model.addAttribute("group_inte1", group_inte1);
+				model.addAttribute("group_inte2", group_inte2);
+				model.addAttribute("group_location", group_location);
+				
+				//추천모임
+				Map<String, Object> daoMap = model.asMap();
+				daoMap.put("group_inte1", group_inte1);
+				daoMap.put("group_inte2", group_inte2);
+				daoMap.put("group_location", group_location);
+				
+				int cnt = sixDao.recommendMoimChk(daoMap);
+				if (cnt != 0){
+					ArrayList<MoimOpenDTO> recommendDtos = sixDao.recommendMoim(daoMap);
+					model.addAttribute("recommendDtos", recommendDtos);
+				}
+			}
+		}	
 	}
 
 	//모임카테고리-규모별
@@ -869,8 +905,41 @@ public class SixServiceImpl implements SixService{
 		ArrayList<MoimOpenDTO> dtos20 = sixDao.categoryScaleT();
 		model.addAttribute("dtos20", dtos20);
 
+		//인기모임
 		ArrayList<HotMoimDTO> hotDtos = sixDao.hotMoim();
 		model.addAttribute("hotDtos", hotDtos);
+
+		//추천모임
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+	
+		//회원의 관심 카테고리 정보 조회
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		if(mem_id != null){
+			InterestCatDTO cateDto = sixDao.inteCate(mem_id);
+			if(cateDto != null){
+				String group_inte1 = cateDto.getInter_first();	
+				String group_inte2 = cateDto.getInter_second();
+				//회원의 관심 지역 정보 조회
+				InterestLocationDTO locaDto = sixDao.inteLoca(mem_id);
+				String group_location = locaDto.getLoc_city() + "-" + locaDto.getLoc_gu();
+				model.addAttribute("group_inte1", group_inte1);
+				model.addAttribute("group_inte2", group_inte2);
+				model.addAttribute("group_location", group_location);
+				
+				//추천모임
+				Map<String, Object> daoMap = model.asMap();
+				daoMap.put("group_inte1", group_inte1);
+				daoMap.put("group_inte2", group_inte2);
+				daoMap.put("group_location", group_location);
+				
+				int cnt = sixDao.recommendMoimChk(daoMap);
+				if (cnt != 0){
+					ArrayList<MoimOpenDTO> recommendDtos = sixDao.recommendMoim(daoMap);
+					model.addAttribute("recommendDtos", recommendDtos);
+				}
+			}
+		}	
 	}
 
 	//모임-메인
@@ -1508,6 +1577,45 @@ public class SixServiceImpl implements SixService{
 			ArrayList<MoimOpenDTO> dtos = sixDao.categoryLocationQ();
 			model.addAttribute("dtos", dtos);
 			
+		} else if(subject.equals("인기모임")) {
+			
+			ArrayList<HotMoimDTO> hot_dtos = sixDao.hotMoim();
+			ArrayList<MoimOpenDTO> dtos = new ArrayList<MoimOpenDTO>();
+			for(int i=0; i<hot_dtos.size(); i++) {
+				MoimOpenDTO dto = sixDao.hotMoimPic(Integer.parseInt(hot_dtos.get(i).getGroup_num()));
+				dtos.add(dto);
+			}
+			
+			model.addAttribute("dtos", dtos);
+		
+		} else if(subject.equals("추천모임")) {
+
+			//회원의 관심 카테고리 정보 조회
+			String mem_id = (String)req.getSession().getAttribute("mem_id");
+			InterestCatDTO cateDto = sixDao.inteCate(mem_id);
+			if(cateDto != null){
+				String group_inte1 = cateDto.getInter_first();	
+				String group_inte2 = cateDto.getInter_second();
+				//회원의 관심 지역 정보 조회
+				InterestLocationDTO locaDto = sixDao.inteLoca(mem_id);
+				String group_location = locaDto.getLoc_city() + "-" + locaDto.getLoc_gu();
+				model.addAttribute("group_inte1", group_inte1);
+				model.addAttribute("group_inte2", group_inte2);
+				model.addAttribute("group_location", group_location);
+				
+				//추천모임
+				Map<String, Object> daoMap = model.asMap();
+				daoMap.put("group_inte1", group_inte1);
+				daoMap.put("group_inte2", group_inte2);
+				daoMap.put("group_location", group_location);
+				
+				int cnt = sixDao.recommendMoimChk(daoMap);
+				if (cnt != 0){
+					ArrayList<MoimOpenDTO> dtos = sixDao.recommendMoim(daoMap);
+					model.addAttribute("dtos", dtos);
+					}
+				}
+		
 		} else if(Integer.parseInt(subject.split("명")[0]) == 5) {
 
 			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleA();
@@ -1608,10 +1716,6 @@ public class SixServiceImpl implements SixService{
 			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleT();
 			model.addAttribute("dtos", dtos);
 			
-		} else if(subject.equals("인기모임")) {
-			
-			ArrayList<HotMoimDTO> dtos = sixDao.hotMoim();
-			model.addAttribute("dtos", dtos);
-		}
+		} 
 	}
 }

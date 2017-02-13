@@ -194,7 +194,7 @@ li {
 								<div class="panel-title-box">
 									<font size="4px;">
 										추천모임&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="fa fa-plus-square-o" href="#"><font size="2">더보기</font></a>
+										<a class="fa fa-plus-square-o" href="/moyeo/six/category/recommend_detail?category=추천모임&subject=추천모임"><font size="2">더보기</font></a>
 									</font><br>
 									<span>더 많은 모임에 가입해보세요!</span>
 								</div>
@@ -203,16 +203,18 @@ li {
 								<div class="chart-holder" id="dashboard-line-1"
 									style="height: 200px;">
 									<c:forEach var="dto" items="${recommendDtos}" begin="0" end="9" >
+										<c:if test="${dto.group_inte1 eq group_inte1 && dto.group_inte2 eq group_inte2 && dto.group_location eq group_location}">
 											<div class="panel-body padding-0" style="height:36px; width:100%; float:left; margin-bottom:13px;">
 												<ul>
 													<li
 														style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
 														<a
 														href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-															<font size="3px">${dto.group_name}</font> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
+															<font size="3px">${dto.group_name}</font> <br> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
 													</li>
 												</ul>
 											</div>
+										</c:if>
 									</c:forEach>		
 								</div>
 							</div>
@@ -298,7 +300,7 @@ li {
 							<div class="panel-heading">
 								<div class="panel-title-box">
 									<font size="4px;">인기모임</font>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a class="fa fa-plus-square-o" href="/moyeo/six/category/category_hobby"><font size="2">더보기</font></a><br>
+									<a class="fa fa-plus-square-o" href="/moyeo/six/category/category_detail?category=인기모임&subject=인기모임"><font size="2">더보기</font></a><br>
 									<span>회원들의 활동이 가장 활발한 모임들입니다.</span>
 								</div>
 							</div>

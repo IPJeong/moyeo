@@ -594,7 +594,12 @@
 	
 	<!-- 추천모임리스트 -->
 	<select id="recommendMoim" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
-		SELECT * FROM group_list WHERE group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2} AND group_location = #{group_location}
+		SELECT * FROM group_list gl, main_picture mp WHERE (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' AND (group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2} AND group_location = #{group_location})) OR (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' AND (group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2})) OR (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' AND (group_location = #{group_location}))
+	</select>
+	
+	<!-- 인기모임 사진포함해서 불러오기 -->
+	<select id="hotMoimPic" parameterType="int" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+		SELECT * FROM group_list g, main_picture p WHERE g.group_num = #{group_num} AND g.group_num = p.group_num AND p.main_pic_path not like '%-'
 	</select>
 	
 </mapper>

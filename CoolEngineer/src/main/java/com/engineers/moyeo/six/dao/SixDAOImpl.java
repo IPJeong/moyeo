@@ -1004,4 +1004,12 @@ public class SixDAOImpl implements SixDAO{
 		
 		return recommendDtos;
 	}
+	
+	//인기모임 사진포함해서 불러오기
+	public MoimOpenDTO hotMoimPic(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		MoimOpenDTO dto = dao.hotMoimPic(group_num);
+		
+		return dto;
+	}
 }

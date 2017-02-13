@@ -357,4 +357,7 @@ public interface SixDAO {
 	
 	//추천모임
 	public ArrayList<MoimOpenDTO> recommendMoim(Map<String, Object> daoMap);
+	
+	//인기모임 사진포함해서 불러오기
+	public MoimOpenDTO hotMoimPic(int group_num);
 }
