@@ -200,22 +200,52 @@
     	 WHERE postrep_num = #{postrep_num}
     </delete>
     
-    <!-- 모임의 사진리스트를 불러옴 -->
-    <select id="getGroupPics" parameterType="int" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
-    	SELECT pp.pic_num, pp.pic_path, pp.pic_name, pp.mem_id, pp.group_num, pp.post_num
+    <!-- 모임의 사진 개수를 불러옴 -->
+    <select id="getGroupPicsCnt" parameterType="Map" resultType="int">
+    	SELECT COUNT(pp.pic_num)
     	  FROM meeting_post mp, post_pictures pp
     	 WHERE mp.post_num = pp.post_num
     	   AND mp.group_num = #{group_num}
-    	 ORDER BY pp.pic_num DESC
     </select>
     
-    <!-- 모임의 동영상리스트를 불러옴 -->
-    <select id="getGroupVideos" parameterType="int" resultType="com.engineers.moyeo.five.dto.PostVideoDTO">
-    	SELECT pv.video_num, pv.video_path, pv.video_name, pv.mem_id, pv.group_num, pv.post_num
+    <!-- 모임의 사진리스트를 불러옴 -->
+    <select id="getGroupPics" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
+	    SELECT *
+	      FROM (
+			    SELECT pic_num, pic_path, pic_name, mem_id, group_num, post_num, rownum as rn
+			      FROM (
+				      	SELECT pp.pic_num, pp.pic_path, pp.pic_name, pp.mem_id, pp.group_num, pp.post_num
+				    	  FROM meeting_post mp, post_pictures pp
+				    	 WHERE mp.post_num = pp.post_num
+				    	   AND mp.group_num = #{group_num}
+				    	 ORDER BY pp.pic_num DESC
+			    	 	)
+	    		)
+	     WHERE rn BETWEEN #{start} AND #{end}		
+    </select>
+    
+    <!-- 모임의 동영상 개수를 불러옴 -->
+    <select id="getGroupVideosCnt" parameterType="Map" resultType="int">
+    	SELECT COUNT(pv.video_num)
     	  FROM meeting_post mp, post_video pv
     	 WHERE mp.post_num = pv.post_num
     	   AND mp.group_num = #{group_num}
-    	 ORDER BY pv.video_num DESC
+    </select>
+    
+    <!-- 모임의 동영상리스트를 불러옴 -->
+    <select id="getGroupVideos" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostVideoDTO">
+	    SELECT *
+	      FROM (
+			    SELECT video_num, video_path, video_name, mem_id, group_num, post_num, rownum as rn
+			      FROM (
+				    	SELECT pv.video_num, pv.video_path, pv.video_name, pv.mem_id, pv.group_num, pv.post_num
+				    	  FROM meeting_post mp, post_video pv
+				    	 WHERE mp.post_num = pv.post_num
+				    	   AND mp.group_num = #{group_num}
+				    	 ORDER BY pv.video_num DESC
+	      	 			)
+	    		)
+	     WHERE rn BETWEEN #{start} AND #{end}		
     </select>
     
     <!-- 모임에서의 회원 권한 확인 -->

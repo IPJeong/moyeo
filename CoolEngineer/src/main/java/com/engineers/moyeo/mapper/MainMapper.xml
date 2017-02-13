@@ -199,4 +199,18 @@
 		  WHERE rn BETWEEN 1 AND 6
 		  ORDER BY rn ASC
 	</select>
+	
+	<select id="getMeetingPost" parameterType="String" resultType="com.engineers.moyeo.five.dto.MeetingPostDTO">
+		SELECT * 
+	       FROM (
+	             SELECT post_num, post_title, post_content, post_tag, post_date, like_num, mem_id, group_num, post_hit, rownum rn
+	               FROM (
+	                     SELECT *
+	                       FROM meeting_post
+	                      WHERE post_date >= to_date(#{last_day} , 'YYYY-MM-DD')
+	                      ORDER BY like_num DESC, post_hit DESC, post_date DESC
+	                    )
+	              )
+	       WHERE rn BETWEEN 1 AND 8
+	</select>
 </mapper>
