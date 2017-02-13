@@ -74,4 +74,10 @@ public interface FourDAO {
 	
 	//제품 등록
 	public int productInsert(productInfoDTO dto);
+	
+	//제품 조회
+	public ArrayList<productInfoDTO> productArticles(Map<String, Integer> daoMap);
+	
+	
+	
 }

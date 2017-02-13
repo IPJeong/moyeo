@@ -1011,10 +1011,11 @@ public class FourServiceImpl implements FourService{
 	//샵 메인
 	@Override
 	public String moyeoShopExecute(Model model) {
+		
 		Map<String, Object> map = model.asMap();
 	    HttpServletRequest req= (HttpServletRequest)map.get("req");
 	    
-		int pageSize = 10;//한 페이지당 출력할 글 개수
+		int pageSize = 4;//한 페이지당 출력할 글 개수
 		int pageBlock = 3; //출력할 페이지 개수
 		
 		int cnt = 0; 		//글 개수
@@ -1035,6 +1036,8 @@ public class FourServiceImpl implements FourService{
 		//1. db메소드 실행
 		//글 개수 구하기
 		cnt = fourDao.shopGetCount();
+		
+	
 		
 		System.out.println("글 개수 cnt: " + cnt);
 		
@@ -1057,15 +1060,15 @@ public class FourServiceImpl implements FourService{
 		number = cnt- (currentPage - 1) * pageSize;
 		if(cnt > 0) {
 			
-			//ArrayList<BoardDTO> dtos = dao.getArticles(start, end); //임포트
+			
 			Map<String, Integer> daoMap = new HashMap<String, Integer>();
 			daoMap.put("start", start);
 			daoMap.put("end", end);
 		
 			
-			ArrayList<GroupNoticeDTO> dtos = fourDao.getArticles(daoMap);
-			System.out.println("dtos: " + dtos);
-			
+			//ArrayList<GroupNoticeDTO> dtos = fourDao.getArticles(daoMap);
+			//System.out.println("dtos: " + dtos);
+			ArrayList<productInfoDTO> dtos = fourDao.productArticles(daoMap);
 			model.addAttribute("dtos", dtos);
 	
 		}
@@ -1116,13 +1119,13 @@ public class FourServiceImpl implements FourService{
 		dto.setProduct_price(req.getParameter("product_price"));
 		dto.setProduct_qty(Integer.parseInt(req.getParameter("product_qty")));
 		dto.setProduct_detail(req.getParameter("product_detail"));
-		dto.setSeller_id((String) req.getSession().getAttribute("mem_id"));
-		
+		dto.setSeller_id("sell");
+	
 		System.out.println("실행");
 		//데이터 메소드 실행
 		//Fourdao.
 		int cnt = fourDao.productInsert(dto);
-	    System.out.println("제품등록 cnt: " + cnt);
+	    System.out.println("제품등록 Insert cnt: " + cnt);
 		
 		//값 설정
 		model.addAttribute("cnt", cnt);

@@ -1608,6 +1608,10 @@ public class SixServiceImpl implements SixService{
 			ArrayList<MoimOpenDTO> dtos = sixDao.categoryScaleT();
 			model.addAttribute("dtos", dtos);
 			
+		} else if(subject.equals("인기모임")) {
+			
+			ArrayList<HotMoimDTO> dtos = sixDao.hotMoim();
+			model.addAttribute("dtos", dtos);
 		}
 	}
 }

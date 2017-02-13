@@ -215,5 +215,13 @@ public class FourDAOImpl implements FourDAO{
 		return cnt;
 	}
 	
+	@Override
+	public ArrayList<productInfoDTO> productArticles(Map<String, Integer> daoMap) {
+		ArrayList<productInfoDTO> dtos = null;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		dtos = dao.productArticles(daoMap);
+		return dtos;
+	}
+	
 	
 }

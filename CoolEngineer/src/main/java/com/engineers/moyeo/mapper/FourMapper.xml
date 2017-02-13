@@ -156,11 +156,20 @@
     <!-- 제품 등록 -->
    <insert id="productInsert" parameterType="com.engineers.moyeo.four.dto.productInfoDTO">
    		 INSERT INTO product_info (product_num, product_name, product_price, product_qty, product_detail, seller_id)
-  	      values(product_info_seq.nextval, #{product_name}, #{product_price}, #{product_qty}, #{product_detail}, #{seller_id} )
-   </insert>
+  			values(product_info_seq.nextval, #{product_name}, #{product_price}, #{product_qty}, #{product_detail},#{seller_id})
+	</insert>
    
-
-	
+    <!-- 제품 목록-->
+    <select id="productArticles" parameterType="Map" resultType="com.engineers.moyeo.four.dto.productInfoDTO"> 
+    	SELECT *  
+		  FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, rownum rnum  
+				 FROM (SELECT * FROM product_info 
+						ORDER BY product_num DESC)
+				)		  
+          WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+    </select>
+ 
+    
 	
 	   
 </mapper>

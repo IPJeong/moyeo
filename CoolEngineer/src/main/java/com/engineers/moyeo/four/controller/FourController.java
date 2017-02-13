@@ -118,9 +118,6 @@ public class FourController {
 	@RequestMapping("/moim_greeting_board")	
 	public String moim_greeting_list(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
-		if((Integer)req.getSession().getAttribute("group_per") == 4){
-			return "four/greeting_board/redirect";
-		}
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetinglistExecute(model);
 		return viewPage;
@@ -262,15 +259,23 @@ public class FourController {
 		return viewPage;
 	}
 	//제품 등록 처리
-	@RequestMapping("productInsertpro")
+	@RequestMapping("productInsertPro")
 	public String productInsertpro(HttpServletRequest req, Model model) {
-		System.out.println("productInsertpro 실행");
+		System.out.println("productInsertPro 실행");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		String viewPage=fourService.productInsertproExecute(model);
 		return viewPage;
 	}
 	
-	
+	//제품 등록 처리
+	@RequestMapping("productDetail")
+	public String productDetail(HttpServletRequest req, Model model) {
+		System.out.println("productInsertpro 실행");
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		
+		return "four/shop/moyeoShopDetail";
+	}
 	
 }
