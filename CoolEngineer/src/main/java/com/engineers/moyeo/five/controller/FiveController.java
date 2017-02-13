@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.engineers.moyeo.five.service.FiveService;
@@ -223,7 +224,6 @@ public class FiveController {
 	}
 	
 	// 모임후기 바로보기(메인페이지 에서)
-	
 	@RequestMapping(value="/postDetailView")
 	public String meetingPostView(Model model, HttpServletRequest req) {
 		
@@ -234,4 +234,18 @@ public class FiveController {
 		return viewPage;
 	}
 	
+	// 모임후기 사진사제
+	@RequestMapping(value="/deletePicture")
+	public ModelAndView deleteGallery(@RequestParam String gal_num, @RequestParam String type) {
+		
+		System.out.println("모임사진 삭제요청");
+		
+		mav = new ModelAndView("JSON");
+		mav.addObject("gal_num", gal_num);
+		mav.addObject("type", type);
+		
+		fiveService.deleteGallery(mav);
+		
+		return mav;
+	}
 }

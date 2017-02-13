@@ -218,7 +218,7 @@ public class FiveServiceImpl implements FiveService {
          // 업로드된 파일 이름을 받아옴
          String fileName = multipartFile.getOriginalFilename();
 
-         if(fileName.trim().length()>4){
+         if(fileName.trim().length()>4) {
 
             String rootPath = Code.rootPath;
             // 모임후기 이미지 저장경로
@@ -612,6 +612,7 @@ public class FiveServiceImpl implements FiveService {
       mav.addObject("postrep_num", postrep_num);
    }
 
+   // 모임후기 사진 리스트 조회
    @Override
    public String getGroupPictures(Model model) throws NumberFormatException, NullPointerException {
       
@@ -620,10 +621,68 @@ public class FiveServiceImpl implements FiveService {
       // 모임번호를 받아옴
       int group_num = (Integer)req.getSession().getAttribute("group_num");
       
+      int pageSize = 12;      //   한 페이지당 출력한 글 개수
+      int pageBlock = 5;      //   출력할 페이지 개수
+
+      int cnt = 0;         // 글 개수
+      int start = 0;         // 현재 페이지 시작번호 : rownum
+      int end   = 0;         // 현재 페이지지 끝번호 : rownum
+      int number = 0;         // 출력할 글 번호
+      String pageNum = null;   // 페이지 번호
+      int currentPage = 0;   // 현재 페이지
+
+      int pageCount = 0;      // 페이지 개수
+      int startPage = 0;      // 시작 페이지
+      int endPage = 0;      // 마지막 페이지
+
+      // 글개수 구하기
+      cnt = fiveDao.getGroupPicsCnt(group_num);
+
+      // 페이지번호를 받아옴
+      pageNum = req.getParameter("pageNum");
+
+      if(pageNum == null) {
+         pageNum = "1";      // 첫페이지를 1페이지로 설정
+      }
+
+      currentPage = Integer.parseInt(pageNum);
+      pageCount = ( cnt / pageSize ) + (cnt % pageSize > 0 ? 1 : 0);
+
+      start = (currentPage -1) * pageSize + 1;   // (5-1) * 10 +1;
+      end = start + pageSize -1; // 41 + 10 -1 = 50;
+
+      if(end > cnt) end = cnt;
+
+      // 글번호
+      number = cnt - (currentPage -1) * pageSize;
+
+      Map<String, Integer> map = new HashMap<>();
+      map.put("group_num", group_num);
+      map.put("start", start);
+      map.put("end", end);
+
       // 모임의 사진리스트를 불러옴
-      List<PostPictureDTO> picDtos = fiveDao.getGroupPics(group_num);
+      List<PostPictureDTO> picDtos = fiveDao.getGroupPics(map);
       
-      model.addAttribute("picDtos", picDtos);
+      req.setAttribute("picDtos", picDtos);
+
+      startPage = (currentPage / pageBlock) * pageBlock + 1;   // (5 / 3) * 3 + 1 = 4
+      if(currentPage % pageBlock == 0) startPage -= pageBlock;   //(5 % 3)
+
+      endPage = startPage + pageBlock - 1;   // 4 + 3 - 1 = 6;
+      if(endPage > pageCount) endPage = pageCount;
+
+      model.addAttribute("cnt", cnt);
+      model.addAttribute("number", number);
+      model.addAttribute("pageNum", pageNum);
+
+      if(cnt > 0) {
+         model.addAttribute("currentPage", currentPage);
+         model.addAttribute("startPage", startPage);
+         model.addAttribute("endPage", endPage);
+         model.addAttribute("pageCount", pageCount);
+         model.addAttribute("pageBlock", pageBlock);
+      }
       
    //--사이드 시작
       //사이드- 모임명, 모임카테고리 불러오기
@@ -651,10 +710,68 @@ public class FiveServiceImpl implements FiveService {
       // 모임번호를 받아옴
       int group_num = (Integer)req.getSession().getAttribute("group_num");
       
-      // 모임의 사진리스트를 불러옴
-      List<PostVideoDTO> videoDtos = fiveDao.getGroupVideos(group_num);
+      int pageSize = 8;      //   한 페이지당 출력한 글 개수
+      int pageBlock = 5;      //   출력할 페이지 개수
+
+      int cnt = 0;         // 글 개수
+      int start = 0;         // 현재 페이지 시작번호 : rownum
+      int end   = 0;         // 현재 페이지지 끝번호 : rownum
+      int number = 0;         // 출력할 글 번호
+      String pageNum = null;   // 페이지 번호
+      int currentPage = 0;   // 현재 페이지
+
+      int pageCount = 0;      // 페이지 개수
+      int startPage = 0;      // 시작 페이지
+      int endPage = 0;      // 마지막 페이지
+
+      // 글개수 구하기
+      cnt = fiveDao.getGroupVideosCnt(group_num);
+
+      // 페이지번호를 받아옴
+      pageNum = req.getParameter("pageNum");
+
+      if(pageNum == null) {
+         pageNum = "1";      // 첫페이지를 1페이지로 설정
+      }
+
+      currentPage = Integer.parseInt(pageNum);
+      pageCount = ( cnt / pageSize ) + (cnt % pageSize > 0 ? 1 : 0);
+
+      start = (currentPage -1) * pageSize + 1;   // (5-1) * 10 +1;
+      end = start + pageSize -1; // 41 + 10 -1 = 50;
+
+      if(end > cnt) end = cnt;
+
+      // 글번호
+      number = cnt - (currentPage -1) * pageSize;
+
+      Map<String, Integer> map = new HashMap<>();
+      map.put("group_num", group_num);
+      map.put("start", start);
+      map.put("end", end);
+
+      // 모임의 동영상 리스트를 불러옴
+      List<PostVideoDTO> videoDtos = fiveDao.getGroupVideos(map);
       
-      model.addAttribute("videoDtos", videoDtos);
+      req.setAttribute("videoDtos", videoDtos);
+
+      startPage = (currentPage / pageBlock) * pageBlock + 1;   // (5 / 3) * 3 + 1 = 4
+      if(currentPage % pageBlock == 0) startPage -= pageBlock;   //(5 % 3)
+
+      endPage = startPage + pageBlock - 1;   // 4 + 3 - 1 = 6;
+      if(endPage > pageCount) endPage = pageCount;
+
+      model.addAttribute("cnt", cnt);
+      model.addAttribute("number", number);
+      model.addAttribute("pageNum", pageNum);
+
+      if(cnt > 0) {
+         model.addAttribute("currentPage", currentPage);
+         model.addAttribute("startPage", startPage);
+         model.addAttribute("endPage", endPage);
+         model.addAttribute("pageCount", pageCount);
+         model.addAttribute("pageBlock", pageBlock);
+      }
       
    //--사이드 시작
       //사이드- 모임명, 모임카테고리 불러오기
@@ -694,6 +811,7 @@ public class FiveServiceImpl implements FiveService {
 		   mem_id = (String)req.getSession().getAttribute("manager_id");
 	   }
 	   
+	   
 	   System.out.println("memid : " + mem_id);
 	   System.out.println("group_num : " + group_num);
 	   
@@ -714,4 +832,23 @@ public class FiveServiceImpl implements FiveService {
 	   return "redirect:postDetail?post_num="+post_num;
    }
 
+
+   // 모임갤러리 삭제
+	@Override
+	public void deleteGallery(ModelAndView mav) {
+		
+		Map<String, Object> dataMap = mav.getModel();
+		
+		int cnt = 0;
+		System.out.println(dataMap.get("gal_num"));
+		int gal_num = Integer.parseInt((String)dataMap.get("gal_num"));
+		String type = (String)dataMap.get("type");
+		
+		if(type.equals("pic")) {
+			cnt = fiveDao.deletePostPic(gal_num);
+		} else if(type.equals("video")) {
+			cnt = fiveDao.deletePostVideo(gal_num);
+		}
+		mav.addObject("cnt", cnt);
+	}
 }

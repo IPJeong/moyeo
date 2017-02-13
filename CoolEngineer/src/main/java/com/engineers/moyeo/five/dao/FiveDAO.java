@@ -62,10 +62,14 @@ public interface FiveDAO {
 	// 모임후기 댓글 삭제
 	public int deletePostReply(int postrep_num);
 	
+	// 모임의 사진 개수 구하기
+	public int getGroupPicsCnt(int group_num);
 	// 모임의 사진리스트를 불러옴
-	public List<PostPictureDTO> getGroupPics(int group_num);
+	public List<PostPictureDTO> getGroupPics(Map<String, Integer> map);
+	// 모임의 동영상 개수 불러옴
+	public int getGroupVideosCnt(int group_num);
 	// 모임의 동영상리스트를 불러옴
-	public List<PostVideoDTO> getGroupVideos(int group_num);
+	public List<PostVideoDTO> getGroupVideos(Map<String, Integer> map);
 	// 모임의 권한을 조회
 	public String getGroupPer(MyGroupDTO dto);
 }

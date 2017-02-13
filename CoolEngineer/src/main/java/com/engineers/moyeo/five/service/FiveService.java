@@ -45,4 +45,7 @@ public interface FiveService {
 	
 	// 모임후기 바로 조회
 	public String postDetailView(Model model) throws NumberFormatException, NullPointerException;
+	
+	// 모임후기 갤러리 삭제
+	public void deleteGallery(ModelAndView mav);
 }

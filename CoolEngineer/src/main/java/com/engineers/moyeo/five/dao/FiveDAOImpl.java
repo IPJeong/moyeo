@@ -193,19 +193,33 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
 		return dao.deletePostReply(postrep_num);
 	}
+	
+	// 모임후기 사진의 개수를 구함
+	@Override
+	public int getGroupPicsCnt(int group_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getGroupPicsCnt(group_num);
+	}
 
 	// 모임의 사진리스트를 불러옴
 	@Override
-	public List<PostPictureDTO> getGroupPics(int group_num) {
+	public List<PostPictureDTO> getGroupPics(Map<String, Integer> map) {
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
-		return dao.getGroupPics(group_num);
+		return dao.getGroupPics(map);
+	}
+	
+	// 모임후기 동영상의 개수를 구함
+	@Override
+	public int getGroupVideosCnt(int group_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getGroupVideosCnt(group_num);
 	}
 
 	// 모임의 동영상리스트를 불러옴
 	@Override
-	public List<PostVideoDTO> getGroupVideos(int group_num) {
+	public List<PostVideoDTO> getGroupVideos(Map<String, Integer> map) {
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
-		return dao.getGroupVideos(group_num);
+		return dao.getGroupVideos(map);
 	}
 
 	// 모임의 권한을 조회
