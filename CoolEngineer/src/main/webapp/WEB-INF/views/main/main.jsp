@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -57,6 +58,7 @@ li {
 	list-style: none;
 	left: -3px;
 }
+	
 </style>
 <script src="/ajax/resources/request.js"></script>
 </head>
@@ -207,7 +209,7 @@ li {
 														style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
 														<a
 														href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-															<font size="3px">${dto.group_name}</font> <br> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
+															<font size="3px">${dto.group_name}</font> <font size="2em;"color="#a7adb5"><div style="float:right; margin-right:20px;">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</div></font></a>
 													</li>
 												</ul>
 											</div>
@@ -309,7 +311,7 @@ li {
 													style="float: none; font-size: 13px; margin: 5px 0px 5px -10px;">
 													<a
 													href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}">
-														<font size="3px" color="#333">${dto.group_name}</font><br><div style="float:right; margin-right:20px;"><font size="2em;"color="#a7adb5">(${dto.group_inte1}-${dto.group_inte2}, ${dto.group_location})</font></div></a>
+														<font size="3px" color="#333">${dto.group_name}</font><br><div style="float:right; margin-right:20px;"><font size="2em;"color="#a7adb5">(${dto.group_inte1}-${dto.group_inte2})</font></div></a>
 												</li>
 											</ul>
 										</div>
@@ -386,7 +388,58 @@ li {
 								</div>
 							</div>
 							<div class="panel-body padding-0">
-								<div class="chart-holder" id="dashboard-donut-1" style="height: 200px;"></div>
+								<div class="chart-holder" id="dashboard-donut-1"
+									style="height: 200px;">
+									<%-- <ul style="padding:0px; margin-left:15px;">
+										<c:forEach var="postDto" items="${postDtos}" begin="0" end="5">
+											<li style="float:none; font-size:13px; margin:10px;">
+												<a href="/moyeo/five/postDetailView?group_num=${postDto.group_num}&post_num=${postDto.post_num}&search=dsearch"><font color="#373a3e">
+													${postDto.post_title}
+												</font></a>
+												<font style="float:right;">
+													<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${postDto.post_date}" />
+												</font>
+												<span class="badge badge-success" style="float:right; margin-right:15px;">${postDto.post_hit}</span>
+	                              				<span class="badge badge-info" style="float:right; margin-right:30px;">${postDto.like_num}</span>
+												
+											</li>
+										</c:forEach>
+									</ul> --%>
+									<table style="padding-top:20px; width:95%;">
+										<thead>
+											<tr>
+												<td align="center" width="10%;">순번</td>
+												<td align="center" width="50%;" >제목</td>
+												<td align="center" width="10%;" >조회수</td>
+												<td align="center" width="10%" >좋아요</td>
+												<td align="center" width="20%;" >등록일</td>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="postDto" items="${postDtos}" varStatus="status">
+												<tr>
+													<td align="center">${status.count}</td>
+													<td style="margin-bottom: 5px;">
+														<a href="/moyeo/five/postDetailView?group_num=${postDto.group_num}&post_num=${postDto.post_num}&search=dsearch"><font color="#373a3e">
+															${postDto.post_title}
+														</font></a>
+													</td>
+													<td align="center" style="margin-bottom: 5px;">
+														<span class="badge badge-success" >${postDto.post_hit}</span>
+													</td>
+													<td align="center"  style="margin-bottom: 5px;">
+		                              					<span class="badge badge-info" >${postDto.like_num}</span>
+		                              				</td>
+		                              				<td align="center"  style="margin-bottom: 5px;">
+														<font style="float:center;">
+															<fmt:formatDate type="both" pattern="yyyy-MM-dd" value="${postDto.post_date}" />
+														</font>
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
