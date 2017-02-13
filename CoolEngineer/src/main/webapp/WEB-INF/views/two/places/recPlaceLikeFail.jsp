@@ -5,14 +5,14 @@
 <body>
 	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
-			alert("'좋아요'를 누르지 못 했습니다.");
+			alert("'좋아요'를 취소하지 못 했습니다.");
 			history.back();
 		</script>
 	</c:if>
 	
 	<c:if test="${cnt == 1}">
 		<script type="text/javascript">
-			alert("'좋아요'를 누르셨습니다.");
+			alert("'좋아요'를 취소했습니다.");
 			window.location='recPlaceContentForm?recpla_num=${recpla_num}';
 		</script>
 	</c:if>

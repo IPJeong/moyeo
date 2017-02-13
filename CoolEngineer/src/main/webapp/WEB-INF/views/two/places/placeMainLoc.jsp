@@ -270,29 +270,29 @@ div .page-content {
 			<c:if test="${lcnt > 0}">
 				<div class="inner">
 		            <div class="info" style="float:left; margin-top:20px; margin-left:5%; width:40%; height:300px;">
-				        <c:forEach var="lppdtos" items="${lppdtos}">
+				        <c:forEach var="lpodtos" items="${lpodtos}">
 					        <ul style="list-style:none; margin-top:20px;">
-					        	<a href="placeContentForm?place_num=${lppdtos.place_num}">
-					        		<img src="${lppdtos.place_pic_path}/${lppdtos.place_pic_name}" alt="장소 사진" style="width:90%; height:145px;">
+					        	<a href="placeContentForm?place_num=${lpodtos.place_num}">
+					        		<img src="${lpodtos.place_pic_path}/${lpodtos.place_pic_name}" alt="장소 사진" style="width:90%; height:145px;">
 					        	</a>
 					        </ul>	
 				        </c:forEach>
 				   </div>
 				   <div class="info" style="float:right; margin-top:20px; margin-right:5%; width:50%; height:300px;">  
 				        <br>
-				        <c:forEach var="lpidtos" items="${lpidtos}">
+				        <c:forEach var="lpodtos" items="${lpodtos}">
 				        	<div style="width:80%; height:145px; margin-top:20px;"> 
 					       		<ul style="list-style:none; margin-top:20px;">
 							        <li>
-							        	<strong>이름</strong> &nbsp; ${lpidtos.place_name}
+							        	<strong>이름</strong> &nbsp; ${lpodtos.place_name}
 							        </li> 
 						         <br>
 							        <li>
-							            <strong>주소</strong> &nbsp; ${lpidtos.place_address}
+							            <strong>주소</strong> &nbsp; ${lpodtos.place_address}
 							        </li> 
 							      <br>
 							        <li>
-							        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpidtos.place_like_count}
+							        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpodtos.place_like_count}
 							        </li>   
 								</ul>
 							</div>
