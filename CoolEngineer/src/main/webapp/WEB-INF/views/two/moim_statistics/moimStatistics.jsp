@@ -84,18 +84,25 @@ li {
 						<ul>
 							<li><a href="/moyeo/two/moimStatisticsArticle?group_num=${group_num}&stats_type=stats_article&term=year"><span class="fa fa-caret-right"></span>1년간</a></li>
 							<li><a href="/moyeo/two/moimStatisticsArticle?group_num=${group_num}&stats_type=stats_article&term=month"><span class="fa fa-caret-right"></span>1개월간</a></li>
+							<li><a href="/moyeo/two/moimStatisticsArticle?group_num=${group_num}&stats_type=stats_article&term=best10"><span class="fa fa-caret-right"></span>BEST 10</a></li>
 						</ul>
 					</li>
-					<li class="xn-openable"><a href="#">방문 분석</a>
+					<li class="xn-openable"><a href="#">출석일 분석</a>
 						<ul>
 							<li><a href="/moyeo/two/moimStatisticsPresent?group_num=${group_num}&stats_type=stats_article&term=year"><span class="fa fa-caret-right"></span>1년간</a></li>
 							<li><a href="/moyeo/two/moimStatisticsPresent?group_num=${group_num}&stats_type=stats_article&term=month"><span class="fa fa-caret-right"></span>1개월간</a></li>
+							<li><a href="/moyeo/two/moimStatisticsPresent?group_num=${group_num}&stats_type=stats_article&term=best10"><span class="fa fa-caret-right"></span>BEST 10</a></li>
+						</ul>
+					</li>
+					<li class="xn-openable"><a href="#">가입자 분석</a>
+						<ul>
+							<li><a href="/moyeo/two/moimStatisticsJoin?group_num=${group_num}&stats_type=stats_article&term=year"><span class="fa fa-caret-right"></span>1년간</a></li>
+							<li><a href="/moyeo/two/moimStatisticsJoin?group_num=${group_num}&stats_type=stats_article&term=month"><span class="fa fa-caret-right"></span>1개월간</a></li>
 						</ul>
 					</li>
 				</ul>	
-			</div>		
-				
- 		<c:if test="${stats_type.equals('stats_member')}">		 
+			</div>			
+				 
 			<div style="float:left; width:30%; height:25%; margin-top:1%; margin-left:15%;">
 			    <script type="text/javascript">
 					google.charts.load('current', {'packages':['corechart']});
@@ -141,26 +148,26 @@ li {
 		
 					function drawChart() {
 					
-					// Create the data table.
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', '연령대');
-					data.addColumn('number', '명수');
-					data.addRows([
-					['10대 이하', ${teen_cnt}], //오류로 표시되더라도 무시
-					['20대', ${twenty_cnt}], //오류로 표시되더라도 무시
-					['30대', ${thirty_cnt}], //오류로 표시되더라도 무시
-					['40대', ${fourty_cnt}], //오류로 표시되더라도 무시
-					['50대', ${fifty_cnt}], //오류로 표시되더라도 무시
-					['60대 이상', ${sixty_cnt}] //오류로 표시되더라도 무시
-					]);
-					
-					// Set chart options
-					var options = {'title':'모임의 연령비 차트',
-					               'width':400,
-					               'height':280};
-		
-					var chart = new google.visualization.PieChart(document.getElementById('chart_by_age'));
-					chart.draw(data, options);
+						// Create the data table.
+						var data = new google.visualization.DataTable();
+						data.addColumn('string', '연령대');
+						data.addColumn('number', '명수');
+						data.addRows([
+						['10대 이하', ${teen_cnt}], //오류로 표시되더라도 무시
+						['20대', ${twenty_cnt}], //오류로 표시되더라도 무시
+						['30대', ${thirty_cnt}], //오류로 표시되더라도 무시
+						['40대', ${fourty_cnt}], //오류로 표시되더라도 무시
+						['50대', ${fifty_cnt}], //오류로 표시되더라도 무시
+						['60대 이상', ${sixty_cnt}] //오류로 표시되더라도 무시
+						]);
+						
+						// Set chart options
+						var options = {'title':'모임의 연령비 차트',
+						               'width':400,
+						               'height':280};
+			
+						var chart = new google.visualization.PieChart(document.getElementById('chart_by_age'));
+						chart.draw(data, options);
 					}
 				</script>
 								
@@ -170,72 +177,72 @@ li {
 			</div>
 			
 				<table class="table table-bordered" style="width:80%; margin-left:10%; margin-top:35%; border:1px solid #D9E5FF;">
-						<colgroup>
-							<col width="21%">
-							<col width="*">
-							<col width="15%">
-							<col width="17%">
-						</colgroup>
-							<tr style="border:1px solid #D9E5FF;">
-								<td rowspan="2" style="border:1px solid #D9E5FF;"><span style="font-weight:bold;">성별 분포</span></td>
-								<td style="background:white; border:1px solid #D9E5FF;">남성</td>
-								<td style="background:white; border:1px solid #D9E5FF;">${man_cnt}명</td>
-								<td style="background:white; border:1px solid #D9E5FF;">
-									<c:set var="man_ratio" value="${man_cnt/(man_cnt + woman_cnt)}" /><fmt:formatNumber value="${man_ratio}" type="percent"/>
-								</td>
-							</tr>
-							<tr style="border:1px solid #D9E5FF;">
-								<td style="background:white; border:1px solid #D9E5FF;">여성</td>
-								<td style="background:white; border:1px solid #D9E5FF;">${woman_cnt}명</td>
-								<td style="background:white; border:1px solid #D9E5FF;">
-									<c:set var="woman_ratio" value="${woman_cnt/(man_cnt + woman_cnt)}" /><fmt:formatNumber value="${woman_ratio}" type="percent"/>
-								</td>
-							</tr>
-							<tr>
-								<td rowspan="6" style="border:1px solid #D9E5FF;"><span style="font-weight:bold;">연령별 분포</span></td>
-								<td style="background:white;">
-									<span>10대 이하</span>
-								</td>
-								<td style="background:white;">${teen_cnt}명</td>
-								<td style="background:white;"><c:set var="teen_ratio" value="${teen_cnt/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixth_cnt)}" /><fmt:formatNumber value="${teen_ratio}" type="percent"/></td>
-							</tr>
-							<tr>
-								<td style="background:white;">
-									<span>20대</span>
-								</td>
-								<td style="background:white;">${twenty_cnt}명</td>
-								<td style="background:white;"><c:set var="twenty_ratio" value="${twenty_cnt/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixth_cnt)}" /><fmt:formatNumber value="${twenty_ratio}" type="percent"/></td>
-							</tr>
-							<tr>
-								<td style="background:white;">
-									<span>30대</span>
-								</td>
-								<td style="background:white;">${thirty_cnt}명</td>
-								<td style="background:white;"><c:set var="thirty_ratio" value="${thirty_cnt/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixth_cnt)}" /><fmt:formatNumber value="${thirty_ratio}" type="percent"/></td>
-							</tr>
-							<tr>
-								<td style="background:white;">
-									<span>40대</span>
-								</td>
-								<td style="background:white;">${fourty_cnt}명</td>
-								<td style="background:white;"><c:set var="fourty_ratio" value="${fourty_cnt/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixth_cnt)}" /><fmt:formatNumber value="${fourty_ratio}" type="percent"/></td>
-							</tr>
-							<tr>
-								<td style="background:white;">
-									<span>50대</span>
-								</td>
-								<td style="background:white;">${fifty_cnt}명</td>
-								<td style="background:white;"><c:set var="fifty_ratio" value="${fifty_cnt/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixth_cnt)}" /><fmt:formatNumber value="${fifty_ratio}" type="percent"/></td>
-							</tr>
-							<tr>
-								<td style="background:white;">
-									<span>60대 이상</span>
-								</td>
-								<td style="background:white;">${sixty_cnt}명</td>
-								<td style="background:white;"><c:set var="sixty_ratio" value="${sixty_cnt/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixth_cnt)}" /><fmt:formatNumber value="${sixty_ratio}" type="percent"/></td>
-							</tr>
+					<colgroup>
+						<col width="21%">
+						<col width="*">
+						<col width="15%">
+						<col width="17%">
+					</colgroup>
+					<tr style="border:1px solid #D9E5FF;">
+						<td rowspan="2" style="border:1px solid #D9E5FF;"><span style="font-weight:bold;">성별 분포</span></td>
+						<td style="background:white; border:1px solid #D9E5FF;">남성</td>
+						<td style="background:white; border:1px solid #D9E5FF;">${man_cnt}명</td>
+						<td style="background:white; border:1px solid #D9E5FF;">
+						<c:set var="man_ratio" value="${man_cnt/(man_cnt + woman_cnt)}" /><fmt:formatNumber value="${man_ratio}" type="percent"/>
+						</td>
+					</tr>
+					<tr style="border:1px solid #D9E5FF;">
+						<td style="background:white; border:1px solid #D9E5FF;">여성</td>
+						<td style="background:white; border:1px solid #D9E5FF;">${woman_cnt}명</td>
+						<td style="background:white; border:1px solid #D9E5FF;">
+						<c:set var="woman_ratio" value="${woman_cnt/(man_cnt + woman_cnt)}" /><fmt:formatNumber value="${woman_ratio}" type="percent"/>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="6" style="border:1px solid #D9E5FF;"><span style="font-weight:bold;">연령별 분포</span></td>
+						<td style="background:white;">
+						<span>10대 이하</span>
+						</td>
+						<td style="background:white;">${teen_cnt}명</td>
+						<td style="background:white;"><c:set var="teen_ratio" value="${(teen_cnt)/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixty_cnt)}" /><fmt:formatNumber value="${teen_ratio}" type="percent"/></td>
+					</tr>
+					<tr>
+						<td style="background:white;">
+						<span>20대</span>
+						</td>
+						<td style="background:white;">${twenty_cnt}명</td>
+						<td style="background:white;"><c:set var="twenty_ratio" value="${(twenty_cnt)/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixty_cnt)}" /><fmt:formatNumber value="${twenty_ratio}" type="percent"/></td>
+					</tr>
+					<tr>
+						<td style="background:white;">
+						<span>30대</span>
+						</td>
+						<td style="background:white;">${thirty_cnt}명</td>
+						<td style="background:white;"><c:set var="thirty_ratio" value="${(thirty_cnt)/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixty_cnt)}" /><fmt:formatNumber value="${thirty_ratio}" type="percent"/></td>
+					</tr>
+					<tr>
+						<td style="background:white;">
+						<span>40대</span>
+						</td>
+						<td style="background:white;">${fourty_cnt}명</td>
+						<td style="background:white;"><c:set var="fourty_ratio" value="${(fourty_cnt)/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixty_cnt)}" /><fmt:formatNumber value="${fourty_ratio}" type="percent"/></td>
+					</tr>
+					<tr>
+						<td style="background:white;">
+						<span>50대</span>
+						</td>
+						<td style="background:white;">${fifty_cnt}명</td>
+						<td style="background:white;"><c:set var="fifty_ratio" value="${(fifty_cnt)/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixty_cnt)}" /><fmt:formatNumber value="${fifty_ratio}" type="percent"/></td>
+					</tr>
+					<tr>
+						<td style="background:white;">
+						<span>60대 이상</span>
+						</td>
+						<td style="background:white;">${sixty_cnt}명</td>
+						<td style="background:white;"><c:set var="sixty_ratio" value="${(sixty_cnt)/(teen_cnt + twenty_cnt + thirty_cnt + fourty_cnt + fifty_cnt + sixty_cnt)}" /><fmt:formatNumber value="${sixty_ratio}" type="percent"/></td>
+					</tr>
 				</table>
-			</c:if>
+
 		</div>
 			<!-- END PHOTO BLOCK -->
 	  </div>
