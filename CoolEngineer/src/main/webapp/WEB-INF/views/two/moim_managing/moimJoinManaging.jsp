@@ -81,8 +81,8 @@ function joinNO() {
 }
 
 .panel .panel-body {
-	height: 780px;
-	overflow: scroll;
+	height: 100%;
+	overflow: auto;
 }
 
 .col-md-25 {
