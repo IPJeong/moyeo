@@ -408,3 +408,4 @@ function delPicture(gal_num, type) {
 		}
 	});
 }
+

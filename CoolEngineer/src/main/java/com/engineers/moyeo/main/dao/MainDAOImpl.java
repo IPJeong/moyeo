@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
+import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
@@ -27,16 +29,16 @@ public class MainDAOImpl implements MainDAO{
 
 	// 메인페이지 모임후기 사진 리스트
 	@Override
-	public List<MainPicDTO> getMainPictures() {
+	public List<MainPicDTO> getMainPictures(Map<String, Integer> map) {
 		MainDAO dao = sqlSession.getMapper(MainDAO.class);
-		return dao.getMainPictures();
+		return dao.getMainPictures(map);
 	}
 
 	// 메인페이지 모임후기 동영상 리스트
 	@Override
-	public List<MainVideoDTO> getMainVideos() {
+	public List<MainVideoDTO> getMainVideos(Map<String, Integer> map) {
 		MainDAO dao = sqlSession.getMapper(MainDAO.class);
-		return dao.getMainVideos();
+		return dao.getMainVideos(map);
 	}
 	
 	// 메인페이지 모임후기 리스트
@@ -130,5 +132,26 @@ public class MainDAOImpl implements MainDAO{
 	public List<WordDTO> searchWordcloud2(Map<String, Object> map) {
 		MainDAO dao = sqlSession.getMapper(MainDAO.class);
 		return dao.searchWordcloud2(map);
+	}
+
+	// 모임후기 전체 사진개수 구하기
+	@Override
+	public int getTotalPicCnt() {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.getTotalPicCnt();
+	}
+	
+	// 메인페이지 모임후기 사진 리스트
+	@Override
+	public List<PostPictureDTO> getPostPictures(Map<String, Integer> map) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.getPostPictures(map);
+	}
+
+	// 메인페이지 모임후기 동영상 리스트
+	@Override
+	public List<PostVideoDTO> getPostVideos(Map<String, Integer> map) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.getPostVideos(map);
 	}
 }

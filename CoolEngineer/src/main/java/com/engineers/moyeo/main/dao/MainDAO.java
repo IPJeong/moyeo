@@ -4,19 +4,22 @@ import java.util.List;
 import java.util.Map;
 
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
+import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
+import com.engineers.moyeo.six.dto.MainPictureDTO;
 
 
 public interface MainDAO {
 
 	
 	// 메인페이지 모임후기 사진 리스트
-	public List<MainPicDTO> getMainPictures();
+	public List<MainPicDTO> getMainPictures(Map<String, Integer> map);
 	
 	// 메인페이지 모임후기 동영상 리스트
-	public List<MainVideoDTO> getMainVideos();
+	public List<MainVideoDTO> getMainVideos(Map<String, Integer> map);
 	
 	// 메인페이지 모임후기 리스트
 	public List<MeetingPostDTO> getMeetingPost(String last_day);
@@ -47,4 +50,13 @@ public interface MainDAO {
 	
 	// 워드카운트 검색
 	public List<WordDTO> searchWordcloud2(Map<String, Object> map);
+	
+	// 전체 모임후기 사진개수 구하기
+	public int getTotalPicCnt();
+	
+	// 전체 모임후기 사진 가저오기
+	public List<PostPictureDTO> getPostPictures(Map<String, Integer> map);
+	
+	// 전체 모임후기 동영상 가저오기
+	public List<PostVideoDTO> getPostVideos(Map<String, Integer> map);
 }

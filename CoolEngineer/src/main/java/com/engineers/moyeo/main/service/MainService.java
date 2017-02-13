@@ -1,6 +1,9 @@
  package com.engineers.moyeo.main.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 public interface MainService {
 
@@ -25,13 +28,18 @@ public interface MainService {
 	// 워드클라우드 재검색 요청
 	public String wordcloudRefresh(Model model);
 	
-	//메인페이지에 인기모임 불러오기
+	// 메인페이지에 인기모임 불러오기
 	public void hotMoim(Model model);
 	
-	//메인페이지에 추천모임 불러오기
+	// 메인페이지에 추천모임 불러오기
 	public void recommendMoim(Model model);
 	
-	//메인페이지에 추천장소 불러오기
+	// 메인페이지에 추천장소 불러오기
 	public void recPlace(Model model);
 	
+	// 메인갤러리 모임후기 사진첩
+	public void getPostPictures(Model model);
+	
+	// 모임후기 상세정보 조회
+	public void getPostDetails(HttpServletRequest req, ModelAndView mav);
 }

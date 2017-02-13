@@ -139,7 +139,7 @@
 	</select>
 	
 	<!-- 모임후기 사진 조회 -->
-	<select id="getMainPictures" resultType="com.engineers.moyeo.main.dto.MainPicDTO">
+	<select id="getMainPictures" parameterType="Map" resultType="com.engineers.moyeo.main.dto.MainPicDTO">
 		SELECT * 
 		  FROM (
 		        SELECT post_num, replyCnt, likeCnt, total, pic_path, pic_name, group_num, rownum as rn
@@ -162,15 +162,15 @@
 		                          WHERE fina.post_num = pp.post_num
 		                      ) fin, post_pictures pp
 		                 WHERE fin.post_num = pp.post_num
-		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.replyCnt DESC
+		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.likeCnt DESC
 		                 )
 		           )
-		  WHERE rn BETWEEN 1 AND 30
+		  WHERE rn BETWEEN #{start} AND #{end}
 		  ORDER BY rn ASC
 	</select>
 	
 	<!-- 모임후기 동영상 조회 -->
-	<select id="getMainVideos" resultType="com.engineers.moyeo.main.dto.MainVideoDTO">
+	<select id="getMainVideos" parameterType="Map" resultType="com.engineers.moyeo.main.dto.MainVideoDTO">
 		SELECT * 
 		  FROM (
 		        SELECT post_num, replyCnt, likeCnt, total, video_path, video_name, group_num, rownum as rn
@@ -193,10 +193,10 @@
 		                          WHERE fina.post_num = pv.post_num
 		                      ) fin, post_video pv
 		                 WHERE fin.post_num = pv.post_num
-		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.replyCnt DESC
+		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.likeCnt DESC
 		                 )
 		           )
-		  WHERE rn BETWEEN 1 AND 6
+		  WHERE rn BETWEEN #{start} AND #{end}
 		  ORDER BY rn ASC
 	</select>
 	
@@ -212,5 +212,49 @@
 	                    )
 	              )
 	       WHERE rn BETWEEN 1 AND 8
+	</select>
+	
+	<select id="getTotalPicCnt" resultType="int">
+		SELECT COUNT(*)
+		  FROM post_pictures
+	</select>
+	
+	<select id="getTotalVideoCnt" resultType="int">
+		SELECT COUNT(*)
+		  FROM post_video
+	</select>
+	
+	<select id="getPostPictures" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
+		SELECT * 
+		  FROM (
+		        SELECT pic_num, pic_path, pic_name, group_num, post_num, rownum as rn
+		          FROM (
+		                SELECT DISTINCT pp.pic_num, pp.pic_path, pp.pic_name, pp.group_num, pp.post_num, fin.total, fin.replyCnt, fin.likeCnt
+		                  FROM (
+		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total, fina.group_num
+		                          FROM (
+		                                SELECT mpr.post_num, replyCnt, likeCnt, (replyCnt + likeCnt) as total, mpr.group_num
+		                                  FROM (SELECT COUNT(postrep_num) as replyCnt, mp.post_num, mp.group_num
+		                                          FROM meeting_post_reply mpr, meeting_post mp
+		                                         WHERE mp.post_num = mpr.post_num(+)
+		                                         GROUP BY mp.post_num, mp.group_num) mpr,
+		                                        (SELECT COUNT(post_like_num) as likeCnt, mp.post_num, mp.group_num
+		                                           FROM meeting_post_like mpl, meeting_post mp
+		                                          WHERE mpl.post_num(+) = mp.post_num
+		                                          GROUP BY mp.post_num, mp.group_num) mpl
+		                                  WHERE mpr.post_num = mpl.post_num                    
+		                                ) fina, post_pictures pp
+		                          WHERE fina.post_num = pp.post_num
+		                      ) fin, post_pictures pp
+		                 WHERE fin.post_num = pp.post_num
+		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.likeCnt DESC
+		                 )
+		           )
+		  WHERE rn BETWEEN #{start} AND #{end}
+		  ORDER BY rn ASC
+	</select>
+	
+	<select id="getPostVideos" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostVideoDTO">
+		
 	</select>
 </mapper>

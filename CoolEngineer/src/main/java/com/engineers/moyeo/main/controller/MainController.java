@@ -9,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.engineers.moyeo.main.service.MainService;
+import com.engineers.moyeo.six.service.SixService;
 
 /**
  * @기능 홈페이지의 메인페이지 관련 기능을 수행하는 컨트롤러
@@ -22,9 +26,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 
 	@Autowired
-	com.engineers.moyeo.main.service.MainService mainService;
+	MainService mainService;
+	
+	@Autowired
+	SixService sixService;
+	
 	String viewPage;
-	com.engineers.moyeo.six.service.SixService sixService;
+	
+	ModelAndView mav;
 	
 	// 모여의 메인페이지를 로드하는 메서드
 	@RequestMapping("/home")
@@ -106,6 +115,28 @@ public class MainController {
 		viewPage = mainService.wordcloudRefresh(model);
 		
 		return viewPage;
+	}
+	
+	// 메인 갤러리 더보기(사진)
+	@RequestMapping(value="/main_gallery")
+	public String main_gallery(Model model, HttpServletRequest req) {
+		
+		System.out.println("메인갤러리 사진보기 요청");
+		model.addAttribute("req", req);
+		mainService.getPostPictures(model);
+		
+		return "five/main/main_gallery";
+	}
+	
+	// 메인사진 클릭시 모임후기 정보 조회
+	@RequestMapping(value="/main_postDetail")
+	public ModelAndView getPostDetails(HttpServletRequest req) {
+				
+		System.out.println("모임후기 정보조회");
+		mav = new ModelAndView("JSON");
+		mainService.getPostDetails(req, mav);
+		return mav;
+		
 	}
 	
 }
