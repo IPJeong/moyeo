@@ -194,26 +194,33 @@ img {
 		                    <div class="content-frame-body content-frame-body-left" style="width:75%; height:776px; padding: 10px;">
 		                        	
 		                        <div class="messages messages-img" id="msgBox" style="overflow:auto; width:100%; height: 720px;">
-		                           	<c:forEach var = "dto" items="${dtos}">
-				                            <c:if test="${dto.mem_id eq mem_id}">
-					                            <div class="item in item-visible" style="width:750px;">
-					                        </c:if>
-					                        <c:if test="${dto.mem_id ne mem_id}">
-					                        	<div class="item item-visible" style="width:750px;">
-					                        </c:if>
-					                                <div class="image">
-					                                    <img src="${dto.propic_path}/${dto.propic_name}" style="height:40px;">
-					                                </div>                                
-					                                <div class="text">
-					                                    <div class="heading">
-					                                        <a href="#">${dto.mem_id}</a>
-					                                        <span class="date">${fn:substring(dto.msg_date, 0, 16)}</span>
-					                                    </div>                                    
-					                                    ${dto.msg_content}
-					                                </div>
-					                            </div>
+		                           	<c:if test="${cnt == 0}">
+		                          	 	<a>모임 채팅방에 오신것을 환영합니다</a>
+		                           	</c:if>
+		                           	
+		                           	<c:if test="${cnt != 0}">
+			                           	<c:forEach var = "dto" items="${dtos}">
+					                            <c:if test="${dto.mem_id eq mem_id}">
+						                            <div class="item in item-visible" style="width:750px;">
+						                        </c:if>
+						                        <c:if test="${dto.mem_id ne mem_id}">
+						                        	<div class="item item-visible" style="width:750px;">
+						                        </c:if>
+						                                <div class="image">
+						                                    <img src="${dto.propic_path}/${dto.propic_name}" style="height:40px;">
+						                                </div>                                
+						                                <div class="text">
+						                                    <div class="heading">
+						                                        <a href="#">${dto.mem_id}</a>
+						                                        <span class="date">${fn:substring(dto.msg_date, 0, 16)}</span>
+						                                    </div>                                    
+						                                    ${dto.msg_content}
+						                                </div>
+						                            </div>
 				                         </c:forEach>
-			                         <div style="width:750px;"><a>이전까지의 채팅 내역입니다.</a><br><br></div>
+				                      
+				                         <div style="width:750px;"><a>이전까지의 채팅 내역입니다.</a><br><br></div>
+	   						   		</c:if>   
 	   						    </div>                        
 		                        	
 		                        <div class="panel panel-default push-up-10" style="height:50px;">
