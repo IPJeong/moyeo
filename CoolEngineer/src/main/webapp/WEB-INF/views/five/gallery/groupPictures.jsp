@@ -59,15 +59,13 @@ li {
 	text-decoration: none;
 }
 </style>
-
+<script src="/moyeo/resources/customScript/five.js" type="text/javascript"></script>
 <!-- START BREADCRUMB -->
-  <ul class="breadcrumb push-down-0">
-      <li><a href="../main/main.jsp">Home</a></li>
-      <li><a href="../category/category_hobby.jsp">모임</a></li>
-      <li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
-      <li class="active">모임갤러리</li>
-  </ul>
-<!-- END BREADCRUMB -->  
+<ul class="breadcrumb push-down-0">
+	<li><a href="/moyeo/main/main">Home</a></li>
+	<li><a href="/moyeo/six/moimMain/moimMain?group_num=${group_num}">${open_dto.group_name}</a></li>
+	<li class="active">모임사진</li>
+</ul>
 
 <!-- START ROW -->
 <div class="row">
@@ -90,35 +88,45 @@ li {
 						<div class="content-frame-body content-frame-body-left">
 							<div class="gallery" id="links">
 								<c:forEach var="picDto" items="${picDtos}">
-									<a class="gallery-item" href="${picDto.pic_path}/${picDto.pic_name}"
-										title="Nature Image 1" data-gallery>
-										<div class="image">
-											<img src="${picDto.pic_path}/${picDto.pic_name}"
-												alt="Nature Image 1" width="250px" height="200px" />
+									<div class="image">
+										<a class="gallery-item" href="${picDto.pic_path}/${picDto.pic_name}" title="Nature Image 1" data-gallery>
+											<img src="${picDto.pic_path}/${picDto.pic_name}" alt="Nature Image 1" width="250px" height="200px" />
 											<ul class="gallery-item-controls">
-												<li>
-													<label class="check"><input type="checkbox" class="icheckbox" /></label>
-												</li>
-												<li>
-													<span class="gallery-item-remove"><i class="fa fa-times"></i></span>
-												</li>
+<!-- 												<li> -->
+<!-- 													<label class="check"><input type="checkbox" class="icheckbox" /></label> -->
+<!-- 												</li> -->
+												<c:if test="${sessionScope.group_per == '1' || sessionScope.group_per == '2' }">
+													<li>
+														<span class="gallery-item-remove" onclick="delPicture('${picDto.pic_num}', 'pic')"><i class="fa fa-times"></i></span>
+													</li>
+												</c:if>
 											</ul>
-										</div>
-									</a>
+										</a>
+									</div>
 								</c:forEach>
 							</div>
 							<div>
-								<ul	class="pagination pagination-sm pull-right push-down-20 push-up-20">
-									<li class="disabled"><a href="#">≪</a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">≫</a></li>
+								<!-- 게시판 페이지 리스트 -->
+							  	<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="margin-left: 30px; margin-right: 40%;">
+									<c:if test="${cnt > 0}">
+										<c:if test="${startPage > pageBlock}">
+											<li class=""><a href="/moyeo/five/group_pictures?page_num=${startPage - pageBlock}"><font size="3"> «</font></a></li>
+										</c:if>
+										<c:forEach var="i" begin="${startPage}" end="${endPage}">
+											<c:if test="${i == currentPage}">
+												<li class=""><a href="#"><font size="3">${i}</font></a></li>
+											</c:if>
+											<c:if test="${i != currentPage}">
+												<li class=""><a href="/moyeo/five/group_pictures?pageNum=${i}"><font size="3">${i}</font></a></li>
+											</c:if>
+										</c:forEach>
+										<c:if test="${pageCount > endPage}">
+											<li><a href="/moyeo/five/group_pictures?page_num${startPage + pageBlock}"><font size="3">»</font></a></li>
+										</c:if>
+									</c:if>
 								</ul>
 							</div>
 						</div>
-	
 					</div>
 				</div>
 			</div>
