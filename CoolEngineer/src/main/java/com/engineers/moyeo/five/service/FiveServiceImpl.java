@@ -822,7 +822,7 @@ public class FiveServiceImpl implements FiveService {
 	   dto.setMem_id(mem_id);
 	   String gp = fiveDao.getGroupPer(dto);
 	   
-	   int group_per = 4;
+	   int group_per = Code.moimNoMember;
 	   
 	   if(gp != null){
 		   group_per = Integer.parseInt(gp);
