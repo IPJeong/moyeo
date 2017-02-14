@@ -1054,9 +1054,23 @@ function chkDel() {
 
 //이벤트 당첨
 function winChk() {	
-	if(confirm('이벤트 당첨자를 선정하시겠습니까?')) {
-		
+	var winners = getElementsByName("mem_id");
+	var conf = false;
+	
+	for(i=0; i<winners.length;  i++){
+		  if(winners[i].checked == true){
+			  conf=true;
+		  }
+	}
+			  
+	if (conf == true) {	
+		if(confirm('이벤트 당첨자를 선정하시겠습니까?')) {
+			
+		} else {
+			return false;
+		}
 	} else {
+		alert('당첨자를 선정해주세요');
 		return false;
-	}	
+	}
 }

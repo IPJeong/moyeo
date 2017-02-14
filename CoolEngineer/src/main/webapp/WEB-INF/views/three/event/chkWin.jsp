@@ -67,28 +67,24 @@ function winChk() {
 			<!-- PAGE CONTENT WRAPPER -->
 			<div class="page-content-wrap">
 
-				<div class="panel panel-default">
-					<form action="winEvent" name="winEve" method="post" onsubmit="return winChk();">
+				<div class="panel panel-default">					
 					<div class="panel-heading col-md-12" style="height:51px;position:fixed;top:0px;left:0px;z-index:999;">
 						<div class="col-md-8" style="margin:0px;padding:0px;">
-							<h3 class="panel-title">참여자 리스트</h3>
+							<h3 class="panel-title" style="color:#03A9F4"><strong>이벤트 당첨자를 알려드립니다.</strong></h3>
 						</div>
-						<div class="col-md-4" style="margin:0px;padding:0px;padding-left:280px;">
-							<input type="hidden" name="event_Num" value="${event_num}">
-							<button type="submit" class="btn btn-danger">선정</button>
+						<div class="col-md-4" style="margin:0px;padding:0px;padding-left:345px;">							
 							<button type="button" class="btn btn-default" onclick="window.close()">닫기</button>
 						</div>						
 					</div>						
 					<div class="panel-body panel-body-table" style="margin-top:51px;">
-						<table class="table table-bordered">	
+						<table class="table table-striped">	
 							<thead>
 								<tr>
 									<th>No.</th>
-									<th>아이디</th>
-									<th>당첨</th>									
+									<th>아이디</th>																	
 								</tr>
 							</thead>						
-							<tbody>
+							<tbody>								
 								<c:if test="${cnt > 0}">
 									<c:forEach var="dto" items="${dtos}">
 										<tr>
@@ -98,19 +94,14 @@ function winChk() {
 											</td>
 											<td>											
 											${dto.mem_id}
-											</td>
-											<td>
-											<label class="check" style="margin:0px;"><input
-											type="checkbox" id="mem_id" class="icheckbox" name="mem_id"
-											value="${dto.mem_id}" />당첨</label>
-											</td>									
+											</td>																				
 										</tr>
 									</c:forEach>
-								</c:if>															
+								</c:if>																															
 							</tbody>
 						</table>
 					</div>
-					</form>
+					
 				</div>
 			
 			</div>

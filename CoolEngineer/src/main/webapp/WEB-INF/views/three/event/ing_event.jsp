@@ -14,121 +14,8 @@
 <script type="text/javascript"
 	src="/moyeo/resources/customScript/five.js"></script>
 
-<style type="text/css">
-.layer {
-	display: none;
-	position: fixed;
-	_position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 100;
-}
-
-.layer .bg {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: #000;
-	opacity: 0.5;
-	filter: alpha(opacity = 50);
-}
-
-.layer .pop-layer {
-	display: block;
-}
-
-.pop-layer {
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 1000px;
-	height: auto;
-	background-color: #fff;
-	border: 0px;
-	z-index: 10;
-}
-
-.pop-layer .pop-container {
-	padding: 20px 25px;
-}
-
-.pop-layer p.ctxt {
-	color: #666;
-	line-height: 25px;
-}
-
-.pop-layer .btn-r {
-	width: 100%;
-	margin: 10px 0 20px;
-	padding-top: 10px;
-	border-top: 1px solid #DDD;
-	text-align: right;
-}
-
-a.cbtn { /* 닫기 버튼 */
-	display: inline-block;
-	height: 25px;
-	padding: 0 14px;
-	border: 1px solid #304a8a;
-	background-color: #3f5a9d;
-	font-size: 13px;
-	color: #fff;
-	line-height: 25px;
-}
-
-a.cbtn:hover {
-	border: 1px solid #091940;
-	background-color: #1f326a;
-	color: #fff;
-}
-
-.btn-example {
-	
-}
-</style>
-
 <script type="text/javascript">
-	function layer_open(el) {
 
-		var temp = $('#' + el);
-		var bg = temp.prev().hasClass('bg'); //dimmed 레이어를 감지하기 위한 boolean 변수
-
-		if (bg) {
-			$('.layer').fadeIn(); //'bg' 클래스가 존재하면 레이어가 나타나고 배경은 dimmed 된다. 
-		} else {
-			temp.fadeIn();
-		}
-
-		// 화면의 중앙에 레이어를 띄운다.
-		if (temp.outerHeight() < $(document).height())
-			temp.css('margin-top', '-' + temp.outerHeight() / 2 + 'px');
-		else
-			temp.css('top', '0px');
-		if (temp.outerWidth() < $(document).width())
-			temp.css('margin-left', '-' + temp.outerWidth() / 2 + 'px');
-		else
-			temp.css('left', '0px');
-
-		temp.find('a.cbtn').click(function(e) {
-			if (bg) {
-				$('.layer').fadeOut(); //'bg' 클래스가 존재하면 레이어를 사라지게 한다. 
-			} else {
-				temp.fadeOut();
-			}
-			e.preventDefault();
-		});
-
-		$('.layer .bg').click(function(e) { //배경을 클릭하면 레이어를 사라지게 하는 이벤트 핸들러
-			$('.layer').fadeOut();
-			e.preventDefault();
-		});
-
-	}
 
 	function dateChk() { //시작일 선택시 종료일과 발표일 동기화
 		if (eventInsertForm.startDate.value != eventInsertForm.endDate.value) {
@@ -175,6 +62,15 @@ a.cbtn:hover {
         var top = Math.ceil((window.screen.height - windowH)/2);
 
 		window.open('eventParticipants?event_num=' + evNum, 'evePart', 'width=450, height=550, left=' + left + 'top=' + top);
+	}
+	
+	function chkWin(winNum) {
+		var windowW = 300;  // 창의 가로 길이
+        var windowH = 70;  // 창의 세로 길이
+        var left = Math.ceil((window.screen.width - windowW)/2);
+        var top = Math.ceil((window.screen.height - windowH)/2);
+
+		window.open('chkWin?winning_num=' + winNum, 'win', 'width=450, height=550, left=' + left + 'top=' + top);
 	}
 </script>
 <!-- START BREADCRUMB -->
@@ -429,49 +325,118 @@ a.cbtn:hover {
 								<tr>
 									<th width="75%">제목</th>
 									<th width="15%">발표일</th>
-									<th width="10%">조회수</th>
+									<th width="10%">이벤트내용</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><a href="#" class="btn-example"
-										onclick="layer_open('layer2');return false;">당첨자</a>
-										<div class="layer">
-											<div class="bg"></div>
-											<div id="layer2" class="pop-layer">
-												<div class="pop-container">
-													<div class="pop-conts">
-														<!--content //-->
-														<p class="ctxt mb20">
-															Thank you.<br> Your registration was submitted
-															successfully.<br> Selected invitees will be notified
-															by e-mail on JANUARY 24th.<br> <br> Hope to see
-															you soon!
-														</p>
-
-														<div class="btn-r">
-															<a href="#" class="cbtn">Close</a>
+							<c:if test="${cnt2 > 0}">
+								<c:forEach var="dto3" items="${dtos3}">
+								<tr>								
+									<td><a href="#" onclick="chkWin(${dto3.winning_num})" style="color:black"><strong>[당첨자 발표]</strong> ${dto3.eventTitle} 당첨자 발표</a></td>
+									<td><font color="#0D47A1"><fmt:formatDate type="both" pattern="yy-MM-dd" value="${dto3.regDate}"/></font></td>
+									<td><button type="button" class="btn btn-primary"
+										data-toggle="modal"
+										data-target="#${dto3.eventNum}"
+										style="text-decoration: none;">이벤트내용</button>
+										<c:forEach var="dto4" items="${dtos4}">
+											<c:if test="${dto4.eventNum == dto3.eventNum}">
+												<div class="modal animated fadeIn" id="${dto3.eventNum}"
+													tabindex="-1" role="dialog" aria-labelledby="smallModalHead"
+													aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content"
+															style="max-height: 85%; border-width: 0px;">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">
+																	<span aria-hidden="true">&times;</span><span
+																		class="sr-only">Close</span>
+																</button>
+																<h4 class="modal-title" id="smallModalHead"
+																	style="font-weight: bold;">${dto4.eventTitle}</h4>
+															</div>
+															<div
+																class="modal-body form-horizontal form-group-separated">
+																<div class="form-group col-md-12" style="padding: 0px;">
+																	<div class="col-md-3" style="width: 30%">
+																		<div class="text-center" id="user_image"
+																			style="width: 100%; height: 100%; padding: 3px;">
+																			<img src="${dto4.picPath}/${dto4.picName}"
+																				style="width: 100%; height: 100%;">
+																		</div>
+																	</div>
+																	<div class="col-md-9" style="width: 70%; padding: 0px;">
+																		<div class="form-group" style="height: 50%;">
+																			<label class="col-md-12 col-xs-12 line-height-30">등록자
+																				: ${dto4.adminId}</label>
+																		</div>
+																		<div class="form-group" style="height: 50%;">
+																			<label class="col-md-12 col-xs-12 line-height-15"
+																				style="margin: 0px;">종&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;료&nbsp;&nbsp;
+																					<font color="#8BC34A"><fmt:formatDate
+																						type="both" pattern="yy-MM-dd"
+																						value="${dto3.regDate}" /></font>
+																			</label>
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group col-md-12"
+																	style="padding: 5px; text-align: center;">
+																	<c:forEach var="dto2" items="${dtos2}">
+																		<c:if test="${dto2.eventNum2 == dto4.eventNum}">
+																			<div class="col-md-12">
+																				<div class="col-md-8"
+																					style="margin: auto; width: 80%; float: none;">
+																					<img src="${dto2.picPath2}/${dto2.picName2}"
+																						style="width: 100%;">
+																				</div>
+																			</div>
+																		</c:if>
+																	</c:forEach>
+																	${dto4.eventCon}
+																</div>
+																<div class="modal-footer">				
+																	<!--  -->
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal">닫기</button>
+																</div>
+															</div>
 														</div>
-														<!--// content-->
 													</div>
 												</div>
-											</div>
-										</div></td>
-									<td>2017.01.25</td>
-									<td>55</td>
+											</c:if>
+										</c:forEach>
+									</td>
 								</tr>
+							</c:forEach>
+							</c:if>	
 							</tbody>
 						</table>
 						<div class="row">
 							<div class="col-md-12">
 								<ul
 									class="pagination pagination-sm pull-right push-down-10 push-up-10">
-									<li class="disabled"><a href="#">«</a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">»</a></li>
+									<c:if test="${cnt2 > 0}">
+										<!-- 처음[◀◀] 이전[◀]-->
+										<c:if test="${startPage2 > pageBlock2}">
+											<li><a href="ing_event">«</a></li>
+											<li><a href="ing_event?pageNum2=${startPage2 - pageBlock2}">‹</a></li>
+										</c:if>
+				
+										<c:forEach var="i" begin="${startPage2}" end="${endPage2}">
+											<c:if test="${i == currentPage2}">
+												<li class="active"><a href="#">${i}</a></li>
+											</c:if>
+											<c:if test="${i != currentPage2}">
+												<li><a href="ing_event?pageNum2=${i}">${i}</a></li>
+											</c:if>
+										</c:forEach>
+				
+										<!-- 다음[▶] 끝[▶▶] -->
+										<c:if test="${pageCount2 > endPage2}">
+											<li><a href="ing_event?pageNum2=${startPage2 + pageBlock2}">›</a></li>
+											<li><a href="ing_event?pageNum2=${pageCount2}">»</a></li>
+										</c:if>
+									</c:if>
 								</ul>
 							</div>
 						</div>
