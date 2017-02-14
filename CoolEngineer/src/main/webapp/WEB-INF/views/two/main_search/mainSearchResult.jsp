@@ -259,9 +259,9 @@ div.page-content {
 											<a href="../five/postDetail?post_num=${mpdto.post_num}&pageNum=1">
 											제목 : ${mpdto.post_title}
 											</a>
-											&nbsp;|&nbsp;<span style="color:red;">작성일 : <fmt:formatDate type="both" pattern="yyyy. MM. dd" value="${mpdto.post_date}" /></span>&nbsp;|&nbsp;<span style="color:green;">작성자 : ${mpdto.mem_id}</span><br>
+											&nbsp;|&nbsp;<span style="color:blue;">작성일 : <fmt:formatDate type="both" pattern="yyyy. MM. dd" value="${mpdto.post_date}" /></span>&nbsp;|&nbsp;<span style="color:green;">작성자 : ${mpdto.mem_id}</span><br>
 											내용 : ${mpdto.post_content}<br>
-											<span style="color:blue;">${mpdto.post_tag}</span>
+											<span style="color:red;">${mpdto.post_tag}</span>
 									</div>   		
 								</c:forEach>               	 	
 							</div>
@@ -349,9 +349,9 @@ div.page-content {
 							        <div style="width:80%; font-size:15px; height:80px; margin-top:20px;"> 
 										<a href="placeContentForm?place_num=${plainfodto.place_num}">
 											제목 : ${plainfodto.place_name}
-										</a><br>
+										</a>&nbsp;|&nbsp;<span style="color:green;">주소 : ${plainfodto.place_address}</span><br>
 										설명 : ${plainfodto.place_detail}<br>
-										<span style="color:green;">주소 : ${plainfodto.place_address}</span>
+										<span style="color:red;">${plainfodto.recpla_tag}</span>
 									</div>   		
 								</c:forEach>               	 	
 							</div>

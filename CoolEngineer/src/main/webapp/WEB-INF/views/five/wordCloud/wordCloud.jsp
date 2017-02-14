@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!-- <script src="/moyeo/resources/customScript/five/tagCanvas.js"></script> -->
@@ -16,7 +17,12 @@
 			<div id="tags" style="float:left;">
 				<ul>
 					<c:forEach var="wordDto" items="${wordDtos}">
-						<li><a href="#" target="_blank">${wordDto.word}</a></li>
+						<c:if test="${wordDto.part_of_speech == 'Hashtag'}">
+							<li><a href="/moyeo/two/wordCloudSearchByTag?search_keyword=${wordDto.word}" target="_blank">${wordDto.word}</a></li>
+						</c:if>
+						<c:if test="${wordDto.part_of_speech != 'Hashtag'}">
+							<li><a href="/moyeo/two/wordCloudSearch?search_keyword=${wordDto.word}" target="_blank">${wordDto.word}</a></li>
+						</c:if>
 					</c:forEach>
 				</ul>
 			</div>

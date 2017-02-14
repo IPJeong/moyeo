@@ -48,8 +48,8 @@ function select_loc_category() {
 	var lo16 = new Array("광양시", "나주시", "목포시", "순천시", "여수시", "강진군", "고흥군", "곡성군", "구례군", "담양군", "무안군", "보성군", "신안군", "영광군", "영암군", "완도군", "장성군", "장흥군", "진도군", "함평군", "해남군", "화순군");
 	var lo17 = new Array("제주시", "서귀포시");
 
-	var lc1 = document.placemodifyform.loc_category1;
-	var lc2 = document.placemodifyform.loc_category2;
+	var lc1 = document.getElementById("loc_category1");
+	var lc2 = document.getElementById("loc_category2");
 
 	if(lc1.value == "서울특별시") {
 		
@@ -303,7 +303,7 @@ li {
 						<div class="form-group">
 							<label class="col-lg-2 control-label">지역 선택</label>
 							<div class="col-lg-10">
-								<select name="loc_category1" class="form-control-1 select" style="width:49%;" onchange="select_loc_category()" required> 
+								<select name="loc_category1" id="loc_category1" class="form-control-1 select" style="width:49%;" onchange="select_loc_category()" required> 
 									<option value="">선택하세요</option>
 					                <option value="서울특별시">서울특별시</option>
 					                <option value="부산광역시">부산광역시</option>
@@ -323,7 +323,7 @@ li {
 					                <option value="전라남도">전라남도</option>
 					                <option value="제주특별자치도">제주특별자치도</option>
 					            </select>
-					            <select name="loc_category2" class="form-control-1 select" style="width:49%; margin-left:0.35%;" required>
+					            <select name="loc_category2" id="loc_category2" class="form-control-1 select" style="width:49%; margin-left:0.35%;" required>
 					            	<option value="">선택하세요</option>
 					            </select>
 							</div>

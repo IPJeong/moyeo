@@ -39,8 +39,8 @@ function select_recpla_category() {
 	var ct17 = new Array("결혼/웨딩", "육아/맘", "아빠/대디");
 	var ct18 = new Array("스피치/발성", "시험/자격증", "취업스터디", "금융보험", "기타(etc)");
 	
-	var rc1 = document.recplacemodifyform.recpla_category1;
-	var rc2 = document.recplacemodifyform.recpla_category2;
+	var rc1 = document.getElementById("recpla_category1");
+	var rc2 = document.getElementById("recpla_category2");
 
 	if(rc1.value == "아웃도어/여행") {
 		
@@ -322,7 +322,7 @@ li {
 						<div class="form-group">
 							<label class="col-lg-2 control-label">관심사</label>
 							<div class="col-lg-10">
-									<select name="recpla_category1" style="width:49%; height:30px;" onchange="select_recpla_category()" required> 
+									<select name="recpla_category1" id="recpla_category1" style="width:49%; height:30px;" onchange="select_recpla_category()" required> 
 										<option value="">선택하세요</option>
 						                <option value="아웃도어/여행">아웃도어/여행</option>
 						                <option value="운동/스포츠">운동/스포츠</option>
@@ -343,7 +343,7 @@ li {
 						                <option value="가족/결혼">가족/결혼</option>
 						                <option value="자유주제">자유주제</option>
 						            </select>
-						            <select name="recpla_category2" style="width:49%; height:30px; margin-left:1%;" required>
+						            <select name="recpla_category2" id="recpla_category2" style="width:49%; height:30px; margin-left:1%;" required>
 						            	<option value="">선택하세요</option>
 						            </select>
 							</div>

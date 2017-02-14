@@ -60,7 +60,6 @@ li {
 }
 	
 </style>
-<script src="/ajax/resources/request.js"></script>
 </head>
 <body class="x-dashboard">
 	<!-- START PAGE CONTAINER -->
@@ -149,6 +148,7 @@ li {
 						                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi2">&nbsp;설명
 						                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi3">&nbsp;제목+설명
 						                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi4">&nbsp;주소
+						                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi5">&nbsp;태그
 								    	</div>
 							    	</div>  
 							    </form>
