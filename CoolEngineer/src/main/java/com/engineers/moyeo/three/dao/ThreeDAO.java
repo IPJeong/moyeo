@@ -36,7 +36,19 @@ public interface ThreeDAO {
 	public int eveChk(Map<String, Object> map); //이벤트 참여여부
 	public int eveParticipate(Map<String, Object> map); //이벤트 참여
 	public int eventParticipantsCount(int event_Num); //이벤트 참여자 명수
-	public ArrayList<EventDTO> getEvePartList(int event_Num); //이벤트 참여자 명단
+	public ArrayList<EventDTO> getEvePartList(int event_num); //이벤트 참여자 명단
+	public EventDTO getEveInfo(int event_num);// 이벤트 정보 가져오기
+	public int winInsert(Map<String, Object> map); //이벤트 마감
+	public int getWinNum(int event_num); //당첨번호 가져오기
+	public void winnerInsert(Map<String, Object> map); //당첨자 입력
+	public void eventParticipantsDelete(int event_num); //참여자 리스트에서 삭제
+	public void eventDone(int event_num); //이벤트 진행상황 바꾸기
+	public void winNoti(Map<String, Object> map); //이벤트 종료 알림
+	public int getWinCount(); //당첨 리스트 개수
+	public ArrayList<EventDTO> getWinList(Map<String, Integer> map); //당첨 리스트 가져오기
+	public ArrayList<EventDTO> getDoneEventList(Map<String, Integer> map);//끝난 이벤트 정보
+	public int getWinnerCount(int winning_num); //이벤트 당첨자 수
+	public ArrayList<EventDTO> getWinnerList(int winning_num); //이벤트 당첨자 
 	
 	public int confirmId(Map<String, Object> map); //아이디 중복 체크
 	public int memInfoInsert(MemberDTO dto); //회원가입	

@@ -102,13 +102,14 @@
 	</insert>
 	<!-- 진행중인 이벤트 개수 -->
 	<select id="getEventCount" resultType="int">
-		SELECT count(*) FROM event_list
+		SELECT count(*) FROM event_list WHERE ing = 'Ing'
 	</select>
 	<!-- 이벤트 리스트 -->
 	<select id="getEventList" parameterType="map" resultType="com.engineers.moyeo.three.dto.EventDTO">
 		SELECT * 
 			FROM (SELECT event_num as eventNum, event_title as eventTitle, event_content as eventCon, reg_date as regDate, start_date as startDate, end_date as endDate, ing, noti_date as notiDate, pic_path as picPath, pic_name as picName, MANAGER_ID as adminId, rownum rnum
 		     		FROM (SELECT * FROM event_list
+		     				WHERE ing = 'Ing'
 		       	   	 	   ORDER BY event_num DESC
 		           	 	 )
 			  	 )
@@ -141,11 +142,83 @@
 		SELECT *
 			FROM (SELECT mem_id
 					FROM (SELECT * FROM evejoin_list
-						   WHERE event_num = #{event_Num}
+						   WHERE event_num = #{event_num}
 						   ORDER BY evejoin_num ASC 
 						  )
 				  )
-	</select>	
+	</select>
+	<!-- 이벤트 정보 가져오기 -->	
+	<select id="getEveInfo" parameterType="int" resultType="com.engineers.moyeo.three.dto.EventDTO">
+		SELECT event_title as eventTitle, event_content as eventCon
+			FROM event_list WHERE event_num = #{event_num}
+	</select>
+	<!-- 이벤트 마감 -->
+	<insert id="winInsert" parameterType="map">
+		INSERT INTO event_winning_list
+			VALUES (winning_list_seq.NEXTVAL, #{title}, #{cont}, #{reg_date}, 0, #{event_num})
+	</insert>
+	<!-- 당첨번호 가져오기 -->
+	<select id="getWinNum" parameterType="int" resultType="int">
+		SELECT winning_num FROM event_winning_list WHERE event_num = #{event_num}
+	</select>
+	<!-- 당첨자 입력 -->
+	<insert id="winnerInsert" parameterType="map">
+		INSERT INTO winning_per_list
+			VALUES (winper_list_seq.NEXTVAL, #{mem_id}, #{win_num})
+	</insert>
+	<!-- 참여자 리스트 제거 -->
+	<delete id="eventParticipantsDelete" parameterType="int">
+		DELETE FROM evejoin_list WHERE event_num = #{event_num}
+	</delete>
+	<!-- 이벤트 진행상황 변경 -->
+	<update id="eventDone" parameterType="int">
+		UPDATE event_list SET ing = 'done' WHERE event_num = #{event_num}
+	</update>
+	<!-- 이벤트 당첨 회원알림 -->
+	<select id="winNoti" parameterType="map">
+		INSERT INTO member_noti
+			VALUES(member_noti_seq.NEXTVAL, #{noti_con}, '00', #{noti_date}, #{mem_id})
+	</select>
+	<!-- 당첨 리스트 개수 -->
+	<select id="getWinCount" resultType="int">
+		SELECT COUNT(*) FROM event_winning_list
+	</select>
+	<!-- 당첨 리스트 -->
+	<select id="getWinList" parameterType="map" resultType="com.engineers.moyeo.three.dto.EventDTO">
+		SELECT * 
+			FROM (SELECT winning_num, event_num as eventNum, winning_title as eventTitle, winning_content as eventCon, reg_date as regDate, rownum rnum
+		     		FROM (SELECT * FROM event_winning_list		     				
+		       	   	 	   ORDER BY reg_date DESC
+		           	 	 )
+			  	 )			
+			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}			
+	</select>
+	<!-- 끝난 이벤트 리스트 -->
+	<select id="getDoneEventList" parameterType="map" resultType="com.engineers.moyeo.three.dto.EventDTO">
+		SELECT * 
+			FROM (SELECT event_num as eventNum, event_title as eventTitle, event_content as eventCon, pic_path as picPath, pic_name as picName, MANAGER_ID as adminId
+		     		FROM (SELECT * FROM event_list
+		     				WHERE ing = 'done'
+		       	   	 	   ORDER BY event_num DESC
+		           	 	 )
+			  	 )					
+	</select>
+	<!-- 이벤트 당첨자 수 -->
+	<select id="getWinnerCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM winning_per_list WHERE winning_num = #{winning_num}
+	</select>
+	<!-- 이벤트 당첨자 리스트 -->
+	<select id="getWinnerList" parameterType="int" resultType="com.engineers.moyeo.three.dto.EventDTO">
+		SELECT *
+			FROM (SELECT mem_id
+					FROM (SELECT * FROM winning_per_list
+						   WHERE winning_num = #{winning_num}
+						   ORDER BY win_per_num ASC 
+						  )
+				  )
+	</select>
+	
+	
 <!-- 이벤트 -->
 <!-- 회원 -->
 	<!-- 아이디 중복체크 -->

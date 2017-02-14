@@ -19,6 +19,7 @@ public class EventDTO {
 	private String picPath2; //이벤트 이미지 경로
 	private String picName2; //이벤트 이미지 이름
 	private String mem_id; //이벤트 참가자
+	private String winning_num; //당첨번호
 	
 	
 	public int getEventNum2() {
@@ -110,6 +111,13 @@ public class EventDTO {
 	}
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
+	}
+	public String getWinning_num() {
+		return winning_num;
+	}
+	public void setWinning_num(String winning_num) {
+		this.winning_num = winning_num;
 	} 
+	
 	
 }

@@ -182,9 +182,20 @@ public class ThreeController {
 		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		viewPage = threeService.winEvent(model);
-		System.out.println("chgPw()");
+		System.out.println("winEvent()");
 		
 		return viewPage;
+	}
+	
+	@RequestMapping("/chkWin") //이벤트 참여
+	public String chkWin(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		viewPage = threeService.chkWin(model);
+		System.out.println("chkWin()");
+		
+		return viewPage;
+		
 	}
 	
 	@RequestMapping("/registration") //회원가입
@@ -361,6 +372,6 @@ public class ThreeController {
 		System.out.println("chgPw()");
 		
 		return viewPage;
-	}		
+	}			
 	
 }

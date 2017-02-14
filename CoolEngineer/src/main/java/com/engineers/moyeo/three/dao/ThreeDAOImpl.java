@@ -342,10 +342,93 @@ public class ThreeDAOImpl implements ThreeDAO{
 	
 	//이벤트 참여자 명단
 	@Override
-	public ArrayList<EventDTO> getEvePartList(int event_Num) {
+	public ArrayList<EventDTO> getEvePartList(int event_num) {
 		ArrayList<EventDTO> dtos = null;
 		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
-		dtos = dao.getEvePartList(event_Num);		
+		dtos = dao.getEvePartList(event_num);		
+		return dtos;
+	}
+
+	@Override
+	public EventDTO getEveInfo(int event_num) {
+		EventDTO dto = null;
+		dto = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getEveInfo", event_num);
+		return dto;
+	}
+
+	@Override
+	public int winInsert(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.winInsert", map);
+		return cnt;
+	}
+
+	@Override
+	public int getWinNum(int event_num) {
+		int winNum = 0;
+		winNum = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getWinNum", event_num);
+		return winNum;
+	}
+
+	@Override
+	public void winnerInsert(Map<String, Object> map) {
+		this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.winnerInsert", map);
+		
+	}
+
+	@Override
+	public void eventParticipantsDelete(int event_num) {
+		this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.eventParticipantsDelete", event_num);
+		
+	}
+
+	@Override
+	public void eventDone(int event_num) {
+		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.eventDone", event_num);
+		
+	}
+
+	@Override
+	public void winNoti(Map<String, Object> map) {		
+		this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.winNoti", map);
+		
+	}
+
+	@Override
+	public int getWinCount() {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getWinCount");
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<EventDTO> getWinList(Map<String, Integer> map) {
+		ArrayList<EventDTO> dtos = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getWinList(map);		
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<EventDTO> getDoneEventList(Map<String, Integer> map) {
+		ArrayList<EventDTO> dtos = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getDoneEventList(map);		
+		return dtos;
+	}
+
+	@Override
+	public int getWinnerCount(int winning_num) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getWinnerCount", winning_num);
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<EventDTO> getWinnerList(int winning_num) {
+		ArrayList<EventDTO> dtos = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getWinnerList(winning_num);		
 		return dtos;
 	}
 	
