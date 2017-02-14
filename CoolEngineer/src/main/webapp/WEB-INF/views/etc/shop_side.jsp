@@ -26,8 +26,6 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-                        <a href="index.html">ATLANT</a>
-                        <a href="#" class="x-navigation-control"></a>
                     </li>
                     <li class="xn-profile">
                        
