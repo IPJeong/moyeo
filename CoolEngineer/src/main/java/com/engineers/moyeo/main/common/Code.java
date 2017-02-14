@@ -94,6 +94,13 @@ public interface Code {
 	// 관리자 권한 코드(일반관리자)
 	public final static String authority_2 = "08";
 	
+	// 모임가입 신청 대기 상태
+	public final static String seler_waiting = "91";
+	// 모임가입 신청 승인
+	public final static String seler_accepted = "06";
+	// 모임가입 신청 거절
+	public final static String seler_refused = "15";
+	
 	// 숫자타입변환 예외 발생 메시지
 	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
 	// 널값 예외 발생 메시지
