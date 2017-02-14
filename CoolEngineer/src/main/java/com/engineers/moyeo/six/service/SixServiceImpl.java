@@ -34,6 +34,7 @@ import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
@@ -1718,5 +1719,61 @@ public class SixServiceImpl implements SixService{
 			model.addAttribute("dtos", dtos);
 			
 		} 
+	}
+	
+	//판매자등록처리
+	public void sellerRegisterPro(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+	
+		// 업로드 파일 객체를 꺼냄
+		FileForm fileForm = (FileForm)map.get("fileForm");
+		
+		// 업로드파일 관리
+		List<MultipartFile> files = fileForm.getFiles();
+		System.out.println(fileForm);
+		// 업로드 파일 확인
+		for (MultipartFile multipartFile : files) {
+			// 업로드된 파일 이름을 받아옴
+			String fileName = multipartFile.getOriginalFilename();
+			
+			if(fileName.trim().length()>4){
+				
+				String rootPath = Code.rootPath;
+				String imgPath = Code.groupImgPath;
+				
+				int type = FileManager.checkFileType(fileName);
+				String filename = null;
+				
+				if(type == 1) {
+					// 파일을 저장 후 저장된 파일명을 반환
+						
+					filename = FileManager.saveFile(multipartFile, rootPath + imgPath, fileName);
+					SellerInfoDTO dto = new SellerInfoDTO();
+					dto.setSeller_id(req.getParameter("seller_id"));
+					dto.setAddress(req.getParameter("address"));
+					dto.setTel(req.getParameter("tel"));
+					dto.setComp_name(req.getParameter("comp_name"));
+					dto.setBank(req.getParameter("bank"));
+					dto.setAccount_number(req.getParameter("account_number"));
+					dto.setDepositor(req.getParameter("depositor"));
+					dto.setReason(req.getParameter("reason"));
+					dto.setReg_date(new Timestamp(System.currentTimeMillis()));
+					dto.setBc_name(filename);
+					dto.setBc_path(Code.B_C_PATHS);
+					dto.setRecognition(Code.seler_waiting);
+
+					int chk_cnt = sixDao.sellerRegisterChk(req.getParameter("seller_id"));
+					int cnt = 0;
+					if(chk_cnt == 0) {
+						cnt = sixDao.sellerRegisterPro(dto);
+					}
+					model.addAttribute("chk_cnt", chk_cnt);
+					model.addAttribute("cnt", cnt);
+				}
+			}
+		}
+		
 	}
 }

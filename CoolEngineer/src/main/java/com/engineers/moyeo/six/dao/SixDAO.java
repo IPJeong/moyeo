@@ -17,6 +17,7 @@ import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.SellerInfoDTO;
 
 
 public interface SixDAO {
@@ -360,4 +361,10 @@ public interface SixDAO {
 	
 	//인기모임 사진포함해서 불러오기
 	public MoimOpenDTO hotMoimPic(int group_num);
+	
+	//판매자 등록여부 확인
+	public int sellerRegisterChk(String seller_id);
+	
+	//판매자등록
+	public int sellerRegisterPro(SellerInfoDTO dto);
 }

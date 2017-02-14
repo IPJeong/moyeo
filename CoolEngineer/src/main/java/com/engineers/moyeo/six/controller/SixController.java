@@ -482,5 +482,28 @@ public class SixController {
 		return "six/category/recommend_detail";
 	}
 	
+	//샵-판매자등록 양식
+	@RequestMapping("/shop/sellerRegister")
+	public String sellerRegister(HttpServletRequest req, Model model) {
+		System.out.println("/shop/sellerRegister");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		
+		return "six/shop/sellerRegister";
+	}
+	
+	//샵-판매자등록 처리
+	@RequestMapping("/shop/sellerRegisterPro")
+	public String sellerRegisterPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
+		
+		System.out.println("/shop/sellerRegisterPro");
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		model.addAttribute("fileForm", fileForm);
+		sixService.sellerRegisterPro(model);
+		
+		return "six/shop/sellerRegisterPro";
+	}
+	
 }
 

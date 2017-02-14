@@ -23,6 +23,7 @@ import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.SellerInfoDTO;
 
 @Repository
 public class SixDAOImpl implements SixDAO{
@@ -1011,5 +1012,21 @@ public class SixDAOImpl implements SixDAO{
 		MoimOpenDTO dto = dao.hotMoimPic(group_num);
 		
 		return dto;
+	}
+	
+	//판매자 등록여부 확인
+	public int sellerRegisterChk(String seller_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.sellerRegisterChk(seller_id);
+		
+		return cnt;
+	}
+
+	//판매자등록
+	public int sellerRegisterPro(SellerInfoDTO dto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.sellerRegisterPro(dto);
+		
+		return cnt; 
 	}
 }
