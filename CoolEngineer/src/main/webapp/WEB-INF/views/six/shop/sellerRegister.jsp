@@ -32,12 +32,22 @@ function imgChk(extension) {
 	}
 	return false;
 }
+
+function goPopup(){
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+    var pop = window.open("jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+		, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno){
+// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+document.getElementById('roadAddrPart1').value = roadAddrPart1;
+document.getElementById('addrDetail').value = addrDetail;
+document.getElementById('roadAddrPart2').value = roadAddrPart2;
+document.getElementById('zipNo').value = zipNo;
+}
+
 </script>
-
-
-
-
-
 
 <style>
 @media only screen and (max-width: 1010px) {
@@ -133,7 +143,7 @@ li {
             			<div class="registration-box animated fadeInDown" >
 				
 					    	<div class="registration-body">
-			                	<form:form class="form-horizontal" action="sellerRegisterPro" method="post" modelAttribute="uploadForm" enctype="multipart/form-data">
+			                	<form:form class="form-horizontal" name="rdnAddr" action="sellerRegisterPro" method="post" modelAttribute="uploadForm" enctype="multipart/form-data">
 				                
 				                    <div class="registration-title"><strong>Seller Registration</strong>, MoYeo</div>
 				                    <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 기본 정보</h4>
@@ -142,11 +152,27 @@ li {
 				                            <input type="text" class="form-control" placeholder="ID" name="seller_id"style="color:#212121;" value="${mem_id}" required readonly/>
 				                        </div>
 				                    </div>
+
+				                     <input type="hidden" id="confmKey" name="confmKey" value="U01TX0FVVEgyMDE3MDIxNDE4MTY1ODE5MDEz"  >
+   				                    <div class="form-group">
+				                        <div class="col-md-12">
+				                            <input type="text" class="form-control" name="zipNo" id="zipNo" name="zipNo" placeholder="우편번호" readonly style="color:#212121; width:100px; float:left;" placeholder="우편번호" maxlength="13" required/>
+				                        	<input type="button" class="btn btn-danger btn-block" style="width:100px; float:left; margin-left:10px; height:40px;" value="주소검색" onclick="goPopup();">
+				                        </div>
+				                    </div> 
+				                    
 				                    <div class="form-group">
 				                        <div class="col-md-12">
-				                            <input type="text" class="form-control" name="address" style="color:#212121;" placeholder="판매자 주소" maxlength="40" required/>
+				                            <input type="text" class="form-control" name="roadAddrPart1" id="roadAddrPart1" placeholder="도로명주소 예)서울특별시 마포구 상암로 301" readonly style="color:#212121;" placeholder="우편번호" maxlength="13" required/>
 				                        </div>
-				                    </div>       
+				                    </div> 
+				                    
+				                  	<div class="form-group">
+				                        <div class="col-md-12">
+				                            <input type="text" class="form-control" name="addrDetail" id="addrDetail" placeholder="상세주소 예)105동 123호" style="color:#212121; width:48%; float:left;" placeholder="우편번호" maxlength="13" required/>
+				                        	<input type="text" class="form-control" name="roadAddrPart2" id="roadAddrPart2" placeholder="참고항목 예)(상암동)" style="width:48%; margin-left:10px; float:left;" value="" readonly>
+				                        </div>
+				                    </div> 
 				                
 				                    <div class="form-group">
 				                        <div class="col-md-12">
