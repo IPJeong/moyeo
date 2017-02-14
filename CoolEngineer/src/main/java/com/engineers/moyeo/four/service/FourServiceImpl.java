@@ -1119,7 +1119,8 @@ public class FourServiceImpl implements FourService{
 		dto.setProduct_price(req.getParameter("product_price"));
 		dto.setProduct_qty(Integer.parseInt(req.getParameter("product_qty")));
 		dto.setProduct_detail(req.getParameter("product_detail"));
-		dto.setSeller_id("sell");
+		dto.setSeller_id((String)(req.getSession().getAttribute("mem_id")));
+		
 	
 		System.out.println("실행");
 		//데이터 메소드 실행

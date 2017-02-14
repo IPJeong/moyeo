@@ -129,7 +129,7 @@ li {
 																
 														</div>
 														<div class="box-bottom">
-															<a href="#">클릭!</a>
+															<a href="productDetail">클릭!</a>
 														</div>
 													</div>
 												</div>
