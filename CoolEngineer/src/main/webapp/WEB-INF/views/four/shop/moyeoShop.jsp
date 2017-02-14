@@ -91,9 +91,9 @@ li {
 							<div style="float: right; margin-right: 5%;">
 								<!-- 로그인 되어 있으면, -->
 								<c:if test="${sessionScope.mem_id != null}">
+								<input class="btn btn-primary" value="판매자 등록" type="button" onclick="location.href='/moyeo/six/shop/sellerRegister'">
 								<input class="btn btn-primary" value="제품 등록" type="button" onclick="location.href='productInsertForm'">
 								
-								<button type="button" class="btn btn-primary" onclick="">제품 등록</button>
 								<button type="button" class="btn btn-primary">제품 수정</button>
 								<button type="button" class="btn btn-primary">제품 삭제</button>
 								</c:if>
