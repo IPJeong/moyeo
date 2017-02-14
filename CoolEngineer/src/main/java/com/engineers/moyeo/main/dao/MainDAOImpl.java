@@ -148,6 +148,13 @@ public class MainDAOImpl implements MainDAO{
 		return dao.getPostPictures(map);
 	}
 
+	// 모임후기 전체 동영상 개수 구하기
+	@Override
+	public int getTotalVideoCnt() {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.getTotalVideoCnt();
+	}
+
 	// 메인페이지 모임후기 동영상 리스트
 	@Override
 	public List<PostVideoDTO> getPostVideos(Map<String, Integer> map) {

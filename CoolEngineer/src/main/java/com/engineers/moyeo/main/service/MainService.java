@@ -37,8 +37,11 @@ public interface MainService {
 	// 메인페이지에 추천장소 불러오기
 	public void recPlace(Model model);
 	
-	// 메인갤러리 모임후기 사진첩
+	// 메인갤러리 모임후기 사진 앨범
 	public void getPostPictures(Model model);
+	
+	// 메인갤러리 모임후기 동영상 앨범
+	public void getPostVideos(Model model);
 	
 	// 모임후기 상세정보 조회
 	public void getPostDetails(HttpServletRequest req, ModelAndView mav);

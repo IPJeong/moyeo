@@ -214,16 +214,19 @@
 	       WHERE rn BETWEEN 1 AND 8
 	</select>
 	
+	<!-- 모임후기 사진 전체 개수 구하기 -->
 	<select id="getTotalPicCnt" resultType="int">
 		SELECT COUNT(*)
 		  FROM post_pictures
 	</select>
 	
+	<!-- 모임후기 동영상 전체 개수 구하기 -->
 	<select id="getTotalVideoCnt" resultType="int">
 		SELECT COUNT(*)
 		  FROM post_video
 	</select>
 	
+	<!-- 모임후기 사진 가져오기 -->
 	<select id="getPostPictures" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
 		SELECT * 
 		  FROM (
@@ -255,6 +258,32 @@
 	</select>
 	
 	<select id="getPostVideos" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostVideoDTO">
-		
+		SELECT * 
+		  FROM (
+		        SELECT video_num, video_path, video_name, mem_id, group_num, post_num, replyCnt, likeCnt, total, rownum as rn
+		          FROM (
+		                SELECT DISTINCT pv.video_num, pv.video_path, pv.video_name, pv.mem_id, pv.group_num, pv.post_num, fin.replyCnt, fin.likeCnt, fin.total
+		                  FROM (
+		                        SELECT fina.post_num, fina.replyCnt as replyCnt , fina.likeCnt as likeCnt, fina.total as total, fina.group_num
+		                          FROM (
+		                                SELECT mpr.post_num, replyCnt, likeCnt, (replyCnt + likeCnt) as total, mpr.group_num
+		                                  FROM (SELECT COUNT(postrep_num) as replyCnt, mp.post_num, mp.group_num
+		                                         FROM meeting_post_reply mpr, meeting_post mp
+		                                        WHERE mp.post_num = mpr.post_num(+)
+		                                        GROUP BY mp.post_num, mp.group_num) mpr,
+		                                        (SELECT COUNT(post_like_num) as likeCnt, mp.post_num
+		                                           FROM meeting_post_like mpl, meeting_post mp
+		                                          WHERE mpl.post_num(+) = mp.post_num
+		                                          GROUP BY mp.post_num) mpl
+		                                  WHERE mpr.post_num = mpl.post_num                    
+		                                ) fina, post_video pv
+		                          WHERE fina.post_num = pv.post_num
+		                      ) fin, post_video pv
+		                 WHERE fin.post_num = pv.post_num
+		                 ORDER BY fin.total DESC, fin.replyCnt DESC, fin.likeCnt DESC
+		                 )
+		           )
+		  WHERE rn BETWEEN #{start} AND #{end}
+		  ORDER BY rn ASC
 	</select>
 </mapper>

@@ -121,11 +121,22 @@ public class MainController {
 	@RequestMapping(value="/main_gallery")
 	public String main_gallery(Model model, HttpServletRequest req) {
 		
-		System.out.println("메인갤러리 사진보기 요청");
+		System.out.println("메인갤러리 사진 앨범 보기 요청");
 		model.addAttribute("req", req);
 		mainService.getPostPictures(model);
 		
 		return "five/main/main_gallery";
+	}
+	
+	// 메인 갤러리 더보기(동영상)
+	@RequestMapping(value="/main_gallery_video")
+	public String main_gallery_video(Model model, HttpServletRequest req) {
+		
+		System.out.println("메인갤러리 동영상 앨범 보기 요청");
+		model.addAttribute("req", req);
+		mainService.getPostVideos(model);
+		
+		return "five/main/main_gallery_video";
 	}
 	
 	// 메인사진 클릭시 모임후기 정보 조회

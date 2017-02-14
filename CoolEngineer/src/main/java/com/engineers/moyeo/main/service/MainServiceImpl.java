@@ -18,6 +18,7 @@ import com.engineers.moyeo.five.dao.FiveDAO;
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.five.dto.MeetingPostViewDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.main.dao.MainDAO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
@@ -354,6 +355,7 @@ public class MainServiceImpl implements MainService{
 		System.out.println("lcnt : "+lcnt);
 	}
 
+	// 모임후기 사진 앨범
 	@Override
 	public void getPostPictures(Model model) {
 
@@ -398,8 +400,77 @@ public class MainServiceImpl implements MainService{
 		map.put("start", start);
 		map.put("end", end);
 
-		// 모임후기 리스트를 가져옴
+		// 모임후기 사진 리스트를 가져옴
 		List<PostPictureDTO> dtos = mainDao.getPostPictures(map);
+
+		req.setAttribute("dtos", dtos);
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1;   // (5 / 3) * 3 + 1 = 4
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;   //(5 % 3)
+
+		endPage = startPage + pageBlock - 1;   // 4 + 3 - 1 = 6;
+		if(endPage > pageCount) endPage = pageCount;
+
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number);
+		model.addAttribute("pageNum", pageNum);
+
+		if(cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+	}
+	
+	// 모임후기 동영상 앨범
+	@Override
+	public void getPostVideos(Model model) {
+
+		HttpServletRequest req = (HttpServletRequest)model.asMap().get("req");
+		
+		int pageSize = 32;      //   한 페이지당 출력한 글 개수
+		int pageBlock = 5;      //   출력할 페이지 개수
+
+		int cnt = 0;         // 사진 개수
+		int start = 0;         // 현재 페이지 시작번호 : rownum
+		int end   = 0;         // 현재 페이지지 끝번호 : rownum
+		int number = 0;         // 출력할 글 번호
+		String pageNum = null;   // 페이지 번호
+		int currentPage = 0;   // 현재 페이지
+
+		int pageCount = 0;      // 페이지 개수
+		int startPage = 0;      // 시작 페이지
+		int endPage = 0;      // 마지막 페이지
+
+		// 동영상 개수 구하기
+		cnt = mainDao.getTotalVideoCnt();
+
+		// 페이지번호를 받아옴
+		pageNum = req.getParameter("pageNum");
+
+		if(pageNum == null) {
+			pageNum = "1";      // 첫페이지를 1페이지로 설정
+		}
+
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = ( cnt / pageSize ) + (cnt % pageSize > 0 ? 1 : 0);
+
+		start = (currentPage -1) * pageSize + 1;   // (5-1) * 10 +1;
+		end = start + pageSize -1; // 41 + 10 -1 = 50;
+
+		if(end > cnt) end = cnt;
+
+		// 글번호
+		number = cnt - (currentPage -1) * pageSize;
+
+		Map<String, Integer> map = new HashMap<>();
+		map.put("start", start);
+		map.put("end", end);
+
+		// 모임후기 동영상 리스트를 가져옴
+		List<PostVideoDTO> dtos = mainDao.getPostVideos(map);
 
 		req.setAttribute("dtos", dtos);
 

@@ -57,6 +57,9 @@ public interface MainDAO {
 	// 전체 모임후기 사진 가저오기
 	public List<PostPictureDTO> getPostPictures(Map<String, Integer> map);
 	
+	// 전체 모임후기 사진개수 구하기
+	public int getTotalVideoCnt();
+	
 	// 전체 모임후기 동영상 가저오기
 	public List<PostVideoDTO> getPostVideos(Map<String, Integer> map);
 }
