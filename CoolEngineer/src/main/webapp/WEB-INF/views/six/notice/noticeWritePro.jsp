@@ -125,10 +125,8 @@ tr {
 	<c:if test = "${cnt == 1}">
 		<script type="text/javascript">
 			alert("글이 작성되었습니다!");
+			window.location='notice';
 		</script>
-		
-		<!-- 작성 성공 -->
-		<c:redirect url="notice" />
 	</c:if>
 
 <%@ include file="../../etc/footer2.jsp"%>
