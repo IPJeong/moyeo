@@ -101,8 +101,7 @@ public interface TwoDAO {
 	public ArrayList<PostPictureDTO> getMoimPostPictureSearchList(Map<String, Object> daoMap); //모임후기 제목, 내용을 검색했을 때 나오는 게시글들의 사진을 리스트로 보여줌
 	public ArrayList<Place_infoDTO> getPlaceSearchList(Map<String, Object> daoMap); //장소 제목, 설명을 검색했을 때 나오는 장소 정보들을 리스트로 보여줌
 	public ArrayList<Place_infoDTO> getPlacePictureSearchList(Map<String, Object> daoMap); //장소 제목, 설명을 검색했을 때 나오는 장소 정보들의 사진을 리스트로 보여줌
-	public ArrayList<Place_infoDTO> getPlaceByAddressSearchList(Map<String, Object> daoMap);  //장소 주소를 검색했을 때 나오는 장소 정보들을 리스트로 보여줌
-	
+
 	public StatisticsDTO chartByGender(int group_num);
 	public StatisticsDTO chartByAge(int group_num);
 	public StatisticsDTO getDate();
@@ -115,5 +114,4 @@ public interface TwoDAO {
 	public int checkBestTenArticle(int group_num);
 	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num);
 	public ArrayList<StatisticsDTO> getBestTenPresent(int group_num);
-
 }

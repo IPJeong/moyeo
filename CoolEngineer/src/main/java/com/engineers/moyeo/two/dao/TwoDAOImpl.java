@@ -631,14 +631,6 @@ public class TwoDAOImpl implements TwoDAO{
 		dtos = dao.getPlacePictureSearchList(daoMap);
 		return dtos;
 	}
-
-	@Override
-	public ArrayList<Place_infoDTO> getPlaceByAddressSearchList(Map<String, Object> daoMap) {
-		ArrayList<Place_infoDTO> dtos = null;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		dtos = dao.getPlaceByAddressSearchList(daoMap);
-		return dtos;
-	}
 	
 	@Override
 	public StatisticsDTO chartByGender(int group_num) {

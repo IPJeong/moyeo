@@ -470,4 +470,24 @@ public class TwoController {
 		return viewPage;
 	}
 	
+	//워드 클라우드 단어를 선택하여 검색
+	@RequestMapping("/wordCloudSearch")
+	public String wordCloudSearch(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+					
+		model.addAttribute("req", req);
+		viewPage = twoService.wordCloudSearch(model);
+		return viewPage;
+	}
+	
+	//워드 클라우드 태그 단어를 선택하여 태그 검색
+	@RequestMapping("/wordCloudSearchByTag")
+	public String wordCloudSearchByTag(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+					
+		model.addAttribute("req", req);
+		viewPage = twoService.wordCloudSearchByTag(model);
+		return viewPage;
+	}
+	
 }

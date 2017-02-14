@@ -1129,6 +1129,7 @@ public class TwoServiceImpl implements TwoService{
 			if (join_check > 0) {
 				cnt = -1;
 			} else {
+				daoMap.put("status", Code.waiting);
 				cnt = twoDao.moimJoin(daoMap);
 			}
 		} else {
@@ -1277,7 +1278,7 @@ public class TwoServiceImpl implements TwoService{
 			
 			Map<String, Object> daoMap = new HashMap<String, Object>();
 			daoMap.put("request_num", request_num);
-			daoMap.put("status", "승인");
+			daoMap.put("status", Code.accepted);
 			
 			twoDao.moimJoinOK(daoMap);
 			
@@ -1313,7 +1314,7 @@ public class TwoServiceImpl implements TwoService{
 			
 			Map<String, Object> daoMap = new HashMap<String, Object>();
 			daoMap.put("request_num", request_num);
-			daoMap.put("status", "거절");
+			daoMap.put("status", Code.refused);
 			
 			twoDao.moimJoinNO(daoMap);
 		}
@@ -1857,6 +1858,10 @@ public class TwoServiceImpl implements TwoService{
 			daoMap.put("place_address", search_keyword);
 			daoMap.put("type", "4");
 			picnt = twoDao.getPlaceSearchCount(daoMap);
+		} else if(search_radio3.equals("pi5")) {
+				daoMap.put("recpla_tag", search_keyword);
+				daoMap.put("type", "5");
+				picnt = twoDao.getPlaceSearchCount(daoMap);	
 		} else if(search_radio3.equals("pi0")) {
 			picnt = 0;
 		}
@@ -2026,7 +2031,14 @@ public class TwoServiceImpl implements TwoService{
 				model.addAttribute("plainfodtos", plainfodtos);
 				ArrayList<Place_infoDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
 				model.addAttribute("plapicdtos", plapicdtos);
-			}  	
+			} else if(search_radio3.equals("pi5")) {
+				daoMap4.put("recpla_tag", search_keyword);
+				daoMap4.put("type", "5");
+				ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
+				model.addAttribute("plainfodtos", plainfodtos);
+				ArrayList<Place_infoDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+				model.addAttribute("plapicdtos", plapicdtos);
+			} 	
 		}
 		
 		startPage1 = (currentPage1 / pageBlock1) * pageBlock1 + 1; 
@@ -2440,6 +2452,376 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("term", term); 
 		
 		return "two/moim_statistics/moimStatisticsJoin";
+	}
+
+	@Override
+	public String wordCloudSearch(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int mscnt = 0;
+		int pageSize1 = 5; 	
+		int pageBlock1 = 3; 
+		int start1 = 0;	//rownum
+		int end1 = 0;	//rownum
+		int num1 = 0;		
+		String pageNum1 = null; 	
+		int currentPage1 = 0;
+		int pageCount1 = 0;	
+		int startPage1 = 0;	
+		int endPage1 = 0;
+
+		int mpscnt = 0;
+		int pageSize2 = 5; 	
+		int pageBlock2 = 3; 
+		int start2 = 0;	//rownum
+		int end2 = 0;	//rownum
+		int num2= 0;		
+		String pageNum2 = null; 	
+		int currentPage2 = 0;
+		int pageCount2 = 0;	
+		int startPage2 = 0;	
+		int endPage2 = 0;
+		
+		int picnt = 0;
+		int pageSize3 = 5; 	
+		int pageBlock3 = 3; 
+		int start3 = 0;	//rownum
+		int end3 = 0;	//rownum
+		int num3= 0;		
+		String pageNum3 = null; 	
+		int currentPage3 = 0;
+		int pageCount3 = 0;	
+		int startPage3 = 0;	
+		int endPage3 = 0;
+		
+		String search_keyword = req.getParameter("search_keyword");
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		
+		daoMap.put("type", "3");
+		
+		daoMap.put("group_name", search_keyword);
+		daoMap.put("group_intro", search_keyword);
+		mscnt = twoDao.getMoimSearchCount(daoMap);
+		
+		daoMap.put("post_title", search_keyword);
+		daoMap.put("post_content", search_keyword);
+		mpscnt = twoDao.getMoimPostSearchCount(daoMap);
+		
+		daoMap.put("place_name", search_keyword);
+		daoMap.put("place_detail", search_keyword);
+		picnt = twoDao.getPlaceSearchCount(daoMap);
+		
+		pageNum1 = req.getParameter("pageNum1");
+		if(pageNum1 == null) {
+			pageNum1 = "1";
+		}
+		
+		pageNum2 = req.getParameter("pageNum2");
+		if(pageNum2 == null) {
+			pageNum2 = "1";
+		}
+		
+		pageNum3 = req.getParameter("pageNum3");
+		if(pageNum3 == null) {
+			pageNum3 = "1";
+		}
+		
+		currentPage1 = Integer.parseInt(pageNum1);
+		if(mscnt > 0) {
+			pageCount1 = (mscnt / pageSize1) + (mscnt % pageSize1> 0 ? 1 : 0);
+		}
+		
+		currentPage2 = Integer.parseInt(pageNum2);
+		if(mpscnt > 0) {
+			pageCount2 = (mpscnt / pageSize2) + (mpscnt % pageSize2 > 0 ? 1 : 0);
+		}
+		
+		currentPage3 = Integer.parseInt(pageNum3);
+		if(picnt > 0) {
+			pageCount3 = (picnt / pageSize3) + (picnt % pageSize3 > 0 ? 1 : 0);
+		}
+		
+		start1 = (currentPage1 - 1) * pageSize1 + 1; 
+		end1 = start1 + pageSize1 -1;
+		
+		start2 = (currentPage2 - 1) * pageSize2 + 1; 
+		end2 = start2 + pageSize2 -1; 
+		
+		start3 = (currentPage3 - 1) * pageSize3 + 1; 
+		end3 = start3 + pageSize3 -1; 
+		
+		if(mscnt > 0) {
+			if(end1 > mscnt) end1 = mscnt;
+	
+			num1 = mscnt - (currentPage1 - 1) * pageSize1;
+		}
+		
+		if(mpscnt > 0 ) {
+			if(end2 > mpscnt) end2 = mpscnt;
+			
+			num2 = mpscnt - (currentPage2 - 1) * pageSize2;
+		}
+		
+		if(picnt > 0 ) {
+			if(end3 > picnt) end3 = picnt;
+			
+			num3 = picnt - (currentPage3 - 1) * pageSize3;
+		}
+		
+		Map<String, Object> daoMap2 = new HashMap<String, Object>();
+		daoMap2.put("start1", start1);
+		daoMap2.put("end1", end1);
+		if(mscnt > 0) {
+			
+			daoMap2.put("group_name", search_keyword);
+			daoMap2.put("group_intro", search_keyword);
+			daoMap2.put("type", "3");
+			ArrayList<Moim_infoDTO> moidtos = twoDao.getMoimSearchList(daoMap2);	
+			model.addAttribute("moidtos", moidtos);
+			ArrayList<Moim_infoDTO> mopdtos = twoDao.getMoimPictureSearchList(daoMap2);
+			model.addAttribute("mopdtos", mopdtos);
+			
+		}
+		
+		Map<String, Object> daoMap3 = new HashMap<String, Object>();
+		daoMap3.put("start2", start2);
+		daoMap3.put("end2", end2);
+		if(mpscnt > 0) {
+
+			daoMap3.put("post_title", search_keyword);
+			daoMap3.put("post_content", search_keyword);
+			daoMap3.put("type", "3");
+			ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);
+			model.addAttribute("mpdtos", mpdtos);
+			ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
+			model.addAttribute("ppdtos", ppdtos);
+
+		}
+		
+		Map<String, Object> daoMap4 = new HashMap<String, Object>();
+		daoMap4.put("start3", start3);
+		daoMap4.put("end3", end3);
+		if(picnt > 0) {
+			
+			daoMap4.put("place_name", search_keyword);
+			daoMap4.put("place_detail", search_keyword);
+			daoMap4.put("type", "3");
+			ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
+			model.addAttribute("plainfodtos", plainfodtos);
+			ArrayList<Place_infoDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+			model.addAttribute("plapicdtos", plapicdtos);
+
+		}
+		
+		startPage1 = (currentPage1 / pageBlock1) * pageBlock1 + 1; 
+		if(currentPage1 % pageBlock1 == 0) startPage1 -= pageBlock1;
+		
+		endPage1 = startPage1 + pageBlock1 - 1; 
+		if(endPage1 > pageCount1) endPage1 = pageCount1;
+		
+		startPage2 = (currentPage2 / pageBlock2) * pageBlock2 + 1; 
+		if(currentPage2 % pageBlock2 == 0) startPage2 -= pageBlock2;
+		
+		endPage2 = startPage2 + pageBlock2 - 1; 
+		if(endPage2 > pageCount2) endPage2 = pageCount2;
+		
+		startPage3 = (currentPage3 / pageBlock3) * pageBlock3 + 1; 
+		if(currentPage3 % pageBlock3 == 0) startPage3 -= pageBlock3;
+		
+		endPage3 = startPage3 + pageBlock3 - 1; 
+		if(endPage3 > pageCount3) endPage3 = pageCount3;
+		
+		model.addAttribute("mscnt", mscnt);
+		model.addAttribute("mpscnt", mpscnt);
+		model.addAttribute("picnt", picnt);
+		model.addAttribute("num1", num1); 
+		model.addAttribute("pageNum1", pageNum1);
+		model.addAttribute("num2", num2); 
+		model.addAttribute("pageNum2", pageNum2);
+		model.addAttribute("num3", num3); 
+		model.addAttribute("pageNum3", pageNum3);
+		
+		if (mscnt > 0) {
+			model.addAttribute("currentPage1", currentPage1);
+			model.addAttribute("startPage1", startPage1);
+			model.addAttribute("endPage1", endPage1);
+			model.addAttribute("pageCount1", pageCount1);
+			model.addAttribute("pageBlock1", pageBlock1);
+		}
+		
+		if (mpscnt > 0) {
+			model.addAttribute("currentPage2", currentPage2);
+			model.addAttribute("startPage2", startPage2);
+			model.addAttribute("endPage2", endPage2);
+			model.addAttribute("pageCount2", pageCount2);
+			model.addAttribute("pageBlock2", pageBlock2);
+		}
+		
+		if (picnt > 0) {
+			model.addAttribute("currentPage3", currentPage3);
+			model.addAttribute("startPage3", startPage3);
+			model.addAttribute("endPage3", endPage3);
+			model.addAttribute("pageCount3", pageCount3);
+			model.addAttribute("pageBlock3", pageBlock3);
+		}
+		
+		model.addAttribute("search_keyword", search_keyword);
+		
+		return "two/main_search/mainSearchResult";
+	}
+
+	@Override
+	public String wordCloudSearchByTag(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int mscnt = 0;
+		
+		int mpscnt = 0;
+		int pageSize2 = 5; 	
+		int pageBlock2 = 3; 
+		int start2 = 0;	//rownum
+		int end2 = 0;	//rownum
+		int num2= 0;		
+		String pageNum2 = null; 	
+		int currentPage2 = 0;
+		int pageCount2 = 0;	
+		int startPage2 = 0;	
+		int endPage2 = 0;
+		
+		int picnt = 0;
+		int pageSize3 = 5; 	
+		int pageBlock3 = 3; 
+		int start3 = 0;	//rownum
+		int end3 = 0;	//rownum
+		int num3= 0;		
+		String pageNum3 = null; 	
+		int currentPage3 = 0;
+		int pageCount3 = 0;	
+		int startPage3 = 0;	
+		int endPage3 = 0;
+
+		String search_keyword_req = req.getParameter("search_keyword");
+		String search_keyword = search_keyword_req.replace("#", "");
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		
+		daoMap.put("type", "4");
+		daoMap.put("post_tag", search_keyword);
+		mpscnt = twoDao.getMoimPostSearchCount(daoMap);
+		
+		Map<String, Object> daoMap2 = new HashMap<String, Object>();
+		daoMap2.put("type", "5");
+		daoMap2.put("recpla_tag", search_keyword);
+		picnt = twoDao.getPlaceSearchCount(daoMap2);
+		
+		pageNum2 = req.getParameter("pageNum2");
+		if(pageNum2 == null) {
+			pageNum2 = "1";
+		}
+		
+		pageNum3 = req.getParameter("pageNum3");
+		if(pageNum3 == null) {
+			pageNum3 = "1";
+		}
+		
+		currentPage2 = Integer.parseInt(pageNum2);
+		if(mpscnt > 0) {
+			pageCount2 = (mpscnt / pageSize2) + (mpscnt % pageSize2 > 0 ? 1 : 0);
+		}
+		
+		currentPage3 = Integer.parseInt(pageNum3);
+		if(picnt > 0) {
+			pageCount3 = (picnt / pageSize3) + (picnt % pageSize3 > 0 ? 1 : 0);
+		}
+		
+		
+		start2 = (currentPage2 - 1) * pageSize2 + 1; 
+		end2 = start2 + pageSize2 -1; 
+		
+		start3 = (currentPage3 - 1) * pageSize3 + 1; 
+		end3 = start3 + pageSize3 -1; 
+		
+		if(mpscnt > 0 ) {
+			if(end2 > mpscnt) end2 = mpscnt;
+			
+			num2 = mpscnt - (currentPage2 - 1) * pageSize2;
+		}
+		
+		if(picnt > 0 ) {
+			if(end3 > picnt) end3 = picnt;
+			
+			num3 = picnt - (currentPage3 - 1) * pageSize3;
+		}
+		
+		Map<String, Object> daoMap3 = new HashMap<String, Object>();
+		daoMap3.put("start2", start2);
+		daoMap3.put("end2", end2);
+		if(mpscnt > 0) {
+			daoMap3.put("type", "4");
+			daoMap3.put("post_tag", search_keyword);
+			ArrayList<MeetingPostDTO> mpdtos = twoDao.getMoimPostSearchList(daoMap3);
+			model.addAttribute("mpdtos", mpdtos);
+			ArrayList<PostPictureDTO> ppdtos = twoDao.getMoimPostPictureSearchList(daoMap3);
+			model.addAttribute("ppdtos", ppdtos);
+
+		}
+		
+		Map<String, Object> daoMap4 = new HashMap<String, Object>();
+		daoMap4.put("start3", start3);
+		daoMap4.put("end3", end3);
+		if(picnt > 0) {
+			daoMap4.put("type", "5");
+			daoMap4.put("recpla_tag", search_keyword);
+			ArrayList<Place_infoDTO> plainfodtos = twoDao.getPlaceSearchList(daoMap4);
+			model.addAttribute("plainfodtos", plainfodtos);
+			ArrayList<Place_infoDTO> plapicdtos = twoDao.getPlacePictureSearchList(daoMap4);
+			model.addAttribute("plapicdtos", plapicdtos);
+
+		}
+		
+		startPage2 = (currentPage2 / pageBlock2) * pageBlock2 + 1; 
+		if(currentPage2 % pageBlock2 == 0) startPage2 -= pageBlock2;
+		
+		endPage2 = startPage2 + pageBlock2 - 1; 
+		if(endPage2 > pageCount2) endPage2 = pageCount2;
+		
+		startPage3 = (currentPage3 / pageBlock3) * pageBlock3 + 1; 
+		if(currentPage3 % pageBlock3 == 0) startPage3 -= pageBlock3;
+		
+		endPage3 = startPage3 + pageBlock3 - 1; 
+		if(endPage3 > pageCount3) endPage3 = pageCount3;
+		
+		model.addAttribute("mscnt", mscnt);
+		model.addAttribute("mpscnt", mpscnt);
+		model.addAttribute("picnt", picnt);
+		
+		model.addAttribute("num2", num2); 
+		model.addAttribute("pageNum2", pageNum2);
+		model.addAttribute("num3", num3); 
+		model.addAttribute("pageNum3", pageNum3);
+		
+		if (mpscnt > 0) {
+			model.addAttribute("currentPage2", currentPage2);
+			model.addAttribute("startPage2", startPage2);
+			model.addAttribute("endPage2", endPage2);
+			model.addAttribute("pageCount2", pageCount2);
+			model.addAttribute("pageBlock2", pageBlock2);
+		}
+		
+		if (picnt > 0) {
+			model.addAttribute("currentPage3", currentPage3);
+			model.addAttribute("startPage3", startPage3);
+			model.addAttribute("endPage3", endPage3);
+			model.addAttribute("pageCount3", pageCount3);
+			model.addAttribute("pageBlock3", pageBlock3);
+		}
+		
+		model.addAttribute("search_keyword", search_keyword);
+		
+		return "two/main_search/mainSearchResult";
 	}
 
 }

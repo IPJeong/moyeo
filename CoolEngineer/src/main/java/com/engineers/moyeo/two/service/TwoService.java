@@ -49,5 +49,7 @@ public interface TwoService {
 	public String moimStatisticsArticle(Model model); //모임 통계 : 게시글 분석
 	public String moimStatisticsPresent(Model model); //모임 통계 : 방문 분석
 	public String moimStatisticsJoin(Model model); //모임 통계 : 모임가입 분석
-
+	
+	public String wordCloudSearch(Model model); //워드 클라우드 단어를 선택하여 검색
+	public String wordCloudSearchByTag(Model model); //워드 클라우드 태그 단어를 선택하여 태그 검색
 }

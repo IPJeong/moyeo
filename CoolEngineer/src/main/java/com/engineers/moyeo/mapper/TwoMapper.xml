@@ -218,16 +218,16 @@
 		 SELECT *
 		   FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum  
 				  FROM(SELECT cc.place_like_count, cc.recpla_num, pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, DENSE_RANK() OVER (ORDER BY cc.place_like_count DESC) AS place_like_order
-		            FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
-		                   FROM place_like pl, rec_place rp, place_info pi, place_pic pp
-		                   WHERE pl.recpla_num = rp.recpla_num
-		                     AND rp.place_num = pi.place_num
-		                     AND pi.place_num = pp.place_num
-		                   GROUP BY pl.recpla_num) cc, rec_place rp, place_info pi, place_pic pp 
-		             WHERE cc.recpla_num = rp.recpla_num
-		               AND rp.place_num = pi.place_num
-		               AND pi.place_num = pp.place_num
-		              ORDER BY place_like_order)
+			            FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
+			                   FROM place_like pl, rec_place rp, place_info pi, place_pic pp
+			                   WHERE pl.recpla_num = rp.recpla_num
+			                     AND rp.place_num = pi.place_num
+			                     AND pi.place_num = pp.place_num
+			                   GROUP BY pl.recpla_num) cc, rec_place rp, place_info pi, place_pic pp 
+			             WHERE cc.recpla_num = rp.recpla_num
+			               AND rp.place_num = pi.place_num
+			               AND pi.place_num = pp.place_num
+			              ORDER BY place_like_order)
 				 WHERE place_like_order BETWEEN 1 AND 5)
 		 WHERE rnum BETWEEN 1 AND 5
 	</select>
@@ -337,7 +337,7 @@
  	</select>
  	
  	<insert id="moimJoin" parameterType="Map">
-		INSERT INTO join_request (request_num, request_date, status, mem_id, group_num) VALUES (join_request_seq.NEXTVAL, SYSDATE, '대기', #{mem_id}, #{group_num})
+		INSERT INTO join_request (request_num, request_date, status, mem_id, group_num) VALUES (join_request_seq.NEXTVAL, SYSDATE, #{status}, #{mem_id}, #{group_num})
 	</insert>
 	
 	<delete id="moimWithdraw" parameterType="Map">
@@ -550,11 +550,19 @@
 		               <if test="type == 4">
 		                WHERE place_address LIKE '%'||#{place_address}||'%'
 		               </if>
+		               <if test="type == 5">
+		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp
-		        WHERE pi.place_num = pp.place_num)
+		                ORDER BY place_pic_num DESC) pp,
+		               (SELECT place_num, recpla_tag
+	                      FROM rec_place
+	                    <if test="type == 5">
+	                    WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+	                    </if>
+	                   ) rp
+		        WHERE pi.place_num = pp.place_num AND pp.place_num = rp.place_num)
     </select>
    
 	<select id="getMoimSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
@@ -656,8 +664,8 @@
 	</select>
 	
     <select id="getPlaceSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
-   		SELECT place_num, place_name, place_address, place_detail, place_link 
-		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
+   		SELECT place_num, place_name, place_address, place_detail, place_link, recpla_tag
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rp.recpla_tag, rownum rnum
 		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
 		                  FROM place_info
 		               <if test="type == 1">
@@ -672,11 +680,20 @@
 		               <if test="type == 4">
 		                WHERE place_address LIKE '%'||#{place_address}||'%'
 		               </if>
+		               <if test="type == 5">
+		               
+		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp
-		        WHERE pi.place_num = pp.place_num)
+		                ORDER BY place_pic_num DESC) pp,
+	                   (SELECT place_num, recpla_tag
+	                      FROM rec_place
+	                    <if test="type == 5">
+	                    WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+	                    </if>
+	                   ) rp
+				  WHERE pi.place_num = pp.place_num AND pp.place_num = rp.place_num)
 		WHERE rnum BETWEEN #{start3} AND #{end3}
     </select>
     
@@ -697,11 +714,20 @@
 		               <if test="type == 4">
 		                WHERE place_address LIKE '%'||#{place_address}||'%'
 		               </if>
+		               <if test="type == 5">
+		               
+		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp
-		        WHERE pi.place_num = pp.place_num)
+		                ORDER BY place_pic_num DESC) pp,
+	                   (SELECT place_num, recpla_tag
+	                      FROM rec_place
+	                    <if test="type == 5">
+	                    WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+	                    </if>
+	                   ) rp
+				  WHERE pi.place_num = pp.place_num AND pp.place_num = rp.place_num)
 		WHERE rnum BETWEEN #{start3} AND #{end3}
     </select>
 

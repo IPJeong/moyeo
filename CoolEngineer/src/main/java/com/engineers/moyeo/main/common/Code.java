@@ -35,8 +35,10 @@ public interface Code {
 	// 모임의 대표사진 저장경로
 	public final static String groupImgPath = "groupImg\\";
 	
+	// 판매자 사업자등록증 사진 저장경로
+	public final static String B_C_PATH = "bcImg\\";
 	
-	
+
 	// 모임의 기본사진 위치(모임생성시 기본사진 입력용)
 	public final static String groupDefSideImgPath = "/moyeo/resources/resource/assets/images/moimImg";
 	
@@ -72,6 +74,10 @@ public interface Code {
 	// 모임의 대표사진 저장경로
 	public final static String groupImgPathS = "/groupImgPath";
 	
+	// 판매자 사업자등록증 사진 저장경로
+	public final static String B_C_PATHS = "/bcImg";
+	
+	
 	// 모임페이지 권한번호
 	// 모임장 권한번호
 	public final static int moimJang = 1;
@@ -82,25 +88,38 @@ public interface Code {
 	// 비모임원 권한번호
 	public final static int moimNoMember = 4;
 	
-	// 모임가입 신청 대기 상태
+	
+	// 회원알림 확인여부
+	// 회원알림을 확인 한 경우
+	public final static String memberNotiCheckod = "1"; 
+	// 회원알림을 확인 하지 않은 경우
+	public final static String memberNotiNonChecked = "0"; 
+	
+	// 모임가입 상태
+	// 모임가입 신청 대기
 	public final static String waiting = "대기";
 	// 모임가입 신청 승인
 	public final static String accepted = "승인";
 	// 모임가입 신청 거절
 	public final static String refused = "거절";
 	
+	
+	// 관리자 권한
 	// 관리자 권한 코드(최고관리자)
 	public final static String authority_1 = "02";
 	// 관리자 권한 코드(일반관리자)
 	public final static String authority_2 = "08";
 	
-	// 모임가입 신청 대기 상태
+	
+	// 판매자 신청 상태
+	// 판매자 신청 대기
 	public final static String seler_waiting = "91";
-	// 모임가입 신청 승인
+	// 판매자 신청 승인
 	public final static String seler_accepted = "06";
-	// 모임가입 신청 거절
+	// 판매자 신청 거절
 	public final static String seler_refused = "15";
 	
+	// 예외 발생 메시지
 	// 숫자타입변환 예외 발생 메시지
 	public final static String numForExceptionMsg = "========== NumberFormat Exception ==========";
 	// 널값 예외 발생 메시지
