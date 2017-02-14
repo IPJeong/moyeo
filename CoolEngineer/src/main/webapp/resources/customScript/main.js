@@ -20,11 +20,11 @@ function getPostDetails(post_num) {
 			// 모임후기 내용 삽입
 			$('#contentForm').html(content);
 			
-			if(data.postDto.post_tags != null ){
+			if(data.postDto.post_tags != null ) {
 				// 사진데이터 삽입
 				jQuery.each(data.postDto.post_tags,
-						function(idx, post_tags){
-					tags += '<li><a href="#"><span class="fa fa-tag" style="color:#001EC9;"></span><font color="#001EC9" size="4px">' + post_tags + '</font></a></li>';
+						function(idx, post_tags) {
+					tags += '<li><a href="#"><span class="fa fa-tag" style="color:#23527c;"></span><font color="#23527c" size="4px" style="font-weight: bold;">' + post_tags + '</font></a></li>';
 				});
 				// 모임후기 태그 삽입
 				$('#listTags').html(tags);
