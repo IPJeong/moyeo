@@ -1,6 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>    
+<script>
+//모임후기 사진파일, 동영상 파일 등록시 파일타입 체크
+function chkType(id) {
+
+	var fileName = $("#"+id).val();
+	var extension = fileName.slice(fileName.indexOf(".") + 1).toLowerCase();
+
+	var isOk = false;
+	isOk = imgChk(extension);
+
+	if(!isOk){
+		alert("이미지 파일 형식만 등록 가능합니다.");
+		$("#"+id).val("");
+	}
+}
+
+//사진파일 확장자
+function imgChk(extension) {
+	var imgs = ['jpg', 'png', 'gif', 'bmp', 'rel', 'psd', 'pdd', 'tif', 'pdf', 'raw', 'pct', 'pic'];
+	for(var i=0; i<imgs.length; i++){
+		if(imgs[i] == extension.toLowerCase()){
+			return true;
+		}
+	}
+	return false;
+}
+</script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
