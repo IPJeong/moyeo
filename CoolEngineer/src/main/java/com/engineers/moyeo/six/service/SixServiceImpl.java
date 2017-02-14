@@ -1741,7 +1741,7 @@ public class SixServiceImpl implements SixService{
 			if(fileName.trim().length()>4){
 				
 				String rootPath = Code.rootPath;
-				String imgPath = Code.groupImgPath;
+				String imgPath = Code.B_C_PATH;
 				
 				int type = FileManager.checkFileType(fileName);
 				String filename = null;
