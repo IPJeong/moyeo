@@ -80,7 +80,7 @@ public interface Code {
 	// 모임원 권한번호
 	public final static int moimMember = 3;
 	// 비모임원 권한번호
-	public final static int noMember = 4;
+	public final static int moimNoMember = 4;
 	
 	// 모임가입 신청 대기 상태
 	public final static String waiting = "대기";
