@@ -1,5 +1,7 @@
  package com.engineers.moyeo.main.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
@@ -45,4 +47,7 @@ public interface MainService {
 	
 	// 모임후기 상세정보 조회
 	public void getPostDetails(HttpServletRequest req, ModelAndView mav);
+	
+	// 회원, 모임장, 판매자 알림 등록
+	public void addNotice(Map<String, Object> map);
 }

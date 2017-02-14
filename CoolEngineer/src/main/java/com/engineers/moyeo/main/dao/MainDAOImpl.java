@@ -12,8 +12,11 @@ import org.springframework.stereotype.Repository;
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
+import com.engineers.moyeo.main.dto.GroupLeaderNotiDTO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
+import com.engineers.moyeo.main.dto.MemberNotiDTO;
+import com.engineers.moyeo.main.dto.SellerNotiDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
 
 
@@ -161,4 +164,26 @@ public class MainDAOImpl implements MainDAO{
 		MainDAO dao = sqlSession.getMapper(MainDAO.class);
 		return dao.getPostVideos(map);
 	}
+
+	// 회원의 알림을 추가
+	@Override
+	public int addMemberNoti(MemberNotiDTO dto) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.addMemberNoti(dto);
+	}
+
+	// 모임장의 알림을 추가
+	@Override
+	public int addLeaderNoti(GroupLeaderNotiDTO dto) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.addLeaderNoti(dto);
+	}
+
+	// 판매자의 알림을 추가
+	@Override
+	public int addSellerNoti(SellerNotiDTO dto) {
+		MainDAO dao = sqlSession.getMapper(MainDAO.class);
+		return dao.addSellerNoti(dto);
+	}
+	
 }

@@ -89,11 +89,11 @@ public interface Code {
 	public final static int moimNoMember = 4;
 	
 	
-	// 회원알림 확인여부
-	// 회원알림을 확인 한 경우
-	public final static String memberNotiCheckod = "1"; 
-	// 회원알림을 확인 하지 않은 경우
-	public final static String memberNotiNonChecked = "0"; 
+	// 알림 확인여부
+	// 알림을 확인 한 경우
+	public final static String NotiCheckod = "1"; 
+	// 알림을 확인 하지 않은 경우
+	public final static String NotiNonChecked = "0"; 
 	
 	// 모임가입 상태
 	// 모임가입 신청 대기

@@ -6,8 +6,11 @@ import java.util.Map;
 import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
+import com.engineers.moyeo.main.dto.GroupLeaderNotiDTO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
+import com.engineers.moyeo.main.dto.MemberNotiDTO;
+import com.engineers.moyeo.main.dto.SellerNotiDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 
@@ -62,4 +65,13 @@ public interface MainDAO {
 	
 	// 전체 모임후기 동영상 가저오기
 	public List<PostVideoDTO> getPostVideos(Map<String, Integer> map);
+	
+	// 회원알림 등록
+	public int addMemberNoti(MemberNotiDTO dto);
+	
+	// 모임장 알림 등록
+	public int addLeaderNoti(GroupLeaderNotiDTO dto);
+	
+	// 판매자 알림 등록
+	public int addSellerNoti(SellerNotiDTO dto);
 }

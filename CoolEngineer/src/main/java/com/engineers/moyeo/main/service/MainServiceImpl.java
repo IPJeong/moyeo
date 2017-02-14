@@ -1,5 +1,6 @@
 package com.engineers.moyeo.main.service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,9 +20,14 @@ import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.five.dto.MeetingPostViewDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
+import com.engineers.moyeo.main.common.Code;
+import com.engineers.moyeo.main.common.TextMessage;
 import com.engineers.moyeo.main.dao.MainDAO;
+import com.engineers.moyeo.main.dto.GroupLeaderNotiDTO;
 import com.engineers.moyeo.main.dto.MainPicDTO;
 import com.engineers.moyeo.main.dto.MainVideoDTO;
+import com.engineers.moyeo.main.dto.MemberNotiDTO;
+import com.engineers.moyeo.main.dto.SellerNotiDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
 import com.engineers.moyeo.main.twitterKoreanParser.KoreanParser;
 import com.engineers.moyeo.six.dao.SixDAO;
@@ -284,7 +290,7 @@ public class MainServiceImpl implements MainService{
 		System.out.println(wordList);
 		for(WordDTO dto : wordList) {
 			if(dto.getPart_of_speech().equals("Hashtag")){
-				resultMsg += "<li><a href='/moyeo/two/wordCloudSearchByTag?search_keyword=" + dto.getWord() + "' target='_blank'>" + dto.getWord() + "</a></li>";
+				resultMsg += "<li><a href='/moyeo/two/wordCloudSearchByTag?search_keyword=" + dto.getWord().replaceAll("#", "") + "' target='_blank'>" + dto.getWord() + "</a></li>";
 			} else {
 				resultMsg += "<li><a href='/moyeo/two/wordCloudSearch?search_keyword=" + dto.getWord() + "' target='_blank'>" + dto.getWord() + "</a></li>";
 			}
@@ -509,6 +515,197 @@ public class MainServiceImpl implements MainService{
 		}
 		mav.addObject("postDto", postDto);
 		
+	}
+
+	// 회원, 모임장, 판매자 알림 등록
+	@Override
+	public void addNotice(Map<String, Object> map) {
+		
+		// 알림을 줄 타입
+		int type = (Integer)map.get("type");
+		// 알림 테이블에 넣을 데이터를 담은 맵
+		Map<String, Object> insertMap = new HashMap<>();
+		// 알림 발생 시간
+		long time = System.currentTimeMillis();
+		// 알림 등록 결과 값
+		int cnt = 0;
+		
+		// 현호
+		// 이벤트에 당첨된 회원의 알림을 생성하는 메서드 (당첨된 회원아이디, 이벤트 명)(회원) - type(1)
+		if(type == 1) {
+			String mem_id = (String)map.get("mem_id");
+			String event_title = (String)map.get("event_titme");
+			String msg = TextMessage.memWinningMsg(mem_id, event_title);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+			
+		// 상준
+		// 모임에 작성한 가입인사 게시판에 댓글이 달린 경우 알림을 생성하는 메서드(회원)(게시글을 작성한 회원아이디, 모임의 이름, 댓글을 작성한 회원의 아이디) - type(2)	
+		} else if(type == 2) {
+			String mem_id = (String)map.get("mem_id");
+			String group_name = (String)map.get("group_name");
+			String from_id = (String)map.get("from_id");
+			String msg = TextMessage.memGreetingReplyMsg(mem_id, group_name, from_id);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+		// 모임에 작성한 가입인사 게시판의 좋아요 버튼을 누른 경우 알림을 생성하는 메서드(게시글을 작성한 회원아이디, 모임의 이름, 좋아한 회원의 아이디) - type(3)
+		} else if(type == 3) {
+			String mem_id = (String)map.get("mem_id");
+			String group_name = (String)map.get("group_name");
+			String from_id = (String)map.get("from_id");
+			String msg = TextMessage.memGreetingReplyMsg(mem_id, group_name, from_id);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+			
+		// 우진
+		// 회원알림테이블에 Q&A 질문에 대한 답변이 달린경우 알림을 생성하는 메서드(회원)(해당 질문의 제목, 질문한 회원의 아이디) - type(4)	
+		} else if(type == 4) {
+			
+			String mem_id = (String)map.get("mem_id");
+			String qna_title = (String)map.get("qna_title");
+			String msg = TextMessage.memQnaReplyMsg(mem_id, qna_title);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+		// 모임이 신고되면 모임장에게 모임이 신고됨을 알림(모임장) - type(5)	
+		} else if(type == 5) {
+			
+			// 모임장 아이디
+			String mem_id = (String)map.get("mem_id");
+			// 모임번호
+			int group_num = (Integer)map.get("group_num");
+			String msg = TextMessage.groupReportNotiMsg();
+			
+			cnt = addGroupLeaderNotiDTO(msg, time, mem_id, group_num);
+			
+		// 모임신고에 관리자가 처리내역을 업데이트 하면 모임을 신고한 회원에게 알림(회원) - type(6)	
+		} else if(type == 6) {
+			
+			String mem_id = (String)map.get("mem_id");
+			String group_name = (String)map.get("group_name");
+			String msg = TextMessage.groupReportSolNotiMsg(mem_id, group_name);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+			
+		// 일품
+		// 모임후기의 좋아요 알림을 생성하는 메서드(모임후기의 제목, 좋아한 회원의 아이디, 모임번호)(모임장) - type(7)
+		} else if(type == 7) {
+			
+			String from_id = (String)map.get("from_id");
+			int group_num = (Integer)map.get("group_num");
+			String post_title = (String)map.get("post_title");
+			String mem_id = (String)map.get("mem_id");
+			
+			String msg = TextMessage.postLikeMsg(post_title, from_id);
+			
+			cnt = addGroupLeaderNotiDTO(msg, time, mem_id, group_num);
+			
+		// 모임후기에 달린 댓글 알림을 생성하는 메서드(모임후기의 제목, 댓글을 작성한 회원의 아이디, 모임번호)(모임장) - type(8)
+		} else if(type == 8) {
+			
+			String from_id = (String)map.get("from_id");
+			int group_num = (Integer)map.get("group_num");
+			String post_title = (String)map.get("post_title");
+			String mem_id = (String)map.get("mem_id");
+			
+			String msg = TextMessage.postReplyMsg(post_title, from_id);
+			
+			cnt = addGroupLeaderNotiDTO(msg, time, mem_id, group_num);
+			
+		// 대성
+		// 모임이 폐지될 경우, 모임장과 모임원들에게 알림(회원) - type(9)
+		} else if(type == 9) {
+			
+			List<String> memberList = (List<String>)map.get("memberList");
+			String group_name = (String)map.get("group_name");
+			
+			for(String mem_id : memberList) {
+				String msg = TextMessage.shutDownGroupMsg(mem_id, group_name);
+				cnt = addMemberNotiDTO(msg, time, mem_id);
+			}
+			
+		// 승우
+		// 회원의 등급이 변화될 경우 알림(회원) - type(10)
+		} else if(type == 10) {
+			
+			String mem_id = (String)map.get("mem_id");
+			String group_name = (String)map.get("group_name");
+			String msg = TextMessage.changeGroupPerMsg(mem_id, group_name);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+		// 모임에서 강제 탈퇴 당한 경우 알림(회원) - type(11)
+		} else if(type == 11) {
+			
+			String mem_id = (String)map.get("mem_id");
+			String group_name = (String)map.get("group_name");
+			String msg = TextMessage.kickedNotiMsg(mem_id, group_name);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+		// 모임에서 가입이 승인된 경우 알림(회원) - type(12)
+		} else if(type == 12) {
+			
+			String mem_id = (String)map.get("mem_id");
+			String group_name = (String)map.get("group_name");
+			String msg = TextMessage.acceptedGroupMsg(mem_id, group_name);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+		// 모임에서 가입이 거절된 경우 알림(회원) - type(13)	
+		} else if(type == 13) {
+			
+			String mem_id = (String)map.get("mem_id");
+			String group_name = (String)map.get("group_name");
+			String msg = TextMessage.refusedGroupMsg(mem_id, group_name);
+			
+			cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+		// 비모임원이 모임에 가입을 신청한 경우 알림(모임장) - type(14)
+		} else if(type == 14) {
+			
+			int group_num = (Integer)map.get("group_num");
+			String group_name = (String)map.get("group_name");
+			String mem_id = (String)map.get("mem_id");
+			
+			String msg = TextMessage.applyJoinGroupMsg(mem_id, group_name);
+			
+			cnt = addGroupLeaderNotiDTO(msg, time, mem_id, group_num);
+			
+		} 
+		
+	}
+	
+	public int addMemberNotiDTO(String msg, long time, String mem_id) {
+		MemberNotiDTO dto = new MemberNotiDTO();
+		dto.setNoti_content(msg);
+		dto.setNoti_date(new Date(time));
+		dto.setIs_checked(Code.NotiNonChecked);
+		dto.setMem_id(mem_id);
+		return mainDao.addMemberNoti(dto);
+	}
+	
+	public int addGroupLeaderNotiDTO(String msg, long time, String mem_id, int group_num) {
+		GroupLeaderNotiDTO dto = new GroupLeaderNotiDTO();
+		dto.setNoti_content(msg);
+		dto.setNoti_date(new Date(time));
+		dto.setIs_checked(Code.NotiNonChecked);
+		dto.setMem_id(mem_id);
+		dto.setGroup_num(group_num);
+		return mainDao.addLeaderNoti(dto);
+	}
+	
+	public int addSellerNotiDTO(String msg, long time, String seller_id) {
+		SellerNotiDTO dto = new SellerNotiDTO();
+		dto.setNoti_content(msg);
+		dto.setNoti_date(new Date(time));
+		dto.setIs_checked(Code.NotiNonChecked);
+		dto.setSeller_id(seller_id);
+		return mainDao.addSellerNoti(dto);
 	}
 	
 }

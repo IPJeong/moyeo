@@ -226,7 +226,7 @@
 		  FROM post_video
 	</select>
 	
-	<!-- 모임후기 사진 가져오기 -->
+	<!-- 모임후기 사진 가져오기(메인 갤러리) -->
 	<select id="getPostPictures" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostPictureDTO">
 		SELECT * 
 		  FROM (
@@ -257,6 +257,7 @@
 		  ORDER BY rn ASC
 	</select>
 	
+	<!-- 모임후기 동영상 가져오기(메인 갤러리) -->
 	<select id="getPostVideos" parameterType="Map" resultType="com.engineers.moyeo.five.dto.PostVideoDTO">
 		SELECT * 
 		  FROM (
@@ -286,4 +287,22 @@
 		  WHERE rn BETWEEN #{start} AND #{end}
 		  ORDER BY rn ASC
 	</select>
+	
+	<!-- 회원의 알림을 등록 -->
+	<insert id="addMemberNoti" parameterType="com.engineers.moyeo.main.dto.MemberNotiDTO">
+		insert into member_noti (noti_num, noti_content, is_checked, noti_date, mem_id)
+						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, #{noti_date}, #{mem_id})
+	</insert>
+	
+	<!-- 모임장 알림을 등록 -->
+	<insert id="addLeaderNoti" parameterType="com.engineers.moyeo.main.dto.GroupLeaderNotiDTO">
+		insert into group_leader_noti (noti_num, noti_content, is_checked, noti_date, mem_id)
+						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, #{noti_date}, #{mem_id})
+	</insert>
+	
+	<!-- 판매자 알림을 등록 -->
+	<insert id="addSellerNoti" parameterType="com.engineers.moyeo.main.dto.SellerNotiDTO">
+		insert into seller_noti (noti_num, noti_content, is_checked, noti_date, seller_id)
+						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, #{noti_date}, #{seller_id})
+	</insert>
 </mapper>
