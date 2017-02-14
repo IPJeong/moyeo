@@ -276,7 +276,7 @@ li {
 							<div class="panel-heading">
 								<div class="panel-title-box">
 									<a href="../movie/movie.jsp"><font size="4px;">동영상</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a class="fa fa-plus-square-o" href="#"><font size="2">더보기</font></a>
+									<a class="fa fa-plus-square-o" href="/moyeo/main/main_gallery_video"><font size="2">더보기</font></a>
 								</div>
 							</div>
 							<div class="panel-body padding-0">

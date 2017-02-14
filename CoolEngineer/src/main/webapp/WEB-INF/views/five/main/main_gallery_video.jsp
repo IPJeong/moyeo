@@ -95,7 +95,7 @@ background:#C1F3FF;
         		 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb push-down-0">
                     <li><a href="/moyeo/main/home">Home</a></li>
-                    <li class="active">사진 앨범</li>
+                    <li class="active">동영상 앨범</li>
                 </ul>
                <!-- END BREADCRUMB -->                                             
                 
@@ -105,7 +105,7 @@ background:#C1F3FF;
                     <!-- START CONTENT FRAME TOP -->
                     <div class="content-frame-top">                        
                         <div class="page-title">                    
-                            <h2><span class="fa fa-image"></span> 모임후기 사진 앨범</h2>
+                            <h2><span class="fa fa-image"></span> 모임후기 동영상 앨범</h2>
                         </div>                                      
                         <div class="pull-right">                            
 <!--                             <button class="btn btn-primary"><span class="fa fa-upload"></span> Upload</button> -->
@@ -136,9 +136,11 @@ background:#C1F3FF;
                         	<c:forEach var="dto" items="${dtos}">
 	                        	
 	                        		<div class="gallery-item" >
-		                        		<a href="${dto.pic_path}/${dto.pic_name}" title="모임후기 사진~" data-gallery>
+		                        		<a href="${dto.video_path}/${dto.video_name}" title="모임후기 동영상~" data-gallery>
 			                                <div class="image">
-			                                    	<img src="${dto.pic_path}/${dto.pic_name}" alt="모임후기 사진~" width="200px" height="150px"/>
+			                                    	<video alt="모임후기 동영상~" width="200px" height="150px">
+			                                    		<source src="${dto.video_path}/${dto.video_name}" >
+			                                    	</video>
 			                                </div>
 		                                </a>
 		                                <button class="btn btn-info btn-rounded" style="margin-top: 5px; float:right;">
@@ -155,7 +157,7 @@ background:#C1F3FF;
                         </div>
                              
                         <div>
-							<!-- 사진 페이지 리스트 -->
+							<!-- 동영상 페이지 리스트 -->
 						  	<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="margin-left: 30px; margin-right: 40%;">
 								<c:if test="${cnt > 0}">
 									<c:if test="${startPage > pageBlock}">

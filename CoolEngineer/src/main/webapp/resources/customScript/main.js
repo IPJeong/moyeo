@@ -11,22 +11,29 @@ function getPostDetails(post_num) {
 		},
 		success : function(data) {
 			
-			var title = data.postDto.post_title;
-			var content = data.postDto.post_content;
-			var tags;
-			
-//			// 사진데이터 삽입
-//			jQuery.each(data.postDto.post_tags,
-//					function(idx, post_tags){
-//				tags += '<li><a href="#"><span class="fa fa-tag"></span>' + post_tags[idx] + '</a></li>';
-//			});
+			var title = '<a href="/moyeo/five/postDetailView?group_num=' + data.postDto.group_num + '&post_num=' + data.postDto.post_num + '&search=dsearch"><h2><strong>' + data.postDto.post_title + '</strong></h2>';
+			var content = '<h3>' + data.postDto.post_content + '</h3>';
+			var tags = '';
 			
 			// 모임후기 제목 삽입
 			$('#titleForm').html(title);
 			// 모임후기 내용 삽입
 			$('#contentForm').html(content);
-			// 모임후기 태그 삽입
-//			$('#listTags').html(tags);
+			
+			if(data.postDto.post_tags != null ){
+				// 사진데이터 삽입
+				jQuery.each(data.postDto.post_tags,
+						function(idx, post_tags){
+					tags += '<li><a href="#"><span class="fa fa-tag" style="color:#001EC9;"></span><font color="#001EC9" size="4px">' + post_tags + '</font></a></li>';
+				});
+				// 모임후기 태그 삽입
+				$('#listTags').html(tags);
+			} else {
+				$('#listTags').html('');
+			}
+			
+			
+			
 			
 		},
 		error : function(xhr) {
