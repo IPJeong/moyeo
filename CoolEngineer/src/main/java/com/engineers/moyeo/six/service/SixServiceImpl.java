@@ -1752,7 +1752,8 @@ public class SixServiceImpl implements SixService{
 					filename = FileManager.saveFile(multipartFile, rootPath + imgPath, fileName);
 					SellerInfoDTO dto = new SellerInfoDTO();
 					dto.setSeller_id(req.getParameter("seller_id"));
-					dto.setAddress(req.getParameter("address"));
+										
+					dto.setAddress((req.getParameter("roadAddrPart1"))+" "+(req.getParameter("addrDetail")));
 					dto.setTel(req.getParameter("tel"));
 					dto.setComp_name(req.getParameter("comp_name"));
 					dto.setBank(req.getParameter("bank"));

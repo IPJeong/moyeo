@@ -505,5 +505,15 @@ public class SixController {
 		return "six/shop/sellerRegisterPro";
 	}
 	
+	//샵-주소api
+	@RequestMapping("/shop/jusoPopup")
+	public String jusoPopup(HttpServletRequest req, Model model) {
+		System.out.println("/shop/jusoPopup");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		
+		return "six/shop/jusoPopup";
+	}
+	
 }
 
