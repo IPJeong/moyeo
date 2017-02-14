@@ -118,14 +118,11 @@ public class FourController {
 	@RequestMapping("/moim_greeting_board")	
 	public String moim_greeting_list(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
-		if((Integer)req.getSession().getAttribute("group_per") == 4){
-			return "four/greeting_board/redirect";
-		}
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetinglistExecute(model);
 		return viewPage;
-	}
 	
+	}
 	//가입인사 글쓰기 폼
 	@RequestMapping("/moim_greeting_write_form")
 	public String moim_greeting_write_form(HttpServletRequest req, Model model) {
@@ -271,14 +268,16 @@ public class FourController {
 		return viewPage;
 	}
 	
-	//제품 등록 처리
+	//제품 상세 페이지
 	@RequestMapping("productDetail")
 	public String productDetail(HttpServletRequest req, Model model) {
 		System.out.println("productInsertpro 실행");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
 		
-		return "four/shop/moyeoShopDetail";
+		return "four/shop/productDetail";
 	}
+	
+	
 	
 }

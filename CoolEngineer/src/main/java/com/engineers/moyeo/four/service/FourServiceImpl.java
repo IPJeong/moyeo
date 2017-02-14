@@ -737,7 +737,7 @@ public class FourServiceImpl implements FourService{
 		int moimJang = Code.moimJang;
 		int moimManager = Code.moimManager;
 		int moimMember = Code.moimMember;
-		int noMember = Code.noMember;
+		int noMember = Code.moimNoMember;
 		
 		model.addAttribute("num", num);
 		model.addAttribute("pageNum", pageNum);
