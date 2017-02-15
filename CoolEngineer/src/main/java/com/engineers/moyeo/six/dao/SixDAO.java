@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.engineers.moyeo.four.dto.productInfoDTO;
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.HotMoimDTO;
 import com.engineers.moyeo.six.dto.InterestCatDTO;
@@ -17,6 +18,7 @@ import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.ProductPicDTO;
 import com.engineers.moyeo.six.dto.SellerInfoDTO;
 
 
@@ -374,4 +376,9 @@ public interface SixDAO {
 	//모임이름
 	public String groupName(int group_num);
 	
+	//샵-제품상세보기
+	public productInfoDTO productDetail(int product_num);
+
+	//샵-제품사진
+	public ProductPicDTO productPic(int product_num);
 }

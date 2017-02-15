@@ -515,5 +515,15 @@ public class SixController {
 		return "six/shop/jusoPopup";
 	}
 	
+	//샵-제품 상세보기
+	@RequestMapping("/shop/productDetail")
+	public String productDetail(HttpServletRequest req, Model model) {
+		System.out.println("/shop/productDetail");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productDetail(model);
+		
+		return "six/shop/productDetail";
+	}
 }
 

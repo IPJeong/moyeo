@@ -7,6 +7,8 @@ public class productInfoDTO {
 	int product_qty; /* 제품수량 */
 	String product_detail; /* 제품설명 */
 	String seller_id; /* 판매자아이디 */
+	String product_cat1; //카테고리1
+	String product_cat2; //카테고리2
 	
 	public int getProduct_num() {
 		return product_num;
@@ -43,5 +45,17 @@ public class productInfoDTO {
 	}
 	public void setSeller_id(String seller_id) {
 		this.seller_id = seller_id;
+	}
+	public String getProduct_cat1() {
+		return product_cat1;
+	}
+	public void setProduct_cat1(String product_cat1) {
+		this.product_cat1 = product_cat1;
+	}
+	public String getProduct_cat2() {
+		return product_cat2;
+	}
+	public void setProduct_cat2(String product_cat2) {
+		this.product_cat2 = product_cat2;
 	}
 }

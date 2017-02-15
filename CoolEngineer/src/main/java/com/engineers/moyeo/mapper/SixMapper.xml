@@ -622,4 +622,14 @@
 		SELECT group_name FROM group_list WHERE group_num = #{group_num}
 	</select>
 	
+	<!-- 샵-상품상세정보 -->
+	<select id="productDetail" parameterType="int" resultType="com.engineers.moyeo.four.dto.productInfoDTO">
+		SELECT * FROM product_info WHERE product_num = #{product_num}
+	</select>
+	
+	<!-- 샵-상품사진 -->
+	<select id="productPic" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductPicDTO">
+		SELECT * FROM product_pic WHERE product_num = #{product_num}
+	</select>
+	
 </mapper>

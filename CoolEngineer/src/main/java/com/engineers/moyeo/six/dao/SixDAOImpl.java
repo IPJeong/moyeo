@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.four.dto.productInfoDTO;
 import com.engineers.moyeo.six.dto.CheckPresentDTO;
 import com.engineers.moyeo.six.dto.HotMoimDTO;
 import com.engineers.moyeo.six.dto.InterestCatDTO;
@@ -23,6 +24,7 @@ import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.ProductPicDTO;
 import com.engineers.moyeo.six.dto.SellerInfoDTO;
 
 @Repository
@@ -1044,6 +1046,23 @@ public class SixDAOImpl implements SixDAO{
 		String group_name = dao.groupName(group_num);
 		
 		return group_name;
+	}
+	
+	//샵-제품상세보기
+	public productInfoDTO productDetail(int product_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		productInfoDTO dto = dao.productDetail(product_num);
+		System.out.println(dto.getProduct_name());
+		
+		return dto;
+	}
+
+	//샵-제품사진
+	public ProductPicDTO productPic(int product_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ProductPicDTO dto = dao.productPic(product_num);
+		
+		return dto;
 	}
 	
 }

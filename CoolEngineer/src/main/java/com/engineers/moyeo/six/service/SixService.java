@@ -119,7 +119,9 @@ public interface SixService {
 	//모임목록 상세보기
 	public void categoryDetail(Model model);
 	
-	//판매자등록처리
+	//샵-판매자등록처리
 	public void sellerRegisterPro(Model model);
 	
+	//샵-제품 상세보기
+	public void productDetail(Model model);
 }

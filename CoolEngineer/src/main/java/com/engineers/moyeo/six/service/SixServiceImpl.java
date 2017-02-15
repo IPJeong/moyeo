@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.engineers.moyeo.four.dao.FourDAO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
+import com.engineers.moyeo.four.dto.productInfoDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
@@ -34,6 +35,7 @@ import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.ProductPicDTO;
 import com.engineers.moyeo.six.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
@@ -1796,6 +1798,21 @@ public class SixServiceImpl implements SixService{
 				}
 			}
 		}
+	}
+
+	//샵-제품 상세보기
+	public void productDetail(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		req.getParameter("product_num");
+		int product_num = 21;
 		
+		productInfoDTO dto =sixDao.productDetail(product_num);
+		ProductPicDTO pic_dto = sixDao.productPic(product_num);
+		
+		System.out.println(pic_dto);
+		model.addAttribute("dto", dto);
+		model.addAttribute("pic_dto", pic_dto);
 	}
 }
