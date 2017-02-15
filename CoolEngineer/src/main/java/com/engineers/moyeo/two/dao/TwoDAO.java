@@ -47,7 +47,7 @@ public interface TwoDAO {
 	public int modifyPlace(Place_infoDTO dto); //장소정보 수정
 	public void modifyPictures(Place_infoDTO ppdto); //장소사진 삭제
 	
-	//추천장소&추천장소 좋아요
+	//추천장소 후기&추천장소 좋아요
 	public int getRecPlaceCount(int place_num); //추천장소 게시글의 개수
 	public ArrayList<Rec_placeDTO> getRecPlaceList(Map<String, Object> daoMap); //추천장소 게시판
 	public Rec_placeDTO readRecPlace(int recplace_num); //추천장소 게시글 상세보기
@@ -60,12 +60,16 @@ public interface TwoDAO {
 	public int checkPlalikeNum(Map<String, Object> daoMap); //장소좋아요 테이블에서 내가 누른 추천의 plalike_num을 확인함
 	public int minusPlaceLike(int plalike_num); //추천을 취소함
 	
+	//모임 가입&탈퇴
 	public Moim_infoDTO readMoimInfo(int group_num); //어떤 모임 하나의 모임 정보를 불러옴 
 	public int identifyMoimMember(Map<String, Object> daoMap); //모임에 가입했는지 확인함
 	public int moimJoinCheck(Map<String, Object> daoMap); //모임가입 신청을 했는지 확인함
 	public int moimBanishCheck(Map<String, Object> daoMap); //모임에서 강제탈퇴된 적이 있는지 확인
-	public int moimJoin(Map<String, Object> daoMap); //모임에 가입 처리함
+	public int moimJoin(Map<String, Object> daoMap); //모임에 가입신청 처리함
+	public String getMoimCheifId(int group_num); //모임장의 아이디를 불러옴
 	public int moimWithdraw(Map<String, Object> daoMap); //모임 탈퇴 처리함
+	
+	//모임 관리(모임장 권한) : 모임원 관리, 가입신청 관리, 게시판 관리
 	public int getMoimJoinCount(int group_num); //모임에 가입신청한 사람의 수를 구함
 	public ArrayList<Join_requestDTO> getMoimJoinList(Map<String, Object> daoMap); //모임에 가입신청한 사람들의 리스트를 불러옴
 	public ArrayList<Member_infoDTO> getMoimJoinMemberInfoList(Map<String, Object> daoMap); //모임에 가입신청한 사람들의 개인정보를 불러와서 리스트로 보여줌
@@ -92,26 +96,31 @@ public interface TwoDAO {
 	public int deleteGreetingBoardArticle(Map<String, Object> daoMap); //가입인사 게시판의 게시글들을 삭제함
 	public int deletePostBoardArticle(Map<String, Object> daoMap); //모임후기 게시판의 게시글들을 삭제함
 	
-	public int getMoimSearchCount(Map<String, Object> daoMap); //모임 제목, 소개를 검색했을 때 나오는 모임수
-	public int getMoimPostSearchCount(Map<String, Object> daoMap); //모임후기 제목, 내용을 검색했을 때 나오는 모임수
-	public int getPlaceSearchCount(Map<String, Object> daoMap); //장소  제목, 설명을 검색했을 때 나오는 모임수
-	public ArrayList<Moim_infoDTO> getMoimSearchList(Map<String, Object> daoMap); //모임 제목, 소개를 검색했을 때 나오는 모임들을 리스트로 보여줌
-	public ArrayList<Moim_infoDTO> getMoimPictureSearchList(Map<String, Object> daoMap); //모임 제목, 소개를 검색했을 때 나오는 모임들의 side 사진을 리스트로 보여줌
-	public ArrayList<MeetingPostDTO> getMoimPostSearchList(Map<String, Object> daoMap); //모임후기 제목, 내용을 검색했을 때 나오는 게시글들을 리스트로 보여줌
-	public ArrayList<PostPictureDTO> getMoimPostPictureSearchList(Map<String, Object> daoMap); //모임후기 제목, 내용을 검색했을 때 나오는 게시글들의 사진을 리스트로 보여줌
-	public ArrayList<Place_infoDTO> getPlaceSearchList(Map<String, Object> daoMap); //장소 제목, 설명을 검색했을 때 나오는 장소 정보들을 리스트로 보여줌
-	public ArrayList<Place_infoDTO> getPlacePictureSearchList(Map<String, Object> daoMap); //장소 제목, 설명을 검색했을 때 나오는 장소 정보들의 사진을 리스트로 보여줌
-
-	public StatisticsDTO chartByGender(int group_num);
-	public StatisticsDTO chartByAge(int group_num);
-	public StatisticsDTO getDate();
-	public StatisticsDTO chartByArticleOfMonth(int group_num);
-	public StatisticsDTO chartByPresentOfMonth(int group_num);
-	public StatisticsDTO chartByJoinOfMonth(int group_num);
-	public StatisticsDTO chartByArticleOfYear(int group_num);
-	public StatisticsDTO chartByPresentOfYear(int group_num);
-	public StatisticsDTO chartByJoinOfYear(int group_num);
-	public int checkBestTenArticle(int group_num);
-	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num);
-	public ArrayList<StatisticsDTO> getBestTenPresent(int group_num);
+	//메인 검색 : 모임, 모임후기, 장소, 추천장소 후기
+	public int getMoimSearchCount(Map<String, Object> daoMap); //모임을 검색했을 때 나오는 모임수
+	public int getMoimPostSearchCount(Map<String, Object> daoMap); //모임후기를 검색했을 때 나오는 모임수
+	public int getPlaceSearchCount(Map<String, Object> daoMap); //장소정보를 검색했을 때 나오는 장소수
+	public int getRecPlaceSearchCount(Map<String, Object> daoMap); //추천장소 후기를 검색했을 때 나오는 게시글수 
+	public ArrayList<Moim_infoDTO> getMoimSearchList(Map<String, Object> daoMap); //모임을 검색했을 때 나오는 모임들을 리스트로 보여줌
+	public ArrayList<Moim_infoDTO> getMoimPictureSearchList(Map<String, Object> daoMap); //모임을 검색했을 때 나오는 모임들의 side 사진을 리스트로 보여줌
+	public ArrayList<MeetingPostDTO> getMoimPostSearchList(Map<String, Object> daoMap); //모임훅를 검색했을 때 나오는 게시글들을 리스트로 보여줌
+	public ArrayList<PostPictureDTO> getMoimPostPictureSearchList(Map<String, Object> daoMap); //모임후기를 검색했을 때 나오는 게시글들의 사진을 리스트로 보여줌
+	public ArrayList<Place_infoDTO> getPlaceSearchList(Map<String, Object> daoMap); //장소를 검색했을 때 나오는 장소 정보들을 리스트로 보여줌
+	public ArrayList<Place_infoDTO> getPlacePictureSearchList(Map<String, Object> daoMap); //장소를 검색했을 때 나오는 장소 정보들의 사진을 리스트로 보여줌
+	public ArrayList<Rec_placeDTO> getRecPlaceSearchList(Map<String, Object> daoMap); //추천장소 후기를 검색했을 때 나오는 추천장소 후기들을 리스트로 보여줌
+	public ArrayList<Rec_placeDTO> getRecPlacePictureSearchList(Map<String, Object> daoMap); //추천장소 후기를 검색했을 때 나오는 추천장소 후기들의 사진을 리스트로 보여줌
+	
+	//모임 통계 : 모임원, 모임가입, 출석일, 게시글
+	public StatisticsDTO chartByGender(int group_num); //성비에 따라 통계 차트를 표시
+	public StatisticsDTO chartByAge(int group_num); //연령비에 따라 통계 차트를 표시
+	public StatisticsDTO getDate(); //오늘, 일주일, 이주일, 삼주일, 한달 전 날짜를 구함
+	public StatisticsDTO chartByArticleOfMonth(int group_num); //한달간 게시글의 조회수에 따라 통계 차트를 표시
+	public StatisticsDTO chartByPresentOfMonth(int group_num); //일년간 게시글의 조회수에 따라 통계 차트를 표시
+	public StatisticsDTO chartByJoinOfMonth(int group_num); //한달간 모임가입자에 따라 통계 차트를 표시
+	public StatisticsDTO chartByArticleOfYear(int group_num); //일년간 모임가입자에 따라 통계 차트를 표시
+	public StatisticsDTO chartByPresentOfYear(int group_num); //한달간 모임원의 출석일수에 따라 통계 차트를 표시
+	public StatisticsDTO chartByJoinOfYear(int group_num); //일년간 모임원의 출석일수에 따라 통계 차트를 표시
+	public int checkBestTenArticle(int group_num); //모임에서 게시글이 존재하는지 여부를 확인
+	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num); //조회수가 높은 10개의 게시글 리스트를 순서대로 보여줌
+	public ArrayList<StatisticsDTO> getBestTenPresent(int group_num); //출석일수가 높은 10명의 모임원의 리스트를 순서대로 보여줌
 }

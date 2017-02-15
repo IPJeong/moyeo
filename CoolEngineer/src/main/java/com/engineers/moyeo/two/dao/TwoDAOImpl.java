@@ -615,6 +615,14 @@ public class TwoDAOImpl implements TwoDAO{
 		cnt = dao.getPlaceSearchCount(daoMap);
 		return cnt;
 	}
+	
+	@Override
+	public int getRecPlaceSearchCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getRecPlaceSearchCount(daoMap);
+		return cnt;
+	}
 
 	@Override
 	public ArrayList<Place_infoDTO> getPlaceSearchList(Map<String, Object> daoMap) {
@@ -629,6 +637,23 @@ public class TwoDAOImpl implements TwoDAO{
 		ArrayList<Place_infoDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getPlacePictureSearchList(daoMap);
+		return dtos;
+	}
+	
+
+	@Override
+	public ArrayList<Rec_placeDTO> getRecPlaceSearchList(Map<String, Object> daoMap) {
+		ArrayList<Rec_placeDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getRecPlaceSearchList(daoMap);
+		return dtos;
+	}
+
+	@Override
+	public ArrayList<Rec_placeDTO> getRecPlacePictureSearchList(Map<String, Object> daoMap) {
+		ArrayList<Rec_placeDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getRecPlacePictureSearchList(daoMap);
 		return dtos;
 	}
 	
@@ -726,5 +751,13 @@ public class TwoDAOImpl implements TwoDAO{
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getBestTenPresent(group_num);
 		return dtos;
+	}
+
+	@Override
+	public String getMoimCheifId(int group_num) {
+		String mem_id = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		mem_id = dao.getMoimCheifId(group_num);
+		return mem_id;
 	}
 }

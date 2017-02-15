@@ -9,6 +9,8 @@ public class Rec_placeDTO {
 	public String recpla_tag;
 	public String mem_id;
 	public int place_num;
+	public String place_pic_path;
+	public String place_pic_name;
 	
 	public int getRecpla_num() {
 		return recpla_num;
@@ -34,6 +36,12 @@ public class Rec_placeDTO {
 	public int getPlace_num() {
 		return place_num;
 	}
+	public String getPlace_pic_path() {
+		return place_pic_path;
+	}
+	public String getPlace_pic_name() {
+		return place_pic_name;
+	}
 	public void setRecpla_num(int recpla_num) {
 		this.recpla_num = recpla_num;
 	}
@@ -58,5 +66,10 @@ public class Rec_placeDTO {
 	public void setPlace_num(int place_num) {
 		this.place_num = place_num;
 	}
-
+	public void setPlace_pic_path(String place_pic_path) {
+		this.place_pic_path = place_pic_path;
+	}
+	public void setPlace_pic_name(String place_pic_name) {
+		this.place_pic_name = place_pic_name;
+	}
 }

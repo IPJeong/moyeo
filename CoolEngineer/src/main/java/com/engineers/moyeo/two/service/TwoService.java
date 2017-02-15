@@ -28,9 +28,10 @@ public interface TwoService {
 	public String plusPlaceLike(Model model); //추천장소 게시글에 추천 누름
 	public String minusPlaceLike(Model model); //추천장소 게시글에서 추천을 취소함
 
-	public String moimJoinForm(Model model); //모임가입 페이지
-	public String moimJoinPro(Model model); //모임가입 처리
+	public String moimJoinForm(Model model); //모임가입신청 페이지
+	public String moimJoinPro(Model model); //모임가입신청 처리
 	public String moimWithdraw(Model model); //모임탈퇴 처리
+	
 	public String moimJoinManaging(Model model); //모임가입 관리 페이지(모임장)
 	public String moimJoinOK(Model model); //모임가입 수락(모임장)
 	public String moimJoinNO(Model model); //모임가입 거절(모임장)

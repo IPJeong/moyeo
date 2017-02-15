@@ -9,7 +9,6 @@ public class Place_infoDTO {
 	public int place_pic_num;
 	public String place_pic_path;
 	public String place_pic_name;
-	public String recpla_tag;
 	
 	public int getPlace_num() {
 		return place_num;
@@ -35,9 +34,6 @@ public class Place_infoDTO {
 	public String getPlace_pic_name() {
 		return place_pic_name;
 	}
-	public String getRecpla_tag() {
-		return recpla_tag;
-	}
 	public void setPlace_num(int place_num) {
 		this.place_num = place_num;
 	}
@@ -61,8 +57,5 @@ public class Place_infoDTO {
 	}
 	public void setPlace_pic_name(String place_pic_name) {
 		this.place_pic_name = place_pic_name;
-	}
-	public void setRecpla_tag(String recpla_tag) {
-		this.recpla_tag = recpla_tag;
 	}
 }
