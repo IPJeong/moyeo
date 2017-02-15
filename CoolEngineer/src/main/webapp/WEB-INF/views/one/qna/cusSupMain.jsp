@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -231,7 +233,7 @@
 										<c:forEach var="dto" items="${dtos2}" begin="0" end="3">
 											<div class="faq-item" style="padding: 0px; margin: 0px;">
 												<div class="faq-title" style="size: 5px;" id="fade">
-													<span class="" style="left: -20px"></span><font size="2px">${dto.faqTitle}</font>
+													<span class="" style="left: -20px"></span><font size="2px" color="black"><b>${dto.faqTitle}</b></font>
 												</div>
 												<div class="faq-text" style="padding: 0px; margin: 0px;">
 													<p class="active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.faqContent}</p>
@@ -263,7 +265,9 @@
 											<p style="margin: 9px; font-size: 13px;">
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
 													href="../six/notice/noticeContent?noti_num=${dto.noti_num}&pageNum=${pageNum}">
-													${dto.noti_title} </a>
+													<font color="black"><b>${dto.noti_title}</b></font> </a>
+													<span style="float:right; margin-right:30px"><b>${fn:substring(dto.noti_date, 0, 10)}</b></span>
+													
 											</p>
 										</c:forEach>
 									</div>
@@ -290,7 +294,11 @@
 											<p style="margin: 9px; font-size: 13px;">
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
 													href="../one/qnaContentForm?qboard_num=${dto.qboard_num}&pageNum=${pageNum}&number=${dto.qboard_num}">
-													${dto.title} </a>
+													<font color="black"><b>${dto.title}</b></font> </a>
+													<span style="float:right; margin-right:30px"><b>${fn:substring(dto.write_date, 0, 10)}</b></span>
+													
+													
+													
 											</p>
 										</c:forEach>
 									</div>
@@ -312,7 +320,18 @@
 								</div>
 								<div class="panel-body" style="padding: 0px;">
 									<div class="contact-info">
-										<p>이벤트1</p>
+										<div class="contact-info">
+											<c:forEach var="dto" items="${dtos4}" begin="0" end="4">
+	
+												<p style="margin: 9px; font-size: 13px;">
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<font color="black"><b>${dto.eventTitle}</b></font>  
+														<span style="float:right; margin-left:30px;"><font color="red"><b>당첨자발표 : ${fn:substring(dto.notiDate, 2, 10)}</b></font></span>	
+														<span style="float:right;"><b>기간 : ${fn:substring(dto.startDate, 2, 10)}~${fn:substring(dto.endDate, 2, 10)}</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														
+												</p>
+											</c:forEach>
+										</div>
 
 									</div>
 								</div>
