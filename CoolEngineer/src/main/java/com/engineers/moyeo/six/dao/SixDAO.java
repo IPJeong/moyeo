@@ -367,4 +367,11 @@ public interface SixDAO {
 	
 	//판매자등록
 	public int sellerRegisterPro(SellerInfoDTO dto);
+	
+	//회원리스트
+	public List<String> memberName(int group_num);
+	
+	//모임이름
+	public String groupName(int group_num);
+	
 }

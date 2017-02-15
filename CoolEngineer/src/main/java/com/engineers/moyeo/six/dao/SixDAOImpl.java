@@ -1029,4 +1029,21 @@ public class SixDAOImpl implements SixDAO{
 		
 		return cnt; 
 	}
+	
+	//회원리스트
+	public List<String> memberName(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		List<String> memberList = dao.memberName(group_num);
+		
+		return memberList;
+	}
+	
+	//모임이름
+	public String groupName(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		String group_name = dao.groupName(group_num);
+		
+		return group_name;
+	}
+	
 }

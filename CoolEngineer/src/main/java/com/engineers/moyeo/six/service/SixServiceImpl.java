@@ -1154,6 +1154,15 @@ public class SixServiceImpl implements SixService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 	
 		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		List<String> memberList = sixDao.memberName(group_num);
+		String group_name = sixDao.groupName(group_num);
+		
+		Map<String, Object> notiMap = new HashMap<>();
+		notiMap.put("type", 9);
+		notiMap.put("memberList", memberList);
+		notiMap.put("group_name", group_name);
+		mainService.addNotice(notiMap);
+		
 		int cnt = sixDao.moimDelete(group_num);
 		
 		//세션삭제

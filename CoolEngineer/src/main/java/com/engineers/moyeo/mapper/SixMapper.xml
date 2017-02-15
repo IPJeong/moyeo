@@ -611,4 +611,15 @@
 	<insert id="sellerRegisterPro" parameterType="com.engineers.moyeo.six.dto.SellerInfoDTO">
 		INSERT INTO seller_info (seller_id, tel, address, comp_name, bank, account_number, depositor, reason, reg_date, bc_path, bc_name, recognition) VALUES (#{seller_id}, #{tel}, #{address}, #{comp_name}, #{bank}, #{account_number}, #{depositor}, #{reason}, #{reg_date}, #{bc_path}, #{bc_name}, #{recognition})
 	</insert>
+	
+	<!-- 회원리스트(아이디만) -->
+	<select id="memberName" parameterType="int" resultType="String">
+		SELECT mem_id FROM my_group WHERE group_num = #{group_num}
+	</select>
+	
+	<!-- 모임이름 -->
+	<select id="groupName" parameterType="int" resultType="String">
+		SELECT group_name FROM group_list WHERE group_num = #{group_num}
+	</select>
+	
 </mapper>
