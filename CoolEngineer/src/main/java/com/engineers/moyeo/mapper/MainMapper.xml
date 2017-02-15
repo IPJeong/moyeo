@@ -296,8 +296,8 @@
 	
 	<!-- 모임장 알림을 등록 -->
 	<insert id="addLeaderNoti" parameterType="com.engineers.moyeo.main.dto.GroupLeaderNotiDTO">
-		insert into group_leader_noti (noti_num, noti_content, is_checked, noti_date, mem_id)
-						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, #{noti_date}, #{mem_id})
+		insert into group_leader_noti (noti_num, noti_content, is_checked, noti_date, group_num, mem_id)
+						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, #{noti_date}, #{group_num}, #{mem_id})
 	</insert>
 	
 	<!-- 판매자 알림을 등록 -->
