@@ -111,7 +111,7 @@ li {
 					<!-- END WORDCLOUD BLOCK -->
 				
 					<!-- START SEARCH BLOCK -->
-					<div class="col-md-23">
+					<div class="col-md-23" style="height:180px;">
 						
 						<div class="panel panel-default">
 							<div class="panel-heading" style="height:30px">
@@ -164,7 +164,7 @@ li {
 					<!-- END SEARCH BLOCK -->
 				
 					<!-- START NOTICE BLOCK -->
-					<div class="col-md-24">
+					<div class="col-md-24"  style="height:210px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
@@ -179,7 +179,7 @@ li {
 								<div class="chart-holder" id="dashboard-donut-1"
 									style="height: 200px;">
 									<ul style="padding:0px; margin-left:15px;">
-										<c:forEach var="dto" items="${dtos}" begin="0" end="5">
+										<c:forEach var="dto" items="${dtos}" begin="0" end="4">
 											<li style="float:none; font-size:13px; margin:10px;">
 												<a href="../six/notice/noticeContent?noti_num=${dto.noti_num}&pageNum=${pageNum}"><font color="#373a3e">
 													${dto.noti_title}

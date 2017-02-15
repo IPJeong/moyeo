@@ -111,7 +111,6 @@ html, body {
 /* slider css */
 </style>
 <script src="/moyeo/resources/resource/customScript/five/postDetailTop.js" type="text/javascript"></script>
-</script>
 </head>
 <body onload="imgSlide(); timestampToDateLoad();">
 
@@ -243,7 +242,7 @@ html, body {
 		                            </div>
 	                              <div class="input-group">
 	                              		<c:if test="${sessionScope.group_per == 4}">
-	                                    <input type="text" class="form-control" placeholder="댓글을 남기려면 로그인해주세요." readonly="readonly">
+	                                    <input type="text" class="form-control" placeholder="댓글은 모임원만 작성 가능 합니다." readonly="readonly">
 	                                    </c:if>
 	                                    <c:if test="${sessionScope.group_per == 1 || sessionScope.group_per == 2 || sessionScope.group_per == 3 }">
 	                                    <input type="text" id="reply_content" class="form-control" placeholder="댓글을 남겨보세요." onkeypress="keycheck(event);">

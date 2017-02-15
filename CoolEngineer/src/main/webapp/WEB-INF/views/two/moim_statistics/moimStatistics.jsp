@@ -176,7 +176,7 @@ li {
 				</div>
 			</div>
 			
-				<table class="table table-bordered" style="width:80%; margin-left:10%; margin-top:37%; border:1px solid #D9E5FF;">
+				<table class="table table-bordered" style="width:80%; margin-left:10%; margin-top:36%; border:1px solid #D9E5FF;">
 					<colgroup>
 						<col width="21%">
 						<col width="*">
