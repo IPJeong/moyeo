@@ -297,7 +297,7 @@ div .page-content {
 				        	<div style="width:80%; height:145px; margin-top:20px;"> 
 					       		<ul style="list-style:none; margin-top:20px;">
 							        <li>
-							        	<strong>이름</strong> &nbsp; ${lpodtos.place_name}
+							        	<strong>이름</strong> &nbsp; <a href="placeContentForm?place_num=${lpodtos.place_num}">${lpodtos.place_name}</a>
 							        </li> 
 						         <br>
 							        <li>
@@ -357,18 +357,18 @@ div .page-content {
 				        </c:forEach>
 				   </div>
 				   <div class="info" style="float:right; margin-top:10px; margin-right:18%; width:40%; height:250px;">  
-				        <br>
 				        <c:forEach var="pidtos" items="${pidtos}">
-				        	<div style="width:80%; height:120px; margin-top:10px;"> 
-					       		<ul style="list-style:none; margin-top:10px;">
+				        	<div style="width:80%; height:120px;">
+					       		<ul style="list-style:none; margin-top:20px;">   
 							        <li>
-							        	<strong>이름</strong> &nbsp; ${pidtos.place_name}
+							        	<strong>이름</strong> &nbsp; <a href="placeContentForm?place_num=${pidtos.place_num}">${pidtos.place_name}</a>
 							        </li> 
-						         <br>
+						        <br>
+						        <br>
 							        <li>
 							            <strong>주소</strong> &nbsp; ${pidtos.place_address}
-							        </li>  
-								</ul>
+							        </li>
+							    </ul>    
 							</div>
 					    </c:forEach>
 		            </div>         	 	

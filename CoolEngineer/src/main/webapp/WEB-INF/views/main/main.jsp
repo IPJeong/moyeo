@@ -120,7 +120,7 @@ li {
 								</div>
 							</div>
 							<div class="panel-body padding-0">
-								<form name="mainsearchfrom" action="../two/mainSearch" onsubmit="return searchKeywordCheck();">
+								<form name="mainsearchfrom" action="/moyeo/two/mainSearch" onsubmit="return searchKeywordCheck();">
 									<div class="col-md-6-2" style="float:left; margin-top:7px; width:90%; margin-left:5%;">	
 										<div class="input-group push-down-10" >
 									        <span class="input-group-addon"><span class="fa fa-search"></span></span>
@@ -148,7 +148,13 @@ li {
 						                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi2">&nbsp;설명
 						                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi3">&nbsp;제목+설명
 						                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi4">&nbsp;주소
-						                    &nbsp;&nbsp;<input type="radio" name="search_radio3" value="pi5">&nbsp;태그
+								    	</div>
+								    	<div style="float:left; margin-top:5px; width:90%;">
+						                	장소후기 검색&nbsp; | 
+						                    &nbsp;&nbsp;<input type="radio" name="search_radio4" value="rp1">&nbsp;제목
+						                    &nbsp;&nbsp;<input type="radio" name="search_radio4" value="rp2">&nbsp;내용
+						                    &nbsp;&nbsp;<input type="radio" name="search_radio4" value="rp3">&nbsp;제목+내용
+						                    &nbsp;&nbsp;<input type="radio" name="search_radio4" value="rp4">&nbsp;태그
 								    	</div>
 							    	</div>  
 							    </form>

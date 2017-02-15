@@ -104,7 +104,7 @@ div.page-content {
 
 <div class="row">
 
-	<c:if test="${mscnt == 0 && mpscnt == 0 && picnt == 0}">
+	<c:if test="${mscnt == 0 && mpscnt == 0 && picnt == 0 && rpcnt == 0}">
 		<div class="col-md-56" style="margin-top:20px; margin-left:10%; height:700px;">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -169,20 +169,6 @@ div.page-content {
 					    </div>
 			       </c:if>	
 						
-						<%-- 
-						<c:if test="${mscnt == 0}">
-							<div style="width:80%; font-size:15px; text-align:left; margin-left:20px;">
-							<h2>모임 검색 결과가 없습니다.</h2>
-							<br>
-							&nbsp;&nbsp;&nbsp;단어의 철자가 정확한지 확인해 보세요.<br>
-							&nbsp;&nbsp;&nbsp;한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br>
-							&nbsp;&nbsp;&nbsp;검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.<br>
-							&nbsp;&nbsp;&nbsp;두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.<br>
-							&nbsp;&nbsp;&nbsp;검색 옵션을 변경해서 다시 검색해 보세요.<br>
-							</div>
-						</c:if> 
-						--%>
-						
 						<br>
 							
 				</div>
@@ -193,7 +179,7 @@ div.page-content {
 								<c:if test="${mscnt > 0}">
 								
 									<c:if test="${startPage1 > pageBlock1}">
-										<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum1=${startPage1 - pageBlock1}"><font
+										<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${startPage1 - pageBlock1}"><font
 															size="3"> «</font></a></li>
 									</c:if>
 								
@@ -204,12 +190,12 @@ div.page-content {
 										</c:if>
 								
 										<c:if test="${i != currentPage1}">
-											<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum1=${i}"><font size="3">${i}</font></a></li>
+											<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${i}"><font size="3">${i}</font></a></li>
 										</c:if>
 								
 									</c:forEach>
 									<c:if test="${pageCount1 > endPage1}">
-										<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum1=${startPage1 + pageBlock1}"><font
+										<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${startPage1 + pageBlock1}"><font
 												size="3">»</font></a></li>
 									</c:if>
 									</c:if>
@@ -256,31 +242,20 @@ div.page-content {
 						   <div class="info" style="float:right; text-align:left; margin-right:10%; width:70%; height:100px;">  
 						        <c:forEach var="mpdto" items="${mpdtos}">
 							        <div style="width:80%; font-size:15px; height:80px; margin-top:20px;"> 
-											<a href="../five/postDetail?post_num=${mpdto.post_num}&pageNum=1">
+											<a href="../five/postDetailView?post_num=${mpdto.post_num}&pageNum=1&group_num=${mpdto.group_num}&search=dsearch">
 											제목 : ${mpdto.post_title}
 											</a>
 											&nbsp;|&nbsp;<span style="color:blue;">작성일 : <fmt:formatDate type="both" pattern="yyyy. MM. dd" value="${mpdto.post_date}" /></span>&nbsp;|&nbsp;<span style="color:green;">작성자 : ${mpdto.mem_id}</span><br>
 											내용 : ${mpdto.post_content}<br>
-											<span style="color:red;">${mpdto.post_tag}</span>
+											<c:if test="${mpdto.post_tag != null}">
+											<span style="color:red;">태그 : ${mpdto.post_tag}</span>
+											</c:if>
 									</div>   		
 								</c:forEach>               	 	
 							</div>
 						</div>
 					</c:if>	
 
-					<%-- 
-					<c:if test="${mpscnt == 0}">
-						<div style="width:80%; text-align:left; font-size:15px;  margin-left:20px;">
-						<h2>모임후기 검색 결과가 없습니다.</h2>
-						<br>
-						&nbsp;&nbsp;&nbsp;단어의 철자가 정확한지 확인해 보세요.<br>
-						&nbsp;&nbsp;&nbsp;한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br>
-						&nbsp;&nbsp;&nbsp;검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.<br>
-						&nbsp;&nbsp;&nbsp;두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.<br>
-						&nbsp;&nbsp;&nbsp;검색 옵션을 변경해서 다시 검색해 보세요.<br>
-						</div>
-					</c:if>	
-					--%>
 			  </div>
 		</div>
 	</div>
@@ -291,7 +266,7 @@ div.page-content {
 				<c:if test="${mpscnt > 0}">
 				
 					<c:if test="${startPage2 > pageBlock2}">
-						<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum2=${startPage2 - pageBlock2}"><font
+						<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 - pageBlock2}"><font
 											size="3"> «</font></a></li>
 					</c:if>
 				
@@ -302,11 +277,11 @@ div.page-content {
 						</c:if>
 				
 						<c:if test="${i != currentPage2}">
-							<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum2=${i}"><font size="3">${i}</font></a></li>
+							<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${i}"><font size="3">${i}</font></a></li>
 						</c:if>
 					</c:forEach>
 					<c:if test="${pageCount2 > endPage2}">
-						<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum2=${startPage2 + pageBlock2}"><font
+						<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 + pageBlock2}"><font
 								size="3">»</font></a></li>
 					</c:if>
 			   </c:if>
@@ -349,27 +324,15 @@ div.page-content {
 							        <div style="width:80%; font-size:15px; height:80px; margin-top:20px;"> 
 										<a href="placeContentForm?place_num=${plainfodto.place_num}">
 											제목 : ${plainfodto.place_name}
-										</a>&nbsp;|&nbsp;<span style="color:green;">주소 : ${plainfodto.place_address}</span><br>
+										</a><br>
 										설명 : ${plainfodto.place_detail}<br>
-										<span style="color:red;">${plainfodto.recpla_tag}</span>
+										<span style="color:green;">주소 : ${plainfodto.place_address}</span>
 									</div>   		
 								</c:forEach>               	 	
 							</div>
 						</div>
 					</c:if>	
-				<%-- 
-					<c:if test="${picnt == 0}">
-						<div style="width:80%; text-align:left; font-size:15px;  margin-left:20px;">
-						<h2>장소 검색 결과가 없습니다.</h2>
-						<br>
-						&nbsp;&nbsp;&nbsp;단어의 철자가 정확한지 확인해 보세요.<br>
-						&nbsp;&nbsp;&nbsp;한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br>
-						&nbsp;&nbsp;&nbsp;검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.<br>
-						&nbsp;&nbsp;&nbsp;두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.<br>
-						&nbsp;&nbsp;&nbsp;검색 옵션을 변경해서 다시 검색해 보세요.<br>
-						</div>
-					</c:if>
-				--%>	
+
 			  </div>
 		</div>
 	</div>
@@ -380,7 +343,7 @@ div.page-content {
 				<c:if test="${picnt > 0}">
 				
 					<c:if test="${startPage3 > pageBlock3}">
-						<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum3=${startPage3 - pageBlock3}"><font
+						<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 - pageBlock3}"><font
 											size="3"> «</font></a></li>
 					</c:if>
 				
@@ -391,11 +354,11 @@ div.page-content {
 						</c:if>
 				
 						<c:if test="${i != currentPage3}">
-							<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum3=${i}"><font size="3">${i}</font></a></li>
+							<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${i}"><font size="3">${i}</font></a></li>
 						</c:if>
 					</c:forEach>
 					<c:if test="${pageCount3 > endPage3}">
-						<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&pageNum3=${startPage3 + pageBlock3}"><font
+						<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 + pageBlock3}"><font
 								size="3">»</font></a></li>
 					</c:if>
 			   </c:if>
@@ -405,6 +368,88 @@ div.page-content {
 		  
 	</div>
 	</c:if>
+	
+	<c:if test="${rpcnt > 0}">
+	<div class="col-md-56" style="margin-top:20px; margin-left:10%; height:700px;">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title-box">
+					<h3>모임후기 검색 결과</h3>
+				</div>
+			</div>
+			
+			<div style="text-align: center; font-size: 25px">
+				<div class="chart-holder" id="dashboard-bar-1" style="height:10px;">
+					<br>
+					<c:if test="${rpcnt > 0}">
+					<br>
+						<span style="float:left; font-size:15px; color:black; margin-left:2%">검색결과 ${rpcnt}개</span>
+					</c:if>
+					<br>
+					
+					<c:if test="${rpcnt > 0}">
+						<div class="inner">
+				            <div class="info" style="float:left; margin-left:5%; width:15%; height:100px;">
+					            <c:forEach var="recpicppto" items="${recpicpptos}">
+									<img src="${recpicppto.place_pic_path}/${recpicppto.place_pic_name}" alt="장소 사진" style="width:50%; height:80px; margin-top:20px;"> 
+									<br>
+								</c:forEach>		      
+						    </div>
+						   <div class="info" style="float:right; text-align:left; margin-right:10%; width:70%; height:100px;">  
+						        <c:forEach var="recpladto" items="${recpladtos}">
+						        	<div style="width:80%; font-size:15px; height:80px; margin-top:20px;">
+									     <a href="../two/recPlaceContentForm?recpla_num=${recpladto.recpla_num}">
+									     	이름 : ${recpladto.recpla_title}
+									     </a>&nbsp;|&nbsp;<span style="color:green">작성자 : ${recpladto.mem_id}</span>
+									     <br>
+										 내용 : ${recpladto.recpla_content}<br>
+										 <c:if test="${recpladto.recpla_tag != null}">
+										 <span style="color:red;">태그 : ${recpladto.recpla_tag}</span>
+										 </c:if>
+									</div>
+								    </c:forEach>
+					        </div>         	 	
+					    </div>
+			       </c:if>	
+						
+						<br>
+							
+				</div>
+				
+					<div style="float:right; margin-top:540px; margin-right:50%;">	
+							<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+					
+								<c:if test="${rpcnt > 0}">
+								
+									<c:if test="${startPage4 > pageBlock4}">
+										<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 - pageBlock4}"><font
+															size="3"> «</font></a></li>
+									</c:if>
+								
+								
+									<c:forEach var="i" begin="${startPage4}" end="${endPage4}">
+										<c:if test="${i == currentPage4}">
+											<li class=""><a href="#"><font size="3">${i}</font></a></li>
+										</c:if>
+								
+										<c:if test="${i != currentPage4}">
+											<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${i}"><font size="3">${i}</font></a></li>
+										</c:if>
+								
+									</c:forEach>
+									<c:if test="${pageCount4 > endPage4}">
+										<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 + pageBlock4}"><font
+												size="3">»</font></a></li>
+									</c:if>
+									</c:if>
+											
+							  </ul>	
+						</div>
+		  		</div>
+		  </div>  
+
+   </div>
+   </c:if>
 	
 </div>
 
