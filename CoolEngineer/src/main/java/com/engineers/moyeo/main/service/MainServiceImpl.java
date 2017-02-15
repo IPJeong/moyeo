@@ -533,12 +533,13 @@ public class MainServiceImpl implements MainService{
 		// 현호
 		// 이벤트에 당첨된 회원의 알림을 생성하는 메서드 (당첨된 회원아이디, 이벤트 명)(회원) - type(1)
 		if(type == 1) {
-			String mem_id = (String)map.get("mem_id");
+			
+			List<String> mem_ids = (List<String>)map.get("mem_id");
 			String event_title = (String)map.get("event_titme");
-			String msg = TextMessage.memWinningMsg(mem_id, event_title);
-			
-			cnt = addMemberNotiDTO(msg, time, mem_id);
-			
+			for(String mem_id : mem_ids) {
+				String msg = TextMessage.memWinningMsg(mem_id, event_title);
+				cnt = addMemberNotiDTO(msg, time, mem_id);
+			}
 			
 		// 상준
 		// 모임에 작성한 가입인사 게시판에 댓글이 달린 경우 알림을 생성하는 메서드(회원)(게시글을 작성한 회원아이디, 모임의 이름, 댓글을 작성한 회원의 아이디) - type(2)	
