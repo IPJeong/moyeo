@@ -1165,15 +1165,15 @@
 		  FROM (SELECT COUNT(*) AS greeting_cnt
 		          FROM greeting_board
 		        WHERE TO_CHAR(greeting_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
-		           AND group_num = 101),
+		           AND group_num = #{group_num}),
 		       (SELECT COUNT(*) AS notice_cnt
 		          FROM group_notice
 		        WHERE TO_CHAR(group_noti_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
-		          AND group_num = 101),
+		          AND group_num = #{group_num}),
 		       (SELECT COUNT(*) AS post_cnt
 		          FROM meeting_post
 		        WHERE TO_CHAR(post_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
-		          AND group_num = 101)
+		          AND group_num = #{group_num})
 	</select>
 	
 	<select id="getBestTenArticle" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
