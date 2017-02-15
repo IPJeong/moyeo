@@ -2315,7 +2315,7 @@ public class TwoServiceImpl implements TwoService{
 		teen_cnt = dto.getTeen_cnt();
 		twenty_cnt = dto.getTwenty_cnt();
 		thirty_cnt = dto.getThirty_cnt();
-		fourty_cnt = dto.getFirty_cnt();
+		fourty_cnt = dto.getFourty_cnt();
 		fifty_cnt = dto.getFifty_cnt();
 		sixty_cnt = dto.getSixty_cnt();
 		
