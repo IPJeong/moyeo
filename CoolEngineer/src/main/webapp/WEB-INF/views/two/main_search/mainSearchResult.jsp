@@ -374,7 +374,7 @@ div.page-content {
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title-box">
-					<h3>모임후기 검색 결과</h3>
+					<h3>장소후기 검색 결과</h3>
 				</div>
 			</div>
 			
