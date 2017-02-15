@@ -116,7 +116,8 @@ $(document).ready(function() {
 </script>
 <div class="col-md-6 page-title"></div>
 
-<div class="col-md-6 " style="margin: auto; float: none;">
+<div class="col-md-10 " style="margin: auto; float: none;">
+<div class="col-md-4">
 	<h2 style="margin: auto;">
 		<span class="fa fa-cogs"></span> 마이페이지
 	</h2>
@@ -126,8 +127,8 @@ $(document).ready(function() {
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="col-md-12" style="margin: 0px; padding: 0px;">
-					<div class="col-md-10"
-						style="margin: 0px; padding: 0px; width: 76%;">
+					<div class="col-md-6"
+						style="margin: 0px; padding: 0px; width: 60%;">
 						<h3>
 							<span class="fa fa-user"></span> ID : ${dto.mem_id}
 						</h3>
@@ -142,17 +143,17 @@ $(document).ready(function() {
 								value="${dto.birth}" />
 						</p>
 					</div>
-					<div class="col-md-2"
-						style="margin: 0px; padding: 0px; width: 24%;">
+					<div class="col-md-6"
+						style="margin: 0px; padding: 0px; width: 40%;">
 						<div class="col-md-6"
 							style="margin: 0px; padding: 0px; padding-left: 3px;">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#modal_change_pw" style="width: 100%">비밀번호변경</button>
+								data-target="#modal_change_pw" style="width: 100%;padding:2px;font-size:100%;">비밀번호변경</button>
 						</div>
 						<div class="col-md-6"
 							style="margin: 0px; padding: 0px; padding-left: 3px;">
 							<button type="button" class="btn btn-warning" data-toggle="modal"
-								data-target="#modal_delete" style="width: 100%">회원탈퇴</button>
+								data-target="#modal_delete" style="width: 100%;padding:2px;font-size:100%;">회원탈퇴</button>
 						</div>
 					</div>
 				</div>
@@ -283,11 +284,16 @@ $(document).ready(function() {
 						</div>
 					</div>
 				</div>
-
+				<div class="form-group" style="float: none;">
+					<div class="col-md-8" style="margin: auto; float: none;">
+						<a href="#" class="btn btn-success btn-block">알림메세지</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</form:form>
-	<div class="col-md-12 " style="padding: 0px;">
+	</div>
+	<div class="col-md-8 " style="padding: 0px;">
 		<h2>
 			<span class="fa fa-github"></span> 가입한 모임
 		</h2>
@@ -314,8 +320,7 @@ $(document).ready(function() {
 				</tbody>
 			</table>
 		</div>
-	</div>
-	<div class="col-md-12">
+		<div class="col-md-12">
 		<ul
 			class="pagination pagination-sm pull-right push-down-10 push-up-10">
 			<c:if test="${cnt > 0}">
@@ -342,6 +347,8 @@ $(document).ready(function() {
 			</c:if>
 		</ul>
 	</div>
+	</div>
+	
 </div>
 
 
