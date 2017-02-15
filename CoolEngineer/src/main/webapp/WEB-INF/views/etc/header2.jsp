@@ -113,7 +113,12 @@
 								<li><a><span class="fa fa-caret-right"></span>
 										시간대별 </a></li>
 							</ul></li> -->
-						<li class="xn-openable"><a href="/moyeo/four/moyeoShop">샵</a></li>
+						<li class="xn-openable"><a href="#">Moyeo 샵</a>
+							<ul>
+								<li><a href="/moyeo/one/moyeoShop"><span class="glyphicon glyphicon-credit-card"></span> 구매 페이지 </a></li>
+								<li><a href="/moyeo/one/moyeoSeller"><span class="glyphicon glyphicon-gift"></span> 판매자 페이지 </a></li>
+							</ul>
+						</li>
 						<li class="xn-openable"><a href="#">추천장소</a>
 							<ul>
 								<li><a href="/moyeo/two/placeMainLoc"><span class="fa fa-caret-right"></span> 지역별</a></li>
