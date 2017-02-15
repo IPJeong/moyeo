@@ -37,6 +37,7 @@ import com.engineers.moyeo.six.dto.NoticeDTO;
 import com.engineers.moyeo.six.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
+import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
 @Service
@@ -596,6 +597,17 @@ public class SixServiceImpl implements SixService{
 			daoMap.put("end", 5);
 			ArrayList<QnaBoardDTO> dtos3 = oneDao.getArticles(daoMap);
 			model.addAttribute("dtos3", dtos3);
+			model.addAttribute("pageNum", 1);
+		}
+		
+		//이벤트 불러오기
+		int cnt4 = threeDao.getEventCount();
+		if(cnt4 > 0) {
+			Map<String, Integer> daoMap = new HashMap<String, Integer>();
+			daoMap.put("start", 1);
+			daoMap.put("end", 5);
+			ArrayList<EventDTO> dtos4 = threeDao.getEventList(daoMap);
+			model.addAttribute("dtos4", dtos4);
 			model.addAttribute("pageNum", 1);
 		}
 	}
