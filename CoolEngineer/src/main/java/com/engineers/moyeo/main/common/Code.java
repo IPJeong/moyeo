@@ -38,6 +38,9 @@ public interface Code {
 	// 판매자 사업자등록증 사진 저장경로
 	public final static String B_C_PATH = "bcImg\\";
 	
+	// 판매 제품 사진 저장경로
+	public final static String PRODUCT_PATH = "productImg\\";
+	
 
 	// 모임의 기본사진 위치(모임생성시 기본사진 입력용)
 	public final static String groupDefSideImgPath = "/moyeo/resources/resource/assets/images/moimImg";
@@ -76,6 +79,9 @@ public interface Code {
 	
 	// 판매자 사업자등록증 사진 저장경로
 	public final static String B_C_PATHS = "/bcImg";
+	
+	// 판매 제품 사진 저장경로
+	public final static String PRODUCT_PATHS = "/productImg";
 	
 	
 	// 모임페이지 권한번호
