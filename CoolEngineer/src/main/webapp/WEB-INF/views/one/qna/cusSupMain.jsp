@@ -150,11 +150,13 @@
 												<input type="button" class="btn btn-success btn-block"
 													style="margin: 5px; float: left; width: 20%;" value="건의사항"
 													onclick="window.location='/moyeo/two/suggestionInputForm'">
-												<input type="button" class="btn btn-success btn-warning"
-													style="margin: 5px; float: left; width: 20%;"
-													value="건의사항확인"
-													onclick="window.location='/moyeo/two/suggestionList'">
-
+												
+												<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
+													<input type="button" class="btn btn-success btn-warning"
+														style="margin: 5px; float: left; width: 20%;"
+														value="건의사항확인"
+														onclick="window.location='/moyeo/two/suggestionList'">
+												</c:if>		
 											</div>
 										</div>
 									</form>
