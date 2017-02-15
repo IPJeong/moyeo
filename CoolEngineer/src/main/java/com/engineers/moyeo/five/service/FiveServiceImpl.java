@@ -83,10 +83,14 @@ public class FiveServiceImpl implements FiveService {
 
       // 페이지번호를 받아옴
       pageNum = req.getParameter("pageNum");
-
+      
       if(pageNum == null) {
          pageNum = "1";      // 첫페이지를 1페이지로 설정
       }
+      if(pageNum.equals("")){
+    	  pageNum = "1";      // 첫페이지를 1페이지로 설정
+      }
+      
 
       currentPage = Integer.parseInt(pageNum);
       pageCount = ( cnt / pageSize ) + (cnt % pageSize > 0 ? 1 : 0);
