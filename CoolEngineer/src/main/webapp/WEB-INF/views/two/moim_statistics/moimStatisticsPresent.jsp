@@ -252,17 +252,17 @@ li {
 				<table class="table table-bordered" style="width:90%; margin-left:5%; margin-top:18%;">
 					<tr>
 						<td style="border:1px solid #D9E5FF; width:6.4%;" align="center">기간</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">11달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">10달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">9달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">8달 전 </td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">7달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">6달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">5달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">4달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">3달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">2달 전</td>
-						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">1달 전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">11달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">10달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">9달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">8달전 </td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">7달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">6달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">5달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">4달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">3달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">2달전</td>
+						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">1달전</td>
 						<td style="border:1px solid #D9E5FF; width:7.8%;" align="center">이번달</td>
 					</tr>
 					<tr>

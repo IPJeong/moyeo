@@ -125,7 +125,7 @@ li {
 					// Set chart options
 					var options = {'title':'모임의 성비 차트',
 					               'width':400,
-					               'height':280};
+					               'height':250};
 		
 					var chart = new google.visualization.PieChart(document.getElementById('chart_by_gender'));
 					chart.draw(data, options);
@@ -164,7 +164,7 @@ li {
 						// Set chart options
 						var options = {'title':'모임의 연령비 차트',
 						               'width':400,
-						               'height':280};
+						               'height':250};
 			
 						var chart = new google.visualization.PieChart(document.getElementById('chart_by_age'));
 						chart.draw(data, options);
@@ -176,7 +176,7 @@ li {
 				</div>
 			</div>
 			
-				<table class="table table-bordered" style="width:80%; margin-left:10%; margin-top:35%; border:1px solid #D9E5FF;">
+				<table class="table table-bordered" style="width:80%; margin-left:10%; margin-top:37%; border:1px solid #D9E5FF;">
 					<colgroup>
 						<col width="21%">
 						<col width="*">
