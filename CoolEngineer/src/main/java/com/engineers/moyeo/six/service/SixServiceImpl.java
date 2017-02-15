@@ -1806,7 +1806,7 @@ public class SixServiceImpl implements SixService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
 		req.getParameter("product_num");
-		int product_num = 21;
+		int product_num = 2;
 		
 		productInfoDTO dto =sixDao.productDetail(product_num);
 		ProductPicDTO pic_dto = sixDao.productPic(product_num);
@@ -1814,5 +1814,19 @@ public class SixServiceImpl implements SixService{
 		System.out.println(pic_dto);
 		model.addAttribute("dto", dto);
 		model.addAttribute("pic_dto", pic_dto);
+	}
+	
+	//샵-제품주문화면
+	public void buy(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		model.addAttribute("pic_path", req.getParameter("pic_path"));
+		model.addAttribute("pic_name", req.getParameter("pic_name"));
+		model.addAttribute("product_price", req.getParameter("product_price"));
+		model.addAttribute("product_num", req.getParameter("product_num"));
+		model.addAttribute("order_limit", req.getParameter("order_limit"));
+		model.addAttribute("product_name", req.getParameter("product_name"));
+		System.out.println(req.getParameter("product_name"));
 	}
 }

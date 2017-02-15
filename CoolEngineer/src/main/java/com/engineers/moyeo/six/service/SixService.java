@@ -124,4 +124,7 @@ public interface SixService {
 	
 	//샵-제품 상세보기
 	public void productDetail(Model model);
+	
+	//샵-제품 주문화면
+	public void buy(Model model);
 }

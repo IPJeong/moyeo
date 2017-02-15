@@ -525,5 +525,27 @@ public class SixController {
 		
 		return "six/shop/productDetail";
 	}
+
+	//샵-구매
+	@RequestMapping("/shop/buy")
+	public String buy(HttpServletRequest req, Model model) {
+		System.out.println("/shop/buy");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.buy(model);
+		
+		return "six/shop/buy";
+	}
+	
+	//샵-구매처리
+	@RequestMapping("/shop/order")
+	public String order(HttpServletRequest req, Model model) {
+		System.out.println("/shop/order");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productDetail(model);
+		
+		return "six/shop/order";
+	}
 }
 
