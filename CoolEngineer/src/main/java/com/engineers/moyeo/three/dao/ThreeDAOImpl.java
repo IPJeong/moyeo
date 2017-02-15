@@ -136,6 +136,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 
+	//이벤트 등록
 	@Override
 	public int eventInsert(EventDTO dto) {
 		int cnt = 0;
@@ -143,24 +144,28 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 	
+	//이벤트 번호
 	@Override
 	public int getEventNum(Timestamp regDate) {
 		int eNum = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getEventNum", regDate);
 		return eNum;
 	}
 
+	//이벤트 썸네일 사진 등록
 	@Override
 	public void eventImgInsert(EventDTO dto) {
 		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.eventImgInsert", dto);
 		
 	}
 
+	//이벤트 사진 등록
 	@Override
 	public void eventImgsInsert(EventDTO dto) {
 		this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.eventImgsInsert", dto);
 		
 	}
 
+	//진행중인 이벤트 개수
 	@Override
 	public int getEventCount() {
 		int cnt = 0;
@@ -168,6 +173,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 
+	//진행중인 이벤트 리스트
 	@Override
 	public ArrayList<EventDTO> getEventList(Map<String, Integer> map) {
 		ArrayList<EventDTO> dtos = null;
@@ -176,6 +182,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return dtos;
 	}
 
+	//진행중인 이벤트 사진
 	@Override
 	public ArrayList<EventDTO> getEventPic(Map<String, Integer> map) {
 		ArrayList<EventDTO> dtos = null;
@@ -184,6 +191,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return dtos;
 	}
 
+	//아이디 중복 체크
 	@Override
 	public int confirmId(Map<String, Object> map) {
 		int cnt = 0;
@@ -191,6 +199,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 
+	//회원가입
 	@Override
 	public int memInfoInsert(MemberDTO dto) {
 		int cnt = 0;
@@ -198,12 +207,14 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 
+	//프로필사진 넣기
 	@Override
 	public void proImgInsert(MemberDTO dto) {
 		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.proImgInsert", dto);
 		
 	}
 
+	//관심지역 넣기
 	@Override
 	public int placeInsert(Map<String, Object> map) {
 		int cnt = 0;
@@ -211,6 +222,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 
+	//관심사 넣기
 	@Override
 	public int cateInsert(Map<String, Object> map) {
 		int cnt = 0;
@@ -349,6 +361,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return dtos;
 	}
 
+	//이벤트 정보 가져오기
 	@Override
 	public EventDTO getEveInfo(int event_num) {
 		EventDTO dto = null;
@@ -356,6 +369,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return dto;
 	}
 
+	//이벤트 마감
 	@Override
 	public int winInsert(Map<String, Object> map) {
 		int cnt = 0;
@@ -363,6 +377,7 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return cnt;
 	}
 
+	//당첨번호 가져오기
 	@Override
 	public int getWinNum(int event_num) {
 		int winNum = 0;
@@ -370,37 +385,43 @@ public class ThreeDAOImpl implements ThreeDAO{
 		return winNum;
 	}
 
+	//당첨자 입력
 	@Override
 	public void winnerInsert(Map<String, Object> map) {
 		this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.winnerInsert", map);
 		
 	}
-
+	
+	//참여자 리스트에서 삭제
 	@Override
 	public void eventParticipantsDelete(int event_num) {
 		this.sqlSession.delete("com.engineers.moyeo.three.dao.ThreeDAO.eventParticipantsDelete", event_num);
 		
 	}
-
+	
+	//이벤트 진행상황 바꾸기
 	@Override
 	public void eventDone(int event_num) {
 		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.eventDone", event_num);
 		
 	}
-
+	
+	//이벤트 종료 알림
 	@Override
 	public void winNoti(Map<String, Object> map) {		
 		this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.winNoti", map);
 		
 	}
-
+	
+	//당첨 리스트 개수
 	@Override
 	public int getWinCount() {
 		int cnt = 0;
 		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getWinCount");
 		return cnt;
 	}
-
+	
+	//당첨 리스트 가져오기
 	@Override
 	public ArrayList<EventDTO> getWinList(Map<String, Integer> map) {
 		ArrayList<EventDTO> dtos = null;
@@ -408,7 +429,8 @@ public class ThreeDAOImpl implements ThreeDAO{
 		dtos = dao.getWinList(map);		
 		return dtos;
 	}
-
+	
+	//끝난 이벤트 정보
 	@Override
 	public ArrayList<EventDTO> getDoneEventList(Map<String, Integer> map) {
 		ArrayList<EventDTO> dtos = null;
@@ -416,14 +438,16 @@ public class ThreeDAOImpl implements ThreeDAO{
 		dtos = dao.getDoneEventList(map);		
 		return dtos;
 	}
-
+	
+	//이벤트 당첨자 수
 	@Override
 	public int getWinnerCount(int winning_num) {
 		int cnt = 0;
 		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getWinnerCount", winning_num);
 		return cnt;
 	}
-
+	
+	//이벤트 당첨자 
 	@Override
 	public ArrayList<EventDTO> getWinnerList(int winning_num) {
 		ArrayList<EventDTO> dtos = null;

@@ -20,6 +20,7 @@ import com.engineers.moyeo.main.common.EmailSender;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.common.TextMessage;
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.main.service.MainServiceImpl;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
@@ -1127,7 +1128,21 @@ public class ThreeServiceImpl implements ThreeService{
 					map3.put("mem_id", mem_id[i]);	
 					
 					dao.winnerInsert(map3); //당첨자 입력
-				}				
+				}
+				
+				ArrayList<EventDTO> mem_ids = dao.getEvePartList(event_num);
+				
+				MainServiceImpl noti = new MainServiceImpl();
+				
+				
+					
+				Map<String, Object> map4 = new HashMap<>();
+				map4.put("type", 1);					
+				map4.put("mem_ids", mem_ids);
+				map4.put("event_title", title);
+				
+				noti.addNotice(map4);					
+				
 				
 				dao.eventParticipantsDelete(event_num); //참여자 리스트에서 삭제
 							
