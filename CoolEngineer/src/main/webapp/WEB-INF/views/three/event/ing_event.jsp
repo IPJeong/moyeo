@@ -226,8 +226,14 @@
 															${dto.eventCon}
 														</div>
 														<div class="modal-footer">
+															<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
+															<button type="button" class="btn btn-danger"
+																onclick="window.location='eventParticipate?memid=${sessionScope.mem_id}&evenum=${dto.eventNum}'" disabled>참여</button>
+															</c:if>
+															<c:if test="${sessionScope.authority != '02' && sessionScope.authority != '08'}">
 															<button type="button" class="btn btn-danger"
 																onclick="window.location='eventParticipate?memid=${sessionScope.mem_id}&evenum=${dto.eventNum}'">참여</button>
+															</c:if>
 															<!--  -->
 															<button type="button" class="btn btn-default"
 																data-dismiss="modal">닫기</button>
