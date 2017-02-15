@@ -765,7 +765,7 @@ li {
 function listOrderLimit(item_option_num, mode)
 {
 
-    var item_money = parseInt({$dto.product_price});
+    var item_money = parseInt(document.getElementById("item_money").value);
     var item_option_id = $('#list_option_'+item_option_num).find('input[rel="option_id"]').val();
     var obj_option_limit = $('#list_option_'+item_option_num).find('input[rel="option_limit"]');
 
@@ -824,15 +824,12 @@ function orderLimit(mode)
 }
 
 // 주문 체크
-function orderCheck()
-{
+function orderCheck() {
 
-    var item_money = parseInt({$dto.product_price});
-
-
+   		var item_money = parseInt(document.getElementById("item_money").value);
 
         var item_option_money = parseInt(0);
-        var item_option_limit = parseInt("1");
+        var item_option_limit = parseInt(document.getElementById("item_limit").value);
 
         var order_limit = parseInt(document.getElementById("order_limit").value);
 
@@ -844,8 +841,8 @@ function orderCheck()
             return false;
 
         }
-
-        if (!shopNumeric(document.getElementById("order_limit").value)) {
+	    var chkStyle = /\d/;
+        if (!chkStyle.test(document.getElementById("order_limit").value)) {
 
             alert("숫자만 입력하여 주세요.");
             document.getElementById("order_limit").value = "1";
@@ -855,7 +852,7 @@ function orderCheck()
         }
 
         // 주문 수량 초과
-        if (order_limit > item_option_limit && item_option_limit) {
+        if (order_limit > item_option_limit) {
 
             alert("주문수량이 재고수량보다 많습니다.");
             document.getElementById("order_limit").value = "1";
@@ -873,9 +870,9 @@ function orderCheck()
 
         }
 
-        var order_money = (item_money * order_limit) + (item_option_money * order_limit);
+        var order_money = (item_money * order_limit);
         var order_total_money = parseInt(order_money);
-
+		
         // 마이너스이면
         if (order_total_money < 0) {
 
@@ -889,8 +886,8 @@ function orderCheck()
    
 
     document.getElementById("order_total_money").value = order_total_money;
-    document.getElementById("order_total_money_view").innerHTML = shopNumberFormat(String(order_total_money));
-
+    document.getElementById("order_total_money_view").innerHTML = String(order_total_money);
+    
 }
 </script>
 
@@ -1034,7 +1031,7 @@ function orderCheck()
 														<tbody>
 															<tr height="30">
 																<td width="60" class="item_subtitle">판매가 :</td>
-																<td style="text-align:left;" class="item_money">${dto.product_price}원</td>
+																<td style="text-align:left;" class="item_money"><input type="text" id="item_money" value="${dto.product_price}" readonly style="padding-right:1px; border:0px; width:45px; text-align:right">원</td>
 															</tr>
 															<tr height="1" bgcolor="#f4f4f4">
 																<td colspan="2"></td>
@@ -1051,7 +1048,7 @@ function orderCheck()
 														<tbody>
 															<tr height="30">
 																<td width="60" class="item_subtitle">재고수량 :</td>
-																<td class="item_limit">${dto.product_qty}개</td>
+																<td class="item_limit"><input type="text" id="item_limit" style="width:20px; border:0px;" readonly value="${dto.product_qty}">개</td>
 															</tr>
 														</tbody>
 													</table>
@@ -1068,12 +1065,16 @@ function orderCheck()
 													<div id="item_cart_data" style="display: none;"></div>
 
 													<form method="post" id="formItem" name="formItem"
-														autocomplete="off">
+														action="buy">
 														<input type="hidden" name="url"
-															value="http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DI313584044">
-														<input type="hidden" name="m" value=""> <input
-															type="hidden" name="cart_type" value=""> <input
-															type="hidden" name="item_id" value="17"> <input
+															value="productDetail?product_num=${dto.product_num}">
+														<input type="hidden" name="pic_path" value="${pic_dto.pic_path}"> <input
+															type="hidden" name="pic_name" value="${pic_dto.pic_name}"> <input
+															type="hidden" name="pic_type" value="${pic_dto.pic_type}"> <input
+															type="hidden" name="product_price" value="${dto.product_price}"> <input
+															type="hidden" name="product_num" value="${dto.product_num}"> <input
+															type="hidden" name="product_name" value="${dto.product_name}"> 
+															<input
 															type="hidden" id="cart_id" name="cart_id" value="">
 														<input type="hidden" id="order_start" name="order_start"
 															value=""> <input type="submit" value="ok"
@@ -1125,7 +1126,7 @@ function orderCheck()
 																											<td class="order_title2">금액 :</td>
 																											<td width="5"></td>
 																											<td class="item_total_"><span
-																												id="order_total_money_view">18,000</span>원</td>
+																												id="order_total_money_view">${dto.product_price}</span>원</td>
 																										</tr>
 																									</tbody>
 																								</table>
@@ -1144,7 +1145,7 @@ function orderCheck()
 															name="item_option_id" value=""> <input
 															type="hidden" id="order_total_money"
 															name="order_total_money" value="0">
-													</form>
+													
 
 
 													<div id="cart_list"></div>
@@ -1162,20 +1163,18 @@ function orderCheck()
 													<table border="0" cellspacing="0" cellpadding="0">
 														<tbody>
 															<tr>
-																<td><a href="#"
-																	onclick="itemOrder(); return false;"><img
-																		src="/moyeo/resources/resource/img/shop/item_order.gif"
-																		border="0"></a></td>
+																<td><input type="submit" value="바로구매" style="background:rgb(34, 136, 155); color:white; font-size:13px; width:100px; height:42px;">
+																</td>
 																<td width="2"></td>
 																<td><a href="#" onclick="itemCart(); return false;"><img
 																		src="/moyeo/resources/resource/img/shop/item_cart.gif"
-																		border="0"></a></td>
+																		border="0" style="padding:3px;"></a></td>
 																<td width="2"></td>
 
 															</tr>
 														</tbody>
 													</table>
-
+													</form>
 													<table width="100%" border="0" cellspacing="0"
 														cellpadding="0">
 														<tbody>
@@ -1203,19 +1202,19 @@ function orderCheck()
 																								<tbody>
 																									<tr>
 																										<td><a
-																											href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DI313584044&amp;text=%EC%B9%98%EB%A7%88%EB%B0%94%EC%A7%80"
+																											href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost:8080/moyeo/six/shop/productDetail?product_num=${dto.product_num};text=${dto.product_name}"
 																											target="_blank" title="트위터 퍼가기"><img
 																												src="/moyeo/resources/resource/img/shop/sns_twitter.png"
 																												border="0"></a></td>
 																										<td width="4"></td>
 																										<td><a
-																											href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DI313584044"
+																											href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost:8080/moyeo/six/shop/productDetail?product_num=${dto.product_num}"
 																											target="_blank" title="페이스북 퍼가기"><img
 																												src="/moyeo/resources/resource/img/shop/sns_facebook.png"
 																												border="0"></a></td>
 																										<td width="4"></td>
 																										<td><a
-																											href="https://story.kakao.com/share?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DI313584044"
+																											href="https://story.kakao.com/share?url=218.38.255.69/localhost:8080/moyeo/six/shop/productDetail?product_num=${dto.product_num}"
 																											target="_blank" title="카카오스토리 퍼가기"><img
 																												src="/moyeo/resources/resource/img/shop/sns_kakaostory.png"
 																												border="0"></a></td>

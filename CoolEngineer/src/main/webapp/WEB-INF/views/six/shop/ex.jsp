@@ -1,98 +1,408 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1">
+<meta name="description" content="양우진">
+<meta name="keywords" content="양우발">
+<title>모여샵 - 양우진</title>
+<meta name="twitter:card" content="summary_large_image">
+<meta property="fb:app_id" content="882367985223438">
+<meta property="og:url" content="http://dmshop.kr/item.php?id=Y379285677">
+<meta property="og:type" content="article">
+<meta property="og:title" content="모여샵 - 양우진">
+<meta property="og:subject" content="양우진">
+<meta property="og:description" content="">
+<meta property="og:image" content="">
+<meta property="og:image:width" content="">
+<meta property="og:image:height" content="">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="모여샵">
+<link rel="stylesheet" href="./css/default.css" type="text/css">
+<link rel="stylesheet" href="./css/jquery.selectBox.css" type="text/css">
+<link rel="stylesheet" href="./css/jquery.jscrollpane.css" type="text/css">
+<script type="text/javascript">var shop_charset = 'utf-8';var shop_path = '.';var shop_user_login = '1';var shop_domain = 'dmshop.kr';var shop_url = 'http://dmshop.kr';var shop_user_admin = '1';var shop_kakaomsg = ' http://dmshop.kr';var shop_return_url = 'http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY379285677';var check_touch= '';</script>
+<script type="text/javascript" src="./js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.cookie.js"></script>
+<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./js/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="./js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="./js/jquery.simpletip-1.3.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.selectBox.min.js"></script>
+<script type="text/javascript" src="./js/jcarousellite_1.0.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.banner.js"></script>
+<script type="text/javascript" src="./js/shop.js"></script>
+<script type="text/javascript" src="./js/showwindow.js"></script>
+<script type="text/javascript" src="./js/showwindow2.js"></script>
+<!--[if IE 6]>
+<script type="text/javascript" src="./js/DD_belatedPNG_0.0.8a-min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="./js/admin.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+Kakao.init('29856bc78cbfb5ed4f80bc189cb01054');
+function kakaoLink()
+{
 
-<%@ include file="../../etc/header2.jsp"%>
+    var label = "";
+    var label_subject = $('meta[property="og:subject"]').attr('content');
+    var label_url = $('meta[property="og:url"]').attr('content');
 
-<style>
-@media only screen and (max-width: 1010px) {
-	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
-		{
-		width: 100%;
-		background-color: #FBFBFB;
-		padding: 0px 20px;
-	}
-}
+    if (label_subject) { label += label_subject; }
+    if (label_url) { label += "\n"+label_url; }
 
-@media only screen and (max-width: 1010px) {
-	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features .x-features-nav-open
-		{
-		display: block;
-	}
-}
+    Kakao.Link.sendTalkLink({
+    label: label,
+    });
 
-@media (min-width: 1100px){
-.col-md-56 {
-    width: 60%;
-    height: 870px;
 }
-}
-.chart-holder {
-	height: 100%;
-}
+</script>
+</head>
+<body>
+<div id="overlay"></div><div id="message_box"></div><div class="layout_top_bg" style="height: 160px;"></div>
+<style type="text/css">
+body {background-color:#ffffff;}
+.layout_top {width:1000px; margin:0 auto;}
+.layout_left {float:left; width:200px;}
+.layout_contents {width:1000px; margin:0 auto;}
+.layout_contents:after {display:block; clear:both; content:'';}
+.layout_main {float:left; width:790px; margin-left:10px;}
+.layout_bottom {position:relative; width:1000px; margin:0 auto;}
+</style>
+<div class="layout_top">
+<style type="text/css">
+.layout_top {margin-bottom:10px;}
+.layout_top_bg {background:url('./data/design/2012-06-11/1935647224_0cdf6ff6_main_bg.gif') repeat;}
+.layout_top .service_menu .line {padding:0 5px; line-height:14px; font-size:12px; color:#eeeeee; font-family:gulim,굴림;}
+.layout_top .service_menu a {font-family:gulim;font-size:12px;color:#717171;font-weight:normal;}
+.layout_top .service_menu a:hover {font-family:gulim;font-size:12px;color:#000000;font-weight:normal;}
+.layout_top .layer0 {position:relative; left:0; top:0px; width:100%; text-align:center;}
+.layout_top .layer0 .layer1 {margin:0 auto;}
+.layout_top .layer0 .layer2 {position:absolute; right:0px; bottom:10px;}
+</style><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td></td>
+    <td align="right"><table border="0" cellspacing="0" cellpadding="0" class="service_menu">
+<tbody><tr height="25">
+    <td><a href="#" onclick="shopBookmark('모여샵', 'http://dmshop.kr'); return false;">즐겨찾기</a></td>
+    <td><span class="line">|</span></td>
+    <td><a href="http://dmshop.kr/adm/">관리홈</a></td>
+    <td><span class="line">|</span></td>
+    <td><a href="http://dmshop.kr/signout.php">로그아웃</a></td>
+    <td><span class="line">|</span></td>
+    <td><a href="http://dmshop.kr/signup_check.php">정보수정</a></td>
+    <td><span class="line">|</span></td>
+    <td><a href="http://dmshop.kr/mypage.php">마이페이지</a></td>
+    <td><span class="line">|</span></td>
+    <td><a href="http://dmshop.kr/cart.php">장바구니</a></td>
+    <td><span class="line">|</span></td>
+    <td><a href="http://dmshop.kr/order_list.php">주문내역</a></td>
+    <td><span class="line">|</span></td>
+    <td><a href="http://dmshop.kr/favorite.php">관심상품</a></td>
+</tr>
+</tbody></table></td>
+</tr>
+</tbody></table>
 
-.main {
-	height: 100%;
-}
+<div class="layer0">
 
-.panel .panel-body {
-	height: 780px;
-	overflow: auto;
-}
+    <div class="layer1"><a href="http://dmshop.kr"><img src="./data/design/2017-02-15/3551987499_09f12947_logo_noimg.png" width="224" height="99" border="0"></a></div>
+    <div class="layer2"></div>
 
-.col-md-25 {
-	display: block;
-}
+</div>
 
-li {
-	float: left;
-	margin: 1px 1px 1px;
-	list-style: none;
-	left: -3px;
+
+<style type="text/css">
+.dmshop_wmlist a.text {
+
+font-family:gulim;
+font-size:13px;
+color:#3e424e;
+font-weight:bold;
+font-style:normal;
+text-decoration:none;
+}
+.dmshop_wmlist a.text:hover, .dmshop_wmlist a.hover {
+
+font-family:gulim;
+font-size:13px;
+color:#018498;
+font-weight:bold;
+font-style:normal;
+text-decoration:none;
 }
 </style>
+<table width="1000" height="36" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="15"><img src="./data/design/2012-06-11/1935647224_9b6953c5_wmbar_l.png" width="15" height="36" border="0"></td>
+<td style="background:url('./data/design/2012-06-11/1935647224_938fe569_wmbar_bg.gif') repeat;">
+<table border="0" cellspacing="0" cellpadding="0" class="dmshop_wmlist auto" align="center">
+<tbody><tr>
+<td><a href="http://dmshop.kr" class="text">메인홈</a></td>
+<td style="padding:0 25px;"><img src="./data/design/2012-06-11/1935647224_d4d657e0_wmbar_line.png" width="2" height="36" border="0"></td>
+<td><a href="http://dmshop.kr/board.php?bbs_id=notice" class="text">공지사항</a></td>
+<td style="padding:0 25px;"><img src="./data/design/2012-06-11/1935647224_d4d657e0_wmbar_line.png" width="2" height="36" border="0"></td>
+<td><a href="http://dmshop.kr/board.php?bbs_id=qna" class="text">질문과 답변</a></td>
+<td style="padding:0 25px;"><img src="./data/design/2012-06-11/1935647224_d4d657e0_wmbar_line.png" width="2" height="36" border="0"></td>
+<td><a href="http://dmshop.kr/board.php?bbs_id=review" class="text">구매후기</a></td>
+<td style="padding:0 25px;"><img src="./data/design/2012-06-11/1935647224_d4d657e0_wmbar_line.png" width="2" height="36" border="0"></td>
+<td><a href="http://dmshop.kr/board.php?bbs_id=faq" class="text">자주묻는 질문</a></td>
+<td style="padding:0 25px;"><img src="./data/design/2012-06-11/1935647224_d4d657e0_wmbar_line.png" width="2" height="36" border="0"></td>
+<td><a href="http://dmshop.kr/plan.php" class="text">기획전</a></td>
+</tr>
+</tbody></table>
+</td>
+<td width="15"><img src="./data/design/2012-06-11/1935647224_9d47e83d_wmbar_r.png" width="15" height="36" border="0"></td>
+</tr>
+</tbody></table></div>
+<div class="layout_contents">
+<div class="layout_left"><style type="text/css">
+.menu_line {height:7px;}
+</style>
 
-<!-- START BREADCRUMB -->
-   <ul class="breadcrumb push-down-0">
-       <li><a href="../main/main.jsp">Home</a></li>
-       
-       <li class="active">Shop</li>
-   </ul>
-<!-- END BREADCRUMB -->  
 
-<!-- START ROW -->
+<div class="menu_default">
+<div class="menu_loginbox"><style type="text/css">
+/* 로그인 */
+.skin_loginbox_default .user_name {font-weight:bold; line-height:14px; font-size:12px; color:#555555; font-family:dotum,돋움;}
+.skin_loginbox_default .user_id {margin-left:3px; line-height:14px; font-size:11px; color:#848689; font-family:dotum,돋움;}
+.skin_loginbox_default .user_nim {line-height:14px; font-size:11px; color:#555555; font-family:dotum,돋움;}
+.skin_loginbox_default .user_level {line-height:14px; font-size:11px; color:#848689; font-family:dotum,돋움;}
+.skin_loginbox_default .coupon {line-height:14px; font-size:11px; color:#787878; font-family:dotum,돋움;}
+.skin_loginbox_default .coupon_count {font-weight:bold; line-height:14px; font-size:11px; color:#ff3c00; font-family:dotum,돋움;}
+.skin_loginbox_default .cash {line-height:14px; font-size:11px; color:#787878; font-family:dotum,돋움;}
+.skin_loginbox_default .cash_count {font-weight:bold; line-height:14px; font-size:11px; color:#3198f0; font-family:dotum,돋움;}
+.skin_loginbox_default .edit {line-height:14px; font-size:11px; color:#848689; font-family:dotum,돋움;}
+.skin_loginbox_default .mypage {line-height:14px; font-size:11px; color:#848689; font-family:dotum,돋움;}
+.skin_loginbox_default .line {padding:0 4px; line-height:14px; font-size:11px; color:#cccccc; font-family:dotum,돋움;}
+</style>
 
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="skin_loginbox_default">
+<tbody><tr>
+    <td>
+<div style="border:1px solid #cccccc;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td height="1" bgcolor="#ffffff" class="none">&nbsp;</td></tr>
+</tbody></table>
 
-<!-- 모임 사이드바 시작 -->
-<div class="row">
-	<div class="col-md-50" style="margin-top: 10px; margin-left: 10%;">
-		<!-- START LOGIN BLOCK -->
-	
-		<!-- 모임페이지 사이드바 시작 -->
-		<%@include file="../../etc/shop_side.jsp"%>
-		<!-- 모임페이지 사이드바 종료 -->
-		
-		<!-- START PHOTO BLOCK -->
-		<div class="col-md-56" style="margin-top: 10px;">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<div class="panel-title-box">
-						<h3>Shop</h3>
-					</div>
-				</div>
-				<div class="panel-body padding-0"
-					style="text-align: center; font-size: 25px">
-					<div class="chart-holder" id="dashboard-bar-1" style="height: 10px;">
-					
-						<div>
-							
-							
-						
-										
-							<!-- 상품 레이아웃 배열 -->
-								
-							<!-- 상품 레이아웃 배열 -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td width="1" bgcolor="#ffffff"></td>
+    <td bgcolor="#f4f4f4">
+<div style="padding:4px;">
+<div style="border:1px solid #cccccc; background-color:#ffffff; padding:5px;">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td valign="top"><img src="./data/user_level/2011-11-21/1935647224_9172674b_10.gif" width="40"></td>
+    <td width="10"></td>
+    <td valign="top">
+<table border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;">
+<tbody><tr>
+    <td><span class="user_name">관리자</span><span class="user_id">(admin)</span><span class="user_nim">님</span></td>
+</tr>
+</tbody></table>
+
+<table border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;">
+<tbody><tr>
+    <td><span class="user_level">회원등급 : 최고관리자</span></td>
+</tr>
+</tbody></table>
+    </td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr height="8"><td></td></tr>
+</tbody></table>
+
+<table border="0" cellspacing="0" cellpadding="0" class="auto">
+<tbody><tr>
+    <td><a href="./coupon.php"><span class="coupon">쿠폰 : </span><span class="coupon_count">0</span></a></td>
+    <td width="10" align="center"><span class="line">|</span></td>
+    <td><a href="./cash.php"><span class="cash">적립금 : </span><span class="cash_count">0</span></a></td>
+</tr>
+</tbody></table>
+</div>
+</div>
+    </td>
+    <td width="1" bgcolor="#eaeaea"></td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td height="1" bgcolor="#eaeaea" class="none">&nbsp;</td></tr>
+<tr><td height="1" bgcolor="#cccccc" class="none">&nbsp;</td></tr>
+<tr><td height="1" bgcolor="#ffffff" class="none">&nbsp;</td></tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td width="1" bgcolor="#ffffff"></td>
+    <td bgcolor="#f4f4f4">
+<div style="padding:5px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td><a href="./adm/" class="edit">관리홈</a></td>
+    <td><span class="line">|</span></td>
+    <td><a href="http://dmshop.kr/mypage.php" class="mypage">마이페이지</a></td>
+</tr>
+</tbody></table>
+    </td>
+    <td width="69"><a href="./signout.php"><img src="./skin/loginbox/default/img/logout.gif" border="0"></a></td>
+</tr>
+</tbody></table>
+</div>
+    </td>
+    <td width="1" bgcolor="#eaeaea"></td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td height="1" bgcolor="#eaeaea" class="none">&nbsp;</td></tr>
+</tbody></table>
+</div>
+    </td>
+</tr>
+</tbody></table></div><div class="menu_line none">&nbsp;</div>
+<div class="menu_menubar">
+<style type="text/css">
+.dmshop_hmlist a {display:block;}
+.dmshop_hmlist a.image1_category_36 {width:170px; height:16px; background:url('./data/text/cache/9e04cef367f702baebad552aa0af2648.png') no-repeat;}
+.dmshop_hmlist a.image1_category_36:hover, .dmshop_hmlist a.image1_category_36_hover {width:170px; height:16px; background:url('./data/text/cache/230a091834a207969ad49d89f0135877.png') no-repeat;}
+.dmshop_hmlist a.image1_category_37 {width:170px; height:16px; background:url('./data/text/cache/d59bc7a21142cfabd509fed3d71652a4.png') no-repeat;}
+.dmshop_hmlist a.image1_category_37:hover, .dmshop_hmlist a.image1_category_37_hover {width:170px; height:16px; background:url('./data/text/cache/833fdd7753e5eba71fcf6c49dd12ec9c.png') no-repeat;}
+.dmshop_hmlist a.image1_category_38 {width:170px; height:16px; background:url('./data/text/cache/dbc1af44dd8d2d9965854378c20d6f39.png') no-repeat;}
+.dmshop_hmlist a.image1_category_38:hover, .dmshop_hmlist a.image1_category_38_hover {width:170px; height:16px; background:url('./data/text/cache/ce3798acf311b5702816f3a8f0a62291.png') no-repeat;}
+.dmshop_hmlist a.image1_category_39 {width:170px; height:16px; background:url('./data/text/cache/c2cb1067f1e4f584b95c6e3cbe914db5.png') no-repeat;}
+.dmshop_hmlist a.image1_category_39:hover, .dmshop_hmlist a.image1_category_39_hover {width:170px; height:16px; background:url('./data/text/cache/e4ca2e27347c5c81b333b6e70273513c.png') no-repeat;}
+.dmshop_hmlist a.image1_category_40 {width:170px; height:16px; background:url('./data/text/cache/0ad8b887bad0e446d9d8bb179fa23da5.png') no-repeat;}
+.dmshop_hmlist a.image1_category_40:hover, .dmshop_hmlist a.image1_category_40_hover {width:170px; height:16px; background:url('./data/text/cache/f3b78593b877c885e6ae89bc02e3b8db.png') no-repeat;}
+.dmshop_hmlist a.image1_category_45 {width:170px; height:16px; background:url('./data/text/cache/e7a196a5775d2914f32bfe4df683571d.png') no-repeat;}
+.dmshop_hmlist a.image1_category_45:hover, .dmshop_hmlist a.image1_category_45_hover {width:170px; height:16px; background:url('./data/text/cache/14f2c4d188bc6a189511b918381c0d2e.png') no-repeat;}
+.dmshop_hmlist p {margin:0px; padding:11px 15px;}</style>
+<table width="200" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td width="200"><img src="./data/design/2012-06-12/1935647224_8f3e09cf_hmbar_t.gif" width="200" height="35" border="0"></td></tr>
+<tr height="-35"><td valign="top" style="background:url('./data/design/2012-06-12/1935647224_a7e53a41_hmbar_bg.gif') repeat;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="dmshop_hmlist">
+<tbody><tr><td><div style="border-top:1px solid #; width:100%; height:1px; margin:0 auto; line-height:0px; font-size:0px;"></div></td></tr>
+<tr><td align="left"><p><a href="http://dmshop.kr/list.php?ct_id=1" class="image1_category_36 image1_category_36_hover"></a></p></td></tr>
+<tr><td><div style="border-top:1px solid #; width:100%; height:1px; margin:0 auto; line-height:0px; font-size:0px;"></div></td></tr>
+<tr><td align="left"><p><a href="http://dmshop.kr/list.php?ct_id=2" class="image1_category_37"></a></p></td></tr>
+<tr><td><div style="border-top:1px solid #; width:100%; height:1px; margin:0 auto; line-height:0px; font-size:0px;"></div></td></tr>
+<tr><td align="left"><p><a href="http://dmshop.kr/list.php?ct_id=3" class="image1_category_38"></a></p></td></tr>
+<tr><td><div style="border-top:1px solid #; width:100%; height:1px; margin:0 auto; line-height:0px; font-size:0px;"></div></td></tr>
+<tr><td align="left"><p><a href="http://dmshop.kr/list.php?ct_id=4" class="image1_category_39"></a></p></td></tr>
+<tr><td><div style="border-top:1px solid #; width:100%; height:1px; margin:0 auto; line-height:0px; font-size:0px;"></div></td></tr>
+<tr><td align="left"><p><a href="http://dmshop.kr/list.php?ct_id=5" class="image1_category_40"></a></p></td></tr>
+<tr><td><div style="border-top:1px solid #; width:100%; height:1px; margin:0 auto; line-height:0px; font-size:0px;"></div></td></tr>
+<tr><td align="left"><p><a href="http://dmshop.kr/list.php?ct_id=18" class="image1_category_45"></a></p></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table></div><div class="menu_line none">&nbsp;</div>
+<div class="menu_boardbox"><style type="text/css">
+.skin_boardbox_default {background-color:#ffffff;}
+.skin_boardbox_default .line {height:1px; background:url('./skin/boardbox/default/img/line.gif') repeat-x;}
+.skin_boardbox_default a {text-decoration:none; display:block; width:100%; margin-top:2px;}
+.skin_boardbox_default a {font-weight:bold; line-height:28px; font-size:12px; color:#717171; font-family:gulim,굴림;}
+.skin_boardbox_default a:hover {font-weight:bold; line-height:28px; font-size:12px; color:#000000; font-family:gulim,굴림;}
+.skin_boardbox_default a.hover {font-weight:bold; line-height:28px; font-size:12px; color:#000000; font-family:gulim,굴림;}
+.skin_boardbox_default a span {margin-left:14px;}
+</style>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="skin_boardbox_default">
+<tbody><tr>
+    <td><img src="./skin/boardbox/default/img/title.gif"></td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="skin_boardbox_default">
+<tbody><tr><td><a href="http://dmshop.kr/board.php?bbs_id=notice"><span>공지사항</span></a></td></tr>
+<tr><td height="1" class="line"></td></tr>
+<tr><td><a href="http://dmshop.kr/board.php?bbs_id=qna"><span>질문과 답변</span></a></td></tr>
+<tr><td height="1" class="line"></td></tr>
+<tr><td><a href="http://dmshop.kr/board.php?bbs_id=review"><span>구매후기</span></a></td></tr>
+<tr><td height="1" class="line"></td></tr>
+<tr><td><a href="http://dmshop.kr/board.php?bbs_id=faq"><span>자주묻는 질문</span></a></td></tr>
+<tr><td height="1" class="line"></td></tr>
+</tbody></table></div><div class="menu_line none">&nbsp;</div>
+<div class="menu_planbox"><style type="text/css">
+.skin_planbox_default.title_bg {height:36px; background:url('./skin/planbox/default_select/img/title_bg.gif') repeat-x;}
+.skin_planbox_default .bottom_bg {height:5px; background:url('./skin/planbox/default_select/img/bottom_bg.gif') repeat-x;}
+
+.skin_planbox_default .select {line-height: 1.5; font-size:12px; color:#9e9e9e; font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif;}
+.skin_planbox_default .selectBox-dropdown {width:150px; height:19px;}
+.skin_planbox_default .selectBox-dropdown .selectBox-label {padding:1px 5px 1px 5px;}
+</style>
+
+<script type="text/javascript">
+$(document).ready( function() {
+    $(".skin_planbox_default select").selectBox();
+});
+
+function planboxGo(id)
+{
+
+    if (id == '') {
+        return false;
+    }
+
+    document.location.href = "./plan.php?pl_id="+id;
+
+}
+</script>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="skin_planbox_default title_bg">
+<tbody><tr>
+    <td align="center"><img src="./skin/planbox/default_select/img/title.gif"></td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td height="10"></td></tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="skin_planbox_default">
+<tbody><tr>
+    <td width="5"></td>
+    <td>
+<select id="skin_planbox_default" name="skin_planbox_default" onchange="planboxGo(this.value);" class="selectBox" style="display: none;">
+<option value="">진행중인 기획전이 없습니다.</option>
+</select><a class="selectBox selectBox-dropdown" style="display: inline-block;" title="" tabindex="0"><span class="selectBox-label">진행중인 기획전이 없습니다.</span><span class="selectBox-arrow"></span></a>
+    </td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td height="10"></td></tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="skin_planbox_default">
+<tbody><tr><td class="bottom_bg none">&nbsp;</td></tr>
+</tbody></table>
+
+<script type="text/javascript">
+</script></div><div class="menu_line none">&nbsp;</div>
+<div class="menu_searchbox"><form method="get" name="form_Searchbox_Default" action="./search.php">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td style="height:5px; background:url('./skin/searchbox/default_left/img/bg_top.gif') repeat-x;" class="none">&nbsp;</td></tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff;">
+<tbody><tr height="37">
+    <td width="48"><img src="./skin/searchbox/default_left/img/title.gif"></td>
+    <td><input type="text" name="q" value="검색어" onmouseover="if (this.value == '검색어') this.value = '';" onfocus="if (this.value == '검색어') this.value = '';" style="width:100%; height:21px; border:1px solid #cccccc; padding:0px 3px 0px 3px; line-height:21px; font-size:12px; color:#9e9e9e; font-family:gulim,굴림;"></td>
+    <td width="26"><input type="image" src="./skin/searchbox/default_left/img/search.gif" border="0"></td>
+    <td width="7"></td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td style="height:5px; background:url('./skin/searchbox/default_left/img/bg_bottom.gif') repeat-x;" class="none">&nbsp;</td></tr>
+</tbody></table>
+</form></div></div>
+
+</div>
 <div class="layout_main">
 
 <script type="text/javascript">
@@ -209,6 +519,12 @@ $('.layout_top_bg').css( { 'height': $('.layout_top').height()+'px' } );
 .item_qna .smile0 {width:74px; height:18px; background:transparent url('./skin/item/default/img/qna_smile.png') no-repeat;}
 .item_qna .smile1 {width:74px; height:18px; background:transparent url('./skin/item/default/img/qna_smile.png') no-repeat 0px -18px;}
 </style>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td><div style="border:1px solid #b4d9e0; background-color:#e2fdff; text-align:center; padding:4px 0 3px 0;"><a href="./adm/item_write.php?m=u&amp;item_id=18"><span style="font-weight:bold; line-height:14px; font-size:12px; color:#027d94; font-family:dotum,돋움;">관리자 권한으로 현재 상품을 수정 합니다.</span></a></div></td>
+</tr>
+<tr><td height="10"></td></tr>
+</tbody></table>
 
 <!--[if IE 6]>
 <script type="text/javascript">
@@ -234,10 +550,22 @@ function itemGallery(id, upload_mode)
 </script>
 
 <div style="border:1px solid #efefef; background-color:#ffffff;">
-
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="item_position">
+<tbody><tr height="30" bgcolor="#f7f7f7">
+    <td width="10"></td>
+    <td>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td><a href="./" class="home">홈</a></td><td width="20" align="center"><img src="./skin/item/default/img/arrow.gif" class="up1"></td><td><a href="./list.php?ct_id=1" class="off">대분류명 (학습예제)</a></td><td width="20" align="center"><img src="./skin/item/default/img/arrow.gif" class="up1"></td><td><a href="./list.php?ct_id=6" class="off">과일</a></td><td width="20" align="center"><img src="./skin/item/default/img/arrow.gif" class="up1"></td><td><a href="./list.php?ct_id=9" class="off">오렌지</a></td></tr>
+</tbody></table>
+    </td>
+    <td width="130" align="right"><span class="title">상품번호 :</span> <span class="code">Y379285677</span></td>
+    <td width="10"></td>
+</tr>
+</tbody></table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tbody>
+<tbody><tr><td height="1" bgcolor="#efefef" class="none">&nbsp;</td></tr>
 </tbody></table>
 
 
@@ -249,7 +577,7 @@ function itemGallery(id, upload_mode)
     <td width="1" bgcolor="#efefef"></td>
     <td width="2"></td>
     <td width="1" bgcolor="#efefef"></td>
-    <td width="60" align="center"><a href="#" onclick="alert('다음상품이 없습니다.'); return false;">다음상품</a></td>
+    <td width="60" align="center"><a href="?ct_id=9&amp;id=Q839326420">다음상품</a></td>
     <td width="1" bgcolor="#efefef"></td>
     <td width="5"></td>
 </tr>
@@ -273,7 +601,7 @@ function itemGallery(id, upload_mode)
 <!-- 상품 이미지 start //-->
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr width="360" height="366">
-    <td align="center" valign="middle"><div id="wrap" style="top:0px;z-index:9999;position:relative;"><a id="image_default_zoom" name="default" rel="zoomWidth:360, zoomHeight:360, adjustX:0, adjustY:0, position:'inside'" class="cloud-zoom" href="./data/item/2012-06-08/1935647224_e717d81d_d1.jpg" onclick="return false;" style="position: relative; display: block;"><img src="./data/thumb/item/360x360/1935647224_e717d81d_d1.jpg" border="0" id="image_default" alt="" style="display: block;"></a><div class="mousetrap" style="background-image: url(&quot;.&quot;); z-index: 999; position: absolute; width: 360px; height: 360px; left: 0px; top: 0px; cursor: move;"></div></div></td>
+    <td style="background-color:#fafafa; width:360px; height:360px; text-align:center;"><img src="./skin/item/default/img/noimage.gif"></td>
 </tr>
 </tbody></table>
 
@@ -296,7 +624,7 @@ function cloudZoom()
 <!-- 상품 정보 박스 start //-->
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td class="item_title">도너츠 (이미지 학습)</td>
+    <td class="item_title">양우진</td>
 </tr>
 </tbody></table>
 
@@ -306,6 +634,7 @@ function cloudZoom()
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
+    <td><img src="./data/icon/2011-11-08/1935647224_8310ce26_i03.gif" width="26" height="15" border="0"></td>
 </tr>
 </tbody></table>
 
@@ -320,12 +649,12 @@ function cloudZoom()
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr height="30">
     <td width="60" class="item_subtitle">판매가 :</td>
-    <td class="item_money">1,000 원</td>
+    <td class="item_money">30,000 원</td>
 </tr>
 <tr height="1" bgcolor="#f4f4f4"><td colspan="2"></td></tr>
 <tr height="30">
     <td width="60" class="item_subtitle">적립금 :</td>
-    <td class="item_cash">100 P</td>
+    <td class="item_cash">3,000 P</td>
 </tr>
 </tbody></table>
 
@@ -333,12 +662,24 @@ function cloudZoom()
 <tbody><tr><td height="1" bgcolor="#cccccc" class="none">&nbsp;</td></tr>
 </tbody></table>
 
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody><tr height="30">
+    <td width="60" class="item_subtitle">재고수량</td>
+    <td class="item_limit">9,999개</td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td height="1" bgcolor="#f4f4f4" class="none">&nbsp;</td></tr>
+</tbody></table>
 
 
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr height="30">
     <td width="60" class="item_subtitle">배송비</td>
     <td class="item_delivery_money">2,500원</td>
+    <td width="5"></td>
+    <td class="help">50,000원 이상 구매시 무료배송</td>
 </tr>
 </tbody></table>
 
@@ -349,40 +690,13 @@ function cloudZoom()
 <div id="item_cart_data" style="display:none;"></div>
 
 <form method="post" id="formItem" name="formItem" autocomplete="off">
-<input type="hidden" name="url" value="http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY253066903">
+<input type="hidden" name="url" value="http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY379285677">
 <input type="hidden" name="m" value="">
 <input type="hidden" name="cart_type" value="">
-<input type="hidden" name="item_id" value="7">
+<input type="hidden" name="item_id" value="18">
 <input type="hidden" id="cart_id" name="cart_id" value="">
 <input type="hidden" id="order_start" name="order_start" value="">
 <input type="submit" value="ok" disabled="" style="display:none;">
-<script type="text/javascript">
-var item_option_7_name = '초코';
-var item_option_7_money = '0';
-var item_option_7_limit = '100';
-var item_option_8_name = '딸기';
-var item_option_8_money = '0';
-var item_option_8_limit = '50';
-</script>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tbody><tr>
-    <td>
-<div style="border:1px solid #eaeaea; background-color:#f4f4f4;">
-<div style="padding:7px 10px 7px 10px;">
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody><tr>
-    <td width="50" class="order_title">옵션</td>
-    <td><select id="order_option" name="order_option" class="select" onchange="orderOption(this.value);"><option value="">선택하세요.</option><option value="7">초코 : 남은수량 100개</option><option value="8">딸기 : 남은수량 50개</option></select></td>
-</tr>
-</tbody></table>
-</div>
-</div>
-    </td>
-</tr>
-</tbody></table>
-
-<div id="item_option_data"></div>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr height="3"><td></td></tr>
@@ -395,12 +709,26 @@ var item_option_8_limit = '50';
 <div style="padding:7px 10px 7px 10px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
+    <td width="55" class="order_title">주문수량</td>
+    <td width="85">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td><input type="text" id="order_limit" name="order_limit" class="input" value="1" onkeyup="orderCheck();"></td>
+    <td width="2"></td>
+    <td class="order_limit">개</td>
+    <td width="5"></td>
+    <td><a href="#" onclick="orderLimit('plus'); return false;"><img src="./skin/item/default/img/limit_plus.gif" border="0"></a></td>
+    <td width="3"></td>
+    <td><a href="#" onclick="orderLimit('minus'); return false;"><img src="./skin/item/default/img/limit_minus.gif" border="0"></a></td>
+</tr>
+</tbody></table>
+    </td>
     <td align="right">
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
     <td class="order_title2">금액 :</td>
     <td width="5"></td>
-    <td class="item_total_money"><span id="order_total_money_view">1,000</span>원</td>
+    <td class="item_total_money"><span id="order_total_money_view">90,000</span>원</td>
 </tr>
 </tbody></table>
     </td>
@@ -413,7 +741,7 @@ var item_option_8_limit = '50';
 </tbody></table>
 
 <input type="hidden" id="item_option_id" name="item_option_id" value="">
-<input type="hidden" id="order_total_money" name="order_total_money" value="0">
+<input type="hidden" id="order_total_money" name="order_total_money" value="90000">
 </form>
 
 <style type="text/css">
@@ -434,7 +762,7 @@ var item_option_8_limit = '50';
 
 <script type="text/javascript">
 // 옵션 사용여부
-var item_option_mode = "1";
+var item_option_mode = "0";
 var item_option_num = 0;
 
 // 옵션 선택
@@ -501,7 +829,7 @@ function listOrderDel(item_option_num)
 function listOrderLimit(item_option_num, mode)
 {
 
-    var item_money = parseInt("1000");
+    var item_money = parseInt("30000");
     var item_option_id = $('#list_option_'+item_option_num).find('input[rel="option_id"]').val();
     var obj_option_limit = $('#list_option_'+item_option_num).find('input[rel="option_limit"]');
 
@@ -563,7 +891,7 @@ function orderLimit(mode)
 function orderCheck()
 {
 
-    var item_money = parseInt("1000");
+    var item_money = parseInt("30000");
 
     // 옵션 사용
     if (item_option_mode == '1') {
@@ -609,7 +937,7 @@ function orderCheck()
     } else {
 
         var item_option_money = parseInt(0);
-        var item_option_limit = parseInt("0");
+        var item_option_limit = parseInt("9999");
 
         var order_limit = parseInt(document.getElementById("order_limit").value);
 
@@ -667,6 +995,101 @@ function orderCheck()
 
     document.getElementById("order_total_money").value = order_total_money;
     document.getElementById("order_total_money_view").innerHTML = shopNumberFormat(String(order_total_money));
+
+}
+
+function itemOrder()
+{
+
+    // 옵션 사용
+    if (item_option_mode == '1') {
+
+        var order_item_count = 0;
+        $('#item_option_data .list_option').each(function() {
+
+            var obj_option_id = $(this).find('input[rel="option_id"]');
+
+            if (obj_option_id.val()) {
+
+                var obj_option_limit = $(this).find('input[rel="option_limit"]');
+
+                if (obj_option_limit.val() <= 0) {
+
+                    alert("옵션을 먼저 선택하세요.");
+                    return false;
+
+                }
+
+                order_item_count++;
+
+            }
+
+        });
+
+        if (!order_item_count) {
+
+            alert("옵션을 먼저 선택하세요.");
+            return false;
+
+        }
+
+        var f = document.formItem;
+
+        var item_id = f.item_id.value;
+
+        f.m.value = "item_option_array";
+        f.cart_type.value = "order";
+
+        var string = $('#formItem').serialize();
+
+        $.post("http://dmshop.kr/cart_update.php", string , function(data) {
+
+            $("#item_cart_data").html(data);
+
+            orderPage('opt');
+
+        });
+
+    } else {
+    // 무옵션
+
+        var f = document.formItem;
+
+        f.m.value = "";
+
+        var item_id = f.item_id.value;
+
+        if (f.order_option) {
+
+            var order_option = f.order_option.value;
+
+        } else {
+
+            var order_option = "";
+
+        }
+
+        var order_limit = f.order_limit.value;
+        var item_option_limit = parseInt("9999");
+
+        if (!item_option_limit) {
+
+            alert("재고가 없습니다.");
+            return false;
+
+        }
+
+        $('#order_start').val('');
+
+        $.post("http://dmshop.kr/cart_update.php", {"item_id" : item_id, "order_option" : order_option, "order_limit" : order_limit, "cart_type" : "order"}, function(data) {
+
+            $("#item_cart_data").html(data);
+
+            orderPage('one');
+
+        });
+
+    }
 
 }
 
@@ -834,11 +1257,7 @@ function itemFavorite()
 </tbody></table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tbody><tr>
-<td height="1" bgcolor="#f4f4f4" class="none">
-<a href="#" onclick="itemOrder(); return false;"><button type="button" class="btn btn-info">구매하기 </button></a>
-<a href="#" onclick="itemCart(); return false;"><button type="button" class="btn btn-warning">장바구니 </button></a>
-</td></tr>
+<tbody><tr><td height="1" bgcolor="#f4f4f4" class="none">&nbsp;</td></tr>
 </tbody></table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -847,6 +1266,11 @@ function itemFavorite()
 
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
+    <td><a href="#" onclick="itemOrder(); return false;"><img src="./skin/item/default/img/item_order.gif" border="0"></a></td>
+    <td width="2"></td>
+    <td><a href="#" onclick="itemCart(); return false;"><img src="./skin/item/default/img/item_cart.gif" border="0"></a></td>
+    <td width="2"></td>
+    <td><a href="#" onclick="itemFavorite(); return false;"><img src="./skin/item/default/img/item_favorite.gif" border="0"></a></td>
 </tr>
 </tbody></table>
 
@@ -861,11 +1285,11 @@ function itemFavorite()
 <div style="padding:5px 10px 5px 10px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td width="40"></td>
+    <td width="40"><img src="./skin/item/default/img/title_sns.gif"></td>
     <td align="right">
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-<td><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY253066903&amp;text=%EB%8F%84%EB%84%88%EC%B8%A0+%28%EC%9D%B4%EB%AF%B8%EC%A7%80+%ED%95%99%EC%8A%B5%29" target="_blank" title="트위터 퍼가기"><img src="./skin/item/default/img/sns_twitter.png" border="0"></a></td><td width="4"></td><td><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY253066903" target="_blank" title="페이스북 퍼가기"><img src="./skin/item/default/img/sns_facebook.png" border="0"></a></td><td width="4"></td><td><a href="https://story.kakao.com/share?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY253066903" target="_blank" title="카카오스토리 퍼가기"><img src="./skin/item/default/img/sns_kakaostory.png" border="0"></a></td><td width="4"></td><td><a href="#" onclick="orderPopupSms('item_code=Y253066903'); return false;"><img src="./skin/item/default/img/sns_email.gif" border="0"></a></td><td width="4"></td></tr>
+<td><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY379285677&amp;text=%EC%96%91%EC%9A%B0%EC%A7%84" target="_blank" title="트위터 퍼가기"><img src="./skin/item/default/img/sns_twitter.png" border="0"></a></td><td width="4"></td><td><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY379285677" target="_blank" title="페이스북 퍼가기"><img src="./skin/item/default/img/sns_facebook.png" border="0"></a></td><td width="4"></td><td><a href="https://story.kakao.com/share?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY379285677" target="_blank" title="카카오스토리 퍼가기"><img src="./skin/item/default/img/sns_kakaostory.png" border="0"></a></td><td width="4"></td><td><a href="#" onclick="orderPopupSms('item_code=Y379285677'); return false;"><img src="./skin/item/default/img/sns_email.gif" border="0"></a></td><td width="4"></td></tr>
 </tbody></table>
     </td>
 </tr>
@@ -901,8 +1325,8 @@ function itemFavorite()
     <td width="141" onclick="shopMove('#item_view'); return false;" class="tab_use1_on pointer"></td>
     <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_off pointer"></td>
     <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_off pointer"></td>
-    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"></td>
-    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"><div class="tab_count1">0</div></td>
+    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"><div class="tab_count1">0</div></td>
 </tr>
 </tbody></table>
     </td>
@@ -916,7 +1340,7 @@ function itemFavorite()
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr height="150">
     <td>
-<p>상품 목록에서는 빨간색의 딸기 도너츠가 보일텐데,<br></p><p><br></p><p>상품페이지에서는 갈색의 초코 도너츠가 보일 겁니다.</p><p><br></p><p>이는 관리자 모드에서 상품 등록시, "대표 이미지"와 "기본 상품목록 이미지"를 각 다르게 첨부하였기 때문 입니다.</p><p><br></p><p><br></p><p><br></p><p>일반적으로 사진을 다르게 첨부하는것은 번거로운 일이기 때문에</p><p><br></p><p>디엠샵의 기본 설정값은 대표이미지로 부터, 기본상품목록 / 기획전 목록의 이미지를 자동 생성하기 위해</p><p><br></p><p>"대표 이지미로 부터 자동생성" 으로 선택되어 있습니다.</p><p><br></p><p><br></p><p>이러한 선택 값을 "다른 이미지 직접입력"으로 바꾸고</p><p><br></p><p>다른 이미지를 첨부하시면 각각 첨부된 이미지가 해당 페이지에서 보여지게 됩니다.<br></p></td>
+양우진 양우발</td>
 </tr>
 </tbody></table>
 </div>
@@ -934,11 +1358,11 @@ function itemFavorite()
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td width="141" onclick="shopMove('#item_view'); return false;" class="tab_use1_off pointer"><div class="tab_count1"> 상품안내 </div></td>
-    <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_on pointer"><div class="tab_count1"> 배송안내 </div></td>
-    <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_off pointer"><div class="tab_count1"> 환불규정 </div></td>
-    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"><div class="tab_count1">상품평 </div></td>
-    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"><div class="tab_count1">구매후기 </div></td>
+    <td width="141" onclick="shopMove('#item_view'); return false;" class="tab_use1_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_on pointer"></td>
+    <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"><div class="tab_count1">0</div></td>
+    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"><div class="tab_count1">0</div></td>
 </tr>
 </tbody></table>
     </td>
@@ -952,11 +1376,11 @@ function itemFavorite()
 <div class="delivery_information">
 <div style="margin-top:10px; border:1px solid #e0e0e0;">
 <div style="padding:20px; border:4px solid #f2f2f2;">
-<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="9"></td><td><button type="button" class="btn btn-default">상품배송안내</button></td></tr></tbody></table><table style="margin-top:10px; border-top:2px solid #f4f4f4;" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="30"><td></td></tr></tbody></table>
-<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="55"></td><td valign="top" width="90"><p style="margin-top:5px;"><button type="button" class="btn btn-default">상품발송</button></p></td><td valign="top"><p>저희 쇼핑몰은 <font color="#436fca">평일 오후 4시 이전 결제완료건에 한하여, 당일 발송</font>을 원칙으로 합니다.<br>단, 주문상품의 입고지연 및 주문제작 상품 경우, 발송기간이 2~3일 가량 지연될 수 있습니다.</p><p style="margin-top:10px; font-weight:bold;">평일(월~금) 주문건 오후 4시 이전 결제건</p><p>당일 발송. 오후 6시 상품 출고</p><p style="margin-top:10px; font-weight:bold;">평일(월~금) 주문건 오후 4시 이후 결제건</p><p>익일 발송. 다음날 오후 6시 상품 출고</p><p style="margin-top:10px; font-weight:bold;">토/일/공휴일 결제건</p><p>다음 영업일 기준 오후 6시 상품 출고</p></td></tr></tbody></table><table style="margin-top:25px; border-top:1px solid #f4f4f4;" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="30"><td></td></tr></tbody></table>
-<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="55"></td><td valign="top" width="90"><p style="margin-top:5px;"><button type="button" class="btn btn-default">배송기간</button></p></td><td valign="top"><p>배송기간은 상품발송일로 부터, <font color="#436fca">택배사의 사정에 따라 1일~4일 가량</font> 소요될 수 있습니다.</p><p>주말/공휴일을 포함하거나, 도선산간 지역일 경우 추가적인 배송지연이 발생할 수 있습니다.</p></td></tr></tbody></table><table style="margin-top:25px; border-top:1px solid #f4f4f4;" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="30"><td></td></tr></tbody></table>
-<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="55"></td><td valign="top" width="90"><p style="margin-top:5px;"><button type="button" class="btn btn-default">배송요금</button></p></td><td valign="top"><p>5만원 이하 결제건 : <b>배송비 2,500원</b> (주문 결제시, 부담)</p><p>5만원 이상 결제건 : <b>무료 배송</b></p><p style="margin-top:10px;">단, 아래와 같은 경우 별도의 추가 배송비(도선료)가 발생 됩니다.</p><p style="margin-left:5px;">- 도서산간/제주도 : 추가요금 500원</p><p style="margin-left:5px;"> - 국내 기타/섬 지역 : 4,500원</p><p style="margin-left:5px;"> - 해외 발송 : 전화문의</p></td></tr></tbody></table><table style="margin-top:25px; border-top:1px solid #f4f4f4;" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="30"><td></td></tr></tbody></table>
-<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="55"></td><td valign="top" width="90"><p style="margin-top:10px;"><button type="button" class="btn btn-default">배송조회</button></p></td><td valign="top"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top"></td><td width="20"></td><td valign="top"><p style="margin-top:25px; font-weight:bold;">우체국 택배</p><p>홈페이지 : <a href="http://parcel.epost.go.kr/" target="_blank">http://parcel.epost.go.kr/</a></p><p>전화문의 : 1588-1300</p><p>상담시간 : 평일 09:00 ~ 18:00</p></td></tr></tbody></table><table style="margin-top:10px;" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><p>배송조회는 택배사의 홈페이지 또는 전화문의를 이용 하시거나,<br>쇼핑몰 내 마이페이지 &gt; 배송조회를 통해 확인하실 수 있습니다.</p></td></tr></tbody></table></td></tr></tbody></table><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="25"><td></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="9"></td><td><img src="/image/shop/public/parcel01.gif"></td></tr></tbody></table><table style="margin-top:10px; border-top:2px solid #f4f4f4;" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="30"><td></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="55"></td><td valign="top" width="90"><p style="margin-top:5px;"><img src="/image/shop/public/parcel02.gif"></p></td><td valign="top"><p>저희 쇼핑몰은 <font color="#436fca">평일 오후 4시 이전 결제완료건에 한하여, 당일 발송</font>을 원칙으로 합니다.<br>단, 주문상품의 입고지연 및 주문제작 상품 경우, 발송기간이 2~3일 가량 지연될 수 있습니다.</p><p style="margin-top:10px; font-weight:bold;">평일(월~금) 주문건 오후 4시 이전 결제건</p><p>당일 발송. 오후 6시 상품 출고</p><p style="margin-top:10px; font-weight:bold;">평일(월~금) 주문건 오후 4시 이후 결제건</p><p>익일 발송. 다음날 오후 6시 상품 출고</p><p style="margin-top:10px; font-weight:bold;">토/일/공휴일 결제건</p><p>다음 영업일 기준 오후 6시 상품 출고</p></td></tr></tbody></table><table style="margin-top:25px; border-top:1px solid #f4f4f4;" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="30"><td></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="55"></td><td valign="top" width="90"><p style="margin-top:5px;"><img src="/image/shop/public/parcel03.gif"></p></td><td valign="top"><p>배송기간은 상품발송일로 부터, <font color="#436fca">택배사의 사정에 따라 1일~4일 가량</font> 소요될 수 있습니다.</p><p>주말/공휴일을 포함하거나, 도선산간 지역일 경우 추가적인 배송지연이 발생할 수 있습니다.</p></td></tr></tbody></table><table style="margin-top:25px; border-top:1px solid #f4f4f4;" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="30"><td></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="55"></td><td valign="top" width="90"><p style="margin-top:5px;"><img src="/image/shop/public/parcel04.gif"></p></td><td valign="top"><p>5만원 이하 결제건 : <b>배송비 2,500원</b> (주문 결제시, 부담)</p><p>5만원 이상 결제건 : <b>무료 배송</b></p><p style="margin-top:10px;">단, 아래와 같은 경우 별도의 추가 배송비(도선료)가 발생 됩니다.</p><p style="margin-left:5px;">- 도서산간/제주도 : 추가요금 500원</p><p style="margin-left:5px;"> - 국내 기타/섬 지역 : 4,500원</p><p style="margin-left:5px;"> - 해외 발송 : 전화문의</p></td></tr></tbody></table><table style="margin-top:25px; border-top:1px solid #f4f4f4;" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="30"><td></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="55"></td><td valign="top" width="90"><p style="margin-top:10px;"><img src="/image/shop/public/parcel05.gif"></p></td><td valign="top"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top"><img src="/image/shop/public/parcel06.gif"></td><td width="20"></td><td valign="top"><p style="margin-top:25px; font-weight:bold;">우체국 택배</p><p>홈페이지 : <a href="http://parcel.epost.go.kr/" target="_blank">http://parcel.epost.go.kr/</a></p><p>전화문의 : 1588-1300</p><p>상담시간 : 평일 09:00 ~ 18:00</p></td></tr></tbody></table><table style="margin-top:10px;" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><p>배송조회는 택배사의 홈페이지 또는 전화문의를 이용 하시거나,<br>쇼핑몰 내 마이페이지 &gt; 배송조회를 통해 확인하실 수 있습니다.</p></td></tr></tbody></table></td></tr></tbody></table><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr height="25"><td></td></tr></tbody></table>
 </div>
 </div>
 </div></td>
@@ -977,11 +1401,11 @@ function itemFavorite()
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-   <td width="141" onclick="shopMove('#item_view'); return false;" class="tab_use1_off pointer"><div class="tab_count1"> 상품안내 </div></td>
-    <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_on pointer"><div class="tab_count1"> 배송안내 </div></td>
-    <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_off pointer"><div class="tab_count1"> 환불규정 </div></td>
-    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"><div class="tab_count1">상품평 </div></td>
-    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"><div class="tab_count1">구매후기 </div></td>
+    <td width="141" onclick="shopMove('#item_view'); return false;" class="tab_use1_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_on pointer"></td>
+    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"><div class="tab_count1">0</div></td>
+    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"><div class="tab_count1">0</div></td>
 </tr>
 </tbody></table>
     </td>
@@ -1021,11 +1445,11 @@ function itemFavorite()
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td width="141" onclick="shopMove('#item_view'); return false;" class="tab_use1_off pointer"><div class="tab_count1"> 상품안내 </div></td>
-    <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_on pointer"><div class="tab_count1"> 배송안내 </div></td>
-    <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_off pointer"><div class="tab_count1"> 환불규정 </div></td>
-    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"><div class="tab_count1">상품평 </div></td>
-    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"><div class="tab_count1">구매후기 </div></td>
+    <td width="141" onclick="shopMove('#item_view'); return false;" class="tab_use1_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_on pointer"><div class="tab_count2">0</div></td>
+    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"><div class="tab_count1">0</div></td>
 </tr>
 </tbody></table>
     </td>
@@ -1054,7 +1478,7 @@ function itemFavorite()
 </tr>
 </tbody></table>
     </td>
-    <td align="right" valign="top"><a href="#" onclick="replyWrite('item', '', '7', '', '1'); return false;"><button type="button" class="btn btn-info">상품평 작성 </button></a></td>
+    <td align="right" valign="top"><a href="#" onclick="replyWrite('item', '', '18', '', '1'); return false;"><img src="./skin/item/default/img/reply_write2.gif" border="0"></a></td>
 </tr>
 </tbody></table>
 
@@ -1139,7 +1563,7 @@ function replyPassword(page_id, m, item_id, reply_id, page)
 </script>
 
 <script type="text/javascript">
-$(document).ready(function() { replyLoading('7', '1'); });
+$(document).ready(function() { replyLoading('18', '1'); });
 </script>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -1155,11 +1579,11 @@ $(document).ready(function() { replyLoading('7', '1'); });
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td width="141" onclick="shopMove('#item_view'); return false;"><div class="tab_count1"> 상품안내 </div></td>
-    <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_on pointer"><div class="tab_count1"> 배송안내 </div></td>
-    <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_off pointer"><div class="tab_count1"> 환불규정 </div></td>
-    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"><div class="tab_count1">상품평 </div></td>
-    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_off pointer"><div class="tab_count1">구매후기 </div></td>
+    <td width="141" onclick="shopMove('#item_view'); return false;" class="tab_use1_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_delivery'); return false;" class="tab_use2_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_refund'); return false;" class="tab_use3_off pointer"></td>
+    <td width="141" onclick="shopMove('#item_reply'); return false;" class="tab_use4_off pointer"><div class="tab_count1">0</div></td>
+    <td width="142" onclick="shopMove('#item_qna'); return false;" class="tab_use5_on pointer"><div class="tab_count2">0</div></td>
 </tr>
 </tbody></table>
     </td>
@@ -1182,13 +1606,13 @@ $(document).ready(function() { replyLoading('7', '1'); });
 
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td> <button type="button" class="btn btn-info">상품 문의 </button> </td>
+    <td><img src="./skin/item/default/img/qna_title.gif"></td>
     <td width="4"></td>
     <td><span class="count down1">(0)</span></td>
 </tr>
 </tbody></table>
     </td>
-    <td align="right" valign="top"><a href="#" onclick="qnaWrite('item', '', '7', '', '1'); return false;"><img src="./skin/item/default/img/qna_write.gif" border="0"></a></td>
+    <td align="right" valign="top"><a href="#" onclick="qnaWrite('item', '', '18', '', '1'); return false;"><img src="./skin/item/default/img/qna_write2.gif" border="0"></a></td>
 </tr>
 </tbody></table>
 
@@ -1273,7 +1697,7 @@ function qnaPassword(page_id, m, item_id, qna_id, page)
 </script>
 
 <script type="text/javascript">
-$(document).ready(function() { qnaLoading('7', '1'); });
+$(document).ready(function() { qnaLoading('18', '1'); });
 </script>
 <!-- 상품문의 end //-->
 </div>
@@ -1315,7 +1739,7 @@ window.onload=function() { shopResizeImage(750); }
 
 <div id="scrollbox_data" style="display:none;"></div>
 
-
+<div id="scrollbox" style="left: 1469.5px; top: 170px; display: inline;">
 <div style="border:2px solid #d4d4d4;">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr height="24" bgcolor="#dbdbdb">
@@ -1358,7 +1782,7 @@ window.onload=function() { shopResizeImage(750); }
     <td><div id="scrollbox_data1" style="display: block;"><meta http-equiv="content-type" content="text/html; charset=utf-8"><div style="padding:3px 8px 0 8px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr height="24">
-    <td align="right"><span class="count">16</span> <span class="text">건</span></td>
+    <td align="right"><span class="count">17</span> <span class="text">건</span></td>
 </tr>
 </tbody></table>
 
@@ -1394,7 +1818,7 @@ window.onload=function() { shopResizeImage(750); }
 </tbody></table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><div class="thumb"><div class="close"></div><div class="image"><a href="../../../item.php?id=Y253066903"><img src="../../../data/thumb/item/60x60/1935647224_e717d81d_d1.jpg" border="0"></a></div></div></td>
+    <td><div class="thumb"><div class="close"></div><div class="image"><a href="../../../item.php?id=O960745964"><img src="../../../data/thumb/item/60x60/1935647224_f0f4199b_a1.jpg" border="0"></a></div></div></td>
 </tr>
 </tbody></table>
 
@@ -1486,50 +1910,129 @@ $(document).ready(function() {
 <![endif]-->
 
 <script type="text/javascript" src="./skin/scrollbox/default/scrollbox.js"></script></div>
-							<!-- 상품 레이아웃 배열 -->
-							
-								
-			
-						</div>
-	
-						<div style="text-align: center; float: right; margin-right: 5%;">
-								<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
-	
-							<c:if test="${cnt > 0}">
-				
-								<c:if test="${startPage > pageBlock}">
-									<li class=""><a href="moyeoShop?pageNum=${startPage - pageBlock}"><font
-											size="3"> «</font></a></li>
-								</c:if>
-				
-				
-								<c:forEach var="i" begin="${startPage}" end="${endPage}">
-									<c:if test="${i == currentPage}">
-										<li class=""><a href="#"><font size="3">${i}</font></a></li>
-									</c:if>
-				
-									<c:if test="${i != currentPage}">
-										<li class=""><a href="moyeoShop?pageNum=${i}"><font size="3">${i}</font></a></li>
-									</c:if>
-				
-								</c:forEach>
-								<c:if test="${pageCount > endPage}">
-									<li><a href="moyeoShop?pageNum=${startPage + pageBlock}"><font
-											size="3">»</font></a></li>
-								</c:if>
-							</c:if>
-						</ul>
-						</div>
-					
-					</div>
-				</div>
-			</div>
-			<!-- END PHOTO BLOCK -->
-		</div>
-	</div>
-	<!-- 
-	-->
-<!-- END ROW -->
 </div>
+<div class="layout_bottom"><div class="layout_bottom_bg" style="left: -451.5px; width: 1903px; height: 208px;"></div>
+<style type="text/css">
+.layout_bottom .service_menu .line {padding:0 5px; line-height:14px; font-size:12px; color:#eeeeee; font-family:gulim,굴림;}
+.layout_bottom .service_menu a {
+font-family:gulim;
+font-size:12px;
+line-height:30px;
+color:#787878;
+font-weight:bold;
+}
+.layout_bottom .service_menu a:hover {
+font-family:gulim;
+font-size:12px;
+line-height:30px;
+color:#787878;
+font-weight:bold;
+}
+</style>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td><br>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td bgcolor="#dbdbdb" height="1"></td>
+</tr>
+<tr>
+<td align="center" height="50"><table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td><a href="http://www.dmshopkorea.com/" target="_blank"><img src="/image/shop/public/bottorm_a01.gif" border="0"></a></td>
+<td><img src="/image/shop/public/bottorm_bg.gif" height="50" width="1"></td>
+<td><a href="http://www.koreacb.com/" target="_blank"><img src="/image/shop/public/bottorm_b01.gif" border="0"></a></td>
+<td><img src="/image/shop/public/bottorm_bg.gif" height="50" width="1"></td>
+<td><a href="http://www.kcp.co.kr/alpa.escrow.info.do" target="_blank"><img src="/image/shop/public/bottorm_c01.gif" border="0"></a></td>
+<td><img src="/image/shop/public/bottorm_bg.gif" height="50" width="1"></td>
+<td><a href="http://www.kcp.co.kr/payment.service.info.do" target="_blank"><img src="/image/shop/public/bottorm_d01.gif" border="0"></a></td>
+<td><img src="/image/shop/public/bottorm_bg.gif" height="50" width="1"></td>
+<td><a href="http://www.taxsave.go.kr/" target="_blank"><img src="/image/shop/public/bottorm_e01.gif" border="0"></a></td>
+<td><img src="/image/shop/public/bottorm_bg.gif" height="50" width="1"></td>
+<td><a href="http://www.ftc.go.kr/" target="_blank"><img src="/image/shop/public/bottorm_f01.gif" border="0"></a></td>
+</tr>
+</tbody></table></td>
+</tr>
+<tr>
+<td bgcolor="#dbdbdb" height="1"></td>
+</tr>
+<tr>
+<td bgcolor="#f1f1f1" height="1"></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
 
-<%@ include file="../../etc/footer2.jsp"%>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td align="center"><table border="0" cellspacing="0" cellpadding="0" class="service_menu">
+<tbody><tr>
+<td><a href="http://dmshop.kr/board.php?bbs_id=notice">공지사항</a></td><td><span class="line">|</span></td><td><a href="http://dmshop.kr/board.php?bbs_id=faq">자주묻는 질문</a></td><td><span class="line">|</span></td><td><a href="http://dmshop.kr/page.php?page_id=about">회사소개</a></td><td><span class="line">|</span></td><td><a href="http://dmshop.kr/page.php?page_id=nospam">이메일무단수집거부</a></td><td><span class="line">|</span></td><td><a href="http://dmshop.kr/page.php?page_id=privacy">개인정보취급방침</a></td><td><span class="line">|</span></td><td><a href="http://dmshop.kr/page.php?page_id=service">서비스이용약관</a></td></tr>
+</tbody></table></td>
+</tr>
+</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td width="215" valign="top"><a href="http://dmshop.kr" onfocus="this.blur();"><img src="./data/design/2012-07-09/2077629024_872f1bb5_logo_noimg.png" width="215" height="70" border="0"></a></td>
+    <td valign="bottom">
+
+<style type="text/css">
+.bottom_information .text {
+font-family:dotum;
+font-size:11px;
+line-height:16px;
+color:#9e9e9e;
+font-weight:normal;
+}
+.bottom_information .bline {margin:0 5px; font-size:11px; color:#cccccc; font-family:dotum,돋움;}
+.bottom_information td {text-align:left;}
+</style>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="bottom_information">
+<tbody><tr>
+    <td>
+<p><span class="text">회사명 : Moyeo</span><span class="bline">|</span><span class="text">사업자 등록번호 : 105-16-21510</span><span class="bline">|</span><span class="text">통신판매업 신고번호 : 시군구-0000호</span></p>
+<p><span class="text">대표 : 홍길동</span> <a href="mailto:info@domain.com"><img src="./layout/default/img/email.gif" border="0" class="down1"></a><span class="bline">|</span><span class="text">개인정보관리 책임자 : 황비홍</span> <a href="mailto:privacy@domain.com"><img src="./layout/default/img/email.gif" border="0" class="down1"></a><span class="bline">|</span><span class="text">주소 : 서울 마포구 성산동 000-00 000호</span></p>
+<p><span class="text">대표전화 : 02-0000-0000</span><span class="bline">|</span><span class="text">팩스 : 02-0000-0000</span></p>
+    </td>
+</tr>
+</tbody></table>
+<style type="text/css">
+.bottom_copyright .text {
+font-family:dotum;
+font-size:11px;
+line-height:11px;
+color:#787878;
+font-weight:normal;
+}
+.bottom_copyright td {text-align:right;}
+</style>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="bottom_copyright">
+<tbody><tr>
+    <td><p><span class="text">Copyright © <b>Moyeo</b> Corp. All Rights Reserved.</span></p></td>
+</tr>
+</tbody></table>    </td>
+</tr>
+</tbody></table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr height="20"><td></td></tr>
+</tbody></table></div>
+
+<script type="text/javascript">
+$(document).ready( function() {
+
+    $(window).resize(function() {
+
+        $('.layout_bottom_bg').css( { 'left': -($('.layout_bottom').offset().left)+'px', 'width': $(window).width()+'px' } );
+
+    });
+
+    $('.layout_bottom_bg').css( { 'left': -($('.layout_bottom').offset().left)+'px', 'width': $(window).width()+'px', 'height': $('.layout_bottom').height()+'px' } );
+
+});
+</script><script type="text/javascript">$(document).ready(function() { var version = $.browser.version; var resolution = screen.width+"x"+screen.height; $.post("./visit_update.php", {"visit_id" : "249", "version" : version, "resolution" : resolution}); });</script>
+
+<ul class="selectBox-dropdown-menu selectBox-options" style="display: none;"><li class="selectBox-selected"><a rel="">진행중인 기획전이 없습니다.</a></li></ul></body></html>
