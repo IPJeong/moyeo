@@ -8,3 +8,4 @@
   <Context docBase="c:\dev\moyeo_image\placeImg\" path="/placeImgPath" reloadable="true"/>
   <Context docBase="c:\dev\moyeo_image\groupImg\" path="/groupImgPath" reloadable="true" />
   <Context docBase="c:\dev\moyeo_image\bcImg\" path="/bcImg" reloadable="true"/>
+  <Context docBase="c:\dev\moyeo_image\productImg\" path="/productImg" reloadable="true"/>
