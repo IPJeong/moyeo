@@ -340,6 +340,13 @@
 		INSERT INTO join_request (request_num, request_date, status, mem_id, group_num) VALUES (join_request_seq.NEXTVAL, SYSDATE, #{status}, #{mem_id}, #{group_num})
 	</insert>
 	
+	<select id="getMoimCheifId" parameterType="int" resultType="String">
+		SELECT mem_id
+		  FROM my_group
+		WHERE group_num = #{group_num}
+		  AND group_per = '1'
+	</select>
+	
 	<delete id="moimWithdraw" parameterType="Map">
 		DELETE FROM my_group WHERE mem_id = #{mem_id} AND group_num = #{group_num}
 	</delete>
@@ -550,19 +557,12 @@
 		               <if test="type == 4">
 		                WHERE place_address LIKE '%'||#{place_address}||'%'
 		               </if>
-		               <if test="type == 5">
-		               </if>
+
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp,
-		               (SELECT place_num, recpla_tag
-	                      FROM rec_place
-	                    <if test="type == 5">
-	                    WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
-	                    </if>
-	                   ) rp
-		        WHERE pi.place_num = pp.place_num AND pp.place_num = rp.place_num)
+		                ORDER BY place_pic_num DESC) pp
+		        WHERE pi.place_num = pp.place_num)
     </select>
    
 	<select id="getMoimSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
@@ -664,8 +664,8 @@
 	</select>
 	
     <select id="getPlaceSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
-   		SELECT place_num, place_name, place_address, place_detail, place_link, recpla_tag
-		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rp.recpla_tag, rownum rnum
+   		SELECT place_num, place_name, place_address, place_detail, place_link
+		  FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pi.place_detail, pi.place_link, pp.place_pic_num, pp.place_pic_path, pp.place_pic_name, rownum rnum
 		          FROM (SELECT place_num, place_name, place_address, SUBSTR(place_detail, 1, 100) AS place_detail, place_link
 		                  FROM place_info
 		               <if test="type == 1">
@@ -680,20 +680,11 @@
 		               <if test="type == 4">
 		                WHERE place_address LIKE '%'||#{place_address}||'%'
 		               </if>
-		               <if test="type == 5">
-		               
-		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp,
-	                   (SELECT place_num, recpla_tag
-	                      FROM rec_place
-	                    <if test="type == 5">
-	                    WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
-	                    </if>
-	                   ) rp
-				  WHERE pi.place_num = pp.place_num AND pp.place_num = rp.place_num)
+		                ORDER BY place_pic_num DESC) pp
+				  WHERE pi.place_num = pp.place_num)
 		WHERE rnum BETWEEN #{start3} AND #{end3}
     </select>
     
@@ -714,20 +705,11 @@
 		               <if test="type == 4">
 		                WHERE place_address LIKE '%'||#{place_address}||'%'
 		               </if>
-		               <if test="type == 5">
-		               
-		               </if>
 		                ORDER BY place_num DESC) pi,
 		               (SELECT place_pic_num, place_pic_path, place_pic_name, place_num
 		                  FROM place_pic
-		                ORDER BY place_pic_num DESC) pp,
-	                   (SELECT place_num, recpla_tag
-	                      FROM rec_place
-	                    <if test="type == 5">
-	                    WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
-	                    </if>
-	                   ) rp
-				  WHERE pi.place_num = pp.place_num AND pp.place_num = rp.place_num)
+		                ORDER BY place_pic_num DESC) pp
+				  WHERE pi.place_num = pp.place_num)
 		WHERE rnum BETWEEN #{start3} AND #{end3}
     </select>
 
@@ -1235,5 +1217,76 @@
 				       WHERE cp.mem_id = mi.mem_id)
 				WHERE present_cnt_rank BETWEEN 1 AND 10)
 		WHERE present_rank BETWEEN 1 AND 10
+	</select>
+	
+	<select id="getRecPlaceSearchCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name
+		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
+		                  FROM rec_place
+		              <if test="type == 1">
+		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 4">
+		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+		              </if>
+		               ) rp,
+		               (SELECT place_pic_path, place_pic_name, place_num
+		                  FROM place_pic) pp
+		        WHERE rp.place_num = pp.place_num)
+	</select>
+	
+	<select id="getRecPlaceSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
+		SELECT recpla_num, recpla_title, recpla_content, recpla_tag, mem_id, place_num
+		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name, rownum rnum
+		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
+		                  FROM rec_place
+		              <if test="type == 1">
+		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 4">
+		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+		              </if>
+		               ) rp,
+		               (SELECT place_pic_path, place_pic_name, place_num
+		                  FROM place_pic) pp
+		        WHERE rp.place_num = pp.place_num)
+		WHERE rnum BETWEEN #{start4} AND #{end4}
+	</select>
+	
+	<select id="getRecPlacePictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
+		SELECT place_pic_path, place_pic_name, place_num
+		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name, rownum rnum
+		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
+		                  FROM rec_place
+		              <if test="type == 1">
+		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 4">
+		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+		              </if>
+					   ) rp,
+		               (SELECT place_pic_path, place_pic_name, place_num
+		                  FROM place_pic) pp
+		        WHERE rp.place_num = pp.place_num)
+		WHERE rnum BETWEEN #{start4} AND #{end4}
 	</select>
 </mapper>
