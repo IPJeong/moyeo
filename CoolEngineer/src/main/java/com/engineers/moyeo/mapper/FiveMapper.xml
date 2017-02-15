@@ -103,6 +103,7 @@
 	    	   FROM meeting_post_reply mpr, member_info mi
 	          WHERE mpr.post_num = #{post_num} 
 	            AND mpr.mem_id = mi.mem_id
+	          ORDER BY mpr.write_date  
             )
     </select>
     

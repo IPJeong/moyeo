@@ -36,6 +36,7 @@ import com.engineers.moyeo.six.dto.InterestCatDTO;
 import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.two.dao.TwoDAO;
 import com.engineers.moyeo.two.dto.Place_likeDTO;
 
@@ -522,9 +523,18 @@ public class MainServiceImpl implements MainService{
 	public void addNotice(Map<String, Object> map) {
 		
 		// 알림을 줄 타입
-		int type = (Integer)map.get("type");
-		// 알림 테이블에 넣을 데이터를 담은 맵
-		Map<String, Object> insertMap = new HashMap<>();
+		int type = 0;
+		try {
+			type = (Integer)map.get("type");
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+			System.out.println("type 숫자 Null");
+			return ;
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("type 형변환 에러 발생");
+			return ;
+		}
 		// 알림 발생 시간
 		long time = System.currentTimeMillis();
 		// 알림 등록 결과 값
@@ -534,11 +544,12 @@ public class MainServiceImpl implements MainService{
 		// 이벤트에 당첨된 회원의 알림을 생성하는 메서드 (당첨된 회원아이디, 이벤트 명)(회원) - type(1)
 		if(type == 1) {
 			
-			List<String> mem_ids = (List<String>)map.get("mem_id");
+			List<EventDTO> eventDtos = (List<EventDTO>)map.get("mem_ids");
 			String event_title = (String)map.get("event_titme");
-			for(String mem_id : mem_ids) {
-				String msg = TextMessage.memWinningMsg(mem_id, event_title);
-				cnt = addMemberNotiDTO(msg, time, mem_id);
+			
+			for(EventDTO dto : eventDtos) {
+				String msg = TextMessage.memWinningMsg(dto.getMem_id(), event_title);
+				cnt = addMemberNotiDTO(msg, time, dto.getMem_id());
 			}
 			
 		// 상준
@@ -559,7 +570,6 @@ public class MainServiceImpl implements MainService{
 			String msg = TextMessage.memGreetingReplyMsg(mem_id, group_name, from_id);
 			
 			cnt = addMemberNotiDTO(msg, time, mem_id);
-			
 			
 		// 우진
 		// 회원알림테이블에 Q&A 질문에 대한 답변이 달린경우 알림을 생성하는 메서드(회원)(해당 질문의 제목, 질문한 회원의 아이디) - type(4)	
@@ -678,7 +688,11 @@ public class MainServiceImpl implements MainService{
 			cnt = addGroupLeaderNotiDTO(msg, time, mem_id, group_num);
 			
 		} 
-		
+		if(cnt == 1) {
+			System.out.println("알림 정상등록");
+		} else {
+			System.out.println("알림등록 실패");
+		}
 	}
 	
 	public int addMemberNotiDTO(String msg, long time, String mem_id) {

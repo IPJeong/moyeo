@@ -562,7 +562,19 @@ public class FiveServiceImpl implements FiveService {
 
       if(type == 1) {
          if(fiveDao.likePost(map) == 1)cnt = fiveDao.updateLikeNum(post_num);
-      } else if(type == 2){
+         MeetingPostDTO dto = fiveDao.getPostDetail(post_num);
+         
+         if(!mem_id.equals(dto.getMem_id())) {
+        	 Map<String, Object> hashMap = new HashMap<>();
+        	 hashMap.put("type", 7);
+             hashMap.put("from_id", mem_id);
+             hashMap.put("group_num", dto.getGroup_num());
+             hashMap.put("post_title", dto.getPost_title());
+             hashMap.put("mem_id", dto.getMem_id());
+             mainService.addNotice(hashMap);
+         }
+         
+      } else if(type == 2) {
          if(fiveDao.unLikePost(map) == 1)cnt = fiveDao.downDateLikeNum(post_num);
       }
       int likeNum = fiveDao.getLikeNum(post_num);
@@ -593,12 +605,22 @@ public class FiveServiceImpl implements FiveService {
       int cnt = fiveDao.addPostReply(dto);
 
       if(cnt == 1) {
-         Map<String, Object> map = new HashMap<>();
-         map.put("post_num", post_num);
-         map.put("mem_id", mem_id);
-         map.put("write_date", time);
-         dto = fiveDao.getPostReply(map);
-         mav.addObject("dto", dto);
+    	  
+    	  Map<String, Object> notiMap = new HashMap<>();
+    	  MeetingPostDTO postDto = fiveDao.getPostDetail(post_num);
+    	  notiMap.put("type", 8);
+    	  notiMap.put("from_id", mem_id);
+    	  notiMap.put("group_num", postDto.getGroup_num());
+    	  notiMap.put("post_title", postDto.getPost_title());
+    	  notiMap.put("mem_id", postDto.getMem_id());
+    	  mainService.addNotice(notiMap);
+    	  
+          Map<String, Object> map = new HashMap<>();
+          map.put("post_num", post_num);
+          map.put("mem_id", mem_id);
+          map.put("write_date", time);
+          dto = fiveDao.getPostReply(map);
+          mav.addObject("dto", dto);
       }
       mav.addObject("cnt", cnt);
    }

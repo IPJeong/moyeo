@@ -1122,7 +1122,7 @@ public class ThreeServiceImpl implements ThreeService{
 			if(cnt == 1) {
 				int win_num = dao.getWinNum(event_num); //당첨번호 가져오기
 				Map<String, Object> map3 = new HashMap<>();
-				
+				System.out.println("win_num : " + win_num);
 				for(int i=0; i < mem_id.length; i++) {					
 					map3.put("win_num", win_num);
 					map3.put("mem_id", mem_id[i]);	
@@ -1134,15 +1134,16 @@ public class ThreeServiceImpl implements ThreeService{
 				
 				MainServiceImpl noti = new MainServiceImpl();
 				
-				
+				for(EventDTO mem : mem_ids) {
+					String mem_i = mem.getMem_id();
+					System.out.println("id : " + mem_i + ", event_title : " + title);
+					Map<String, Object> map4 = new HashMap<>();
+					map4.put("type", 1);					
+					map4.put("mem_id", mem_i);
+					map4.put("event_title", title);
 					
-				Map<String, Object> map4 = new HashMap<>();
-				map4.put("type", 1);					
-				map4.put("mem_ids", mem_ids);
-				map4.put("event_title", title);
-				
-				noti.addNotice(map4);					
-				
+					noti.addNotice(map4);
+				}
 				
 				dao.eventParticipantsDelete(event_num); //참여자 리스트에서 삭제
 							

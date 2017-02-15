@@ -35,11 +35,11 @@ public class TextMessage {
 	// 일품
 	// 모임후기의 좋아요 알림을 생성하는 메서드(모임후기의 제목, 좋아한 회원의 아이디, 모임번호) - type(7)
 	public static String postLikeMsg(String post_title, String from_id) {
-		return "[좋아요알림] " + post_title + " 후기를 " + from_id + " 님께서 좋아하셨습니다.";
+		return "[좋아요알림] '" + post_title + "' 후기를 " + from_id + " 님께서 좋아하셨습니다.";
 	}
 	// 모임후기에 달린 댓글 알림을 생성하는 메서드(모임후기의 제목, 댓글을 작성한 회원의 아이디, , 모임번호) - type(8)
 	public static String postReplyMsg(String post_title, String from_id) {
-		return "[댓글알림] " + post_title + " 후기에 " + from_id + " 님께서 댓글을 작성하셨습니다.";
+		return "[댓글알림] '" + post_title + "' 후기에 " + from_id + " 님께서 댓글을 작성하셨습니다.";
 	}
 	
 	// 대성
