@@ -1371,19 +1371,19 @@ function orderCheck() {
 																								<tbody>
 																									<tr>
 																										<td><a
-																											href="https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost:8080/moyeo/six/shop/productDetail?product_num=${dto.product_num};text=${dto.product_name}"
+																											href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DL234534367&amp;text=${dto.product_name}"
 																											target="_blank" title="트위터 퍼가기"><img
 																												src="/moyeo/resources/resource/img/shop/sns_twitter.png"
 																												border="0"></a></td>
 																										<td width="4"></td>
 																										<td><a
-																											href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DY848100408""
+																											href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DL234534367"
 																											target="_blank" title="페이스북 퍼가기"><img
 																												src="/moyeo/resources/resource/img/shop/sns_facebook.png"
 																												border="0"></a></td>
 																										<td width="4"></td>
 																										<td><a
-																											href="https://story.kakao.com/share?url=218.38.255.69/localhost:8080/moyeo/six/shop/productDetail?product_num=${dto.product_num}"
+																											href="https://story.kakao.com/share?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DL234534367"
 																											target="_blank" title="카카오스토리 퍼가기"><img
 																												src="/moyeo/resources/resource/img/shop/sns_kakaostory.png"
 																												border="0"></a></td>
@@ -1445,7 +1445,7 @@ function orderCheck() {
 																								<tbody>
 																									<tr>
 																										<td><a
-																											href="../../../item.php?id=J252641947"><img
+																											href="#"><img
 																												src=/moyeo/resources/resource/img/shop/1935647224_397711a1_m07.jpg
 																												" width="80" height="80" border="0"></a></td>
 																									</tr>
@@ -1462,7 +1462,7 @@ function orderCheck() {
 																								<tbody>
 																									<tr>
 																										<td><a
-																											href="../../../item.php?id=J252641947"
+																											href="#"
 																											class="item_relation_title">단가라 원피스</a></td>
 																									</tr>
 																								</tbody>
@@ -1489,7 +1489,7 @@ function orderCheck() {
 																								<tbody>
 																									<tr>
 																										<td><a
-																											href="../../../item.php?id=X589981672"><img
+																											href="#"><img
 																												src="/moyeo/resources/resource/img/shop/1935647224_188c59da_m06.jpg"
 																												width="80" height="80" border="0"></a></td>
 																									</tr>
@@ -1506,7 +1506,7 @@ function orderCheck() {
 																								<tbody>
 																									<tr>
 																										<td><a
-																											href="../../../item.php?id=X589981672"
+																											href="#"
 																											class="item_relation_title">땡땡이 블라우스</a></td>
 																									</tr>
 																								</tbody>
@@ -1533,7 +1533,7 @@ function orderCheck() {
 																								<tbody>
 																									<tr>
 																										<td><a
-																											href="../../../item.php?id=N768748935"><img
+																											href="#"><img
 																												src="/moyeo/resources/resource/img/shop/1935647224_03f68276_m05.jpg"
 																												width="80" height="80" border="0"></a></td>
 																									</tr>
@@ -1577,7 +1577,7 @@ function orderCheck() {
 																								<tbody>
 																									<tr>
 																										<td><a
-																											href="../../../item.php?id=O577892850"><img
+																											href="#"><img
 																												src="/moyeo/resources/resource/img/shop/1935647224_4b57bae0_m04.jpg"
 																												width="80" height="80" border="0"></a></td>
 																									</tr>
