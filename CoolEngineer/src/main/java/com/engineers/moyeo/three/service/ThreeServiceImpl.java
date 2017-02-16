@@ -21,10 +21,10 @@ import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.common.TextMessage;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.main.service.MainService;
-import com.engineers.moyeo.main.service.MainServiceImpl;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
+import com.engineers.moyeo.three.dto.JoinRequestDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
@@ -710,20 +710,8 @@ public class ThreeServiceImpl implements ThreeService{
 		String memid = (String) req.getSession().getAttribute("mem_id");
 		String manageid = (String) req.getSession().getAttribute("manager_id");
 		String mem_id = "";
-		
-		int pageSize = 3;		//	한 페이지당 출력한 글 개수
-		int pageBlock = 3;		//	출력할 페이지 개수
-		
-		int cnt = 0;			// 글 개수
-		int start = 0;			// 현재 페이지 시작번호 : rownum
-		int end	= 0;			// 현재 페이지지 끝번호 : rownum
-		int number = 0;			// 출력할 글 번호
-		String pageNum = null;	// 페이지 번호
-		int currentPage = 0;	// 현재 페이지
-		
-		int pageCount = 0;		// 페이지 개수
-		int startPage = 0;		// 시작 페이지
-		int endPage = 0;		// 마지막 페이지
+				
+		int cnt = 0;			// 글 개수		
 		
 		if(memid == null) {
 			mem_id = manageid;
@@ -741,25 +729,13 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		cnt = dao.getGroupCnt(mem_id); //가입한 모임 개수 가져오기
 		
-		pageNum = req.getParameter("pageNum");
-		
-		if(pageNum == null) {
-			pageNum = "1";
-		}
-		
-		currentPage = Integer.parseInt(pageNum);
-		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
-		
-		start = (currentPage - 1) * pageSize + 1; // (5 - 1) * 10 + 1;
-		end = start + pageSize - 1; //41 + 10 - 1 = 50;
-		
-		if(end > cnt) end = cnt;
+		int notiCnt =dao.getNoneChkNoti(mem_id);//확인 안한 알림
+		model.addAttribute("notiCnt",notiCnt);
 				
-		number = cnt - (currentPage - 1) * pageSize;
-		
+				
 		Map<String, Object> dataMap = new HashMap<>();
-		dataMap.put("start", start);
-		dataMap.put("end", end);
+		dataMap.put("start", 1);
+		dataMap.put("end", 1000);
 		dataMap.put("mem_id", mem_id);
 		
 		if(cnt > 0) {
@@ -768,23 +744,27 @@ public class ThreeServiceImpl implements ThreeService{
 			
 		}
 		
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
-		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		int interCnt = dao.getInterGroupCnt(mem_id); // 관심 모임 개수 가져오기
 		
-		endPage = startPage + pageBlock - 1;
-		if(endPage > pageCount) endPage = pageCount;
+		if(interCnt > 0) {
+			List<MoimOpenDTO> interDtos = dao.getInterGroup(mem_id); //관심 모임 리스트 불러오기			
+			req.setAttribute("interDtos", interDtos);
+			System.out.println(interDtos.size());
+			
+		}
 		
+		int applHistoryCnt = dao.getApplHistoryCnt(mem_id); // 가입 신청 이력 개수 가져오기
+		
+		if(applHistoryCnt > 0) {
+			List<JoinRequestDTO> applyDtos = dao.getApplHistory(mem_id); //가입 신청 이력 리스트 불러오기		
+			req.setAttribute("applyDtos", applyDtos);
+			System.out.println(applyDtos.size());
+			
+		}
+				
 		req.setAttribute("cnt", cnt);
-		req.setAttribute("number", number); 
-		req.setAttribute("pageNum", pageNum);		
-		
-		if(cnt > 0) {
-			req.setAttribute("currentPage", currentPage);
-			req.setAttribute("startPage", startPage);
-			req.setAttribute("endPage", endPage);
-			req.setAttribute("pageCount", pageCount);
-			req.setAttribute("pageBlock", pageBlock);
-		}		
+		req.setAttribute("interCnt", interCnt);
+		req.setAttribute("applHistoryCnt", applHistoryCnt);
 		
 		return "/three/member/myPage";
 	}
@@ -1189,7 +1169,7 @@ public class ThreeServiceImpl implements ThreeService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
-		String mem_id = req.getParameter("mem_id");		
+		String mem_id = (String) req.getSession().getAttribute("mem_id");		
 		
 		int pageSize = 5;		//	한 페이지당 출력한 글 개수
 		int pageBlock = 3;		//	출력할 페이지 개수
@@ -1209,7 +1189,9 @@ public class ThreeServiceImpl implements ThreeService{
 		Map<String, Object> map2 = new HashMap<>();
 		map2.put("mem_id", mem_id);	
 				
-		cnt = dao.getNotiCount(mem_id); //가입한 모임 개수 가져오기
+		cnt = dao.getNotiCount(mem_id); //알림메세지 개수
+		
+		dao.chkNoti(mem_id);
 		
 		pageNum = req.getParameter("pageNum");
 		
@@ -1233,7 +1215,7 @@ public class ThreeServiceImpl implements ThreeService{
 		dataMap.put("mem_id", mem_id);
 		
 		if(cnt > 0) {
-			ArrayList<MoimOpenDTO> dtos = dao.getGroupList(dataMap); //가입한 모임 리스트 불러오기			
+			ArrayList<MemberDTO> dtos = dao.getNotiList(dataMap);//가입한 모임 리스트 불러오기			
 			req.setAttribute("dtos", dtos);
 			
 		}
@@ -1255,7 +1237,7 @@ public class ThreeServiceImpl implements ThreeService{
 			req.setAttribute("pageCount", pageCount);
 			req.setAttribute("pageBlock", pageBlock);
 		}
-		return null;
+		return "/three/member/notiList";
 	}	
 	
 	

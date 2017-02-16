@@ -2,6 +2,7 @@ package com.engineers.moyeo.three.dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dto.EventDTO;
+import com.engineers.moyeo.three.dto.JoinRequestDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
@@ -461,6 +463,55 @@ public class ThreeDAOImpl implements ThreeDAO{
 		int cnt = 0;
 		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getNotiCount", mem_id);
 		return cnt;
+	}
+
+	@Override
+	public ArrayList<MemberDTO> getNotiList(Map<String, Object> map) {
+		ArrayList<MemberDTO> dtos = null;
+		ThreeDAO dao = this.sqlSession.getMapper(ThreeDAO.class);
+		dtos = dao.getNotiList(map);
+		return dtos;
+	}
+
+	@Override
+	public int getNoneChkNoti(String mem_id) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getNoneChkNoti", mem_id);
+		return cnt;
+	}
+
+	@Override
+	public void chkNoti(String mem_id) {
+		this.sqlSession.update("com.engineers.moyeo.three.dao.ThreeDAO.chkNoti", mem_id);
+		
+	}
+	
+	// 관심모임 개수
+	@Override
+	public int getInterGroupCnt(String mem_id) {
+		ThreeDAO dao = sqlSession.getMapper(ThreeDAO.class);
+		return dao.getInterGroupCnt(mem_id);
+	}
+
+	// 모임가입신청 이력 개수
+	@Override
+	public int getApplHistoryCnt(String mem_id) {
+		ThreeDAO dao = sqlSession.getMapper(ThreeDAO.class);
+		return dao.getApplHistoryCnt(mem_id);
+	}
+
+	// 관심모임 가져오기
+	@Override
+	public List<MoimOpenDTO> getInterGroup(String mem_id) {
+		ThreeDAO dao = sqlSession.getMapper(ThreeDAO.class);
+		return dao.getInterGroup(mem_id);
+	}
+
+	// 모임가입신청 이력 가져오기
+	@Override
+	public List<JoinRequestDTO> getApplHistory(String mem_id) {
+		ThreeDAO dao = sqlSession.getMapper(ThreeDAO.class);
+		return dao.getApplHistory(mem_id);
 	}
 	
 	

@@ -2,10 +2,12 @@ package com.engineers.moyeo.three.dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dto.EventDTO;
+import com.engineers.moyeo.three.dto.JoinRequestDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.three.dto.ThreeDTO;
 
@@ -68,5 +70,12 @@ public interface ThreeDAO {
 	public int tempUpdate(Map<String, Object> map); //임시번호 변경
 	public int tempDelete(String mem_id); //임시번호 삭제
 	public int getNotiCount(String mem_id); //알림메세지 개수
+	public ArrayList<MemberDTO> getNotiList(Map<String, Object> map); //알림메세지
+	public int getNoneChkNoti(String mem_id); //확인안한 알림개수
+	public void chkNoti(String mem_id);//알림 확인
+	public int getInterGroupCnt(String mem_id); //관심모임 개수
+	public int getApplHistoryCnt(String mem_id); // 가입신청 이력 개수
+	public List<MoimOpenDTO> getInterGroup(String mem_id); //관심모임 가져오기
+	public List<JoinRequestDTO> getApplHistory(String mem_id); // 가입신청 이력 가져오기
 
 }

@@ -301,5 +301,51 @@
 	<delete id="tempDelete" parameterType="String">
 		DELETE FROM temppasswd_list WHERE mem_id = #{mem_id}
 	</delete>
+	<!-- 알림메세지 개수 -->
+	<select id="getNotiCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member_noti WHERE mem_id = #{mem_id}
+	</select>
+	<!-- 알림메세지 -->
+	<select id="getNotiList" parameterType="map" resultType="com.engineers.moyeo.three.dto.MemberDTO">
+		SELECT * 
+			FROM (SELECT noti_content, noti_date, rownum rnum
+		     		FROM (SELECT * FROM member_noti
+		     			   WHERE mem_id = #{mem_id}    				
+		       	   	 	   ORDER BY noti_date DESC
+		           	 	 )
+			  	 )			
+			WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}	
+	</select>
+	<!-- 확인 안한 알림 개수 -->
+	<select id="getNoneChkNoti" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member_noti WHERE mem_id = #{mem_id} AND is_checked = 0
+	</select>
+	<!-- 알림 확인 -->
+	<update id="chkNoti" parameterType="String">
+		UPDATE member_noti SET is_checked = 1 WHERE mem_id = #{mem_id}
+	</update>
+	<!-- 관심모임 개수 -->
+	<select id="getInterGroupCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM interest_group WHERE mem_id = #{mem_id}
+	</select>
+	<!-- 가입신청 이력 개수 -->
+	<select id="getApplHistoryCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM join_request WHERE mem_id = #{mem_id} AND (status = '대기' OR status = '거절' OR status = '강제탈퇴' OR status = '탈퇴')
+	</select>
+	<!-- 관심모임 가져오기 -->
+	<select id="getInterGroup" parameterType="String" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
+		SELECT gl.group_num, gl.group_name, gl.group_inte1, gl.group_inte2, gl.group_location
+		  FROM interest_group ig, group_list gl 
+		 WHERE ig.mem_id = #{mem_id}
+           AND ig.group_num = gl.group_num
+	</select>
+	<!-- 가입신청 이력 가져오기 -->
+	<select id="getApplHistory" parameterType="String" resultType="com.engineers.moyeo.three.dto.JoinRequestDTO">
+		SELECT jr.request_num as request_num, jr.request_date as request_date, jr.status as status, jr.mem_id as mem_id, jr.group_num as group_num, gl.group_name as group_name
+		  FROM join_request jr, group_list gl 
+		 WHERE mem_id = #{mem_id} 
+		   AND (status = '대기' OR status = '거절' OR status = '강제탈퇴' OR status = '탈퇴')
+		   AND jr.group_num = gl.group_num
+	</select>
 <!-- 회원 -->
 </mapper>
