@@ -350,7 +350,8 @@ public class TwoServiceImpl implements TwoService{
 		String place_address1 = req.getParameter("loc_category1");
 		String place_address2 = req.getParameter("loc_category2");
 		String place_address = place_address1 + " " + place_address2;
-		String place_name = req.getParameter("search_keyword");
+		String search_keyword = req.getParameter("search_keyword");
+		String place_name = search_keyword;
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("place_address", place_address);
@@ -446,6 +447,10 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("pageBlock2", pageBlock2);
 		}
 		
+		model.addAttribute("search_keyword", search_keyword);
+		model.addAttribute("place_address1", place_address1);
+		model.addAttribute("place_address2", place_address2);
+
 		return "two/places/placeMainLoc";
 	}
 	
@@ -605,7 +610,8 @@ public class TwoServiceImpl implements TwoService{
 		
 		String recpla_category1 = req.getParameter("recpla_category1");
 		String recpla_category2 = req.getParameter("recpla_category2");
-		String place_name = req.getParameter("search_keyword");
+		String search_keyword = req.getParameter("search_keyword");
+		String place_name = search_keyword;
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("recpla_category1", recpla_category1);
@@ -702,6 +708,9 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("pageBlock2", pageBlock2);
 		}
 		
+		model.addAttribute("search_keyword", search_keyword);
+		model.addAttribute("recpla_category1", recpla_category1);
+		model.addAttribute("recpla_category2", recpla_category2);
 		
 		return "two/places/placeMainRecpla";
 	}
@@ -2455,6 +2464,8 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("search_radio3", search_radio3);
 		model.addAttribute("search_radio4", search_radio4);
 		
+		model.addAttribute("search_type", "Normal");
+		
 		return "two/main_search/mainSearchResult";
 	}
 
@@ -3100,6 +3111,8 @@ public class TwoServiceImpl implements TwoService{
 		
 		model.addAttribute("search_keyword", search_keyword);
 		
+		model.addAttribute("search_type", "WordCloud");
+		
 		return "two/main_search/mainSearchResult";
 	}
 
@@ -3152,7 +3165,7 @@ public class TwoServiceImpl implements TwoService{
 			pageNum2 = "1";
 		}
 		
-		pageNum4 = req.getParameter("pageNum3");
+		pageNum4 = req.getParameter("pageNum4");
 		if(pageNum4 == null) {
 			pageNum4 = "1";
 		}
@@ -3199,16 +3212,16 @@ public class TwoServiceImpl implements TwoService{
 
 		}
 		
-		Map<String, Object> daoMap5 = new HashMap<String, Object>();
-		daoMap5.put("start4", start4);
-		daoMap5.put("end4", end4);
+		Map<String, Object> daoMap4 = new HashMap<String, Object>();
+		daoMap4.put("start4", start4);
+		daoMap4.put("end4", end4);
 		if(rpcnt > 0) {
 			
-			daoMap5.put("type", "4");
-			daoMap5.put("recpla_tag", search_keyword);
-			ArrayList<Rec_placeDTO> recpladtos = twoDao.getRecPlaceSearchList(daoMap5);
+			daoMap4.put("type", "4");
+			daoMap4.put("recpla_tag", search_keyword);
+			ArrayList<Rec_placeDTO> recpladtos = twoDao.getRecPlaceSearchList(daoMap4);
 			model.addAttribute("recpladtos", recpladtos);
-			ArrayList<Rec_placeDTO> recpicpptos = twoDao.getRecPlacePictureSearchList(daoMap5);
+			ArrayList<Rec_placeDTO> recpicpptos = twoDao.getRecPlacePictureSearchList(daoMap4);
 			model.addAttribute("recpicpptos", recpicpptos);
 
 		}
@@ -3252,6 +3265,8 @@ public class TwoServiceImpl implements TwoService{
 		}
 		
 		model.addAttribute("search_keyword", search_keyword);
+		
+		model.addAttribute("search_type", "WordCloudByTag");
 		
 		return "two/main_search/mainSearchResult";
 	}
