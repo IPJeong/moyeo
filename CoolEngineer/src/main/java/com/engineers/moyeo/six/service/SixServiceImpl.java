@@ -1811,7 +1811,7 @@ public class SixServiceImpl implements SixService{
 		productInfoDTO dto =sixDao.productDetail(product_num);
 		ProductPicDTO pic_dto = sixDao.productPic(product_num);
 		
-		System.out.println(pic_dto);
+		System.out.println(pic_dto.getPic_path());
 		model.addAttribute("dto", dto);
 		model.addAttribute("pic_dto", pic_dto);
 	}
