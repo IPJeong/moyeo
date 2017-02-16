@@ -155,10 +155,10 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<Place_likeDTO> getPlaceLikeList() {
+	public ArrayList<Place_likeDTO> getPlaceLikeList(Map<String, Object> daoMap) {
 		ArrayList<Place_likeDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		dtos = dao.getPlaceLikeList();
+		dtos = dao.getPlaceLikeList(daoMap);
 		return dtos;
 	}
 	
@@ -349,6 +349,22 @@ public class TwoDAOImpl implements TwoDAO{
 		cnt = dao.moimBanishCheck(daoMap);	
 		return cnt;
 	}
+	
+	@Override
+	public int checkGroupMemLimit(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.checkGroupMemLimit(group_num);	
+		return cnt;
+	}
+
+	@Override
+	public int checkGroupMemNumber(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.checkGroupMemNumber(group_num);	
+		return cnt;
+	}
 
 	@Override
 	public int moimJoin(Map<String, Object> daoMap) {
@@ -356,6 +372,14 @@ public class TwoDAOImpl implements TwoDAO{
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		cnt = dao.moimJoin(daoMap);	
 		return cnt;
+	}
+	
+	@Override
+	public String getMoimCheifId(int group_num) {
+		String mem_id = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		mem_id = dao.getMoimCheifId(group_num);
+		return mem_id;
 	}
 	
 	@Override
@@ -736,6 +760,15 @@ public class TwoDAOImpl implements TwoDAO{
 		cnt = dao.checkBestTenArticle(group_num);
 		return cnt;
 	}
+	
+
+	@Override
+	public int checkBestTenPresent(int group_num) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.checkBestTenPresent(group_num);
+		return cnt;
+	}
 
 	@Override
 	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num) {
@@ -751,13 +784,5 @@ public class TwoDAOImpl implements TwoDAO{
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getBestTenPresent(group_num);
 		return dtos;
-	}
-
-	@Override
-	public String getMoimCheifId(int group_num) {
-		String mem_id = null;
-		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
-		mem_id = dao.getMoimCheifId(group_num);
-		return mem_id;
 	}
 }

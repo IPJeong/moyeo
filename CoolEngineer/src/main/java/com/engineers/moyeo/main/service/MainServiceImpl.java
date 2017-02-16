@@ -355,9 +355,12 @@ public class MainServiceImpl implements MainService{
 		int lcnt = 0;
 
 		lcnt = twoDao.getPlaceLikeCount();
-
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("start2", 1);
+		daoMap.put("end2", 5);
 		if(lcnt > 0) {
-			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList(daoMap);
 			System.out.println("lpdtos : " + lpodtos.size());
 			model.addAttribute("lpodtos", lpodtos);
 		}
@@ -567,7 +570,7 @@ public class MainServiceImpl implements MainService{
 			String mem_id = (String)map.get("mem_id");
 			String group_name = (String)map.get("group_name");
 			String from_id = (String)map.get("from_id");
-			String msg = TextMessage.memGreetingReplyMsg(mem_id, group_name, from_id);
+			String msg = TextMessage.memGreetingLikeMsg(mem_id, group_name, from_id);
 			
 			cnt = addMemberNotiDTO(msg, time, mem_id);
 			

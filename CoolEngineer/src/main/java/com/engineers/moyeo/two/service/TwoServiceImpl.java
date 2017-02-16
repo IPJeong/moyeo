@@ -199,17 +199,26 @@ public class TwoServiceImpl implements TwoService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
 		int pageSize = 5; 	
-		int pageBlock = 3; 	
-					
+		int pageBlock = 3; 			
 		int start = 0;			//rownum
 		int end = 0;			//rownum
-		int place_num = 0;		
+		int num = 0;		
 		String pageNum = null; 	
-		int currentPage = 0;
-		
+		int currentPage = 0;		
 		int pageCount = 0;	
 		int startPage = 0;	
-		int endPage = 0;	
+		int endPage = 0;
+		
+		int pageSize2 = 5; 	
+		int pageBlock2 = 3; 			
+		int start2 = 0;			//rownum
+		int end2 = 0;			//rownum
+		int num2 = 0;		
+		String pageNum2 = null; 	
+		int currentPage2 = 0;		
+		int pageCount2 = 0;	
+		int startPage2 = 0;	
+		int endPage2 = 0;	
 		
 		int cnt = 0;
 		int lcnt = 0;
@@ -218,9 +227,14 @@ public class TwoServiceImpl implements TwoService{
 		lcnt = twoDao.getPlaceLikeCount();
 		
 		pageNum = req.getParameter("pageNum");
+		pageNum2 = req.getParameter("pageNum2");
 		
 		if(pageNum == null) {
 			pageNum = "1";
+		}
+		
+		if(pageNum2 == null) {
+			pageNum2 = "1";
 		}
 		
 		currentPage = Integer.parseInt(pageNum);
@@ -231,7 +245,17 @@ public class TwoServiceImpl implements TwoService{
 		
 		if(end > cnt) end = cnt;
 
-		place_num = cnt - (currentPage - 1) * pageSize;
+		num = cnt - (currentPage - 1) * pageSize;
+		
+		currentPage2 = Integer.parseInt(pageNum2);
+		pageCount2 = (lcnt / pageSize2) + (lcnt % pageSize2 > 0 ? 1 : 0);
+		
+		start2 = (currentPage2 - 1) * pageSize2 + 1; 
+		end2 = start2 + pageSize2 -1; 
+		
+		if(end2 > lcnt) end2 = lcnt;
+
+		num2 = lcnt - (currentPage2 - 1) * pageSize2;
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("start", start);
@@ -245,8 +269,12 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("ppdtos", ppdtos);
 		}
 		
+		Map<String, Object> daoMap2 = new HashMap<String, Object>();
+		daoMap2.put("start2", start2);
+		daoMap2.put("end2", end2);
+		
 		if(lcnt > 0) {
-			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList(daoMap2);
 			model.addAttribute("lpodtos", lpodtos);
 		}
 
@@ -256,10 +284,19 @@ public class TwoServiceImpl implements TwoService{
 		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
+		startPage2 = (currentPage2 / pageBlock2) * pageBlock2 + 1; 
+		if(currentPage2 % pageBlock2 == 0) startPage2 -= pageBlock2;
+		
+		endPage2 = startPage2 + pageBlock2 - 1; 
+		if(endPage2 > pageCount2) endPage2 = pageCount2;
+		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("lcnt", lcnt);
-		model.addAttribute("place_num", place_num); 
+		
+		model.addAttribute("num", num); 
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("num2", num2); 
+		model.addAttribute("pageNum2", pageNum2);
 		
 		if (cnt > 0) {
 			model.addAttribute("currentPage", currentPage);
@@ -267,6 +304,14 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		if (lcnt > 0) {
+			model.addAttribute("currentPage2", currentPage2);
+			model.addAttribute("startPage2", startPage2);
+			model.addAttribute("endPage2", endPage2);
+			model.addAttribute("pageCount2", pageCount2);
+			model.addAttribute("pageBlock2", pageBlock2);
 		}
 		
 		return "two/places/placeMainLoc";
@@ -279,16 +324,25 @@ public class TwoServiceImpl implements TwoService{
 		
 		int pageSize = 5; 	
 		int pageBlock = 3; 	
-				
 		int start = 0;			//rownum
 		int end = 0;			//rownum
-		int place_num = 0;		
+		int num = 0;		
 		String pageNum = null; 	
 		int currentPage = 0;
-		
 		int pageCount = 0;	
 		int startPage = 0;	
 		int endPage = 0;	
+		
+		int pageSize2 = 5; 	
+		int pageBlock2 = 3; 			
+		int start2 = 0;			//rownum
+		int end2 = 0;			//rownum
+		int num2 = 0;		
+		String pageNum2 = null; 	
+		int currentPage2 = 0;		
+		int pageCount2 = 0;	
+		int startPage2 = 0;	
+		int endPage2 = 0;	
 		
 		int cnt = 0;
 		int lcnt = 0;
@@ -296,7 +350,7 @@ public class TwoServiceImpl implements TwoService{
 		String place_address1 = req.getParameter("loc_category1");
 		String place_address2 = req.getParameter("loc_category2");
 		String place_address = place_address1 + " " + place_address2;
-		String place_name = req.getParameter("place_name");
+		String place_name = req.getParameter("search_keyword");
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("place_address", place_address);
@@ -306,9 +360,14 @@ public class TwoServiceImpl implements TwoService{
 		lcnt = twoDao.getPlaceLikeCount();
 		
 		pageNum = req.getParameter("pageNum");
+		pageNum2 = req.getParameter("pageNum2");
 		
 		if(pageNum == null) {
 			pageNum = "1";
+		}
+		
+		if(pageNum2 == null) {
+			pageNum2 = "1";
 		}
 		
 		currentPage = Integer.parseInt(pageNum);
@@ -319,7 +378,17 @@ public class TwoServiceImpl implements TwoService{
 		
 		if(end > cnt) end = cnt;
 
-		place_num = cnt - (currentPage - 1) * pageSize;
+		num = cnt - (currentPage - 1) * pageSize;
+		
+		currentPage2 = Integer.parseInt(pageNum2);
+		pageCount2 = (lcnt / pageSize2) + (lcnt % pageSize2 > 0 ? 1 : 0);
+		
+		start2 = (currentPage2 - 1) * pageSize2 + 1; 
+		end2 = start2 + pageSize2 -1; 
+		
+		if(end2 > lcnt) end2 = lcnt;
+
+		num2 = lcnt - (currentPage2 - 1) * pageSize2;
 		
 		daoMap.put("start", start);
 		daoMap.put("end", end);
@@ -332,8 +401,12 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("ppdtos", ppdtos);
 		}
 		
+		Map<String, Object> daoMap2 = new HashMap<String, Object>();
+		daoMap2.put("start2", start2);
+		daoMap2.put("end2", end2);
+		
 		if(lcnt > 0) {
-			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList(daoMap2);
 			model.addAttribute("lpodtos", lpodtos);
 		}
 
@@ -343,10 +416,19 @@ public class TwoServiceImpl implements TwoService{
 		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
+		startPage2 = (currentPage2 / pageBlock2) * pageBlock2 + 1; 
+		if(currentPage2 % pageBlock2 == 0) startPage2 -= pageBlock2;
+		
+		endPage2 = startPage2 + pageBlock2 - 1; 
+		if(endPage2 > pageCount2) endPage2 = pageCount2;
+		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("lcnt", lcnt);
-		model.addAttribute("place_num", place_num); 
+		
+		model.addAttribute("num", num); 
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("num2", num2); 
+		model.addAttribute("pageNum2", pageNum2);
 		
 		if (cnt > 0) {
 			model.addAttribute("currentPage", currentPage);
@@ -354,6 +436,14 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		if (lcnt > 0) {
+			model.addAttribute("currentPage2", currentPage2);
+			model.addAttribute("startPage2", startPage2);
+			model.addAttribute("endPage2", endPage2);
+			model.addAttribute("pageCount2", pageCount2);
+			model.addAttribute("pageBlock2", pageBlock2);
 		}
 		
 		return "two/places/placeMainLoc";
@@ -365,17 +455,26 @@ public class TwoServiceImpl implements TwoService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
 		int pageSize = 5; 	
-		int pageBlock = 3; 	
-					
+		int pageBlock = 3; 		
 		int start = 0;			//rownum
 		int end = 0;			//rownum
-		int place_num = 0;		
+		int num = 0;		
 		String pageNum = null; 	
-		int currentPage = 0;
-		
+		int currentPage = 0;	
 		int pageCount = 0;	
 		int startPage = 0;	
-		int endPage = 0;	
+		int endPage = 0;
+		
+		int pageSize2 = 5; 	
+		int pageBlock2 = 3; 			
+		int start2 = 0;			//rownum
+		int end2 = 0;			//rownum
+		int num2 = 0;		
+		String pageNum2 = null; 	
+		int currentPage2 = 0;		
+		int pageCount2 = 0;	
+		int startPage2 = 0;	
+		int endPage2 = 0;	
 		
 		int cnt = 0;
 		int lcnt = 0;
@@ -384,9 +483,14 @@ public class TwoServiceImpl implements TwoService{
 		lcnt = twoDao.getPlaceLikeCount();
 		
 		pageNum = req.getParameter("pageNum");
+		pageNum2 = req.getParameter("pageNum2");
 		
 		if(pageNum == null) {
 			pageNum = "1";
+		}
+		
+		if(pageNum2 == null) {
+			pageNum2 = "1";
 		}
 		
 		currentPage = Integer.parseInt(pageNum);
@@ -397,7 +501,17 @@ public class TwoServiceImpl implements TwoService{
 		
 		if(end > cnt) end = cnt;
 
-		place_num = cnt - (currentPage - 1) * pageSize;
+		num = cnt - (currentPage - 1) * pageSize;
+		
+		currentPage2 = Integer.parseInt(pageNum2);
+		pageCount2 = (lcnt / pageSize2) + (lcnt % pageSize2 > 0 ? 1 : 0);
+		
+		start2 = (currentPage2 - 1) * pageSize2 + 1; 
+		end2 = start2 + pageSize2 -1; 
+		
+		if(end2 > lcnt) end2 = lcnt;
+
+		num2 = lcnt - (currentPage2 - 1) * pageSize2;
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("start", start);
@@ -411,8 +525,12 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("ppdtos", ppdtos);
 		}
 		
+		Map<String, Object> daoMap2 = new HashMap<String, Object>();
+		daoMap2.put("start2", start2);
+		daoMap2.put("end2", end2);
+		
 		if(lcnt > 0) {
-			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList(daoMap2);
 			model.addAttribute("lpodtos", lpodtos);
 		}
 
@@ -422,10 +540,19 @@ public class TwoServiceImpl implements TwoService{
 		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
+		startPage2 = (currentPage2 / pageBlock2) * pageBlock2 + 1; 
+		if(currentPage2 % pageBlock2 == 0) startPage2 -= pageBlock2;
+		
+		endPage2 = startPage2 + pageBlock2 - 1; 
+		if(endPage2 > pageCount2) endPage2 = pageCount2;
+		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("lcnt", lcnt);
-		model.addAttribute("place_num", place_num); 
+		
+		model.addAttribute("num", num); 
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("num2", num2); 
+		model.addAttribute("pageNum2", pageNum2);
 		
 		if (cnt > 0) {
 			model.addAttribute("currentPage", currentPage);
@@ -433,6 +560,14 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		if (lcnt > 0) {
+			model.addAttribute("currentPage2", currentPage2);
+			model.addAttribute("startPage2", startPage2);
+			model.addAttribute("endPage2", endPage2);
+			model.addAttribute("pageCount2", pageCount2);
+			model.addAttribute("pageBlock2", pageBlock2);
 		}
 		
 		return "two/places/placeMainRecpla";
@@ -445,23 +580,32 @@ public class TwoServiceImpl implements TwoService{
 		
 		int pageSize = 5; 	
 		int pageBlock = 3; 	
-				
 		int start = 0;			//rownum
 		int end = 0;			//rownum
-		int place_num = 0;		
+		int num = 0;		
 		String pageNum = null; 	
 		int currentPage = 0;
-		
 		int pageCount = 0;	
 		int startPage = 0;	
 		int endPage = 0;	
+		
+		int pageSize2 = 5; 	
+		int pageBlock2 = 3; 			
+		int start2 = 0;			//rownum
+		int end2 = 0;			//rownum
+		int num2 = 0;		
+		String pageNum2 = null; 	
+		int currentPage2 = 0;		
+		int pageCount2 = 0;	
+		int startPage2 = 0;	
+		int endPage2 = 0;	
 		
 		int cnt = 0;
 		int lcnt = 0;
 		
 		String recpla_category1 = req.getParameter("recpla_category1");
 		String recpla_category2 = req.getParameter("recpla_category2");
-		String place_name = req.getParameter("place_name");
+		String place_name = req.getParameter("search_keyword");
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("recpla_category1", recpla_category1);
@@ -472,9 +616,14 @@ public class TwoServiceImpl implements TwoService{
 		lcnt = twoDao.getPlaceLikeCount();
 
 		pageNum = req.getParameter("pageNum");
+		pageNum2 = req.getParameter("pageNum2");
 		
 		if(pageNum == null) {
 			pageNum = "1";
+		}
+		
+		if(pageNum2 == null) {
+			pageNum2 = "1";
 		}
 		
 		currentPage = Integer.parseInt(pageNum);
@@ -485,7 +634,17 @@ public class TwoServiceImpl implements TwoService{
 		
 		if(end > cnt) end = cnt;
 
-		place_num = cnt - (currentPage - 1) * pageSize;
+		num = cnt - (currentPage - 1) * pageSize;
+		
+		currentPage2 = Integer.parseInt(pageNum2);
+		pageCount2 = (lcnt / pageSize2) + (lcnt % pageSize2 > 0 ? 1 : 0);
+		
+		start2 = (currentPage2 - 1) * pageSize2 + 1; 
+		end2 = start2 + pageSize2 -1; 
+		
+		if(end2 > lcnt) end2 = lcnt;
+
+		num2 = lcnt - (currentPage2 - 1) * pageSize2;
 		
 		daoMap.put("start", start);
 		daoMap.put("end", end);
@@ -498,8 +657,12 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("ppdtos", ppdtos);
 		}
 		
+		Map<String, Object> daoMap2 = new HashMap<String, Object>();
+		daoMap2.put("start2", start2);
+		daoMap2.put("end2", end2);
+		
 		if(lcnt > 0) {
-			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList();
+			ArrayList<Place_likeDTO> lpodtos = twoDao.getPlaceLikeList(daoMap2);
 			model.addAttribute("lpodtos", lpodtos);
 		}
 
@@ -509,10 +672,19 @@ public class TwoServiceImpl implements TwoService{
 		endPage = startPage + pageBlock - 1; 
 		if(endPage > pageCount) endPage = pageCount;
 		
+		startPage2 = (currentPage2 / pageBlock2) * pageBlock2 + 1; 
+		if(currentPage2 % pageBlock2 == 0) startPage2 -= pageBlock2;
+		
+		endPage2 = startPage2 + pageBlock2 - 1; 
+		if(endPage2 > pageCount2) endPage2 = pageCount2;
+		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("lcnt", lcnt);
-		model.addAttribute("place_num", place_num); 
+		
+		model.addAttribute("num", num); 
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("num2", num2); 
+		model.addAttribute("pageNum2", pageNum2);
 		
 		if (cnt > 0) {
 			model.addAttribute("currentPage", currentPage);
@@ -521,6 +693,15 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("pageBlock", pageBlock);
 		}
+		
+		if (lcnt > 0) {
+			model.addAttribute("currentPage2", currentPage2);
+			model.addAttribute("startPage2", startPage2);
+			model.addAttribute("endPage2", endPage2);
+			model.addAttribute("pageCount2", pageCount2);
+			model.addAttribute("pageBlock2", pageBlock2);
+		}
+		
 		
 		return "two/places/placeMainRecpla";
 	}
@@ -1124,29 +1305,37 @@ public class TwoServiceImpl implements TwoService{
 		
 		int join_check = twoDao.moimJoinCheck(daoMap);
 		int banish_check = twoDao.moimBanishCheck(daoMap);
+		int mem_cnt_limit = twoDao.checkGroupMemLimit(group_num);
+		int mem_cnt_now = twoDao.checkGroupMemNumber(group_num);
+
+		if(mem_cnt_limit > mem_cnt_now) {
 		
-		if (banish_check == 0) {
-			if (join_check > 0) {
-				cnt = -1;
+			if (banish_check == 0) {
+				if (join_check > 0) {
+					cnt = -1;
+				} else {
+					daoMap.put("status", Code.waiting);
+					cnt = twoDao.moimJoin(daoMap);
+					
+					Moim_infoDTO dto = new Moim_infoDTO();
+					dto = twoDao.readMoimInfo(group_num);
+					String mem_id_moim_cheif = twoDao.getMoimCheifId(group_num);
+					String group_name = dto.getGroup_name();
+					
+					Map<String, Object> daoMap2 = new HashMap<String, Object>();
+					daoMap2.put("type", 14);
+					daoMap2.put("group_num", group_num);
+					daoMap2.put("mem_id", mem_id_moim_cheif);
+					daoMap2.put("group_name", group_name);
+					
+					mainService.addNotice(daoMap2);
+				}
 			} else {
-				daoMap.put("status", Code.waiting);
-				cnt = twoDao.moimJoin(daoMap);
-				
-				Moim_infoDTO dto = new Moim_infoDTO();
-				dto = twoDao.readMoimInfo(group_num);
-				String mem_id_moim_cheif = twoDao.getMoimCheifId(group_num);
-				String group_name = dto.getGroup_name();
-				
-				Map<String, Object> daoMap2 = new HashMap<String, Object>();
-				daoMap2.put("type", 14);
-				daoMap2.put("group_num", group_num);
-				daoMap2.put("mem_id", mem_id_moim_cheif);
-				daoMap2.put("group_name", group_name);
-				
-				mainService.addNotice(daoMap2);
+				cnt = -2;
 			}
+		
 		} else {
-			cnt = -2;
+			cnt = -3;
 		}
 		
 		model.addAttribute("group_num", group_num);
@@ -2518,11 +2707,17 @@ public class TwoServiceImpl implements TwoService{
 			model.addAttribute("month12", month12);
 			
 		} else if(term.equals("best10")) {
-			
-			ArrayList<StatisticsDTO> dtos = twoDao.getBestTenPresent(group_num);
-				
-			model.addAttribute("dtos", dtos);
 
+			int cnt = 0;
+			
+			cnt = twoDao.checkBestTenPresent(group_num);
+
+			if (cnt > 0) {
+				ArrayList<StatisticsDTO> dtos = twoDao.getBestTenPresent(group_num);
+				model.addAttribute("dtos", dtos);	
+			}
+			
+			model.addAttribute("cnt", cnt);
 		}
 		
 		model.addAttribute("group_num", group_num); 

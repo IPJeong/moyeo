@@ -36,7 +36,7 @@ public interface TwoDAO {
 	public ArrayList<Place_infoDTO> getPlaceRecplaList(Map<String, Object> daoMap); //관심사별 검색 결과에 따른 장소정보 리스트
 	public ArrayList<Place_infoDTO> getPlaceRecplaPictureList(Map<String, Object> daoMap); //관심사별 검색 결과에 따른 장소사진 리스트
 	public int getPlaceLikeCount(); //추천받은 장소정보의 개수
-	public ArrayList<Place_likeDTO> getPlaceLikeList(); //추천받은 장소정보들의 리스트
+	public ArrayList<Place_likeDTO> getPlaceLikeList(Map<String, Object> daoMap); //추천받은 장소정보들의 리스트
 	public Place_infoDTO readPlace(int place_num); //장소정보 상세보기
 	public Place_infoDTO readPlacePicture(int place_num); //장소사진 상세보기
 	public int inputPlace(Place_infoDTO piDTO); //장소정보 입력
@@ -65,6 +65,8 @@ public interface TwoDAO {
 	public int identifyMoimMember(Map<String, Object> daoMap); //모임에 가입했는지 확인함
 	public int moimJoinCheck(Map<String, Object> daoMap); //모임가입 신청을 했는지 확인함
 	public int moimBanishCheck(Map<String, Object> daoMap); //모임에서 강제탈퇴된 적이 있는지 확인
+	public int checkGroupMemLimit(int group_num); //모임의 정원 제한을 확인
+	public int checkGroupMemNumber(int group_num); //모임의 현재 모임원수를 확인
 	public int moimJoin(Map<String, Object> daoMap); //모임에 가입신청 처리함
 	public String getMoimCheifId(int group_num); //모임장의 아이디를 불러옴
 	public int moimWithdraw(Map<String, Object> daoMap); //모임 탈퇴 처리함
@@ -121,6 +123,7 @@ public interface TwoDAO {
 	public StatisticsDTO chartByPresentOfYear(int group_num); //한달간 모임원의 출석일수에 따라 통계 차트를 표시
 	public StatisticsDTO chartByJoinOfYear(int group_num); //일년간 모임원의 출석일수에 따라 통계 차트를 표시
 	public int checkBestTenArticle(int group_num); //모임에서 게시글이 존재하는지 여부를 확인
+	public int checkBestTenPresent(int group_num); //모임원 중에 출석한 적이 있는지 여부를 확인
 	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num); //조회수가 높은 10개의 게시글 리스트를 순서대로 보여줌
 	public ArrayList<StatisticsDTO> getBestTenPresent(int group_num); //출석일수가 높은 10명의 모임원의 리스트를 순서대로 보여줌
 }
