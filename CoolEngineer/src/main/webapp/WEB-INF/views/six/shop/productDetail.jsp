@@ -14,10 +14,8 @@
 
 <link rel="icon" href="/moyeo/resources/resource/favicon.ico" type="image/x-icon" />
 <!-- END META SECTION -->
-<!-- CSS INCLUDE -->
-<link rel="stylesheet" type="text/css" id="theme" href="/moyeo/resources/resource/css/theme-default.css" />
-<!-- EOF CSS INCLUDE -->
 
+<!-- CSS INCLUDE -->
 <style>
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
@@ -774,13 +772,17 @@ li {
 }
 </style>
 
-
+<link rel="stylesheet" type="text/css" id="theme" href="/moyeo/resources/resource/css/theme-default.css" />
+<!-- EOF CSS INCLUDE -->
 <script type="text/javascript">
 window.onload = function() {
-	$('#item_money1').val($('#item_money1').val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
-	$('#order_total_money_view').val($('#order_total_money_view').val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+	$('#item_money1').val($('#item_money1').val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	$('#order_total_money_view').val($('#order_total_money_view').val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 }
 
+function comma(x) {
+	return  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 function shopNumberFormat(data) 
 {
@@ -935,7 +937,7 @@ function orderCheck() {
    
 
     document.getElementById("order_total_money").value = order_total_money;
-    document.getElementById("order_total_money_view").value = shopNumberFormat(String(order_total_money)) + "원";
+    document.getElementById("order_total_money_view").value = shopNumberFormat(String(order_total_money));
     
 }
 
@@ -1199,7 +1201,7 @@ function orderCheck() {
 														<tbody>
 															<tr height="30">
 																<td width="60" class="item_subtitle">판매가 :</td><input type="hidden" id="item_money" value="${dto.product_price}">
-																<td style="text-align:left;" class="item_money"><input type="text" id="item_money1" value="${dto.product_price}" readonly style="padding-right:1px; border:0px;"></td>
+																<td style="text-align:left;" class="item_money"><input type="text" id="item_money1" value="${dto.product_price}" style="padding-right:1px; border:0px; text-align: right; width:80px;" readonly>원</td>
 															</tr>
 															<tr height="1" bgcolor="#f4f4f4">
 																<td colspan="2"></td>
@@ -1286,15 +1288,14 @@ function orderCheck() {
 																									</tbody>
 																								</table>
 																							</td>
-																							<td align="right">
+																							<td align="left">
 																								<table border="0" cellspacing="0"
 																									cellpadding="0">
 																									<tbody>
 																										<tr>
 																											<td class="order_title2">금액 :</td>
 																											<td width="5"></td>
-																											<td class="item_total_"><input
-																												id="order_total_money_view" style="border:0px" value="${dto.product_price}"> </td>
+																											<td class="item_total_" ><input id="order_total_money_view" style="border:0px; text-align: right; width:150px;" value="${dto.product_price}">원</td>
 																										</tr>
 																									</tbody>
 																								</table>
