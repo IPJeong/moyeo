@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
@@ -29,6 +30,9 @@ public class OneReportServiceImpl implements OneReportService{
 
 	@Autowired
 	OneDAO oneDao;
+	
+	@Autowired
+	MainService mainService;
 	
 	// 모임신고 폼
 	@Override
@@ -83,12 +87,12 @@ public class OneReportServiceImpl implements OneReportService{
 					String report_title = req.getParameter("report_title");
 					String report_content = req.getParameter("report_content");
 					String group_name = req.getParameter("group_name");
+					int group_num = Integer.parseInt(req.getParameter("group_num")); 
 				
 					System.out.println(req.getParameter("group_name"));
 					dto.setReport_title(report_title);
 					dto.setReport_content(report_content);
-					dto.setGroup_num(Integer.parseInt(req.getParameter("group_num")));
-					System.out.println("group_num: " + req.getParameter("group_num"));
+					dto.setGroup_num(group_num);
 					dto.setReport_date(new Timestamp(System.currentTimeMillis()));
 					dto.setMem_id((String)req.getSession().getAttribute("mem_id"));
 					dto.setGroup_name(group_name);
@@ -98,6 +102,16 @@ public class OneReportServiceImpl implements OneReportService{
 					System.out.println(dto.toString());
 					
 					cnt = oneDao.MoimReportInsert(dto);
+					String mem_id = oneDao.bringReportInform(group_num);
+					
+					Map<String, Object> map2 = new HashMap<String, Object>();
+					map2.put("type", 5);
+					map2.put("mem_id", mem_id);
+					map2.put("group_num", group_num);
+					
+					mainService.addNotice(map2);
+					
+					
 				}
 			}
 		}
@@ -235,6 +249,17 @@ public class OneReportServiceImpl implements OneReportService{
 		
 		int cnt = oneDao.updateReport(dto);
 		System.out.println("cnt: " + cnt);
+		
+		MoimReportDTO dto2 = oneDao.bringReportInform2(report_num);
+		String group_name = oneDao.bringGroup_name(dto2.getGroup_num());
+		
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("type", 6);
+		map2.put("mem_id", dto2.getMem_id());
+		map2.put("group_name", group_name);
+		
+		mainService.addNotice(map2);
+		
 		
 		model.addAttribute("report_num", report_num);
 		model.addAttribute("cnt", cnt);

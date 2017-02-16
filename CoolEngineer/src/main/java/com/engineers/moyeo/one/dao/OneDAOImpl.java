@@ -13,8 +13,10 @@ import org.springframework.stereotype.Repository;
 import com.engineers.moyeo.one.dto.ManagerDTO;
 import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
+import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
+import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
@@ -106,6 +108,15 @@ public class OneDAOImpl implements OneDAO{
 		
 		return cnt;
 	}
+	
+	// Q&A 알림을 위해 qboard_num을 이용해 mem_id 불러오기
+	@Override
+	public  QnaBoardDTO bringMemId(int qboard_num) {
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+
+		return dao.bringMemId(qboard_num);
+	}
+	
 	
 	// Q&A 게시판 답변내용 삭제
 	@Override
@@ -222,6 +233,31 @@ public class OneDAOImpl implements OneDAO{
 		cnt = dao.updateReport(dto);
 		
 		return cnt;
+	}
+	
+	// 신고키를 통하여 신고내용 가져오기(알림)
+	public String bringReportInform(int group_num) {
+		String mem_id;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		mem_id = dao.bringReportInform(group_num);
+		
+		return mem_id;
+	}
+	
+	@Override
+	public MoimReportDTO bringReportInform2(int report_num) {
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+
+		return dao.bringReportInform2(report_num);
+	}
+	
+	@Override
+	public String bringGroup_name(int group_num) {
+		String group_name;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		group_name = dao.bringGroup_name(group_num);
+		
+		return group_name;
 	}
 
 	//관리자가 회원정보 몇명인지 구하기
@@ -521,5 +557,70 @@ public class OneDAOImpl implements OneDAO{
 		dtos = dao.getGroupList(daoMap);
 		return dtos;
 	}
+
+	// 판매신청한 회원수 구하기
+	@Override
+	public int getSellerCount() {
+		int cnt = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.getSellerCount();
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<SellerInfoDTO> getSellerArticles(Map<String, Integer> daoMap) {
+		ArrayList<SellerInfoDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getSellerArticles(daoMap);
+		return dtos;
+	}
 	
+	@Override
+	public SellerInfoDTO getSellerInformArticle(String seller_id) {
+		SellerInfoDTO dto = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dto = dao.getSellerInformArticle(seller_id);
+		
+		return dto;
+	}
+
+	// 판매자승인 후 승인여부 바꾸기
+	@Override
+	public int updateRecognition(String seller_id) {
+		int cnt = 0;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.updateRecognition(seller_id);
+		
+		return cnt;
+	}
+
+	// 판매자거절 후 승인여부 바꾸기
+	@Override
+	public int updateRecognition2(String seller_id) {
+		int cnt = 0;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.updateRecognition2(seller_id);
+		
+		return cnt;
+	}
+
+	// 판매샵에 등록된 모든 제품갯수 구하기
+	@Override
+	public int getProductCount() {
+		int cnt = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.getManagerCount();
+		return cnt;
+	}
+	
+	// 모든 제품정보 가져오기
+	@Override
+	public ArrayList<ProductInfoDTO> getProductArticles(Map<String, Integer> daoMap) {
+		ArrayList<ProductInfoDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getProductArticles(daoMap);
+		return dtos;
+	}
 }

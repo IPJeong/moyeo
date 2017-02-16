@@ -14,6 +14,7 @@ import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.ManagerDTO;
 import com.engineers.moyeo.one.dto.MemberInformDTO;
+import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
@@ -579,6 +580,7 @@ public class OneManagerServiceImpl implements OneManagerService {
 		return "one/manager/groupDelete";
 	}
 
+	// 관리자 권한에서 회원 아이디/이름 검색
 	@Override
 	public String guestListSearch(Model model) {
 		Map<String, Object> map = model.asMap();
@@ -672,6 +674,7 @@ public class OneManagerServiceImpl implements OneManagerService {
 		return "one/manager/guestList";
 	}
 
+	// 관리자 권한에서 모임 검색
 	@Override
 	public String guestGroupSearch(Model model) {
 		Map<String, Object> map = model.asMap();
@@ -749,6 +752,156 @@ public class OneManagerServiceImpl implements OneManagerService {
 		return "one/manager/moimCheck";
 	}
 
-	
+	// 하위관리자 생성시 아이디 중복확인
+	@Override
+	public String confirmId(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String manager_id = req.getParameter("manager_id");
+		
+		int cnt = oneDao.idCheck(manager_id);
+		
+		
+		model.addAttribute("manager_id", manager_id);
+		model.addAttribute("cnt", cnt);
+		
+		return "one/manager/confirmId";
+	}
+
+	// 판매자관리 메인관리
+	@Override
+	public String seller(Model model) {
+		int pageSize = 5;
+		int pageBlock = 3;
+		
+		int cnt = 0;
+		int start = 0;
+		int end = 0;
+		int number = 0;
+		String pageNum = null;
+		int currentPage = 0;
+		
+		int pageCount = 0;
+		int startPage = 0;
+		int endPage = 0;
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		cnt = oneDao.getSellerCount();
+		
+		System.out.println("cnt: " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		
+		if(end > cnt) end = cnt;
+		
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		if(cnt > 0) {
+			Map<String, Integer> daoMap = new HashMap<String, Integer>();
+			daoMap.put("start", start);
+			daoMap.put("end", end);
+			
+			// 판매신청한 회원의 정보를 ArrayList에 담는다.
+			ArrayList<SellerInfoDTO> dtos = oneDao.getSellerArticles(daoMap);
+			model.addAttribute("dtos", dtos);
+
+			System.out.println("dtos: " + dtos);
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number);
+		model.addAttribute("pageNum", pageNum);
+		
+		System.out.println("cnt: " + cnt);
+		
+		if(cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		return "one/manager/seller";
+	}
+
+	@Override
+	public String sellerInform(Model model) {
+
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		// 판매자 아이디
+		String seller_id = req.getParameter("seller_id");
+		
+		// 페이지 번호
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
+		
+		// seller_id로 회원정보를 불러옴
+		SellerInfoDTO dto = oneDao.getSellerInformArticle(seller_id);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("pageNum", pageNum);
+		
+		return "one/manager/sellerInform";
+	}
+
+	@Override
+	public String sellerSuccess(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		// 판매자 아이디
+		String seller_id = req.getParameter("seller_id");
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
+		int cnt = oneDao.updateRecognition(seller_id);
+		System.out.println("cnt");
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("seller_id", seller_id);
+		model.addAttribute("pageNum", pageNum);
+		
+		return "one/manager/sellerSuccess";
+	}
+
+	@Override
+	public String sellerRefuse(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		// 판매자 아이디
+		String seller_id = req.getParameter("seller_id");
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
+		int cnt = oneDao.updateRecognition2(seller_id);
+		System.out.println("cnt");
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("seller_id", seller_id);
+		model.addAttribute("pageNum", pageNum);
+		
+		return "one/manager/sellerRefuse";
+	}
 
 }

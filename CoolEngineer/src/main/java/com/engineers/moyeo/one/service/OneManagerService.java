@@ -51,4 +51,19 @@ public interface OneManagerService {
 	
 	// 관리자 권한에서 모임 검색하기
 	public String guestGroupSearch(Model model);
+	
+	// 하위 관리자 생성시 아이디 중복확인
+	public String confirmId(Model model);
+	
+	// 판매자관리 메인화면
+	public String seller(Model model);
+	
+	// 판매자 상세정보 보기
+	public String sellerInform(Model model);
+	
+	// 관리자가 판매승인
+	public String sellerSuccess(Model model);
+	
+	// 관리자가 판매거절
+	public String sellerRefuse(Model model);
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.ManagerDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
@@ -23,6 +24,9 @@ public class OneServiceImpl implements OneService{
 	
 	@Autowired
 	OneDAO oneDao;
+	
+	@Autowired
+	MainService mainService;
 
 	// qna 메인화면
 	@Override
@@ -341,6 +345,15 @@ public class OneServiceImpl implements OneService{
 		
 		
 		int cnt = oneDao.insertReply(rdto);	
+		QnaBoardDTO dto = oneDao.bringMemId(qboard_num);
+		
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("type", 4);
+		map2.put("mem_id", dto.getMem_id());
+		map2.put("qna_title", dto.getTitle());
+		
+		mainService.addNotice(map2);
+		
 		System.out.println("Rcnt: " + cnt);
 	
 		

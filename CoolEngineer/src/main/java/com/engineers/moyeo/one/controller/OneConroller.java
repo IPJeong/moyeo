@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.one.service.OneManagerService;
 import com.engineers.moyeo.one.service.OneReportService;
+import com.engineers.moyeo.one.service.OneSellerService;
 import com.engineers.moyeo.one.service.OneService;
 
 /**
@@ -35,6 +36,9 @@ public class OneConroller {
 	
 	@Autowired
 	OneManagerService oneManagerService;
+	
+	@Autowired
+	OneSellerService oneSellerService;
 	
 	// Q&A 게시판 홈
 	@RequestMapping(value="/qna", method=RequestMethod.GET)
@@ -364,7 +368,8 @@ public class OneConroller {
 	
 	// 관리자 로그인 폼
 	@RequestMapping(value="/managerLoginForm", method=RequestMethod.GET)
-	public String managerHome(HttpServletRequest req, Model model) {
+	public String managerHome(HttpServletRequest req, Model model) {	
+		if(req.getSession().getAttribute("manager_id")!=null)return "redirect:/one/managerMain";
 		System.out.println("관리자 로그인 폼");
 		model.addAttribute("req", req);
 		
@@ -443,6 +448,104 @@ public class OneConroller {
 		
 		model.addAttribute("req", req);
 		viewPage = oneManagerService.guestGroupSearch(model);
+		return viewPage;
+	}
+	
+	@RequestMapping(value="/confirmId")
+	public String confirmId(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		viewPage = oneManagerService.confirmId(model);
+		return viewPage;
+	}
+	
+	// 판매신청한 판매자 리스트
+	@RequestMapping(value="/seller")
+	public String seller(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		viewPage = oneManagerService.seller(model);
+		return viewPage;
+	}
+	
+	// 판매신청한 판매자 상세정보
+	@RequestMapping(value="/sellerInform")
+	public String sellerInform(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		viewPage = oneManagerService.sellerInform(model);
+		return viewPage;
+	}
+	
+	// 판매신청한 판매자 판매승인
+	@RequestMapping(value="/sellerSuccess", method=RequestMethod.GET)
+	public String sellerSuccess(HttpServletRequest req, Model model) {
+		System.out.println("판매승인");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.sellerSuccess(model);
+		
+		return viewPage;
+	}
+	
+	// 판매신청한 판매자 판매거절
+	@RequestMapping(value="/sellerRefuse", method=RequestMethod.GET)
+	public String sellerRefuse(HttpServletRequest req, Model model) {
+		System.out.println("판매거절");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneManagerService.sellerRefuse(model);
+		
+		return viewPage;
+	}
+	
+	// 판매샵에 등록된 제품의 상세정보 보기
+	@RequestMapping(value="/productDetail", method=RequestMethod.GET)
+	public String productDetail(HttpServletRequest req, Model model) {
+		System.out.println("제품 상세보기");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneSellerService.productDetail(model);
+		
+		return viewPage;
+	}
+	
+	// 판매샵(구매페이지)메인
+	@RequestMapping(value="/moyeoShop", method=RequestMethod.GET)
+	public String moyeoShop(HttpServletRequest req, Model model) {
+		System.out.println("판매샵 메인");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneSellerService.moyeoShop(model);
+		
+		return viewPage;
+	}
+	// 판매샵(판매페이지)메인
+	@RequestMapping(value="/moyeoSeller", method=RequestMethod.GET)
+	public String moyeoSeller(HttpServletRequest req, Model model) {
+		System.out.println("판매샵 메인");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneSellerService.moyeoSeller(model);
+		
 		return viewPage;
 	}
 	

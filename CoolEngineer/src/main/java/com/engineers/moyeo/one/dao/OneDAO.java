@@ -7,8 +7,10 @@ import java.util.Map;
 import com.engineers.moyeo.one.dto.ManagerDTO;
 import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
+import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
+import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
@@ -55,6 +57,10 @@ public interface OneDAO {
 	// Q&A 게시판 관리자가 답변한 내용 삭제
 	public int deleteRe(int qboard_num);
 	
+	// Q&A 알림을 위해 qboard_num을 이용해 mem_id 불러오기
+	public QnaBoardDTO bringMemId(int qboard_num);
+	
+	
 /////////////////////// 모임신고 //////////////////////////
 	
 	// group_num을 이용하여 해당 모임의 정보를 출력
@@ -75,6 +81,13 @@ public interface OneDAO {
 	// 답변여부 바꾸기
 	public int updateReport(MoimReportDTO dto);
 	
+	// 그룹번호를 통하여 신고내용 가져오기(알림)
+	public String bringReportInform(int group_num);
+	
+	// 신고키를 통하여 신고내용 가져오기(알림)
+	public MoimReportDTO bringReportInform2(int report_num);
+	
+	public String bringGroup_name(int group_num);
 	
 /////////////////////// 관리자게시판 //////////////////////////
 	
@@ -162,5 +175,26 @@ public interface OneDAO {
 	// 검색결과에 따른 모임 리스트
 	public ArrayList<MoimOpenDTO> getGroupList(Map<String, Object> daoMap);
 	
+	// 판매신청한 회원 몇명인지 구하기
+	public int getSellerCount(); 
 	
+	// 판매신청한 모든 회원정보 가져오기
+	public ArrayList<SellerInfoDTO> getSellerArticles(Map<String, Integer> daoMap);
+
+	public SellerInfoDTO getSellerInformArticle(String seller_id);
+	
+	// 판매승인 후 승인여부 바꾸기
+	public int updateRecognition(String seller_id);
+	
+	// 판매거절 후 승인여부 바꾸기
+	public int updateRecognition2(String seller_id);
+	
+	
+	/////////////////////판매샵////////////////////////
+	
+	// 전체제품 갯수 구하기
+	public int getProductCount();
+	
+	// 모든 제품정보 구하기
+	public ArrayList<ProductInfoDTO> getProductArticles(Map<String, Integer> daoMap);
 }
