@@ -14,8 +14,10 @@
 
 <link rel="icon" href="/moyeo/resources/resource/favicon.ico" type="image/x-icon" />
 <!-- END META SECTION -->
-
 <!-- CSS INCLUDE -->
+<link rel="stylesheet" type="text/css" id="theme" href="/moyeo/resources/resource/css/theme-default.css" />
+<!-- EOF CSS INCLUDE -->
+
 <style>
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
@@ -772,17 +774,13 @@ li {
 }
 </style>
 
-<link rel="stylesheet" type="text/css" id="theme" href="/moyeo/resources/resource/css/theme-default.css" />
-<!-- EOF CSS INCLUDE -->
+
 <script type="text/javascript">
 window.onload = function() {
 	$('#item_money1').val($('#item_money1').val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 	$('#order_total_money_view').val($('#order_total_money_view').val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 }
 
-function comma(x) {
-	return  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
 
 function shopNumberFormat(data) 
 {

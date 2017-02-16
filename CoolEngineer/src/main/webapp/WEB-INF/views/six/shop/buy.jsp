@@ -907,13 +907,6 @@ function smsSelfSend(order_code)
 
 
 
-
-
-
-
-
-
-
 <!-- START SCRIPTS -->
 <!-- START PLUGINS -->
 <script type="text/javascript"
@@ -949,8 +942,6 @@ function smsSelfSend(order_code)
 <script type="text/javascript" src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script>
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->
-
-
 
 </head>
 
@@ -1932,7 +1923,7 @@ var order_coupon_cash = "";
 </script>
 
 <script type="text/javascript">
-var order_pay_url = "order";
+var order_pay_url = "order?product_num=${product_num}";
 </script>
 
 <script type="text/javascript" src="/moyeo/resources/customScript/six/order.js"></script>
