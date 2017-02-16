@@ -32,7 +32,7 @@ function m_Completepayment( FormOrJson, closeEvent )
 
         if (document.getElementById("shop_cancel").value == 'cart') {
 
-            location.href = "../../cart.php";
+            location.href = "/moyeo/one/moyeoShop";
 
         }
 
@@ -57,8 +57,8 @@ setTimeout("jsf__pay();", 1000);
 <!-- 기본 주문 정보 //-->
 <input type="hidden" name="pay_method" value="000010000000">
 <input type="hidden" name="ordr_idxx" value="ZJ1702162780">
-<input type="hidden" name="good_name" value="소품 (갤러리 학습)">
-<input type="hidden" name="good_mny" value="3640">
+<input type="hidden" name="good_name" value="${good_name}">
+<input type="hidden" name="good_mny" value="${good_mny}">
 <input type="hidden" name="buyr_name" value="하대성">
 <input type="hidden" name="buyr_mail" value="111@naver.com">
 <input type="hidden" name="buyr_tel1" value="010-1111-1111">

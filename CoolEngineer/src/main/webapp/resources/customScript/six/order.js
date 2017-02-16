@@ -369,16 +369,52 @@ function orderSave()
     }
 
     if (confirm("결제 하시겠습니까?")) {
+        var pay_type = "";
+        for (var i=0; i<f.order_pay_type.length; i++) {
 
-        f.action = order_pay_url;
+            if (f.order_pay_type[i].checked == true) {
+
+                pay_type = f.order_pay_type[i].value;
+
+                break;
+
+            }
+
+        }
+    	
+    	if(pay_type == '1'){
+    	f.action = order_pay_url1;
         //f.target = "order_update";
         f.submit();
+        }
+    	
+    	if(pay_type == '2'){
+    		
+            f.action = order_pay_url2;
+            //f.target = "order_update";
+            f.submit();
+        }
+    	
+    	if(pay_type == '3'){
+    		
+            f.action = order_pay_url3;
+            //f.target = "order_update";
+            f.submit();
+        }
 
+    	if(pay_type == '4'){
+    		
+            f.action = order_pay_url4;
+            //f.target = "order_update";
+            f.submit();
+        }    	
+    	
     } else {
 
         return false;
 
     }
+
 
 }
 

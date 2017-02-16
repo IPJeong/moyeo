@@ -2194,7 +2194,7 @@ function orderCheck() {
 																		</table>
 																	</td>
 																	<td align="right" valign="top"><a href="#"
-																		onclick="replyWrite('item', '', '17', '', '1'); return false;"><img
+																		onclick="window.open('productReview?product_num=${dto.product_num}&mem_id=${mem_id}&product_name=${dto.product_name}&pic_path=${pic_dto.pic_path}&pic_name=${pic_dto.pic_name}','','menubar=no, toolbar=no, width=620, height=750, left=350, top=100'); return false;"><img
 																			src="/moyeo/resources/resource/img/shop/reply_write.gif"
 																			border="0"></a></td>
 																</tr>

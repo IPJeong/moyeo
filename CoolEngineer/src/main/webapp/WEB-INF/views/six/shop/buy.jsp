@@ -644,10 +644,10 @@ function orderSave()
 
     if (confirm("결제 하시겠습니까?")) {
 
-        f.action = order_pay_url;
+     	f.action = order_pay_url1;
         //f.target = "order_update";
         f.submit();
-
+       	
     } else {
 
         return false;
@@ -2230,16 +2230,20 @@ var order_coupon_cash = "";
 </script>
 
 <script type="text/javascript">
-var order_pay_url = "order?product_num=${product_num}";
+var total_money = parseInt(document.getElementById("total_money").value);
+
+
+var order_pay_url = "order?product_num=${product_num}&product_name=${product_name}&product_price=" + total_money;
+
 </script>
 
-<script type="text/javascript" src="/moyeo/resources/customScript/six/order.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
     orderByte('order_memo', 'order_memo_byte');
     orderCheck();
     orderPayTypeLoad();
+    
 });
 </script>
 
