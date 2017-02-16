@@ -383,6 +383,6 @@
     					FROM (SELECT * FROM product_info
     						  ORDER BY product_num DESC) 
     				  ) ss, product_pic pp   
-    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND ss.product_num = pp.product_num
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND ss.product_num = pp.product_num ORDER BY pp.product_num DESC
     </select>
 </mapper>
