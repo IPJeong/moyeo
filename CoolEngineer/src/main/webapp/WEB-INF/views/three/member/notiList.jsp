@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <!-- META SECTION -->
@@ -23,42 +24,24 @@
 	height: auto;
 }
 
-</style>
-</head>
-<script type="text/javascript">
-
-function winChk() {	
-	var winners = getElementsByName("mem_id");
-	var conf = false;
-	
-	for(i=0; i<winners.length;  i++){
-		  if(winners[i].checked == true){
-			  conf=true;
-		  }
-	}
-			  
-	if (conf == true) {	
-		if(confirm('이벤트 당첨자를 선정하시겠습니까?')) {
-			
-		} else {
-			return false;
-		}
-	} else {
-		alert('당첨자를 선정해주세요');
-		return false;
-	}
+.panel-default .panel-heading, .panel-primary .panel-heading, .panel-success .panel-heading, .panel-info .panel-heading, .panel-warning .panel-heading, .panel-danger .panel-heading {
+    background: linear-gradient( to left, #4DB6AC, #80CBC4 ,#B2DFDB, #E0F2F1);    
 }
 
-</script>
+</style>
+
+</head>
+
+<script>
+      document.body.style.overflow='hidden';  
+      if (navigator.userAgent.indexOf('Chrome')>-1) {  
+			    window.resizeTo(800, 450);   
+      }
+    </script>
 
 <body class="x-dashboard">
 	<!-- START PAGE CONTAINER -->
-	<script>
-      document.body.style.overflow='hidden';  
-      if (navigator.userAgent.indexOf('Chrome')>-1) {  
-			    window.resizeTo(700, 450);   
-      }
-    </script>
+	
 
 	<div class="page-container">
 
@@ -72,16 +55,16 @@ function winChk() {
 						<div class="col-md-8" style="margin:0px;padding:0px;">
 							<h3 class="panel-title" style="color:#03A9F4"><strong>알림메세지</strong></h3>
 						</div>
-						<div class="col-md-4" style="margin:0px;padding:0px;padding-left:80%;">							
+						<div class="col-md-4" style="margin:0px;padding:0px;padding-left:90%;">							
 							<button type="button" class="btn btn-default" onclick="window.close()">닫기</button>
 						</div>						
 					</div>						
 					<div class="panel-body panel-body-table" style="margin-top:51px;">
-						<table class="table table-striped">	
+						<table class="table table-striped table-hover">	
 							<thead>
 								<tr>
-									<th>No.</th>
-									<th>아이디</th>																	
+									<th style="width:80%">알림내용</th>
+									<th style="width:20%">알림날짜</th>																	
 								</tr>
 							</thead>						
 							<tbody>								
@@ -89,11 +72,11 @@ function winChk() {
 									<c:forEach var="dto" items="${dtos}">
 										<tr>
 											<td>
-											${start}
-											<c:set var="start" value="${start + 1}"/>
+											${dto.noti_content}
 											</td>
 											<td>											
-											${dto.mem_id}
+											<fmt:formatDate type="both" pattern="yy-MM-dd"
+												value="${dto.noti_date}"/>
 											</td>																				
 										</tr>
 									</c:forEach>
@@ -101,7 +84,33 @@ function winChk() {
 							</tbody>
 						</table>
 					</div>
-					
+					<div class="col-md-12">
+						<ul
+							class="pagination pagination-sm pull-right push-down-10 push-up-10">
+							<c:if test="${cnt > 0}">
+								<!-- 처음[◀◀] 이전[◀]-->
+								<c:if test="${startPage > pageBlock}">
+									<li><a href="notiList">«</a></li>
+									<li><a href="notiList?pageNum=${startPage - pageBlock}">‹</a></li>
+								</c:if>
+				
+								<c:forEach var="i" begin="${startPage}" end="${endPage}">
+									<c:if test="${i == currentPage}">
+										<li class="active"><a href="#">${i}</a></li>
+									</c:if>
+									<c:if test="${i != currentPage}">
+										<li><a href="notiList?pageNum=${i}">${i}</a></li>
+									</c:if>
+								</c:forEach>
+				
+								<!-- 다음[▶] 끝[▶▶] -->
+								<c:if test="${pageCount > endPage}">
+									<li><a href="notiList?pageNum=${startPage + pageBlock}">›</a></li>
+									<li><a href="notiList?pageNum=${pageCount}">»</a></li>
+								</c:if>
+							</c:if>
+						</ul>
+					</div>
 				</div>
 			
 			</div>
@@ -111,59 +120,40 @@ function winChk() {
 	
 	<!-- START SCRIPTS -->
 	
-	<script src="/moyeo/resources/customScript/three.js" type="text/javascript"></script>
-	<!-- START PLUGINS -->
 	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
-	<!-- END PLUGINS -->
+	src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- END PLUGINS -->
 
-	<!-- START THIS PAGE PLUGINS-->
-	<script type='text/javascript'
-		src="/moyeo/resources/resource/js/plugins/icheck/icheck.min.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+<!-- THIS PAGE PLUGINS -->
+<script type='text/javascript'
+	src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/morris/raphael-min.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/morris/morris.min.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/rickshaw/d3.v3.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/rickshaw/rickshaw.min.js"></script>
-	<script type='text/javascript'
-		src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
-	<script type='text/javascript'
-		src='/moyeo/resources/resource/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
-	<script type='text/javascript'
-		src='/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js'></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/owl/owl.carousel.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-select.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+<!-- END THIS PAGE PLUGINS -->
 
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/moment.min.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins/daterangepicker/daterangepicker.js"></script>
-	<!-- END THIS PAGE PLUGINS-->
-
-	<!-- START TEMPLATE -->
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/plugins.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/actions.js"></script>
-	<script type="text/javascript"
-		src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script>
-	<!-- END TEMPLATE -->
-	<!-- END SCRIPTS -->
+<!-- START TEMPLATE -->
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/settings.js"></script>
+	<script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
+        <script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script> 
 </body>
 </html>

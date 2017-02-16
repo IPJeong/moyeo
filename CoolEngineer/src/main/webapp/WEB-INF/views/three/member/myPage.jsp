@@ -114,17 +114,18 @@ $(document).ready(function() {
 	
 });
 
-function notiList(memid) {
+function notiList() {
 	
 	var windowW = 300;  // 창의 가로 길이
     var windowH = 70;  // 창의 세로 길이
     var left = Math.ceil((window.screen.width - windowW)/2);
     var top = Math.ceil((window.screen.height - windowH)/2);
 
-	window.open('notiList?memid=' + memid, 'notiWindow', 'width=700, height=450, left=' + left + 'top=' + top);
+	window.open('notiList', 'notiWindow', 'width=800, height=450, left=' + left + 'top=' + top);
 	
 }
 </script>
+
 <div class="col-md-6 page-title"></div>
 
 <div class="col-md-10 " style="margin: auto; float: none;">
@@ -297,17 +298,22 @@ function notiList(memid) {
 				</div>
 				<div class="form-group" style="float: none;">
 					<div class="col-md-8" style="margin: auto; float: none;">
-						<a href="#" onclick="notiList(${dto.mem_id})" class="btn btn-success btn-block">알림메세지</a>
-						<div style="color:#FFEBEE;						
-									border:1px solid #F44336;
-									font-size: 100%;
-								    width: 1.5em;height:1.5em;
-								    border-radius: 50%;			    
-								    display: inline-block;								    
-									 background-color:#F44336;
-									 position: absolute;left:60%;top:25%;z-index:2;
-									 padding-left: 2px;
-									 ">23</div>
+						<button type="button" class="btn btn-success btn-block" onclick="notiList()" style="width:100%">알림메세지</button>
+						<c:if test="${notiCnt == 0}">
+						
+						</c:if>
+						<c:if test="${notiCnt > 0}">
+							<div style="color:#FFEBEE;						
+										border:1px solid #F44336;
+										font-size: 100%;
+									    width: 1.5em;height:1.5em;
+									    border-radius: 50%;			    
+									    display: inline-block;								    
+										 background-color:#F44336;
+										 position: absolute;left:60%;top:25%;z-index:2;
+										 padding-left: 3px;
+										 ">${notiCnt}</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -318,7 +324,7 @@ function notiList(memid) {
 		<h2>
 			<span class="fa fa-github"></span> 가입한 모임
 		</h2>
-		<div class="panel-body panel-body-table">
+		<div class="panel-body panel-body-table" style="overflow:auto;height:240px;">
 			<table class="table table-bordered" style="border: 1px solid #E0E0E0">
 				<thead>
 					<tr>
@@ -340,36 +346,63 @@ function notiList(memid) {
 					</c:if>
 				</tbody>
 			</table>
+		</div>		
+	</div>
+	<div class="col-md-8 " style="padding: 0px;margin-top:10px;">
+		<h2>
+			<span class="fa fa-heart"></span> 관심 모임
+		</h2>
+		<div class="panel-body panel-body-table" style="overflow: auto; height:240px;">
+			<table class="table table-bordered" style="border: 1px solid #E0E0E0">
+				<thead>
+					<tr>
+						<th>모임 이름</th>
+						<th>모임 관심사</th>
+						<th>모임 지역</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${interCnt > 0}">
+						<c:forEach var="dto3" items="${interDtos}">
+							<tr>
+								<td><a
+									href="/moyeo/six/moimMain/moimMain?group_num=${dto3.group_num}">${dto3.group_name}</a></td>
+								<td>${dto3.group_inte1}- ${dto3.group_inte2}</td>
+								<td>${dto3.group_location}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</tbody>
+			</table>
 		</div>
-		<div class="col-md-12">
-		<ul
-			class="pagination pagination-sm pull-right push-down-10 push-up-10">
-			<c:if test="${cnt > 0}">
-				<!-- 처음[◀◀] 이전[◀]-->
-				<c:if test="${startPage > pageBlock}">
-					<li><a href="myPage">«</a></li>
-					<li><a href="myPage?pageNum=${startPage - pageBlock}">‹</a></li>
-				</c:if>
-
-				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<c:if test="${i == currentPage}">
-						<li class="active"><a href="#">${i}</a></li>
-					</c:if>
-					<c:if test="${i != currentPage}">
-						<li><a href="myPage?pageNum=${i}">${i}</a></li>
-					</c:if>
-				</c:forEach>
-
-				<!-- 다음[▶] 끝[▶▶] -->
-				<c:if test="${pageCount > endPage}">
-					<li><a href="myPage?pageNum=${startPage + pageBlock}">›</a></li>
-					<li><a href="myPage?pageNum=${pageCount}">»</a></li>
-				</c:if>
-			</c:if>
-		</ul>
 	</div>
+	<div class="col-md-8 " style="padding: 0px; margin-top: 10px;">
+		<h2>
+			<span class="fa fa-list-alt"></span> 모임 가입신청 이력
+		</h2>
+		<div class="panel-body panel-body-table" style="overflow: auto; height:240px;">
+			<table class="table table-bordered" style="border: 1px solid #E0E0E0">
+				<thead>
+					<tr>
+						<th>모임 이름</th>
+						<th>신청일/탈퇴일</th>
+						<th>상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${applHistoryCnt > 0}">
+						<c:forEach var="applyDto" items="${applyDtos}">
+							<tr>
+								<td><a href="/moyeo/six/moimMain/moimMain?group_num=${applyDto.group_num}">${applyDto.group_name}</a></td>
+								<td>${applyDto.request_date}</td>
+								<td>${applyDto.status}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	
 </div>
 
 
