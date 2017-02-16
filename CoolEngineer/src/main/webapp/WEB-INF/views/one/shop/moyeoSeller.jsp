@@ -68,9 +68,8 @@ li {
 	left: -3px;
 }
 
-<
-style
->
+<style>
+
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
 		{
