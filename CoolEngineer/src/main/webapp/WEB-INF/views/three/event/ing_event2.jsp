@@ -83,11 +83,11 @@
 
 <!-- PAGE CONTENT TABBED -->
 <div class="page-tabs">
-	<a href="#first-tab" class="active">진행중인 이벤트</a> <a href="#second-tab">
+	<a href="#first-tab">진행중인 이벤트</a> <a href="#second-tab" class="active">
 		당첨자 발표</a>
 </div>
 
-<div class="page-content-wrap page-tabs-item active" id="first-tab">
+<div class="page-content-wrap page-tabs-item" id="first-tab">
 	<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
 		<div class="form-group">
 			<div class="col-md-6-3" style="width: 70%;">
@@ -320,7 +320,7 @@
 	</div>
 </div>
 
-<div class="page-content-wrap page-tabs-item" id="second-tab">
+<div class="page-content-wrap page-tabs-item active" id="second-tab">
 	<div class="row">
 		<div class="col-md-6-3">
 			<div class="panel panel-default">
@@ -387,7 +387,7 @@
 																</div>
 																<div class="form-group col-md-12"
 																	style="padding: 5px; text-align: center;">
-																	<c:forEach var="dto5" items="${dtos5}">
+																	<c:forEach var="dto2" items="${dtos2}">
 																		<c:if test="${dto5.eventNum2 == dto4.eventNum}">
 																			<div class="col-md-12">
 																				<div class="col-md-8"
