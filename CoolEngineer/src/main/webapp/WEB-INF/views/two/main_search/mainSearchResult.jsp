@@ -116,7 +116,7 @@ div.page-content {
 				<br><br>
 				
 				<div style="width:80%; font-size:15px; text-align:left; margin-top:20px; margin-left:20px;">
-					<h2>검색 결과가 없습니다.</h2>
+					<h2><span style="color:red">${search_keyword}</span>에 대한 검색 결과가 없습니다.</h2>
 					<br>
 					&nbsp;&nbsp;&nbsp;단어의 철자가 정확한지 확인해 보세요.<br>
 					&nbsp;&nbsp;&nbsp;한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br>
@@ -174,15 +174,16 @@ div.page-content {
 				</div>
 				
 					<div style="float:right; margin-top:540px; margin-right:50%;">	
-							<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
-					
-								<c:if test="${mscnt > 0}">
+						<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+				
+							<c:if test="${mscnt > 0}">
 								
+								<c:if test="${search_type=='Normal'}">
+							
 									<c:if test="${startPage1 > pageBlock1}">
 										<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${startPage1 - pageBlock1}"><font
 															size="3"> «</font></a></li>
 									</c:if>
-								
 								
 									<c:forEach var="i" begin="${startPage1}" end="${endPage1}">
 										<c:if test="${i == currentPage1}">
@@ -194,14 +195,68 @@ div.page-content {
 										</c:if>
 								
 									</c:forEach>
+									
 									<c:if test="${pageCount1 > endPage1}">
 										<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${startPage1 + pageBlock1}"><font
 												size="3">»</font></a></li>
 									</c:if>
+								
+								</c:if>
+								
+								<c:if test="${search_type=='WordCloud'}">
+									
+									<c:if test="${startPage1 > pageBlock1}">
+										<li class=""><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${startPage1 - pageBlock1}"><font
+															size="3"> «</font></a></li>
 									</c:if>
-											
-							  </ul>	
-						</div>
+
+									<c:forEach var="i" begin="${startPage1}" end="${endPage1}">
+										<c:if test="${i == currentPage1}">
+											<li class=""><a href="#"><font size="3">${i}</font></a></li>
+										</c:if>
+								
+										<c:if test="${i != currentPage1}">
+											<li class=""><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${i}"><font size="3">${i}</font></a></li>
+										</c:if>
+								
+									</c:forEach>
+									
+									<c:if test="${pageCount1 > endPage1}">
+										<li><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${startPage1 + pageBlock1}"><font
+												size="3">»</font></a></li>
+									</c:if>
+								
+								</c:if>
+								
+								<c:if test="${search_type=='WordCloudByTag'}">
+								
+									<c:if test="${startPage1 > pageBlock1}">
+										<li class=""><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${startPage1 - pageBlock1}"><font
+															size="3"> «</font></a></li>
+									</c:if>
+
+									<c:forEach var="i" begin="${startPage1}" end="${endPage1}">
+										<c:if test="${i == currentPage1}">
+											<li class=""><a href="#"><font size="3">${i}</font></a></li>
+										</c:if>
+								
+										<c:if test="${i != currentPage1}">
+											<li class=""><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${i}"><font size="3">${i}</font></a></li>
+										</c:if>
+								
+									</c:forEach>
+									
+									<c:if test="${pageCount1 > endPage1}">
+										<li><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum1=${startPage1 + pageBlock1}"><font
+												size="3">»</font></a></li>
+									</c:if>
+								
+								</c:if>
+								
+							</c:if>
+										
+						 </ul>	
+					</div>
 		  		</div>
 		  </div>  
 
@@ -264,26 +319,77 @@ div.page-content {
 			<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
 	
 				<c:if test="${mpscnt > 0}">
-				
-					<c:if test="${startPage2 > pageBlock2}">
-						<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 - pageBlock2}"><font
-											size="3"> «</font></a></li>
+					
+					<c:if test="${search_type=='Normal'}">
+					
+						<c:if test="${startPage2 > pageBlock2}">
+							<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 - pageBlock2}"><font
+												size="3"> «</font></a></li>
+						</c:if>
+
+						<c:forEach var="i" begin="${startPage2}" end="${endPage2}">
+							<c:if test="${i == currentPage2}">
+								<li class=""><a href="#"><font size="3">${i}</font></a></li>
+							</c:if>
+					
+							<c:if test="${i != currentPage2}">
+								<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${i}"><font size="3">${i}</font></a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pageCount2 > endPage2}">
+							<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 + pageBlock2}"><font
+									size="3">»</font></a></li>
+						</c:if>	
+					
+					</c:if>
+					
+					<c:if test="${search_type=='WordCloud'}">
+					
+						<c:if test="${startPage2 > pageBlock2}">
+							<li class=""><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 - pageBlock2}"><font
+												size="3"> «</font></a></li>
+						</c:if>
+
+						<c:forEach var="i" begin="${startPage2}" end="${endPage2}">
+							<c:if test="${i == currentPage2}">
+								<li class=""><a href="#"><font size="3">${i}</font></a></li>
+							</c:if>
+					
+							<c:if test="${i != currentPage2}">
+								<li class=""><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${i}"><font size="3">${i}</font></a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pageCount2 > endPage2}">
+							<li><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 + pageBlock2}"><font
+									size="3">»</font></a></li>
+						</c:if>
+					
+					</c:if>
+					
+					<c:if test="${search_type=='WordCloudByTag'}">
+					
+						<c:if test="${startPage2 > pageBlock2}">
+							<li class=""><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 - pageBlock2}"><font
+												size="3"> «</font></a></li>
+						</c:if>
+
+						<c:forEach var="i" begin="${startPage2}" end="${endPage2}">
+							<c:if test="${i == currentPage2}">
+								<li class=""><a href="#"><font size="3">${i}</font></a></li>
+							</c:if>
+					
+							<c:if test="${i != currentPage2}">
+								<li class=""><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${i}"><font size="3">${i}</font></a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pageCount2 > endPage2}">
+							<li><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 + pageBlock2}"><font
+									size="3">»</font></a></li>
+						</c:if>
+					
 					</c:if>
 				
-				
-					<c:forEach var="i" begin="${startPage2}" end="${endPage2}">
-						<c:if test="${i == currentPage2}">
-							<li class=""><a href="#"><font size="3">${i}</font></a></li>
-						</c:if>
-				
-						<c:if test="${i != currentPage2}">
-							<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${i}"><font size="3">${i}</font></a></li>
-						</c:if>
-					</c:forEach>
-					<c:if test="${pageCount2 > endPage2}">
-						<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum2=${startPage2 + pageBlock2}"><font
-								size="3">»</font></a></li>
-					</c:if>
+					
 			   </c:if>
 							
 			</ul>	
@@ -342,24 +448,73 @@ div.page-content {
 	
 				<c:if test="${picnt > 0}">
 				
-					<c:if test="${startPage3 > pageBlock3}">
-						<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 - pageBlock3}"><font
-											size="3"> «</font></a></li>
+					<c:if test="${search_type=='Normal'}">
+				
+						<c:if test="${startPage3 > pageBlock3}">
+							<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 - pageBlock3}"><font
+												size="3"> «</font></a></li>
+						</c:if>
+					
+						<c:forEach var="i" begin="${startPage3}" end="${endPage3}">
+							<c:if test="${i == currentPage3}">
+								<li class=""><a href="#"><font size="3">${i}</font></a></li>
+							</c:if>
+					
+							<c:if test="${i != currentPage3}">
+								<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${i}"><font size="3">${i}</font></a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pageCount3 > endPage3}">
+							<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 + pageBlock3}"><font
+									size="3">»</font></a></li>
+						</c:if>
+						
 					</c:if>
-				
-				
-					<c:forEach var="i" begin="${startPage3}" end="${endPage3}">
-						<c:if test="${i == currentPage3}">
-							<li class=""><a href="#"><font size="3">${i}</font></a></li>
+					
+					<c:if test="${search_type=='WordCloud'}">
+					
+						<c:if test="${startPage3 > pageBlock3}">
+							<li class=""><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 - pageBlock3}"><font
+												size="3"> «</font></a></li>
 						</c:if>
-				
-						<c:if test="${i != currentPage3}">
-							<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${i}"><font size="3">${i}</font></a></li>
+					
+						<c:forEach var="i" begin="${startPage3}" end="${endPage3}">
+							<c:if test="${i == currentPage3}">
+								<li class=""><a href="#"><font size="3">${i}</font></a></li>
+							</c:if>
+					
+							<c:if test="${i != currentPage3}">
+								<li class=""><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${i}"><font size="3">${i}</font></a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pageCount3 > endPage3}">
+							<li><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 + pageBlock3}"><font
+									size="3">»</font></a></li>
 						</c:if>
-					</c:forEach>
-					<c:if test="${pageCount3 > endPage3}">
-						<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 + pageBlock3}"><font
-								size="3">»</font></a></li>
+					
+					</c:if>
+					
+					<c:if test="${search_type=='WordCloudByTag'}">
+						
+						<c:if test="${startPage3 > pageBlock3}">
+							<li class=""><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 - pageBlock3}"><font
+												size="3"> «</font></a></li>
+						</c:if>
+					
+						<c:forEach var="i" begin="${startPage3}" end="${endPage3}">
+							<c:if test="${i == currentPage3}">
+								<li class=""><a href="#"><font size="3">${i}</font></a></li>
+							</c:if>
+					
+							<c:if test="${i != currentPage3}">
+								<li class=""><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${i}"><font size="3">${i}</font></a></li>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pageCount3 > endPage3}">
+							<li><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum3=${startPage3 + pageBlock3}"><font
+									size="3">»</font></a></li>
+						</c:if>
+						
 					</c:if>
 			   </c:if>
 							
@@ -420,31 +575,81 @@ div.page-content {
 							<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
 					
 								<c:if test="${rpcnt > 0}">
-								
-									<c:if test="${startPage4 > pageBlock4}">
-										<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 - pageBlock4}"><font
-															size="3"> «</font></a></li>
-									</c:if>
-								
-								
-									<c:forEach var="i" begin="${startPage4}" end="${endPage4}">
-										<c:if test="${i == currentPage4}">
-											<li class=""><a href="#"><font size="3">${i}</font></a></li>
+									<c:if test="${search_type=='Normal'}">
+									
+										<c:if test="${startPage4 > pageBlock4}">
+											<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 - pageBlock4}"><font
+																size="3"> «</font></a></li>
 										</c:if>
-								
-										<c:if test="${i != currentPage4}">
-											<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${i}"><font size="3">${i}</font></a></li>
+									
+										<c:forEach var="i" begin="${startPage4}" end="${endPage4}">
+											<c:if test="${i == currentPage4}">
+												<li class=""><a href="#"><font size="3">${i}</font></a></li>
+											</c:if>
+									
+											<c:if test="${i != currentPage4}">
+												<li class=""><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${i}"><font size="3">${i}</font></a></li>
+											</c:if>
+									
+										</c:forEach>
+										<c:if test="${pageCount4 > endPage4}">
+											<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 + pageBlock4}"><font
+													size="3">»</font></a></li>
 										</c:if>
-								
-									</c:forEach>
-									<c:if test="${pageCount4 > endPage4}">
-										<li><a href="mainSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 + pageBlock4}"><font
-												size="3">»</font></a></li>
 									</c:if>
+									
+									<c:if test="${search_type=='WordCloud'}">
+	
+										<c:if test="${startPage4 > pageBlock4}">
+											<li class=""><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 - pageBlock4}"><font
+																size="3"> «</font></a></li>
+										</c:if>
+									
+										<c:forEach var="i" begin="${startPage4}" end="${endPage4}">
+											<c:if test="${i == currentPage4}">
+												<li class=""><a href="#"><font size="3">${i}</font></a></li>
+											</c:if>
+									
+											<c:if test="${i != currentPage4}">
+												<li class=""><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${i}"><font size="3">${i}</font></a></li>
+											</c:if>
+									
+										</c:forEach>
+										<c:if test="${pageCount4 > endPage4}">
+											<li><a href="wordCloudSearch?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 + pageBlock4}"><font
+													size="3">»</font></a></li>
+										</c:if>
+										
 									</c:if>
+									
+									<c:if test="${search_type=='WordCloudByTag'}">
+									
+										<c:if test="${startPage4 > pageBlock4}">
+											<li class=""><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 - pageBlock4}"><font
+																size="3"> «</font></a></li>
+										</c:if>
+									
+										<c:forEach var="i" begin="${startPage4}" end="${endPage4}">
+											<c:if test="${i == currentPage4}">
+												<li class=""><a href="#"><font size="3">${i}</font></a></li>
+											</c:if>
+									
+											<c:if test="${i != currentPage4}">
+												<li class=""><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${i}"><font size="3">${i}</font></a></li>
+											</c:if>
+									
+										</c:forEach>
+										<c:if test="${pageCount4 > endPage4}">
+											<li><a href="wordCloudSearchByTag?search_keyword=${search_keyword}&search_radio1=${search_radio1}&search_radio2=${search_radio2}&search_radio3=${search_radio3}&search_radio4=${search_radio4}&pageNum4=${startPage4 + pageBlock4}"><font
+													size="3">»</font></a></li>
+										</c:if>
+									
+									</c:if>
+									
+								</c:if>
 											
-							  </ul>	
-						</div>
+							</ul>	
+					  </div>
 		  		</div>
 		  </div>  
 
