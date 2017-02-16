@@ -146,6 +146,16 @@ public class ThreeController {
 		return viewPage;
 	}
 	
+	@RequestMapping("/ing_event2") //이벤트 페이지
+	public String ing_event2(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		viewPage = threeService.ing_event2(model);
+		System.out.println("ing_event()");
+		
+		return viewPage;
+	}
+	
 	@RequestMapping("/eventInsert") //이벤트 입력
 	public String eventInsert(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";

@@ -447,9 +447,11 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		if(cnt2 > 0) {
 			ArrayList<EventDTO> dtos3 = dao.getWinList(dataMap2); //이벤트 리스트 불러오기
-			ArrayList<EventDTO> dtos4 = dao.getDoneEventList(dataMap2);//이벤트 이미지 불러오기			
+			ArrayList<EventDTO> dtos4 = dao.getDoneEventList(dataMap2);//이벤트 이미지 불러오기	
+			ArrayList<EventDTO> dtos5 = dao.getEventPic(dataMap2);
 			req.setAttribute("dtos3", dtos3);
 			req.setAttribute("dtos4", dtos4);
+			req.setAttribute("dtos5", dtos5);
 			
 		}
 		
@@ -491,6 +493,141 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/event/ing_event";	
 	}
+	
+	//이벤트 페이지2
+		@Override
+		public String ing_event2(Model model) {
+			
+			Map<String, Object> map = model.asMap();
+			HttpServletRequest req = (HttpServletRequest)map.get("req");
+			
+			//이벤트 리스트
+			int pageSize = 3;		//	한 페이지당 출력한 글 개수
+			int pageBlock = 5;		//	출력할 페이지 개수
+			
+			int cnt = 0;			// 글 개수
+			int start = 0;			// 현재 페이지 시작번호 : rownum
+			int end	= 0;			// 현재 페이지지 끝번호 : rownum
+			int number = 0;			// 출력할 글 번호
+			String pageNum = null;	// 페이지 번호
+			int currentPage = 0;	// 현재 페이지
+			
+			int pageCount = 0;		// 페이지 개수
+			int startPage = 0;		// 시작 페이지
+			int endPage = 0;		// 마지막 페이지
+			
+			//당첨자 리스트
+			int pageSize2 = 5;		//	한 페이지당 출력한 글 개수
+			int pageBlock2 = 5;		//	출력할 페이지 개수
+			
+			int cnt2 = 0;			// 글 개수
+			int start2 = 0;			// 현재 페이지 시작번호 : rownum
+			int end2	= 0;			// 현재 페이지지 끝번호 : rownum
+			int number2 = 0;			// 출력할 글 번호
+			String pageNum2 = null;	// 페이지 번호
+			int currentPage2 = 0;	// 현재 페이지
+			
+			int pageCount2 = 0;		// 페이지 개수
+			int startPage2 = 0;		// 시작 페이지
+			int endPage2 = 0;		// 마지막 페이지
+			
+			cnt = dao.getEventCount(); //등록된 이벤트 개수 가져오기	
+			cnt2 = dao.getWinCount(); //당첨 리스트 개수
+			
+			pageNum = req.getParameter("pageNum");
+			pageNum2 = req.getParameter("pageNum2");
+			
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			
+			if(pageNum2 == null) {
+				pageNum2 = "1";
+			}
+			
+			currentPage = Integer.parseInt(pageNum);
+			pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+			
+			currentPage2 = Integer.parseInt(pageNum2);
+			pageCount2 = (cnt2 / pageSize2) + (cnt2 % pageSize2 > 0 ? 1 : 0);
+			
+			start = (currentPage - 1) * pageSize + 1; // (5 - 1) * 10 + 1;
+			end = start + pageSize - 1; //41 + 10 - 1 = 50;
+			
+			start2 = (currentPage2 - 1) * pageSize2 + 1; // (5 - 1) * 10 + 1;
+			end2 = start2 + pageSize2 - 1; //41 + 10 - 1 = 50;
+			
+			if(end > cnt) end = cnt;
+			
+			if(end2 > cnt2) end2 = cnt2;
+					
+			number = cnt - (currentPage - 1) * pageSize;
+			
+			number2 = cnt2 - (currentPage2 - 1) * pageSize2;
+			
+			Map<String, Integer> dataMap = new HashMap<>();
+			dataMap.put("start", start);
+			dataMap.put("end", end);
+			
+			if(cnt > 0) {
+				ArrayList<EventDTO> dtos = dao.getEventList(dataMap); //이벤트 리스트 불러오기
+				ArrayList<EventDTO> dtos2 = dao.getEventPic(dataMap); //이벤트 이미지 불러오기
+				req.setAttribute("dtos", dtos);
+				req.setAttribute("dtos2", dtos2);
+			}
+			
+			Map<String, Integer> dataMap2 = new HashMap<>();
+			dataMap2.put("start", start2);
+			dataMap2.put("end", end2);
+			
+			if(cnt2 > 0) {
+				ArrayList<EventDTO> dtos3 = dao.getWinList(dataMap2); //이벤트 리스트 불러오기
+				ArrayList<EventDTO> dtos4 = dao.getDoneEventList(dataMap2);//이벤트 이미지 불러오기	
+				ArrayList<EventDTO> dtos5 = dao.getEventPic(dataMap2);
+				req.setAttribute("dtos3", dtos3);
+				req.setAttribute("dtos4", dtos4);
+				req.setAttribute("dtos5", dtos5);
+				
+			}
+			
+			startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+			if(currentPage % pageBlock == 0) startPage -= pageBlock;
+			
+			startPage2 = (currentPage2 / pageBlock2) * pageBlock2 + 1; // (5 / 3) * 3 + 1 = 4
+			if(currentPage2 % pageBlock2 == 0) startPage2 -= pageBlock2;
+			
+			endPage = startPage + pageBlock - 1;
+			if(endPage > pageCount) endPage = pageCount;
+			
+			endPage2 = startPage2 + pageBlock2 - 1;
+			if(endPage2 > pageCount2) endPage2 = pageCount2;
+			
+			req.setAttribute("cnt", cnt);
+			req.setAttribute("number", number); 
+			req.setAttribute("pageNum", pageNum);
+			
+			req.setAttribute("cnt2", cnt2);
+			req.setAttribute("number2", number2); 
+			req.setAttribute("pageNum2", pageNum2);
+			
+			if(cnt > 0) {
+				req.setAttribute("currentPage", currentPage);
+				req.setAttribute("startPage", startPage);
+				req.setAttribute("endPage", endPage);
+				req.setAttribute("pageCount", pageCount);
+				req.setAttribute("pageBlock", pageBlock);
+			}
+			
+			if(cnt2 > 0) {
+				req.setAttribute("currentPage2", currentPage2);
+				req.setAttribute("startPage2", startPage2);
+				req.setAttribute("endPage2", endPage2);
+				req.setAttribute("pageCount2", pageCount2);
+				req.setAttribute("pageBlock2", pageBlock2);
+			}
+			
+			return "/three/event/ing_event2";	
+		}
 	
 	//아이디 중복체크
 	@Override

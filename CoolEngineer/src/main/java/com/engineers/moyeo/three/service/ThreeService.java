@@ -19,6 +19,7 @@ public interface ThreeService {
 	public String faqDelete(Model model); //FAQ 삭제
 	
 	public String ing_event(Model model); //이벤트 진입
+	public String ing_event2(Model model); //이벤트 진입
 	public String eventInsert(Model model); //이벤트 입력
 	public String eventParticipate(Model model); //이벤트 참여
 	public String eventParticipants(Model model); //이벤트 참가자 명단
