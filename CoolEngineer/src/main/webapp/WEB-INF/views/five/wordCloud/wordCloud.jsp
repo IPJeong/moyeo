@@ -18,10 +18,10 @@
 				<ul>
 					<c:forEach var="wordDto" items="${wordDtos}">
 						<c:if test="${wordDto.part_of_speech == 'Hashtag'}">
-							<li><a href="/moyeo/two/wordCloudSearchByTag?search_keyword=${wordDto.word}" target="_blank">${wordDto.word}</a></li>
+							<li><a href="/moyeo/two/wordCloudSearchByTag?search_keyword=${wordDto.word}">${wordDto.word}</a></li>
 						</c:if>
 						<c:if test="${wordDto.part_of_speech != 'Hashtag'}">
-							<li><a href="/moyeo/two/wordCloudSearch?search_keyword=${wordDto.word}" target="_blank">${wordDto.word}</a></li>
+							<li><a href="/moyeo/two/wordCloudSearch?search_keyword=${wordDto.word}">${wordDto.word}</a></li>
 						</c:if>
 					</c:forEach>
 				</ul>

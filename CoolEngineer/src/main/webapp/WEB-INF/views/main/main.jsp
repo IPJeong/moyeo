@@ -372,7 +372,7 @@ li {
 								<div class="panel-title-box">
 									<font size="4px;">
 										<a href="/moyeo/event/ing-event.jsp">이벤트</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="fa fa-plus-square-o" href="#"><font size="2">더보기</font></a>
+										<a class="fa fa-plus-square-o" href="/moyeo/three/ing_event"><font size="2">더보기</font></a>
 									</font><br>
 									<span>Moyeo에서 진행하는 다양한 이벤트에 참여해 보세요.</span>
 								</div>
