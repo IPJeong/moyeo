@@ -291,9 +291,9 @@ public class MainServiceImpl implements MainService{
 		System.out.println(wordList);
 		for(WordDTO dto : wordList) {
 			if(dto.getPart_of_speech().equals("Hashtag")){
-				resultMsg += "<li><a href='/moyeo/two/wordCloudSearchByTag?search_keyword=" + dto.getWord().replaceAll("#", "") + "' target='_blank'>" + dto.getWord() + "</a></li>";
+				resultMsg += "<li><a href='/moyeo/two/wordCloudSearchByTag?search_keyword=" + dto.getWord().replaceAll("#", "") + "' >" + dto.getWord() + "</a></li>";
 			} else {
-				resultMsg += "<li><a href='/moyeo/two/wordCloudSearch?search_keyword=" + dto.getWord() + "' target='_blank'>" + dto.getWord() + "</a></li>";
+				resultMsg += "<li><a href='/moyeo/two/wordCloudSearch?search_keyword=" + dto.getWord() + "' >" + dto.getWord() + "</a></li>";
 			}
 		}
 		if(wordList.isEmpty())resultMsg += "<li><a href='#' target='_blank'>단어가 없습니다.</a></li>";
