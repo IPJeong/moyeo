@@ -151,13 +151,26 @@
     <select id="shopGetCount" resultType="int">
   		SELECT count(*) FROM  product_info
    </select>	
-    
+   
+   
+    <!-- 제품번호 조회  -->
+	<select id="getProductNum" resultType="int">
+		SELECT product_info_seq.nextval from dual
+	</select>    
+
     
     <!-- 제품 등록 -->
-   <insert id="productInsert" parameterType="com.engineers.moyeo.four.dto.productInfoDTO">
-   		 INSERT INTO product_info (product_num, product_name, product_price, product_qty, product_detail, seller_id)
-  			values(product_info_seq.nextval, #{product_name}, #{product_price}, #{product_qty}, #{product_detail},#{seller_id})
+    <insert id="productInsert" parameterType="com.engineers.moyeo.four.dto.productInfoDTO">
+   		 INSERT INTO product_info (product_num, product_name, product_price, product_qty, product_detail, seller_id, product_cat1, product_cat2)
+  			values(#{product_num}, #{product_name}, #{product_price}, #{product_qty}, #{product_detail},#{seller_id},#{product_cat1}, #{product_cat2})
+  			
 	</insert>
+   
+  
+   <!-- 추가2 --> <!-- 제품등록 중 사진을 등록하는 쿼리 -->
+   <insert id="productPictureInsert" parameterType="com.engineers.moyeo.four.dto.productPicDTO">
+   		INSERT INTO product_pic (pic_num, pic_path, pic_name, product_num, pic_type) VALUES (product_pic_seq.nextval, #{pic_path}, #{pic_name}, #{product_num}, #{pic_type})
+   </insert>
    
     <!-- 제품 목록-->
     <select id="productArticles" parameterType="Map" resultType="com.engineers.moyeo.four.dto.productInfoDTO"> 
@@ -168,8 +181,20 @@
 				)		  
           WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
     </select>
- 
-    
+ 	
+    <!-- 알림 -->
+   	<select id="alrim"  parameterType="int" resultMap="rmap">
+   		SELECT gb.mem_id as mem_id, gl.group_name as group_name
+			  FROM greeting_board gb, group_list gl
+		  	 WHERE gb.greeting_num = #{greeting_num}
+			   AND gb.group_num = gl.group_num
+   	</select>
 	
-	   
+	<resultMap type="java.util.HashMap" id="rmap">
+	<result javaType="java.lang.String" column="mem_id" property="mem_id"/>
+	<result javaType="java.lang.String" column="group_name" property="group_name" />
+	</resultMap>
+	
+	
+	
 </mapper>

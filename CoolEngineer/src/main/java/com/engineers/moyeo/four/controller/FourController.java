@@ -4,9 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.engineers.moyeo.four.service.FourService;
+import com.engineers.moyeo.main.model.FileForm;
 
 /**
  * 
@@ -260,10 +263,11 @@ public class FourController {
 	}
 	//제품 등록 처리
 	@RequestMapping("productInsertPro")
-	public String productInsertpro(HttpServletRequest req, Model model) {
+	public String productInsertpro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req,  Model model) {
 		System.out.println("productInsertPro 실행");
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
+		model.addAttribute("fileForm", fileForm);
 		String viewPage=fourService.productInsertproExecute(model);
 		return viewPage;
 	}

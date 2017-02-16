@@ -59,6 +59,12 @@
     	DELETE FROM qna_reply WHERE qboard_num=#{qboard_num}
     </delete>
     
+    <!--  Q&A 알림을 위해 qboard_num을 이용해 mem_id 불러오기 -->
+    <select id="bringMemId" parameterType="int" resultType="com.engineers.moyeo.one.dto.QnaBoardDTO">
+    	SELECT mem_id, title FROM qna WHERE qboard_num=#{qboard_num}
+    </select>
+    
+    
     <!-- Q&A 게시판 답변내용 삭제 -->
     <delete id="deleteAnws" parameterType="int">
     	DELETE FROM qna_reply WHERE reply_num=#{reply_num}
@@ -112,6 +118,21 @@
     				  )  
     	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
     </select>
+    
+    <!--  Q&A 알림을 위해 qboard_num을 이용해 mem_id 불러오기 -->
+    <select id="bringReportInform" parameterType="int" resultType="String">
+    	SELECT mem_id FROM my_group WHERE group_num=#{group_num} AND group_per=1
+    </select>
+    
+    <!-- 모임신고 알림을 위해 report_num을 이용해 정보를 불러오기 -->
+    <select id="bringReportInform2" parameterType="int" resultType="com.engineers.moyeo.one.dto.MoimReportDTO">
+    	SELECT mem_id, group_num FROM report_group WHERE report_num=#{report_num}
+    </select>
+    
+    <select id="bringGroup_name" parameterType="int" resultType="String">
+    	SELECT group_name FROM group_list WHERE group_num=#{group_num}
+    </select>
+    
     
     <!-- report_num을 통하여 해당 모임 정보 가져오기 -->
     <select id="getMoimContentArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MoimReportDTO">
@@ -321,4 +342,47 @@
    		  WHERE rnum BETWEEN #{start} AND #{end}
     </select>
    
+   	<!-- 판매샵에서 판매신청한 회원수 구하기 -->
+    <select id="getSellerCount" resultType="int">
+    	SELECT count(*) FROM seller_info
+    </select>
+    
+    <!-- 판매신청한 회원의 모든 정보 구하기 -->
+    <select id="getSellerArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.SellerInfoDTO">
+    	SELECT * 
+    			FROM (SELECT seller_id, tel, address, comp_name, bank, account_number, depositor, reason, reg_date, bc_path, bc_name, recognition, rownum rnum
+    					FROM (SELECT * FROM seller_info
+    						  ORDER BY reg_date DESC)
+    				  )  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+    </select>
+    
+    <select id="getSellerInformArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.SellerInfoDTO">
+    	SELECT * FROM seller_info WHERE seller_id = #{seller_id}
+    </select>
+    
+    <!-- 판매승인 후 승인여부 변경 -->
+    <update id="updateRecognition" parameterType="String">
+    	UPDATE seller_info SET recognition='06' WHERE seller_id=#{seller_id}
+    </update>
+    
+    <!-- 판매거절 후 승인여부 변경 -->
+    <update id="updateRecognition2" parameterType="String">
+    	UPDATE seller_info SET recognition='15' WHERE seller_id=#{seller_id}
+    </update>
+    
+    <!-- 판매되고 있는 모든 상품갯수 조회 -->
+    <select id="getProductCount" resultType="int">
+    	SELECT count(*) FROM product_info
+    </select>
+    
+    <!-- 모든 제품 구하기 -->
+    <select id="getProductArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ProductInfoDTO">
+    	SELECT * 
+    			FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, rownum rnum
+    					FROM (SELECT * FROM product_info
+    						  ORDER BY product_num DESC) 
+    				  ) ss, product_pic pp   
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND ss.product_num = pp.product_num
+    </select>
 </mapper>

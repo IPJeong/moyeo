@@ -14,6 +14,7 @@ import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 
 import com.engineers.moyeo.four.dto.productInfoDTO;
+import com.engineers.moyeo.four.dto.productPicDTO;
 
 
 @Repository
@@ -221,6 +222,27 @@ public class FourDAOImpl implements FourDAO{
 		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
 		dtos = dao.productArticles(daoMap);
 		return dtos;
+	}
+	@Override
+	public int getProductNum() {
+		int cnt  = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.getProductNum();
+		return cnt;
+	}
+	@Override
+	public Map<String, String> alrim(int greeting_num) {
+		Map<String, String> daomap2 = null;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		daomap2 = dao.alrim(greeting_num);
+		return daomap2;
+	}
+	@Override
+	public int productPictureInsert(productPicDTO dto) {
+		int cnt = 0;
+		FourDAO dao = this.sqlSession.getMapper(FourDAO.class);
+		cnt = dao.productPictureInsert(dto);
+		return cnt;
 	}
 	
 	

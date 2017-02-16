@@ -3,6 +3,7 @@ package com.engineers.moyeo.four.service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,17 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.engineers.moyeo.five.dto.PostPictureDTO;
+import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.four.dao.FourDAO;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.four.dto.productInfoDTO;
+import com.engineers.moyeo.four.dto.productPicDTO;
 import com.engineers.moyeo.main.common.Code;
+import com.engineers.moyeo.main.common.FileManager;
+import com.engineers.moyeo.main.dao.MainDAO;
+import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
+import com.engineers.moyeo.six.dto.SellerInfoDTO;
 
 @Service
 public class FourServiceImpl implements FourService{
@@ -30,6 +40,9 @@ public class FourServiceImpl implements FourService{
 	
 	@Autowired
 	SixDAO sixDao;
+	
+	@Autowired
+	MainService mainService;
 	//댓글이 달릴 떄, 알림에 띄워주는 메소드 : 아직 미정
 	public void memethod() {
 		//TextMessage.memGreetingReplyMsg(mem_id, group_name, id);
@@ -299,7 +312,11 @@ public class FourServiceImpl implements FourService{
 		GroupNoticeDTO dto = fourDao.getArticle(num);
 		System.out.println("dto: " + dto);
 		
-		fourDao.addReadCnt(num);
+		//조회수, 자기 아이디가 아닐 때만 증가
+		if(!dto.getMem_id().equals((String)req.getSession().getAttribute("mem_id"))){
+			fourDao.addReadCnt(num);
+
+		}
 		
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("number", number);
@@ -727,8 +744,12 @@ public class FourServiceImpl implements FourService{
 		ArrayList<GreetingReplyDTO> dtos = fourDao.replegGetArticles(num);
 		
 		System.out.println("가입인사 글내용 dto: " + dto);
-		//System.out.println("dtos: " + dtos);
-		fourDao.greetingAddReadCnt(num);
+		if(!dto.getMem_id().equals((String)req.getSession().getAttribute("mem_id"))){
+			fourDao.greetingAddReadCnt(num);
+			
+
+		}
+		
 		
 		/*if (group_per == ) {
 			
@@ -925,6 +946,27 @@ public class FourServiceImpl implements FourService{
 		//FourDAO dao = FourDAOImpl.getInstance();
 		int cnt = fourDao.repleInsert(dto);
 		System.out.println("cnt: " + cnt);
+		
+		if(cnt == 1) {
+			
+			Map<String, String> daoMap2 =fourDao.alrim(greeting_num);
+			Map<String, Object> daoMap = new HashMap<>();
+
+			String mem_id = daoMap2.get("mem_id");
+			String from_id = (String) req.getSession().getAttribute("mem_id");
+			System.out.println(daoMap2.get("mem_id")+"//" + daoMap2.get("group_name"));
+			
+			daoMap.put("type", 2);
+			daoMap.put("mem_id", mem_id);
+			daoMap.put("from_id", from_id);
+			daoMap.put("group_name", daoMap2.get("group_name"));
+			if(!from_id.equals(mem_id)) {
+				mainService.addNotice(daoMap);
+			}
+			
+		}
+		
+		
 		model.addAttribute("cnt", cnt);
 		
 		return "redirect:/four/moim_greeting_contentform?num="+num+"&pageNum="+pageNum+"&number="+number;
@@ -970,7 +1012,7 @@ public class FourServiceImpl implements FourService{
 		
 		return "redirect:/four/moim_greeting_contentform?num="+num+"&pageNum="+pageNum+"&number="+number;
 	}
-
+	//좋아요 새롭게 추가
 	@Override
 	public String likeInsertExecute(Model model) {
 		Map<String, Object> map = model.asMap();
@@ -996,13 +1038,40 @@ public class FourServiceImpl implements FourService{
 			
 			model.addAttribute("cnt", cnt);
 		} else {
-			//좋아요 테이블 좋아요컬럼 증가
+			//1.첫번째 메소드 실행 : 좋아요 테이블 좋아요컬럼 증가
 			cnt = fourDao.likeInsert(daoMap);
-			//가입인사 테이블 좋아요컬럼 증가
+			System.out.println("좋아요 cnt: " +cnt); //   1나옴
+			
+			//2. 두번째 메소드 실행 : 가입인사 테이블 좋아요컬럼 증가
 			fourDao.likecacount(greeting_num);
 
 			System.out.println("cnt : " + cnt);
+				
+			if(cnt == 1) {
+				
+				Map<String, String> daoMap2 =fourDao.alrim(greeting_num);
+				Map<String, Object> daoMap1 = new HashMap<>();
+
+				String mem_id1 = daoMap2.get("mem_id");
+				String from_id = (String) req.getSession().getAttribute("mem_id");
+				System.out.println(daoMap2.get("mem_id")+"//" + daoMap2.get("group_name"));
+				
+				daoMap1.put("type", 3);
+				daoMap1.put("mem_id", mem_id1);
+				daoMap1.put("from_id", from_id);
+				daoMap1.put("group_name", daoMap2.get("group_name"));
+				
+				if(!from_id.equals(mem_id1)) {
+					mainService.addNotice(daoMap1);
+				}
+				
+				
+			}
+			
 		}
+		
+		
+		
 		model.addAttribute("cnt", cnt);
 		
 		return "four/greeting_board/moim_greeting_likepro";
@@ -1100,42 +1169,88 @@ public class FourServiceImpl implements FourService{
 
 	@Override
 	public String productInsertFormExecute(Model model) {
-
+		
 		
 		return "four/shop/productInsertForm";
 	}
-
+	//제품 등록
 	@Override
 	public String productInsertproExecute(Model model) {
 		
 		Map<String, Object> map = model.asMap();
 	    HttpServletRequest req= (HttpServletRequest)map.get("req");
 	    
+	    System.out.println(req.getParameter("shop_category1"));
+	    System.out.println(req.getParameter("shop_category2"));
+		String product_cat1 = req.getParameter("shop_category1"); //카테고리1
+		String product_cat2 = req.getParameter("shop_category2"); //카테고리2
+		
+		String mem_id = (String)(req.getSession().getAttribute("mem_id"));
 	    //폼에서 값을 받아와서 dto에 넣어 정의.
 	    //쿼리문에 어떻게 넣을 건지를 결정.
 		productInfoDTO dto = new productInfoDTO();
-		//dto.setProduct_num 는 nextval로 증가
+		
+		//SELECT로 제품번호 조회 메소드 실행
+		int product_num = fourDao.getProductNum();
+		dto.setProduct_num(product_num);
 		dto.setProduct_name(req.getParameter("product_name"));
 		dto.setProduct_price(req.getParameter("product_price"));
 		dto.setProduct_qty(Integer.parseInt(req.getParameter("product_qty")));
 		dto.setProduct_detail(req.getParameter("product_detail"));
-		dto.setSeller_id((String)(req.getSession().getAttribute("mem_id")));
+		dto.setSeller_id(mem_id);
+		dto.setProduct_cat1(product_cat1);
+		dto.setProduct_cat2(product_cat2);
 		
-	
-		System.out.println("실행");
 		//데이터 메소드 실행
-		//Fourdao.
 		int cnt = fourDao.productInsert(dto);
-	    System.out.println("제품등록 Insert cnt: " + cnt);
-		
-		//값 설정
 		model.addAttribute("cnt", cnt);
+		System.out.println(cnt);
+
 		
 		
+		//사진등록부분
 		
+		// 업로드 파일 객체를 꺼냄
+		FileForm fileForm = (FileForm)map.get("fileForm");
+		
+		// 업로드파일 관리
+		List<MultipartFile> files = fileForm.getFiles();
+		int pic_cnt = 0;
+		
+		// 업로드 파일 확인
+		for (MultipartFile multipartFile : files) {
+			// 업로드된 파일 이름을 받아옴
+			String fileName = multipartFile.getOriginalFilename();
+			
+			if(fileName.trim().length()>4){
+				
+				String rootPath = Code.rootPath;
+				String imgPath = Code.PRODUCT_PATH;
+				
+				int type = FileManager.checkFileType(fileName);
+				String filename = null;
+				
+				if(type == 1) {
+					// 파일을 저장 후 저장된 파일명을 반환
+					filename = FileManager.saveFile(multipartFile, rootPath + imgPath, fileName);
+					productPicDTO pic_dto = new productPicDTO();
+					pic_dto.setProduct_num(product_num);
+					pic_dto.setPic_path(Code.PRODUCT_PATHS);	
+					pic_dto.setPic_name(filename);
+					//사진타입 임시로 1로 지정
+					pic_dto.setPic_type(1);
+					System.out.println(pic_dto.getPic_name());
+					System.out.println(pic_dto.getPic_path());
+					System.out.println(pic_dto.getProduct_num());
+					
+					pic_cnt = fourDao.productPictureInsert(pic_dto); 
+				}
+			}
+			
+		}
+		model.addAttribute("pic_cnt", pic_cnt);
+			
 		return "four/shop/productInsertPro";
 	}
-	
-	
 	
 }

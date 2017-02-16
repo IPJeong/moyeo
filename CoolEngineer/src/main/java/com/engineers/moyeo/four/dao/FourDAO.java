@@ -7,6 +7,7 @@ import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GreetingReplyDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.four.dto.productInfoDTO;
+import com.engineers.moyeo.four.dto.productPicDTO;
 
 
 
@@ -78,6 +79,14 @@ public interface FourDAO {
 	//제품 조회
 	public ArrayList<productInfoDTO> productArticles(Map<String, Integer> daoMap);
 	
+	//제품 번호 조회
+	public int getProductNum();
+	
+	//제품 사진 등록
+	public int productPictureInsert(productPicDTO dto);
+	
+	//알림
+	public Map<String, String>alrim(int greeting_num);
 	
 	
 }

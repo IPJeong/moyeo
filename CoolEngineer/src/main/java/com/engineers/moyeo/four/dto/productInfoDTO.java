@@ -7,8 +7,8 @@ public class productInfoDTO {
 	int product_qty; /* 제품수량 */
 	String product_detail; /* 제품설명 */
 	String seller_id; /* 판매자아이디 */
-	String product_cat1; //카테고리1
-	String product_cat2; //카테고리2
+	String product_cat1;
+	String product_cat2;
 	
 	public int getProduct_num() {
 		return product_num;
