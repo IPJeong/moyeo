@@ -292,7 +292,7 @@ div .page-content {
 						        </li> 
 						      <br>
 						        <li>
-						        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpodtos.place_like_count}
+						        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpodtos.place_like_count}</span>
 						        </li>   
 							</ul>
 						</div>
