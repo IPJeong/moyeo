@@ -43,3 +43,4 @@ function getPostDetails(post_num) {
 	});
 	
 }
+

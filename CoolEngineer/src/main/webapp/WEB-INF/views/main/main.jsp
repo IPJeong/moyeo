@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,6 +51,19 @@
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->
 
+<script type="text/javascript">
+function notiList() {
+	
+	var windowW = 300;  // 창의 가로 길이
+    var windowH = 70;  // 창의 세로 길이
+    var left = Math.ceil((window.screen.width - windowW)/2);
+    var top = Math.ceil((window.screen.height - windowH)/2);
+
+	window.open('../three/notiList', 'notiWindow', 'width=800, height=450, left=' + left + 'top=' + top);
+	
+}
+</script>
+
 	
 <style>
 li {
@@ -58,7 +72,6 @@ li {
 	list-style: none;
 	left: -3px;
 }
-	
 </style>
 </head>
 <body class="x-dashboard">
@@ -77,15 +90,39 @@ li {
 				<div class="row">
 					<!-- START LOGIN BLOCK -->
 					<div class="col-md-21">
-						<div class="panel panel-default">
+						<div class="panel panel-default" style="height:230px;">
 							<div class="panel-heading">
 								<div class="panel-title-box">
-									<a href="/moyeo/three/myPage"><font size="4px;">${sessionScope.mem_id}님 로그인됨</font><br></a>
-									<span></span>
+									<font size="4px;">회원정보</font><br>
+									<span>회원님의 정보가 표시됩니다.</span>
 								</div>
 							</div>
-							<div class="panel-body padding-0">
-								<div class="chart-holder" id="dashboard-line-1" style="height: 200px;">
+							<div class="panel-body padding-0" style="background-color: white;">
+								<div class="chart-holder" id="dashboard-line-1" style="height: 140px; background-color: white; margin-top: 10px;">
+									<ul class="x-navigation" style="height:140px; background-color: white;">
+										<li class="xn-profile"  style="background-color: white; border-color: white; height:140px; margin-left:5px; width:370px;">
+					                        <div class="profile"  style="background-color: white; height:140px;">
+					                            <div class="profile-image" style="float:left; width:120px;">
+					                                <img style="float:center; border: solid black 1px;" src="${memInfo.propic_path}/${memInfo.propic_name}" alt="회원님의 프로필 사진 입니다."/>
+					                            </div>
+					                            <div style="float:left; margin-left:10px; width:220px; height:100px;">
+						                            <div class="profile-data">
+						                            	<div><font color="black;" size="4px;">이름(아이디)</font>
+						                                <div><font color="black;" size="4px;">${memInfo.name}(${memInfo.mem_id})</font></div>
+						                            </div>
+						                            <div>
+						                                <button type="button" class="btn btn-success btn-block" onclick="notiList()" style="width:100px; float:left; margin-top:30px;">
+						                                	<i class="fa fa-bullhorn"></i>알림
+						                                	<c:if test="${notiCnt > 0}">
+																<span class="badge badge-info" style="background-color : #FFD8D8;"><font size="3px;" style="font-style: bold">${notiCnt}</font></span>
+																</c:if>
+						                                </button>
+						                                <a href="/moyeo/three/myPage"><button type="button" class="btn btn-success btn-block" style="width:100px; float:left; margin-top:30px; margin-left:10px;"><i class="fa fa-info-circle"></i>마이페이지</button></a>
+						                            </div>
+					                            </div>
+					                        </div>                                                                        
+					                    </li>
+					            	</ul>        
 								</div>
 							</div>
 						</div>
@@ -366,7 +403,7 @@ li {
 					<!-- END RECOMMENDATION LOCATION BLOCK -->
 				
 					<!-- START EVENT BLOCK -->
-					<div class="col-md-30">
+					<div class="col-md-30" style="height:200px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
@@ -378,7 +415,24 @@ li {
 								</div>
 							</div>
 							<div class="panel-body padding-0">
-								<div class="chart-holder" id="dashboard-donut-1" style="height: 200px;"></div>
+								<div class="chart-holder" id="dashboard-donut-1" style="height: 200px;">
+								
+									<div class="contact-info">
+										<div class="contact-info">
+											<c:forEach var="dto" items="${dtos4}" begin="0" end="4">
+	
+												<p style="margin: 9px; font-size: 13px;">
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<font color="black"><b>${dto.eventTitle}</b></font>  
+														<span style="float:right; margin-left:30px;"><font color="red"><b>당첨자발표 : ${fn:substring(dto.notiDate, 2, 10)}</b></font></span>	
+														<span style="float:right;"><b>기간 : ${fn:substring(dto.startDate, 2, 10)}~${fn:substring(dto.endDate, 2, 10)}</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												</p>
+											</c:forEach>
+										</div>
+
+									</div>
+								
+								</div>
 							</div>
 						</div>
 					</div>
@@ -389,24 +443,39 @@ li {
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
-									<font size="4px;">광고</font>&nbsp;&nbsp;&nbsp;&nbsp;
+									<font size="4px;">Moyeo샵</font>&nbsp;&nbsp;&nbsp;&nbsp;
 									<a class="fa fa-plus-square-o" href="#"><font size="2">더보기</font></a><br>
 									<span>설명</span>
 								</div>
 							</div>
 							<div class="panel-body padding-0">
-								<div class="chart-holder" id="dashboard-donut-1" style="height: 200px;"></div>
+								<div class="chart-holder" id="dashboard-donut-1" style="height: 200px;">
+									<div>
+										<c:forEach var="productDto" items="${productDtos}" begin="0">
+										<div style="float:left; margin-top: 10px;">
+											<a class="gallery-item" style="width:150px; height:120px; margin:30px;" href="/moyeo/six/shop/productDetail?product_num=${productDto.product_num}"
+												title="Nature Image 1" data-gallery>
+												
+												<img src="${productDto.pic_path}/${productDto.pic_name}" style="width:120px; height:90px;" />
+												<div class="meta" align="center" >
+												<strong>${productDto.product_name}</strong> 
+												</div>
+											</a>
+										</div>
+										</c:forEach>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 					<!-- END ADVERTISE BLOCK -->
 				
 					<!-- START REVIEW BLOCK -->
-					<div class="col-md-32" style="height:240px;">
+					<div class="col-md-32" style="height:240px; margin-top:-50px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
-									<font size="4px;">후기</font>&nbsp;&nbsp;&nbsp;&nbsp;
+									<font size="4px;">모임후기</font>&nbsp;&nbsp;&nbsp;&nbsp;
 									<a class="fa fa-plus-square-o" href="#"><font size="2">더보기</font></a><br>
 									<span>모임의 후기 리스트 입니다. 모임의 후기를 추천해 주세요.</span>
 								</div>
