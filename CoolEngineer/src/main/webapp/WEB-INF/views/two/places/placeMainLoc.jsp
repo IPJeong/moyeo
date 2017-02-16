@@ -348,7 +348,9 @@ div .page-content {
 		<div class="panel panel-default">
 			<c:if test="${cnt == 0}">
 				<div style="width:80%; font-size:15px; text-align:left; margin-top:50px; margin-left:20px;">
-					<h2>장소 검색결과가 존재하지 않습니다.</h2>
+					<c:if test="${place_address1 != ''}"><h2><span style="color:blue">${place_address1} ${place_address2}</span> 카테고리를 선택하셨습니다.</h2></c:if>
+					<c:if test="${search_keyword != ''}"><h2><span style="color:red">${search_keyword}</span>에 대한 검색 결과가 없습니다.</h2></c:if>
+					<c:if test="${search_keyword == ''}"><h2>검색 결과가 없습니다.</h2></c:if>
 					<br>
 					&nbsp;&nbsp;&nbsp;단어의 철자가 정확한지 확인해 보세요.<br>
 					&nbsp;&nbsp;&nbsp;한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.<br>
