@@ -41,4 +41,5 @@ public interface ThreeService {
 	public String delMem(Model model); //회원탈퇴
 	public String findPw(Model model); //비밀번호 찾기
 	public String chgPw(Model model); //임시비밀번호 변경
+	public String notiList(Model model); //알림확인창
 }

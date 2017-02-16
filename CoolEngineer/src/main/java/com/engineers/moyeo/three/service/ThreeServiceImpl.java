@@ -20,6 +20,7 @@ import com.engineers.moyeo.main.common.EmailSender;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.common.TextMessage;
 import com.engineers.moyeo.main.model.FileForm;
+import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.main.service.MainServiceImpl;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
@@ -33,6 +34,8 @@ public class ThreeServiceImpl implements ThreeService{
 	
 	@Autowired
 	ThreeDAO dao;
+	@Autowired
+	MainService noti;
 	
 	//FAQ페이지
 	@Override
@@ -708,8 +711,8 @@ public class ThreeServiceImpl implements ThreeService{
 		String manageid = (String) req.getSession().getAttribute("manager_id");
 		String mem_id = "";
 		
-		int pageSize = 5;		//	한 페이지당 출력한 글 개수
-		int pageBlock = 5;		//	출력할 페이지 개수
+		int pageSize = 3;		//	한 페이지당 출력한 글 개수
+		int pageBlock = 3;		//	출력할 페이지 개수
 		
 		int cnt = 0;			// 글 개수
 		int start = 0;			// 현재 페이지 시작번호 : rownum
@@ -1122,7 +1125,7 @@ public class ThreeServiceImpl implements ThreeService{
 			if(cnt == 1) {
 				int win_num = dao.getWinNum(event_num); //당첨번호 가져오기
 				Map<String, Object> map3 = new HashMap<>();
-				System.out.println("win_num : " + win_num);
+				
 				for(int i=0; i < mem_id.length; i++) {					
 					map3.put("win_num", win_num);
 					map3.put("mem_id", mem_id[i]);	
@@ -1130,20 +1133,15 @@ public class ThreeServiceImpl implements ThreeService{
 					dao.winnerInsert(map3); //당첨자 입력
 				}
 				
-				ArrayList<EventDTO> mem_ids = dao.getEvePartList(event_num);
-				
-				MainServiceImpl noti = new MainServiceImpl();
-				
-				for(EventDTO mem : mem_ids) {
-					String mem_i = mem.getMem_id();
-					System.out.println("id : " + mem_i + ", event_title : " + title);
-					Map<String, Object> map4 = new HashMap<>();
-					map4.put("type", 1);					
-					map4.put("mem_id", mem_i);
-					map4.put("event_title", title);
+				ArrayList<EventDTO> mem_ids = dao.getEvePartList(event_num);				
 					
-					noti.addNotice(map4);
-				}
+				Map<String, Object> map4 = new HashMap<>();
+				map4.put("type", 1);					
+				map4.put("mem_ids", mem_ids);
+				map4.put("event_title", title);
+				
+				noti.addNotice(map4);					
+				
 				
 				dao.eventParticipantsDelete(event_num); //참여자 리스트에서 삭제
 							
@@ -1183,6 +1181,81 @@ public class ThreeServiceImpl implements ThreeService{
 		model.addAttribute("start", start);
 		
 		return "/three/event/chkWin";
+	}
+
+	@Override
+	public String notiList(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String mem_id = req.getParameter("mem_id");		
+		
+		int pageSize = 5;		//	한 페이지당 출력한 글 개수
+		int pageBlock = 3;		//	출력할 페이지 개수
+		
+		int cnt = 0;			// 글 개수
+		int start = 0;			// 현재 페이지 시작번호 : rownum
+		int end	= 0;			// 현재 페이지지 끝번호 : rownum
+		int number = 0;			// 출력할 글 번호
+		String pageNum = null;	// 페이지 번호
+		int currentPage = 0;	// 현재 페이지
+		
+		int pageCount = 0;		// 페이지 개수
+		int startPage = 0;		// 시작 페이지
+		int endPage = 0;		// 마지막 페이지
+		
+		
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("mem_id", mem_id);	
+				
+		cnt = dao.getNotiCount(mem_id); //가입한 모임 개수 가져오기
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1; // (5 - 1) * 10 + 1;
+		end = start + pageSize - 1; //41 + 10 - 1 = 50;
+		
+		if(end > cnt) end = cnt;
+				
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		Map<String, Object> dataMap = new HashMap<>();
+		dataMap.put("start", start);
+		dataMap.put("end", end);
+		dataMap.put("mem_id", mem_id);
+		
+		if(cnt > 0) {
+			ArrayList<MoimOpenDTO> dtos = dao.getGroupList(dataMap); //가입한 모임 리스트 불러오기			
+			req.setAttribute("dtos", dtos);
+			
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5 / 3) * 3 + 1 = 4
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		req.setAttribute("cnt", cnt);
+		req.setAttribute("number", number); 
+		req.setAttribute("pageNum", pageNum);		
+		
+		if(cnt > 0) {
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("startPage", startPage);
+			req.setAttribute("endPage", endPage);
+			req.setAttribute("pageCount", pageCount);
+			req.setAttribute("pageBlock", pageBlock);
+		}
+		return null;
 	}	
 	
 	

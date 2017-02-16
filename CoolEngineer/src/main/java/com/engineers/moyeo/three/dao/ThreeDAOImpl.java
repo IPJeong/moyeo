@@ -455,6 +455,13 @@ public class ThreeDAOImpl implements ThreeDAO{
 		dtos = dao.getWinnerList(winning_num);		
 		return dtos;
 	}
+
+	@Override
+	public int getNotiCount(String mem_id) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getNotiCount", mem_id);
+		return cnt;
+	}
 	
 	
 }

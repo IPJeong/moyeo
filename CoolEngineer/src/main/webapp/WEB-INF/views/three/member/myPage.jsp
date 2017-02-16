@@ -113,6 +113,17 @@ $(document).ready(function() {
 	
 	
 });
+
+function notiList(memid) {
+	
+	var windowW = 300;  // 창의 가로 길이
+    var windowH = 70;  // 창의 세로 길이
+    var left = Math.ceil((window.screen.width - windowW)/2);
+    var top = Math.ceil((window.screen.height - windowH)/2);
+
+	window.open('notiList?memid=' + memid, 'notiWindow', 'width=700, height=450, left=' + left + 'top=' + top);
+	
+}
 </script>
 <div class="col-md-6 page-title"></div>
 
@@ -286,7 +297,17 @@ $(document).ready(function() {
 				</div>
 				<div class="form-group" style="float: none;">
 					<div class="col-md-8" style="margin: auto; float: none;">
-						<a href="#" class="btn btn-success btn-block">알림메세지</a>
+						<a href="#" onclick="notiList(${dto.mem_id})" class="btn btn-success btn-block">알림메세지</a>
+						<div style="color:#FFEBEE;						
+									border:1px solid #F44336;
+									font-size: 100%;
+								    width: 1.5em;height:1.5em;
+								    border-radius: 50%;			    
+								    display: inline-block;								    
+									 background-color:#F44336;
+									 position: absolute;left:60%;top:25%;z-index:2;
+									 padding-left: 2px;
+									 ">23</div>
 					</div>
 				</div>
 			</div>

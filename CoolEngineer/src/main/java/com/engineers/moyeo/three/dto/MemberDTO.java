@@ -15,6 +15,8 @@ public class MemberDTO {
 	private String proPicName;
 	private Timestamp joinDate;
 	private String gender;
+	private String noti_content;
+	private Timestamp noti_date;
 	
 	
 	public String getMem_id() {
@@ -82,6 +84,18 @@ public class MemberDTO {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public String getNoti_content() {
+		return noti_content;
+	}
+	public void setNoti_content(String noti_content) {
+		this.noti_content = noti_content;
+	}
+	public Timestamp getNoti_date() {
+		return noti_date;
+	}
+	public void setNoti_date(Timestamp noti_date) {
+		this.noti_date = noti_date;
 	}
 	
 	

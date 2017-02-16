@@ -372,6 +372,16 @@ public class ThreeController {
 		System.out.println("chgPw()");
 		
 		return viewPage;
-	}			
+	}
+	
+	@RequestMapping("/notiList") //알림메세지 확인창
+	public String notiList(HttpServletRequest req, Model model) {		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		viewPage = threeService.notiList(model);
+		System.out.println("notiList()");
+		
+		return viewPage;
+	}	
 	
 }

@@ -67,5 +67,6 @@ public interface ThreeDAO {
 	public int tempInsert(Map<String, Object> map); //임시번호 저장
 	public int tempUpdate(Map<String, Object> map); //임시번호 변경
 	public int tempDelete(String mem_id); //임시번호 삭제
+	public int getNotiCount(String mem_id); //알림메세지 개수
 
 }
