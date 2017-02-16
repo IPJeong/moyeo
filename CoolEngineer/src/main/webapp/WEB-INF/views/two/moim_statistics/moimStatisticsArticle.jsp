@@ -365,7 +365,7 @@ li {
  				</c:if>
  				<c:if test="${cnt == 0}">
  					<tr>
- 						<td colspan="5" style="background:white; border:1px solid #D9E5FF;" align="center">
+ 						<td colspan="5" style="background:white; border:1px solid #D9E5FF;" align="center"><center>게시글이 없습니다.</center></td>
  					</tr>
  				</c:if>
  				</table>

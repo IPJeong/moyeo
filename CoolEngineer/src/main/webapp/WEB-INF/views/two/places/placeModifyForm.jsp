@@ -323,7 +323,7 @@ li {
 					                <option value="전라남도">전라남도</option>
 					                <option value="제주특별자치도">제주특별자치도</option>
 					            </select>
-					            <select name="loc_category2" id="loc_category2" class="form-control-1 select" style="width:49%; margin-left:0.35%;" required>
+					            <select name="loc_category2" id="loc_category2" class="form-control-1 select" style="width:49%; margin-left:2%;" required>
 					            	<option value="">선택하세요</option>
 					            </select>
 							</div>
@@ -332,8 +332,7 @@ li {
 						<div class="form-group">
 							<label class="col-lg-2 control-label">상세 주소</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" name="place_address" maxlength="40"
-									required>
+								<input type="text" class="form-control" name="place_address" maxlength="40">
 							</div>
 						</div>
 					
@@ -360,7 +359,7 @@ li {
 	                           <div class="col-md-6 col-xs-12">
 	                           	   <span class="help-block">사진을 선택하세요.</span>
 	                           	   <div id="fileview">
-	                               		<input class="btn btn-warning btn-rounded" id="file0" type="file" name="files[0]" style="float:left;" onchange="chkType('file0')"/ required>
+	                               		<input class="btn btn-warning btn-rounded" id="file0" type="file" name="files[0]" style="float:left;" onchange="chkType('file0')"/>
 	                           	   </div>
 	                           </div>
 	                       </div>

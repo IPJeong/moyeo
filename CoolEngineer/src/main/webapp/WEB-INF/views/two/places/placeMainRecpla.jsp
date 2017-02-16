@@ -218,15 +218,15 @@ div .page-content {
 <br>
 
 <div class="col-md-13-2">
-	<div class="panel panel-default" style="margin-top:10px; width:60%; float:left;">
+	<div class="panel panel-default" style="margin-top:10px; width:60%; float:left; height:130px;">
 		<div class="panel-heading">
-			<div class="panel-title-box">
+			<div class="panel-title-box" style="height:15px;">
 				<h3>관심사 선택</h3>										
 			</div>
 		</div>
 		<form name="recplaselectform" action="placeMainRecplaSearch">
-			<div class="panel-body padding-0" style="margin-top:10px; margin-bottom:0.75%; margin-left:0.5%;">
-				<select name="recpla_category1" id="recpla_category1" class="form-control-1 select" style="width:49%;" onchange="select_recpla_category()" required> 
+			<div class="panel-body padding-0" style="margin-top:10px; margin-bottom:10px; margin-left:0.75%;">
+				<select name="recpla_category1" id="recpla_category1" class="form-control-1 select" style="width:49%;" onchange="select_recpla_category()"> 
 					<option value="">선택하세요</option>
 	                <option value="아웃도어/여행">아웃도어/여행</option>
 	                <option value="운동/스포츠">운동/스포츠</option>
@@ -247,20 +247,20 @@ div .page-content {
 	                <option value="가족/결혼">가족/결혼</option>
 	                <option value="자유주제">자유주제</option>
 	            </select>
-	            <select name="recpla_category2" id="recpla_category2"  class="form-control-1 select" style="width:49%; margin-left:0.35%;">
+	            <select name="recpla_category2" id="recpla_category2"  class="form-control-1 select" style="width:49%; margin-left:0.5%;">
 	            	<option value="">선택하세요</option>
 	            </select>
-	            </div>
-	            <div class="col-md-6-2" style="margin-top:0.5%;">
+	        </div>
+	        <div class="col-md-6-2" style="margin-top:0.5%;">
 	            	
-	            </div>
-	            <div class="col-md-6-2" style="margin-top:0.5%;">	
-					<div class="input-group push-down-10">
-				        <span class="input-group-addon"><span class="fa fa-search"></span></span>
-				        <input type="text" class="form-control" name="place_name" placeholder="검색할 장소를 입력하세요..."/>
-				        <div class="input-group-btn">
-				            <input type="submit" class="btn btn-primary" value="검색">
-				    	</div>
+	        </div>
+            <div class="col-md-6-2" style="float:left; margin-left:1%; width:95%;">	
+				<div class="input-group push-down-10">
+			        <span class="input-group-addon"><span class="fa fa-search"></span></span>
+			        	<input type="text" class="form-control" name="search_keyword" placeholder="검색할 장소를 입력하세요...">
+			        <div class="input-group-btn">
+			            <input type="submit" class="btn btn-primary" value="검색">
+			    	</div>
 				</div>  
 			</div>
 		</form>	 
@@ -270,7 +270,7 @@ div .page-content {
 
 
 <div class="col-md-13-3">
-	<div class="panel panel-default" style="float:right; margin-top:10px; width:38%; height:900px;">
+	<div class="panel panel-default" style="float:right; margin-top:10px; width:38%; height:910px;">
 		<div class="panel-heading">
 			<div class="panel-title-box">
 				<h3>지금 뜨는 장소</h3>										
@@ -279,46 +279,76 @@ div .page-content {
 		
 		<div class="panel panel-default">
 			<c:if test="${lcnt > 0}">
-				<div class="inner">
-		            <div class="info" style="float:left; margin-top:20px; margin-left:5%; width:40%; height:300px;">
-				        <c:forEach var="lpodtos" items="${lpodtos}">
-					        <ul style="list-style:none; margin-top:20px;">
-					        	<li>
-					        		<a href="placeContentForm?place_num=${lpodtos.place_num}">
-					        			<img src="${lpodtos.place_pic_path}/${lpodtos.place_pic_name}" alt="장소 사진" style="width:90%; height:145px;">
-					        		</a>
-					        	</li>
-					        </ul>	
-				        </c:forEach>
-				   </div>
-				   <div class="info" style="float:right; margin-top:20px; margin-right:5%; width:50%; height:300px;">  
-				        <br>
-				        <c:forEach var="lpodtos" items="${lpodtos}">
-				        	<div style="width:80%; height:145px; margin-top:20px;"> 
-					       		<ul style="list-style:none; margin-top:20px;">
-							        <li>
-							        	<strong>이름</strong> &nbsp; <a href="placeContentForm?place_num=${lpodtos.place_num}">${lpodtos.place_name}</a>
-							        </li> 
-						         <br>
-							        <li>
-							            <strong>주소</strong> &nbsp; ${lpodtos.place_address}
-							        </li>
-							     <br>
-							        <li>
-							        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpodtos.place_like_count}</span>
-							        </li>   
-								</ul>
-							</div>
-					    </c:forEach>
-		            </div>         	 	
-			       </div>
-				</c:if>	
-			</div>	
+			<div class="inner">
+	            <div class="info" style="float:left; margin-top:10px; margin-left:5%; width:40%; height:300px;">
+			        <c:forEach var="lpodtos" items="${lpodtos}">
+				        <ul style="list-style:none; margin-top:20px;">
+				        	<li>
+				        		<a href="placeContentForm?place_num=${lpodtos.place_num}">
+				        			<img src="${lpodtos.place_pic_path}/${lpodtos.place_pic_name}" alt="장소 사진" style="width:90%; height:145px;">
+				        		</a>
+				        	</li>
+				        </ul>	
+			        </c:forEach>
+			   </div>
+			   <div class="info" style="float:right; margin-top:10px; margin-right:5%; width:50%; height:300px;">  
+			        <br>
+			        <c:forEach var="lpodtos" items="${lpodtos}">
+			        	<div style="width:80%; height:145px; margin-top:20px;"> 
+				       		<ul style="list-style:none; margin-top:20px;">
+						        <li>
+						        	<strong>이름</strong> &nbsp; <a href="placeContentForm?place_num=${lpodtos.place_num}">${lpodtos.place_name}</a>
+						        </li> 
+					         <br>
+						        <li>
+						            <strong>주소</strong> &nbsp; ${lpodtos.place_address}
+						        </li>
+						     <br>
+						        <li>
+						        	<strong>추천수</strong> &nbsp; <span style="color:red;">${lpodtos.place_like_count}</span>
+						        </li>   
+							</ul>
+						</div>
+				    </c:forEach>
+	            </div>         	 	
+		    </div>
+			</c:if>	
+		</div>	
+	
+		<div style="float:right; margin-top:-85px; margin-right:50%;">	
+			<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+	
+				<c:if test="${lcnt > 0}">
+			
+						<c:if test="${startPage2 > pageBlock2}">
+							<li class=""><a href="placeMainLoc?pageNum2=${startPage2 - pageBlock2}"><font
+										size="3"> «</font></a></li>
+						</c:if>
+			
+			
+						<c:forEach var="i" begin="${startPage2}" end="${endPage2}">
+							<c:if test="${i == currentPage2}">
+								<li class=""><a href="#"><font size="3">${i}</font></a></li>
+							</c:if>
+			
+							<c:if test="${i != currentPage2}">
+								<li class=""><a href="placeMainLoc?pageNum2=${i}"><font size="3">${i}</font></a></li>
+							</c:if>
+			
+						</c:forEach>
+						<c:if test="${pageCount2 > endPage2}">
+							<li><a href="placeMainLoc?pageNum2=${startPage2 + pageBlock2}"><font
+										size="3">»</font></a></li>
+					</c:if>
+				</c:if>
+							
+		    </ul>
+		</div>	
 				
 	</div>
 </div>
 
-<div class="col-md-13-3" style="margin-top:-50px; width:50%; height:770px; float:left; margin-left:8.5%;">
+<div class="col-md-13-3" style="margin-top:-40px; width:50%; height:770px; float:left; margin-left:8.5%;">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="panel-title-box" style="font-size:14px">
@@ -378,34 +408,34 @@ div .page-content {
 	</div>
 	
 	<div style="float:right; margin-top:-45px; margin-right:50%;">	
-			<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
+		<ul class="pagination pagination-sm pull-right push-down-20 push-up-20" style="align: center;">
 	
-					<c:if test="${cnt > 0}">
-				
-							<c:if test="${startPage > pageBlock}">
-								<li class=""><a href="placeMainRecpla?pageNum=${startPage - pageBlock}"><font
-											size="3"> «</font></a></li>
-							</c:if>
-				
-				
-							<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								<c:if test="${i == currentPage}">
-									<li class=""><a href="#"><font size="3">${i}</font></a></li>
-								</c:if>
-				
-								<c:if test="${i != currentPage}">
-									<li class=""><a href="placeMainRecpla?pageNum=${i}"><font size="3">${i}</font></a></li>
-								</c:if>
-				
-							</c:forEach>
-							<c:if test="${pageCount > endPage}">
-								<li><a href="placeMainRecpla?pageNum=${startPage + pageBlock}"><font
-											size="3">»</font></a></li>
-						</c:if>
+			<c:if test="${cnt > 0}">
+		
+					<c:if test="${startPage > pageBlock}">
+						<li class=""><a href="placeMainRecpla?pageNum=${startPage - pageBlock}"><font
+									size="3"> «</font></a></li>
 					</c:if>
+		
+		
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<c:if test="${i == currentPage}">
+							<li class=""><a href="#"><font size="3">${i}</font></a></li>
+						</c:if>
+		
+						<c:if test="${i != currentPage}">
+							<li class=""><a href="placeMainRecpla?pageNum=${i}"><font size="3">${i}</font></a></li>
+						</c:if>
+		
+					</c:forEach>
+					<c:if test="${pageCount > endPage}">
+						<li><a href="placeMainRecpla?pageNum=${startPage + pageBlock}"><font
+									size="3">»</font></a></li>
+				</c:if>
+			</c:if>
 							
-				</ul>
-			</div>
+		</ul>
+	</div>
 	
 </div> 
 	

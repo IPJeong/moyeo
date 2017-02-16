@@ -351,6 +351,7 @@ li {
 	 					 	<td style="border:1px solid #D9E5FF; width:10%;" align="center">성별</td>
 	 					 	<td style="border:1px solid #D9E5FF; width:15%;" align="center">출석일수</td>		 	
 	 					</tr>
+	 			<c:if test="${cnt > 0}">		
  					<c:forEach var="dto" items="${dtos}">
 	 					<tr>
 	 						<td style="background:white; border:1px solid #D9E5FF;" align="center">${dto.present_rank}</td>
@@ -363,6 +364,12 @@ li {
 	 						<td style="background:white; border:1px solid #D9E5FF;" align="center">${dto.present_cnt}</td>
 	 					</tr>
  					</c:forEach>
+ 				</c:if>
+ 				<c:if test="${cnt == 0}">
+ 					<tr>
+ 						<td colspan="5" style="background:white; border:1px solid #D9E5FF;" align="center"><center>출석한 모임원이 없습니다.</center></td>
+ 					</tr>
+ 				</c:if>	
  				</table>
  			</c:if>
 			<!-- END PHOTO BLOCK -->
