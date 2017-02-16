@@ -217,20 +217,17 @@ li {
 						<!-- START PHOTO BLOCK -->
 						<div class="col-md-56" style="margin-top: 10px;">
 							<div class="panel panel-default" style="height:870px; width:1200px;">
+								<div class="panel-heading">
+									<div class="panel-title-box">
+										<h3>Shop</h3>
+									</div>
+								</div>
+								
 								<div class="content-frame-body content-frame-body-left">
 									<div class="pull-right push-up-10">
 									</div>
 
 									<div class="gallery">
-										<c:if test="${sessionScope.mem_id != null}">
-											<div style="margin-left:68%;">
-												<input class="btn btn-primary" value="판매자 등록" type="button" onclick="location.href='/moyeo/six/shop/sellerRegister'">
-												<input class="btn btn-primary" value="제품 등록" type="button" onclick="location.href='productInsertForm'">
-												
-												<button type="button" class="btn btn-primary">제품 수정</button>
-												<button type="button" class="btn btn-primary">제품 삭제</button>
-											</div>
-										</c:if>
 										<div>
 										<c:forEach var="dto" items="${dtos}" begin="0">
 										<a class="gallery-item" style="width:300px; height:200px; margin:30px;"
