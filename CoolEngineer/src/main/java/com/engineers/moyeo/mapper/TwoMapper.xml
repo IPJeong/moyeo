@@ -214,7 +214,7 @@
 		              ORDER BY place_like_order)
 	</select>
 	
-	<select id="getPlaceLikeList" resultType="com.engineers.moyeo.two.dto.Place_likeDTO">		
+	<select id="getPlaceLikeList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_likeDTO">		
 		 SELECT *
 		   FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum  
 				  FROM(SELECT cc.place_like_count, cc.recpla_num, pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, DENSE_RANK() OVER (ORDER BY cc.place_like_count DESC) AS place_like_order
@@ -229,7 +229,7 @@
 			               AND pi.place_num = pp.place_num
 			              ORDER BY place_like_order)
 				 WHERE place_like_order BETWEEN 1 AND 5)
-		 WHERE rnum BETWEEN 1 AND 5
+		 WHERE rnum BETWEEN #{start2} AND #{end2}
 	</select>
 	
 	<select id="readPlace" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
@@ -334,6 +334,19 @@
  	
  	<select id="moimBanishCheck" parameterType="Map" resultType="int">
  		SELECT COUNT(*) FROM join_request WHERE group_num = #{group_num} AND mem_id = #{mem_id} AND status = '강제탈퇴'
+ 	</select>
+ 	
+ 	<select id="checkGroupMemLimit" parameterType="int" resultType="int">
+ 		SELECT group_mem_cnt
+		  FROM group_list
+		WHERE group_num = #{group_num}
+ 	</select>
+ 	
+ 	<select id="checkGroupMemNumber" parameterType="int" resultType="int">
+ 		SELECT COUNT(*)+1
+		  FROM join_request
+		WHERE group_num = #{group_num}
+		  AND (status = '승인' OR status = '대기')
  	</select>
  	
  	<insert id="moimJoin" parameterType="Map">
@@ -564,6 +577,29 @@
 		                ORDER BY place_pic_num DESC) pp
 		        WHERE pi.place_num = pp.place_num)
     </select>
+    
+    <select id="getRecPlaceSearchCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name
+		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
+		                  FROM rec_place
+		              <if test="type == 1">
+		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 4">
+		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+		              </if>
+		               ) rp,
+		               (SELECT place_pic_path, place_pic_name, place_num
+		                  FROM place_pic) pp
+		        WHERE rp.place_num = pp.place_num)
+	</select>
    
 	<select id="getMoimSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Moim_infoDTO">
 		SELECT group_num, group_name, group_mem_cnt, group_inte1, group_inte2, group_location, group_intro
@@ -712,6 +748,54 @@
 				  WHERE pi.place_num = pp.place_num)
 		WHERE rnum BETWEEN #{start3} AND #{end3}
     </select>
+    
+    <select id="getRecPlaceSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
+		SELECT recpla_num, recpla_title, recpla_content, recpla_tag, mem_id, place_num
+		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name, rownum rnum
+		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
+		                  FROM rec_place
+		              <if test="type == 1">
+		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 4">
+		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+		              </if>
+		               ) rp,
+		               (SELECT place_pic_path, place_pic_name, place_num
+		                  FROM place_pic) pp
+		        WHERE rp.place_num = pp.place_num)
+		WHERE rnum BETWEEN #{start4} AND #{end4}
+	</select>
+	
+	<select id="getRecPlacePictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
+		SELECT place_pic_path, place_pic_name, place_num
+		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name, rownum rnum
+		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
+		                  FROM rec_place
+		              <if test="type == 1">
+		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
+		              </if>
+		              <if test="type == 2">
+		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 3">
+		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
+		              </if>
+		              <if test="type == 4">
+		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
+		              </if>
+					   ) rp,
+		               (SELECT place_pic_path, place_pic_name, place_num
+		                  FROM place_pic) pp
+		        WHERE rp.place_num = pp.place_num)
+		WHERE rnum BETWEEN #{start4} AND #{end4}
+	</select>
 
 	<select id="chartByGender" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
 		SELECT *
@@ -1164,16 +1248,29 @@
 		SELECT greeting_cnt+notice_cnt+post_cnt AS article_cnt
 		  FROM (SELECT COUNT(*) AS greeting_cnt
 		          FROM greeting_board
-		        WHERE TO_CHAR(greeting_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
-		           AND group_num = #{group_num}),
+		        WHERE group_num = #{group_num}),
 		       (SELECT COUNT(*) AS notice_cnt
 		          FROM group_notice
-		        WHERE TO_CHAR(group_noti_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
-		          AND group_num = #{group_num}),
+		        WHERE group_num = #{group_num}),
 		       (SELECT COUNT(*) AS post_cnt
 		          FROM meeting_post
-		        WHERE TO_CHAR(post_date, 'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-28, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')
-		          AND group_num = #{group_num})
+		        WHERE group_num = #{group_num})
+	</select>
+	
+	<select id="checkBestTenPresent" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		  FROM (SELECT present_cnt, name, mem_id, birth, gender, rownum AS present_rank
+				  FROM (SELECT cp.present_cnt AS present_cnt, mi.mem_id AS mem_id, mi.name AS name, mi.address AS address, mi.birth AS birth, mi.gender AS gender, DENSE_RANK() OVER (ORDER BY present_cnt DESC) AS present_cnt_rank
+				          FROM (SELECT mem_id, COUNT(*) AS present_cnt
+				                  FROM check_present
+				                WHERE group_num = #{group_num}
+				                GROUP BY mem_id
+				                ORDER BY present_cnt DESC) cp,
+				              (SELECT mem_id, name, address, birth, gender
+				                 FROM member_info) mi
+				       WHERE cp.mem_id = mi.mem_id)
+				WHERE present_cnt_rank BETWEEN 1 AND 10)
+		WHERE present_rank BETWEEN 1 AND 10
 	</select>
 	
 	<select id="getBestTenArticle" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
@@ -1217,76 +1314,5 @@
 				       WHERE cp.mem_id = mi.mem_id)
 				WHERE present_cnt_rank BETWEEN 1 AND 10)
 		WHERE present_rank BETWEEN 1 AND 10
-	</select>
-	
-	<select id="getRecPlaceSearchCount" parameterType="Map" resultType="int">
-		SELECT COUNT(*)
-		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name
-		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
-		                  FROM rec_place
-		              <if test="type == 1">
-		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
-		              </if>
-		              <if test="type == 2">
-		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
-		              </if>
-		              <if test="type == 3">
-		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
-		              </if>
-		              <if test="type == 4">
-		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
-		              </if>
-		               ) rp,
-		               (SELECT place_pic_path, place_pic_name, place_num
-		                  FROM place_pic) pp
-		        WHERE rp.place_num = pp.place_num)
-	</select>
-	
-	<select id="getRecPlaceSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
-		SELECT recpla_num, recpla_title, recpla_content, recpla_tag, mem_id, place_num
-		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name, rownum rnum
-		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
-		                  FROM rec_place
-		              <if test="type == 1">
-		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
-		              </if>
-		              <if test="type == 2">
-		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
-		              </if>
-		              <if test="type == 3">
-		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
-		              </if>
-		              <if test="type == 4">
-		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
-		              </if>
-		               ) rp,
-		               (SELECT place_pic_path, place_pic_name, place_num
-		                  FROM place_pic) pp
-		        WHERE rp.place_num = pp.place_num)
-		WHERE rnum BETWEEN #{start4} AND #{end4}
-	</select>
-	
-	<select id="getRecPlacePictureSearchList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Rec_placeDTO">
-		SELECT place_pic_path, place_pic_name, place_num
-		  FROM (SELECT rp.recpla_num, rp.recpla_title, rp.recpla_content, rp.recpla_tag, rp.place_num, rp.mem_id, pp.place_pic_path, pp.place_pic_name, rownum rnum
-		          FROM (SELECT recpla_num, recpla_title, SUBSTR(recpla_content, 1, 100) AS recpla_content, recpla_tag, place_num, mem_id
-		                  FROM rec_place
-		              <if test="type == 1">
-		             	WHERE recpla_title LIKE '%'||#{recpla_title}||'%'
-		              </if>
-		              <if test="type == 2">
-		                WHERE recpla_content LIKE '%'||#{recpla_content}||'%'
-		              </if>
-		              <if test="type == 3">
-		                WHERE recpla_title LIKE '%'||#{recpla_title}||'%' OR recpla_content LIKE '%'||#{recpla_content}||'%'
-		              </if>
-		              <if test="type == 4">
-		               WHERE recpla_tag LIKE '%'||#{recpla_tag}||'%'
-		              </if>
-					   ) rp,
-		               (SELECT place_pic_path, place_pic_name, place_num
-		                  FROM place_pic) pp
-		        WHERE rp.place_num = pp.place_num)
-		WHERE rnum BETWEEN #{start4} AND #{end4}
 	</select>
 </mapper>
