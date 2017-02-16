@@ -543,9 +543,32 @@ public class SixController {
 		System.out.println("/shop/order");
 		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
-		sixService.productDetail(model);
+		sixService.order(model);
 		
 		return "six/shop/order";
 	}
+
+	//샵-구매후기 입력창
+	@RequestMapping("/shop/productReview")
+	public String productReview(HttpServletRequest req, Model model) {
+		System.out.println("/shop/productReview");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productReview(model);
+		
+		return "six/shop/productReview";
+	}
+	
+	//샵-구매후기 입력결과 처리
+	@RequestMapping("/shop/productReviewPro")
+	public String productReviewPro(HttpServletRequest req, Model model) {
+		System.out.println("/shop/productReviewPro");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productReviewPro(model);
+		
+		return "six/shop/productReview";
+	}
+	
 }
 

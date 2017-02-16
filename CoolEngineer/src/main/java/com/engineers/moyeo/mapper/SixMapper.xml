@@ -632,4 +632,9 @@
 		SELECT * FROM product_pic WHERE product_num = #{product_num}
 	</select>
 	
+	<!-- 샵-제품후기등록 -->
+	<insert id="productReviewPro" parameterType="com.engineers.moyeo.six.dto.ProductCommentsDTO" >
+		INSERT INTO product_comments (comments_num, comments_content, comments_date, star_points, product_num, mem_id, comments_title) VALUES (product_comments_seq.NEXTVAL, #{comments_content}, #{comments_date}, #{star_points}, #{product_num}, #{mem_id}, #{comments_title})
+	</insert>
+	
 </mapper>

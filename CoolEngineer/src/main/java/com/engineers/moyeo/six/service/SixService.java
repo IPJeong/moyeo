@@ -127,4 +127,13 @@ public interface SixService {
 	
 	//샵-제품 주문화면
 	public void buy(Model model);
+	
+	//샵-결제처리
+	public void order(Model model);
+	
+	//샵-상품평 입력창
+	public void productReview(Model model);
+	
+	//샵-상품평 입력결과 처리
+	public void productReviewPro(Model model);
 }

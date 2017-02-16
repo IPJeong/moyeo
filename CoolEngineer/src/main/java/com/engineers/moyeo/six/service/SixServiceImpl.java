@@ -35,6 +35,7 @@ import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.ProductCommentsDTO;
 import com.engineers.moyeo.six.dto.ProductPicDTO;
 import com.engineers.moyeo.six.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
@@ -1828,5 +1829,61 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("order_limit", req.getParameter("order_limit"));
 		model.addAttribute("product_name", req.getParameter("product_name"));
 		System.out.println(req.getParameter("product_name"));
+	}
+	
+	//샵-결제 처리
+	public void order(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		model.addAttribute("good_name", req.getParameter("product_name"));
+		model.addAttribute("good_mny", req.getParameter("product_price"));
+		model.addAttribute("product_num", req.getParameter("product_num"));
+	}
+
+	//샵-상품평 입력창
+	public void productReview(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		String product_name = req.getParameter("product_name");
+		String pic_path = req.getParameter("pic_path");
+		String pic_name = req.getParameter("pic_name");
+
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("product_name", product_name);
+		model.addAttribute("pic_path", pic_path);
+		model.addAttribute("pic_name", pic_name);
+
+	}
+	
+	//샵-상품평 입력결과 처리
+	public void productReviewPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		ProductCommentsDTO dto = new ProductCommentsDTO();
+		
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		String comments_content = req.getParameter("reply_content");
+		String comments_title = req.getParameter("reply_title");	
+		int star_points = Integer.parseInt(req.getParameter("reply_score"));
+		
+		dto.setProduct_num(product_num);
+		dto.setComments_content(comments_content);
+		dto.setComments_title(comments_title);
+		dto.setStar_points(star_points);
+		dto.setComments_date(new Timestamp(System.currentTimeMillis()));
+		dto.setMem_id(mem_id);
+		
+		System.out.println(dto.getComments_content());
+		System.out.println(dto.getProduct_num());
+		System.out.println(dto.getComments_title());
+		System.out.println(dto.getStar_points());
+		System.out.println(dto.getComments_date());
+		System.out.println(dto.getMem_id());
+		int cnt = sixDao.productReviewPro(dto);
 	}
 }
