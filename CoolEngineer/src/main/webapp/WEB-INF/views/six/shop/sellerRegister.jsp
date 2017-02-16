@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>    
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>    
 
 <%@ include file="../../etc/header2.jsp"%>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -69,7 +69,7 @@ document.getElementById('zipNo').value = zipNo;
 @media (min-width: 1100px){
 .col-md-56 {
     width: 60%;
-    height: 870px;
+    height: 900px;
 }
 }
 .chart-holder {
@@ -107,6 +107,9 @@ li {
 .registration-container .registration-box {  
     padding-top: 25px;
 }
+
+
+
 </style>
 
 <!-- START BREADCRUMB -->
@@ -130,7 +133,7 @@ li {
 		<!-- 모임페이지 사이드바 종료 -->
 		
 		<!-- START PHOTO BLOCK -->
-		<div class="col-md-56" style="margin-top: 10px;">
+		<div class="col-md-56" style="margin-top: 10px; height:870px;">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="panel-title-box">
@@ -139,7 +142,7 @@ li {
 				</div>
 				<div class="panel-body padding-0" style="text-align: center; font-size: 25px; height:830px;">
 					
-					<div class="registration-container">            
+					<div class="registration-container" style="background: url("/moyeo/resources/resource/img/bg.png") left top repeat rgba(245, 247, 239, 0.91);">            
             			<div class="registration-box animated fadeInDown" >
 				
 					    	<div class="registration-body">

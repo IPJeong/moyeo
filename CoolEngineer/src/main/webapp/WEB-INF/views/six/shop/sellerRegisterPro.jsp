@@ -13,7 +13,7 @@
 	<c:if test="${chk_cnt != 0}">
 		<script type="text/javascript">
 			alert("이미 판매자등록 신청을 하였습니다.");
-			window.location='/moyeo/four/moyeoShop';
+			window.location='/moyeo/one/moyeoSeller';
 		</script>
 		
 		
@@ -21,7 +21,7 @@
 	<c:if test="${cnt == 1}">
 		<script type="text/javascript">
 			alert("판매자등록 신청에 성공했습니다.");
-			window.location='/moyeo/four/moyeoShop';
+			window.location='/moyeo/one/moyeoSeller';
 		</script>
 	</c:if>	
 	
