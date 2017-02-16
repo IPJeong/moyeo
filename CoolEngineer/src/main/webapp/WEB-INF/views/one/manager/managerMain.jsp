@@ -219,14 +219,24 @@
 									style="width: 472px; height: 200px;"> <br>
 								<br>
 								<br> <br>
-								<div style="margin-left: 35%; margin-top: 5%">
+								<div style="margin-left: 15%; margin-top: 5%">
+									
 									<div>
-										<span><button class="btn btn-primary btn-rounded"
-												style="width: 150px;" value="버튼"
-												onclick="window.location='guestList'">
-												<font size="3px;">회원관리</font>
-											</button></span>
+											<span><button class="btn btn-primary btn-rounded"
+													style="width: 150px;" value="버튼"
+													onclick="window.location='guestList'">
+													<font size="3px;">회원관리</font>
+												</button></span>
+										</div>
+										<div style="margin-left: 40%; margin-top: -7%;">
+											<span><button class="btn btn-primary btn-rounded"
+													style="width: 150px;" value="버튼"
+													onclick="window.location='seller'">
+													<font size="3px"> 판매자관리 </font>
+												</button></span>
 									</div>
+									
+									
 									<div class="chart-holder" id="dashboard-bar-1"
 										style="height: 200px;"></div>
 								</div>

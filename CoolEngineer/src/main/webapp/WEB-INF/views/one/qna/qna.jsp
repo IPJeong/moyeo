@@ -192,7 +192,7 @@ tr {
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<div class="table-responsive">
+								<div class="table-responsive" style="width:110%;">
 									<table class="table table-bordered table-striped table-actions">
 										<tr>
 											<th align="center" class="num"><font size="4">글

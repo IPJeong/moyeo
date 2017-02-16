@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +18,7 @@
 <link rel="stylesheet" type="text/css" id="theme"
 	href="/moyeo/resources/resource/css/theme-default.css" />
 <!-- EOF CSS INCLUDE -->
+
 </head>
 
 <!-- START SCRIPTS -->
@@ -86,97 +86,91 @@
 
 				<%@ include file="../../etc/header.jsp"%>
 
-
-				<form action="reportAnswerPro" method="post">
-					<div class="timeline-item" style="width: 50%; margin-left: 25%;">
-
-						<input type="hidden" name="report_num" value="${report_num}">
-						<input type="hidden" name="pageNum" value="${pageNum}"> <input
-							type="hidden" name="number" value="${number}"> <input
-							type="hidden" name="manager_id" value="${manager_id}">
-
-						<div class="content-frame-body" style="width: 100%;">
-							<div class="panel panel-default" style="width: 100%%;">
-								<div class="panel-heading">
-									<div class="pull-left">
-
-										<h3 class="panel-title">
-											<small>신고인: </small>${dto.mem_id}</h3>
-									</div>
-									<div class="pull-right">
-										<a
-											href="/moyeo/six/moimMain/moimMain?group_num=${dto.group_num}"><span
-											class="fa fa-mail-reply">해당모임으로 이동</span></a>
-									</div>
-								</div>
-								<div class="panel-body">
-									<h3>
-										신고제목: ${dto.report_title} <small class="pull-right text-muted"><span
-											class="fa fa-clock-o"></span><fmt:formatDate value="${dto.report_date}" type="both"
-													pattern="yyyy-MM-dd HH:mm" /></small>
-											
-									</h3>
-									<p>${dto.report_content}</p>
-
-									<img src="${dto.pic_path}/${dto.pic_name}" class="img-text"
-										width="300" height="300" align="left"
-										onclick="window.open(this.src)" alt="클릭하시면 사진이 커집니다."
-										hspace="0" /> <br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br>
-									<br> <a href="#"
-										onclick="window.open('${dto.pic_path}/${dto.pic_name}')"
-										style="margin-left: 12%;"><span class="fa fa-tag"></span>
-										확대하기</a>
-									<div class="timeline-body comments" style="margin-top: 5%">
-										<div class="comment-item" style="border: 1px solid #8C8C8C">
-											<p class="comment-head">
-												<a href="#">${dto.manager_id}</a> <span class="text-muted">@bradpitt</span>
-											</p>
-											<p>${dto.sol_content}</p>
-											<br>
-										</div>
-
-										<br>
-										<br>
-										<div class="comment-write">
-											<textarea class="form-control" placeholder="답변을 달아주세요."
-												rows="5" name="sol_content"></textarea>
-										</div>
-									</div>
-									<div class="timeline-footer">
-										<div class="pull-right">
-											<input type="submit" class="btn btn-success pull-right"
-												value="답변달기">
-											<a href="moimReportHandleMain"><input type="button" class="btn btn-success pull-right"
-												value="목록으로" style="margin-right:5px;"></a>
-										</div>
-									</div>
-								</div>
-
-							</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">판매자 관리</h3>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive" style="width:70%; margin-left:15%;">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th style="width:3%">승인여부</th>
+										<th style="width:7%;">아이디</th>
+										<th style="width:12%;">전화번호</th>
+										<th style="width:20%;">주소</th>
+										<th style="width:15%;">상호명</th>
+										<th style="width:15%">등록일</th>
+										<th style="width:5%">상세보기</th>
+									</tr>
+								</thead>
+								<c:forEach var="dto" items="${dtos}" begin="0">
+								<tbody>
+									<tr>
+										<c:if test="${dto.recognition=='91'}">
+										<td>신청대기</td>
+										</c:if>
+										<c:if test="${dto.recognition=='06'}">
+										<td><font color="blue">신청승인</font></td>
+										</c:if>
+										<c:if test="${dto.recognition=='15'}">
+										<td><font color="orange">신청거절</font></td>
+										</c:if>
+										<td>${dto.seller_id}</td>
+										<td>${dto.tel}</td>
+										<td>${dto.address}</td>
+										<td>${dto.comp_name}</td>
+										<td>${dto.reg_date}</td>
+										<td><a href="" onclick="return getInfo('${dto.seller_id}', '${pageNum}')"><input type="button" value="상세보기"></a></td>
+									</tr>
+								</tbody>
+								</c:forEach>
+							</table>
+							
 						</div>
 					</div>
-				</form>
+					<div class="row">
+					<div class="col-md-12">
+						<ul class="pagination pagination-sm pull-right push-down-10 push-up-10" style="margin-right:5%;">
+							<c:if test="${cnt > 0}">
 
+								<li><a href="managerMain?authority=">목록으로</a></li>
+								<!-- 처음[◀◀] 이전[◀]-->
+								<c:if test="${startPage > pageBlock}">
+									<li><a href="seller">«</a></li>
+									<li><a href="seller?pageNum=${startPage - pageBlock}">‹</a></li>
+								</c:if>
+
+								<c:forEach var="i" begin="${startPage}" end="${endPage}">
+									<c:if test="${i == currentPage}">
+										<li class="active"><a href="#">${i}</a></li>
+									</c:if>
+									<c:if test="${i != currentPage}">
+										<li><a href="seller?pageNum=${i}">${i}</a></li>
+									</c:if>
+								</c:forEach>
+
+								<!-- 다음[▶] 끝[▶▶] -->
+								<c:if test="${pageCount > endPage}">
+									<li><a href="seller?pageNum=${startPage + pageBlock}">›</a></li>
+									<li><a href="seller?pageNum=${pageCount}">»</a></li>
+								</c:if>
+							</c:if>
+						</ul>
+					</div>
+				</div>
+				</div>
+				<script type="text/javascript">
+					function getInfo(seller_id, pageNum) {
+						window.open('sellerInform?seller_id=' + seller_id + '&pageNum=' + pageNum, 'sellerInform', 'menubar=no, width=540, height=800, top=100, left=500');
+						return false;
+					}
+
+				</script>
+				
+				
 			</div>
 		</div>
 	</div>
-	<%@ include file="../../etc/footer.jsp"%>
 </body>
 </html>
-

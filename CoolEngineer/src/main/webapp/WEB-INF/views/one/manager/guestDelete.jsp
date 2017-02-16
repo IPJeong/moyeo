@@ -19,7 +19,8 @@
 				alert("정상적으로 삭제되었습니다.");
 				
 				self.close();
-				opener.location.reload(true);
+				opener.close();
+				opener.opener.location.reload(true);
 			</script>
 		</c:if>
 	</c:if>

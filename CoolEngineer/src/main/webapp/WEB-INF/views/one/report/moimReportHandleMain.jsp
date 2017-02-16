@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -191,7 +192,10 @@ tr {
 										<a
 											href="/moyeo/one/reportContentForm?report_num=${dto.report_num}&pageNum=${pageNum}&number=${number+1}"
 											class="mail-text">${dto.report_title}</a>
-										<div class="mail-date">${dto.report_date }</div>
+										<div class="mail-date">
+										<fmt:formatDate value="${dto.report_date}" type="both"
+													pattern="yyyy-MM-dd HH:mm" />
+										</div>
 
 									</div>
 

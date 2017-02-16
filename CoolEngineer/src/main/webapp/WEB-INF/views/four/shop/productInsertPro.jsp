@@ -5,8 +5,9 @@
 	<c:if test="${cnt > 0}">
 		<script type="text/javascript">
 			alert("제품이 등록되었습니다.");
+			window.location ='/moyeo/one/moyeoSeller'
 		</script>
-		<c:redirect url="/four/moyeoShop" />
+		 
 	</c:if>
 	<c:if test="${cnt <= 0}">
 		<!-- 작성 실패  -->

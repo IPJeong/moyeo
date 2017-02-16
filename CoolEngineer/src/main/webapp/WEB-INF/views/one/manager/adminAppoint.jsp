@@ -85,18 +85,15 @@
 
 				<%@ include file="../../etc/header.jsp"%>
 
-				<div class="col-md-12">
-					<form class="form-horizontal" action="adminAppointPro"
+				<div class="col-md-12" style="width:50%; margin-left:24%;">
+					<form class="form-horizontal" action="adminAppointPro" name="inputform"
 						method="post">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
 									<strong>관리자임명</strong>
 								</h3>
-								<ul class="panel-controls">
-									<li><a href="#" class="panel-remove"><span
-											class="fa fa-times"></span></a></li>
-								</ul>
+								
 							</div>
 
 							<div class="panel-body form-group-separated">
@@ -106,8 +103,12 @@
 									<div class="col-md-6 col-xs-12">
 										<div class="input-group">
 											<span class="input-group-addon"><span
-												class="fa fa-pencil"></span></span> <input type="text"
-												class="form-control" name="manager_id" />
+												class="fa fa-pencil"></span></span> 
+											<div>
+											<input type="text" name="manager_id" style="height:27px; width:200px;">
+											<input type="button" class="btn btn-primary" value="중복확인" name="dupChk" onclick="confirmId()">
+											</div>
+											
 										</div>
 										<span class="help-block">관리자 아이디를 입력하세요</span>
 									</div>
@@ -119,7 +120,7 @@
 										<div class="input-group">
 											<span class="input-group-addon"><span
 												class="fa fa-unlock-alt"></span></span> <input type="password"
-												class="form-control" name="passwd" />
+												 name="passwd" style="height:27px; width:200px;"/>
 										</div>
 										<span class="help-block">비밀번호를 입력하세요</span>
 									</div>
@@ -131,16 +132,14 @@
 										<div class="input-group">
 											<span class="input-group-addon"><span
 												class="fa fa-unlock-alt"></span></span> <input type="text"
-												class="form-control" name="name" />
+												name="name" style="height:27px; width:200px;" />
 										</div>
 										<span class="help-block">이름을 입력하세요</span>
 									</div>
 								</div>
 							</div>
 							<div class="panel-footer">
-
-								<button class="btn btn-primary pull-right" type="submit">관리자
-									생성</button>
+								<button class="btn btn-primary pull-right" type="submit">관리자 생성</button>
 							</div>
 						</div>
 					</form>
@@ -151,5 +150,15 @@
 	</div>
 
 	<%@ include file="../../etc/footer.jsp"%>
+	
+	<script type="text/javascript">
+		function confirmId() {
+			var url="confirmId?manager_id=" + document.inputform.manager_id.value;
+			window.open(url, 'confirmId', 'menubar=no, width=250, height=100, top=100, left=500');
+			return false;
+		}
+	</script>
+	
+	
 </body>
 </html>

@@ -9,9 +9,7 @@
 </head>
 
 <body>
-
-	<div class="col-md-3"
-		style="margin-left: -2%; width: 105%; overflow: hidden;">
+	<div class="col-md-3" style="margin-left: -2%; width: 105%; overflow: hidden;">
 
 		<div class="panel panel-default">
 			<div class="panel-body profile"
@@ -26,7 +24,7 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="profile-image">
-						<button class="btn btn-info btn-rounded btn-block">모임장
+						<button class="btn btn-info btn-rounded btn-block" onclick="return getInfo('${ldto.mem_id}', '${pageNum}')">모임장
 							[${ldto.mem_id}]</button>
 					</div>
 

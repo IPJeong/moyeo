@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -102,16 +103,16 @@
 								<span>설명</span>
 							</div>
 						</div>
-						<div style="margin-left: 83%; width: 15%">
-							<div style="float: left; width: 200px; margin-right: 10px;">
-							 	<select name="type">
-							 		<option value="name">이름</option>
-							 		<option value="id">아이디</option>
-							 	</select>
-								<input type="text" style="width: 100%" class="form-control"
+						<div style="margin-left: 84%; width: 300px;">
+							<div style="float: left; width: 180px; margin-right: 13px;">
+									<select name="type" style="margin-left:-37%; margin-top:8%">
+									 	<option value="name">이름</option>
+									 	<option value="id">아이디</option>
+									</select>
+									<input type="text" style="width: 105%; margin-top:-14%;" class="form-control"
 									name="search_name" placeholder="이름 / 아이디를 입력하세요"  required/>
 							</div>
-							<div style="float: left;">
+							<div style="float: left; margin-top:3%">
 								<input class="btn btn-primary" type="submit" value="검색">
 							</div>
 						</div>
@@ -152,7 +153,8 @@
 														<font size="2"><small>주소</small><br />${dto.address}</font>
 													</p>
 													<p>
-														<font size="2"><small>생년월일</small><br />${dto.birth}</font>
+														<font size="2"><small>생년월일</small><br /><fmt:formatDate value="${dto.birth}" type="both"
+													pattern="yyyy-MM-dd" /></font>
 													</p>
 												</div>
 											</div>

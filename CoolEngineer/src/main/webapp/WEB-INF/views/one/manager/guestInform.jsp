@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!-- CSS INCLUDE -->
 <link rel="stylesheet" type="text/css" id="theme"
 	href="/moyeo/resources/resource/css/theme-default.css" />
@@ -69,8 +71,9 @@
 				<div class="form-group">
 					<label class="col-md-3 col-xs-5 control-label" style="width: 200px">생년월일</label>
 					<div class="col-md-9 col-xs-7">
-						<input type="text" value="${dto.birth }" class="form-control"
-							style="width: 300px" />
+						<input type="text" value="${dto.birth}" class="form-control"
+							style="width: 300px" pattern="yyyy-MM-dd" />
+							
 					</div>
 				</div>
 
@@ -78,7 +81,7 @@
 					<div class="col-md-12 col-xs-12" style="width: 520px">
 						<a
 							onclick="if(confirm('정말 탈퇴처리를 하시겠습니까?\n탈퇴시킬 경우 해당 회원이 개설한 모임도 \n전부 삭제됩니다.'))
-                     window.location='/moyeo/one/guestDelete?mem_id=${dto.mem_id}&pageNum=${pageNum}&openType=${openType}'"
+                     		window.location='/moyeo/one/guestDelete?mem_id=${dto.mem_id}&pageNum=${pageNum}&openType=${openType}'"
 							class="btn btn-danger btn-block btn-rounded" data-toggle="modal"
 							data-target="#modal_change_password">회원 강퇴</a>
 					</div>
