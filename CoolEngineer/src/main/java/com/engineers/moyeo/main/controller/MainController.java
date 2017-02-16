@@ -40,13 +40,18 @@ public class MainController {
 	public String home(HttpServletRequest req, Model model) {
 		
 		if(req.getSession().getAttribute("mem_id")==null && req.getSession().getAttribute("manager_id")==null )return "redirect:/main/memberLoginForm";
+		
 		model.addAttribute("req", req);
+		
+		mainService.getMemberInfo(model);
 		mainService.main_notice(model);
 		mainService.hotMoim(model);
 		mainService.main_meeting_post(model);
 		mainService.recommendMoim(model);
 		mainService.getMeetingPostList(model);
 		mainService.recPlace(model);
+		mainService.getEventList(model);
+		mainService.getProducts(model);
 		
 		return "main/main";
 	}

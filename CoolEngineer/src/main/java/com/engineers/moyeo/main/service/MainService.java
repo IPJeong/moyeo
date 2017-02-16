@@ -9,14 +9,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface MainService {
 
+	
+	// 메인페이지에 회원정보 연동
+	public void getMemberInfo(Model model);
+	
 	// 메인페이지에 공지사항 글 연동
 	public void main_notice(Model model);
 	
 	// 메인페이지에 모임후기 사진, 동영상, 모임후기 연동
 	public void main_meeting_post(Model model);
 	
-	// 메인페이지에 모임후기 연돌
+	// 메인페이지에 모임후기 연동
 	public void getMeetingPostList(Model model);
+	
+	// 메인페이지에 이벤트 리스트 연동
+	public void getEventList(Model model);
+	
+	// 메인페이지 제품리스트 연동
+	public void getProducts(Model model);
 	
 	// 로그인 처리
 	public String memberLoginPro(Model model);

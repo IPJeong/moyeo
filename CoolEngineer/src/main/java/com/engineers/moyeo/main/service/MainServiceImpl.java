@@ -30,12 +30,17 @@ import com.engineers.moyeo.main.dto.MemberNotiDTO;
 import com.engineers.moyeo.main.dto.SellerNotiDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
 import com.engineers.moyeo.main.twitterKoreanParser.KoreanParser;
+import com.engineers.moyeo.one.dao.OneDAO;
+import com.engineers.moyeo.one.dto.MemberInformDTO;
+import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.HotMoimDTO;
 import com.engineers.moyeo.six.dto.InterestCatDTO;
 import com.engineers.moyeo.six.dto.InterestLocationDTO;
+import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.two.dao.TwoDAO;
 import com.engineers.moyeo.two.dto.Place_likeDTO;
@@ -54,10 +59,29 @@ public class MainServiceImpl implements MainService{
 	
 	@Autowired
 	FiveDAO fiveDao;
+	
+	@Autowired
+	ThreeDAO threeDao;
 
+	@Autowired
+	OneDAO oneDao;
+	
 	// 워드클라우드 리스트
 	private static List<WordDTO> wordDtos;
 
+
+	// 메인페이지에 회원정보 연동
+	@Override
+	public void getMemberInfo(Model model) {
+		
+		String mem_id = (String)((HttpServletRequest)model.asMap().get("req")).getSession().getAttribute("mem_id");
+		if(mem_id != null) {
+			MemberInformDTO memInfo = oneDao.getMemberInformArticle(mem_id);
+			model.addAttribute("memInfo", memInfo);
+			int notiCnt =threeDao.getNoneChkNoti(mem_id);//확인 안한 알림
+			model.addAttribute("notiCnt",notiCnt);
+		}
+	}
 
 	//메인페이지에 공지사항 글 연동
 	@Override
@@ -117,6 +141,35 @@ public class MainServiceImpl implements MainService{
 		System.out.println("미팅후기 수 : " + postDtos.size());
 		model.addAttribute("postDtos", postDtos);
 
+	}
+	
+	// 메인페이지에 이벤트 글 연동
+	@Override
+	public void getEventList(Model model) {
+		//이벤트 불러오기
+		int cnt4 = threeDao.getEventCount();
+		if(cnt4 > 0) {
+			Map<String, Integer> daoMap = new HashMap<String, Integer>();
+			daoMap.put("start", 1);
+			daoMap.put("end", 5);
+			ArrayList<EventDTO> dtos4 = threeDao.getEventList(daoMap);
+			model.addAttribute("dtos4", dtos4);
+			model.addAttribute("pageNum", 1);
+		}
+	}
+	
+	// 메인페이지 제품리스트 연동
+	@Override
+	public void getProducts(Model model) {
+		
+		Map<String, Integer> daoMap = new HashMap<String, Integer>();
+		daoMap.put("start", 1);
+		daoMap.put("end", 8);
+		
+		ArrayList<ProductInfoDTO> dtos = oneDao.getProductArticles(daoMap);
+		
+		model.addAttribute("productDtos", dtos);
+		
 	}
 
 	// 로그인 프로세스

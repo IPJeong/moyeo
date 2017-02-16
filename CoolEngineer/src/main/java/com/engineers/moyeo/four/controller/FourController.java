@@ -121,6 +121,7 @@ public class FourController {
 	@RequestMapping("/moim_greeting_board")	
 	public String moim_greeting_list(HttpServletRequest req, Model model) {
 		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
+		if((Integer)req.getSession().getAttribute("group_per")==4)return "four/greeting_board/redirect";
 		model.addAttribute("req", req);
 		String viewPage=fourService.greetinglistExecute(model);
 		return viewPage;
