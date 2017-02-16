@@ -1805,8 +1805,8 @@ public class SixServiceImpl implements SixService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
-		req.getParameter("product_num");
-		int product_num = 2;
+		
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
 		
 		productInfoDTO dto =sixDao.productDetail(product_num);
 		ProductPicDTO pic_dto = sixDao.productPic(product_num);
