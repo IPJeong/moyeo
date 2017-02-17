@@ -124,8 +124,14 @@ function notiList() {
 	
 }
 
-function change() {
+function myGroup() {
+	$('#order_info').attr('style', 'display:none');
+	$('#group_info').removeAttr('style');
+}
+
+function myShop() {
 	$('#group_info').attr('style', 'display:none');
+	$('#order_info').removeAttr('style');
 }
 </script>
 <style>
@@ -176,6 +182,17 @@ function change() {
 							style="margin: 0px; padding: 0px; padding-left: 3px;">
 							<button type="button" class="btn btn-warning" data-toggle="modal"
 								data-target="#modal_delete" style="width: 100%;padding:2px;font-size:100%;">회원탈퇴</button>
+						</div>
+					</div>
+					<div class="col-md-6"
+						style="margin: 0px; padding: 0px; width: 40%; margin-top: 5px;">
+						<div class="col-md-6"
+							style="margin: 0px; padding: 0px; padding-left: 3px;">
+							<button type="button" class="btn btn-success" style="width: 100%;padding:2px;font-size:100%;" onclick="myGroup();">MyGroup</button>
+						</div>
+						<div class="col-md-6"
+							style="margin: 0px; padding: 0px; padding-left: 3px;  ">
+							<button type="button" class="btn btn-info" style="width: 100%;padding:2px;font-size:100%;" onclick="myShop();">MyShop</button>
 						</div>
 					</div>
 				</div>
@@ -392,17 +409,12 @@ function change() {
 							</c:if>
 							</div>		
 						</div>      
-						
-						                                 
-                             <input type="button" value="change" onclick="change();">
-                             
-                                         
                 </div>                                                                        
-                
             </div>
-            
         </div>
 	</div>
+	
+	<!--******************************************** 모임 영역 시작  ******************************************************* -->
 	
 	<div id="group_info">
 		<div class="col-md-8 " style="padding: 0px;">
@@ -489,6 +501,105 @@ function change() {
 			</div>
 		</div>
 	</div>
+	
+	<!--******************************************** 모임 영역 끝  ******************************************************* -->
+	
+	
+	<!--******************************************** 샵 영역 시작  ******************************************************* -->
+	
+	<div id="order_info" style="display: none;">
+		<div class="col-md-8 " style="padding: 0px;">
+			<h2>
+				<span class="fa fa-github"></span> 주문내역
+			</h2>
+			<div class="panel-body panel-body-table"
+				style="overflow: auto; height: 250px;">
+				<table class="table table-bordered" style="border: 1px solid #E0E0E0">
+					<thead>
+						<tr>
+							<th>모임 이름</th>
+							<th>모임 관심사</th>
+							<th>모임 지역</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${cnt > 0}">
+							<c:forEach var="dto2" items="${dtos}">
+								<tr>
+									<td><a
+										href="/moyeo/six/moimMain/moimMain?group_num=${dto2.group_num}">${dto2.group_name}</a></td>
+									<td>${dto2.group_inte1}-${dto2.group_inte2}</td>
+									<td>${dto2.group_location}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-8 " style="padding: 0px; margin-top: 10px;">
+			<h2>
+				<span class="fa fa-heart"></span> 관심 모임
+			</h2>
+			<div class="panel-body panel-body-table"
+				style="overflow: auto; height: 250px;">
+				<table class="table table-bordered" style="border: 1px solid #E0E0E0">
+					<thead>
+						<tr>
+							<th>모임 이름</th>
+							<th>모임 관심사</th>
+							<th>모임 지역</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${interCnt > 0}">
+							<c:forEach var="dto3" items="${interDtos}">
+								<tr>
+									<td><a
+										href="/moyeo/six/moimMain/moimMain?group_num=${dto3.group_num}">${dto3.group_name}</a></td>
+									<td>${dto3.group_inte1}-${dto3.group_inte2}</td>
+									<td>${dto3.group_location}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-md-8 " style="padding: 0px; margin-top: 10px;">
+			<h2>
+				<span class="fa fa-list-alt"></span> 모임 가입신청 이력
+			</h2>
+			<div class="panel-body panel-body-table"
+				style="overflow: auto; height: 250px;">
+				<table class="table table-bordered" style="border: 1px solid #E0E0E0">
+					<thead>
+						<tr>
+							<th>모임 이름</th>
+							<th>신청일/탈퇴일</th>
+							<th>상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${applHistoryCnt > 0}">
+							<c:forEach var="applyDto" items="${applyDtos}">
+								<tr>
+									<td><a
+										href="/moyeo/six/moimMain/moimMain?group_num=${applyDto.group_num}">${applyDto.group_name}</a></td>
+									<td>${applyDto.request_date}</td>
+									<td>${applyDto.status}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!--******************************************** 샵 영역 끝  ******************************************************* -->
+		
 </div>
 
 
