@@ -13,9 +13,10 @@ import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
+import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
+import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
-import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_likeDTO;
@@ -407,8 +408,8 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 	
 	@Override
-	public ArrayList<Member_infoDTO> getMoimJoinMemberInfoList(Map<String, Object> daoMap) {
-		ArrayList<Member_infoDTO> dtos = null;
+	public ArrayList<MemberDTO> getMoimJoinMemberInfoList(Map<String, Object> daoMap) {
+		ArrayList<MemberDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getMoimJoinMemberInfoList(daoMap);
 		return dtos;
@@ -457,8 +458,8 @@ public class TwoDAOImpl implements TwoDAO{
 	}
 
 	@Override
-	public ArrayList<Member_infoDTO> getMoimMemberInfoList(Map<String, Object> daoMap) {
-		ArrayList<Member_infoDTO> dtos = null;
+	public ArrayList<MemberDTO> getMoimMemberInfoList(Map<String, Object> daoMap) {
+		ArrayList<MemberDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getMoimMemberInfoList(daoMap);
 		return dtos;
@@ -783,6 +784,22 @@ public class TwoDAOImpl implements TwoDAO{
 		ArrayList<StatisticsDTO> dtos = null;
 		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
 		dtos = dao.getBestTenPresent(group_num);
+		return dtos;
+	}
+
+	@Override
+	public int getProductSearchCount(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.getPlaceSearchCount(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<ProductInfoDTO> getProductSearchList(Map<String, Object> daoMap) {
+		ArrayList<ProductInfoDTO> dtos = null;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		dtos = dao.getProductSearchList(daoMap);
 		return dtos;
 	}
 }

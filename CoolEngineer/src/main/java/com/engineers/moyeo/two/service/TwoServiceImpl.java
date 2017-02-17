@@ -21,14 +21,15 @@ import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.main.service.MainService;
+import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
+import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.two.dao.TwoDAO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
-import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_likeDTO;
@@ -1447,9 +1448,9 @@ public class TwoServiceImpl implements TwoService{
 		
 		if(cnt > 0) {
 			ArrayList<Join_requestDTO> dtos = twoDao.getMoimJoinList(daoMap);
-			ArrayList<Member_infoDTO> mifdtos = twoDao.getMoimJoinMemberInfoList(daoMap);
+			ArrayList<MemberDTO> mdtos = twoDao.getMoimJoinMemberInfoList(daoMap);
 			model.addAttribute("dtos", dtos);
-			model.addAttribute("mifdtos", mifdtos);
+			model.addAttribute("mdtos", mdtos);
 		}
 
 		startPage = (currentPage / pageBlock) * pageBlock + 1; 
@@ -1621,9 +1622,9 @@ public class TwoServiceImpl implements TwoService{
 		
 		if(cnt > 0) {
 			ArrayList<MyGroupDTO> dtos = twoDao.getMoimMemberList(daoMap);
-			ArrayList<Member_infoDTO> mifdtos = twoDao.getMoimMemberInfoList(daoMap);
+			ArrayList<MemberDTO> mdtos = twoDao.getMoimMemberInfoList(daoMap);
 			model.addAttribute("dtos", dtos);
-			model.addAttribute("mifdtos", mifdtos);
+			model.addAttribute("mdtos", mdtos);
 		}
 
 		startPage = (currentPage / pageBlock) * pageBlock + 1; 
@@ -3269,6 +3270,167 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("search_type", "WordCloudByTag");
 		
 		return "two/main_search/mainSearchResult";
+	}
+
+	@Override
+	public String productSearch(Model model) {
+		int pageSize = 9;
+		int pageBlock = 5;
+		int cnt = 0;
+		int start = 0;
+		int end = 0;
+		int number = 0;
+		String pageNum = null;
+		int currentPage = 0;
+		int pageCount = 0;
+		int startPage = 0;
+		int endPage = 0;
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String search_type = req.getParameter("search_type");
+		String search_keyword = req.getParameter("search_keyword");
+
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("search_type", search_type);
+		daoMap.put("search_keyword", search_keyword);
+		
+		cnt = twoDao.getProductSearchCount(daoMap);
+		
+		System.out.println("cnt: " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		
+		if(end > cnt) end = cnt;
+		
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		if(cnt > 0) {
+			daoMap.put("start", start);
+			daoMap.put("end", end);
+			
+			ArrayList<ProductInfoDTO> dtos = twoDao.getProductSearchList(daoMap);
+			model.addAttribute("dtos", dtos);
+			
+			System.out.println("dtos: " + dtos);
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number);
+		model.addAttribute("pageNum", pageNum);
+		
+		System.out.println("cnt: " + cnt);
+		
+		if(cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		model.addAttribute("view_page", "productSearch");
+		
+		return "one/shop/moyeoShop";
+	}
+
+	@Override
+	public String productCategory(Model model) {
+		int pageSize = 9;
+		int pageBlock = 5;
+		int cnt = 0;
+		int start = 0;
+		int end = 0;
+		int number = 0;
+		String pageNum = null;
+		int currentPage = 0;
+		int pageCount = 0;
+		int startPage = 0;
+		int endPage = 0;
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String product_cat1 = req.getParameter("product_cat1");
+		String product_cat2 = req.getParameter("product_cat2");
+		
+		Map<String, Object> daoMap = new HashMap<String, Object>();
+		daoMap.put("search_type", "4");
+		daoMap.put("product_cat1", product_cat1);
+		daoMap.put("product_cat2", product_cat2);
+		
+		cnt = twoDao.getProductSearchCount(daoMap);
+		
+		System.out.println("cnt: " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		
+		if(end > cnt) end = cnt;
+		
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		if(cnt > 0) {
+			daoMap.put("start", start);
+			daoMap.put("end", end);
+			
+			ArrayList<ProductInfoDTO> dtos = twoDao.getProductSearchList(daoMap);
+			model.addAttribute("dtos", dtos);
+			
+			System.out.println("dtos: " + dtos);
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number);
+		model.addAttribute("pageNum", pageNum);
+		
+		System.out.println("cnt: " + cnt);
+		
+		if(cnt > 0) {
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageBlock", pageBlock);
+		}
+		
+		model.addAttribute("view_page", "productCategory");
+		
+		System.out.println("Product Category");
+		
+		return "one/shop/moyeoShop";
 	}
 
 }

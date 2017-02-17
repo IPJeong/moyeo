@@ -7,9 +7,10 @@ import com.engineers.moyeo.five.dto.MeetingPostDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
+import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
+import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
-import com.engineers.moyeo.two.dto.Member_infoDTO;
 import com.engineers.moyeo.two.dto.Moim_infoDTO;
 import com.engineers.moyeo.two.dto.Place_infoDTO;
 import com.engineers.moyeo.two.dto.Place_likeDTO;
@@ -74,14 +75,14 @@ public interface TwoDAO {
 	//모임 관리(모임장 권한) : 모임원 관리, 가입신청 관리, 게시판 관리
 	public int getMoimJoinCount(int group_num); //모임에 가입신청한 사람의 수를 구함
 	public ArrayList<Join_requestDTO> getMoimJoinList(Map<String, Object> daoMap); //모임에 가입신청한 사람들의 리스트를 불러옴
-	public ArrayList<Member_infoDTO> getMoimJoinMemberInfoList(Map<String, Object> daoMap); //모임에 가입신청한 사람들의 개인정보를 불러와서 리스트로 보여줌
+	public ArrayList<MemberDTO> getMoimJoinMemberInfoList(Map<String, Object> daoMap); //모임에 가입신청한 사람들의 개인정보를 불러와서 리스트로 보여줌
 	public Join_requestDTO getMoimJoinInfo(int request_num); //모임에 가입신청한 사람 한명의 정보를 불러옴
 	public void moimJoinOK(Map<String, Object> daoMap); //모임가입 승인 처리함
 	public void moimJoinPro(Map<String, Object> daoMap); //모임 가입 승인한 후 모임원 정보 테이블에 등록함
 	public void moimJoinNO(Map<String, Object> daoMap); //모임가입 거절 처리함
 	public int getMoimMemberCount(int group_num); //모임원수를 구함
 	public ArrayList<MyGroupDTO> getMoimMemberList(Map<String, Object> daoMap); //모임원 리스트를 구함
-	public ArrayList<Member_infoDTO> getMoimMemberInfoList(Map<String, Object> daoMap); //모임원들의 개인정보를 불러와서 리스트로 보여줌
+	public ArrayList<MemberDTO> getMoimMemberInfoList(Map<String, Object> daoMap); //모임원들의 개인정보를 불러와서 리스트로 보여줌
 	public MyGroupDTO getMoimMemberInfo(int my_group_num); //모임원 정보 테이블의 프리머리 키값을 통해 모임원 정보를 구함
 	public MyGroupDTO getMoimMemberInfo2(Map<String, Object> daoMap); //아이디, 모임번호를 통해 모임원 정보를 구함
 	public String checkMoimMemberRank(int my_group_num); //모임원의 등급을 확인함
@@ -126,4 +127,8 @@ public interface TwoDAO {
 	public int checkBestTenPresent(int group_num); //모임원 중에 출석한 적이 있는지 여부를 확인
 	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num); //조회수가 높은 10개의 게시글 리스트를 순서대로 보여줌
 	public ArrayList<StatisticsDTO> getBestTenPresent(int group_num); //출석일수가 높은 10명의 모임원의 리스트를 순서대로 보여줌
+	
+	public int getProductSearchCount(Map<String, Object> daoMap); //상품을 검색했을 때 나오는 상품수
+	public ArrayList<ProductInfoDTO> getProductSearchList(Map<String, Object> daoMap); //상품을 검색했을 때 나오는 상품들을 리스트로 보여줌
+	
 }

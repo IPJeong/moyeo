@@ -377,7 +377,7 @@
 		 WHERE rnum BETWEEN #{start} AND #{end} 
 	</select>
 	
-	<select id="getMoimJoinMemberInfoList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Member_infoDTO">
+	<select id="getMoimJoinMemberInfoList" parameterType="Map" resultType="com.engineers.moyeo.three.dto.MemberDTO">
  		SELECT *
 		  FROM (SELECT mem_id, name, birth, gender, rownum rnum
 		          FROM (SELECT jmi.request_num, jmi.request_date, jmi.status, mi.mem_id, jmi.group_num, mi.name, mi.birth, mi.gender 
@@ -415,7 +415,7 @@
  		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	</select>
 	
-	<select id="getMoimMemberInfoList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Member_infoDTO">
+	<select id="getMoimMemberInfoList" parameterType="Map" resultType="com.engineers.moyeo.three.dto.MemberDTO">
  		SELECT * 
 		  FROM (SELECT mem_id, name, birth, gender, rownum rnum
 		          FROM (SELECT gmi.my_group_num, gmi.group_per, gmi.group_num, mi.mem_id, mi.name, mi.birth, mi.gender 
@@ -1314,5 +1314,56 @@
 				       WHERE cp.mem_id = mi.mem_id)
 				WHERE present_cnt_rank BETWEEN 1 AND 10)
 		WHERE present_rank BETWEEN 1 AND 10
+	</select>
+
+	<select id="getProductSearchCount" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ProductInfoDTO">
+		SELECT COUNT(*)
+		  FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, product_cat1, product_cat2, pic_num, pic_path, pic_name, pic_type, rownum rnum
+		          FROM (SELECT pi.product_num, pi.product_name, pi.product_price, pi.product_qty, pi.product_detail, pi.seller_id, pi.product_cat1, pi.product_cat2, pp.pic_num, pp.pic_path, pp.pic_name, pp.pic_type
+		                  FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, product_cat1, product_cat2
+		                          FROM product_info
+		                        <if test="type == 1">
+		                        WHERE product_name LIKE '%'||#{product_name}||'%'
+		                        </if>
+		                        <if test="type == 2">
+		                        WHERE product_detail LIKE '%'||#{product_detail}||'%'
+		                        </if>
+		                        <if test="type == 3">
+		                        WHERE seller_id LIKE '%'||#{seller_id}||'%'
+		                        </if>
+		                        <if test="type == 4">
+		                        WHERE product_cat1 LIKE '%'||#{product_cat1}||'%' AND product_cat2 LIKE '%'||#{product_cat2}||'%'
+		                        </if>
+		                        ORDER BY product_price) pi,
+		                       (SELECT pic_num, pic_path, pic_name, product_num, pic_type
+		                          FROM product_pic) pp
+		                WHERE pi.product_num = pp.product_num)
+		       )
+	</select>
+	
+	<select id="getProductSearchList" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ProductInfoDTO">
+		SELECT *
+		  FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, product_cat1, product_cat2, pic_num, pic_path, pic_name, pic_type, rownum rnum
+		          FROM (SELECT pi.product_num, pi.product_name, pi.product_price, pi.product_qty, pi.product_detail, pi.seller_id, pi.product_cat1, pi.product_cat2, pp.pic_num, pp.pic_path, pp.pic_name, pp.pic_type
+		                  FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, product_cat1, product_cat2
+		                          FROM product_info
+		                        <if test="type == 1">
+		                        WHERE product_name LIKE '%'||#{product_name}||'%'
+		                        </if>
+		                        <if test="type == 2">
+		                        WHERE product_detail LIKE '%'||#{product_detail}||'%'
+		                        </if>
+		                        <if test="type == 3">
+		                        WHERE seller_id LIKE '%'||#{seller_id}||'%'
+		                        </if>
+		                        <if test="type == 4">
+		                        WHERE product_cat1 LIKE '%'||#{product_cat1}||'%' AND product_cat2 LIKE '%'||#{product_cat2}||'%'
+		                        </if>
+		                        ORDER BY product_price) pi,
+		                       (SELECT pic_num, pic_path, pic_name, product_num, pic_type
+		                          FROM product_pic) pp
+		                WHERE pi.product_num = pp.product_num)
+		       )
+		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 </mapper>

@@ -490,4 +490,23 @@ public class TwoController {
 		return viewPage;
 	}
 	
+	//상품 검색
+	@RequestMapping("/productSearch")
+	public String productSearch(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+					
+		model.addAttribute("req", req);
+		viewPage = twoService.productSearch(model);
+		return viewPage;
+	}
+	
+	//상품 카테고리 선택
+	@RequestMapping("/productCategory")
+	public String productCategory(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+					
+		model.addAttribute("req", req);
+		viewPage = twoService.productCategory(model);
+		return viewPage;
+	}
 }

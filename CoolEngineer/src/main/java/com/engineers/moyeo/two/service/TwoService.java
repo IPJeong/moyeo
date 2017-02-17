@@ -53,4 +53,7 @@ public interface TwoService {
 	
 	public String wordCloudSearch(Model model); //워드 클라우드 단어를 선택하여 검색
 	public String wordCloudSearchByTag(Model model); //워드 클라우드 태그 단어를 선택하여 태그 검색
+	
+	public String productSearch(Model model); //상품 검색
+	public String productCategory(Model model); //상품 카테고리 선택
 }
