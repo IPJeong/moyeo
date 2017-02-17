@@ -252,21 +252,21 @@ li {
 								</div>
 							
 							
-							<div style="float:right; margin-right:2.5%; width:27.5%;">
-								<form name="productsearchform" action="/moyeo/two/productSearch">
-									<select class="form-control-1" name="search_type" style="width:22.5%; height:35px; margin-right:2.5%;">
-										<option value="1">이름</option>
-										<option value="2">설명</option>
-										<option value="3">판매자</option>
-									</select>
-			
-									<input type="text" class="form-control" name="search_keyword" style="width:55%; height:35px;" maxlength="30">
-									
-									<input type="submit" class="btn btn-primary" value="검색" style="float:right; width:17.5%; height:35px; margin-top:-35px;">
-								</form>
-							</div>	
+						<div style="float:left; margin-left:5%; width:27.5%; margin-top:50px;">
+							<form name="productsearchform" action="/moyeo/two/productSearch">
+								<select class="form-control-1" name="search_type" style="width:22.5%; height:35px; margin-right:2.5%;">
+									<option value="1">이름</option>
+									<option value="2">설명</option>
+									<option value="3">판매자</option>
+								</select>
+		
+								<input type="text" class="form-control" name="search_keyword" style="width:55%; height:35px;" maxlength="30">
 								
-							<div class="row"  style="float:left; margin-left:50%;">
+								<input type="submit" class="btn btn-primary" value="검색" style="float:right; width:17.5%; height:35px; margin-top:-35px;">
+							</form>
+						</div>	
+								
+							<div class="row"  style="float:right; margin-right:5%; margin-top:45px;">
 								<div class="col-md-12">
 									<ul class="pagination pagination-sm pull-right push-down-10 push-up-10">
 										<c:if test="${view_page=='moyeoShop'}">
