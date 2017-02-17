@@ -80,7 +80,7 @@
 		                    <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</h4> 
 	                    	<div class="form-group">                                            
                                  <div class="col-md-12">                                                                                
-                                     <select name="loc_category1" class="form-control select" style="color:#212121;" onchange="select_loc_category()" required>
+                                     <select name="loc_category1" class="form-control" style="color:#212121;" onchange="select_loc_category()" required>
                                          	<option value="">선택하세요</option>
                                          	<option value="서울특별시">서울특별시</option>
 							                <option value="부산광역시">부산광역시</option>
@@ -104,7 +104,7 @@
                              </div>
                            	 <div class="form-group">
                                  <div class="col-md-12"> 
-                                      <select name="loc_category2" style="color:#212121;" class="form-control select" required>
+                                      <select name="loc_category2" style="color:#212121;" class="form-control" required>
                                       		<option value="">선택하세요</option>
                                       </select>
                                  </div>
@@ -113,7 +113,7 @@
                              <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 휴대폰 번호</h4> 
                              <div class="form-group">
 		                        <div class="col-md-12" style="width:80%; float:left">
-		                            <input type="text" class="form-control" name="tel" placeholder="tel" id="tell"
+		                            <input type="text" class="form-control" name="tel" placeholder="ex) 010-0000-0000" id="tell"
 		                            onkeyup="phoneChk()"		                             
 		                            style="color:#212121;" required/>		                            
 		                        </div>
@@ -130,11 +130,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <h4>프로필 사진</h4>
+                            <h4>&nbsp;&nbsp;&nbsp;프로필 사진</h4>
                             <div class="form-group">
-                            	<label class="col-md-2 control-label"></label>                           	                                
+                            	<label class="col-md-6 control-label"></label>                           	                                
                                 <div class="col-md-12">                               	                            	
-                                    <input type="file" class="fileinput btn-info" name="files[0]" id="filename2" onchange="chkType('files[0]')" style="" title="프로필 사진"/>
+                                    <input type="file" class="fileinput btn-info" name="files[0]" id="filename2" onchange="chkType('files[0]')" style="" title="사진선택"/>
                                 </div>
                             </div>
                             <h4><span class="fa fa-asterisk" style="color:#F44336;font-size:3pt;"></span> 성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</h4>
@@ -178,11 +178,37 @@
 
 <script src="/moyeo/resources/customScript/three.js" type="text/javascript"></script>
 
-<script type="text/javascript" src="/moyeo/resources/customScript/five.js"></script> 
-<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
-<script type="text/javascript" src="/moyeo/resources/resource/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
 
-<script type="text/javascript" src="/moyeo/resources/resource/js/settings.js"></script>
-<script type="text/javascript" src="/moyeo/resources/resource/js/plugins.js"></script>        
-<script type="text/javascript" src="/moyeo/resources/resource/js/actions.js"></script> 
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap.min.js"></script>
+<!-- END PLUGINS -->
+
+<!-- THIS PAGE PLUGINS -->
+<script type='text/javascript'
+	src='/moyeo/resources/resource/js/plugins/icheck/icheck.min.js'></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/jquery-mousewheel-master/jquery.mousewheel.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-file-input.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/bootstrap/bootstrap-select.js"></script>
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+<!-- END THIS PAGE PLUGINS -->
+
+<!-- START TEMPLATE -->
+<script type="text/javascript"
+	src="/moyeo/resources/resource/js/settings.js"></script>

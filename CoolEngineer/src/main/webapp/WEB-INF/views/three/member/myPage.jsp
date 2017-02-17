@@ -19,7 +19,7 @@ $(document).ready(function() {
 	$('#nameInBtn1').fadeToggle(0);
 	$('#nameInBtn').click(function(){	
 		nameinput = '<input type="hidden" name="pro1" value="o"/>' +
-					'<input type="text" name="name" value="${dto.name}" class="form-control" required/>';		
+					'<input type="text" name="name" value="${dto.name}" class="form-control" style="padding-left:0px;" required/>';		
 		$('#nameInput').html(nameinput);
 		$('#nameInBtn').fadeToggle(0);
 		$('#nameInBtn1').fadeToggle(0);
@@ -77,7 +77,7 @@ $(document).ready(function() {
 	$('#emInBtn1').fadeToggle(0);
 	$('#emInBtn').click(function(){	
 		emailinput ='<input type="hidden" name="pro3" value="o"/>' + 
-					'<input type="email" name="email" value="${dto.email}" class="form-control" required/>';		
+					'<input type="email" name="email" value="${dto.email}" class="form-control" style="padding-left:0px;" required/>';		
 		$('#emailInput').html(emailinput);
 		$('#emInBtn').fadeToggle(0);
 		$('#emInBtn1').fadeToggle(0);
@@ -95,7 +95,7 @@ $(document).ready(function() {
 	$('#telInBtn1').fadeToggle(0);
 	$('#telInBtn').click(function(){	
 		telinput = '<input type="hidden" name="pro4" value="o"/>' +
-				   '<input type="text" name="tel" value="${dto.tel}" class="form-control" onkeyup="phoneChk2()" required/>';		
+				   '<input type="text" name="tel" value="${dto.tel}" class="form-control" onkeyup="phoneChk2()" style="padding-left:0px;" required/>';		
 		$('#telInput').html(telinput);
 		$('#telInBtn').fadeToggle(0);
 		$('#telInBtn1').fadeToggle(0);
@@ -109,9 +109,7 @@ $(document).ready(function() {
 		$('#telInBtn').fadeToggle(0);
 		$('#telInBtn1').fadeToggle(0);
 	});	
-	
-	
-	
+			
 });
 
 function notiList() {
@@ -119,12 +117,20 @@ function notiList() {
 	var windowW = 300;  // 창의 가로 길이
     var windowH = 70;  // 창의 세로 길이
     var left = Math.ceil((window.screen.width - windowW)/2);
-    var top = Math.ceil((window.screen.height - windowH)/2);
-
+    var top = Math.ceil((window.screen.height - windowH)/2);    
+    
+    $('#notiChk').fadeOut(300);
 	window.open('notiList', 'notiWindow', 'width=800, height=450, left=' + left + 'top=' + top);
 	
 }
 </script>
+<style>
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > .dropdown.active.open > a:hover{
+	border-top: 2px solid #00BCD4;
+}
+
+
+</style>
 
 <div class="col-md-6 page-title"></div>
 
@@ -303,7 +309,7 @@ function notiList() {
 						
 						</c:if>
 						<c:if test="${notiCnt > 0}">
-							<div style="color:#FFEBEE;						
+							<div id="notiChk" style="color:#FFEBEE;						
 										border:1px solid #F44336;
 										font-size: 100%;
 									    width: 1.5em;height:1.5em;
@@ -319,12 +325,81 @@ function notiList() {
 			</div>
 		</div>
 	</form:form>
+	<div class="panel panel-default tabs">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">나의 관심사</a></li>
+                <li><a href="#tab2" data-toggle="tab">나의 관심지역</a></li>                                    
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane panel-body active" id="tab1">
+                	
+						<div class="form-group">							
+							<div class="col-md-12 col-xs-6">
+								<c:if test="${intCnt > 0}">									
+									<table style="width: 100%">
+										<tr>
+											<th style="width: 80%">
+												<div id="interCat">													
+														${interCat1} - ${interCat2}
+												</div>												
+											</th>
+											<th style="width: 20%">
+												<div id="interCatBtn">													
+													<button type="button" id="interCatInBtn2" onclick="window.location='memInterestModify2'" class="btn btn-primary">													
+														<span class="fa fa-refresh">&nbsp;수정</span>
+													</button>
+												</div>
+											</th>
+										</tr>
+									</table>									
+								</c:if>
+								<c:if test="${intCnt == 0}">
+									<button type="button" class="btn btn-info btn-block" onclick="window.location='memInterest'" style="width:100%">관심사 등록하기</button>
+								</c:if>
+							</div>		
+						</div>
+                	
+                </div>
+                <div class="tab-pane panel-body" id="tab2"> 
+                	<div class="form-group">							
+							<div class="col-md-12 col-xs-6">
+							<c:if test="${intCnt > 0}">
+								<table style="width: 100%">
+									<tr>
+										<th style="width: 80%">
+											<div id="interCat">												
+													${interLoca1} - ${interLoca2}
+											</div>
+										</th>
+										<th style="width: 20%">
+											<div id="interCatBtn">
+												<div id="interCatBtn">													
+													<button type="button" id="interCatInBtn2" onclick="window.location='memInterestModify'" class="btn btn-primary">													
+														<span class="fa fa-refresh">&nbsp;수정</span>
+													</button>
+												</div>
+											</div>
+										</th>
+									</tr>
+								</table>
+							</c:if>
+							<c:if test="${intCnt == 0}">
+								<button type="button" class="btn btn-info btn-block" onclick="window.location='memInterest'" style="width:100%">관심지역 등록하기</button>
+							</c:if>
+							</div>		
+						</div>                                       
+                                         
+                </div>                                                                        
+                
+            </div>
+            
+        </div>
 	</div>
 	<div class="col-md-8 " style="padding: 0px;">
 		<h2>
 			<span class="fa fa-github"></span> 가입한 모임
 		</h2>
-		<div class="panel-body panel-body-table" style="overflow:auto;height:240px;">
+		<div class="panel-body panel-body-table" style="overflow:auto;height:250px;">
 			<table class="table table-bordered" style="border: 1px solid #E0E0E0">
 				<thead>
 					<tr>
@@ -352,7 +427,7 @@ function notiList() {
 		<h2>
 			<span class="fa fa-heart"></span> 관심 모임
 		</h2>
-		<div class="panel-body panel-body-table" style="overflow: auto; height:240px;">
+		<div class="panel-body panel-body-table" style="overflow: auto; height:250px;">
 			<table class="table table-bordered" style="border: 1px solid #E0E0E0">
 				<thead>
 					<tr>
@@ -380,7 +455,7 @@ function notiList() {
 		<h2>
 			<span class="fa fa-list-alt"></span> 모임 가입신청 이력
 		</h2>
-		<div class="panel-body panel-body-table" style="overflow: auto; height:240px;">
+		<div class="panel-body panel-body-table" style="overflow: auto; height:250px;">
 			<table class="table table-bordered" style="border: 1px solid #E0E0E0">
 				<thead>
 					<tr>

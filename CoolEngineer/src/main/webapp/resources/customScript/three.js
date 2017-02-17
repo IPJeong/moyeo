@@ -769,6 +769,7 @@ function select_recpla_category() {
 	
 }
 
+
 //마이페이지
 function select_loc_category3() {
 
@@ -953,6 +954,8 @@ function select_loc_category3() {
 	}
 	
 }
+
+
 
 // date picker
 $(function(){
