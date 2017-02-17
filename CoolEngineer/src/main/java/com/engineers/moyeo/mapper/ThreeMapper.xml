@@ -347,5 +347,29 @@
 		   AND (status = '대기' OR status = '거절' OR status = '강제탈퇴' OR status = '탈퇴')
 		   AND jr.group_num = gl.group_num
 	</select>
+	<!-- 관심지역 가져오기 -->
+	<select id="getLocaDTO" parameterType="String" resultType="com.engineers.moyeo.six.dto.InterestLocationDTO">
+		SELECT loc_city, loc_gu FROM interest_location WHERE mem_id = #{mem_id}
+	</select>
+	<!-- 관심사 가져오기 -->
+	<select id="getCatDTO" parameterType="String" resultType="com.engineers.moyeo.six.dto.InterestCatDTO">
+		SELECT inter_first, inter_second FROM interest_cat WHERE mem_id = #{mem_id}
+	</select>
+	<!-- 관심사 개수 -->
+	<select id="getInterCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) 
+		  FROM interest_location i
+		 INNER JOIN interest_cat c 
+		    ON i.mem_id = c.mem_id
+		 WHERE c.mem_id = #{mem_id}
+	</select>
+	<!-- 관심 지역 수정 -->
+	<update id="placeModify" parameterType="map">
+		UPDATE interest_location SET loc_city = #{place1}, loc_gu = #{place2} WHERE mem_id = #{mem_id}
+	</update>
+	<!-- 관심사 수정 -->
+	<update id="cateModify" parameterType="map">
+		UPDATE 	interest_cat SET inter_first = #{category1}, inter_second = #{category2} WHERE mem_id = #{mem_id}
+	</update>
 <!-- 회원 -->
 </mapper>

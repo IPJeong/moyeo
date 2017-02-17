@@ -11,6 +11,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.engineers.moyeo.six.dto.InterestCatDTO;
+import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.JoinRequestDTO;
@@ -512,6 +514,43 @@ public class ThreeDAOImpl implements ThreeDAO{
 	public List<JoinRequestDTO> getApplHistory(String mem_id) {
 		ThreeDAO dao = sqlSession.getMapper(ThreeDAO.class);
 		return dao.getApplHistory(mem_id);
+	}
+	
+	//관심사 가져오기
+	@Override
+	public InterestCatDTO getCatDTO(String mem_id) {
+		InterestCatDTO dto = null;
+		dto = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getCatDTO", mem_id);
+		return dto;
+	}
+
+	//관심지역 가져오기
+	@Override
+	public InterestLocationDTO getLocaDTO(String mem_id) {
+		InterestLocationDTO dto = null;
+		dto = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getLocaDTO", mem_id);
+		return dto;
+	}
+
+	@Override
+	public int getInterCount(String mem_id) {
+		int cnt = 0;
+		cnt = this.sqlSession.selectOne("com.engineers.moyeo.three.dao.ThreeDAO.getInterCount", mem_id);
+		return cnt;
+	}
+
+	@Override
+	public int placeModify(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.placeModify", map);
+		return cnt;
+	}
+
+	@Override
+	public int cateModify(Map<String, Object> map) {
+		int cnt = 0;
+		cnt = this.sqlSession.insert("com.engineers.moyeo.three.dao.ThreeDAO.cateModify", map);
+		return cnt;
 	}
 	
 	

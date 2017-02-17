@@ -261,7 +261,43 @@ public class ThreeController {
 		System.out.println("memInterestInput()");
 		
 		return viewPage;
-	}	
+	}
+		
+	@RequestMapping("/memInterestModify") //관심사 수정
+	public String memInterestModify(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		System.out.println("memInterestModify()");
+		
+		return "three/member/memInterestModify";
+	}
+	
+	@RequestMapping("/memInterestModifyPro") //관심사 수정처리
+	public String memInterestModifyPro(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.memInterestModifyPro(model);
+		System.out.println("memInterestModifyPro()");
+		
+		return viewPage;
+	}
+	
+	@RequestMapping("/memInterestModify2") //관심사 수정
+	public String memInterestModify2(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		System.out.println("memInterestModify2()");
+		
+		return "three/member/memInterestModify2";
+	}
+	
+	@RequestMapping("/memInterestModifyPro2") //관심사 수정처리
+	public String memInterestModifyPro2(HttpServletRequest req, Model model) {
+		
+		model.addAttribute("req", req);
+		viewPage = threeService.memInterestModifyPro2(model);
+		System.out.println("memInterestModifyPro2()");
+		
+		return viewPage;
+	}
 	
 	@RequestMapping("/myPage") //마이페이지
 	public String myPage(HttpServletRequest req, Model model) {		

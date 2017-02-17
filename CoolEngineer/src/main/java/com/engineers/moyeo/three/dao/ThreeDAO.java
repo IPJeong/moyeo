@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.engineers.moyeo.six.dto.InterestCatDTO;
+import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.JoinRequestDTO;
@@ -57,6 +59,8 @@ public interface ThreeDAO {
 	public void proImgInsert(MemberDTO dto); //프로필사진 넣기
 	public int placeInsert(Map<String, Object> map); //관심지역 넣기
 	public int cateInsert(Map<String, Object> map);//관심사 넣기
+	public int placeModify(Map<String, Object> map); //관심지역수정
+	public int cateModify(Map<String, Object> map);//관심사 넣기
 	public MemberDTO getMyInfo(Map<String, Object> map);//마이페이지
 	public int getGroupCnt(String memid);//가입한 모임 개수
 	public ArrayList<MoimOpenDTO> getGroupList(Map<String, Object> map); //가입한 모임 리스트
@@ -77,5 +81,8 @@ public interface ThreeDAO {
 	public int getApplHistoryCnt(String mem_id); // 가입신청 이력 개수
 	public List<MoimOpenDTO> getInterGroup(String mem_id); //관심모임 가져오기
 	public List<JoinRequestDTO> getApplHistory(String mem_id); // 가입신청 이력 가져오기
+	public InterestCatDTO getCatDTO(String mem_id);//관심사 가져오기
+	public InterestLocationDTO getLocaDTO(String mem_id); //관심지역 가져오기
+	public int getInterCount(String mem_id); //관심사 개수
 
 }

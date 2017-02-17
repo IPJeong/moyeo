@@ -30,7 +30,9 @@ public interface ThreeService {
 	public void duplication(ModelAndView mav, HttpServletRequest req) throws NumberFormatException, NullPointerException;
 	public String registMember(Model model); //회원가입
 	public String memInterest(Model model);//관심사 선택
-	public String memInterestInput(Model model); //관심사 입력처리
+	public String memInterestInput(Model model); //관심사 입력처리	
+	public String memInterestModifyPro(Model model); //관심사 수정처리	
+	public String memInterestModifyPro2(Model model); //관심사 수정처리
 	public String myPage(Model model); //마이페이지
 	public String changeProImg(Model model); //프로필 사진 변경
 	//현 비밀번호 체크

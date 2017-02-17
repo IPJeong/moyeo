@@ -21,6 +21,8 @@ import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.common.TextMessage;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.main.service.MainService;
+import com.engineers.moyeo.six.dto.InterestCatDTO;
+import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
@@ -781,7 +783,7 @@ public class ThreeServiceImpl implements ThreeService{
 		model.addAttribute("cnt", cnt3);		
 		
 		return "/three/member/memInterestInput";
-	}
+	}	
 	
 	//이벤트 참여
 	@Override
@@ -865,6 +867,25 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		
 		cnt = dao.getGroupCnt(mem_id); //가입한 모임 개수 가져오기
+		int intCnt = dao.getInterCount(mem_id); //관심사 개수
+		
+		if(intCnt > 0) {
+			InterestCatDTO catDto = dao.getCatDTO(mem_id); //관심사 가져오기
+			
+			String interCat1 = catDto.getInter_first();
+			String interCat2 = catDto.getInter_second();
+			
+			InterestLocationDTO locaDto = dao.getLocaDTO(mem_id); //관심지역 가져오기
+			String interLoca1 = locaDto.getLoc_city();
+			String interLoca2 = locaDto.getLoc_gu();
+			
+			model.addAttribute("interCat1", interCat1);
+			model.addAttribute("interCat2", interCat2);
+			model.addAttribute("interLoca1", interLoca1);
+			model.addAttribute("interLoca2", interLoca2);
+		}
+		
+		model.addAttribute("intCnt", intCnt);
 		
 		int notiCnt =dao.getNoneChkNoti(mem_id);//확인 안한 알림
 		model.addAttribute("notiCnt",notiCnt);
@@ -1275,7 +1296,8 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/event/winEvent";
 	}
-
+	
+	//당첨자 확인창
 	@Override
 	public String chkWin(Model model) {
 		
@@ -1288,7 +1310,7 @@ public class ThreeServiceImpl implements ThreeService{
 		int cnt = dao.getWinnerCount(winning_num); //이벤트 당첨자 명수
 		
 		if(cnt != 0) {
-			ArrayList<EventDTO> dtos = dao.getWinnerList(winning_num);//이벤트 참가자 명단
+			ArrayList<EventDTO> dtos = dao.getWinnerList(winning_num);//이벤트 당첨자 명단
 			model.addAttribute("dtos", dtos);
 			
 		}		
@@ -1299,7 +1321,8 @@ public class ThreeServiceImpl implements ThreeService{
 		
 		return "/three/event/chkWin";
 	}
-
+	
+	//알림메세지 창
 	@Override
 	public String notiList(Model model) {
 		
@@ -1375,6 +1398,55 @@ public class ThreeServiceImpl implements ThreeService{
 			req.setAttribute("pageBlock", pageBlock);
 		}
 		return "/three/member/notiList";
+	}
+		
+	
+	//관심사 수정 처리
+	@Override
+	public String memInterestModifyPro2(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String mem_id = req.getParameter("mem_id");		
+		String category1 = req.getParameter("recpla_category1").replace("_", "/");
+		String category2 = req.getParameter("recpla_category2");
+			
+		
+		Map<String, Object>	iMap2 = new HashMap<>();
+		iMap2.put("mem_id", mem_id);
+		iMap2.put("category1", category1);
+		iMap2.put("category2", category2);
+		
+		int cnt = dao.cateModify(iMap2); //관심사 수정
+		
+		model.addAttribute("cnt", cnt);		
+		
+		return "/three/member/memInterestModifyPro";
+	}	
+	
+	
+	//관심지역 수정 처리
+	@Override
+	public String memInterestModifyPro(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String mem_id = req.getParameter("mem_id");
+		String place1 = req.getParameter("loc_category1");
+		String place2 = req.getParameter("loc_category2");		
+		
+		Map<String, Object>	iMap = new HashMap<>();
+		iMap.put("mem_id", mem_id);
+		iMap.put("place1", place1);
+		iMap.put("place2", place2);
+		
+		int cnt = dao.placeModify(iMap); //관심지역 수정	
+				
+		model.addAttribute("cnt", cnt);		
+		
+		return "/three/member/memInterestModifyPro2";
 	}	
 	
 	
