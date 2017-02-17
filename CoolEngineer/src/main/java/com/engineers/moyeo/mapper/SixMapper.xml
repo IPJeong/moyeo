@@ -637,4 +637,9 @@
 		INSERT INTO product_comments (comments_num, comments_content, comments_date, star_points, product_num, mem_id, comments_title) VALUES (product_comments_seq.NEXTVAL, #{comments_content}, #{comments_date}, #{star_points}, #{product_num}, #{mem_id}, #{comments_title})
 	</insert>
 	
+	<!-- 샵-제품문의등록 -->
+	<insert id="inquirePro" parameterType="com.engineers.moyeo.six.dto.ProductQueDTO">
+		INSERT INTO product_que (que_num, que_title, que_content, que_date, mem_id, product_num, que_type, visible) VALUES (product_que_seq.NEXTVAL, #{que_title}, #{que_content}, #{que_date}, #{mem_id}, #{product_num}, #{que_type}, #{visible})	
+	</insert>
+	
 </mapper>

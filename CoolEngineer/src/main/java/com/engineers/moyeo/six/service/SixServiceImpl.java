@@ -37,6 +37,7 @@ import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 import com.engineers.moyeo.six.dto.ProductCommentsDTO;
 import com.engineers.moyeo.six.dto.ProductPicDTO;
+import com.engineers.moyeo.six.dto.ProductQueDTO;
 import com.engineers.moyeo.six.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
@@ -1878,12 +1879,39 @@ public class SixServiceImpl implements SixService{
 		dto.setComments_date(new Timestamp(System.currentTimeMillis()));
 		dto.setMem_id(mem_id);
 		
-		System.out.println(dto.getComments_content());
-		System.out.println(dto.getProduct_num());
-		System.out.println(dto.getComments_title());
-		System.out.println(dto.getStar_points());
-		System.out.println(dto.getComments_date());
-		System.out.println(dto.getMem_id());
 		int cnt = sixDao.productReviewPro(dto);
+		model.addAttribute("cnt", cnt);
+	}
+	
+	
+	
+	//샵-상품문의 입력결과 처리
+	public void inquirePro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		ProductQueDTO dto = new ProductQueDTO();
+		
+		String visible;
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		String que_content = req.getParameter("qna_content");
+		String que_title = req.getParameter("qna_title");	
+		String que_type = req.getParameter("qna_category");
+		if(req.getParameter("qna_secret") == null) {
+			visible = "yes";
+		} else {
+			visible = req.getParameter("qna_secret");
+		};
+		
+		dto.setMem_id(mem_id);
+		dto.setProduct_num(product_num);
+		dto.setQue_content(que_content);
+		dto.setQue_date(new Timestamp(System.currentTimeMillis()));
+		dto.setQue_title(que_title);
+		dto.setQue_type(que_type);
+		dto.setVisible(visible);
+		
+		int cnt = sixDao.inquirePro(dto);
+		model.addAttribute("cnt", cnt);
 	}
 }

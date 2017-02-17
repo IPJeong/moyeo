@@ -20,6 +20,7 @@ import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 import com.engineers.moyeo.six.dto.ProductCommentsDTO;
 import com.engineers.moyeo.six.dto.ProductPicDTO;
+import com.engineers.moyeo.six.dto.ProductQueDTO;
 import com.engineers.moyeo.six.dto.SellerInfoDTO;
 
 
@@ -385,4 +386,7 @@ public interface SixDAO {
 	
 	//샵-제품후기 등록
 	public int productReviewPro(ProductCommentsDTO dto);
+
+	//샵-제품문의 등록
+	public int inquirePro(ProductQueDTO dto);
 }

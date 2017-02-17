@@ -26,6 +26,7 @@ import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
 import com.engineers.moyeo.six.dto.ProductCommentsDTO;
 import com.engineers.moyeo.six.dto.ProductPicDTO;
+import com.engineers.moyeo.six.dto.ProductQueDTO;
 import com.engineers.moyeo.six.dto.SellerInfoDTO;
 
 @Repository
@@ -1070,6 +1071,14 @@ public class SixDAOImpl implements SixDAO{
 	public int productReviewPro(ProductCommentsDTO dto) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		int cnt = dao.productReviewPro(dto);
+		
+		return cnt;
+	}
+	
+	//샵-제품문의 등록
+	public int inquirePro(ProductQueDTO dto){
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.inquirePro(dto);
 		
 		return cnt;
 	}

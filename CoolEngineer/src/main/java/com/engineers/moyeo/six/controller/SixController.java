@@ -567,8 +567,39 @@ public class SixController {
 		model.addAttribute("req", req);
 		sixService.productReviewPro(model);
 		
-		return "six/shop/productReview";
+		return "six/shop/productReviewPro";
 	}
 	
+	//샵-상품문의 입력창
+	@RequestMapping("/shop/inquire")
+	public String inquire(HttpServletRequest req, Model model) {
+		System.out.println("/shop/inquire");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productReview(model);
+		
+		return "six/shop/inquire";
+	}
+	
+	//샵-상품문의 입력결과 처리
+	@RequestMapping("/shop/inquirePro")
+	public String inquirePro(HttpServletRequest req, Model model) {
+		System.out.println("/shop/inquirePro");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.inquirePro(model);
+		
+		return "six/shop/inquirePro";
+	}
+	
+	//샵-주문확인
+	@RequestMapping("/shop/buyResult")
+	public String buyResult(HttpServletRequest req, Model model) {
+		System.out.println("/shop/buyResult");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		
+		return "six/shop/buyResult";
+	}
 }
 
