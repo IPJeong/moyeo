@@ -173,8 +173,10 @@ li {
 	                	<input type="hidden" name="mem_id" value="${rpdto.mem_id}">
 	                	
 						<div style="float:left; margin-left:6%;">
+						<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
 							<input type="button" class="btn btn-info" value="수정" onclick="recPlaceModify()">
 							<input type="button" class="btn btn-info" value="삭제" onclick="recPlaceDelete()">
+						</c:if>	
 							<input type="button" class="btn btn-info" value="목록" onclick="window.location='placeContentForm?place_num=${rpdto.place_num}'">
 						</div>
 					</form>
