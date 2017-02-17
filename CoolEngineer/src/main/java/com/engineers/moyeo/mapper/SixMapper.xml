@@ -642,4 +642,25 @@
 		INSERT INTO product_que (que_num, que_title, que_content, que_date, mem_id, product_num, que_type, visible) VALUES (product_que_seq.NEXTVAL, #{que_title}, #{que_content}, #{que_date}, #{mem_id}, #{product_num}, #{que_type}, #{visible})	
 	</insert>
 	
+	<!-- 샵-리뷰목록 -->
+	<select id="reviewList" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductCommentsDTO">
+		SELECT * FROM product_comments WHERE product_num = #{product_num} ORDER BY comments_num DESC
+	</select>
+	
+	<!-- 샵-리뷰삭제 -->
+	<delete id="productReviewDelete" parameterType="int">
+		DELETE FROM product_comments WHERE comments_num = #{comments_num} 
+	</delete>
+	
+	<!-- 샵-문의사항목록 -->
+	<select id ="queList" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductQueDTO">
+		SELECT pq.que_num, pq.que_title, pq.que_content, pq.que_date, pq.mem_id, pq.product_num, pq.que_type, NVL(pa.ans_cnt, 0) AS ans_cnt
+  FROM (SELECT que_num, que_title, que_content, que_date, mem_id, product_num, que_type
+          FROM product_que) pq,
+       (SELECT COUNT(*) AS ans_cnt, que_num
+          FROM product_ans
+        GROUP BY que_num) pa
+WHERE pq.que_num = pa.que_num(+)		
+	</select>
+	
 </mapper>
