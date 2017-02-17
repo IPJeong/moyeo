@@ -15,7 +15,10 @@
 
 <div class="col-md-10 " style="margin: auto; float: none;">
 <div class="col-md-4" style="width:500px; margin-left:-50%;">
-	
+	<h2 style="margin: auto;">
+		<span class="fa fa-cogs"></span> 판매자 정보
+	</h2>
+	<br>
 	<form:form action="changeMyInfo" name="myPage" class="form-horizontal"
 		onsubmit="return chgMyInfo();">
 		<div class="panel panel-default">
@@ -26,152 +29,31 @@
 						<h3>
 							<span class="fa fa-user"></span> ID : ${dto.seller_id}
 						</h3>
+						<br><br>
+						<p style="margin: 0px;">
+							<h2>이용하실 수 없습니다.</h2>
+							<h3>판매자등록 후에</h3>
+							<h3>이용해주세요</h3>
+						</p>
 						
 					</div>
 					<div class="col-md-6"
 						style="margin: 0px; padding: 0px; width: 40%;">
-						
+						<div class="col-md-6"
+							style="margin: 0px; padding: 0px; padding-left: 3px;">
+							
+						</div>
+						<div class="col-md-6"
+							style="margin: 0px; padding: 0px; padding-left: 3px;">
+						</div>
 					</div>
 				</div>
 				<div class="text-center" id="user_image">
-					<img src="${dto.bc_path}/${dto.bc_name}"
-						class="img-thumbnail" style="width: 250px; height:240px;" />
+					
 				</div>
 			</div>
 			<div class="panel-body form-group-separated" style="height:500px;">
-
-				<div class="form-group">
-					<label class="col-md-3 col-xs-5 control-label">아이디</label>
-					<div class="col-md-9 col-xs-6">
-						<table style="width: 100%">
-							<tr>
-								<th style="width: 80%">
-									<div id="nameInput">
-										<input type="hidden" name="pro1" value="x" /> <input
-											type="hidden" name="name" value="" /> 
-									</div>
-									${dto.seller_id}
-								</th>
-								<th style="width: 20%">
-									
-								</th>
-							</tr>
-						</table>
-					</div>
-
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-3 col-xs-5 control-label">전화번호</label>
-					<div class="col-md-9 col-xs-7">
-						<table style="width: 100%">
-							<tr>
-								<th style="width: 80%">
-									<div class="col-md-12" style="padding: 0px;" id="addInput">
-										<input type="hidden" name="pro2" value="x" /> <input
-											type="hidden" name="address" value="" />
-									</div>
-									${dto.tel}
-								</th>
-								<th style="width: 20%">
-									
-								</th>
-							</tr>
-						</table>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-3 col-xs-5 control-label">주소</label>
-					<div class="col-md-9 col-xs-7">
-						<table style="width: 100%">
-							<tr>
-								<th style="width: 80%">
-									<div id="emailInput">
-										<input type="hidden" name="pro3" value="x" /> <input
-											type="hidden" name="email" value="" />
-									</div>
-									${dto.address}
-								</th>
-								<th style="width: 20%">
-									
-								</th>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 col-xs-5 control-label">상호명</label>
-					<div class="col-md-9 col-xs-7">
-						<table style="width: 100%">
-							<tr>
-								<th style="width: 80%">
-									<div id="telInput">
-										<input type="hidden" name="pro4" value="x" /> <input
-											type="hidden" name="tel" value="" /> 
-									</div>
-									${dto.comp_name}
-								</th>
-								<th style="width: 20%">
-									
-								</th>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 col-xs-5 control-label">예금주</label>
-					<div class="col-md-9 col-xs-7">
-						<table style="width: 100%">
-							<tr>
-								<th style="width: 80%">
-									<div id="telInput">
-										<input type="hidden" name="pro4" value="x" /> <input
-											type="hidden" name="tel" value="" /> 
-									</div>
-									${dto.depositor}
-								</th>
-								<th style="width: 20%">
-									
-								</th>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-3 col-xs-5 control-label">계좌번호</label>
-					<div class="col-md-9 col-xs-7">
-						<table style="width: 100%">
-							<tr>
-								<th style="width: 80%">
-									<div id="telInput">
-										<input type="hidden" name="pro4" value="x" /> <input
-											type="hidden" name="tel" value="" /> 
-									</div>
-									${dto.account_number}
-								</th>
-								<th style="width: 20%">
-									
-								</th>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-md-8" style="margin: auto; float: none;">
-						<div class="col-md-6"
-							style="margin: 0px; padding: 0px; padding-right: 2px; padding-bottom: 5px; border: 0px;">
-							<button type="button" class="btn btn-primary col-md-12"
-								id="chnInfo" style="width:300px;" onclick="window.location='productInsertForm'">제품등록</button>
-						</div>
-						
-					</div>
-				</div>
-				<div class="form-group" style="float: none;">
-					<div class="col-md-8" style="margin: auto; float: none;">
-						<a href="#" onclick="notiList()" class="btn btn-success btn-block" style="width:300px;">제품수정</a>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</form:form>
@@ -185,19 +67,9 @@
 	role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title" id="smallModalHead">프로필 사진 변경</h4>
-			</div>
+			
 
-			<div class="modal-body">
-				<div class="text-center" id="user_image">
-					<img src=""
-						class="img-thumbnail" style="width: 70%;" />
-				</div>
-			</div>
+		
 
 			<form:form class="form-horizontal" action="changeProImg"
 				method="post" name="changeProImg" modelAttribute="uploadForm"
@@ -231,7 +103,7 @@
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 				</button>
-				<h4 class="modal-title" id="smallModalHead">비밀번호 변경</h4>
+				
 			</div>
 			<form:form class="form-horizontal" action="changePw" method="post"
 				name="proPwCng">
@@ -263,8 +135,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success" id="proPwSub"
-						disabled>비밀번호변경</button>
+					
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 				</div>
 			</form:form>

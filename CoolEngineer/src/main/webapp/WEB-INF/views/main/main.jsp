@@ -106,39 +106,48 @@ li {
 								<div class="chart-holder" id="dashboard-line-1" style="height: 150px; background-color: white; margin-top: 10px;">
 									<ul class="x-navigation" style="height:140px; background-color: white;">
 										<li class="xn-profile"  style="background-color: white; border-color: white; height:150px; margin-left:5px; width:100%;">
+					                        
+			                            <c:if test="${sessionScope.authority == null}">
 					                        <div class="profile"  style="background-color: white; height:150px; width:100%; overflow: auto;">
 					                            <div class="profile-image" style="float:left; width:100px;">
 					                                <img style="float:center; border: solid black 1px;" src="${memInfo.propic_path}/${memInfo.propic_name}" alt="회원님의 프로필 사진 입니다."/>
 					                            </div>
-					                            <div style="float:left; margin-left:10px; width:240px; height:100px;">
-						                            <div class="profile-data">
-						                            	<div><font color="black;" size="3px;">이름(아이디) : ${memInfo.name}(${memInfo.mem_id})</font></div>
-						                                <div class="col-md-9" style="margin-top: 15px; width:100%;">
-						                                	<div style="float:left;">                                                                                            
-			                                                    <select class="form-control select" id="group_name_box" style="float:left; width:160px;" >
-			                                                    	<c:forEach var="moim" items="${moimList}">
-				                                                        <option value="${moim.group_num}">${moim.group_name}</option>
-			                                                        </c:forEach>
-			                                                    </select>
-		                                                    </div>
-		                                                    <div style="float:left;">
-			                                                    <button type="button" class="btn btn-info" style="width:45px; float:left; text-align: left; margin-left: 5px; height:30px;" onclick="goToMoim()">
-			                                                    	<i class="fa fa-hand-o-left"></i>
-			                                                    </button>
-		                                                    </div>
-                                               			</div>
+						                            <div style="float:left; margin-left:10px; width:240px; height:100px;">
+							                            <div class="profile-data">
+							                            	<div><font color="black;" size="3px;">이름(아이디) : ${memInfo.name}(${memInfo.mem_id})</font></div>
+							                                <div class="col-md-9" style="margin-top: 15px; width:100%;">
+							                                	<div style="float:left;">                                                                                            
+				                                                    <select class="form-control select" id="group_name_box" style="float:left; width:160px;" >
+				                                                    	<c:forEach var="moim" items="${moimList}">
+					                                                        <option value="${moim.group_num}">${moim.group_name}</option>
+				                                                        </c:forEach>
+				                                                    </select>
+			                                                    </div>
+			                                                    <div style="float:left;">
+				                                                    <button type="button" class="btn btn-info" style="width:45px; float:left; text-align: left; margin-left: 5px; height:30px;" onclick="goToMoim()">
+				                                                    	<i class="fa fa-hand-o-left"></i>
+				                                                    </button>
+			                                                    </div>
+	                                               			</div>
+							                            </div>
+							                            <div>
+							                                <a href="/moyeo/three/myPage"><button type="button" class="btn btn-danger" style="width:100px; float:left; margin-top:15px; margin-left:15px;"><i class="fa fa-info-circle"></i>마이페이지</button></a>
+							                                <button type="button" class="btn btn-warning" onclick="notiList()" style="width:100px; float:left; margin-top:15px; margin-left:10px;">
+							                                	<i class="fa fa-bullhorn"></i>알림
+							                                	<c:if test="${notiCnt > 0}">
+																	<span class="badge badge-info" style="background-color : #FFD8D8;"><font size="3px;" style="font-style: bold">${notiCnt}</font></span>
+																	</c:if>
+							                                </button>
+							                            </div>
 						                            </div>
-						                            <div>
-						                                <a href="/moyeo/three/myPage"><button type="button" class="btn btn-danger" style="width:100px; float:left; margin-top:15px; margin-left:15px;"><i class="fa fa-info-circle"></i>마이페이지</button></a>
-						                                <button type="button" class="btn btn-warning" onclick="notiList()" style="width:100px; float:left; margin-top:15px; margin-left:10px;">
-						                                	<i class="fa fa-bullhorn"></i>알림
-						                                	<c:if test="${notiCnt > 0}">
-																<span class="badge badge-info" style="background-color : #FFD8D8;"><font size="3px;" style="font-style: bold">${notiCnt}</font></span>
-																</c:if>
-						                                </button>
-						                            </div>
-					                            </div>
-					                        </div>
+						                        </div>
+				                            </c:if>
+				                            
+				                            <c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08' }">
+						                        <div>
+						                        	<img alt="관리자 이미지 입니다." src="/moyeo/resources/resource/assets/images/gallery/관리자.jpg" style="width:370px; height:160px;">
+						                        </div>
+				                            </c:if>
 					                    </li>
 					            	</ul>        
 								</div>
@@ -294,7 +303,7 @@ li {
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
-									<a href="../gallery/gallery.jsp"><font size="4px;">사진</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<font size="4px;">사진</font>&nbsp;&nbsp;&nbsp;&nbsp;
 									<a class="fa fa-plus-square-o" href="/moyeo/main/main_gallery"><font size="2">더보기</font></a>
 				
 								</div>
@@ -336,7 +345,7 @@ li {
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<div class="panel-title-box">
-									<a href="../movie/movie.jsp"><font size="4px;">동영상</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<font size="4px;">동영상</font>&nbsp;&nbsp;&nbsp;&nbsp;
 									<a class="fa fa-plus-square-o" href="/moyeo/main/main_gallery_video"><font size="2">더보기</font></a>
 								</div>
 							</div>
@@ -426,7 +435,7 @@ li {
 							<div class="panel-heading">
 								<div class="panel-title-box">
 									<font size="4px;">
-										<a href="/moyeo/event/ing-event.jsp">이벤트</a>&nbsp;&nbsp;&nbsp;&nbsp;
+										이벤트&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="fa fa-plus-square-o" href="/moyeo/three/ing_event"><font size="2">더보기</font></a>
 									</font><br>
 									<span>Moyeo에서 진행하는 다양한 이벤트에 참여해 보세요.</span>
@@ -494,7 +503,7 @@ li {
 							<div class="panel-heading">
 								<div class="panel-title-box">
 									<font size="4px;">모임후기</font>&nbsp;&nbsp;&nbsp;&nbsp;
-									<a class="fa fa-plus-square-o" href="#"><font size="2">더보기</font></a><br>
+									<a class="fa fa-plus-square-o" href="/moyeo/two/mainSearch?search_keyword=&search_radio2=mp3"><font size="2">더보기</font></a><br>
 									<span>모임의 후기 리스트 입니다. 모임의 후기를 추천해 주세요.</span>
 								</div>
 							</div>

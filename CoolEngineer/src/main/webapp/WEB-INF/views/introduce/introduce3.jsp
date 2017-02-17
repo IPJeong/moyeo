@@ -117,7 +117,7 @@
 									</div>
 									<div class="tab-pane active" id="tab-third">
 										<img
-											src="/moyeo/resources/resource/assets/images/users/introduce3.png"
+											src="/moyeo/resources/resource/assets/images/gallery/engineers.png"
 											width="1000px">
 									</div>
 								</div>
