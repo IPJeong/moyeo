@@ -3,7 +3,7 @@
 
 
 
-<div id="overlay"></div><div id="message_box"></div><div class="layout_top_bg" style="height: 160px;"></div>
+<div id="overlay"></div><div id="message_box"></div><div class="layout_top_bg" style="height: 0px;"></div>
 <style type="text/css">
 body {background-color:#ffffff;}
 .layout_top {width:1000px; margin:0 auto;}
@@ -195,9 +195,7 @@ text-decoration:none;
 	</div>
 <div class="layout_main">
 
-<script type="text/javascript">
-$('.layout_top_bg').css( { 'height': $('.layout_top').height()+'px' } );
-</script><style type="text/css">
+<style type="text/css">
 .order_list_position .home {line-height:14px; font-size:11px; color:#9e9e9e; font-family:gulim,굴림;}
 .order_list_position .off {line-height:14px; font-size:11px; color:#9e9e9e; font-family:gulim,굴림;}
 

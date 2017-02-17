@@ -445,42 +445,42 @@ li {
 .item_reply .star0 {
 	width: 85px;
 	height: 18px;
-	background: transparent url('./skin/item/default/img/reply_star.png')
+	background: transparent url('/moyeo/resources/resource/img/shop/reply_star.png')
 		no-repeat;
 }
 
 .item_reply .star1 {
 	width: 85px;
 	height: 18px;
-	background: transparent url('./skin/item/default/img/reply_star.png')
+	background: transparent url('/moyeo/resources/resource/img/shop/reply_star.png')
 		no-repeat 0px -18px;
 }
 
 .item_reply .star2 {
 	width: 85px;
 	height: 18px;
-	background: transparent url('./skin/item/default/img/reply_star.png')
+	background: transparent url('/moyeo/resources/resource/img/shop/reply_star.png')
 		no-repeat 0px -36px;
 }
 
 .item_reply .star3 {
 	width: 85px;
 	height: 18px;
-	background: transparent url('./skin/item/default/img/reply_star.png')
+	background: transparent url('/moyeo/resources/resource/img/shop/reply_star.png')
 		no-repeat 0px -54px;
 }
 
 .item_reply .star4 {
 	width: 85px;
 	height: 18px;
-	background: transparent url('./skin/item/default/img/reply_star.png')
+	background: transparent url('/moyeo/resources/resource/img/shop/reply_star.png')
 		no-repeat 0px -72px;
 }
 
 .item_reply .star5 {
 	width: 85px;
 	height: 18px;
-	background: transparent url('./skin/item/default/img/reply_star.png')
+	background: transparent url('/moyeo/resources/resource/img/shop/reply_star.png')
 		no-repeat 0px -90px;
 }
 
@@ -2216,8 +2216,8 @@ function orderCheck() {
 																</tr>
 															</tbody>
 														</table>
-
-
+<!-- 상품평 연습구간 -->
+<!-- 
 														<table width="100%" border="0" cellspacing="0"
 															cellpadding="0">
 															<tbody>
@@ -2225,7 +2225,142 @@ function orderCheck() {
 																	<td align="center" class="content">등록된 상품평이 없습니다.</td>
 																</tr>
 															</tbody>
-														</table>
+														</table> -->
+	<table width="100%" border="0" cellspacing="0"
+		cellpadding="0"
+		onmouseover="this.style.backgroundColor='#ffffe5';"
+		onmouseout="this.style.backgroundColor='#ffffff';"
+		style="background-color: rgb(255, 255, 255);">
+		<tbody>
+			<tr>
+				<td width="124" valign="top"><div
+						style="padding: 14px 19px 0 19px;">
+						<div class="star3"></div>
+					</div></td>
+				<td width="2" valign="top"><div
+						style="margin-top: 10px;">
+						<img
+							src="/moyeo/resources/resource/img/shop/reply_line.gif">
+					</div></td>
+				<td width="20"></td>
+				<td valign="top"><table width="100%"
+						border="0" cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr>
+								<td valign="top"><table width="100%"
+										border="0" cellspacing="0" cellpadding="0"
+										onclick="replyView('2');" class="pointer">
+										<tbody>
+											<tr height="43">
+												<td><span class="title">좋았어요</span></td>
+											</tr>
+										</tbody>
+									</table>
+									<div style="display: none;" class="reply_2">
+										<table width="100%" border="0"
+											cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr height="10">
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+										<table width="100%" border="0"
+											cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr>
+													<td><span class="content">굿</span></td>
+												</tr>
+											</tbody>
+										</table>
+										<table width="100%" border="0"
+											cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr height="10">
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+										<table border="0" cellspacing="0"
+											cellpadding="0">
+											<tbody>
+												<tr>
+													<td><a href="#"
+														onclick="replyWrite('item', 'u', '8', '2', '1'); return false;"><img
+															src="/moyeo/resources/resource/img/shop/reply_btn_edit.gif"
+															border="0"></a></td>
+													<td width="2"></td>
+													<td><a href="#"
+														onclick="replyDelete('item', 'd', '8', '2', '1'); return false;"><img
+															src="/moyeo/resources/resource/img/shop/reply_btn_delete.gif"
+															border="0"></a></td>
+													<td width="2"></td>
+												</tr>
+											</tbody>
+										</table>
+										<table width="100%" border="0"
+											cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr height="15">
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div></td>
+								<td width="140" valign="top"><table
+										width="100%" border="0" cellspacing="0"
+										cellpadding="0">
+										<tbody>
+											<tr height="7">
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0"
+										cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td><span class="name">작성자 :
+														김대식</span></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0"
+										cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr height="3">
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0"
+										cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td><span class="name">작성일 :
+														2017-02-17</span></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0"
+										cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr height="5">
+												<td></td>
+											</tr>
+										</tbody>
+									</table></td>
+							</tr>
+						</tbody>
+					</table></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+
+																					<!-- 상품평 연습구간 -->														
 
 														<table border="0" cellspacing="0" cellpadding="0">
 															<tbody>

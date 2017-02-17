@@ -505,7 +505,7 @@ function myShop() {
 	
 	<!--******************************************** 모임 영역 끝  ******************************************************* -->
 	
-	
+		
 	<!--******************************************** 샵 영역 시작  ******************************************************* -->
 	<c:if test="${location == null}">
 	<div id="order_info" style="display: none;">
@@ -513,7 +513,7 @@ function myShop() {
 	<c:if test="${location != null}">
 	<div id="order_info">
 	</c:if>
-		<div class="col-md-8 " style="padding: 0px;">
+		<div class="col-md-8 " style="padding: 0px; height:45px;">
 			<div style="width:100%">
 				<div style="width:85%">
 					<h2>
@@ -523,93 +523,24 @@ function myShop() {
 				<div class="col-md-6"
 					style="margin: 0px; padding: 0px; padding-left: 3px; width:15%;position: absolute;left:85%;top:5%;z-index:2;">
 					<button type="button" class="btn btn-success" style="width: 100%;padding:0px;font-size:100%;" onclick="myGroup();">MyGroup</button>
-				</div>				
-			</div>
-			<div class="panel-body panel-body-table"
-				style="overflow: auto; height: 250px;">
-				<table class="table table-bordered" style="border: 1px solid #E0E0E0">
-					<thead>
-						<tr>
-							<th>모임 이름</th>
-							<th>모임 관심사</th>
-							<th>모임 지역</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${cnt > 0}">
-							<c:forEach var="dto2" items="${dtos}">
-								<tr>
-									<td><a
-										href="/moyeo/six/moimMain/moimMain?group_num=${dto2.group_num}">${dto2.group_name}</a></td>
-									<td>${dto2.group_inte1}-${dto2.group_inte2}</td>
-									<td>${dto2.group_location}</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-					</tbody>
-				</table>
+				</div>	
+				<div class="panel-body panel-body-table" style="overflow:auto;height:860px; background:white;">
+					
+<!-- 샵인클루드 -->
+						
+						
+
+				<%@ include file="../../six/shop/myPage.jsp"%>		
+						
+						
+<!-- 샵인클루드 -->
+						
+					
+				</div>
+				</div>			
 			</div>
 		</div>
-		<div class="col-md-8 " style="padding: 0px; margin-top: 10px;">
-			<h2>
-				<span class="fa fa-heart"></span> 관심 모임
-			</h2>
-			<div class="panel-body panel-body-table"
-				style="overflow: auto; height: 250px;">
-				<table class="table table-bordered" style="border: 1px solid #E0E0E0">
-					<thead>
-						<tr>
-							<th>모임 이름</th>
-							<th>모임 관심사</th>
-							<th>모임 지역</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${interCnt > 0}">
-							<c:forEach var="dto3" items="${interDtos}">
-								<tr>
-									<td><a
-										href="/moyeo/six/moimMain/moimMain?group_num=${dto3.group_num}">${dto3.group_name}</a></td>
-									<td>${dto3.group_inte1}-${dto3.group_inte2}</td>
-									<td>${dto3.group_location}</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="col-md-8 " style="padding: 0px; margin-top: 10px;">
-			<h2>
-				<span class="fa fa-list-alt"></span> 모임 가입신청 이력
-			</h2>
-			<div class="panel-body panel-body-table"
-				style="overflow: auto; height: 250px;">
-				<table class="table table-bordered" style="border: 1px solid #E0E0E0">
-					<thead>
-						<tr>
-							<th>모임 이름</th>
-							<th>신청일/탈퇴일</th>
-							<th>상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${applHistoryCnt > 0}">
-							<c:forEach var="applyDto" items="${applyDtos}">
-								<tr>
-									<td><a
-										href="/moyeo/six/moimMain/moimMain?group_num=${applyDto.group_num}">${applyDto.group_name}</a></td>
-									<td>${applyDto.request_date}</td>
-									<td>${applyDto.status}</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	
+		
 	
 	<!--******************************************** 샵 영역 끝  ******************************************************* -->
 		
