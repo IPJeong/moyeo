@@ -29,7 +29,7 @@ public class TwoController {
 	//건의사항 입력 페이지(회원)
 	@RequestMapping("/suggestionInputForm")
 	public String suggestionInputForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		viewPage = "two/suggestion/suggestionInputForm";
 		return viewPage;
@@ -38,7 +38,7 @@ public class TwoController {
 	//건의사항 입력 처리(회원)
 	@RequestMapping("/suggestionInputPro")
 	public String suggestionInputPro(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.suggestionInputPro(model);
@@ -48,7 +48,7 @@ public class TwoController {
 	//건의사항 리스트(관리자)
 	@RequestMapping("/suggestionList")
 	public String suggestionList(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.suggestionList(model);
@@ -58,7 +58,7 @@ public class TwoController {
 	//건의사항 상세보기(관리자)
 	@RequestMapping("/suggestionContentForm")
 	public String suggestionContentForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.suggestionContentForm(model);
@@ -68,7 +68,7 @@ public class TwoController {
 	//건의사항 확인 처리(관리자)
 	@RequestMapping("/suggestionCheckPro")
 	public String suggestionCheckPro(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.suggestionCheckPro(model);
@@ -78,7 +78,7 @@ public class TwoController {
 	//장소정보&추천장소 메인페이지1
 	@RequestMapping("/placeMainLoc")
 	public String placeMainLoc(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.placeMainLoc(model);
@@ -88,7 +88,7 @@ public class TwoController {
 	//지역별 장소정보 검색
 	@RequestMapping("/placeMainLocSearch")
 	public String placeMainLocSearch(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.placeMainLocSearch(model);
@@ -98,7 +98,7 @@ public class TwoController {
 	//장소정보&추천장소 메인페이지2
 	@RequestMapping("/placeMainRecpla")
 	public String placeMainRecpla(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.placeMainRecpla(model);
@@ -108,7 +108,7 @@ public class TwoController {
 	//관심사별 장소정보 검색
 	@RequestMapping("/placeMainRecplaSearch")
 	public String placeMainRecplaSearch(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.placeMainRecplaSearch(model);
@@ -118,7 +118,7 @@ public class TwoController {
 	//전체 장소정보 리스트
 	@RequestMapping("/placeList")
 	public String placeList(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.placeList(model);
@@ -128,7 +128,7 @@ public class TwoController {
 	//장소정보 상세보기&추천장소 게시판
 	@RequestMapping("/placeContentForm")
 	public String placeContentForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.placeContentForm(model);
@@ -138,7 +138,7 @@ public class TwoController {
 	//장소정보 입력 페이지
 	@RequestMapping("/placeInputForm")
 	public String placeInputForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		viewPage = "two/places/placeInputForm";
 		return viewPage;
@@ -147,7 +147,7 @@ public class TwoController {
 	//장소정보 입력 처리
 	@RequestMapping("/placeInputPro")
 	public String placeInputPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
@@ -158,7 +158,7 @@ public class TwoController {
 	//장소정보 삭제 처리
 	@RequestMapping("/placeDeletePro")
 	public String placeDeletePro(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.placeDeletePro(model);
@@ -168,7 +168,7 @@ public class TwoController {
 	//장소정보 수정 페이지
 	@RequestMapping("/placeModifyForm")
 	public String placeModifyForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.placeModifyForm(model);
@@ -178,7 +178,7 @@ public class TwoController {
 	//장소정보 수정 처리
 	@RequestMapping("/placeModifyPro")
 	public String placeModifyPro(@ModelAttribute("uploadForm") FileForm fileForm, HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		model.addAttribute("fileForm", fileForm);
@@ -189,7 +189,7 @@ public class TwoController {
 	//추천장소 게시글 상세보기
 	@RequestMapping("/recPlaceContentForm")
 	public String recPlaceContentForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.recPlaceContentForm(model);
@@ -199,7 +199,7 @@ public class TwoController {
 	//추천장소 게시글 작성 페이지
 	@RequestMapping("/recPlaceWriteForm")
 	public String recPlaceWriteForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.recPlaceWriteForm(model);
@@ -209,7 +209,7 @@ public class TwoController {
 	//추천장소 게시글 작성 처리
 	@RequestMapping("/recPlaceWritePro")
 	public String recPlaceWritePro(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.recPlaceWritePro(model);
@@ -219,7 +219,7 @@ public class TwoController {
 	//추천장소 게시글 삭제 처리
 	@RequestMapping("/recPlaceDeletePro")
 	public String recPlaceDeletePro(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.recPlaceDeletePro(model);
@@ -229,7 +229,7 @@ public class TwoController {
 	//추천장소 게시글 수정 페이지
 	@RequestMapping("/recPlaceModifyForm")
 	public String recPlaceModifyForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.recPlaceModifyForm(model);
@@ -239,7 +239,7 @@ public class TwoController {
 	//추천장소 게시글 수정 처리
 	@RequestMapping("/recPlaceModifyPro")
 	public String recPlaceModifyPro(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.recPlaceModifyPro(model);
@@ -249,7 +249,7 @@ public class TwoController {
 	//추천장소 게시글에 추천을 누름
 	@RequestMapping("/plusPlaceLike")
 	public String plusPlaceLike(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.plusPlaceLike(model);
@@ -259,7 +259,7 @@ public class TwoController {
 	//추천장소 게시글에서 추천을 취소함
 	@RequestMapping("/minusPlaceLike")
 	public String minusPlaceLike(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.minusPlaceLike(model);
@@ -269,7 +269,7 @@ public class TwoController {
 	//모임가입 페이지
 	@RequestMapping("/moimJoinForm")
 	public String moimJoinForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimJoinForm(model);
@@ -279,7 +279,7 @@ public class TwoController {
 	//모임가입 처리
 	@RequestMapping("/moimJoinPro")
 	public String moimJoinPro(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimJoinPro(model);
@@ -289,7 +289,7 @@ public class TwoController {
 	//모임탈퇴 처리
 	@RequestMapping("/moimWithdraw")
 	public String moimWithdraw(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimWithdraw(model);
@@ -313,7 +313,7 @@ public class TwoController {
 	//모임가입 관리 페이지(모임장)
 	@RequestMapping("/moimJoinManaging")
 	public String moimJoinManaging(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimJoinManaging(model);
@@ -323,7 +323,7 @@ public class TwoController {
 	//모임가입 수락(모임장)
 	@RequestMapping("/moimJoinOK")
 	public String moimJoinOK(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimJoinOK(model);
@@ -333,7 +333,7 @@ public class TwoController {
 	//모임가입 거절(모임장)
 	@RequestMapping("/moimJoinNO")
 	public String moimJoinNO(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimJoinNO(model);
@@ -343,7 +343,7 @@ public class TwoController {
 	//모임원 관리 페이지(모임장)
 	@RequestMapping("/moimMemberManaging")
 	public String moimMemberManaging(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimMemberManaging(model);
@@ -353,7 +353,7 @@ public class TwoController {
 	//모임원 등급변경 페이지(모임장)
 	@RequestMapping("/moimMemberRankForm")
 	public String moimMemberRankForm(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimMemberRankForm(model);
@@ -363,7 +363,7 @@ public class TwoController {
 	//모임원 등급변경 처리(모임장)
 	@RequestMapping("/moimMemberRankPro")
 	public String moimMemberRankPro(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimMemberRankPro(model);
@@ -373,7 +373,7 @@ public class TwoController {
 	//모임원 강제탈퇴(모임장)
 	@RequestMapping("/moimMemberBanish")
 	public String moimMemberBanish(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimMemberBanish(model);
@@ -383,7 +383,7 @@ public class TwoController {
 	//모임 게시판 관리 페이지(모임장)
 	@RequestMapping("/moimBoardManaging")
 	public String moimBoardManaging(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.moimBoardManaging(model);
@@ -393,7 +393,7 @@ public class TwoController {
 	//모임공지 게시판의 게시글 삭제(모임장)
 	@RequestMapping("/deleteNoticeBoardArticle")
 	public String deleteNoticeBoardArticle(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.deleteNoticeBoardArticle(model);
@@ -403,7 +403,7 @@ public class TwoController {
 	//가입인사 게시판의 게시글 삭제(모임장)
 	@RequestMapping("/deleteGreetingBoardArticle")
 	public String deleteGreetingBoardArticle(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.deleteGreetingBoardArticle(model);
@@ -413,7 +413,7 @@ public class TwoController {
 	//모임후기 게시판의 게시글 삭제(모임장)
 	@RequestMapping("/deletePostBoardArticle")
 	public String deletePostBoardArticle(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		viewPage = twoService.deletePostBoardArticle(model);
@@ -423,7 +423,7 @@ public class TwoController {
 	//메인페이지 검색
 	@RequestMapping("/mainSearch")
 	public String mainSearch(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 			
 		model.addAttribute("req", req);
 		viewPage = twoService.mainSearch(model);
@@ -433,7 +433,7 @@ public class TwoController {
 	//모임 통계 : 모임원 분석
 	@RequestMapping("/moimStatistics")
 	public String moimStatistics(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 			
 		model.addAttribute("req", req);
 		viewPage = twoService.moimStatistics(model);
@@ -443,7 +443,7 @@ public class TwoController {
 	//모임 통계 : 게시글 분석
 	@RequestMapping("/moimStatisticsArticle")
 	public String moimStatisticsArticle(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 				
 		model.addAttribute("req", req);
 		viewPage = twoService.moimStatisticsArticle(model);
@@ -453,7 +453,7 @@ public class TwoController {
 	//모임 통계 : 방문 분석
 	@RequestMapping("/moimStatisticsPresent")
 	public String moimStatisticsPresent(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 				
 		model.addAttribute("req", req);
 		viewPage = twoService.moimStatisticsPresent(model);
@@ -463,7 +463,7 @@ public class TwoController {
 	//모임 통계 : 모임가입 분석
 	@RequestMapping("/moimStatisticsJoin")
 	public String moimStatisticsJoin(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 				
 		model.addAttribute("req", req);
 		viewPage = twoService.moimStatisticsJoin(model);
@@ -473,7 +473,7 @@ public class TwoController {
 	//워드 클라우드 단어를 선택하여 검색
 	@RequestMapping("/wordCloudSearch")
 	public String wordCloudSearch(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 					
 		model.addAttribute("req", req);
 		viewPage = twoService.wordCloudSearch(model);
@@ -483,7 +483,7 @@ public class TwoController {
 	//워드 클라우드 태그 단어를 선택하여 태그 검색
 	@RequestMapping("/wordCloudSearchByTag")
 	public String wordCloudSearchByTag(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 					
 		model.addAttribute("req", req);
 		viewPage = twoService.wordCloudSearchByTag(model);
@@ -493,7 +493,7 @@ public class TwoController {
 	//상품 검색
 	@RequestMapping("/productSearch")
 	public String productSearch(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 					
 		model.addAttribute("req", req);
 		viewPage = twoService.productSearch(model);
@@ -503,7 +503,7 @@ public class TwoController {
 	//상품 카테고리 선택
 	@RequestMapping("/productCategory")
 	public String productCategory(HttpServletRequest req, Model model) {
-		if(req.getSession().getAttribute("mem_id")==null) return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 					
 		model.addAttribute("req", req);
 		viewPage = twoService.productCategory(model);

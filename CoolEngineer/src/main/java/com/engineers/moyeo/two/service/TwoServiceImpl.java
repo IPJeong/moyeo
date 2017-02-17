@@ -178,8 +178,6 @@ public class TwoServiceImpl implements TwoService{
 		int sug_num = Integer.parseInt(req.getParameter("sug_num"));
 		String manager_id = (String) req.getSession().getAttribute("manager_id"); 
 		String sol_content = req.getParameter("sol_content");
-		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
-		
 		SuggestionDTO dto = new SuggestionDTO();
 		
 		dto.setSug_num(sug_num);
@@ -189,7 +187,6 @@ public class TwoServiceImpl implements TwoService{
 		int cnt = twoDao.checkSuggestion(dto);
 		
 		model.addAttribute("cnt", cnt);
-		model.addAttribute("pageNum", pageNum);
 		
 		return "two/suggestion/suggestionCheckPro";
 	}
