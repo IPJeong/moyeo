@@ -254,7 +254,7 @@ div .page-content {
 	        <div class="col-md-6-2" style="margin-top:0.5%;">
 	            	
 	        </div>
-            <div class="col-md-6-2" style="float:left; margin-left:1%; width:95%;">	
+            <div class="col-md-6-2" style="float:left; margin-left:1%; width:98%;">	
 				<div class="input-group push-down-10">
 			        <span class="input-group-addon"><span class="fa fa-search"></span></span>
 			        	<input type="text" class="form-control" name="search_keyword" placeholder="검색할 장소를 입력하세요...">

@@ -202,16 +202,16 @@ li {
 									<td align="center" style="width:40%">출생년도</td>
 									<td align="center" style="width:30%">성별</td>
 								</tr>
-								<c:forEach var="mifdtos" items="${mifdtos}">
+								<c:forEach var="mdtos" items="${mdtos}">
 									<tr style="border:0;">
 										<td style="border:0;">
-											${mifdtos.name}
+											${mdtos.name}
 										</td>
 										<td style="border:0;" align="center">
-											<fmt:formatDate type="both" pattern="yyyy" value="${mifdtos.birth}" />
+											<fmt:formatDate type="both" pattern="yyyy" value="${mdtos.birth}" />
 										</td>	
 										<td style="border:0;" align="center">
-											${mifdtos.gender}
+											${mdtos.gender}
 										</td>	
 									</tr>
 								</c:forEach>
