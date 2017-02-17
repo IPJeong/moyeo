@@ -62,6 +62,11 @@ function notiList() {
 	window.open('../three/notiList', 'notiWindow', 'width=800, height=450, left=' + left + 'top=' + top);
 	
 }
+
+function goToMoim() {
+	var group_num = $('#group_name_box option:selected').val();	
+	window.location = '/moyeo/six/moimMain/moimMain?group_num='+group_num;
+}
 </script>
 
 	
@@ -98,29 +103,42 @@ li {
 								</div>
 							</div>
 							<div class="panel-body padding-0" style="background-color: white;">
-								<div class="chart-holder" id="dashboard-line-1" style="height: 140px; background-color: white; margin-top: 10px;">
+								<div class="chart-holder" id="dashboard-line-1" style="height: 150px; background-color: white; margin-top: 10px;">
 									<ul class="x-navigation" style="height:140px; background-color: white;">
-										<li class="xn-profile"  style="background-color: white; border-color: white; height:140px; margin-left:5px; width:370px;">
-					                        <div class="profile"  style="background-color: white; height:140px;">
-					                            <div class="profile-image" style="float:left; width:120px;">
+										<li class="xn-profile"  style="background-color: white; border-color: white; height:150px; margin-left:5px; width:100%;">
+					                        <div class="profile"  style="background-color: white; height:150px; width:100%; overflow: auto;">
+					                            <div class="profile-image" style="float:left; width:100px;">
 					                                <img style="float:center; border: solid black 1px;" src="${memInfo.propic_path}/${memInfo.propic_name}" alt="회원님의 프로필 사진 입니다."/>
 					                            </div>
-					                            <div style="float:left; margin-left:10px; width:220px; height:100px;">
+					                            <div style="float:left; margin-left:10px; width:240px; height:100px;">
 						                            <div class="profile-data">
-						                            	<div><font color="black;" size="4px;">이름(아이디)</font>
-						                                <div><font color="black;" size="4px;">${memInfo.name}(${memInfo.mem_id})</font></div>
+						                            	<div><font color="black;" size="3px;">이름(아이디) : ${memInfo.name}(${memInfo.mem_id})</font></div>
+						                                <div class="col-md-9" style="margin-top: 15px; width:100%;">
+						                                	<div style="float:left;">                                                                                            
+			                                                    <select class="form-control select" id="group_name_box" style="float:left; width:160px;" >
+			                                                    	<c:forEach var="moim" items="${moimList}">
+				                                                        <option value="${moim.group_num}">${moim.group_name}</option>
+			                                                        </c:forEach>
+			                                                    </select>
+		                                                    </div>
+		                                                    <div style="float:left;">
+			                                                    <button type="button" class="btn btn-info" style="width:45px; float:left; text-align: left; margin-left: 5px; height:30px;" onclick="goToMoim()">
+			                                                    	<i class="fa fa-hand-o-left"></i>
+			                                                    </button>
+		                                                    </div>
+                                               			</div>
 						                            </div>
 						                            <div>
-						                                <button type="button" class="btn btn-success btn-block" onclick="notiList()" style="width:100px; float:left; margin-top:30px;">
+						                                <a href="/moyeo/three/myPage"><button type="button" class="btn btn-danger" style="width:100px; float:left; margin-top:15px; margin-left:15px;"><i class="fa fa-info-circle"></i>마이페이지</button></a>
+						                                <button type="button" class="btn btn-warning" onclick="notiList()" style="width:100px; float:left; margin-top:15px; margin-left:10px;">
 						                                	<i class="fa fa-bullhorn"></i>알림
 						                                	<c:if test="${notiCnt > 0}">
 																<span class="badge badge-info" style="background-color : #FFD8D8;"><font size="3px;" style="font-style: bold">${notiCnt}</font></span>
 																</c:if>
 						                                </button>
-						                                <a href="/moyeo/three/myPage"><button type="button" class="btn btn-success btn-block" style="width:100px; float:left; margin-top:30px; margin-left:10px;"><i class="fa fa-info-circle"></i>마이페이지</button></a>
 						                            </div>
 					                            </div>
-					                        </div>                                                                        
+					                        </div>
 					                    </li>
 					            	</ul>        
 								</div>
