@@ -80,6 +80,14 @@ public class MainServiceImpl implements MainService{
 			model.addAttribute("memInfo", memInfo);
 			int notiCnt =threeDao.getNoneChkNoti(mem_id);//확인 안한 알림
 			model.addAttribute("notiCnt",notiCnt);
+			
+			Map<String, Object> dataMap = new HashMap<>();
+			dataMap.put("start", 1);
+			dataMap.put("end", 1000);
+			dataMap.put("mem_id", mem_id);
+			
+			List<MoimOpenDTO> moimList = threeDao.getGroupList(dataMap);
+			model.addAttribute("moimList", moimList);
 		}
 	}
 

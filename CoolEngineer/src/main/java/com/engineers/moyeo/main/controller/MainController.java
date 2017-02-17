@@ -42,15 +42,23 @@ public class MainController {
 		if(req.getSession().getAttribute("mem_id")==null && req.getSession().getAttribute("manager_id")==null )return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
-		
+		// 회원정보 가져오기
 		mainService.getMemberInfo(model);
+		// 공지사항 가져오기
 		mainService.main_notice(model);
+		// 인기모임 가져오기
 		mainService.hotMoim(model);
+		// 모임후기 가져오기
 		mainService.main_meeting_post(model);
+		// 추천모임 가져오기
 		mainService.recommendMoim(model);
+		// 모임후기 사진, 동영상 가져오기
 		mainService.getMeetingPostList(model);
+		// 추천장소 가져오기
 		mainService.recPlace(model);
+		// 이벤트 내역 가져오기
 		mainService.getEventList(model);
+		// 제품정보 가져오기
 		mainService.getProducts(model);
 		
 		return "main/main";
