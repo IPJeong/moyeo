@@ -31,7 +31,6 @@ import com.engineers.moyeo.main.dto.SellerNotiDTO;
 import com.engineers.moyeo.main.dto.WordDTO;
 import com.engineers.moyeo.main.twitterKoreanParser.KoreanParser;
 import com.engineers.moyeo.one.dao.OneDAO;
-import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.HotMoimDTO;
@@ -76,7 +75,7 @@ public class MainServiceImpl implements MainService{
 		
 		String mem_id = (String)((HttpServletRequest)model.asMap().get("req")).getSession().getAttribute("mem_id");
 		if(mem_id != null) {
-			MemberInformDTO memInfo = oneDao.getMemberInformArticle(mem_id);
+			MemberInfoDTO memInfo = oneDao.getMemberInformArticle(mem_id);
 			model.addAttribute("memInfo", memInfo);
 			int notiCnt =threeDao.getNoneChkNoti(mem_id);//확인 안한 알림
 			model.addAttribute("notiCnt",notiCnt);

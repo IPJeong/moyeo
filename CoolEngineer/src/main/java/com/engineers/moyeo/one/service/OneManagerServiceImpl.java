@@ -13,9 +13,9 @@ import org.springframework.ui.Model;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.ManagerDTO;
-import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
+import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 
@@ -90,7 +90,7 @@ public class OneManagerServiceImpl implements OneManagerService {
 			daoMap.put("end", end);
 			
 			// 가입한 회원의 정보를 ArrayList에 담는다.
-			ArrayList<MemberInformDTO> dtos = oneDao.gerMemberArticles(daoMap);
+			ArrayList<MemberInfoDTO> dtos = oneDao.gerMemberArticles(daoMap);
 			model.addAttribute("dtos", dtos);
 			
 			System.out.println("dtos: " + dtos);
@@ -136,7 +136,7 @@ public class OneManagerServiceImpl implements OneManagerService {
 		String openType = req.getParameter("openType");
 		
 		// mem_id로 회원정보를 불러옴
-		MemberInformDTO dto = oneDao.getMemberInformArticle(mem_id);
+		MemberInfoDTO dto = oneDao.getMemberInformArticle(mem_id);
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("pageNum", pageNum);
@@ -638,7 +638,7 @@ public class OneManagerServiceImpl implements OneManagerService {
 		daoMap.put("end", end);
 		
 		if(cnt > 0) {
-			ArrayList<MemberInformDTO> dtos = null;
+			ArrayList<MemberInfoDTO> dtos = null;
 			if(type.equals("name")){
 				dtos = oneDao.getMemberList(daoMap);
 			} else {

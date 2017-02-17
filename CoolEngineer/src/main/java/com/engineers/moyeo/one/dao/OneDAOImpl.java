@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.engineers.moyeo.one.dto.ManagerDTO;
-import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
 import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
+import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 
@@ -272,8 +272,8 @@ public class OneDAOImpl implements OneDAO{
 
 	// 모든 회원정보 가져오기
 	@Override
-	public ArrayList<MemberInformDTO> gerMemberArticles(Map<String, Integer> daoMap) {
-		ArrayList<MemberInformDTO> dtos = null;
+	public ArrayList<MemberInfoDTO> gerMemberArticles(Map<String, Integer> daoMap) {
+		ArrayList<MemberInfoDTO> dtos = null;
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
 		dtos = dao.gerMemberArticles(daoMap);
 		return dtos;
@@ -281,8 +281,8 @@ public class OneDAOImpl implements OneDAO{
 
 	// 모든 회원정보 가져오기
 	@Override
-	public MemberInformDTO getMemberInformArticle(String mem_id) {
-		MemberInformDTO dto = null;
+	public MemberInfoDTO getMemberInformArticle(String mem_id) {
+		MemberInfoDTO dto = null;
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
 		dto = dao.getMemberInformArticle(mem_id);
 		
@@ -526,8 +526,8 @@ public class OneDAOImpl implements OneDAO{
 
 	// 관리자 권한에서 회원 검색
 	@Override
-	public ArrayList<MemberInformDTO> getMemberList(Map<String, Object> daoMap) {
-		ArrayList<MemberInformDTO> dtos = null;
+	public ArrayList<MemberInfoDTO> getMemberList(Map<String, Object> daoMap) {
+		ArrayList<MemberInfoDTO> dtos = null;
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
 		dtos = dao.getMemberList(daoMap);
 		return dtos;
@@ -535,8 +535,8 @@ public class OneDAOImpl implements OneDAO{
 	
 	// 관리자 권한에서 회원 검색
 	@Override
-	public ArrayList<MemberInformDTO> getMemberList2(Map<String, Object> daoMap) {
-		ArrayList<MemberInformDTO> dtos = null;
+	public ArrayList<MemberInfoDTO> getMemberList2(Map<String, Object> daoMap) {
+		ArrayList<MemberInfoDTO> dtos = null;
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
 		dtos = dao.getMemberList2(daoMap);
 		return dtos;
@@ -615,6 +615,26 @@ public class OneDAOImpl implements OneDAO{
 		return cnt;
 	}
 	
+	// 해당 판매자가 등록한 제품갯수 구하기
+	@Override
+	public int getSellerProductCount() {
+		int cnt = 0;
+		
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.getSellerProductCount();
+		return cnt;
+	}
+	
+	// 해당 판매자가 등록한 모든 제품 구하기
+	@Override
+	public ArrayList<ProductInfoDTO> getSellerProductInform(Map<String, Object> daoMap) {
+		ArrayList<ProductInfoDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getSellerProductInform(daoMap);
+		return dtos;
+	}
+	
+	
 	// 모든 제품정보 가져오기
 	@Override
 	public ArrayList<ProductInfoDTO> getProductArticles(Map<String, Integer> daoMap) {
@@ -622,5 +642,14 @@ public class OneDAOImpl implements OneDAO{
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
 		dtos = dao.getProductArticles(daoMap);
 		return dtos;
+	}
+
+	@Override
+	public String getRecognition(String seller_id) {
+		String recognition;
+
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		recognition = dao.getRecognition(seller_id);
+		return recognition;
 	}
 }

@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.engineers.moyeo.one.dto.ManagerDTO;
-import com.engineers.moyeo.one.dto.MemberInformDTO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
 import com.engineers.moyeo.one.dto.ProductInfoDTO;
 import com.engineers.moyeo.one.dto.QnaBoardDTO;
 import com.engineers.moyeo.one.dto.QnaReplyDTO;
 import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
+import com.engineers.moyeo.six.dto.MemberInfoDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 
@@ -95,8 +95,8 @@ public interface OneDAO {
 	public int getManagerCount();
 	
 	// 모든 회원정보 가져오기
-	public ArrayList<MemberInformDTO> gerMemberArticles(Map<String, Integer> daoMap);
-	public MemberInformDTO getMemberInformArticle(String mem_id);
+	public ArrayList<MemberInfoDTO> gerMemberArticles(Map<String, Integer> daoMap);
+	public MemberInfoDTO getMemberInformArticle(String mem_id);
 	
 	// 관리자 권한에서 회원 강퇴
 	public int deleteInfo(String mem_id);
@@ -164,10 +164,10 @@ public interface OneDAO {
 	public int getSearchIdCount(Map<String, Object> daoMap);
 	
 	// 관리자 권한에서 회원리스트 검색(아이디)
-	public ArrayList<MemberInformDTO> getMemberList(Map<String, Object> daoMap);
+	public ArrayList<MemberInfoDTO> getMemberList(Map<String, Object> daoMap);
 	
 	// 관리자 권한에서 회원리스트 검색(아이디)
-	public ArrayList<MemberInformDTO> getMemberList2(Map<String, Object> daoMap);
+	public ArrayList<MemberInfoDTO> getMemberList2(Map<String, Object> daoMap);
 	
 	// 관리자 권한에서 모임리스트 검색
 	public int getSearchGroupCount(Map<String, Object> daoMap);
@@ -195,6 +195,15 @@ public interface OneDAO {
 	// 전체제품 갯수 구하기
 	public int getProductCount();
 	
+	// 해당 판매자가 등록한 제품 갯수 구하기
+	public int getSellerProductCount();
+	
+	// 해당 판매자가 등록한 제품의 정보들을 불러옴
+	public ArrayList<ProductInfoDTO> getSellerProductInform(Map<String, Object> daoMap);
+	
 	// 모든 제품정보 구하기
 	public ArrayList<ProductInfoDTO> getProductArticles(Map<String, Integer> daoMap);
+	
+	// 판매자 recognition 구하기
+	public String getRecognition(String seller_id);
 }

@@ -12,4 +12,13 @@ public interface OneSellerService {
 	
 	// 판매샵에 등록된 제품의 상세정보 보기
 	public String productDetail(Model model);
+	
+	// 제품등록 폼
+	public String productInsertForm(Model model);
+	
+	// 제품등록 성공요청
+	public String productInsertPro(Model model);
+	
+	// 제품관리 페이지(판매자)
+	public String productManage(Model model);
 }

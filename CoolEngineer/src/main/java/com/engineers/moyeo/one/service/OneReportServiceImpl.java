@@ -1,9 +1,7 @@
 package com.engineers.moyeo.one.service;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +19,6 @@ import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.MoimReportDTO;
-import com.engineers.moyeo.one.dto.QnaBoardDTO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Service
 public class OneReportServiceImpl implements OneReportService{

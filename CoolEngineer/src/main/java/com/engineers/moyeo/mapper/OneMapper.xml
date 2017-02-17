@@ -150,7 +150,7 @@
     </select>
     
     <!-- 모든 회원정보 가져오기 -->
-    <select id="gerMemberArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    <select id="gerMemberArticles" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
     	SELECT * 
     			FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
     					FROM (SELECT * FROM member_info
@@ -159,7 +159,7 @@
     	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
     </select>
     
-    <select id="getMemberInformArticle" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    <select id="getMemberInformArticle" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
     	SELECT * FROM member_info WHERE mem_id = #{mem_id}
     </select>
     
@@ -308,7 +308,7 @@
     	WHERE mem_id LIKE '%'||#{search}||'%'
     </select>
     
-    <select id="getMemberList" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    <select id="getMemberList" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
     	 SELECT * 
     		FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
     				FROM (SELECT * FROM member_info
@@ -318,7 +318,7 @@
    		  WHERE rnum BETWEEN #{start} AND #{end}
     </select>
     
-    <select id="getMemberList2" parameterType="Map" resultType="com.engineers.moyeo.one.dto.MemberInformDTO">
+    <select id="getMemberList2" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MemberInfoDTO">
     	 SELECT * 
     		FROM (SELECT mem_id, passwd, name, address, tel, birth, email, propic_path, propic_name, join_date, gender, rownum rnum
     				FROM (SELECT * FROM member_info
@@ -376,6 +376,10 @@
     	SELECT count(*) FROM product_info
     </select>
     
+    <select id="getSellerProductCount" resultType="int">
+    	SELECT count(*) FROM product_info WHERE seller_id=#{seller_id}
+    </select>
+    
     <!-- 모든 제품 구하기 -->
     <select id="getProductArticles" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ProductInfoDTO">
     	SELECT * 
@@ -384,5 +388,10 @@
     						  ORDER BY product_num DESC) 
     				  ) ss, product_pic pp   
     	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND ss.product_num = pp.product_num ORDER BY pp.product_num DESC
+    </select>
+    
+    <!-- 판매자의 recognition 구하기 -->
+    <select id="getRecognition" parameterType="String" resultType="String">
+    	SELECT recognition FROM seller_info WHERE seller_id=#{seller_id}
     </select>
 </mapper>

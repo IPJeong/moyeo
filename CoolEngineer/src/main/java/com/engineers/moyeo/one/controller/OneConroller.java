@@ -525,7 +525,7 @@ public class OneConroller {
 	// 판매샵(구매페이지)메인
 	@RequestMapping(value="/moyeoShop", method=RequestMethod.GET)
 	public String moyeoShop(HttpServletRequest req, Model model) {
-		System.out.println("판매샵 메인");
+		System.out.println("판매샵(구매페이지) 메인");
 		
 		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
@@ -535,10 +535,11 @@ public class OneConroller {
 		
 		return viewPage;
 	}
+	
 	// 판매샵(판매페이지)메인
 	@RequestMapping(value="/moyeoSeller", method=RequestMethod.GET)
 	public String moyeoSeller(HttpServletRequest req, Model model) {
-		System.out.println("판매샵 메인");
+		System.out.println("판매샵(판매페이지)메인");
 		
 		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
 		
@@ -549,4 +550,46 @@ public class OneConroller {
 		return viewPage;
 	}
 	
+	// 제품등록 폼
+	@RequestMapping(value="/productInsertForm", method=RequestMethod.GET)
+	public String productInsertForm(HttpServletRequest req, Model model) {
+		System.out.println("제품등록 폼");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneSellerService.productInsertForm(model);
+		
+		return viewPage;
+	}
+	
+	// 제품등록 성공요청
+	@RequestMapping(value="/productInsertPro", method=RequestMethod.POST)
+	public String productInsertPro(@ModelAttribute("productInsertPro") FileForm fileForm, HttpServletRequest req,  Model model) {
+		System.out.println("제품등록 성공요청");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		model.addAttribute("fileForm", fileForm);
+		
+		viewPage = oneSellerService.productInsertPro(model);
+		
+		return viewPage;
+	}
+	
+	// 제품관리 페이지(판매자)
+	@RequestMapping(value="/productManage", method=RequestMethod.GET)
+	public String productManage(HttpServletRequest req, Model model) {
+		System.out.println("제품등록 폼");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneSellerService.productManage(model);
+		
+		return viewPage;
+	}
 }
