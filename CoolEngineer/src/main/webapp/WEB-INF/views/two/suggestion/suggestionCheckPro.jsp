@@ -15,7 +15,7 @@
 	<c:if test="${cnt != 0}">
 		<script type="text/javascript">
 			alert("건의사항을 확인 처리했습니다.!");
-			window.location='suggestionList?pageNum=' + ${pageNum};
+			window.location="suggestionList";
 		</script>
 	</c:if>
 </body>

@@ -103,7 +103,13 @@ li {
 						
 					</table>
 				</div>
+				
+				<div style="float:right; margin-right:10%; margin-top:-15px;">
+					<input type="button" class="btn btn-info" value="목록" onclick="window.location='suggestionList'">
+				</div>
+				
 				<br><br>
+						
 				<div style="width:80%; margin-left:10%;">
 
 					<form action="suggestionCheckPro" method="post" name="suggestioncontentform" class="form-horizontal" onsubmit="return suggestionCheck()">
@@ -129,7 +135,7 @@ li {
 </c:if>
 <c:if test="${dto.sug_status == 'Y'}">
 <!--<div class="col-md-56" style="margin-top:30px; margin-left:20%; height:650px;"> -->
-	<div class="col-md-56" style="margin-top:30px; margin-left:20%; height:730px;">
+	<div class="col-md-56" style="margin-top:10px; margin-left:20%; height:730px;">
 		<div class="panel panel-default">
 			<div class="panel-heading" style="padding-top: 10px;">
 				<div class="panel-title-box">
@@ -157,7 +163,13 @@ li {
 						
 					</table>
 				</div>
+
+				<div style="float:right; margin-right:10%; margin-top:-15px;">
+					<input type="button" class="btn btn-info" value="목록" onclick="window.location='suggestionList'">
+				</div>
+				
 				<br><br>
+				
 				<div style="width:80%; margin-left:10%;">
 					<h3>&nbsp;건의처리 내용</h3>
 					<br>
