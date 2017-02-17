@@ -1616,7 +1616,7 @@ body {
 						<td><a href="/moyeo/one/moyeoShop"><img
 								src="/moyeo/resources/resource/img/shop/home.gif" border="0"></a></td>
 						<td width="5"></td>
-						<td><a href="http://dmshop.kr/mypage.php"><img
+						<td><a href="/moyeo/three/myPage/#order_info"><img
 								src="/moyeo/resources/resource/img/shop/mypage.gif" border="0"></a></td>
 					</tr>
 				</tbody>

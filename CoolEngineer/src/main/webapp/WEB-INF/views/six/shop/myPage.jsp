@@ -92,11 +92,7 @@ text-decoration:none;
 	<table border="0" cellspacing="0" cellpadding="0" class="menu_list">
 	<tbody><tr height="21" class="off">
 	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/order_list.php">- 주문 내역</a></td>
-	</tr>
-	<tr height="21" class="off">
-	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/payment.php">- 개별 결제창</a></td>
+	    <td><a href="#">- 주문 내역</a></td>
 	</tr>
 	</tbody></table>
 	
@@ -126,15 +122,15 @@ text-decoration:none;
 	<table border="0" cellspacing="0" cellpadding="0" class="menu_list">
 	<tbody><tr height="21" class="off">
 	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/cancel.php">- 취소 내역</a></td>
+	    <td><a href="#">- 취소 내역</a></td>
 	</tr>
 	<tr height="21" class="off">
 	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/exchange.php">- 교환 내역</a></td>
+	    <td><a href="#">- 교환 내역</a></td>
 	</tr>
 	<tr height="21" class="off">
 	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/refund.php">- 환불 내역</a></td>
+	    <td><a href="#">- 환불 내역</a></td>
 	</tr>
 	</tbody></table>
 	
@@ -165,19 +161,19 @@ text-decoration:none;
 	<table border="0" cellspacing="0" cellpadding="0" class="menu_list">
 	<tbody><tr height="21" class="off">
 	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/cash.php">- 적립금</a></td>
+	    <td><a href="#">- 적립금</a></td>
 	</tr>
 	<tr height="21" class="off">
 	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/coupon.php">- 쿠폰 보관함</a></td>
+	    <td><a href="#">- 쿠폰 보관함</a></td>
 	</tr>
 	<tr height="21" class="off">
 	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/coupon_list.php">- 쿠폰 사용내역</a></td>
+	    <td><a href="#">- 쿠폰 사용내역</a></td>
 	</tr>
 	<tr height="21" class="off">
 	    <td width="10"></td>
-	    <td><a href="http://dmshop.kr/coupon_regist.php" class="off">- 쿠폰 등록</a></td>
+	    <td><a href="#" class="off">- 쿠폰 등록</a></td>
 	</tr>
 	</tbody></table>
 	
@@ -285,7 +281,7 @@ function orderOk(order_code)
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-<td width="10"></td><td><a href="http://dmshop.kr" class="home">홈</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><a href="http://dmshop.kr/mypage.php" class="off">마이페이지</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><a href="http://dmshop.kr/order_list.php" class="off">주문 내역</a></td></tr>
+<td width="10"></td><td><a href="#" class="home">홈</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><a href="#" class="off">마이페이지</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><a href="#" class="off">주문 내역</a></td></tr>
 </tbody></table>
     </td>
 </tr>
@@ -448,7 +444,7 @@ function orderOk(order_code)
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mypage_title">
 <tbody><tr height="30">
-    <td align="right"><p>김대식님의 사용가능하신 <a href="http://dmshop.kr/cash.php"><span class="t1">적립금은 0원</span></a>이며, 사용 가능하신 <a href="http://dmshop.kr/coupon.php"><span class="t2">쿠폰은 0장</span></a>이 있습니다.</p></td>
+    <td align="right"><p>김대식님의 사용가능하신 <a href="#"><span class="t1">적립금은 0원</span></a>이며, 사용 가능하신 <a href="#"><span class="t2">쿠폰은 0장</span></a>이 있습니다.</p></td>
 </tr>
 </tbody></table>
 
@@ -514,12 +510,12 @@ function orderOk(order_code)
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
     <td width="9"></td>
-    <td width="50" align="center"><div class="thumb"><a href="http://dmshop.kr/item.php?id=Y848100408" target="_blank"><img src="./data/thumb/item/50x50/1935647224_bcb14092_IMG_1674.jpg" width="50" height="50" border="0"></a></div></td>
+    <td width="50" align="center"><div class="thumb"><a href="#" target="_blank"><img src="./data/thumb/item/50x50/1935647224_bcb14092_IMG_1674.jpg" width="50" height="50" border="0"></a></div></td>
     <td width="20"></td>
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><a href="http://dmshop.kr/item.php?id=Y848100408" target="_blank" class="item_name">소품 (갤러리 학습)</a></td>
+    <td><a href="#" target="_blank" class="item_name">소품 (갤러리 학습)</a></td>
 </tr>
 </tbody></table>
 
@@ -593,12 +589,12 @@ function orderOk(order_code)
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
     <td width="9"></td>
-    <td width="50" align="center"><div class="thumb"><a href="http://dmshop.kr/item.php?id=Y848100408" target="_blank"><img src="./data/thumb/item/50x50/1935647224_bcb14092_IMG_1674.jpg" width="50" height="50" border="0"></a></div></td>
+    <td width="50" align="center"><div class="thumb"><a href="#" target="_blank"><img src="./data/thumb/item/50x50/1935647224_bcb14092_IMG_1674.jpg" width="50" height="50" border="0"></a></div></td>
     <td width="20"></td>
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><a href="http://dmshop.kr/item.php?id=Y848100408" target="_blank" class="item_name">소품 (갤러리 학습)</a></td>
+    <td><a href="#" target="_blank" class="item_name">소품 (갤러리 학습)</a></td>
 </tr>
 </tbody></table>
 
