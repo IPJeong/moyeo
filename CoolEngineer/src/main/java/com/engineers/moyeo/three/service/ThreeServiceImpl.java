@@ -924,6 +924,8 @@ public class ThreeServiceImpl implements ThreeService{
 		req.setAttribute("interCnt", interCnt);
 		req.setAttribute("applHistoryCnt", applHistoryCnt);
 		
+		model.addAttribute("location", req.getParameter("location"));
+		
 		return "/three/member/myPage";
 	}
 	
