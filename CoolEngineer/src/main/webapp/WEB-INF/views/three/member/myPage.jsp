@@ -183,18 +183,7 @@ function myShop() {
 							<button type="button" class="btn btn-warning" data-toggle="modal"
 								data-target="#modal_delete" style="width: 100%;padding:2px;font-size:100%;">회원탈퇴</button>
 						</div>
-					</div>
-					<div class="col-md-6"
-						style="margin: 0px; padding: 0px; width: 40%; margin-top: 5px;">
-						<div class="col-md-6"
-							style="margin: 0px; padding: 0px; padding-left: 3px;">
-							<button type="button" class="btn btn-success" style="width: 100%;padding:2px;font-size:100%;" onclick="myGroup();">MyGroup</button>
-						</div>
-						<div class="col-md-6"
-							style="margin: 0px; padding: 0px; padding-left: 3px;  ">
-							<button type="button" class="btn btn-info" style="width: 100%;padding:2px;font-size:100%;" onclick="myShop();">MyShop</button>
-						</div>
-					</div>
+					</div>					
 				</div>
 				<div class="text-center" id="user_image">
 					<img src="${dto.proPicPath}/${dto.proPicName}"
@@ -418,9 +407,17 @@ function myShop() {
 	
 	<div id="group_info">
 		<div class="col-md-8 " style="padding: 0px;">
-			<h2>
-				<span class="fa fa-github"></span> 가입한 모임
-			</h2>
+			<div style="width:100%">
+				<div style="width:85%">
+					<h2>
+						<span class="fa fa-github"></span> 가입한 모임
+					</h2>
+				</div>
+				<div class="col-md-6"
+					style="margin: 0px; padding: 0px; padding-left: 3px; width:15%;position: absolute;left:85%;top:5%;z-index:2;">
+					<button type="button" class="btn btn-info" style="width: 100%;padding:0px;font-size:100%;" onclick="myShop();">MyShop</button>
+				</div>
+			</div>
 			<div class="panel-body panel-body-table" style="overflow:auto;height:250px;">
 				<table class="table table-bordered" style="border: 1px solid #E0E0E0">
 					<thead>
@@ -509,9 +506,17 @@ function myShop() {
 	
 	<div id="order_info" style="display: none;">
 		<div class="col-md-8 " style="padding: 0px;">
-			<h2>
-				<span class="fa fa-github"></span> 주문내역
-			</h2>
+			<div style="width:100%">
+				<div style="width:85%">
+					<h2>
+						<span class="fa fa-github"></span> 주문내역
+					</h2>
+				</div>
+				<div class="col-md-6"
+					style="margin: 0px; padding: 0px; padding-left: 3px; width:15%;position: absolute;left:85%;top:5%;z-index:2;">
+					<button type="button" class="btn btn-success" style="width: 100%;padding:0px;font-size:100%;" onclick="myGroup();">MyGroup</button>
+				</div>				
+			</div>
 			<div class="panel-body panel-body-table"
 				style="overflow: auto; height: 250px;">
 				<table class="table table-bordered" style="border: 1px solid #E0E0E0">
