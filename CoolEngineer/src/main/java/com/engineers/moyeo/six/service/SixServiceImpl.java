@@ -1816,6 +1816,13 @@ public class SixServiceImpl implements SixService{
 		System.out.println(pic_dto.getPic_path());
 		model.addAttribute("dto", dto);
 		model.addAttribute("pic_dto", pic_dto);
+		
+		
+		ArrayList<ProductCommentsDTO> dtos = sixDao.reviewList(product_num);
+		model.addAttribute("dtos", dtos);
+		
+		ArrayList<ProductQueDTO> que_dtos = sixDao.queList(product_num); 
+		model.addAttribute("que_dtos", que_dtos);
 	}
 	
 	//샵-제품주문화면
@@ -1914,4 +1921,14 @@ public class SixServiceImpl implements SixService{
 		int cnt = sixDao.inquirePro(dto);
 		model.addAttribute("cnt", cnt);
 	}
+	
+	//샵-상품리뷰 삭제
+	public void productReviewDelete(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int comments_num = Integer.parseInt(req.getParameter("comments_num"));
+		sixDao.productReviewDelete(comments_num);
+	}
+	
 }

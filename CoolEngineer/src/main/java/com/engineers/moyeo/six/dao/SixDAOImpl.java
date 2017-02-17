@@ -1082,5 +1082,28 @@ public class SixDAOImpl implements SixDAO{
 		
 		return cnt;
 	}
+	
+	//샵-리뷰목록
+	public ArrayList<ProductCommentsDTO> reviewList(int product_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<ProductCommentsDTO> dtos = dao.reviewList(product_num);
+		
+		return dtos;
+	}
+	
+	//샵-리뷰삭제
+	public void productReviewDelete(int comments_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.productReviewDelete(comments_num);
+	}
+	
+	//샵-문의글목록
+	public ArrayList<ProductQueDTO> queList(int product_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<ProductQueDTO> dtos = dao.queList(product_num);
+		
+		return dtos; 
+	}
+
 
 }

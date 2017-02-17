@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,6 +18,9 @@
 
 <!-- CSS INCLUDE -->
 <style>
+
+	
+
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
 		{
@@ -258,14 +262,14 @@ li {
 /* 상품 갤러리 */
 .item_gallery .btn_prev {
 	width: 10px;
-	background: url('./skin/item/default/img/btn_prev.gif') no-repeat left
+	background: url('/moyeo/resources/resource/img/shop/btn_prev.gif') no-repeat left
 		center;
 	cursor: pointer;
 }
 
 .item_gallery .btn_next {
 	width: 10px;
-	background: url('./skin/item/default/img/btn_next.gif') no-repeat right
+	background: url('/moyeo/resources/resource/img/shop/btn_next.gif') no-repeat right
 		center;
 	cursor: pointer;
 }
@@ -302,14 +306,14 @@ li {
 /* 관련상품 */
 #relation_data .btn_prev {
 	width: 25px;
-	background: url('./skin/item/default/img/btn_prev2.gif') no-repeat
+	background: url('/moyeo/resources/resource/img/shop/btn_prev2.gif') no-repeat
 		center center;
 	cursor: pointer;
 }
 
 #relation_data .btn_next {
 	width: 25px;
-	background: url('./skin/item/default/img/btn_next2.gif') no-repeat
+	background: url('/moyeo/resources/resource/img/shop/btn_next2.gif') no-repeat
 		center center;
 	cursor: pointer;
 }
@@ -409,7 +413,7 @@ li {
 	border: 1px solid #eaeaea;
 	width: 100%;
 	height: 28px;
-	background: url('./skin/item/default/img/sns_bg.gif') repeat-x;
+	background: url('/moyeo/resources/resource/img/shop/sns_bg.gif') repeat-x;
 }
 
 /* 상품평 */
@@ -524,14 +528,14 @@ li {
 .item_qna .smile0 {
 	width: 74px;
 	height: 18px;
-	background: transparent url('./skin/item/default/img/qna_smile.png')
+	background: transparent url('/moyeo/resources/resource/img/shop/qna_smile.png')
 		no-repeat;
 }
 
 .item_qna .smile1 {
 	width: 74px;
 	height: 18px;
-	background: transparent url('./skin/item/default/img/qna_smile.png')
+	background: transparent url('/moyeo/resources/resource/img/shop/qna_smile.png')
 		no-repeat 0px -18px;
 }
 
@@ -817,6 +821,44 @@ function shopNumberFormat(data)
     }
 
     return number;
+
+}
+
+function replyDelete(num){	
+	var comments_num = num;
+	
+    if (confirm("삭제하시겠습니까?")) {
+
+      window.location='productReviewDelete?comments_num='+comments_num; 
+    }
+
+}
+
+function replyView(reply_id){
+
+    if ($("#reply_data .reply_"+reply_id).is(":hidden")) {
+
+        $("#reply_data .reply_"+reply_id).slideDown("slow");
+
+    } else {
+
+        $("#reply_data .reply_"+reply_id).hide();
+
+    }
+}
+
+function qnaView(qna_id)
+{
+
+    if ($("#qna_data .qna_"+qna_id).is(":hidden")) {
+
+        $("#qna_data .qna_"+qna_id).slideDown("slow");
+
+    } else {
+
+        $("#qna_data .qna_"+qna_id).hide();
+
+    }
 
 }
 
@@ -2151,228 +2193,259 @@ function orderCheck() {
 									</table>
 
 									<table width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td><div id="reply_data">
-														<meta http-equiv="content-type"
-															content="text/html; charset=utf-8">
-														<table width="100%" border="0" cellspacing="0"
-															cellpadding="0">
-															<tbody>
-																<tr height="20">
-																	<td></td>
-																</tr>
-															</tbody>
-														</table>
+																	<tbody>
+																		<tr>
+																			<td><div id="reply_data">
+																					<meta http-equiv="content-type"
+																						content="text/html; charset=utf-8">
+																					<table width="100%" border="0" cellspacing="0"
+																						cellpadding="0">
+																						<tbody>
+																							<tr height="20">
+																								<td></td>
+																							</tr>
+																						</tbody>
+																					</table>
 
-														<table width="100%" border="0" cellspacing="0"
-															cellpadding="0">
-															<tbody>
-																<tr>
-																	<td width="200" valign="top">
-																		<table width="100%" border="0" cellspacing="0"
-																			cellpadding="0">
-																			<tbody>
-																				<tr height="8">
-																					<td></td>
-																				</tr>
-																			</tbody>
-																		</table>
+																					<table width="100%" border="0" cellspacing="0"
+																						cellpadding="0">
+																						<tbody>
+																							<tr>
+																								<td width="200" valign="top">
+																									<table width="100%" border="0" cellspacing="0"
+																										cellpadding="0">
+																										<tbody>
+																											<tr height="8">
+																												<td></td>
+																											</tr>
+																										</tbody>
+																									</table>
 
-																		<table border="0" cellspacing="0" cellpadding="0">
-																			<tbody>
-																				<tr>
-																					<td><img
-																						src="/moyeo/resources/resource/img/shop/reply_title.gif"></td>
-																					<td width="4"></td>
-																					<td><span class="count down1">(0)</span></td>
-																				</tr>
-																			</tbody>
-																		</table>
-																	</td>
-																	<td align="right" valign="top"><a href="#"
-																		onclick="window.open('productReview?product_num=${dto.product_num}&mem_id=${mem_id}&product_name=${dto.product_name}&pic_path=${pic_dto.pic_path}&pic_name=${pic_dto.pic_name}','','menubar=no, toolbar=no, width=620, height=750, left=350, top=100'); return false;"><img
-																			src="/moyeo/resources/resource/img/shop/reply_write.gif"
-																			border="0"></a></td>
-																</tr>
-															</tbody>
-														</table>
+																									<table border="0" cellspacing="0"
+																										cellpadding="0">
+																										<tbody>
+																											<tr>
+																												<td><img
+																													src="/moyeo/resources/resource/img/shop/reply_title.gif"></td>
+																												<td width="4"></td>
+																												<td><span class="count down1">(0)</span></td>
+																											</tr>
+																										</tbody>
+																									</table>
+																								</td>
+																								<td align="right" valign="top"><a href="#"
+																									onclick="window.open('productReview?product_num=${dto.product_num}&mem_id=${mem_id}&product_name=${dto.product_name}&pic_path=${pic_dto.pic_path}&pic_name=${pic_dto.pic_name}','','menubar=no, toolbar=no, width=620, height=750, left=350, top=100'); return false;"><img
+																										src="/moyeo/resources/resource/img/shop/reply_write.gif"
+																										border="0"></a></td>
+																							</tr>
+																						</tbody>
+																					</table>
 
-														<table width="100%" border="0" cellspacing="0"
-															cellpadding="0">
-															<tbody>
-																<tr height="10">
-																	<td></td>
-																</tr>
-															</tbody>
-														</table>
+																					<table width="100%" border="0" cellspacing="0"
+																						cellpadding="0">
+																						<tbody>
+																							<tr height="10">
+																								<td></td>
+																							</tr>
+																						</tbody>
+																					</table>
 
 
-														<table style="height:1px;" width="100%" border="0" cellspacing="0"
-															cellpadding="0">
-															<tbody>
-																<tr>
-																			<td><div style="height:1px; width:100%; background:#efefef;" class="none"></div></td>
-																</tr>
-															</tbody>
-														</table>
-<!-- 상품평 연습구간 -->
-<!-- 
-														<table width="100%" border="0" cellspacing="0"
-															cellpadding="0">
-															<tbody>
-																<tr height="150">
-																	<td align="center" class="content">등록된 상품평이 없습니다.</td>
-																</tr>
-															</tbody>
-														</table> -->
-	<table width="100%" border="0" cellspacing="0"
-		cellpadding="0"
-		onmouseover="this.style.backgroundColor='#ffffe5';"
-		onmouseout="this.style.backgroundColor='#ffffff';"
-		style="background-color: rgb(255, 255, 255);">
-		<tbody>
-			<tr>
-				<td width="124" valign="top"><div
-						style="padding: 14px 19px 0 19px;">
-						<div class="star3"></div>
-					</div></td>
-				<td width="2" valign="top"><div
-						style="margin-top: 10px;">
-						<img
-							src="/moyeo/resources/resource/img/shop/reply_line.gif">
-					</div></td>
-				<td width="20"></td>
-				<td valign="top"><table width="100%"
-						border="0" cellspacing="0" cellpadding="0">
-						<tbody>
-							<tr>
-								<td valign="top"><table width="100%"
-										border="0" cellspacing="0" cellpadding="0"
-										onclick="replyView('2');" class="pointer">
-										<tbody>
-											<tr height="43">
-												<td><span class="title">좋았어요</span></td>
-											</tr>
-										</tbody>
-									</table>
-									<div style="display: none;" class="reply_2">
-										<table width="100%" border="0"
-											cellspacing="0" cellpadding="0">
-											<tbody>
-												<tr height="10">
-													<td></td>
-												</tr>
-											</tbody>
-										</table>
-										<table width="100%" border="0"
-											cellspacing="0" cellpadding="0">
-											<tbody>
-												<tr>
-													<td><span class="content">굿</span></td>
-												</tr>
-											</tbody>
-										</table>
-										<table width="100%" border="0"
-											cellspacing="0" cellpadding="0">
-											<tbody>
-												<tr height="10">
-													<td></td>
-												</tr>
-											</tbody>
-										</table>
-										<table border="0" cellspacing="0"
+																					<table style="height: 1px;" width="100%" border="0"
+																						cellspacing="0" cellpadding="0">
+																						<tbody>
+																							<tr>
+																								<td><div
+																										style="height: 1px; width: 100%; background: #efefef;"
+																										class="none"></div></td>
+																							</tr>
+																						</tbody>
+																					</table>
+		<c:if test="${empty dtos}">
+			<table width="100%" border="0" cellspacing="0"
+				cellpadding="0">
+				<tbody>
+					<tr height="150">
+						<td align="center" class="content">등록된 상품평이 없습니다.</td>
+					</tr>
+				</tbody>
+			</table> 
+		</c:if>
+		<c:if test="${!empty dtos}">
+		<c:forEach var="dto" items="${dtos}">
+		<table width="100%" border="0" cellspacing="0"
+			cellpadding="0"
+			onmouseover="this.style.backgroundColor='#ffffe5';"
+			onmouseout="this.style.backgroundColor='#ffffff';"
+			style="background-color: rgb(255, 255, 255);">
+			<tbody>
+				<tr>
+					<td width="124" valign="top"><div
+							style="padding: 14px 19px 0 19px;">
+							<div class="star${dto.star_points}"></div>
+						</div></td>
+					<td width="2" valign="top"><div
+							style="margin-top: 10px;">
+							<img
+								src="/moyeo/resources/resource/img/shop/reply_line.gif">
+						</div></td>
+					<td width="20"></td>
+					<td valign="top"><table width="100%"
+							border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<td valign="top"><a href="#"
+										style="text-decoration: none;"><table
+												width="100%" border="0" cellspacing="0"
+												cellpadding="0" onclick="replyView('${dto.comments_num}');"
+												class="pointer">
+												<tbody>
+													<tr height="43">
+														<td style="text-align:left;"><span class="title">${dto.comments_title}</span></td>
+													</tr>
+												</tbody>
+											</table></a>
+										<div style="display: none;" class="reply_${dto.comments_num}">
+											<table width="100%" border="0"
+												cellspacing="0" cellpadding="0">
+												<tbody>
+													<tr height="10">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+											<table width="100%" border="0"
+												cellspacing="0" cellpadding="0">
+												<tbody>
+													<tr>
+														<td style="text-align:left;"><span class="content">${dto.comments_content}</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<table width="100%" border="0"
+												cellspacing="0" cellpadding="0">
+												<tbody>
+													<tr height="10">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+											
+											<c:if test="${dto.mem_id == mem_id}">
+											<table border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr>
+														<td><a href="#"
+															onclick="replyWrite('item', 'u', '8', '2', '1'); return false;"><img
+																src="/moyeo/resources/resource/img/shop/reply_btn_edit.gif"
+																border="0"></a></td>
+														<td width="2"></td>
+														<td><a href="#"
+															onclick="replyDelete(${dto.comments_num}); return false;"><img
+																src="/moyeo/resources/resource/img/shop/reply_btn_delete.gif"
+																border="0"></a></td>
+														<td width="2"></td>
+													</tr>
+												</tbody>
+											</table>
+											</c:if>
+											<table width="100%" border="0"
+												cellspacing="0" cellpadding="0">
+												<tbody>
+													<tr height="15">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div></td>
+									<td width="140" valign="top"><table
+											width="100%" border="0" cellspacing="0"
 											cellpadding="0">
 											<tbody>
-												<tr>
-													<td><a href="#"
-														onclick="replyWrite('item', 'u', '8', '2', '1'); return false;"><img
-															src="/moyeo/resources/resource/img/shop/reply_btn_edit.gif"
-															border="0"></a></td>
-													<td width="2"></td>
-													<td><a href="#"
-														onclick="replyDelete('item', 'd', '8', '2', '1'); return false;"><img
-															src="/moyeo/resources/resource/img/shop/reply_btn_delete.gif"
-															border="0"></a></td>
-													<td width="2"></td>
+												<tr height="7">
+													<td></td>
 												</tr>
 											</tbody>
 										</table>
 										<table width="100%" border="0"
 											cellspacing="0" cellpadding="0">
 											<tbody>
-												<tr height="15">
+												<tr>
+													<td style="text-align:left;"><span class="name">작성자 :
+															${dto.mem_id}</span></td>
+												</tr>
+											</tbody>
+										</table>
+										<table width="100%" border="0"
+											cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr height="3">
 													<td></td>
 												</tr>
 											</tbody>
 										</table>
-									</div></td>
-								<td width="140" valign="top"><table
-										width="100%" border="0" cellspacing="0"
-										cellpadding="0">
-										<tbody>
-											<tr height="7">
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-									<table width="100%" border="0"
-										cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td><span class="name">작성자 :
-														김대식</span></td>
-											</tr>
-										</tbody>
-									</table>
-									<table width="100%" border="0"
-										cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr height="3">
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-									<table width="100%" border="0"
-										cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td><span class="name">작성일 :
-														2017-02-17</span></td>
-											</tr>
-										</tbody>
-									</table>
-									<table width="100%" border="0"
-										cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr height="5">
-												<td></td>
-											</tr>
-										</tbody>
-									</table></td>
-							</tr>
-						</tbody>
-					</table></td>
-			</tr>
-		</tbody>
-	</table>
+										<table width="100%" border="0"
+											cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr>
+													<td style="text-align:left;"><span class="name">작성일 :
+															${fn:substring(dto.comments_date, 0, 10)}</span></td>
+												</tr>
+											</tbody>
+										</table>
+										<table width="100%" border="0"
+											cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr height="5">
+													<td></td>
+												</tr>
+											</tbody>
+										</table></td>
+								</tr>
+							</tbody>
+						</table></td>
+				</tr>
+
+			</tbody>
+		</table>
+		<table width="100%" border="0" cellspacing="0"
+			cellpadding="0">
+			<tbody>
+				<tr height="1" bgcolor="#efefef">
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+</c:forEach>
+</c:if>
 
 
+					<!-- 상품평 연습구간 -->
+
+																	<table border="0" cellspacing="0" cellpadding="0">
+																		<tbody>
+																			<tr>
+																				<td height="50"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+
+																</div></td>
+														</tr>
+													</tbody>
 
 
-																					<!-- 상품평 연습구간 -->														
-
-														<table border="0" cellspacing="0" cellpadding="0">
-															<tbody>
-																<tr>
-																	<td height="50"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div></td>
-											</tr>
-										</tbody>
+<!-- 페이징처리구간 -->			
+								
 									</table>
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+    <td><style type="text/css">#paging_reply {margin:0 auto;}#paging_reply .page_line {line-height:18px; font-size:11px; color:#e5e5e5; font-family:dotum,돋움;}#paging_reply .page_on {display:block; width:23px; height:20px; border:1px solid #e4e4e4; background-color:#555555; text-align:center;}#paging_reply .page_on {font-weight:bold; text-decoration:none; line-height:20px; font-size:11px; color:#ffffff; font-family:Tahoma,dotum,gulim;}#paging_reply .page_off {display:block; width:23px; height:20px; border:1px solid #e4e4e4; background-color:#ffffff; text-align:center;}#paging_reply .page_off {font-weight:bold; text-decoration:none; line-height:20px; font-size:11px; color:#676767; font-family:Tahoma,dotum,gulim;}#paging_reply a.page_off:hover {background-color:#555555; color:#ffffff;}#paging_reply .btn a {text-decoration:none; font-weight:bold; line-height:18px; font-size:11px; color:#676767; font-family:dotum,돋움;}#paging_reply .btn a:hover {text-decoration:underline; color:#555555;}</style><table id="paging_reply" cellspacing="0" cellpadding="0" border="0" align="center"><tbody><tr><td></td><td width="15"></td><td width="4"></td><td><a href="#" class="page_on" onclick="replyLoading('8', '1'); return false;">1</a></td><td width="4"></td><td><a href="#" class="page_off" onclick="replyLoading('8', '2'); return false;">2</a></td><td width="15"></td><td class="btn"><a href="#" onclick="replyLoading('8', '2'); return false;">맨뒤로</a></td></tr></tbody></table></td>
+</tr>
+</tbody></table>
+									
+<!-- 페이징처리구간 -->											
 								</div>
 
 
@@ -2476,7 +2549,7 @@ function orderCheck() {
 
 														<div style="height:1px; width:100%; background:#efefef;" class="none">
 
-
+													<c:if test="${empty que_dtos}">				
 														<table width="100%" border="0" cellspacing="0"
 															cellpadding="0">
 															<tbody>
@@ -2485,15 +2558,155 @@ function orderCheck() {
 																</tr>
 															</tbody>
 														</table>
+													</c:if>
+												<c:if test="${!empty que_dtos}">
+												<c:forEach var="dto" items="${que_dtos}">
+												<table width="100%" border="0" cellspacing="0"
+													cellpadding="0"
+													onmouseover="this.style.backgroundColor='#ffffe5';"
+													onmouseout="this.style.backgroundColor='#ffffff';"
+													style="background-color: rgb(255, 255, 229);">
+													<tbody>
+														<tr>
+															<td width="124" valign="top"><div
+																	style="padding: 14px 19px 0 19px;">
+																	<div class="smile${dto.asn_cnt}"></div>
+																</div></td>
+															<td width="2" valign="top"><div
+																	style="margin-top: 10px;">
+																	<img
+																		src="/moyeo/resources/resource/img/shop/qna_line.gif">
+																</div></td>
+															<td width="20"></td>
+															<td valign="top"><table width="100%"
+																	border="0" cellspacing="0" cellpadding="0">
+																	<tbody>
+																		<tr>
+																			<td valign="top"><table width="100%"
+																					border="0" cellspacing="0"
+																					cellpadding="0" onclick="qnaView(${dto.que_num});"
+																					class="pointer">
+																					<tbody>
+																						<tr height="43">
+																							<td  style="text-align:left;"><span class="category">[${dto.que_type}]</span>
+																								<span class="title">${dto.que_title}</span></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				<div style="display: none;"
+																					class="qna_${dto.que_num}">
+																					<table width="100%" border="0"
+																						cellspacing="0" cellpadding="0">
+																						<tbody>
+																							<tr height="10">
+																								<td></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																					<table width="100%" border="0"
+																						cellspacing="0" cellpadding="0">
+																						<tbody>
+																							<tr>
+																								<td style="text-align:left;"><span class="content">${dto.que_content}</span></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																					<table width="100%" border="0"
+																						cellspacing="0" cellpadding="0">
+																						<tbody>
+																							<tr height="10">
+																								<td></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																					<table border="0" cellspacing="0"
+																						cellpadding="0">
+																						<tbody>
+																							<tr>
+																								<td><a href="#"
+																									onclick="qnaWrite('item', 'u', '8', '3', '1'); return false;"><img
+																										src="/moyeo/resources/resource/img/shop/qna_btn_edit.gif"
+																										border="0"></a></td>
+																								<td width="2"></td>
+																								<td><a href="#"
+																									onclick="qnaDelete('item', 'd', '8', '3', '1'); return false;"><img
+																										src="/moyeo/resources/resource/img/shop/qna_btn_delete.gif"
+																										border="0"></a></td>
+																								<td width="2"></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																					<table width="100%" border="0"
+																						cellspacing="0" cellpadding="0">
+																						<tbody>
+																							<tr height="15">
+																								<td></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</div></td>
+																			<td width="140" valign="top"><table
+																					width="100%" border="0" cellspacing="0"
+																					cellpadding="0">
+																					<tbody>
+																						<tr height="7">
+																							<td></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				<table width="100%" border="0"
+																					cellspacing="0" cellpadding="0">
+																					<tbody>
+																						<tr>
+																							<td style="text-align:left;"><span class="name">작성자
+																									: ${dto.mem_id}</span></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				<table width="100%" border="0"
+																					cellspacing="0" cellpadding="0">
+																					<tbody>
+																						<tr height="3">
+																							<td></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				<table width="100%" border="0"
+																					cellspacing="0" cellpadding="0">
+																					<tbody>
+																						<tr>
+																							<td style="text-align:left;"><span class="name">작성일
+																									: ${fn:substring(dto.que_date, 0, 10)}</span></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				<table width="100%" border="0"
+																					cellspacing="0" cellpadding="0">
+																					<tbody>
+																						<tr height="5">
+																							<td></td>
+																						</tr>
+																					</tbody>
+																				</table></td>
+																		</tr>
+																	</tbody>
+																</table></td>
+														</tr>
+													</tbody>
+												</table>
+											</c:forEach>	
+												
+												<table border="0" cellspacing="0" cellpadding="0">
+														<tbody>
+															<tr>
+																<td height="50" width="739px"></td>
+															</tr>
+														</tbody>
+													</table>
 
-														<table border="0" cellspacing="0" cellpadding="0">
-															<tbody>
-																<tr>
-																	<td height="50"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div></td>
+
+											</c:if>
+
 											</tr>
 										</tbody>
 									</table>

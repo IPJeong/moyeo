@@ -131,7 +131,7 @@ public interface SixService {
 	//샵-결제처리
 	public void order(Model model);
 	
-	//샵-상품평 입력창, 상품문의 입력창
+	//샵-상품리뷰 입력창, 상품문의 입력창
 	public void productReview(Model model);
 	
 	//샵-상품평 입력결과 처리
@@ -139,4 +139,7 @@ public interface SixService {
 	
 	//샵-상품문의 입력결과 처리
 	public void inquirePro(Model model);
+	
+	//샵-상품리뷰 삭제
+	public void productReviewDelete(Model model);
 }

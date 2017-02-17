@@ -601,5 +601,16 @@ public class SixController {
 		
 		return "six/shop/buyResult";
 	}
+	
+	//샵-리뷰삭제
+	@RequestMapping("/shop/productReviewDelete")
+	public String productReviewDelete(HttpServletRequest req, Model model) {
+		System.out.println("/shop/productReviewDelete");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productReviewDelete(model);
+		
+		return "six/shop/productDetail";
+	}
 }
 

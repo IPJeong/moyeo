@@ -27,6 +27,9 @@ public class ProductQueDTO {
 	
 	//공개여부
 	private String visible;
+	
+	//답변여부
+	private String asn_cnt;
 
 	public int getQue_num() {
 		return que_num;
@@ -90,5 +93,13 @@ public class ProductQueDTO {
 
 	public void setVisible(String visible) {
 		this.visible = visible;
+	}
+
+	public String getAsn_cnt() {
+		return asn_cnt;
+	}
+
+	public void setAsn_cnt(String asn_cnt) {
+		this.asn_cnt = asn_cnt;
 	}
 }

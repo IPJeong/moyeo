@@ -389,4 +389,13 @@ public interface SixDAO {
 
 	//샵-제품문의 등록
 	public int inquirePro(ProductQueDTO dto);
+	
+	//샵-리뷰목록
+	public ArrayList<ProductCommentsDTO> reviewList(int product_num);
+	
+	//샵-리뷰삭제
+	public void productReviewDelete(int comments_num);
+
+	//샵-문의글목록
+	public ArrayList<ProductQueDTO> queList(int product_num);
 }
