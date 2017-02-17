@@ -644,7 +644,7 @@ function orderSave()
 
     if (confirm("결제 하시겠습니까?")) {
 
-     	f.action = order_pay_url1;
+     	f.action = order_pay_url;
         //f.target = "order_update";
         f.submit();
        	
@@ -1377,7 +1377,7 @@ function smsSelfSend(order_code)
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-<td><a href="http://dmshop.kr/" class="home">홈</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><span class="off">주문/결제</span></td></tr>
+<td><a href="" class="home">홈</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><span class="off">주문/결제</span></td></tr>
 </tbody></table>
     </td>
     <td width="10"></td>
@@ -2142,9 +2142,7 @@ function cartCouponUpdate()
 
 <table align="center" border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td><a href="#"><img src="/moyeo/resources/resource/img/shop/cart_go.gif" border="0"></a></td>
-    <td width="5"></td>
-    <td><a href="#" onclick="orderSave(); return false;"><img src="/moyeo/resources/resource/img/shop/order_pay.gif" border="0"></a></td>
+     <td><a href="#" onclick="orderSave(); return false;"><img src="/moyeo/resources/resource/img/shop/order_pay.gif" border="0"></a></td>
 </tr>
 </tbody></table>
 

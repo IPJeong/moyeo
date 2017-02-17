@@ -32,7 +32,7 @@ function m_Completepayment( FormOrJson, closeEvent )
 
         if (document.getElementById("shop_cancel").value == 'cart') {
 
-            location.href = "/moyeo/one/moyeoShop";
+            location.href = "/moyeo/six/shop/buyResult";
 
         }
 

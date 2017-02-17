@@ -909,7 +909,7 @@ function orderCheck() {
             return false;
 
         }
-
+		
         // 주문 수량 초과
         if (order_limit > item_option_limit) {
 
@@ -1335,10 +1335,7 @@ function orderCheck() {
 																<td><input type="submit" value="바로구매" style="background:rgb(34, 136, 155); color:white; font-size:13px; width:100px; height:42px;">
 																</td>
 																<td width="2"></td>
-																<td><a href="#" onclick="itemCart(); return false;"><img
-																		src="/moyeo/resources/resource/img/shop/item_cart.gif"
-																		border="0" style="padding:3px;"></a></td>
-																<td width="2"></td>
+																
 
 															</tr>
 														</tbody>
@@ -1651,7 +1648,7 @@ function orderCheck() {
 											<tr class="tab_bg">
 												<td>
 													<table border="0" style="border-bottom: 2px #383d41"
-														cellspacing="0" cellpadding="0">
+														cellspacing="0" cellpadding="0" width="100%">
 														<tbody>
 															<tr>
 																<td width="200" height="40" bgcolor="#383d41"
@@ -1706,7 +1703,7 @@ function orderCheck() {
 										<tbody>
 											<tr class="tab_bg">
 												<td>
-													<table border="0" cellspacing="0" cellpadding="0">
+													<table border="0" cellspacing="0" cellpadding="0" width="100%">
 														<tbody>
 															<tr>
 																<td width="200" height="40" bgcolor="#f4f4f4"
@@ -1832,10 +1829,10 @@ function orderCheck() {
 																						src="/moyeo/resources/resource/img/shop/parcel04.gif">
 																				</p></td>
 																			<td valign="top"><p style="text-align:left;">
-																					5만원 이하 결제건 : <b>배송비 2,500원</b> (주문 결제시, 부담)
+																					5000억원 이하 결제건 : <b>배송비 2,500원</b> (주문 결제시, 부담)
 																				</p>
 																				<p style="text-align:left;">
-																					5만원 이상 결제건 : <b>무료 배송</b>
+																					5000억원 이상 결제건 : <b>무료 배송</b>
 																				</p>
 																				<p style="margin-top: 10px; text-align:left;">단, 아래와 같은 경우 별도의 추가
 																					배송비(도선료)가 발생 됩니다.</p>
@@ -1925,7 +1922,7 @@ function orderCheck() {
 										<tbody>
 											<tr class="tab_bg">
 												<td>
-													<table border="0" cellspacing="0" cellpadding="0">
+													<table border="0" cellspacing="0" cellpadding="0" width="100%">
 														<tbody>
 															<tr>
 																<td width="200" height="40" bgcolor="#f4f4f4"
@@ -2256,7 +2253,7 @@ function orderCheck() {
 										<tbody>
 											<tr class="tab_bg">
 												<td>
-													<table border="0" cellspacing="0" cellpadding="0">
+													<table border="0" cellspacing="0" cellpadding="0" width="100%">
 														<tbody>
 															<tr>
 																<td width="200" height="40" bgcolor="#f4f4f4"
@@ -2325,7 +2322,7 @@ function orderCheck() {
 																		</table>
 																	</td>
 																	<td align="right" valign="top"><a href="#"
-																		onclick="qnaWrite('item', '', '17', '', '1'); return false;"><img
+																		onclick="window.open('inquire?product_num=${dto.product_num}&mem_id=${mem_id}&product_name=${dto.product_name}&pic_path=${pic_dto.pic_path}&pic_name=${pic_dto.pic_name}','','menubar=no, toolbar=no, width=620, height=750, left=350, top=100'); return false;"><img
 																			src="/moyeo/resources/resource/img/shop/qna_write.gif"
 																			border="0"></a></td>
 																</tr>
