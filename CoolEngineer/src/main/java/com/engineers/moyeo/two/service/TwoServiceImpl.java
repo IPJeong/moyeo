@@ -3294,7 +3294,14 @@ public class TwoServiceImpl implements TwoService{
 
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("search_type", search_type);
-		daoMap.put("search_keyword", search_keyword);
+		
+		if(search_type.equals("1")) {
+			daoMap.put("product_name", search_keyword);
+		} else if(search_type.equals("2")) {
+			daoMap.put("product_detail", search_keyword);
+		} else if(search_type.equals("3")) {
+			daoMap.put("seller_id", search_keyword);
+		}
 		
 		cnt = twoDao.getProductSearchCount(daoMap);
 		
@@ -3322,8 +3329,6 @@ public class TwoServiceImpl implements TwoService{
 			
 			ArrayList<ProductInfoDTO> dtos = twoDao.getProductSearchList(daoMap);
 			model.addAttribute("dtos", dtos);
-			
-			System.out.println("dtos: " + dtos);
 		}
 		
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
@@ -3370,6 +3375,9 @@ public class TwoServiceImpl implements TwoService{
 		
 		String product_cat1 = req.getParameter("product_cat1");
 		String product_cat2 = req.getParameter("product_cat2");
+		
+		System.out.println("product_cat1 : "+product_cat1);
+		System.out.println("product_cat2 : "+product_cat2);
 		
 		Map<String, Object> daoMap = new HashMap<String, Object>();
 		daoMap.put("search_type", "4");
@@ -3427,8 +3435,6 @@ public class TwoServiceImpl implements TwoService{
 		}
 		
 		model.addAttribute("view_page", "productCategory");
-		
-		System.out.println("Product Category");
 		
 		return "one/shop/moyeoShop";
 	}
