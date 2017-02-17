@@ -68,8 +68,9 @@ li {
 	left: -3px;
 }
 
-<style>
-
+<
+style
+>
 @media only screen and (max-width: 1010px) {
 	.x-dashboard .page-container .page-content .page-content-wrap .x-hnavigation .x-features
 		{
@@ -170,14 +171,7 @@ li {
 <script type="text/javascript"
 	src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script> -->
 
-<script type="text/javascript">
-	function chk() {
-		if (document.guestListSearch.search_name.value.trim() == '') {
-			alert("공백은 검색할 수 없습니다.");
-			return false;
-		}
-	}
-</script>
+
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->
 
@@ -211,41 +205,192 @@ li {
 
 						<!-- 모임페이지 사이드바 시작 -->
 						<div>
+						<c:if test="${recognition == '06'}">
 						<%@include file="../../etc/shop_seller_side.jsp"%>
 						<!-- 모임페이지 사이드바 종료 -->
-
+						</c:if>
+						
+						<c:if test="${recognition == '15' || recognition == '91' || recognition eq null}">
+						<%@include file="../../etc/shop_seller_side2.jsp"%>
+						<!-- 모임페이지 사이드바 종료 -->
+						</c:if>
 						<!-- START PHOTO BLOCK -->
 						
 						</div>
 					</div>
+					<br><br><br>
 					<div style="width:100%">
-					<div class="col-md-22" style="width:65%; height:860px;">
+					<div class="col-md-22" style="width:27%; height:380px;">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<div class="panel-title-box">
-									<h3>판매자관리</h3>
-									<span>설명</span>
+								<div class="panel-title-box" >
+									<h3>판매자등록</h3>
 								</div>
 							</div>
 							<div class="panel-body padding-0">
 								<img
-									src="/moyeo/resources/resource/assets/images/gallery/group.jpg"
-									style="width: 472px; height: 200px;"> <br>
+									src="/moyeo/resources/resource/assets/images/gallery/seller2.jpg"
+									style="width: 483px; height: 235px;"> <br>
 								<br>
 								<br>
 								<br>
 								<div style="margin-left: 35%; margin-top: 5%">
 									<div>
+										<c:if test="${recognition == '06'}">
 										<span><button class="btn btn-primary btn-rounded"
-												style="width: 150px;" value="버튼"
-												onclick="window.location='/moyeo/four/productInsertForm'">
-												<font size="3px;">제품등록</font>
-											</button></span>
-										<span><button class="btn btn-primary btn-rounded"
-												style="width: 150px;" value="버튼"
-												onclick="window.location='/moyeo/six/shop/sellerRegister'">
+												style="width: 150px;" value="버튼" onclick="window.location='/moyeo/six/shop/sellerRegister'" disabled="disabled">
 												<font size="3px;">판매자등록</font>
-											</button></span>
+											 </button></span>
+										</c:if>
+										
+										<c:if test="${recognition == '15' || recognition eq null}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='/moyeo/six/shop/sellerRegister'">
+												<font size="3px;">판매자등록</font>
+											 </button></span>
+										</c:if>
+										
+										<c:if test="${recognition == '91'}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='/moyeo/six/shop/sellerRegister'">
+												<font size="3px;">판매자등록</font>
+											 </button></span>
+										</c:if>
+									</div>
+									<div class="chart-holder" id="dashboard-bar-1"
+										style="height: 200px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-22" style="width:27%; height:380px;">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title-box">
+									<h3>제품등록</h3>
+								</div>
+							</div>
+							<div class="panel-body padding-0">
+								<img
+									src="/moyeo/resources/resource/assets/images/gallery/product.png"
+									style="width: 483px; height: 235px;"> <br>
+								<br>
+								<br>
+								<br>
+								<div style="margin-left: 35%; margin-top: 5%">
+									<div>
+										<c:if test="${recognition == '06'}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='/moyeo/one/productInsertForm'">
+												<font size="3px;">제품등록</font>
+											 </button></span>
+										</c:if>
+										
+										<c:if test="${recognition == '15' || recognition eq null}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='/moyeo/one/productInsertForm'" disabled="disabled">
+												<font size="3px;">제품등록</font>
+											 </button></span>
+										</c:if>
+										
+										<c:if test="${recognition == '91'}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='/moyeo/one/productInsertForm'" disabled="disabled">
+												<font size="3px;">제품등록</font>
+											 </button></span>
+										</c:if>
+									</div>
+									<div class="chart-holder" id="dashboard-bar-1"
+										style="height: 200px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-22" style="width:27%; height:380px; margin-top:50px;">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title-box">
+									<h3>제품관리</h3>
+								</div>
+							</div>
+							<div class="panel-body padding-0">
+								<img
+									src="/moyeo/resources/resource/assets/images/gallery/adjust3.jpg"
+									style="width:483px; height:235px;"> <br>
+								<br>
+								<br>
+								<br>
+								<div style="margin-left: 35%; margin-top: 5%">
+									<div>
+										<c:if test="${recognition == '06'}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='productManage?seller_id=${seller_id}'">
+												<font size="3px;">제품관리</font>
+											 </button></span>
+										</c:if>
+											
+										<c:if test="${recognition == '15' || recognition eq null }">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" disabled="disabled">
+												<font size="3px;">제품수정</font>
+											 </button></span>
+										</c:if>
+										
+										<c:if test="${recognition == '91'}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='#''" disabled="disabled">
+												<font size="3px;">제품수정</font>
+											 </button></span>
+										</c:if>
+										
+									</div>
+									
+									
+									<div class="chart-holder" id="dashboard-bar-1"
+										style="height: 200px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-22" style="width:27%; height:380px; margin-top:50px;">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title-box">
+									<h3>재고관리</h3>
+								</div>
+							</div>
+							<div class="panel-body padding-0">
+								<img
+									src="/moyeo/resources/resource/assets/images/gallery/stock.png"
+									style="width: 483px; height: 235px;"> <br>
+								<br>
+								<br>
+								<br>
+								<div style="margin-left: 35%; margin-top: 5%">
+									<div>
+										<c:if test="${recognition == '06'}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼">
+												<font size="3px;">재고관리</font>
+											 </button></span>
+										</c:if>
+										
+										<c:if test="${recognition == '15' || recognition eq null}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='#''" disabled="disabled">
+												<font size="3px;">재고관리</font>
+											 </button></span>
+										</c:if>
+										
+										<c:if test="${recognition == '91'}">
+										<span><button class="btn btn-primary btn-rounded"
+												style="width: 150px;" value="버튼" onclick="window.location='#''" disabled="disabled">
+												<font size="3px;">재고관리</font>
+											 </button></span>
+										</c:if>
 									</div>
 									<div class="chart-holder" id="dashboard-bar-1"
 										style="height: 200px;"></div>
