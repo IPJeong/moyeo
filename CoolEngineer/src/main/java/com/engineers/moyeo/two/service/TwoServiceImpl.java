@@ -3447,7 +3447,9 @@ public class TwoServiceImpl implements TwoService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
 		int cnt = 0;
-		int chk_cnt =0;
+		int chk_cnt = 0;
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
 		String seller_id = req.getParameter("seller_id");
 		String recognition = Code.seler_revoked;
 		
@@ -3464,6 +3466,7 @@ public class TwoServiceImpl implements TwoService{
 		}
 		
 		model.addAttribute("chk_cnt", chk_cnt);
+		model.addAttribute("pageNum", pageNum);
 		
 		return "two/shop/sellerDeletePro";
 	}
