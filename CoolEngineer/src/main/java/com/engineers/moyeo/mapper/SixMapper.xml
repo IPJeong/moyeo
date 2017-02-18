@@ -654,13 +654,37 @@
 	
 	<!-- 샵-문의사항목록 -->
 	<select id ="queList" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductQueDTO">
-		SELECT pq.que_num, pq.que_title, pq.que_content, pq.que_date, pq.mem_id, pq.product_num, pq.que_type, NVL(pa.ans_cnt, 0) AS ans_cnt
-  FROM (SELECT que_num, que_title, que_content, que_date, mem_id, product_num, que_type
+		SELECT pq.que_num, pq.que_title, pq.que_content, pq.que_date, pq.mem_id, pq.product_num, pq.que_type, pq.visible, NVL(pa.ans_cnt, 0) AS ans_cnt
+  FROM (SELECT que_num, que_title, que_content, que_date, mem_id, product_num, que_type, visible
           FROM product_que) pq,
        (SELECT COUNT(*) AS ans_cnt, que_num
           FROM product_ans
         GROUP BY que_num) pa
-WHERE pq.que_num = pa.que_num(+)		
+WHERE pq.que_num = pa.que_num(+) AND pq.product_num = #{product_num} ORDER BY que_num DESC		
 	</select>
 	
+	<!-- 샵-문의글 삭제 -->
+	<delete id="productQnaDelete" parameterType="int">
+		DELETE FROM product_que WHERE que_num = #{que_num}
+	</delete>
+	
+	<!-- 샵-리뷰수정폼 -->
+	<select id="productReviewModify" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductCommentsDTO">
+		SELECT pc.*, pi.product_name FROM product_comments pc, product_info pi WHERE pc.comments_num = #{comments_num} AND pc.product_num = pi.product_num
+	</select>
+	
+	<!-- 샵-리뷰수정처리 -->
+	<update id="productReviewModifyPro" parameterType="com.engineers.moyeo.six.dto.ProductCommentsDTO">
+		UPDATE product_comments SET comments_content = #{comments_content}, comments_title = #{comments_title}, star_points = #{star_points} WHERE comments_num = #{comments_num}
+	</update>
+	
+	<!-- 샵-문의글 수정폼  -->
+	<select id="inquireModify" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductQueDTO"> 
+		SELECT pq.*, pi.product_name FROM product_que pq, product_info pi WHERE pq.que_num = #{que_num} AND pq.product_num = pi.product_num
+	</select>
+	
+	<!-- 샵-문의글 수정처리 -->
+	<update id="inquireModifyPro" parameterType="com.engineers.moyeo.six.dto.ProductQueDTO">
+		UPDATE product_que SET que_type = #{que_type}, que_title = #{que_title}, que_content = #{que_content}, visible = #{visible} WHERE que_num = #{que_num}
+	</update>	
 </mapper>
