@@ -7,19 +7,22 @@
 	<c:if test="${chk_cnt == 0}">
 		<script type="text/javascript">
 			alert("판매자가 아닙니다");
-			window.location='/moyeo/one/moyeoSeller';
+			opener.document.location.href="/moyeo/one/seller?pageNum="+${pageNum};
+			self.close();
 		</script>
 	</c:if>
 	<c:if test="${cnt == 0}">
 		<script type="text/javascript">
 			alert("판매자 삭제에 실패했습니다.");
-			window.location='/moyeo/one/moyeoSeller';
+			opener.document.location.href="/moyeo/one/seller?pageNum="+${pageNum};
+			self.close();
 		</script>
 	</c:if>
 	<c:if test="${cnt > 0}">
 		<script type="text/javascript">
-			alert("판매자 삭제를 성공했습니다.");
-			window.location='/moyeo/one/moyeoSeller';
+			alert("판매자 삭제에 성공했습니다.");
+			opener.document.location.href="/moyeo/one/seller?pageNum="+${pageNum};
+			self.close();
 		</script>
 	</c:if>	
 </body>
