@@ -131,4 +131,34 @@ public interface Code {
 	// 널값 예외 발생 메시지
 	public final static String nullPoExceptionMsg = "========== NullPoint Exception ==========";
 	
+	
+	// 판매페이지 구매상태 메시지 - 결제전
+	public final static String BEFORE_PAYMENT = "결제전";
+	// 판매페이지 구매상태 메시지 - 결제완료
+	public final static String PAYMENT_DONE = "결제완료";
+	// 판매페이지 구매상태 메시지 - 배송준비
+	public final static String READY_SHIP = "배송준비";
+	// 판매페이지 구매상태 메시지 - 배송중
+	public final static String SHIPPING = "배송중";
+	// 판매페이지 구매상태 메시지 - 상품수령
+	public final static String RECEIVE_PRODUCT = "상품수령";
+	// 판매페이지 구매상태 메시지 - 구매완료
+	public final static String ORDER_DONE = "구매완료";
+	// 판매페이지 구매상태 메시지 - 취소접수
+	public final static String RECEIVE_CANCEL = "취소접수";
+	// 판매페이지 구매상태 메시지 - 취소완료
+	public final static String CANCEL_DONE = "취소완료";
+	// 판매페이지 구매상태 메시지 - 교환접수
+	public final static String RECEIVE_EXCHANGE = "교환접수";
+	// 판매페이지 구매상태 메시지 - 교환중
+	public final static String EXCHANGING = "교환중";
+	// 판매페이지 구매상태 메시지 - 교환완료
+	public final static String EXCHANGE_DONE = "교환완료";
+	// 판매페이지 구매상태 메시지 - 반품접수
+	public final static String RECEIVE_RETURNS = "반품접수";
+	// 판매페이지 구매상태 메시지 - 반품완료
+	public final static String RETURNS_DONE = "반품완료";
+	// 판매페이지 구매상태 메시지 - 판매자취소
+	public final static String SELLER_CANCLE = "판매자취소";
+	
 }
