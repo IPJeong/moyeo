@@ -3507,14 +3507,6 @@ public class TwoServiceImpl implements TwoService{
 		String account_number = req.getParameter("account_number");
 		String depositor = req.getParameter("depositor");
 		
-		System.out.println("seller_id : "+seller_id);
-		System.out.println("add : "+address);
-		System.out.println("tel : "+tel);
-		System.out.println("comp_name : "+comp_name);
-		System.out.println("bank : "+bank);
-		System.out.println("account_number : "+account_number);
-		System.out.println("depositor : "+depositor);
-		
 		dto.setSeller_id(seller_id);
 		dto.setAddress(address);
 		dto.setTel(tel);
