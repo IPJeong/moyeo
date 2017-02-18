@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+		<script type="text/javascript">
+		window.location ='productDetail?product_num=${product_num}'
+		</script>
 </body>
 </html>

@@ -1817,12 +1817,17 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("dto", dto);
 		model.addAttribute("pic_dto", pic_dto);
 		
-		
+		//상품리뷰
 		ArrayList<ProductCommentsDTO> dtos = sixDao.reviewList(product_num);
+		model.addAttribute("reviewCnt", dtos.size());
 		model.addAttribute("dtos", dtos);
 		
+		//상품문의
 		ArrayList<ProductQueDTO> que_dtos = sixDao.queList(product_num); 
 		model.addAttribute("que_dtos", que_dtos);
+		model.addAttribute("queCnt", que_dtos.size());
+		
+	
 	}
 	
 	//샵-제품주문화면
@@ -1888,14 +1893,17 @@ public class SixServiceImpl implements SixService{
 		
 		int cnt = sixDao.productReviewPro(dto);
 		model.addAttribute("cnt", cnt);
+		model.addAttribute("product_num", product_num);
 	}
 	
 	
 	
 	//샵-상품문의 입력결과 처리
 	public void inquirePro(Model model) {
+
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
+	
 		ProductQueDTO dto = new ProductQueDTO();
 		
 		String visible;
@@ -1904,6 +1912,8 @@ public class SixServiceImpl implements SixService{
 		String que_content = req.getParameter("qna_content");
 		String que_title = req.getParameter("qna_title");	
 		String que_type = req.getParameter("qna_category");
+		Timestamp que_date = new Timestamp(System.currentTimeMillis());
+		
 		if(req.getParameter("qna_secret") == null) {
 			visible = "yes";
 		} else {
@@ -1913,13 +1923,16 @@ public class SixServiceImpl implements SixService{
 		dto.setMem_id(mem_id);
 		dto.setProduct_num(product_num);
 		dto.setQue_content(que_content);
-		dto.setQue_date(new Timestamp(System.currentTimeMillis()));
+		dto.setQue_date(que_date);
 		dto.setQue_title(que_title);
 		dto.setQue_type(que_type);
 		dto.setVisible(visible);
 		
 		int cnt = sixDao.inquirePro(dto);
 		model.addAttribute("cnt", cnt);
+
+		model.addAttribute("product_num", product_num);
+		
 	}
 	
 	//샵-상품리뷰 삭제
@@ -1928,7 +1941,107 @@ public class SixServiceImpl implements SixService{
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
 		int comments_num = Integer.parseInt(req.getParameter("comments_num"));
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
 		sixDao.productReviewDelete(comments_num);
+		model.addAttribute("product_num", product_num);
+	}
+
+	//샵-상품문의 삭제
+	public void productQnaDelete(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int que_num = Integer.parseInt(req.getParameter("que_num"));
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		sixDao.productQnaDelete(que_num);
+		model.addAttribute("product_num", product_num);
 	}
 	
+	//샵-상품리뷰 수정창
+	public void productReviewModify(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int comments_num = Integer.parseInt(req.getParameter("comments_num"));
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		String pic_path = req.getParameter("pic_path");
+		String pic_name = req.getParameter("pic_name");
+
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("pic_path", pic_path);
+		model.addAttribute("pic_name", pic_name);
+		
+		ProductCommentsDTO dto = sixDao.productReviewModify(comments_num);
+		model.addAttribute("dto", dto);
+	}
+	
+	//샵-상품리뷰 수정처리
+	public void productReviewModifyPro(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+	
+		ProductCommentsDTO dto = new ProductCommentsDTO();
+		
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		String comments_content = req.getParameter("reply_content");
+		String comments_title = req.getParameter("reply_title");	
+		int star_points = Integer.parseInt(req.getParameter("reply_score"));
+		int comments_num = Integer.parseInt(req.getParameter("comments_num"));
+		dto.setComments_content(comments_content);
+		dto.setComments_title(comments_title);
+		dto.setStar_points(star_points);
+		dto.setComments_num(comments_num);
+		System.out.println(dto.getComments_num());
+		sixDao.productReviewModifyPro(dto);
+		
+		model.addAttribute("product_num", product_num);
+	}
+	
+	//샵-상품문의 수정폼
+	public void inquireModify(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int que_num = Integer.parseInt(req.getParameter("que_num"));
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		String pic_path = req.getParameter("pic_path");
+		String pic_name = req.getParameter("pic_name");
+
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("pic_path", pic_path);
+		model.addAttribute("pic_name", pic_name);
+		
+		ProductQueDTO dto = sixDao.inquireModify(que_num);
+		model.addAttribute("dto", dto);
+	}
+	
+	//샵-상품문의 수정처리
+	public void inquireModifyPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+	
+		ProductQueDTO dto = new ProductQueDTO();
+
+		int que_num = Integer.parseInt(req.getParameter("que_num"));
+		String visible;
+		String que_content = req.getParameter("qna_content");
+		String que_title = req.getParameter("qna_title");	
+		String que_type = req.getParameter("qna_category");
+		
+		if(req.getParameter("qna_secret") == null) {
+			visible = "yes";
+		} else {
+			visible = req.getParameter("qna_secret");
+		};
+		
+		dto.setQue_content(que_content);
+		dto.setQue_title(que_title);
+		dto.setQue_type(que_type);
+		dto.setVisible(visible);
+		dto.setQue_num(que_num);
+		
+		sixDao.inquireModifyPro(dto);
+		
+	}
 }

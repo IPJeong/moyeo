@@ -25,6 +25,9 @@ public class ProductCommentsDTO {
 	//평가 타이틀
 	private String comments_title;
 
+	//상품이름
+	private String product_name;
+	
 	public int getComments_num() {
 		return comments_num;
 	}
@@ -80,5 +83,12 @@ public class ProductCommentsDTO {
 	public void setComments_title(String comments_title) {
 		this.comments_title = comments_title;
 	}
-	
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
 }

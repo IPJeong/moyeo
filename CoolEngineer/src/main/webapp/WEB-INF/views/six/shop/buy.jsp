@@ -610,38 +610,6 @@ function orderSave()
 
     }
 
-    if (f.order_receipt.value == '1' || f.order_receipt.value == '2') {
-
-        var receipt_type = $("input[name='order_receipt_type']:checked").val();
-        var receipt_name = $('#tmp'+receipt_type+'_order_receipt_name');
-        var receipt_number = $('#tmp'+receipt_type+'_order_receipt_number');
-
-        if (receipt_name.val() == '') {
-
-            alert("항목을 입력하세요.");
-            receipt_name.focus();
-            return false;
-
-        }
-
-        if (receipt_number.val() == '') {
-
-            alert("항목을 입력하세요.");
-            receipt_number.focus();
-            return false;
-
-        }
-
-        f.order_receipt_name.value = receipt_name.val();
-        f.order_receipt_number.value = receipt_number.val();
-
-    } else {
-
-        f.order_receipt_name.value = "";
-        f.order_receipt_number.value = "";
-
-    }
-
     if (confirm("결제 하시겠습니까?")) {
 
      	f.action = order_pay_url;
@@ -1930,15 +1898,8 @@ function cartCouponUpdate()
     <td width="20"></td>
     <td><input type="text" name="order_dep_name" value="" class="input" style="width:92px;"></td>
     <td width="50"></td>
-    <td><img src="/moyeo/resources/resource/img/shop/order_receipt.gif"></td>
-    <td width="20"></td>
-    <td>
-<select id="order_receipt" name="order_receipt" onchange="orderReceipt(this.value);" class="select selectBox" style="display: none;">
-    <option value="0">신청안함</option>
-    <option value="1">개인소득공제</option>
-    <option value="2">사업자지출증빙</option>
-</select><a class="selectBox select selectBox-dropdown" style="display: inline-block;" title="" tabindex="0"><span class="selectBox-label">신청안함</span><span class="selectBox-arrow"></span></a>
-    </td>
+
+
 </tr>
 </tbody></table>
 </div>

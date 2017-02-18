@@ -398,4 +398,19 @@ public interface SixDAO {
 
 	//샵-문의글목록
 	public ArrayList<ProductQueDTO> queList(int product_num);
+	
+	//샵-문의글삭제
+	public void productQnaDelete(int que_num);
+
+	//샵-리뷰 수정 폼
+	public ProductCommentsDTO productReviewModify(int comments_num);
+
+	//샵-리뷰 수정 처리
+	public void productReviewModifyPro(ProductCommentsDTO dto);
+	
+	//샵-상품문의 수정 폼
+	public ProductQueDTO inquireModify(int que_num);
+	
+	//샵-상품문의 수정처리
+	public void inquireModifyPro(ProductQueDTO dto);
 }

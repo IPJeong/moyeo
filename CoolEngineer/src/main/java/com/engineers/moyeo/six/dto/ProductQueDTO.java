@@ -29,8 +29,11 @@ public class ProductQueDTO {
 	private String visible;
 	
 	//답변여부
-	private String asn_cnt;
+	private String ans_cnt;
 
+	//상품명
+	private String product_name;
+	
 	public int getQue_num() {
 		return que_num;
 	}
@@ -95,11 +98,20 @@ public class ProductQueDTO {
 		this.visible = visible;
 	}
 
-	public String getAsn_cnt() {
-		return asn_cnt;
+	public String getAns_cnt() {
+		return ans_cnt;
 	}
 
-	public void setAsn_cnt(String asn_cnt) {
-		this.asn_cnt = asn_cnt;
+	public void setAns_cnt(String ans_cnt) {
+		this.ans_cnt = ans_cnt;
 	}
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	
 }

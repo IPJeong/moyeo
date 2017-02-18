@@ -139,7 +139,22 @@ public interface SixService {
 	
 	//샵-상품문의 입력결과 처리
 	public void inquirePro(Model model);
-	
+
 	//샵-상품리뷰 삭제
 	public void productReviewDelete(Model model);
+	
+	//샵-상품문의 삭제
+	public void productQnaDelete(Model model);
+	
+	//샵-상품리뷰 수정폼
+	public void productReviewModify(Model model);
+	
+	//샵-상품리뷰 수정처리
+	public void productReviewModifyPro(Model model);
+	
+	//샵-상품문의 수정폼
+	public void inquireModify(Model model);
+	
+	//샵-상품문의 수정처리
+	public void inquireModifyPro(Model model);
 }

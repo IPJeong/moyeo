@@ -1104,6 +1104,38 @@ public class SixDAOImpl implements SixDAO{
 		
 		return dtos; 
 	}
+	
+	//샵-문의글삭제
+	public void productQnaDelete(int que_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.productQnaDelete(que_num);
+	}
 
+	//샵-리뷰 수정폼
+	public ProductCommentsDTO productReviewModify(int comments_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ProductCommentsDTO dto = dao.productReviewModify(comments_num);
+		
+		return dto;
+	}
+	
+	//샵-리뷰 수정 처리
+	public void productReviewModifyPro(ProductCommentsDTO dto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.productReviewModifyPro(dto);
+	}
+	
+	//샵-상품문의 수정 폼
+	public ProductQueDTO inquireModify(int que_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ProductQueDTO dto = dao.inquireModify(que_num);
 
+		return dto;
+	}
+	
+	//샵-상품문의 수정처리
+	public void inquireModifyPro(ProductQueDTO dto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.inquireModifyPro(dto);
+	}
 }

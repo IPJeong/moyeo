@@ -824,12 +824,13 @@ function shopNumberFormat(data)
 
 }
 
-function replyDelete(num){	
+//상품평삭제
+function replyDelete(num, product_num){	
 	var comments_num = num;
 	
     if (confirm("삭제하시겠습니까?")) {
 
-      window.location='productReviewDelete?comments_num='+comments_num; 
+      window.location='productReviewDelete?comments_num='+comments_num+'&product_num='+product_num; 
     }
 
 }
@@ -847,8 +848,25 @@ function replyView(reply_id){
     }
 }
 
-function qnaView(qna_id)
-{
+//상품문의 삭제
+function qnaDelete(que_num, product_num) {
+
+    if (confirm("삭제하시겠습니까?")) {
+
+    	window.location='productQnaDelete?que_num='+que_num+'&product_num='+product_num;
+        
+    }
+}
+
+
+//상품문의 조회조건
+function qnaView(qna_id, write_id, mem_id, visible) {
+	if(visible == 'no') {
+		if(write_id != mem_id) {
+			alert('작성자만 조회가능합니다.')
+			return false; 
+		}
+	}
 
     if ($("#qna_data .qna_"+qna_id).is(":hidden")) {
 
@@ -861,6 +879,19 @@ function qnaView(qna_id)
     }
 
 }
+
+
+function qnaLoading(item_id, page)
+{
+
+    $.post("./qna.php", {"item_id" : item_id, "page" : page}, function(data) {
+
+        $("#qna_data").html(data);
+
+    });
+
+}
+
 
 // 주문 수량
 function listOrderLimit(item_option_num, mode)
@@ -1706,11 +1737,11 @@ function orderCheck() {
 																<td width="200" height="40" bgcolor="#f4f4f4"
 																	onclick="shopMove('#item_reply'); return false;"
 																	class="tab_use4_off pointer"><a href="#item_reply"><font size="2" color="#656d78">상품평
-																		0</font></a></td>
+																		${reviewCnt}</font></a></td>
 																<td width="200" height="40" bgcolor="#f4f4f4"
 																	onclick="shopMove('#item_qna'); return false;"
 																	class="tab_use5_off pointer"><a href="#item_qna"><font size="2" color="#656d78">상품문의
-																		0</font></a>
+																		${queCnt}</font></a>
 																</td>
 															</tr>
 														</tbody>
@@ -1760,10 +1791,10 @@ function orderCheck() {
 																	class="tab_use3_off pointer"><a href="#item_refund"><font size="2" color="#656d78">환불규정</font></a></td>
 																<td width="200" height="40" bgcolor="#f4f4f4"
 																	onclick="shopMove('#item_reply'); return false;"
-																	class="tab_use4_off pointer"><a href="#item_reply"><font size="2" color="#656d78">상품평</font></a></td>
+																	class="tab_use4_off pointer"><a href="#item_reply"><font size="2" color="#656d78">상품평 ${reviewCnt}</font></a></td>
 																<td width="200" height="40" bgcolor="#f4f4f4"
 																	onclick="shopMove('#item_qna'); return false;"
-																	class="tab_use5_off pointer"><a href="#item_qna"><font size="2" color="#656d78">상품문의</font></a></td>
+																	class="tab_use5_off pointer"><a href="#item_qna"><font size="2" color="#656d78">상품문의 ${queCnt}</font></a></td>
 															</tr>
 														</tbody>
 													</table>
@@ -1979,10 +2010,10 @@ function orderCheck() {
 																	color="#ffffff">환불규정</font></a></td>
 																<td width="200" height="40" bgcolor="#f4f4f4"
 																	onclick="shopMove('#item_reply'); return false;"
-																	class="tab_use4_off pointer"><a href="#item_reply"><font size="2" color="#656d78">상품평</font></a></td>
+																	class="tab_use4_off pointer"><a href="#item_reply"><font size="2" color="#656d78">상품평 ${reviewCnt}</font></a></td>
 																<td width="200" height="40" bgcolor="#f4f4f4"
 																	onclick="shopMove('#item_qna'); return false;"
-																	class="tab_use5_off pointer"><a href="#item_qna"><font size="2" color="#656d78">상품문의</font></a></td>
+																	class="tab_use5_off pointer"><a href="#item_qna"><font size="2" color="#656d78">상품문의 ${queCnt}</font></a></td>
 															</tr>
 														</tbody>
 													</table>
@@ -2179,10 +2210,10 @@ function orderCheck() {
 																<td width="200" height="40" bgcolor="#383d41"
 																	onclick="shopMove('#item_reply'); return false;"
 																	class="tab_use4_on pointer"><a href="#item_reply"><font color="#ffffff"
-																	size="2">상품평</font></a></td>
+																	size="2">상품평 ${reviewCnt}</font></a></td>
 																<td width="200" height="40" bgcolor="#f4f4f4"
 																	onclick="shopMove('#item_qna'); return false;"
-																	class="tab_use5_off pointer"><a href="#item_qna"><font size="2" color="#656d78">상품문의</font></a></td>
+																	class="tab_use5_off pointer"><a href="#item_qna"><font size="2" color="#656d78">상품문의 ${queCnt}</font></a></td>
 															</tr>
 														</tbody>
 													</table>
@@ -2228,7 +2259,7 @@ function orderCheck() {
 																												<td><img
 																													src="/moyeo/resources/resource/img/shop/reply_title.gif"></td>
 																												<td width="4"></td>
-																												<td><span class="count down1">(0)</span></td>
+																												<td><span class="count down1">(${reviewCnt})</span></td>
 																											</tr>
 																										</tbody>
 																									</table>
@@ -2272,6 +2303,7 @@ function orderCheck() {
 			</table> 
 		</c:if>
 		<c:if test="${!empty dtos}">
+		<div id="que">
 		<c:forEach var="dto" items="${dtos}">
 		<table width="100%" border="0" cellspacing="0"
 			cellpadding="0"
@@ -2337,12 +2369,12 @@ function orderCheck() {
 												<tbody>
 													<tr>
 														<td><a href="#"
-															onclick="replyWrite('item', 'u', '8', '2', '1'); return false;"><img
+															onclick="window.open('productReviewModify?product_num=${dto.product_num}&comments_num=${dto.comments_num}&mem_id=${mem_id}&pic_path=${pic_dto.pic_path}&pic_name=${pic_dto.pic_name}','','menubar=no, toolbar=no, width=620, height=750, left=350, top=100');"><img
 																src="/moyeo/resources/resource/img/shop/reply_btn_edit.gif"
 																border="0"></a></td>
 														<td width="2"></td>
 														<td><a href="#"
-															onclick="replyDelete(${dto.comments_num}); return false;"><img
+															onclick="replyDelete('${dto.comments_num}', '${dto.product_num}'); return false;"><img
 																src="/moyeo/resources/resource/img/shop/reply_btn_delete.gif"
 																border="0"></a></td>
 														<td width="2"></td>
@@ -2418,6 +2450,7 @@ function orderCheck() {
 			</tbody>
 		</table>
 </c:forEach>
+</div>
 </c:if>
 
 
@@ -2475,11 +2508,11 @@ function orderCheck() {
 																	class="tab_use3_off pointer"><a href="#item_refund"><font size="2" color="#656d78">환불규정</font></a></td>
 																<td width="200" height="40" bgcolor="#f4f4f4"
 																	onclick="shopMove('#item_reply'); return false;"
-																	class="tab_use4_off pointer"><a href="#item_reply"><font size="2" color="#656d78">상품평</font></a></td>
+																	class="tab_use4_off pointer"><a href="#item_reply"><font size="2" color="#656d78">상품평 ${reviewCnt}</font></a></td>
 																<td width="200" height="40" bgcolor="#383d41"
 																	onclick="shopMove('#item_qna'); return false;"
 																	class="tab_use5_on pointer"><a href="#item_qna"><font color="#ffffff"
-																	size="2">상품문의</font></a></td>
+																	size="2">상품문의 ${queCnt}</font></a></td>
 															</tr>
 														</tbody>
 													</table>
@@ -2524,7 +2557,7 @@ function orderCheck() {
 																					<td><img
 																						src="/moyeo/resources/resource/img/shop/qna_title.gif"></td>
 																					<td width="4"></td>
-																					<td><span class="count down1">(0)</span></td>
+																					<td><span class="count down1">(${queCnt})</span></td>
 																				</tr>
 																			</tbody>
 																		</table>
@@ -2547,7 +2580,7 @@ function orderCheck() {
 														</table>
 
 
-														<div style="height:1px; width:100%; background:#efefef;" class="none">
+												<div style="height:1px; width:100%; background:#efefef;" class="none" id="que">
 
 													<c:if test="${empty que_dtos}">				
 														<table width="100%" border="0" cellspacing="0"
@@ -2570,7 +2603,7 @@ function orderCheck() {
 														<tr>
 															<td width="124" valign="top"><div
 																	style="padding: 14px 19px 0 19px;">
-																	<div class="smile${dto.asn_cnt}"></div>
+																	<div class="smile${dto.ans_cnt}"></div>
 																</div></td>
 															<td width="2" valign="top"><div
 																	style="margin-top: 10px;">
@@ -2584,12 +2617,22 @@ function orderCheck() {
 																		<tr>
 																			<td valign="top"><table width="100%"
 																					border="0" cellspacing="0"
-																					cellpadding="0" onclick="qnaView(${dto.que_num});"
-																					class="pointer">
+																					cellpadding="0" onclick="qnaView('${dto.que_num}', '${dto.mem_id}', '${mem_id}', '${dto.visible}');"
+																					class="pointer">  
 																					<tbody>
 																						<tr height="43">
-																							<td  style="text-align:left;"><span class="category">[${dto.que_type}]</span>
-																								<span class="title">${dto.que_title}</span></td>
+																							<td  style="text-align:left;"><a href="#" style="text-decoration:none;">
+																							
+																							<c:if test="${dto.mem_id == mem_id && dto.visible eq 'no'}">
+																								<img src="/moyeo/resources/resource/img/shop/secret2.gif" align="absmiddle">
+																							</c:if>
+																							
+																						    <c:if test="${dto.mem_id != mem_id && dto.visible eq 'no'}">
+																								<img src="/moyeo/resources/resource/img/shop/qna_secret.gif" align="absmiddle">
+																							</c:if>
+																							
+																							<span class="category">[${dto.que_type}]</span>
+																								<span class="title">${dto.que_title}</span></a></td>
 																						</tr>
 																					</tbody>
 																				</table>
@@ -2619,23 +2662,26 @@ function orderCheck() {
 																							</tr>
 																						</tbody>
 																					</table>
-																					<table border="0" cellspacing="0"
-																						cellpadding="0">
-																						<tbody>
-																							<tr>
-																								<td><a href="#"
-																									onclick="qnaWrite('item', 'u', '8', '3', '1'); return false;"><img
-																										src="/moyeo/resources/resource/img/shop/qna_btn_edit.gif"
-																										border="0"></a></td>
-																								<td width="2"></td>
-																								<td><a href="#"
-																									onclick="qnaDelete('item', 'd', '8', '3', '1'); return false;"><img
-																										src="/moyeo/resources/resource/img/shop/qna_btn_delete.gif"
-																										border="0"></a></td>
-																								<td width="2"></td>
-																							</tr>
-																						</tbody>
-																					</table>
+																					
+																					<c:if test="${dto.mem_id == mem_id}">
+																						<table border="0" cellspacing="0"
+																							cellpadding="0">
+																							<tbody>
+																								<tr>
+																									<td><a href="#"
+																										onclick="window.open('inquireModify?product_num=${dto.product_num}&que_num=${dto.que_num}&mem_id=${mem_id}&pic_path=${pic_dto.pic_path}&pic_name=${pic_dto.pic_name}','','menubar=no, toolbar=no, width=620, height=750, left=350, top=100')"><img
+																											src="/moyeo/resources/resource/img/shop/qna_btn_edit.gif"
+																											border="0"></a></td>
+																									<td width="2"></td>
+																									<td><a href="#"
+																										onclick="qnaDelete('${dto.que_num}', '${dto.product_num}'); return false;"><img
+																											src="/moyeo/resources/resource/img/shop/qna_btn_delete.gif"
+																											border="0"></a></td>
+																									<td width="2"></td>
+																								</tr>
+																							</tbody>
+																						</table>
+																					</c:if>
 																					<table width="100%" border="0"
 																						cellspacing="0" cellpadding="0">
 																						<tbody>
@@ -2711,6 +2757,10 @@ function orderCheck() {
 										</tbody>
 									</table>
 								</div>
+<script type="text/javascript">
+$(document).ready(function() { qnaLoading('8', '1'); });
+</script>
+
 
 
 								<!-- 상품문의 end //-->

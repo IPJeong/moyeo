@@ -602,7 +602,7 @@ public class SixController {
 		return "six/shop/buyResult";
 	}
 	
-	//샵-리뷰삭제
+	//샵-구매후기삭제
 	@RequestMapping("/shop/productReviewDelete")
 	public String productReviewDelete(HttpServletRequest req, Model model) {
 		System.out.println("/shop/productReviewDelete");
@@ -610,7 +610,63 @@ public class SixController {
 		model.addAttribute("req", req);
 		sixService.productReviewDelete(model);
 		
-		return "six/shop/productDetail";
+		return "six/shop/productReviewDelete";
 	}
+	
+	//샵-문의삭제
+	@RequestMapping("/shop/productQnaDelete")
+	public String productQnaDelete(HttpServletRequest req, Model model) {
+		System.out.println("/shop/productQnaDelete");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productQnaDelete(model);
+		
+		return "six/shop/productQnaDelete";
+	}
+	
+	//샵-구매후기 수정
+	@RequestMapping("/shop/productReviewModify")
+	public String productReviewModify(HttpServletRequest req, Model model) {
+		System.out.println("/shop/productReviewModify");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productReviewModify(model);
+		
+		return "six/shop/productReviewModify";
+	}
+	
+	//샵-구매후기 수정처리
+	@RequestMapping("/shop/productReviewModifyPro")
+	public String productReviewModifyPro(HttpServletRequest req, Model model) {
+		System.out.println("/shop/productReviewModifyPro");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.productReviewModifyPro(model);
+		
+		return "six/shop/productReviewModifyPro";
+	}
+	
+	//샵-상품문의 수정창
+	@RequestMapping("/shop/inquireModify")
+	public String inquireModify(HttpServletRequest req, Model model) {
+		System.out.println("/shop/inquireModify");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.inquireModify(model);
+		
+		return "six/shop/inquireModify";
+	}
+	
+	//샵-상품문의 수정처리
+	@RequestMapping("/shop/inquireModifyPro")
+	public String inquireModifyPro(HttpServletRequest req, Model model) {
+		System.out.println("/shop/inquireModifyPro");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.inquireModifyPro(model);
+		
+		return "six/shop/inquireModifyPro";
+	}
+
 }
 
