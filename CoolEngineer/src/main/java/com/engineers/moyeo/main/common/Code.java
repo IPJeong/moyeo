@@ -124,6 +124,8 @@ public interface Code {
 	public final static String seler_accepted = "06";
 	// 판매자 신청 거절
 	public final static String seler_refused = "15";
+	// 판매자 자격 박탈
+	public final static String seler_revoked = "20";
 	
 	// 예외 발생 메시지
 	// 숫자타입변환 예외 발생 메시지
