@@ -537,7 +537,7 @@ public class SixController {
 		return "six/shop/buy";
 	}
 	
-	//샵-구매처리
+	//샵-결제&구매처리
 	@RequestMapping("/shop/order")
 	public String order(HttpServletRequest req, Model model) {
 		System.out.println("/shop/order");
@@ -598,6 +598,7 @@ public class SixController {
 		System.out.println("/shop/buyResult");
 		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
 		model.addAttribute("req", req);
+		sixService.buyResult(model);
 		
 		return "six/shop/buyResult";
 	}

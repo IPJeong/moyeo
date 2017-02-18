@@ -594,12 +594,21 @@
 	
 	<!-- 추천모임리스트 -->
 	<select id="recommendMoim" parameterType="Map" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
-		SELECT * FROM group_list gl, main_picture mp WHERE (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' AND (group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2} AND group_location = #{group_location})) OR (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' AND (group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2})) OR (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' AND (group_location = #{group_location}))
+		SELECT * 
+		FROM group_list gl, main_picture mp 
+		WHERE (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' AND (group_inte1 = #{group_inte1} 
+		AND group_inte2 = #{group_inte2} AND group_location = #{group_location})) 
+		OR (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' 
+		AND (group_inte1 = #{group_inte1} AND group_inte2 = #{group_inte2})) 
+		OR (gl.group_num = mp.group_num AND mp.main_pic_path not like '%-' 
+		AND (group_location = #{group_location}))
 	</select>
 	
 	<!-- 인기모임 사진포함해서 불러오기 -->
 	<select id="hotMoimPic" parameterType="int" resultType="com.engineers.moyeo.six.dto.MoimOpenDTO">
-		SELECT * FROM group_list g, main_picture p WHERE g.group_num = #{group_num} AND g.group_num = p.group_num AND p.main_pic_path not like '%-'
+		SELECT * 
+		FROM group_list g, main_picture p 
+		WHERE g.group_num = #{group_num} AND g.group_num = p.group_num AND p.main_pic_path not like '%-'
 	</select>
 	
 	<!-- 판매자 등록여부 확인 -->
@@ -609,7 +618,8 @@
 	
 	<!-- 판매자등록 -->
 	<insert id="sellerRegisterPro" parameterType="com.engineers.moyeo.six.dto.SellerInfoDTO">
-		INSERT INTO seller_info (seller_id, tel, address, comp_name, bank, account_number, depositor, reason, reg_date, bc_path, bc_name, recognition) VALUES (#{seller_id}, #{tel}, #{address}, #{comp_name}, #{bank}, #{account_number}, #{depositor}, #{reason}, #{reg_date}, #{bc_path}, #{bc_name}, #{recognition})
+		INSERT INTO seller_info (seller_id, tel, address, comp_name, bank, account_number, depositor, reason, reg_date, bc_path, bc_name, recognition) 
+		VALUES (#{seller_id}, #{tel}, #{address}, #{comp_name}, #{bank}, #{account_number}, #{depositor}, #{reason}, #{reg_date}, #{bc_path}, #{bc_name}, #{recognition})
 	</insert>
 	
 	<!-- 회원리스트(아이디만) -->
@@ -634,17 +644,22 @@
 	
 	<!-- 샵-제품후기등록 -->
 	<insert id="productReviewPro" parameterType="com.engineers.moyeo.six.dto.ProductCommentsDTO" >
-		INSERT INTO product_comments (comments_num, comments_content, comments_date, star_points, product_num, mem_id, comments_title) VALUES (product_comments_seq.NEXTVAL, #{comments_content}, #{comments_date}, #{star_points}, #{product_num}, #{mem_id}, #{comments_title})
+		INSERT INTO product_comments (comments_num, comments_content, comments_date, star_points, product_num, mem_id, comments_title) 
+		VALUES (product_comments_seq.NEXTVAL, #{comments_content}, #{comments_date}, #{star_points}, #{product_num}, #{mem_id}, #{comments_title})
 	</insert>
 	
 	<!-- 샵-제품문의등록 -->
 	<insert id="inquirePro" parameterType="com.engineers.moyeo.six.dto.ProductQueDTO">
-		INSERT INTO product_que (que_num, que_title, que_content, que_date, mem_id, product_num, que_type, visible) VALUES (product_que_seq.NEXTVAL, #{que_title}, #{que_content}, #{que_date}, #{mem_id}, #{product_num}, #{que_type}, #{visible})	
+		INSERT INTO product_que (que_num, que_title, que_content, que_date, mem_id, product_num, que_type, visible) 
+		VALUES (product_que_seq.NEXTVAL, #{que_title}, #{que_content}, #{que_date}, #{mem_id}, #{product_num}, #{que_type}, #{visible})	
 	</insert>
 	
 	<!-- 샵-리뷰목록 -->
 	<select id="reviewList" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductCommentsDTO">
-		SELECT * FROM product_comments WHERE product_num = #{product_num} ORDER BY comments_num DESC
+		SELECT * 
+		FROM product_comments 
+		WHERE product_num = #{product_num} 
+		ORDER BY comments_num DESC
 	</select>
 	
 	<!-- 샵-리뷰삭제 -->
@@ -670,21 +685,61 @@ WHERE pq.que_num = pa.que_num(+) AND pq.product_num = #{product_num} ORDER BY qu
 	
 	<!-- 샵-리뷰수정폼 -->
 	<select id="productReviewModify" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductCommentsDTO">
-		SELECT pc.*, pi.product_name FROM product_comments pc, product_info pi WHERE pc.comments_num = #{comments_num} AND pc.product_num = pi.product_num
+		SELECT pc.*, pi.product_name FROM product_comments pc, product_info pi 
+		WHERE pc.comments_num = #{comments_num} AND pc.product_num = pi.product_num
 	</select>
 	
 	<!-- 샵-리뷰수정처리 -->
 	<update id="productReviewModifyPro" parameterType="com.engineers.moyeo.six.dto.ProductCommentsDTO">
-		UPDATE product_comments SET comments_content = #{comments_content}, comments_title = #{comments_title}, star_points = #{star_points} WHERE comments_num = #{comments_num}
+		UPDATE product_comments 
+		SET comments_content = #{comments_content}, comments_title = #{comments_title}, star_points = #{star_points} 
+		WHERE comments_num = #{comments_num}
 	</update>
 	
 	<!-- 샵-문의글 수정폼  -->
 	<select id="inquireModify" parameterType="int" resultType="com.engineers.moyeo.six.dto.ProductQueDTO"> 
-		SELECT pq.*, pi.product_name FROM product_que pq, product_info pi WHERE pq.que_num = #{que_num} AND pq.product_num = pi.product_num
+		SELECT pq.*, pi.product_name 
+		FROM product_que pq, product_info pi 
+		WHERE pq.que_num = #{que_num} AND pq.product_num = pi.product_num
 	</select>
 	
 	<!-- 샵-문의글 수정처리 -->
 	<update id="inquireModifyPro" parameterType="com.engineers.moyeo.six.dto.ProductQueDTO">
-		UPDATE product_que SET que_type = #{que_type}, que_title = #{que_title}, que_content = #{que_content}, visible = #{visible} WHERE que_num = #{que_num}
+		UPDATE product_que 
+		SET que_type = #{que_type}, que_title = #{que_title}, que_content = #{que_content}, visible = #{visible} 
+		WHERE que_num = #{que_num}
 	</update>	
+	
+	<!-- 샵-결제번호 구하기 -->
+	<select id="GetPaymentnum" resultType="int">
+		SELECT payment_list_seq.NEXTVAL FROM dual
+	</select>
+	
+	<!-- 샵-결제처리 -->
+	<insert id="Payment" parameterType="com.engineers.moyeo.six.dto.PaymentListDTO">
+		INSERT INTO payment_list (payment_num, receiver_name, address, tel1, tel2, delivery_request, payment_means, payment_amount, mem_id) 
+		VALUES (#{payment_num}, #{receiver_name}, #{address}, #{tel1}, #{tel2}, #{delivery_request}, #{payment_means}, #{payment_amount}, #{mem_id})
+	</insert>
+	
+	<!-- 샵-구매목록에 추가 -->
+	<insert id="Order" parameterType="com.engineers.moyeo.six.dto.OrderListDTO">
+		INSERT INTO order_list (order_num, order_date, order_qty, order_status, mem_id, product_num, payment_num)
+		VALUES (order_list_seq.NEXTVAL, #{order_date}, #{order_qty}, #{order_status}, #{mem_id}, #{product_num}, #{payment_num})
+	</insert>
+	
+	<!-- 샵-구매수량만큼 재고감소 -->
+	<update id="StockMinus" parameterType="map">
+		UPDATE product_info 
+		SET product_qty = product_qty-#{order_qty} 
+		WHERE product_num = #{product_num}
+	</update>
+	
+	<!-- 샵-주문확인 -->
+	<select id="buyResult" parameterType="int" resultType="com.engineers.moyeo.six.dto.PaymentListDTO">
+		SELECT pl.*, ol.product_num, ol.order_qty, pi.product_name, pp.pic_path, pp.pic_name 
+		FROM payment_list pl, order_list ol, product_info pi, product_pic pp 
+		WHERE pl.payment_num = ol.payment_num AND ol.product_num = pi.product_num 
+		AND pi.product_num = pp.product_num AND pl.payment_num = #{payment_num}
+	</select>
+		
 </mapper>

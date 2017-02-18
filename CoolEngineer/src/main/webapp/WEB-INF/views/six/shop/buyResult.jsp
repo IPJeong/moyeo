@@ -172,11 +172,65 @@ li {
 	src="/moyeo/resources/resource/js/demo_dashboard_x.js"></script> -->
 
 <script type="text/javascript">
+	window.onload= function() {
+		var p1 = parseInt(document.getElementById("p1").innerHTML);
+		var p2 = parseInt(document.getElementById("p2").innerHTML);
+		var p3 = parseInt(document.getElementById("p3").innerHTML);
+		var p4 = parseInt(document.getElementById("p4").innerHTML);
+		var p5 = parseInt(document.getElementById("p5").innerHTML);
+
+		document.getElementById("p1").innerHTML = shopNumberFormat(String(p1))
+				+ " 원";
+		document.getElementById("p2").innerHTML = shopNumberFormat(String(p2))
+				+ " 원";
+		document.getElementById("p3").innerHTML = shopNumberFormat(String(p3))
+				+ " 원";
+		document.getElementById("p4").innerHTML = shopNumberFormat(String(p4))
+				+ " 원";
+		document.getElementById("p5").innerHTML = shopNumberFormat(String(p5))
+				+ " 원";
+	}
+
 	function chk() {
 		if (document.guestListSearch.search_name.value.trim() == '') {
 			alert("공백은 검색할 수 없습니다.");
 			return false;
 		}
+	}
+
+	function shopNumberFormat(data) {
+
+		var tmp = '';
+		var number = '';
+		var cutlen = 3;
+		var comma = ',';
+		var i;
+
+		len = data.length;
+		mod = (len % cutlen);
+		k = cutlen - mod;
+
+		for (i = 0; i < data.length; i++) {
+
+			number = number + data.charAt(i);
+
+			if (i < data.length - 1) {
+
+				k++;
+
+				if ((k % cutlen) == 0) {
+
+					number = number + comma;
+					k = 0;
+
+				}
+
+			}
+
+		}
+
+		return number;
+
 	}
 </script>
 <!-- END TEMPLATE -->
@@ -216,59 +270,70 @@ li {
 
 						<!-- START PHOTO BLOCK -->
 						<div class="col-md-56" style="margin-top: 10px;">
-							<div class="panel panel-default" style="height:870px; width:1200px;">
+							<div class="panel panel-default"
+								style="height: 870px; width: 1200px;">
 								<div class="panel-heading">
 									<div class="panel-title-box">
 										<h3>Shop</h3>
 									</div>
 								</div>
-								<div class="" style="height:830px; width:1200px; overflow:auto; ">
+								<div class=""
+									style="height: 830px; width: 1200px; overflow: auto;">
 									<!-- 본문입력 -->
-									
-									
-									
-									
-									
-<script type="text/javascript" src="./js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="./js/jquery.cookie.js"></script>
-<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="./js/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="./js/jquery.jscrollpane.min.js"></script>
-<script type="text/javascript" src="./js/jquery.simpletip-1.3.1.min.js"></script>
-<script type="text/javascript" src="./js/jquery.selectBox.min.js"></script>
-<script type="text/javascript" src="./js/jcarousellite_1.0.1.min.js"></script>
-<script type="text/javascript" src="./js/jquery.banner.js"></script>
-<script type="text/javascript" src="./js/shop.js"></script>
-<script type="text/javascript" src="./js/showwindow.js"></script>
-<script type="text/javascript" src="./js/showwindow2.js"></script>
-<!--[if IE 6]>
+
+
+
+
+
+									<script type="text/javascript" src="./js/jquery-1.7.1.min.js"></script>
+									<script type="text/javascript" src="./js/jquery.cookie.js"></script>
+									<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+									<script type="text/javascript" src="./js/jquery.mousewheel.js"></script>
+									<script type="text/javascript"
+										src="./js/jquery.jscrollpane.min.js"></script>
+									<script type="text/javascript"
+										src="./js/jquery.simpletip-1.3.1.min.js"></script>
+									<script type="text/javascript"
+										src="./js/jquery.selectBox.min.js"></script>
+									<script type="text/javascript"
+										src="./js/jcarousellite_1.0.1.min.js"></script>
+									<script type="text/javascript" src="./js/jquery.banner.js"></script>
+									<script type="text/javascript" src="./js/shop.js"></script>
+									<script type="text/javascript" src="./js/showwindow.js"></script>
+									<script type="text/javascript" src="./js/showwindow2.js"></script>
+									<!--[if IE 6]>
 <script type="text/javascript" src="./js/DD_belatedPNG_0.0.8a-min.js"></script>
 <![endif]-->
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript">
-	Kakao.init('29856bc78cbfb5ed4f80bc189cb01054');
-	function kakaoLink() {
+									<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+									<script type="text/javascript">
+										Kakao
+												.init('29856bc78cbfb5ed4f80bc189cb01054');
+										function kakaoLink() {
 
-		var label = "";
-		var label_subject = $('meta[property="og:subject"]').attr('content');
-		var label_url = $('meta[property="og:url"]').attr('content');
+											var label = "";
+											var label_subject = $(
+													'meta[property="og:subject"]')
+													.attr('content');
+											var label_url = $(
+													'meta[property="og:url"]')
+													.attr('content');
 
-		if (label_subject) {
-			label += label_subject;
-		}
-		if (label_url) {
-			label += "\n" + label_url;
-		}
+											if (label_subject) {
+												label += label_subject;
+											}
+											if (label_url) {
+												label += "\n" + label_url;
+											}
 
-		Kakao.Link.sendTalkLink({
-			label : label,
-		});
+											Kakao.Link.sendTalkLink({
+												label : label,
+											});
 
-	}
-</script>
-</head>
-<body>
-	<style type="text/css">
+										}
+									</script>
+									</head>
+									<body>
+										<style type="text/css">
 body {
 	background-color: #ffffff;
 }
@@ -309,14 +374,19 @@ body {
 
 
 
-		<div class="layout_main">
+										<div class="layout_main">
 
-			<script type="text/javascript">
-				$('.layout_top_bg').css({
-					'height' : $('.layout_top').height() + 'px'
-				});
-			</script>
-			<style type="text/css">
+											<script type="text/javascript">
+												$('.layout_top_bg')
+														.css(
+																{
+																	'height' : $(
+																			'.layout_top')
+																			.height()
+																			+ 'px'
+																});
+											</script>
+											<style type="text/css">
 /* 분류 */
 .order_position .home {
 	line-height: 14px;
@@ -334,23 +404,27 @@ body {
 
 .order_top .bg {
 	height: 79px;
-	background: url('/moyeo/resources/resource/img/shop/top_bg.gif') repeat-x;
+	background: url('/moyeo/resources/resource/img/shop/top_bg.gif')
+		repeat-x;
 }
 
 .order_title .bg1 {
 	width: 2px;
 	height: 30px;
-	background: url('/moyeo/resources/resource/img/shop/title_bg1.gif') no-repeat;
+	background: url('/moyeo/resources/resource/img/shop/title_bg1.gif')
+		no-repeat;
 }
 
 .order_title .bg2 {
 	height: 30px;
-	background: url('/moyeo/resources/resource/img/shop/title_bg2.gif') repeat-x;
+	background: url('/moyeo/resources/resource/img/shop/title_bg2.gif')
+		repeat-x;
 }
 
 .order_title .bg3 {
 	width: 2px;
-	background: url('/moyeo/resources/resource/img/shop/title_bg3.gif') no-repeat;
+	background: url('/moyeo/resources/resource/img/shop/title_bg3.gif')
+		no-repeat;
 }
 
 .order_bank .t1 {
@@ -400,7 +474,8 @@ body {
 .order_bank .sms_bg {
 	width: 164px;
 	height: 154px;
-	background: url('/moyeo/resources/resource/img/shop/sms_bg.gif') no-repeat;
+	background: url('/moyeo/resources/resource/img/shop/sms_bg.gif')
+		no-repeat;
 }
 
 .order_bank .sms_bg textarea {
@@ -532,17 +607,20 @@ body {
 
 .order_bank_title .bg {
 	height: 35px;
-	background: url('/moyeo/resources/resource/img/shop/title_bg.gif') repeat-x;
+	background: url('/moyeo/resources/resource/img/shop/title_bg.gif')
+		repeat-x;
 }
 
 .order_addr_title .bg {
 	height: 35px;
-	background: url('/moyeo/resources/resource/img/shop/title_bg.gif') repeat-x;
+	background: url('/moyeo/resources/resource/img/shop/title_bg.gif')
+		repeat-x;
 }
 
 .order_pay_title .bg {
 	height: 35px;
-	background: url('/moyeo/resources/resource/img/shop/title_bg.gif') repeat-x;
+	background: url('/moyeo/resources/resource/img/shop/title_bg.gif')
+		repeat-x;
 }
 
 .order_addr .text {
@@ -555,7 +633,8 @@ body {
 .order_pay .pay_bg {
 	width: 250px;
 	height: 50px;
-	background: url('/moyeo/resources/resource/img/shop/pay_bg.gif') no-repeat;
+	background: url('/moyeo/resources/resource/img/shop/pay_bg.gif')
+		no-repeat;
 }
 
 .order_pay .money {
@@ -618,118 +697,1043 @@ body {
 }
 </style>
 
-			<script type="text/javascript" src="/moyeo/resources/resource/img/shop/order.js"></script>
+											<script type="text/javascript"
+												src="/moyeo/resources/resource/img/shop/order.js"></script>
 
-			<div id="order_ok_update" style="display: none;"></div>
+											<div id="order_ok_update" style="display: none;"></div>
 
-			<div style="border: 1px solid #efefef; background-color: #f7f7f7;">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0"
-					class="order_position">
-					<tbody>
-						<tr height="30">
-							<td width="10"></td>
-							<td>
-								<table border="0" cellspacing="0" cellpadding="0">
-									<tbody>
-										<tr>
-											<td><a href="" class="home">홈</a></td>
-											<td width="20" align="center"><img
-												src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td>
-											<td><span class="off">주문결과 확인</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</td>
-							<td width="10"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+											<div
+												style="border: 1px solid #efefef; background-color: #f7f7f7;">
+												<table width="100%" border="0" cellspacing="0"
+													cellpadding="0" class="order_position">
+													<tbody>
+														<tr height="30">
+															<td width="10"></td>
+															<td>
+																<table border="0" cellspacing="0" cellpadding="0">
+																	<tbody>
+																		<tr>
+																			<td><a href="" class="home">홈</a></td>
+																			<td width="20" align="center"><img
+																				src="/moyeo/resources/resource/img/shop/arrow.gif"
+																				class="up1"></td>
+																			<td><span class="off">주문결과 확인</span></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+															<td width="10"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="10">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr height="10">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
 
-			<table width="100%" border="0" cellspacing="0" cellpadding="0"
-				class="order_top">
-				<tbody>
-					<tr>
-						<td width="4"><img
-							src="/moyeo/resources/resource/img/shop/top_bg_side1.gif"></td>
-						<td width="599"><img
-							src="/moyeo/resources/resource/img/shop/top_bg_title2.gif"></td>
-						<td class="bg none">&nbsp;</td>
-						<td width="4"><img
-							src="/moyeo/resources/resource/img/shop/top_bg_side2.gif"></td>
-					</tr>
-				</tbody>
-			</table>
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0" class="order_top">
+												<tbody>
+													<tr>
+														<td width="4"><img
+															src="/moyeo/resources/resource/img/shop/top_bg_side1.gif"></td>
+														<td width="599"><img
+															src="/moyeo/resources/resource/img/shop/top_bg_title2.gif"></td>
+														<td class="bg none">&nbsp;</td>
+														<td width="4"><img
+															src="/moyeo/resources/resource/img/shop/top_bg_side2.gif"></td>
+													</tr>
+												</tbody>
+											</table>
 
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="50">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr height="50">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
 
-			<table border="0" cellspacing="0" cellpadding="0" class="auto" align="center">
-				<tbody>
-					<tr>
-						<td><img src="/moyeo/resources/resource/img/shop/order_msg5.gif"></td>
-					</tr>
-				</tbody>
-			</table>
+											<table border="0" cellspacing="0" cellpadding="0"
+												class="auto" align="center">
+												<tbody>
+													<tr>
+														<td><img
+															src="/moyeo/resources/resource/img/shop/order_msg5.gif"></td>
+													</tr>
+												</tbody>
+											</table>
 
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="50">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr height="50">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
 
-			<div style="height:1px; background:#efefef;" class="none">&nbsp;</div>
+											<div style="height: 1px; background: #efefef;" class="none">&nbsp;</div>
 
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="10">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr height="10">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
 
-			<!-- 무통장/가상계좌 start //-->
-			<table width="100%" border="0" cellspacing="0" cellpadding="0"
-				class="order_bank_title">
-				<tbody>
-					<tr>
-						<td width="5"><img
-							src="/moyeo/resources/resource/img/shop/title_side1.gif"></td>
-						<td class="bg" align="center"><img
-							src="/moyeo/resources/resource/img/shop/title_bank_5.gif"></td>
-						<td width="5"><img
-							src="/moyeo/resources/resource/img/shop/title_side2.gif"></td>
-					</tr>
-				</tbody>
-			</table>
+											<!-- 무통장/가상계좌 start //-->
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0" class="order_bank_title">
+												<tbody>
+													<tr>
+														<td width="5"><img
+															src="/moyeo/resources/resource/img/shop/title_side1.gif"></td>
+														<td class="bg" align="center"><img
+															src="/moyeo/resources/resource/img/shop/title_bank_5.gif"></td>
+														<td width="5"><img
+															src="/moyeo/resources/resource/img/shop/title_side2.gif"></td>
+													</tr>
+												</tbody>
+											</table>
 
 
-			<table width="100%" border="0" cellspacing="0" cellpadding="0"
-				class="order_bank">
-				<tbody>
-					<tr>
-						<td width="1" bgcolor="#d6d6d6"></td>
-						<td valign="top">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tbody>
-									<tr>
-										<td width="30"></td>
-										<td valign="top">
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0" class="order_bank">
+												<tbody>
+													<tr>
+														<td width="1" bgcolor="#d6d6d6"></td>
+														<td valign="top">
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0">
+																<tbody>
+																	<tr>
+																		<td width="30"></td>
+																		<td valign="top">
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="30">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<div style="height: 1px; background: #ebebeb;"
+																				class="none">&nbsp;</div>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="10"><img
+																							src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																						<td width="100"><img
+																							src="/moyeo/resources/resource/img/shop/order_bank_name.gif"></td>
+																						<td class="t1">신한은행</td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<div style="height: 1px; background: #ebebeb;"
+																				class="none">&nbsp;</div>
+
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="10"><img
+																							src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																						<td width="100"><img
+																							src="/moyeo/resources/resource/img/shop/order_bank_code.gif"></td>
+																						<td class="t1">752-436-739113</td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<div style="height: 1px; background: #ebebeb;"
+																				class="none">&nbsp;</div>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="10"><img
+																							src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																						<td width="100"><img
+																							src="/moyeo/resources/resource/img/shop/order_bank_holder.gif"></td>
+																						<td class="t1">양우진</td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<div style="height: 1px; background: #ebebeb;"
+																				class="none">&nbsp;</div>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="10"><img
+																							src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																						<td width="100"><img
+																							src="/moyeo/resources/resource/img/shop/order_dep_name2.gif"></td>
+																						<td class="t1">${dto.receiver_name}</td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="1" bgcolor="#ebebeb">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="10"><img
+																							src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																						<td width="100"><img
+																							src="/moyeo/resources/resource/img/shop/order_bank_pay_money.gif"></td>
+																						<td class="t2" id="p1">${dto.payment_amount}</td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<div style="height: 1px; background: #ebebeb;"
+																				class="none">&nbsp;</div>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="20">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="10">
+																						<td width="10"></td>
+																						<td class="t4">5일 이내, 미 입금시 본 주문건은 자동으로 취소
+																							됩니다.</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																		<td width="30"></td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0">
+																<tbody>
+																	<tr height="45">
+																		<td></td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<div style="height: 1px; background: #ebebeb;"
+																class="none">&nbsp;</div>
+
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0">
+																<tbody>
+																	<tr>
+																		<td height="20" bgcolor="#f7f7f7" class="none">&nbsp;</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0">
+																<tbody>
+																	<tr bgcolor="#f7f7f7">
+																		<td width="50"></td>
+																		<td valign="top">
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td><img
+																							src="/moyeo/resources/resource/img/shop/internet_bank.gif"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																		<td width="20"></td>
+																		<td width="1" bgcolor="#d9d9d9"></td>
+																		<td width="20"></td>
+																		<td valign="top">
+																			<table border="0" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="100"><a
+																							href="http://www.kbstar.com/" target="_blank"
+																							class="t5">KB국민은행</a></td>
+																						<td width="100"><a
+																							href="http://www.hanabank.com/" target="_blank"
+																							class="t5">하나은행</a></td>
+																						<td width="100"><a
+																							href="http://www.nonghyup.com/" target="_blank"
+																							class="t5">농협</a></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="3">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table border="0" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="100"><a
+																							href="http://www.wooribank.com/" target="_blank"
+																							class="t5">우리은행</a></td>
+																						<td width="100"><a
+																							href="http://www.keb.co.kr/" target="_blank"
+																							class="t5">외환은행</a></td>
+																						<td width="100"><a
+																							href="http://www.kfcc.co.kr/" target="_blank"
+																							class="t5">새마을금고</a></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="3">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table border="0" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="100"><a
+																							href="http://www.shinhan.com/" target="_blank"
+																							class="t5">신한은행</a></td>
+																						<td width="100"><a
+																							href="http://www.scfirstbank.com/"
+																							target="_blank" class="t5">SC제일은행</a></td>
+																						<td width="100"><a
+																							href="http://www.epostbank.go.kr/"
+																							target="_blank" class="t5">우체국</a></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="3">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table border="0" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="100"><a
+																							href="http://www.ibk.co.kr/" target="_blank"
+																							class="t5">기업은행</a></td>
+																						<td width="100"><a
+																							href="http://www.citibank.co.kr/" target="_blank"
+																							class="t5">씨티은행</a></td>
+																						<td width="100"><a
+																							href="http://www.kdb.co.kr/" target="_blank"
+																							class="t5">산업은행</a></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0">
+																<tbody>
+																	<tr>
+																		<td height="20" bgcolor="#f7f7f7" class="none">&nbsp;</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+														<td width="1" bgcolor="#d6d6d6"></td>
+													</tr>
+												</tbody>
+											</table>
+
+											<div style="height: 1px; background: #d6d6d6;" class="none">&nbsp;</div>
+
+											<!-- 무통장/가상계좌 end //-->
+
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr height="10">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+
+											<!-- 타이틀 start //-->
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0" class="order_title">
+												<tbody>
+													<tr>
+														<td class="bg1"></td>
+														<td class="bg2">
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0">
+																<tbody>
+																	<tr height="30">
+																		<td width="6"></td>
+																		<td align="center" width="680"><img
+																			src="/moyeo/resources/resource/img/shop/title_item2.gif"></td>
+																		<td width="1"></td>
+																		<td width="60" align="center"><img
+																			src="/moyeo/resources/resource/img/shop/title_limit.gif"></td>
+																		<td width="1"></td>
+																		<td width="90" align="center"><img
+																			src="/moyeo/resources/resource/img/shop/title_money.gif"></td>
+																		<td width="1"></td>
+																		<td width="90" align="center"><img
+																			src="/moyeo/resources/resource/img/shop/title_coupon.gif"></td>
+																		<td width="1"></td>
+																		<td width="90" align="center"><img
+																			src="/moyeo/resources/resource/img/shop/title_total.gif"></td>
+																		<td width="1"></td>
+																		<td width="90" align="center"><img
+																			src="/moyeo/resources/resource/img/shop/title_delivery.gif"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+														<td class="bg3"></td>
+													</tr>
+												</tbody>
+											</table>
+											<!-- 타이틀 end //-->
+
+											<!-- 리스트 start //-->
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0" class="order_list">
+												<colgroup>
+													<col width="6">
+													<col width="">
+													<col width="1">
+													<col width="60">
+													<col width="1">
+													<col width="110">
+													<col width="1">
+													<col width="90">
+													<col width="1">
+													<col width="90">
+													<col width="1">
+													<col width="90">
+												</colgroup>
+												<tbody>
+													<tr>
+														<td></td>
+														<td valign="top" style="padding: 15px 0 15px 0;">
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0">
+																<tbody>
+																	<tr>
+																		<td width="84" valign="top"><div
+																				style="border: 1px solid #e0e0e0;">
+																				<a
+																					href="productDetail?product_num=${dto.product_num}"><img
+																					src="${dto.pic_path}/${dto.pic_name}" width="82"
+																					height="82" border="0"></a>
+																			</div></td>
+																		<td width="15"></td>
+																		<td>
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td><a
+																							href="productDetail?product_num=${dto.product_num}"
+																							class="title">${dto.product_name}</a></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr height="8">
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table>
+
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td><a
+																							href="productDetail?product_num=${product_num}"
+																							target="_blank"><img
+																								src="/moyeo/resources/resource/img/shop/blank.gif"
+																								border="0"></a></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																		<td width="20"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+														<td class="line_h"></td>
+														<td class="limit" align="center">${dto.order_qty}</td>
+														<td class="line_h"></td>
+														<td class="money" id="p2" align="center">${dto.payment_amount-2500}</td>
+														<td class="line_h"></td>
+														<td align="center">
+															<table border="0" cellspacing="0" cellpadding="0"
+																class="auto">
+																<tbody>
+																	<tr>
+																		<td class="coupon">없음</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+														<td class="line_h"></td>
+														<td class="total" id="p3" align="center">${dto.payment_amount}</td>
+														<td class="line_h"></td>
+														<td class="money" align="center"><span
+															class="delivery2">2,500 원<br>묶음배송불가
+														</span></td>
+													</tr>
+													<tr>
+														<td colspan="12" class="line_w"></td>
+													</tr>
+												</tbody>
+											</table>
+											<!-- 리스트 end //-->
+
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr height="10">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr>
+														<td valign="top">
+															<!-- 배송지정보 start //-->
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0" class="order_addr_title">
+																<tbody>
+																	<tr>
+																		<td width="5"><img
+																			src="/moyeo/resources/resource/img/shop/title_side1.gif"></td>
+																		<td class="bg" align="center"><img
+																			src="/moyeo/resources/resource/img/shop/title_rec.gif"></td>
+																		<td width="5"><img
+																			src="/moyeo/resources/resource/img/shop/title_side2.gif"></td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0" class="order_addr">
+																<tbody>
+																	<tr height="310">
+																		<td width="1" bgcolor="#d6d6d6"></td>
+																		<td valign="top">
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="30"></td>
+																						<td valign="top">
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="30">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<div style="height: 1px; background: #ebebeb;"
+																								class="none">&nbsp;</div>
+
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr>
+																										<td width="10"><img
+																											src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																										<td width="100"><img
+																											src="/moyeo/resources/resource/img/shop/order_rec_name.gif"></td>
+																										<td class="text">${dto.receiver_name}</td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<div style="height: 1px; background: #ebebeb;"
+																								class="none">&nbsp;</div>
+
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr>
+																										<td width="10"><img
+																											src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																										<td width="100"><img
+																											src="/moyeo/resources/resource/img/shop/order_addr.gif"></td>
+																										<td class="text">${dto.address}</td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<div style="height: 1px; background: #ebebeb;"
+																								class="none">&nbsp;</div>
+
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr>
+																										<td width="10"><img
+																											src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																										<td width="100"><img
+																											src="/moyeo/resources/resource/img/shop/order_mobile.gif"></td>
+																										<td class="text">${dto.tel1}/ ${dto.tel2}</td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<div style="height: 1px; background: #ebebeb;"
+																								class="none">&nbsp;</div>
+
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr>
+																										<td width="10"><img
+																											src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
+																										<td width="100"><img
+																											src="/moyeo/resources/resource/img/shop/order_memo.gif"></td>
+																										<td class="text">${dto.delivery_request}</td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<div style="height: 1px; background: #ebebeb;"
+																								class="none">&nbsp;</div>
+
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="30">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+																						</td>
+																						<td width="30"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																		<td width="1" bgcolor="#d6d6d6"></td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<div style="height: 1px; background: #d6d6d6;"
+																class="none">&nbsp;</div>
+
+														</td>
+														<td width="2"></td>
+														<td width="314" valign="top">
+															<!-- 결제정보 start //-->
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0" class="order_pay_title">
+																<tbody>
+																	<tr>
+																		<td width="5"><img
+																			src="/moyeo/resources/resource/img/shop/title_side1.gif"></td>
+																		<td class="bg" align="center"><img
+																			src="/moyeo/resources/resource/img/shop/title_payment.gif"></td>
+																		<td width="5"><img
+																			src="/moyeo/resources/resource/img/shop/title_side2.gif"></td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<table width="100%" border="0" cellspacing="0"
+																cellpadding="0" class="order_pay">
+																<tbody>
+																	<tr height="310">
+																		<td width="1" bgcolor="#d6d6d6"></td>
+																		<td valign="top">
+																			<table width="100%" border="0" cellspacing="0"
+																				cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="32"></td>
+																						<td valign="top">
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="30">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr>
+																										<td><img
+																											src="/moyeo/resources/resource/img/shop/title_money_ok.gif"></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="250" border="0" cellspacing="0"
+																								cellpadding="0" class="pay_bg">
+																								<tbody>
+																									<tr>
+																										<td align="center"><span class="money"
+																											id="p4">${dto.payment_amount}</span></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<div style="border: 2px solid #d6d6d6;">
+																								<table width="100%" border="0" cellspacing="0"
+																									cellpadding="0">
+																									<tbody>
+																										<tr height="31">
+																											<td width="12" bgcolor="#f4f4f4"></td>
+																											<td width="73" bgcolor="#f4f4f4"
+																												class="title">상품금액</td>
+																											<td align="right" class="m1" id="p5">${dto.payment_amount - 2500}</td>
+																											<td width="10"></td>
+																										</tr>
+																										<tr>
+																											<td colspan="4" height="1" bgcolor="#d6d6d6"></td>
+																										</tr>
+																										<tr height="31">
+																											<td width="12" bgcolor="#f4f4f4"></td>
+																											<td width="73" bgcolor="#f4f4f4"
+																												class="title">배송비</td>
+																											<td align="right" class="m2">2,500 원</td>
+																											<td width="10"></td>
+																										</tr>
+																										<tr>
+																											<td colspan="4" height="1" bgcolor="#d6d6d6"></td>
+																										</tr>
+																										<tr height="31">
+																											<td width="12" bgcolor="#f4f4f4"></td>
+																											<td width="73" bgcolor="#f4f4f4"
+																												class="title">할인금액</td>
+																											<td align="right" class="m3">0 원</td>
+																											<td width="10"></td>
+																										</tr>
+																										<tr>
+																											<td colspan="4" height="1" bgcolor="#d6d6d6"></td>
+																										</tr>
+																										<tr height="31">
+																											<td width="12" bgcolor="#f4f4f4"></td>
+																											<td width="73" bgcolor="#f4f4f4"
+																												class="title">적립금 할인</td>
+																											<td align="right" class="m3">0 원</td>
+																											<td width="10"></td>
+																										</tr>
+																										<tr>
+																											<td colspan="4" height="1" bgcolor="#d6d6d6"></td>
+																										</tr>
+																									</tbody>
+																								</table>
+																							</div>
+
+																							<table width="100%" border="0" cellspacing="0"
+																								cellpadding="0">
+																								<tbody>
+																									<tr height="10">
+																										<td></td>
+																									</tr>
+																								</tbody>
+																							</table>
+
+																							<div style="border: 2px solid #cbd8e9;">
+																								<table width="100%" border="0" cellspacing="0"
+																									cellpadding="0">
+																									<tbody>
+																										<tr height="31">
+																											<td width="12" bgcolor="#dbeaff"></td>
+																											<td width="73" bgcolor="#dbeaff"
+																												class="title2">결제수단</td>
+																											<td bgcolor="#eff5ff" align="right"
+																												class="m4">${dto.payment_means}</td>
+																											<td width="10" bgcolor="#eff5ff"></td>
+																										</tr>
+																									</tbody>
+																								</table>
+																							</div>
+																						</td>
+																						<td width="32"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																		<td width="1" bgcolor="#d6d6d6"></td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<div style="height: 1px; background: #d6d6d6;"
+																class="none">&nbsp;</div>
+
+														</td>
+													</tr>
+												</tbody>
+											</table>
+
+											<table width="100%" border="0" cellspacing="0"
+												cellpadding="0">
+												<tbody>
+													<tr height="10">
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+
+											<div style="height: 2px; background: #6b6b6b;" class="none">&nbsp;</div>
+
+
 											<table width="100%" border="0" cellspacing="0"
 												cellpadding="0">
 												<tbody>
@@ -739,26 +1743,17 @@ body {
 												</tbody>
 											</table>
 
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
+											<table border="0" cellspacing="0" cellpadding="0"
+												class="auto" align="center">
 												<tbody>
 													<tr>
-														<td width="10"><img
-															src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-														<td width="100"><img
-															src="/moyeo/resources/resource/img/shop/order_bank_name.gif"></td>
-														<td class="t1">신한은행</td>
+														<td><a href="/moyeo/one/moyeoShop"><img
+																src="/moyeo/resources/resource/img/shop/home.gif"
+																border="0"></a></td>
+														<td width="5"></td>
+														<td><a href="/moyeo/three/myPage?location=myorder"><img
+																src="/moyeo/resources/resource/img/shop/mypage.gif"
+																border="0"></a></td>
 													</tr>
 												</tbody>
 											</table>
@@ -766,914 +1761,59 @@ body {
 											<table width="100%" border="0" cellspacing="0"
 												cellpadding="0">
 												<tbody>
-													<tr height="10">
+													<tr height="50">
 														<td></td>
 													</tr>
 												</tbody>
 											</table>
 
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
+											<table border="0" cellspacing="0" cellpadding="0"
+												align="center" class="auto order_help">
 												<tbody>
 													<tr>
-														<td width="10"><img
-															src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-														<td width="100"><img
-															src="/moyeo/resources/resource/img/shop/order_bank_code.gif"></td>
-														<td class="t1">752-436-739113</td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="10"><img
-															src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-														<td width="100"><img
-															src="/moyeo/resources/resource/img/shop/order_bank_holder.gif"></td>
-														<td class="t1">양우진</td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="10"><img
-															src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-														<td width="100"><img
-															src="/moyeo/resources/resource/img/shop/order_dep_name2.gif"></td>
-														<td class="t1">김대식</td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="1" bgcolor="#ebebeb">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="10"><img
-															src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-														<td width="100"><img
-															src="/moyeo/resources/resource/img/shop/order_bank_pay_money.gif"></td>
-														<td class="t2">3,500 원</td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="20">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="10">
-														<td width="10"></td>
-														<td class="t4">5일 이내, 미 입금시 본 주문건은 자동으로 취소 됩니다.</td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-										<td width="30"></td>
-									</tr>
-								</tbody>
-							</table>
-
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tbody>
-									<tr height="45">
-										<td></td>
-									</tr>
-								</tbody>
-							</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tbody>
-									<tr>
-										<td height="20" bgcolor="#f7f7f7" class="none">&nbsp;</td>
-									</tr>
-								</tbody>
-							</table>
-
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tbody>
-									<tr bgcolor="#f7f7f7">
-										<td width="50"></td>
-										<td valign="top">
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr>
-														<td><img
-															src="/moyeo/resources/resource/img/shop/internet_bank.gif"></td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-										<td width="20"></td>
-										<td width="1" bgcolor="#d9d9d9"></td>
-										<td width="20"></td>
-										<td valign="top">
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="100"><a href="http://www.kbstar.com/"
-															target="_blank" class="t5">KB국민은행</a></td>
-														<td width="100"><a href="http://www.hanabank.com/"
-															target="_blank" class="t5">하나은행</a></td>
-														<td width="100"><a href="http://www.nonghyup.com/"
-															target="_blank" class="t5">농협</a></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="3">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="100"><a href="http://www.wooribank.com/"
-															target="_blank" class="t5">우리은행</a></td>
-														<td width="100"><a href="http://www.keb.co.kr/"
-															target="_blank" class="t5">외환은행</a></td>
-														<td width="100"><a href="http://www.kfcc.co.kr/"
-															target="_blank" class="t5">새마을금고</a></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="3">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="100"><a href="http://www.shinhan.com/"
-															target="_blank" class="t5">신한은행</a></td>
-														<td width="100"><a href="http://www.scfirstbank.com/"
-															target="_blank" class="t5">SC제일은행</a></td>
-														<td width="100"><a href="http://www.epostbank.go.kr/"
-															target="_blank" class="t5">우체국</a></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="3">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="100"><a href="http://www.ibk.co.kr/"
-															target="_blank" class="t5">기업은행</a></td>
-														<td width="100"><a href="http://www.citibank.co.kr/"
-															target="_blank" class="t5">씨티은행</a></td>
-														<td width="100"><a href="http://www.kdb.co.kr/"
-															target="_blank" class="t5">산업은행</a></td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tbody>
-									<tr>
-										<td height="20" bgcolor="#f7f7f7" class="none">&nbsp;</td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-						<td width="1" bgcolor="#d6d6d6"></td>
-					</tr>
-				</tbody>
-			</table>
-
-			<div style="height:1px; background:#d6d6d6;" class="none">&nbsp;</div>
-
-			<!-- 무통장/가상계좌 end //-->
-
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="10">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
-
-			<!-- 타이틀 start //-->
-			<table width="100%" border="0" cellspacing="0" cellpadding="0"
-				class="order_title">
-				<tbody>
-					<tr>
-						<td class="bg1"></td>
-						<td class="bg2">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tbody>
-									<tr height="30">
-										<td width="6"></td>
-										<td align="center"><img
-											src="/moyeo/resources/resource/img/shop/title_item2.gif"></td>
-										<td width="1"></td>
-										<td width="60" align="center"><img
-											src="/moyeo/resources/resource/img/shop/title_limit.gif"></td>
-										<td width="1"></td>
-										<td width="90" align="center"><img
-											src="/moyeo/resources/resource/img/shop/title_money.gif"></td>
-										<td width="1"></td>
-										<td width="90" align="center"><img
-											src="/moyeo/resources/resource/img/shop/title_coupon.gif"></td>
-										<td width="1"></td>
-										<td width="90" align="center"><img
-											src="/moyeo/resources/resource/img/shop/title_total.gif"></td>
-										<td width="1"></td>
-										<td width="90" align="center"><img
-											src="/moyeo/resources/resource/img/shop/title_delivery.gif"></td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-						<td class="bg3"></td>
-					</tr>
-				</tbody>
-			</table>
-			<!-- 타이틀 end //-->
-
-			<!-- 리스트 start //-->
-			<table width="100%" border="0" cellspacing="0" cellpadding="0"
-				class="order_list">
-				<colgroup>
-					<col width="6">
-					<col width="">
-					<col width="1">
-					<col width="60">
-					<col width="1">
-					<col width="110">
-					<col width="1">
-					<col width="90">
-					<col width="1">
-					<col width="90">
-					<col width="1">
-					<col width="90">
-				</colgroup>
-				<tbody>
-					<tr>
-						<td></td>
-						<td valign="top" style="padding: 15px 0 15px 0;">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tbody>
-									<tr>
-										<td width="84" valign="top"><div
-												style="border: 1px solid #e0e0e0;">
-												<a href="http://dmshop.kr/item.php?id=Y848100408"><img
-													src="./data/thumb/item/82x82/1935647224_bcb14092_IMG_1674.jpg"
-													width="82" height="82" border="0"></a>
-											</div></td>
-										<td width="15"></td>
-										<td>
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr>
-														<td><a href="http://dmshop.kr/item.php?id=Y848100408"
-															class="title">소품 (갤러리 학습)</a></td>
-													</tr>
-												</tbody>
-											</table>
-
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr height="8">
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr>
-														<td><a href="http://dmshop.kr/item.php?id=Y848100408"
-															target="_blank"><img
-																src="/moyeo/resources/resource/img/shop/blank.gif" border="0"></a></td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-										<td width="20"></td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-						<td class="line_h"></td>
-						<td class="limit" align="center">1</td>
-						<td class="line_h"></td>
-						<td class="money" align="center">1,000 원</td>
-						<td class="line_h"></td>
-						<td align="center">
-							<table border="0" cellspacing="0" cellpadding="0" class="auto">
-								<tbody>
-									<tr>
-										<td class="coupon">없음</td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-						<td class="line_h"></td>
-						<td class="total" align="center">3,500 원</td>
-						<td class="line_h"></td>
-						<td class="money" align="center"><span class="delivery2">2,500
-								원<br>묶음배송불가
-						</span></td>
-					</tr>
-					<tr>
-						<td colspan="12" class="line_w"></td>
-					</tr>
-				</tbody>
-			</table>
-			<!-- 리스트 end //-->
-
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="10">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
-
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr>
-						<td valign="top">
-							<!-- 배송지정보 start //-->
-							<table width="100%" border="0" cellspacing="0" cellpadding="0"
-								class="order_addr_title">
-								<tbody>
-									<tr>
-										<td width="5"><img
-											src="/moyeo/resources/resource/img/shop/title_side1.gif"></td>
-										<td class="bg" align="center"><img
-											src="/moyeo/resources/resource/img/shop/title_rec.gif"></td>
-										<td width="5"><img
-											src="/moyeo/resources/resource/img/shop/title_side2.gif"></td>
-									</tr>
-								</tbody>
-							</table>
-
-							<table width="100%" border="0" cellspacing="0" cellpadding="0"
-								class="order_addr">
-								<tbody>
-									<tr height="310">
-										<td width="1" bgcolor="#d6d6d6"></td>
-										<td valign="top">
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="30"></td>
-														<td valign="top">
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="30">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr>
-																		<td width="10"><img
-																			src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-																		<td width="100"><img
-																			src="/moyeo/resources/resource/img/shop/order_rec_name.gif"></td>
-																		<td class="text">김대식</td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr>
-																		<td width="10"><img
-																			src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-																		<td width="100"><img
-																			src="/moyeo/resources/resource/img/shop/order_addr.gif"></td>
-																		<td class="text">(우:04991)서울특별시 광진구 능동로 210 (7호선
-																			어린이대공원역)<br>102
-																		</td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr>
-																		<td width="10"><img
-																			src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-																		<td width="100"><img
-																			src="/moyeo/resources/resource/img/shop/order_mobile.gif"></td>
-																		<td class="text">010-123-1231 / 031-123-123</td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr>
-																		<td width="10"><img
-																			src="/moyeo/resources/resource/img/shop/arrow4.gif"></td>
-																		<td width="100"><img
-																			src="/moyeo/resources/resource/img/shop/order_memo.gif"></td>
-																		<td class="text"></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-			<div style="height:1px; background:#ebebeb;" class="none">&nbsp;</div>
-
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="30">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>
-														<td width="30"></td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-										<td width="1" bgcolor="#d6d6d6"></td>
-									</tr>
-								</tbody>
-							</table>
-
-			<div style="height:1px; background:#d6d6d6;" class="none">&nbsp;</div>
-
-						</td>
-						<td width="2"></td>
-						<td width="314" valign="top">
-							<!-- 결제정보 start //-->
-							<table width="100%" border="0" cellspacing="0" cellpadding="0"
-								class="order_pay_title">
-								<tbody>
-									<tr>
-										<td width="5"><img
-											src="/moyeo/resources/resource/img/shop/title_side1.gif"></td>
-										<td class="bg" align="center"><img
-											src="/moyeo/resources/resource/img/shop/title_payment.gif"></td>
-										<td width="5"><img
-											src="/moyeo/resources/resource/img/shop/title_side2.gif"></td>
-									</tr>
-								</tbody>
-							</table>
-
-							<table width="100%" border="0" cellspacing="0" cellpadding="0"
-								class="order_pay">
-								<tbody>
-									<tr height="310">
-										<td width="1" bgcolor="#d6d6d6"></td>
-										<td valign="top">
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tbody>
-													<tr>
-														<td width="32"></td>
-														<td valign="top">
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="30">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr>
-																		<td><img
-																			src="/moyeo/resources/resource/img/shop/title_money_ok.gif"></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="250" border="0" cellspacing="0"
-																cellpadding="0" class="pay_bg">
-																<tbody>
-																	<tr>
-																		<td align="center"><span class="money">3,500
-																				원</span></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<div style="border: 2px solid #d6d6d6;">
-																<table width="100%" border="0" cellspacing="0"
-																	cellpadding="0">
+														<td>
+															<div
+																style="padding: 20px 68px; border: 1px solid #d6d6d6;">
+																<table border="0" cellspacing="0" cellpadding="0">
 																	<tbody>
-																		<tr height="31">
-																			<td width="12" bgcolor="#f4f4f4"></td>
-																			<td width="73" bgcolor="#f4f4f4" class="title">상품금액</td>
-																			<td align="right" class="m1">1,000 원</td>
-																			<td width="10"></td>
-																		</tr>
 																		<tr>
-																			<td colspan="4" height="1" bgcolor="#d6d6d6"></td>
-																		</tr>
-																		<tr height="31">
-																			<td width="12" bgcolor="#f4f4f4"></td>
-																			<td width="73" bgcolor="#f4f4f4" class="title">배송비</td>
-																			<td align="right" class="m2">2,500 원</td>
-																			<td width="10"></td>
-																		</tr>
-																		<tr>
-																			<td colspan="4" height="1" bgcolor="#d6d6d6"></td>
-																		</tr>
-																		<tr height="31">
-																			<td width="12" bgcolor="#f4f4f4"></td>
-																			<td width="73" bgcolor="#f4f4f4" class="title">할인금액</td>
-																			<td align="right" class="m3">0 원</td>
-																			<td width="10"></td>
-																		</tr>
-																		<tr>
-																			<td colspan="4" height="1" bgcolor="#d6d6d6"></td>
-																		</tr>
-																		<tr height="31">
-																			<td width="12" bgcolor="#f4f4f4"></td>
-																			<td width="73" bgcolor="#f4f4f4" class="title">적립금
-																				할인</td>
-																			<td align="right" class="m3">0 원</td>
-																			<td width="10"></td>
-																		</tr>
-																		<tr>
-																			<td colspan="4" height="1" bgcolor="#d6d6d6"></td>
+																			<td><img
+																				src="/moyeo/resources/resource/img/shop/dot.gif"
+																				class="up1"></td>
+																			<td width="5"></td>
+																			<td class="title">주문하신 상품은 마이페이지에서 확인/수정 하실 수
+																				있습니다.</td>
 																		</tr>
 																	</tbody>
 																</table>
-															</div>
 
-															<table width="100%" border="0" cellspacing="0"
-																cellpadding="0">
-																<tbody>
-																	<tr height="10">
-																		<td></td>
-																	</tr>
-																</tbody>
-															</table>
-
-															<div style="border: 2px solid #cbd8e9;">
-																<table width="100%" border="0" cellspacing="0"
-																	cellpadding="0">
-																	<tbody>
-																		<tr height="31">
-																			<td width="12" bgcolor="#dbeaff"></td>
-																			<td width="73" bgcolor="#dbeaff" class="title2">결제수단</td>
-																			<td bgcolor="#eff5ff" align="right" class="m4">무통장
-																				입금</td>
-																			<td width="10" bgcolor="#eff5ff"></td>
-																		</tr>
-																	</tbody>
-																</table>
 															</div>
 														</td>
-														<td width="32"></td>
 													</tr>
 												</tbody>
 											</table>
-										</td>
-										<td width="1" bgcolor="#d6d6d6"></td>
-									</tr>
-								</tbody>
-							</table>
 
-			<div style="height:1px; background:#d6d6d6;" class="none">&nbsp;</div>
-
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="10">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
-
-			<div style="height:2px; background:#6b6b6b;" class="none">&nbsp;</div>
+											<table border="0" cellspacing="0" cellpadding="0">
+												<tbody>
+													<tr>
+														<td height="50"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 
 
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="30">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
 
-			<table border="0" cellspacing="0" cellpadding="0" class="auto" align="center">
-				<tbody>
-					<tr>
-						<td><a href="/moyeo/one/moyeoShop"><img
-								src="/moyeo/resources/resource/img/shop/home.gif" border="0"></a></td>
-						<td width="5"></td>
-						<td><a href="/moyeo/three/myPage?location=myorder"><img
-								src="/moyeo/resources/resource/img/shop/mypage.gif" border="0"></a></td>
-					</tr>
-				</tbody>
-			</table>
 
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr height="50">
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
 
-			<table border="0" cellspacing="0" cellpadding="0" align="center"
-				class="auto order_help">
-				<tbody>
-					<tr>
-						<td>
-							<div style="padding: 20px 68px; border: 1px solid #d6d6d6;">
-								<table border="0" cellspacing="0" cellpadding="0">
-									<tbody>
-										<tr>
-											<td><img src="/moyeo/resources/resource/img/shop/dot.gif"
-												class="up1"></td>
-											<td width="5"></td>
-											<td class="title">주문하신 상품은 마이페이지에서 확인/수정 하실 수 있습니다.</td>
-										</tr>
-									</tbody>
-								</table>
 
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
 
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr>
-						<td height="50"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-			
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									<!-- 본문끝 -->					
+
+
+
+										<!-- 본문끝 -->
 								</div>
-	
+
 							</div>
 						</div>
 					</div>
@@ -1686,17 +1826,3 @@ body {
 	</div>
 
 	<%@ include file="../../etc/footer2.jsp"%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

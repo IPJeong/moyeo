@@ -1386,11 +1386,11 @@ function smsSelfSend(order_code)
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr height="30">
     <td width="6"></td>
-    <td align="center"><img src="/moyeo/resources/resource/img/shop/title_item.gif"></td>
+    <td align="center" width="517"><img src="/moyeo/resources/resource/img/shop/title_item.gif"></td>
     <td width="1"></td>
-    <td width="60" align="center"><img src="/moyeo/resources/resource/img/shop/title_limit.gif"></td>
+    <td width="59" align="center"><img src="/moyeo/resources/resource/img/shop/title_limit.gif"></td>
     <td width="1"></td>
-    <td width="90" align="center"><img src="/moyeo/resources/resource/img/shop/title_money.gif"></td>
+    <td width="109" align="center"><img src="/moyeo/resources/resource/img/shop/title_money.gif"></td>
     <td width="1"></td>
     <td width="90" align="center"><img src="/moyeo/resources/resource/img/shop/title_coupon.gif"></td>
     <td width="1"></td>
@@ -1493,7 +1493,7 @@ function cartCouponUpdate()
     <td class="line_h"></td>
     <td class="limit" align="center">${order_limit}</td>
     <td class="line_h"></td>
-    <td class="money" align="center"><span id="money2"></span> 원</td>
+    <td class="money" align="center" width="90px;"><span id="money2"></span> 원</td>
     <td class="line_h"></td>
     <td align="center">
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
@@ -1522,14 +1522,7 @@ function cartCouponUpdate()
 </tbody></table>
 <!-- 리스트 end //-->
 
-<table border="0" cellspacing="0" cellpadding="0" class="order_cart">
-<tbody><tr height="34">
-    <td width="10"></td>
-    <td><a href="http://dmshop.kr/cart.php"><img src="/moyeo/resources/resource/img/shop/cart.gif" border="0"></a></td>
-    <td width="10"></td>
-    <td class="title">주문상품의 변경과 쿠폰을 적용하고자 하신다면 장바구니로 돌아가 다시 진행하시기 바랍니다.</td>
-</tr>
-</tbody></table>
+
 
 <!-- 적립금사용 start //-->
 <!-- 적립금사용 end //-->
@@ -1853,19 +1846,19 @@ function cartCouponUpdate()
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><input type="radio" style="width:13px;" name="order_pay_type" value="1" class="radio" checked="" onclick="orderPayType(this.value);"></td>
+    <td><input type="radio" style="width:13px;" name="order_pay_type" value="신용카드" class="radio" checked="" onclick="orderPayType(this.value);"></td>
     <td width="5"></td>
     <td class="title">신용카드</td>
     <td width="15"></td>
-    <td><input type="radio" style="width:13px;" name="order_pay_type" value="2" class="radio" onclick="orderPayType(this.value);"></td>
+    <td><input type="radio" style="width:13px;" name="order_pay_type" value="실시간 계좌이체" class="radio" onclick="orderPayType(this.value);"></td>
     <td width="5"></td>
     <td class="title">실시간 계좌이체</td>
     <td width="15"></td>
-    <td><input type="radio" style="width:13px;" name="order_pay_type" value="3" class="radio" onclick="orderPayType(this.value);"></td>
+    <td><input type="radio" style="width:13px;" name="order_pay_type" value="휴대폰 결제" class="radio" onclick="orderPayType(this.value);"></td>
     <td width="5"></td>
     <td class="title">휴대폰 결제</td>
     <td width="15"></td>
-    <td><input type="radio" style="width:13px;" name="order_pay_type" value="5" class="radio" onclick="orderPayType(this.value);"></td>
+    <td><input type="radio" style="width:13px;" name="order_pay_type" value="무통장 입금" class="radio" onclick="orderPayType(this.value);"></td>
     <td width="5"></td>
     <td class="title">무통장 입금</td>
 </tr>
@@ -2192,7 +2185,7 @@ var order_coupon_cash = "";
 var total_money = parseInt(document.getElementById("total_money").value);
 
 
-var order_pay_url = "order?product_num=${product_num}&product_name=${product_name}&product_price=" + total_money;
+var order_pay_url = "order?product_num=${product_num}&product_name=${product_name}&product_price=" + total_money +"&cnt=${order_limit}";
 
 </script>
 

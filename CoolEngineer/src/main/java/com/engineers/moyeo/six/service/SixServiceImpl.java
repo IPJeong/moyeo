@@ -35,6 +35,8 @@ import com.engineers.moyeo.six.dto.MoimOpenDTO;
 import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.OrderListDTO;
+import com.engineers.moyeo.six.dto.PaymentListDTO;
 import com.engineers.moyeo.six.dto.ProductCommentsDTO;
 import com.engineers.moyeo.six.dto.ProductPicDTO;
 import com.engineers.moyeo.six.dto.ProductQueDTO;
@@ -1849,9 +1851,61 @@ public class SixServiceImpl implements SixService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 		
+		PaymentListDTO plDto = new PaymentListDTO();
+		OrderListDTO olDto = new OrderListDTO();
+
+		String address = "(우:"+ req.getParameter("order_rec_zip1")+")"
+				+ req.getParameter("order_rec_addr1") + " " 
+				+ req.getParameter("order_rec_addr2");
+		String hp = req.getParameter("order_rec_hp1") + "-" +
+					req.getParameter("order_rec_hp2") + "-" +
+					req.getParameter("order_rec_hp3");
+		String tel = req.getParameter("order_rec_tel1") + "-" +
+					req.getParameter("order_rec_tel2") + "-" + 
+					req.getParameter("order_rec_tel3");
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		int payment_num = sixDao.GetPaymentnum();
+		int order_qty = Integer.parseInt(req.getParameter("cnt"));
+		String delivery_request;
+		if(req.getParameter("order_memo").equals("")){
+			delivery_request= "없음";
+		} else {
+			delivery_request = req.getParameter("order_memo");
+		}
+		
+		//결제처리
+		System.out.println(payment_num);
+		plDto.setPayment_num(payment_num);
+		plDto.setReceiver_name(req.getParameter("order_rec_name"));
+		plDto.setAddress(address);
+		plDto.setTel1(hp);
+		plDto.setTel2(tel);
+		plDto.setDelivery_request(delivery_request);
+		plDto.setPayment_means(req.getParameter("order_pay_type"));
+		plDto.setPayment_amount(Integer.parseInt(req.getParameter("product_price")));
+		plDto.setMem_id(mem_id);
+		sixDao.Payment(plDto);
+		
+		//구매처리
+		olDto.setOrder_date(new Timestamp(System.currentTimeMillis()));
+		olDto.setOrder_qty(order_qty);
+		olDto.setOrder_status(Code.BEFORE_PAYMENT);
+		olDto.setMem_id(mem_id);
+		olDto.setProduct_num(Integer.parseInt(req.getParameter("product_num")));
+		olDto.setPayment_num(payment_num);
+		sixDao.Order(olDto);
+		
+		//재고감소
+		Map<String, Object> daoMap = new HashMap<>();
+		daoMap.put("product_num", product_num);
+		daoMap.put("order_qty", order_qty);
+		sixDao.StockMinus(daoMap);
+		
 		model.addAttribute("good_name", req.getParameter("product_name"));
 		model.addAttribute("good_mny", req.getParameter("product_price"));
-		model.addAttribute("product_num", req.getParameter("product_num"));
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("payment_num", payment_num);
 	}
 
 	//샵-상품평 입력창
@@ -2042,6 +2096,15 @@ public class SixServiceImpl implements SixService{
 		dto.setQue_num(que_num);
 		
 		sixDao.inquireModifyPro(dto);
+	}
+	
+	//샵-주문확인
+	public void buyResult(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		PaymentListDTO dto = sixDao.buyResult(Integer.parseInt(req.getParameter("payment_num")));
 		
+		model.addAttribute("dto", dto);
 	}
 }

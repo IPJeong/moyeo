@@ -18,6 +18,8 @@ import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.OrderListDTO;
+import com.engineers.moyeo.six.dto.PaymentListDTO;
 import com.engineers.moyeo.six.dto.ProductCommentsDTO;
 import com.engineers.moyeo.six.dto.ProductPicDTO;
 import com.engineers.moyeo.six.dto.ProductQueDTO;
@@ -413,4 +415,19 @@ public interface SixDAO {
 	
 	//샵-상품문의 수정처리
 	public void inquireModifyPro(ProductQueDTO dto);
+
+	//샵-결제번호 구하기
+	public int GetPaymentnum();
+	
+	//샵-결제처리
+	public void Payment(PaymentListDTO plDto);
+	
+	//샵-구매처리
+	public void Order(OrderListDTO olDto);
+	
+	//샵-구매로인한 재고감소
+	public void StockMinus(Map<String, Object> daoMap);
+	
+	//샵-주문확인
+	public PaymentListDTO buyResult(int payment_num);
 }

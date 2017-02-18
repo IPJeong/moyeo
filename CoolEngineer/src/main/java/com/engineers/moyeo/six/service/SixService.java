@@ -157,4 +157,7 @@ public interface SixService {
 	
 	//샵-상품문의 수정처리
 	public void inquireModifyPro(Model model);
+	
+	//샵-주문확인
+	public void buyResult(Model model);
 }

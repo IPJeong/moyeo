@@ -24,6 +24,8 @@ import com.engineers.moyeo.six.dto.MoimScheduleDTO;
 import com.engineers.moyeo.six.dto.MsgListDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.six.dto.NoticeDTO;
+import com.engineers.moyeo.six.dto.OrderListDTO;
+import com.engineers.moyeo.six.dto.PaymentListDTO;
 import com.engineers.moyeo.six.dto.ProductCommentsDTO;
 import com.engineers.moyeo.six.dto.ProductPicDTO;
 import com.engineers.moyeo.six.dto.ProductQueDTO;
@@ -1138,4 +1140,39 @@ public class SixDAOImpl implements SixDAO{
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
 		dao.inquireModifyPro(dto);
 	}
+	
+	//샵-결제번호 구하기
+	public int GetPaymentnum(){
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cnt = dao.GetPaymentnum();
+		
+		return cnt;
+	}
+	
+	//샵-결제처리
+	public void Payment(PaymentListDTO plDto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.Payment(plDto);
+	}
+	
+	//샵-구매처리
+	public void Order(OrderListDTO olDto) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.Order(olDto);
+	}
+	
+	//샵-구매로 인한 재고감소
+	public void StockMinus(Map<String, Object> daoMap) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		dao.StockMinus(daoMap);
+	}
+	
+	//샵-주문확인
+	public PaymentListDTO buyResult(int payment_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		PaymentListDTO dto = dao.buyResult(payment_num);
+		
+		return dto;
+	}
+
 }
