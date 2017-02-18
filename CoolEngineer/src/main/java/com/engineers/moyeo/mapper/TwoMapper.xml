@@ -1366,4 +1366,15 @@
 		       )
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
+	
+	<update id="revokeSellerRecognition" parameterType="Map">
+		UPDATE seller_info SET recognition = #{recognition} WHERE seller_id = #{seller_id}
+	</update>
+	
+	<update id="modifySellerInfo" parameterType="com.engineers.moyeo.six.dto.SellerInfoDTO">
+		UPDATE seller_info 
+		   SET address = #{address}, tel = #{tel}, comp_name = #{comp_name}, bank = #{bank}, account_number = #{account_number}, depositor = #{depositor}
+		WHERE seller_id = #{seller_id}
+	</update>
+
 </mapper>
