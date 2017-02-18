@@ -162,7 +162,7 @@
 						<div class="col-md-6"
 							style="margin: 0px; padding: 0px; padding-right: 2px; padding-bottom: 5px; border: 0px;">
 							<button type="button" class="btn btn-primary col-md-12"
-								id="chnInfo" style="width:300px;" onclick="window.location='productInsertForm'">제품등록</button>
+								id="chnInfo" style="width:300px;" onclick="window.location='/moyeo/two/sellerModifyForm?seller_id=${seller_id}'">정보수정</button>
 						</div>
 						
 					</div>
