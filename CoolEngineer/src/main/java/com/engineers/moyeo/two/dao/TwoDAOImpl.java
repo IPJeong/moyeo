@@ -14,6 +14,7 @@ import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.one.dto.ProductInfoDTO;
+import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
@@ -802,4 +803,21 @@ public class TwoDAOImpl implements TwoDAO{
 		dtos = dao.getProductSearchList(daoMap);
 		return dtos;
 	}
+
+	@Override
+	public int revokeSellerRecognition(Map<String, Object> daoMap) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.revokeSellerRecognition(daoMap);
+		return cnt;
+	}
+
+	@Override
+	public int modifySellerInfo(SellerInfoDTO dto) {
+		int cnt = 0;
+		TwoDAO dao = this.sqlSession.getMapper(TwoDAO.class);
+		cnt = dao.modifySellerInfo(dto);
+		return cnt;
+	}
+
 }

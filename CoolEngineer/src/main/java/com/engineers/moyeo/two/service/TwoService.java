@@ -56,4 +56,8 @@ public interface TwoService {
 	
 	public String productSearch(Model model); //상품 검색
 	public String productCategory(Model model); //상품 카테고리 선택
+	
+	public String sellerRevokePro(Model model); //판매자 자격박탈 처리
+	public String sellerModifyForm(Model model); //판매자 정보 수정 페이지
+	public String sellerModifyPro(Model model); //판매자 정보 수정 처리
 }

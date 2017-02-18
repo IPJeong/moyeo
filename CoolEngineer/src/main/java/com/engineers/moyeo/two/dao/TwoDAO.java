@@ -8,6 +8,7 @@ import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.four.dto.GreetingBoardDTO;
 import com.engineers.moyeo.four.dto.GroupNoticeDTO;
 import com.engineers.moyeo.one.dto.ProductInfoDTO;
+import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 import com.engineers.moyeo.three.dto.MemberDTO;
 import com.engineers.moyeo.two.dto.Join_requestDTO;
@@ -128,7 +129,12 @@ public interface TwoDAO {
 	public ArrayList<StatisticsDTO> getBestTenArticle(int group_num); //조회수가 높은 10개의 게시글 리스트를 순서대로 보여줌
 	public ArrayList<StatisticsDTO> getBestTenPresent(int group_num); //출석일수가 높은 10명의 모임원의 리스트를 순서대로 보여줌
 	
+	//상품 검색
 	public int getProductSearchCount(Map<String, Object> daoMap); //상품을 검색했을 때 나오는 상품수
 	public ArrayList<ProductInfoDTO> getProductSearchList(Map<String, Object> daoMap); //상품을 검색했을 때 나오는 상품들을 리스트로 보여줌
+	
+	//판매자 정보 수정&삭제
+	public int revokeSellerRecognition(Map<String, Object> daoMap); //판매자 자격 박탈
+	public int modifySellerInfo(SellerInfoDTO dto); //판매자 정보 수정
 	
 }

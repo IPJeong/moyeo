@@ -21,7 +21,9 @@ import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.main.service.MainService;
+import com.engineers.moyeo.one.dao.OneDAO;
 import com.engineers.moyeo.one.dto.ProductInfoDTO;
+import com.engineers.moyeo.one.dto.SellerInfoDTO;
 import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.MainPictureDTO;
 import com.engineers.moyeo.six.dto.MemberInfoDTO;
@@ -42,6 +44,9 @@ public class TwoServiceImpl implements TwoService{
 
 	@Autowired
 	MainService mainService;
+	
+	@Autowired
+	OneDAO oneDao;
 	
 	@Autowired
 	TwoDAO twoDao;
@@ -3434,6 +3439,99 @@ public class TwoServiceImpl implements TwoService{
 		model.addAttribute("view_page", "productCategory");
 		
 		return "one/shop/moyeoShop";
+	}
+
+	@Override
+	public String sellerRevokePro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int cnt = 0;
+		int chk_cnt =0;
+		String seller_id = req.getParameter("seller_id");
+		String recognition = Code.seler_revoked;
+		
+		chk_cnt = sixDao.sellerRegisterChk(req.getParameter("seller_id"));
+		
+		if(chk_cnt > 0) {
+			Map<String, Object> daoMap = new HashMap<String, Object>();
+			daoMap.put("seller_id", seller_id);
+			daoMap.put("recognition", recognition);
+			
+			cnt = twoDao.revokeSellerRecognition(daoMap);
+			
+			model.addAttribute("cnt", cnt);
+		}
+		
+		model.addAttribute("chk_cnt", chk_cnt);
+		
+		return "two/shop/sellerDeletePro";
+	}
+
+	@Override
+	public String sellerModifyForm(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		String seller_id = req.getParameter("seller_id");
+		
+		int chk_cnt = 0;
+		chk_cnt = sixDao.sellerRegisterChk(req.getParameter("seller_id"));
+		
+		if(chk_cnt > 0) {
+			SellerInfoDTO dto = oneDao.getSellerInformArticle(seller_id);
+			
+			model.addAttribute("dto", dto);
+			
+			return "two/shop/sellerModifyForm";
+		} else {
+			
+			model.addAttribute("chk_cnt", chk_cnt);
+
+			return "two/shop/sellerModifyPro";
+		}
+	}
+
+	@Override
+	public String sellerModifyPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+	
+		SellerInfoDTO dto = new SellerInfoDTO();
+		
+		String seller_id = req.getParameter("seller_id");
+		String address = req.getParameter("roadAddrPart1")+" "+req.getParameter("addrDetail");
+		String tel = req.getParameter("tel");
+		String comp_name = req.getParameter("comp_name");
+		String bank = req.getParameter("bank");
+		String account_number = req.getParameter("account_number");
+		String depositor = req.getParameter("depositor");
+		
+		System.out.println("seller_id : "+seller_id);
+		System.out.println("add : "+address);
+		System.out.println("tel : "+tel);
+		System.out.println("comp_name : "+comp_name);
+		System.out.println("bank : "+bank);
+		System.out.println("account_number : "+account_number);
+		System.out.println("depositor : "+depositor);
+		
+		dto.setSeller_id(seller_id);
+		dto.setAddress(address);
+		dto.setTel(tel);
+		dto.setComp_name(comp_name);
+		dto.setBank(bank);
+		dto.setAccount_number(account_number);
+		dto.setDepositor(depositor);
+
+		int chk_cnt = sixDao.sellerRegisterChk(req.getParameter("seller_id"));
+		int cnt = 0;
+		if(chk_cnt > 0) {
+			cnt = twoDao.modifySellerInfo(dto);
+		}
+		model.addAttribute("chk_cnt", chk_cnt);
+		model.addAttribute("cnt", cnt);
+		
+		return "two/shop/sellerModifyPro";
 	}
 
 }

@@ -509,4 +509,35 @@ public class TwoController {
 		viewPage = twoService.productCategory(model);
 		return viewPage;
 	}
+	
+	//판매자 자격박탈 처리
+	@RequestMapping("/sellerRevokePro")
+	public String sellerRevokePro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+					
+		model.addAttribute("req", req);
+		viewPage = twoService.sellerRevokePro(model);
+		return viewPage;
+	}
+	
+	//판매자 정보 수정 페이지
+	@RequestMapping("/sellerModifyForm")
+	public String sellerModifyForm(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+					
+		model.addAttribute("req", req);
+		viewPage = twoService.sellerModifyForm(model);
+		return viewPage;
+	}
+	
+	//판매자 정보 수정 처리
+	@RequestMapping("/sellerModifyPro")
+	public String sellerModifyPro(HttpServletRequest req, Model model) {
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+					
+		model.addAttribute("req", req);
+		viewPage = twoService.sellerModifyPro(model);
+		return viewPage;
+	}
+	
 }
