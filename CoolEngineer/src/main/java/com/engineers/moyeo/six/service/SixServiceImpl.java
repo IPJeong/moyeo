@@ -1811,13 +1811,28 @@ public class SixServiceImpl implements SixService{
 
 		
 		int product_num = Integer.parseInt(req.getParameter("product_num"));
-		
+		//상품정보
 		productInfoDTO dto =sixDao.productDetail(product_num);
-		ProductPicDTO pic_dto = sixDao.productPic(product_num);
-		
-		System.out.println(pic_dto.getPic_path());
+		ArrayList<ProductPicDTO> pic_dtos = sixDao.productPic(product_num);
+		ProductPicDTO pic_dto = pic_dtos.get(0);
+		ProductPicDTO pic_dto1 = pic_dtos.get(1);
 		model.addAttribute("dto", dto);
 		model.addAttribute("pic_dto", pic_dto);
+		model.addAttribute("pic_dto1", pic_dto1);
+		
+		//관련상품
+		Map<String, Object> relMap = new HashMap<>();
+		relMap.put("product_num", product_num);
+		relMap.put("start", 1);
+		relMap.put("end", 8);
+		ArrayList<productInfoDTO> rel_dtos_sub = sixDao.relative(relMap);
+		ArrayList<productInfoDTO> rel_dtos = new ArrayList<productInfoDTO>();
+		
+		for(int i=0; i<rel_dtos_sub.size(); i=i+2){
+			rel_dtos.add(rel_dtos_sub.get(i));
+		}
+		
+		model.addAttribute("rel_dtos", rel_dtos);
 		
 		//상품리뷰
 		ArrayList<ProductCommentsDTO> dtos = sixDao.reviewList(product_num);
@@ -2103,8 +2118,18 @@ public class SixServiceImpl implements SixService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
-		PaymentListDTO dto = sixDao.buyResult(Integer.parseInt(req.getParameter("payment_num")));
-		
+		ArrayList<PaymentListDTO> dtos = sixDao.buyResult(Integer.parseInt(req.getParameter("payment_num")));
+		PaymentListDTO dto = dtos.get(0);
 		model.addAttribute("dto", dto);
+	}
+	
+	//마이페이지-샵
+	public void myPage(Model model){
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		
 	}
 }

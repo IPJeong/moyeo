@@ -7,8 +7,11 @@ public class productInfoDTO {
 	int product_qty; /* 제품수량 */
 	String product_detail; /* 제품설명 */
 	String seller_id; /* 판매자아이디 */
-	String product_cat1;
-	String product_cat2;
+	String product_cat1; /*제품분류1*/
+	String product_cat2; /*제품분류2*/
+	String pic_name; /*제품사진이름*/
+	String pic_path; /*제품사진경로*/
+	
 	
 	public int getProduct_num() {
 		return product_num;
@@ -58,4 +61,17 @@ public class productInfoDTO {
 	public void setProduct_cat2(String product_cat2) {
 		this.product_cat2 = product_cat2;
 	}
+	public String getPic_name() {
+		return pic_name;
+	}
+	public void setPic_name(String pic_name) {
+		this.pic_name = pic_name;
+	}
+	public String getPic_path() {
+		return pic_path;
+	}
+	public void setPic_path(String pic_path) {
+		this.pic_path = pic_path;
+	}
+
 }

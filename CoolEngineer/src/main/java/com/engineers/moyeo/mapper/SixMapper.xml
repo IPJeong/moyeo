@@ -741,5 +741,14 @@ WHERE pq.que_num = pa.que_num(+) AND pq.product_num = #{product_num} ORDER BY qu
 		WHERE pl.payment_num = ol.payment_num AND ol.product_num = pi.product_num 
 		AND pi.product_num = pp.product_num AND pl.payment_num = #{payment_num}
 	</select>
+	
+	<!-- 샵-관련상품 -->
+	<select id="relative" parameterType="map" resultType="com.engineers.moyeo.four.dto.productInfoDTO">
+	SELECT * FROM (
+SELECT pi.*, pp.pic_name, pp.pic_path, rownum rnum FROM product_info pi, product_pic pp WHERE seller_id = 
+(SELECT seller_id FROM product_info WHERE product_num = #{product_num}) AND pi.product_num != #{product_num} AND pi.product_num = pp.product_num ORDER BY pi.product_num DESC)
+WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+	
+	</select>
 		
 </mapper>

@@ -785,15 +785,37 @@ li {
 	href="/moyeo/resources/resource/css/theme-default.css" />
 <!-- EOF CSS INCLUDE -->
 <script type="text/javascript">
-	window.onload = function() {
+window.onload = function() {
 		var p1 = parseInt(document.getElementById("item_money1").innerHTML);
 		var p2 = parseInt(document.getElementById("order_total_money_view").innerHTML);
 		var p3 = parseInt(document.getElementById("item_limit").innerHTML);	
 		var p4 = parseInt(document.getElementById("item_cash").innerHTML);
+		
 		document.getElementById("item_money1").innerHTML = shopNumberFormat(String(p1)) + " 원";
 		document.getElementById("order_total_money_view").innerHTML = shopNumberFormat(String(p2)) + " 원";
 		document.getElementById("item_limit").innerHTML = shopNumberFormat(String(p3)) + " 개";
 		document.getElementById("item_cash").innerHTML = shopNumberFormat(String(p4)) + " P";
+
+		if(document.getElementById("rel1").innerHTML != null) {
+			var p5 = parseInt(document.getElementById("rel1").innerHTML);
+			document.getElementById("rel1").innerHTML = shopNumberFormat(String(p5)) + " 원";
+					
+		}
+		if(document.getElementById("rel1").innerHTML != null) {
+			
+			var p6 = parseInt(document.getElementById("rel2").innerHTML);
+			document.getElementById("rel2").innerHTML = shopNumberFormat(String(p6)) + " 원";
+		}
+		if(document.getElementById("rel1").innerHTML != null) {
+			
+			var p7 = parseInt(document.getElementById("rel3").innerHTML);
+			document.getElementById("rel3").innerHTML = shopNumberFormat(String(p7)) + " 원";
+		}	
+		if(document.getElementById("rel1").innerHTML != null) {
+				
+			var p8 = parseInt(document.getElementById("rel4").innerHTML);
+			document.getElementById("rel4").innerHTML = shopNumberFormat(String(p8)) + " 원";
+		}
 	}
 
 	function shopNumberFormat(data) {
@@ -1263,12 +1285,15 @@ li {
 																<td width="360" valign="top">
 																	<!-- 상품 이미지 start //-->
 																	<table border="0" cellspacing="0" cellpadding="0"
-																		class="auto">
+																		class="auto">         
 																		<tbody>
 																			<tr width="360" height="366">
-																				<td align="center" valign="middle"><img
+																				<td align="center" valign="middle"><a href="#">
+																				<img
 																					src="${pic_dto.pic_path}/${pic_dto.pic_name}"
-																					width="360" height="366"></td>
+																					width="360" height="366" onclick="window.open('${pic_dto.pic_path}/${pic_dto.pic_name}')">
+																					</a>
+																				</td>
 																			</tr>
 																		</tbody>
 																	</table> <!-- 상품 이미지 end //-->
@@ -1427,7 +1452,21 @@ li {
 																												</td>
 																											</c:if>
 																											<c:if test="${dto.product_qty == 0}">
-																												<td><font color="red">일시품절</font></td>
+																												<td width="140"><font color="red">일시품절</font></td>
+																												<td align="right">
+																													<table border="0" cellspacing="0"
+																														cellpadding="0">
+																														<tbody>
+																															<tr>
+																																<td class="order_title2">금액 :</td>
+																																<td width="5"></td>
+																																<td class="item_total_" id="order_total_money_view">
+																																${dto.product_price}</td>
+																															</tr>
+																														</tbody>
+																													</table>
+																												</td>
+																											
 																											</c:if>
 																										</tr>
 																									</tbody>
@@ -1570,16 +1609,17 @@ li {
 																								style="visibility: visible; overflow: hidden; position: relative; z-index: 2; left: 0px; width: 700px;">
 																								<ul
 																									style="margin: 0px; padding: 0px; position: relative; list-style-type: none; z-index: 1; width: 700px; left: 0px;">
+																									<c:forEach var="rel_dto" items="${rel_dtos}" varStatus="status">
 																									<li
-																										style="overflow: hidden; float: left; width: 116px; height: 118px;"><div
+																										style="overflow: hidden; float: left; width: 116px; height: 122px;"><div
 																											style="width: 80px;">
 																											<table border="0" cellspacing="0"
 																												cellpadding="0">
 																												<tbody>
 																													<tr>
-																														<td><a href="#"><img
-																																src=/moyeo/resources/resource/img/shop/1935647224_397711a1_m07.jpg
-																																" width="80" height="80" border="0"></a></td>
+																														<td><a href="productDetail?product_num=${rel_dto.product_num}"><img
+																																src="${rel_dto.pic_path}/${rel_dto.pic_name}"
+																																 width="80" height="80" border="0"></a></td>
 																													</tr>
 																												</tbody>
 																											</table>
@@ -1595,8 +1635,8 @@ li {
 																												cellpadding="0">
 																												<tbody>
 																													<tr>
-																														<td><a href="#"
-																															class="item_relation_title">단가라 원피스</a></td>
+																														<td><a href="productDetail?product_num=${rel_dto.product_num}"
+																															class="item_relation_title">${rel_dto.product_name}</a></td>
 																													</tr>
 																												</tbody>
 																											</table>
@@ -1612,155 +1652,13 @@ li {
 																												cellpadding="0">
 																												<tbody>
 																													<tr>
-																														<td><span class="item_relation_money">25,000</span></td>
+																														<td><span class="item_relation_money" id="rel${status.count}">${rel_dto.product_price}</span></td>
 																													</tr>
 																												</tbody>
 																											</table>
 																										</div></li>
-																									<li
-																										style="overflow: hidden; float: left; width: 116px; height: 118px;"><div
-																											style="width: 80px;">
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><a href="#"><img
-																																src="/moyeo/resources/resource/img/shop/1935647224_188c59da_m06.jpg"
-																																width="80" height="80" border="0"></a></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td height="5"></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><a href="#"
-																															class="item_relation_title">땡땡이 블라우스</a></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td height="5"></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><span class="item_relation_money">15,800</span></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																										</div></li>
-																									<li
-																										style="overflow: hidden; float: left; width: 116px; height: 118px;"><div
-																											style="width: 80px;">
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><a href="#"><img
-																																src="/moyeo/resources/resource/img/shop/1935647224_03f68276_m05.jpg"
-																																width="80" height="80" border="0"></a></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td height="5"></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><a
-																															href="../../../item.php?id=N768748935"
-																															class="item_relation_title">리본블라우스</a></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td height="5"></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><span class="item_relation_money">20,000</span></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																										</div></li>
-																									<li
-																										style="overflow: hidden; float: left; width: 116px; height: 118px;"><div
-																											style="width: 80px;">
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><a href="#"><img
-																																src="/moyeo/resources/resource/img/shop/1935647224_4b57bae0_m04.jpg"
-																																width="80" height="80" border="0"></a></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td height="5"></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><a
-																															href="../../../item.php?id=O577892850"
-																															class="item_relation_title">검은치마</a></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td height="5"></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><span class="item_relation_money">6,000</span></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																										</div></li>
-																								</ul>
+																									</c:forEach>	
+																																																	</ul>
 																							</div></td>
 																						<td class="btn_next_out"></td>
 																					</tr>
@@ -1836,13 +1734,30 @@ li {
 													</table>
 
 													<!-- 상품 요약안내 start //-->
+													<br>
+													<table border="0" cellpadding="0" cellspacing="0">
+														<tbody>
+															<tr>
+																<td valign="top"><p
+																		style="text-align: left;  line-height: 16px; font-size: 12px; color: #878787; font-family: gulim, 굴림;">
+																		${dto.product_detail}</p></td>
+															</tr>
+														</tbody>
+													</table>
+																										<br>
+													
+													
+													
+													
 													<!-- 상품 요약안내 end //-->
 
 													<table width="100%" border="0" cellspacing="0"
 														cellpadding="0">
 														<tbody>
 															<tr height="150">
-																<td></td>
+																<td>
+																<img src="${pic_dto1.pic_path}/${pic_dto1.pic_name}" width="1000" height="1000">
+																</td>
 															</tr>
 														</tbody>
 													</table>

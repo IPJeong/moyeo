@@ -279,7 +279,7 @@ function orderOk(order_code)
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-<td width="10"></td><td><a href="#" class="home">홈</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><a href="#" class="off">마이페이지</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><a href="#" class="off">주문 내역</a></td></tr>
+<td width="10"></td><td><a class="home">홈</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><a class="off">마이페이지</a></td><td width="20" align="center"><img src="/moyeo/resources/resource/img/shop/arrow.gif" class="up1"></td><td><a class="off">주문 내역</a></td></tr>
 </tbody></table>
     </td>
 </tr>

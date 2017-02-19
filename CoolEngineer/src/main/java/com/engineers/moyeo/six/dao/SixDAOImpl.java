@@ -1062,11 +1062,11 @@ public class SixDAOImpl implements SixDAO{
 	}
 
 	//샵-제품사진
-	public ProductPicDTO productPic(int product_num) {
+	public ArrayList<ProductPicDTO> productPic(int product_num) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		ProductPicDTO dto = dao.productPic(product_num);
+		ArrayList<ProductPicDTO> dtos = dao.productPic(product_num);
 		
-		return dto;
+		return dtos;
 	}
 	
 	//샵-제품후기 등록
@@ -1168,11 +1168,20 @@ public class SixDAOImpl implements SixDAO{
 	}
 	
 	//샵-주문확인
-	public PaymentListDTO buyResult(int payment_num) {
+	public ArrayList<PaymentListDTO> buyResult(int payment_num) {
 		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
-		PaymentListDTO dto = dao.buyResult(payment_num);
+		ArrayList<PaymentListDTO> dto = dao.buyResult(payment_num);
 		
 		return dto;
 	}
+	
+	//샵-관련상품
+	public ArrayList<productInfoDTO> relative(Map<String, Object> map) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<productInfoDTO> dtos = dao.relative(map);
+	
+		return dtos;
+	}
+	
 
 }

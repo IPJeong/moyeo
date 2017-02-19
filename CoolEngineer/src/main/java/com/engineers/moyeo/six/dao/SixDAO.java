@@ -384,7 +384,7 @@ public interface SixDAO {
 	public productInfoDTO productDetail(int product_num);
 
 	//샵-제품사진
-	public ProductPicDTO productPic(int product_num);
+	public ArrayList<ProductPicDTO> productPic(int product_num);
 	
 	//샵-제품후기 등록
 	public int productReviewPro(ProductCommentsDTO dto);
@@ -429,5 +429,9 @@ public interface SixDAO {
 	public void StockMinus(Map<String, Object> daoMap);
 	
 	//샵-주문확인
-	public PaymentListDTO buyResult(int payment_num);
+	public ArrayList<PaymentListDTO> buyResult(int payment_num);
+	
+	//샵-관련상품
+	public ArrayList<productInfoDTO> relative(Map<String, Object> map);
+	
 }
