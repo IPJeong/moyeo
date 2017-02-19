@@ -179,10 +179,17 @@
 												</div>
 
 												<div class="form-group">
-													<label class="col-md-3 control-label">제품 사진</label>
+													<label class="col-md-3 control-label">제품 사진(메인)</label>
 													<div id="fileview">
 														<input type="file" class="fileinput btn-primary"
 															 name="files[0]" id="file0" title="Browse file" onchange="chkType('file0')" />
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label">제품 사진(상세)</label>
+													<div id="fileview2">
+														<input type="file" class="fileinput btn-primary"
+															 name="files[1]" id="file1" title="Browse file" onchange="chkType('file0')" />
 													</div>
 												</div>
 											</div>
