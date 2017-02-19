@@ -115,7 +115,7 @@
 														<div class="input-group">
 															<span class="input-group-addon"><span
 																class="fa fa-info-circle"></span></span>
-																 <input type="text" class="form-control" name="product_name"/>
+																 <input type="text" class="form-control" name="product_name" required/>
 														</div>
 													</div>
 												</div>
@@ -125,8 +125,7 @@
 													<div class="col-md-9 col-xs-12">
 														<div class="input-group">
 															<span class="input-group-addon"><span
-																class="fa fa-krw"></span></span> <input type="text"
-																class="form-control" name="product_price"/>
+																class="fa fa-krw"></span></span> <input type="number" class="form-control" name="product_price" min="10" required/>
 														</div>
 													
 													</div>
@@ -137,8 +136,7 @@
 													<div class="col-md-9 col-xs-12">
 														<div class="input-group">
 															<span class="input-group-addon"><span
-																class="fa fa-floppy-o"></span></span> <input type="number"
-																class="form-control" name="product_qty"/>
+																class="fa fa-floppy-o"></span></span> <input type="number" class="form-control" name="product_qty" min="1" required/>
 														</div>
 													
 													</div>
@@ -147,7 +145,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label">제품 설명</label>
 													<div class="col-md-9 col-xs-12">
-														<textarea class="form-control" rows="5" name="product_detail"></textarea>
+														<textarea class="form-control" rows="5" name="product_detail" required></textarea>
 													
 													</div>
 												</div>
@@ -182,14 +180,14 @@
 													<label class="col-md-3 control-label">제품 사진(메인)</label>
 													<div id="fileview">
 														<input type="file" class="fileinput btn-primary"
-															 name="files[0]" id="file0" title="Browse file" onchange="chkType('file0')" />
+															 name="files[0]" id="file0" title="Browse file" onchange="chkType('file0')" required/>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label">제품 사진(상세)</label>
 													<div id="fileview2">
 														<input type="file" class="fileinput btn-primary"
-															 name="files[1]" id="file1" title="Browse file" onchange="chkType('file0')" />
+															 name="files[1]" id="file1" title="Browse file" onchange="chkType('file0')" required/>
 													</div>
 												</div>
 											</div>
