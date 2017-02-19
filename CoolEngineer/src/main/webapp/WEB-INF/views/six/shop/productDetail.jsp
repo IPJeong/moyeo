@@ -785,36 +785,44 @@ li {
 	href="/moyeo/resources/resource/css/theme-default.css" />
 <!-- EOF CSS INCLUDE -->
 <script type="text/javascript">
-window.onload = function() {
+	window.onload = function() {
 		var p1 = parseInt(document.getElementById("item_money1").innerHTML);
 		var p2 = parseInt(document.getElementById("order_total_money_view").innerHTML);
-		var p3 = parseInt(document.getElementById("item_limit").innerHTML);	
+		var p3 = parseInt(document.getElementById("item_limit").innerHTML);
 		var p4 = parseInt(document.getElementById("item_cash").innerHTML);
-		
-		document.getElementById("item_money1").innerHTML = shopNumberFormat(String(p1)) + " 원";
-		document.getElementById("order_total_money_view").innerHTML = shopNumberFormat(String(p2)) + " 원";
-		document.getElementById("item_limit").innerHTML = shopNumberFormat(String(p3)) + " 개";
-		document.getElementById("item_cash").innerHTML = shopNumberFormat(String(p4)) + " P";
 
-		if(document.getElementById("rel1").innerHTML != null) {
+		document.getElementById("item_money1").innerHTML = shopNumberFormat(String(p1))
+				+ " 원";
+		document.getElementById("order_total_money_view").innerHTML = shopNumberFormat(String(p2))
+				+ " 원";
+		document.getElementById("item_limit").innerHTML = shopNumberFormat(String(p3))
+				+ " 개";
+		document.getElementById("item_cash").innerHTML = shopNumberFormat(String(p4))
+				+ " P";
+
+		if (document.getElementById("rel1").innerHTML != null) {
 			var p5 = parseInt(document.getElementById("rel1").innerHTML);
-			document.getElementById("rel1").innerHTML = shopNumberFormat(String(p5)) + " 원";
-					
+			document.getElementById("rel1").innerHTML = shopNumberFormat(String(p5))
+					+ " 원";
+
 		}
-		if(document.getElementById("rel2").innerHTML != null) {
-			
+		if (document.getElementById("rel2").innerHTML != null) {
+
 			var p6 = parseInt(document.getElementById("rel2").innerHTML);
-			document.getElementById("rel2").innerHTML = shopNumberFormat(String(p6)) + " 원";
+			document.getElementById("rel2").innerHTML = shopNumberFormat(String(p6))
+					+ " 원";
 		}
-		if(document.getElementById("rel3").innerHTML != null) {
-			
+		if (document.getElementById("rel3").innerHTML != null) {
+
 			var p7 = parseInt(document.getElementById("rel3").innerHTML);
-			document.getElementById("rel3").innerHTML = shopNumberFormat(String(p7)) + " 원";
-		}	
-		if(document.getElementById("rel4").innerHTML != null) {
-				
+			document.getElementById("rel3").innerHTML = shopNumberFormat(String(p7))
+					+ " 원";
+		}
+		if (document.getElementById("rel4").innerHTML != null) {
+
 			var p8 = parseInt(document.getElementById("rel4").innerHTML);
-			document.getElementById("rel4").innerHTML = shopNumberFormat(String(p8)) + " 원";
+			document.getElementById("rel4").innerHTML = shopNumberFormat(String(p8))
+					+ " 원";
 		}
 	}
 
@@ -889,18 +897,19 @@ window.onload = function() {
 		}
 	}
 
-	function replyLoading(item_id, page)
-	{
+	function replyLoading(item_id, page) {
 
-	    $.post("./reply.php", {"item_id" : item_id, "page" : page}, function(data) {
+		$.post("./reply.php", {
+			"item_id" : item_id,
+			"page" : page
+		}, function(data) {
 
-	        $("#reply_data").html(data);
+			$("#reply_data").html(data);
 
-	    });
+		});
 
 	}
-	
-	
+
 	//상품문의 조회조건
 	function qnaView(qna_id, write_id, mem_id, visible) {
 		if (visible == 'no') {
@@ -1052,7 +1061,8 @@ window.onload = function() {
 		}
 
 		document.getElementById("order_total_money").value = order_total_money;
-		document.getElementById("order_total_money_view").innerHTML = shopNumberFormat(String(order_total_money)) + " 원";
+		document.getElementById("order_total_money_view").innerHTML = shopNumberFormat(String(order_total_money))
+				+ " 원";
 
 	}
 </script>
@@ -1297,15 +1307,14 @@ window.onload = function() {
 																<td width="360" valign="top">
 																	<!-- 상품 이미지 start //-->
 																	<table border="0" cellspacing="0" cellpadding="0"
-																		class="auto">         
+																		class="auto">
 																		<tbody>
 																			<tr width="360" height="366">
 																				<td align="center" valign="middle"><a href="#">
-																				<img
-																					src="${pic_dto.pic_path}/${pic_dto.pic_name}"
-																					width="360" height="366" onclick="window.open('${pic_dto.pic_path}/${pic_dto.pic_name}')">
-																					</a>
-																				</td>
+																						<img src="${pic_dto.pic_path}/${pic_dto.pic_name}"
+																						width="360" height="366"
+																						onclick="window.open('${pic_dto.pic_path}/${pic_dto.pic_name}')">
+																				</a></td>
 																			</tr>
 																		</tbody>
 																	</table> <!-- 상품 이미지 end //-->
@@ -1351,16 +1360,16 @@ window.onload = function() {
 																				<td width="60" class="item_subtitle">판매가 :</td>
 																				<input type="hidden" id="item_money"
 																					value="${dto.product_price}">
-																				<td style="text-align: left;" class="item_money" id="item_money1">
-																					${dto.product_price}"
-																				</td>
+																				<td style="text-align: left;" class="item_money"
+																					id="item_money1">${dto.product_price}"</td>
 																			</tr>
 																			<tr height="1" bgcolor="#f4f4f4">
 																				<td colspan="2"></td>
 																			</tr>
 																			<tr height="30">
 																				<td width="60" class="item_subtitle">적립금 :</td>
-																				<td style="text-align: left;" class="item_cash" id="item_cash">${dto.product_price * 0.01}</td>
+																				<td style="text-align: left;" class="item_cash"
+																					id="item_cash">${dto.product_price * 0.01}</td>
 																			</tr>
 																		</tbody>
 																	</table>
@@ -1456,8 +1465,9 @@ window.onload = function() {
 																															<tr>
 																																<td class="order_title2">금액 :</td>
 																																<td width="5"></td>
-																																<td class="item_total_" id="order_total_money_view">
-																																${dto.product_price}</td>
+																																<td class="item_total_"
+																																	id="order_total_money_view">
+																																	${dto.product_price}</td>
 																															</tr>
 																														</tbody>
 																													</table>
@@ -1472,13 +1482,14 @@ window.onload = function() {
 																															<tr>
 																																<td class="order_title2">금액 :</td>
 																																<td width="5"></td>
-																																<td class="item_total_" id="order_total_money_view">
-																																${dto.product_price}</td>
+																																<td class="item_total_"
+																																	id="order_total_money_view">
+																																	${dto.product_price}</td>
 																															</tr>
 																														</tbody>
 																													</table>
 																												</td>
-																											
+
 																											</c:if>
 																										</tr>
 																									</tbody>
@@ -1621,56 +1632,61 @@ window.onload = function() {
 																								style="visibility: visible; overflow: hidden; position: relative; z-index: 2; left: 0px; width: 700px;">
 																								<ul
 																									style="margin: 0px; padding: 0px; position: relative; list-style-type: none; z-index: 1; width: 700px; left: 0px;">
-																									<c:forEach var="rel_dto" items="${rel_dtos}" varStatus="status">
-																									<li
-																										style="overflow: hidden; float: left; width: 116px; height: 122px;"><div
-																											style="width: 80px;">
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><a href="productDetail?product_num=${rel_dto.product_num}"><img
-																																src="${rel_dto.pic_path}/${rel_dto.pic_name}"
-																																 width="80" height="80" border="0"></a></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td height="5"></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><a href="productDetail?product_num=${rel_dto.product_num}"
-																															class="item_relation_title">${rel_dto.product_name}</a></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td height="5"></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																											<table border="0" cellspacing="0"
-																												cellpadding="0">
-																												<tbody>
-																													<tr>
-																														<td><span class="item_relation_money" id="rel${status.count}">${rel_dto.product_price}</span></td>
-																													</tr>
-																												</tbody>
-																											</table>
-																										</div></li>
-																									</c:forEach>	
-																																																	</ul>
+																									<c:forEach var="rel_dto" items="${rel_dtos}"
+																										varStatus="status">
+																										<li
+																											style="overflow: hidden; float: left; width: 116px; height: 122px;"><div
+																												style="width: 80px;">
+																												<table border="0" cellspacing="0"
+																													cellpadding="0">
+																													<tbody>
+																														<tr>
+																															<td><a
+																																href="productDetail?product_num=${rel_dto.product_num}"><img
+																																	src="${rel_dto.pic_path}/${rel_dto.pic_name}"
+																																	width="80" height="80" border="0"></a></td>
+																														</tr>
+																													</tbody>
+																												</table>
+																												<table border="0" cellspacing="0"
+																													cellpadding="0">
+																													<tbody>
+																														<tr>
+																															<td height="5"></td>
+																														</tr>
+																													</tbody>
+																												</table>
+																												<table border="0" cellspacing="0"
+																													cellpadding="0">
+																													<tbody>
+																														<tr>
+																															<td><a
+																																href="productDetail?product_num=${rel_dto.product_num}"
+																																class="item_relation_title">${rel_dto.product_name}</a></td>
+																														</tr>
+																													</tbody>
+																												</table>
+																												<table border="0" cellspacing="0"
+																													cellpadding="0">
+																													<tbody>
+																														<tr>
+																															<td height="5"></td>
+																														</tr>
+																													</tbody>
+																												</table>
+																												<table border="0" cellspacing="0"
+																													cellpadding="0">
+																													<tbody>
+																														<tr>
+																															<td><span
+																																class="item_relation_money"
+																																id="rel${status.count}">${rel_dto.product_price}</span></td>
+																														</tr>
+																													</tbody>
+																												</table>
+																											</div></li>
+																									</c:forEach>
+																								</ul>
 																							</div></td>
 																						<td class="btn_next_out"></td>
 																					</tr>
@@ -1751,25 +1767,25 @@ window.onload = function() {
 														<tbody>
 															<tr>
 																<td valign="top"><p
-																		style="text-align: left;  line-height: 16px; font-size: 12px; color: #878787; font-family: gulim, 굴림;">
+																		style="text-align: left; line-height: 16px; font-size: 12px; color: #878787; font-family: gulim, 굴림;">
 																		${dto.product_detail}</p></td>
 															</tr>
 														</tbody>
 													</table>
-																										<br>
-													
-													
-													
-													
+													<br>
+
+
+
+
 													<!-- 상품 요약안내 end //-->
 
 													<table width="100%" border="0" cellspacing="0"
 														cellpadding="0">
 														<tbody>
 															<tr height="150">
-																<td>
-																<img src="${pic_dto1.pic_path}/${pic_dto1.pic_name}" width="100%" height="1000">
-																</td>
+																<td><img
+																	src="${pic_dto1.pic_path}/${pic_dto1.pic_name}"
+																	width="100%" height="1000"></td>
 															</tr>
 														</tbody>
 													</table>
@@ -2573,7 +2589,7 @@ window.onload = function() {
 																	</tbody>
 
 
-<!-- 																	페이징처리구간
+																	<!-- 																	페이징처리구간
 
 																</table>
 																<table width="100%" border="0" cellspacing="0"
@@ -2669,7 +2685,7 @@ window.onload = function() {
 																	</tbody>
 																</table>
  -->
-																<!-- 페이징처리구간 -->
+																	<!-- 페이징처리구간 -->
 															</div>
 
 
@@ -2800,7 +2816,436 @@ window.onload = function() {
 																										</tr>
 																									</tbody>
 																								</table>
+<!-- 답변 없는 경우 예시 시작-->
+																								<table width="100%" border="0" cellspacing="0"
+																									cellpadding="0"
+																									onmouseover="this.style.backgroundColor='#ffffe5';"
+																									onmouseout="this.style.backgroundColor='#ffffff';"
+																									style="background-color: rgb(255, 255, 255);">
+																									<tbody>
+																										<tr>
+																											<td width="124" valign="top"><div
+																													class="item_qna"
+																													style="padding: 14px 19px 0 19px;">
+																													<div class="smile0"></div>
+																												</div></td>
+																											<td width="2" valign="top"><div
+																													style="margin-top: 10px;">
+																													<img
+																														src="/moyeo/resources/resource/img/shop/qna_line.gif">
+																												</div></td>
+																											<td width="20"></td>
+																											<td valign="top"><table width="100%"
+																													border="0" cellspacing="0" cellpadding="0">
+																													<tbody>
+																														<tr>
+																															<td valign="top"><table width="100%"
+																																	border="0" cellspacing="0"
+																																	cellpadding="0" onclick="qnaView('3');"
+																																	class="pointer">
+																																	<tbody>
+																																		<tr height="43">
+																																			<td style="text-align: left;"><span
+																																				class="category"
+																																				style="line-height: 14px; font-size: 12px; color: #999999; font-family: gulim, 굴림;">[요구사항변경]</span>
+																																				<span class="title">관리자가 답변달기
+																																					전</span></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<div class="qna_3">
+																																	<table width="100%" border="0"
+																																		cellspacing="0" cellpadding="0">
+																																		<tbody>
+																																			<tr height="10">
+																																				<td></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																	<table width="100%" border="0"
+																																		cellspacing="0" cellpadding="0">
+																																		<tbody>
+																																			<tr>
+																																				<td style="text-align: left;"><span
+																																					class="content">ㅈㄷㄹ</span></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																	<table width="100%" border="0"
+																																		cellspacing="0" cellpadding="0">
+																																		<tbody>
+																																			<tr height="10">
+																																				<td></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																	<table border="0" cellspacing="0"
+																																		cellpadding="0">
+																																		<tbody>
+																																			<tr>
+																																				<td><a href="#"
+																																					onclick="qnaWrite('item', '', '8', '3', '1'); return false;"><img
+																																						src="/moyeo/resources/resource/img/shop/qna_btn_reply2.gif"
+																																						border="0"></a></td>
+																																				<td width="2"></td>
+																																				<td><a href="#"
+																																					onclick="qnaWrite('item', 'u', '8', '3', '1'); return false;"><img
+																																						src="/moyeo/resources/resource/img/shop/qna_btn_edit2.gif"
+																																						border="0"></a></td>
+																																				<td width="2"></td>
+																																				<td><a href="#"
+																																					onclick="qnaDelete('item', 'd', '8', '3', '1'); return false;"><img
+																																						src="/moyeo/resources/resource/img/shop/qna_btn_delete2.gif"
+																																						border="0"></a></td>
+																																				<td width="2"></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																	<table width="100%" border="0"
+																																		cellspacing="0" cellpadding="0">
+																																		<tbody>
+																																			<tr height="15">
+																																				<td></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																</div></td>
+																															<td width="140" valign="top"><table
+																																	width="100%" border="0" cellspacing="0"
+																																	cellpadding="0">
+																																	<tbody>
+																																		<tr height="7">
+																																			<td></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<table width="100%" border="0"
+																																	cellspacing="0" cellpadding="0">
+																																	<tbody>
+																																		<tr>
+																																			<td style="text-align: left;"><span
+																																				class="name">회원명 : 관리자</span></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<table width="100%" border="0"
+																																	cellspacing="0" cellpadding="0">
+																																	<tbody>
+																																		<tr height="3">
+																																			<td></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<table width="100%" border="0"
+																																	cellspacing="0" cellpadding="0">
+																																	<tbody>
+																																		<tr>
+																																			<td style="text-align: left;"><span
+																																				class="name">작성일 : 2017-02-19</span></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<table width="100%" border="0"
+																																	cellspacing="0" cellpadding="0">
+																																	<tbody>
+																																		<tr height="5">
+																																			<td></td>
+																																		</tr>
+																																	</tbody>
+																																</table></td>
+																														</tr>
+																													</tbody>
+																												</table></td>
+																										</tr>
+																									</tbody>
+																								</table>
+																								<table width="100%" border="0" cellspacing="0"
+																									cellpadding="0">
+																									<tbody>
+																										<tr height="1" bgcolor="#efefef">
+																											<td></td>
+																										</tr>
+																									</tbody>
+																								</table>
+
+<!-- 답변 없는 경우 예시 끝 -->
+
+<!-- 답변 있는 경우 예시 시작 -->
+																								<table width="100%" border="0" cellspacing="0"
+																									cellpadding="0"
+																									onmouseover="this.style.backgroundColor='#ffffe5';"
+																									onmouseout="this.style.backgroundColor='#ffffff';"
+																									style="background-color: rgb(255, 255, 255);">
+																									<tbody>
+																										<tr>
+																											<td width="124" valign="top"><div
+																													class="item_qna"
+																													style="padding: 14px 19px 0 19px;">
+																													<div class="smile1"></div>
+																												</div></td>
+																											<td width="2" valign="top"><div
+																													style="margin-top: 10px;">
+																													<img
+																														src="/moyeo/resources/resource/img/shop/qna_line.gif">
+																												</div></td>
+																											<td width="20"></td>
+																											<td valign="top"><table width="100%"
+																													border="0" cellspacing="0" cellpadding="0">
+																													<tbody>
+																														<tr>
+																															<td valign="top"><table width="100%"
+																																	border="0" cellspacing="0"
+																																	cellpadding="0" onclick="qnaView('1');"
+																																	class="pointer">
+																																	<tbody>
+																																		<tr height="43">
+																																			<td style="text-align: left;"><span
+																																				class="category"
+																																				style="line-height: 14px; font-size: 12px; color: #999999; font-family: gulim, 굴림;">[배송]</span>
+																																				<span class="title">관리자가 답변 단
+																																					후</span> <span class="count">(1)</span></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<div class="qna_1">
+																																	<table width="100%" border="0"
+																																		cellspacing="0" cellpadding="0">
+																																		<tbody>
+																																			<tr height="10">
+																																				<td></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																	<table width="100%" border="0"
+																																		cellspacing="0" cellpadding="0">
+																																		<tbody>
+																																			<tr>
+																																				<td style="text-align: left;"><span
+																																					class="content">123</span></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																	<table width="100%" border="0"
+																																		cellspacing="0" cellpadding="0">
+																																		<tbody>
+																																			<tr height="10">
+																																				<td></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																	<table border="0" cellspacing="0"
+																																		cellpadding="0">
+																																		<tbody>
+																																			<tr>
+																																				<td><a href="#"
+																																					onclick="qnaWrite('item', 'u', '8', '1', '1'); return false;"><img
+																																						src="/moyeo/resources/resource/img/shop/qna_btn_edit2.gif"
+																																						border="0"></a></td>
+																																				<td width="2"></td>
+																																				<td><a href="#"
+																																					onclick="qnaDelete('item', 'd', '8', '1', '1'); return false;"><img
+																																						src="/moyeo/resources/resource/img/shop/qna_btn_delete2.gif"
+																																						border="0"></a></td>
+																																				<td width="2"></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																	<table width="100%" border="0"
+																																		cellspacing="0" cellpadding="0">
+																																		<tbody>
+																																			<tr height="15">
+																																				<td></td>
+																																			</tr>
+																																		</tbody>
+																																	</table>
+																																</div></td>
+																															<td width="140" valign="top"><table
+																																	width="100%" border="0" cellspacing="0"
+																																	cellpadding="0">
+																																	<tbody>
+																																		<tr height="7">
+																																			<td></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<table width="100%" border="0"
+																																	cellspacing="0" cellpadding="0">
+																																	<tbody>
+																																		<tr>
+																																			<td style="text-align: left;"><span
+																																				class="name">회원명 : 홍길동</span></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<table width="100%" border="0"
+																																	cellspacing="0" cellpadding="0">
+																																	<tbody>
+																																		<tr height="3">
+																																			<td></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<table width="100%" border="0"
+																																	cellspacing="0" cellpadding="0">
+																																	<tbody>
+																																		<tr>
+																																			<td style="text-align: left;"><span
+																																				class="name">작성일 : 2017-02-19</span></td>
+																																		</tr>
+																																	</tbody>
+																																</table>
+																																<table width="100%" border="0"
+																																	cellspacing="0" cellpadding="0">
+																																	<tbody>
+																																		<tr height="5">
+																																			<td></td>
+																																		</tr>
+																																	</tbody>
+																																</table></td>
+																														</tr>
+																													</tbody>
+																												</table></td>
+																										</tr>
+																									</tbody>
+																								</table>
+																								<div class="qna_1">
+																									<table width="100%" border="0" cellspacing="0"
+																										cellpadding="0">
+																										<tbody>
+																											<tr>
+																												<td width="124" valign="top"></td>
+																												<td width="2" valign="top"></td>
+																												<td width="20"></td>
+																												<td valign="top"><div
+																														style="border: 1px solid rgb(239, 239, 239); padding: 15px 10px; background-color: rgb(255, 255, 255);"
+																														onmouseover="this.style.backgroundColor='#f0f5f6';"
+																														onmouseout="this.style.backgroundColor='#ffffff';">
+																														<table width="100%" border="0"
+																															cellspacing="0" cellpadding="0">
+																															<tbody>
+																																<tr>
+																																	<td valign="top"><table
+																																			width="100%" border="0"
+																																			cellspacing="0" cellpadding="0">
+																																			<tbody>
+																																				<tr>
+																																					<td style="text-align: left;"><span
+																																						class="title">좋아요</span></td>
+																																				</tr>
+																																			</tbody>
+																																		</table>
+																																		<table width="100%" border="0"
+																																			cellspacing="0" cellpadding="0">
+																																			<tbody>
+																																				<tr height="10">
+																																					<td></td>
+																																				</tr>
+																																			</tbody>
+																																		</table>
+																																		<table width="100%" border="0"
+																																			cellspacing="0" cellpadding="0">
+																																			<tbody>
+																																				<tr>
+																																					<td style="text-align: left;"><span
+																																						class="content">굿</span></td>
+																																				</tr>
+																																			</tbody>
+																																		</table>
+																																		<table width="100%" border="0"
+																																			cellspacing="0" cellpadding="0">
+																																			<tbody>
+																																				<tr height="10">
+																																					<td></td>
+																																				</tr>
+																																			</tbody>
+																																		</table>
+																																		<table border="0" cellspacing="0"
+																																			cellpadding="0">
+																																			<tbody>
+																																				<tr>
+																																					<td><a href="#"
+																																						onclick="qnaWrite('item', 'u', '8', '2', '1'); return false;"><img
+																																							src="/moyeo/resources/resource/img/shop/qna_btn_edit2.gif"
+																																							border="0"></a></td>
+																																					<td width="2"></td>
+																																					<td><a href="#"
+																																						onclick="qnaDelete('item', 'd', '8', '2', '1'); return false;"><img
+																																							src="/moyeo/resources/resource/img/shop/qna_btn_delete2.gif"
+																																							border="0"></a></td>
+																																					<td width="2"></td>
+																																				</tr>
+																																			</tbody>
+																																		</table>
+																																	<td width="140" valign="top"><table
+																																			width="100%" border="0"
+																																			cellspacing="0" cellpadding="0">
+																																			<tbody>
+																																				<tr height="10">
+																																					<td></td>
+																																				</tr>
+																																			</tbody>
+																																		</table>
+																																		<table width="100%" border="0"
+																																			cellspacing="0" cellpadding="0">
+																																			<tbody>
+																																				<tr>
+																																					<td style="text-align: left;"><span
+																																						class="name">답변자 : 관리자</span></td>
+																																				</tr>
+																																			</tbody>
+																																		</table>
+																																		<table width="100%" border="0"
+																																			cellspacing="0" cellpadding="0">
+																																			<tbody>
+																																				<tr height="3">
+																																					<td></td>
+																																				</tr>
+																																			</tbody>
+																																		</table>
+																																		<table width="100%" border="0"
+																																			cellspacing="0" cellpadding="0">
+																																			<tbody>
+																																				<tr>
+																																					<td style="text-align: left;"><span
+																																						class="name">작성일 :
+																																							2017-02-19</span></td>
+																																				</tr>
+																																			</tbody>
+																																		</table></td>
+																																</tr>
+																															</tbody>
+																														</table>
+																													</div></td>
+																											</tr>
+																										</tbody>
+																									</table>
+																									<table width="100%" border="0" cellspacing="0"
+																										cellpadding="0">
+																										<tbody>
+																											<tr height="5">
+																												<td></td>
+																											</tr>
+																										</tbody>
+																									</table>
+																								</div>
+																								<div style="height: 1px; background: #efefef;"
+																									class="none">&nbsp;</div>
+<!-- 답변 있는 경우 예시 끝 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 																							</c:if>
+
 																							<c:if test="${!empty que_dtos}">
 																								<c:forEach var="dto" items="${que_dtos}">
 																									<table width="100%" border="0" cellspacing="0"
@@ -2811,8 +3256,10 @@ window.onload = function() {
 																										<tbody>
 																											<tr>
 																												<td width="124" valign="top"><div
+																														class="item_qna"
 																														style="padding: 14px 19px 0 19px;">
-																														<div class="smile${dto.ans_cnt}"></div>
+																														<div class="smile${dto.ans_cnt}"
+																															style="width: 74px; height: 18px;"></div>
 																													</div></td>
 																												<td width="2" valign="top"><div
 																														style="margin-top: 10px;">
@@ -2845,7 +3292,8 @@ window.onload = function() {
 																																							<img
 																																								src="/moyeo/resources/resource/img/shop/qna_secret.gif"
 																																								align="absmiddle">
-																																						</c:if> <span class="category">[${dto.que_type}]</span>
+																																						</c:if> <span class="category"
+																																						style="line-height: 14px; font-size: 12px; color: #999999; font-family: gulim, 굴림;">[${dto.que_type}]</span>
 																																						<span class="title">${dto.que_title}</span>
 																																				</a></td>
 																																			</tr>

@@ -105,9 +105,34 @@ $(document).ready(function(){
 function orderPopupView(order_code)
 {
 
-    window.open("/moyeo/six/shop/orderDetail?payment_num"+order_code, "orderPopupView", "width=650, height=700, scrollbars=yes");
+    window.open("/moyeo/six/shop/orderDetail?payment_num="+order_code, "orderPopupView", "width=650, height=700, scrollbars=yes");
 
 }
+
+//배송정보변경
+function orderPopupAddress(order_code)
+{
+
+    window.open("/moyeo/six/shop/addressModify?payment_num="+order_code, "orderPopupAddress", "width=650, height=700, scrollbars=yes");
+
+}
+//교환신청
+function orderPopupOption(order_code)
+{
+
+    window.open("/moyeo/six/shop/addressModify?payment_num="+order_code, "orderPopupOption", "width=650, height=700, scrollbars=yes");
+
+}
+
+// 주문취소
+function orderPopupCancel(order_code)
+{
+
+	window.open("/moyeo/six/shop/addressModify?payment_num="+order_code, "orderPopupCancel", "width=650, height=700, scrollbars=yes");
+
+}
+
+
 </script>
 
 <div id="overlay"></div><div id="message_box"></div><div class="layout_top_bg" style="height: 0px;"></div>
@@ -673,11 +698,11 @@ function orderOk(order_code)
 <!-- btn start //-->
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td><a href="#" onclick="orderPopupAddress('BW1702179574'); return false;"><img src="/moyeo/resources/resource/img/shop/btn1.gif" border="0"></a></td>
+    <td><a href="#" onclick="orderPopupAddress('${dto.payment_num}'); return false;"><img src="/moyeo/resources/resource/img/shop/btn1.gif" border="0"></a></td>
     <td width="2"></td>
-    <td><a href="#" onclick="orderPopupOption('BW1702179574'); return false;"><img src="/moyeo/resources/resource/img/shop/btn2.gif" border="0"></a></td>
+    <td><a href="#" onclick="orderPopupOption('${dto.payment_num}'); return false;"><input type="button" style="width:57px; height:50px; background:#fbfbfb; font-family: 'Open Sans', sans-serif; font-size: 12px; border:1px solid #bdbdbd;" value="교환신청"></a></td>
     <td width="2"></td>
-    <td><a href="#" onclick="orderPopupCancel('BW1702179574'); return false;"><img src="/moyeo/resources/resource/img/shop/btn3.gif" border="0"></a></td>
+    <td><a href="#" onclick="orderPopupCancel('${dto.payment_num}'); return false;"><img src="/moyeo/resources/resource/img/shop/btn3.gif" border="0"></a></td>
 </tr>
 </tbody></table>
 <!-- btn end //-->
