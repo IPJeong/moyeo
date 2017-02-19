@@ -678,6 +678,16 @@ public class SixController {
 		sixService.orderDetail(model);
 		return "six/shop/orderDetail";
 	}
+	
+	//샵-배송지 변경
+	@RequestMapping("/shop/addressModify")
+	public String addressModify(HttpServletRequest req, Model model) {
+		System.out.println("/shop/addressModify");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.addressModify(model);
+		return "six/shop/addressModify";
+	}
 
 }
 

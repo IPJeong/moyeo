@@ -1251,4 +1251,13 @@ public class SixDAOImpl implements SixDAO{
 		
 		return dtos;
 	}
+	
+	//샵-마이페이지 배송지변경
+	public PaymentListDTO addressModify(int payment_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		PaymentListDTO dto = dao.addressModify(payment_num);
+		
+		return dto;
+	}
+
 }

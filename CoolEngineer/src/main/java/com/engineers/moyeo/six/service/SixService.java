@@ -163,5 +163,8 @@ public interface SixService {
 	
 	//샵-주문내역 상세보기
 	public void orderDetail(Model model);
+	
+	//샵-배송지 변경
+	public void addressModify(Model model);
 
 }

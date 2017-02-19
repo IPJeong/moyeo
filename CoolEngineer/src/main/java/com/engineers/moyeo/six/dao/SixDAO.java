@@ -457,4 +457,7 @@ public interface SixDAO {
 	
 	//샵-마이페이지 주문내역 상세보기
 	public ArrayList<PaymentListDTO> orderDetail(int payment_num);
+
+	//샵-마이페이지 배송지변경
+	public PaymentListDTO addressModify(int payment_num);
 }

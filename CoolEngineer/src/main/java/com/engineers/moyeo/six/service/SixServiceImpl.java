@@ -2132,5 +2132,15 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("dto", dtos.get(0));
 		
 	}
+	
+	//샵-배송지 변경
+	public void addressModify(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int payment_num = Integer.parseInt(req.getParameter("payment_num"));
+		PaymentListDTO dto = sixDao.addressModify(payment_num);
+		model.addAttribute("dto", dto);
+	}
 
 }
