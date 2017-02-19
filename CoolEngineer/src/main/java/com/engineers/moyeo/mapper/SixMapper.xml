@@ -796,9 +796,14 @@ WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
  		SELECT * FROM payment_list pl, order_list ol, product_pic pp, product_info pi WHERE pl.payment_num = #{payment_num} AND pl.payment_num = ol.payment_num AND ol.product_num = pp.product_num AND ol.product_num = pi.product_num ORDER BY pic_num
  	</select>
  	
- 	<!-- 샵-마이페이지 배송지변경 -->
+ 	<!-- 샵-마이페이지 배송지변경 폼-->
  	<select id="addressModify" parameterType="int" resultType="com.engineers.moyeo.six.dto.PaymentListDTO">
  		SELECT * FROM payment_list WHERE payment_num = #{payment_num}
  	</select>
+ 	
+ 	<!-- 샵-마이페이지 배송지변경 처리 -->
+ 	<update id="addressModifyPro" parameterType="com.engineers.moyeo.six.dto.PaymentListDTO">
+ 		UPDATE payment_list SET receiver_name = #{receiver_name}, address = #{address}, tel1 = #{tel1}, tel2 = #{tel2}, delivery_request = #{delivery_request} WHERE payment_num = #{payment_num}
+ 	</update>
  	
 </mapper>

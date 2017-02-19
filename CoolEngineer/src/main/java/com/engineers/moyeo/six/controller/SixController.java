@@ -679,7 +679,7 @@ public class SixController {
 		return "six/shop/orderDetail";
 	}
 	
-	//샵-배송지 변경
+	//샵-배송지 변경폼
 	@RequestMapping("/shop/addressModify")
 	public String addressModify(HttpServletRequest req, Model model) {
 		System.out.println("/shop/addressModify");
@@ -687,6 +687,16 @@ public class SixController {
 		model.addAttribute("req", req);
 		sixService.addressModify(model);
 		return "six/shop/addressModify";
+	}
+	
+	//샵-배송지 변경처리
+	@RequestMapping("/shop/addressModifyPro")
+	public String addressModifyPro(HttpServletRequest req, Model model) {
+		System.out.println("/shop/addressModifyPro");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.addressModifyPro(model);
+		return "six/shop/addressModifyPro";
 	}
 
 }

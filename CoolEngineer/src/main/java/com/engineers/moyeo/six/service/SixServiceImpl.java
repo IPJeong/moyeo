@@ -1889,7 +1889,6 @@ public class SixServiceImpl implements SixService{
 		}
 		
 		//결제처리
-		System.out.println(payment_num);
 		plDto.setPayment_num(payment_num);
 		plDto.setReceiver_name(req.getParameter("order_rec_name"));
 		plDto.setAddress(address);
@@ -2142,5 +2141,36 @@ public class SixServiceImpl implements SixService{
 		PaymentListDTO dto = sixDao.addressModify(payment_num);
 		model.addAttribute("dto", dto);
 	}
+	
+	//샵-배송지변경 처리
+	public void addressModifyPro(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
+		int payment_num = Integer.parseInt(req.getParameter("payment_num"));
+
+		PaymentListDTO plDto = new PaymentListDTO();
+
+		String address = "(우:"+ req.getParameter("zipNo")+")"
+				+ req.getParameter("roadAddrPart1") + " " 
+				+ req.getParameter("addrDetail");
+		String hp = req.getParameter("order_rec_hp1");
+		String tel = req.getParameter("order_rec_tel1");
+		String delivery_request;
+		if(req.getParameter("order_memo").equals("")){
+			delivery_request= "없음";
+		} else {
+			delivery_request = req.getParameter("order_memo");
+		}
+		
+		plDto.setPayment_num(payment_num);
+		plDto.setReceiver_name(req.getParameter("order_rec_name"));
+		plDto.setAddress(address);
+		plDto.setTel1(hp);
+		plDto.setTel2(tel);
+		plDto.setDelivery_request(delivery_request);
+			
+		int cnt = sixDao.addressModifyPro(plDto);
+		model.addAttribute("cnt", cnt);
+	}
 }

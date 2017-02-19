@@ -127,22 +127,6 @@ function submitOrder()
 
     }
 
-    if (!f.order_rec_hp2.value) {
-
-        alert("휴대폰번호를 입력하십시오.");
-        f.order_rec_hp2.focus();
-        return false;
-
-    }
-
-    if (!f.order_rec_hp3.value) {
-
-        alert("휴대폰번호를 입력하십시오.");
-        f.order_rec_hp3.focus();
-        return false;
-
-    }
-
     if (!f.order_rec_tel1.value) {
 
         alert("일반전화를 입력하십시오.");
@@ -151,34 +135,18 @@ function submitOrder()
 
     }
 
-    if (!f.order_rec_tel2.value) {
-
-        alert("일반전화를 입력하십시오.");
-        f.order_rec_tel2.focus();
-        return false;
-
-    }
-
-    if (!f.order_rec_tel3.value) {
-
-        alert("일반전화를 입력하십시오.");
-        f.order_rec_tel3.focus();
-        return false;
-
-    }
-
-    if (!f.order_rec_addr1.value) {
+    if (!f.roadAddrPart1.value) {
 
         alert("주소를 입력하세요.");
-        f.order_rec_addr1.focus();
+        f.roadAddrPart1.focus();
         return false;
 
     }
 
-    if (!f.order_rec_addr2.value) {
+    if (!f.addrDetail.value) {
 
         alert("상세주소를 입력하세요.");
-        f.order_rec_addr2.focus();
+        f.addrDetail.focus();
         return false;
 
     }
@@ -210,7 +178,7 @@ document.getElementById('zipNo').value = zipNo;
 
 </script>
 
-<form method="post" name="formOrder" action="./order_address_update.php" onsubmit="return submitOrder();">
+<form name="formOrder" action="addressModifyPro" onsubmit="return submitOrder();">
 <input type="hidden" name="order_code" value="QG1702199468">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr class="top_bg">
@@ -326,6 +294,7 @@ document.getElementById('zipNo').value = zipNo;
     <td bgcolor="#e4e4e4"></td>
     <td></td>
     <td><input type="text" name="order_rec_name" value="${dto.receiver_name}" class="input"></td>
+	<input type="hidden" name="payment_num" value="${dto.payment_num}">
 </tr>
 <tr><td colspan="4" height="1" bgcolor="#bbbbbb"></td>
 </tr><tr height="30">
@@ -365,7 +334,7 @@ document.getElementById('zipNo').value = zipNo;
 
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><input type="text" id="zipNo" id="zipNo" value="04991" class="input" style="width:40px;"></td>
+    <td><input type="text" id="zipNo" name="zipNo" value="" class="input" style="width:45px;" readonly></td>
     <td><a href="#" onclick="goPopup();"><img src="/moyeo/resources/resource/img/shop/find_addr2.gif" border="0"></a></td>
 </tr>
 </tbody></table>
@@ -376,7 +345,7 @@ document.getElementById('zipNo').value = zipNo;
 
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><input type="text" id="roadAddrPart1" name="roadAddrPart1" value="서울특별시 광진구 화양동 164-1 (7호선 어린이대공원역)" class="input" style="width:340px;"></td>
+    <td><input type="text" id="roadAddrPart1" name="roadAddrPart1" value="" class="input" style="width:340px;" readonly></td>
 </tr>
 </tbody></table>
 
@@ -386,7 +355,7 @@ document.getElementById('zipNo').value = zipNo;
 
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><input type="text" id="addrDetail" id="zipNo" value="102" class="input" style="width:340px;"></td>
+    <td><input type="text" id="addrDetail" name="addrDetail" value="" class="input" style="width:340px;"></td>
 </tr>
 </tbody></table>
 
@@ -461,6 +430,5 @@ document.getElementById('zipNo').value = zipNo;
     </td>
 </tr>
 </tbody></table>
-</form><script type="text/javascript">$(document).ready(function() { var version = $.browser.version; var resolution = screen.width+"x"+screen.height; $.post("./visit_update.php", {"visit_id" : "264", "version" : version, "resolution" : resolution}); });</script>
-
+</form>
 </body></html>
