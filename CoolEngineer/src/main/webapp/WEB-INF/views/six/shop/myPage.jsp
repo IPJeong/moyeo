@@ -1,7 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript">
+$(document).ready(function(){
 
+	if(document.getElementById("mileage").innerHTML != null) {
+		var p0 = parseInt(document.getElementById("mileage").innerHTML);
+		document.getElementById("mileage").innerHTML = shopNumberFormat(String(p0)) + " 원";
+				
+	}
+	
+	if(document.getElementById("money1").innerHTML != null) {
+		var p1 = parseInt(document.getElementById("money1").innerHTML);
+		document.getElementById("money1").innerHTML = shopNumberFormat(String(p1)) + " 원";
+				
+	}
+	if(document.getElementById("money2").innerHTML != null) {
+		
+		var p2 = parseInt(document.getElementById("money2").innerHTML);
+		document.getElementById("money2").innerHTML = shopNumberFormat(String(p2)) + " 원";
+	}
+	if(document.getElementById("money3").innerHTML != null) {
+		
+		var p3 = parseInt(document.getElementById("money3").innerHTML);
+		document.getElementById("money3").innerHTML = shopNumberFormat(String(p3)) + " 원";
+	}	
+	if(document.getElementById("money4").innerHTML != null) {
+			
+		var p4 = parseInt(document.getElementById("money4").innerHTML);
+		document.getElementById("money4").innerHTML = shopNumberFormat(String(p4)) + " 원";
+	}
+	if(document.getElementById("money4").innerHTML != null) {
+		
+		var p5 = parseInt(document.getElementById("money5").innerHTML);
+		document.getElementById("money5").innerHTML = shopNumberFormat(String(p5)) + " 원";
+	}
+	if(document.getElementById("money6").innerHTML != null) {
+		
+		var p6 = parseInt(document.getElementById("money6").innerHTML);
+		document.getElementById("money6").innerHTML = shopNumberFormat(String(p6)) + " 원";
+	}
+	if(document.getElementById("money7").innerHTML != null) {
+		
+		var p7 = parseInt(document.getElementById("money7").innerHTML);
+		document.getElementById("money7").innerHTML = shopNumberFormat(String(p7)) + " 원";
+	}
+	if(document.getElementById("money8").innerHTML != null) {
+		
+		var p8 = parseInt(document.getElementById("money8").innerHTML);
+		document.getElementById("money8").innerHTML = shopNumberFormat(String(p8)) + " 원";
+	}
+	if(document.getElementById("money9").innerHTML != null) {
+		
+		var p9 = parseInt(document.getElementById("money9").innerHTML);
+		document.getElementById("money9").innerHTML = shopNumberFormat(String(p9)) + " 원";
+	}
+	if(document.getElementById("money10").innerHTML != null) {
+		
+		var p10 = parseInt(document.getElementById("money10").innerHTML);
+		document.getElementById("money10").innerHTML = shopNumberFormat(String(p10)) + " 원";
+	}
+	
+	
+	function shopNumberFormat(data) {
+
+		var tmp = '';
+		var number = '';
+		var cutlen = 3;
+		var comma = ',';
+		var i;
+
+		len = data.length;
+		mod = (len % cutlen);
+		k = cutlen - mod;
+
+		for (i = 0; i < data.length; i++) {
+
+			number = number + data.charAt(i);
+
+			if (i < data.length - 1) {
+
+				k++;
+
+				if ((k % cutlen) == 0) {
+
+					number = number + comma;
+					k = 0;
+
+				}
+
+			}
+
+		}
+
+		return number;
+
+	}
+});
+</script>
 
 <div id="overlay"></div><div id="message_box"></div><div class="layout_top_bg" style="height: 0px;"></div>
 <style type="text/css">
@@ -66,6 +164,7 @@ text-decoration:none;
 	.skin_mypage_menu .on {background-color:#f2f2f2;}
 	.skin_mypage_menu .on a {font-weight:bold; line-height:14px; font-size:12px; color:#000000; font-family:gulim,굴림;}
 	</style>
+
 	
 	<div class="skin_mypage_menu">
 	
@@ -305,7 +404,7 @@ function orderOk(order_code)
 <table border="0" cellspacing="0" cellpadding="0" style="margin-top:20px;">
 <tbody><tr>
     <td width="90" align="center" valign="top"><img src="/moyeo/resources/resource/img/shop/1935647224_968fdff8_2.gif"></td>
-    <td valign="top"><div><img src="/moyeo/resources/resource/img/shop/title_level.gif"></div><div class="level">김대식님의 회원등급은<br>일반회원 입니다.</div></td>
+    <td valign="top"><div><img src="/moyeo/resources/resource/img/shop/title_level.gif"></div><div class="level">${mem_id}님의 회원등급은<br>일반회원 입니다.</div></td>
 </tr>
 </tbody></table>
     </td>
@@ -330,7 +429,7 @@ function orderOk(order_code)
 
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td><span class="t1">2</span></td>
+    <td><span class="t1">${orderCnt}</span></td>
     <td width="4"></td>
     <td><img src="/moyeo/resources/resource/img/shop/limit.gif"></td>
 </tr>
@@ -354,7 +453,7 @@ function orderOk(order_code)
 
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td><span class="t1">0</span></td>
+    <td><span class="t1">${cancelCnt}</span></td>
     <td width="4"></td>
     <td><img src="/moyeo/resources/resource/img/shop/limit.gif"></td>
 </tr>
@@ -378,7 +477,7 @@ function orderOk(order_code)
 
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td><span class="t1">0</span></td>
+    <td><span class="t1">${changeCnt}</span></td>
     <td width="4"></td>
     <td><img src="/moyeo/resources/resource/img/shop/limit.gif"></td>
 </tr>
@@ -402,7 +501,7 @@ function orderOk(order_code)
 
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td><span class="t1">0</span></td>
+    <td><span class="t1">${refundCnt}</span></td>
     <td width="4"></td>
     <td><img src="/moyeo/resources/resource/img/shop/limit.gif"></td>
 </tr>
@@ -426,7 +525,7 @@ function orderOk(order_code)
 
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td><span class="t1">0</span></td>
+    <td><span class="t1">${queCnt}</span></td>
     <td width="4"></td>
     <td><img src="/moyeo/resources/resource/img/shop/limit.gif"></td>
 </tr>
@@ -442,7 +541,7 @@ function orderOk(order_code)
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mypage_title">
 <tbody><tr height="30">
-    <td align="right"><p>김대식님의 사용가능하신 <a href="#"><span class="t1">적립금은 0원</span></a>이며, 사용 가능하신 <a href="#"><span class="t2">쿠폰은 0장</span></a>이 있습니다.</p></td>
+    <td align="right"><p>${mem_id}님의 사용가능하신 <a href="#"><span class="t1">적립금은 <span id=mileage>${mileage}</span></span></a>이며, 사용 가능하신 <a href="#"><span class="t2">쿠폰은 0장</span></a>이 있습니다.</p></td>
 </tr>
 </tbody></table>
 
@@ -457,7 +556,7 @@ function orderOk(order_code)
     <td width="9"></td>
     <td width="82" valign="top"><img src="/moyeo/resources/resource/img/shop/t1.gif"></td>
     <td width="10"></td>
-    <td width="100"><p class="b1 t2"><span class="t1">2</span> 건</p></td>
+    <td width="100"><p class="b1 t2"><span class="t1">${orderCnt}</span> 건</p></td>
     <td align="right"><p class="b2 t2">주문중이거나 구매완료된 상품 목록 입니다. (취소/교환/환불 내역은 해당메뉴에서 확인)</p></td>
 </tr>
 </tbody></table>
@@ -485,11 +584,23 @@ function orderOk(order_code)
     <td><img src="/moyeo/resources/resource/img/shop/line.gif"></td>
     <td align="center" class="t1"><b>옵션</b></td>
 </tr>
+
+
+
+
+
+
+
+
+
+
+<!-- 주문목록시작 -->
+<c:forEach var="dto" items="${order_dtos}" varStatus="status">
 <tr height="74">
     <td>
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td class="date">2017-02-17</td>
+    <td class="date">${fn:substring(dto.order_date, 0, 10)}</td>
 </tr>
 </tbody></table>
 
@@ -508,12 +619,12 @@ function orderOk(order_code)
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
     <td width="9"></td>
-    <td width="50" align="center"><div class="thumb"><a href="#" target="_blank"><img src="./data/thumb/item/50x50/1935647224_bcb14092_IMG_1674.jpg" width="50" height="50" border="0"></a></div></td>
+    <td width="50" align="center"><div class="thumb"><a href="/moyeo/six/shop/productDetail?product_num=${dto.product_num}" target="_blank"><img src="${dto.pic_path}/${dto.pic_name}" width="50" height="50" border="0"></a></div></td>
     <td width="20"></td>
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><a href="#" target="_blank" class="item_name">소품 (갤러리 학습)</a></td>
+    <td><a href="/moyeo/six/shop/productDetail?product_num=${dto.product_num}" target="_blank" class="item_name">${dto.product_name}</a></td>
 </tr>
 </tbody></table>
 
@@ -523,7 +634,7 @@ function orderOk(order_code)
 
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><b class="money">3,500 원</b></td>
+    <td><b class="money" id="money${status.count}">${dto.payment_amount}</b></td>
 </tr>
 </tbody></table>
     </td>
@@ -534,7 +645,7 @@ function orderOk(order_code)
     <td>
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td class="order_type">결제전</td>
+    <td class="order_type">${dto.order_status}</td>
 </tr>
 </tbody></table>
 
@@ -544,7 +655,7 @@ function orderOk(order_code)
 
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td class="payment">무통장 입금</td>
+    <td class="payment">${dto.payment_means}</td>
 </tr>
 </tbody></table>
     </td>
@@ -564,86 +675,8 @@ function orderOk(order_code)
     </td>
 </tr>
 <tr><td colspan="7" class="dot"></td></tr>
-<tr height="74">
-    <td>
-<table border="0" cellspacing="0" cellpadding="0" class="auto">
-<tbody><tr>
-    <td class="date">2017-02-17</td>
-</tr>
-</tbody></table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tbody><tr height="5"><td></td></tr>
-</tbody></table>
-
-<table border="0" cellspacing="0" cellpadding="0" class="auto">
-<tbody><tr>
-    <td><a href="#" onclick="orderPopupView('GB1702174845'); return false;" class="view">상세주문내역</a></td>
-</tr>
-</tbody></table>
-    </td>
-    <td></td>
-    <td>
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody><tr>
-    <td width="9"></td>
-    <td width="50" align="center"><div class="thumb"><a href="#" target="_blank"><img src="./data/thumb/item/50x50/1935647224_bcb14092_IMG_1674.jpg" width="50" height="50" border="0"></a></div></td>
-    <td width="20"></td>
-    <td>
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody><tr>
-    <td><a href="#" target="_blank" class="item_name">소품 (갤러리 학습)</a></td>
-</tr>
-</tbody></table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tbody><tr height="2"><td></td></tr>
-</tbody></table>
-
-<table border="0" cellspacing="0" cellpadding="0">
-<tbody><tr>
-    <td><b class="money">3,500 원</b></td>
-</tr>
-</tbody></table>
-    </td>
-</tr>
-</tbody></table>
-    </td>
-    <td></td>
-    <td>
-<table border="0" cellspacing="0" cellpadding="0" class="auto">
-<tbody><tr>
-    <td class="order_type">결제전</td>
-</tr>
-</tbody></table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tbody><tr height="5"><td></td></tr>
-</tbody></table>
-
-<table border="0" cellspacing="0" cellpadding="0" class="auto">
-<tbody><tr>
-    <td class="payment">무통장 입금</td>
-</tr>
-</tbody></table>
-    </td>
-    <td></td>
-    <td>
-<!-- btn start //-->
-<table border="0" cellspacing="0" cellpadding="0" class="auto">
-<tbody><tr>
-    <td><a href="#" onclick="orderPopupAddress('GB1702174845'); return false;"><img src="/moyeo/resources/resource/img/shop/btn1.gif" border="0"></a></td>
-    <td width="2"></td>
-    <td><a href="#" onclick="orderPopupOption('GB1702174845'); return false;"><img src="/moyeo/resources/resource/img/shop/btn2.gif" border="0"></a></td>
-    <td width="2"></td>
-    <td><a href="#" onclick="orderPopupCancel('GB1702174845'); return false;"><img src="/moyeo/resources/resource/img/shop/btn3.gif" border="0"></a></td>
-</tr>
-</tbody></table>
-<!-- btn end //-->
-    </td>
-</tr>
-<tr><td colspan="7" height="2" bgcolor="#dddddd"></td></tr>
-</tbody></table>
+</c:forEach>
+<!-- 주문목록 끝 -->
 
 
 <table border="0" cellspacing="0" cellpadding="0">
@@ -696,22 +729,8 @@ $(document).ready(function() {
 </script>
 <![endif]-->
 
-<script type="text/javascript" src="./skin/scrollbox/default/scrollbox.js"></script></div>
 </div>
 
 
 
-<script type="text/javascript">
-$(document).ready( function() {
-
-    $(window).resize(function() {
-
-        $('.layout_bottom_bg').css( { 'left': -($('.layout_bottom').offset().left)+'px', 'width': $(window).width()+'px' } );
-
-    });
-
-    $('.layout_bottom_bg').css( { 'left': -($('.layout_bottom').offset().left)+'px', 'width': $(window).width()+'px', 'height': $('.layout_bottom').height()+'px' } );
-
-});
-</script><script type="text/javascript">$(document).ready(function() { var version = $.browser.version; var resolution = screen.width+"x"+screen.height; $.post("./visit_update.php", {"visit_id" : "168", "version" : version, "resolution" : resolution}); });</script>
 

@@ -801,17 +801,17 @@ window.onload = function() {
 			document.getElementById("rel1").innerHTML = shopNumberFormat(String(p5)) + " 원";
 					
 		}
-		if(document.getElementById("rel1").innerHTML != null) {
+		if(document.getElementById("rel2").innerHTML != null) {
 			
 			var p6 = parseInt(document.getElementById("rel2").innerHTML);
 			document.getElementById("rel2").innerHTML = shopNumberFormat(String(p6)) + " 원";
 		}
-		if(document.getElementById("rel1").innerHTML != null) {
+		if(document.getElementById("rel3").innerHTML != null) {
 			
 			var p7 = parseInt(document.getElementById("rel3").innerHTML);
 			document.getElementById("rel3").innerHTML = shopNumberFormat(String(p7)) + " 원";
 		}	
-		if(document.getElementById("rel1").innerHTML != null) {
+		if(document.getElementById("rel4").innerHTML != null) {
 				
 			var p8 = parseInt(document.getElementById("rel4").innerHTML);
 			document.getElementById("rel4").innerHTML = shopNumberFormat(String(p8)) + " 원";
@@ -889,6 +889,18 @@ window.onload = function() {
 		}
 	}
 
+	function replyLoading(item_id, page)
+	{
+
+	    $.post("./reply.php", {"item_id" : item_id, "page" : page}, function(data) {
+
+	        $("#reply_data").html(data);
+
+	    });
+
+	}
+	
+	
 	//상품문의 조회조건
 	function qnaView(qna_id, write_id, mem_id, visible) {
 		if (visible == 'no') {
@@ -1756,7 +1768,7 @@ window.onload = function() {
 														<tbody>
 															<tr height="150">
 																<td>
-																<img src="${pic_dto1.pic_path}/${pic_dto1.pic_name}" width="1000" height="1000">
+																<img src="${pic_dto1.pic_path}/${pic_dto1.pic_name}" width="100%" height="1000">
 																</td>
 															</tr>
 														</tbody>
@@ -2561,7 +2573,7 @@ window.onload = function() {
 																	</tbody>
 
 
-																	<!-- 페이징처리구간 -->
+<!-- 																	페이징처리구간
 
 																</table>
 																<table width="100%" border="0" cellspacing="0"
@@ -2656,7 +2668,7 @@ window.onload = function() {
 																		</tr>
 																	</tbody>
 																</table>
-
+ -->
 																<!-- 페이징처리구간 -->
 															</div>
 

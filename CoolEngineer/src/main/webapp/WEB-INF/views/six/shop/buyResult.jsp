@@ -271,14 +271,14 @@ li {
 						<!-- START PHOTO BLOCK -->
 						<div class="col-md-56" style="margin-top: 10px;">
 							<div class="panel panel-default"
-								style="height: 870px; width: 1200px;">
+								style="height: 870px; width: 100%;">
 								<div class="panel-heading">
 									<div class="panel-title-box">
 										<h3>Shop</h3>
 									</div>
 								</div>
 								<div class=""
-									style="height: 830px; width: 1200px; overflow: auto;">
+									style="height: 830px; width: 100%; overflow: auto;">
 									<!-- 본문입력 -->
 
 
