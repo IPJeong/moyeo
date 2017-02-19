@@ -192,17 +192,13 @@
 												</div>
 											</div>
 										</div>
-
 									</div>
 									
 										<input type="submit" class="btn btn-primary" style="margin-left:62%;" value="제품등록">
-									
 								</div>
 							</form:form>
-
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
