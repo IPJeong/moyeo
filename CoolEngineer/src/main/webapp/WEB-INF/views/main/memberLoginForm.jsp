@@ -88,7 +88,7 @@ li {
 													<div class="input-group-addon">
 														<span class="fa fa-user"></span>
 													</div>
-													<input type="text" name="mem_id" class="form-control" placeholder="아이디 입력" />
+													<input type="text" name="mem_id" class="form-control" placeholder="아이디 입력" required>
 												</div>
 											</div>
 										</div>
@@ -98,8 +98,7 @@ li {
 													<div class="input-group-addon">
 														<span class="fa fa-lock"></span>
 													</div>
-													<input type="password" name="passwd" class="form-control"
-														placeholder="패스워드 입력" />
+													<input type="password" name="passwd" class="form-control" placeholder="패스워드 입력"  required>
 												</div>
 											</div>
 										</div>
