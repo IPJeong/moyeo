@@ -2122,4 +2122,15 @@ public class SixServiceImpl implements SixService{
 		model.addAttribute("dto", dto);
 	}
 
+	//샵-주문내역 상세보기
+	public void orderDetail(Model model) {
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+
+		int payment_num = Integer.parseInt(req.getParameter("payment_num"));
+		ArrayList<PaymentListDTO> dtos = sixDao.orderDetail(payment_num);
+		model.addAttribute("dto", dtos.get(0));
+		
+	}
+
 }

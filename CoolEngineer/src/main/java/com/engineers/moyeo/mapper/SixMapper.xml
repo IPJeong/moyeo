@@ -762,38 +762,38 @@ WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 		
 	<!-- 샵-마이페이지 적립금액구하기 -->
 	<select id="mileage" parameterType="String" resultType="int">
-		SELECT SUM(payment_amount-2500)*0.01 AS mileage FROM payment_list WHERE mem_id = #{mem_id}
+		SELECT NVL(SUM(payment_amount-2500)*0.01 , 0) FROM payment_list WHERE mem_id = #{mem_id}
 	</select>	
 	
 	<!-- 샵-마이페이지 주문건수 구하기 -->
 	<select id="orderCnt" parameterType="String" resultType="int">
-		SELECT COUNT(*) AS order_cnt FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '결제전' OR order_status = '결제완료' 
+		SELECT NVL(COUNT(*), 0) FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '결제전' OR order_status = '결제완료' 
 		OR order_status = '배송준비' OR order_status = '배송중' OR order_status = '상품수령' OR order_status ='구매완료')
 	</select>
 	
 	<!-- 샵-마이페이지 취소건수 구하기 -->
 	<select id="cancelCnt" parameterType="String" resultType="int">
-		SELECT COUNT(*) AS cancel_cnt FROM order_list WHERE  mem_id = #{mem_id} AND (order_status = '취소접수' OR order_status = '취소완료' OR order_status = '판매자취소')
+		SELECT NVL(COUNT(*), 0) FROM order_list WHERE  mem_id = #{mem_id} AND (order_status = '취소접수' OR order_status = '취소완료' OR order_status = '판매자취소')
 	</select>
 	
 	<!-- 샵-마이페이지 교환건수 구하기 -->
 	<select id="changeCnt" parameterType="String" resultType="int">
-		SELECT COUNT(*) AS change_cnt FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '교환접수' OR order_status = '교환중' OR order_status = '교환완료')
+		SELECT NVL(COUNT(*), 0) FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '교환접수' OR order_status = '교환중' OR order_status = '교환완료')
 	</select>
 	
 	<!-- 샵-마이페이지 환불건수 구하기 -->
 	<select id="refundCnt" parameterType="String" resultType="int">
-		SELECT COUNT(*) AS refund_cnt FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '반품접수' OR order_status = '반품완료')
+		SELECT NVL(COUNT(*), 0) FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '반품접수' OR order_status = '반품완료')
 	</select>
 	
 	<!-- 샵-마이페이지 문의글 건수 구하기 -->
  	<select id="queCnt" parameterType="String" resultType="int">
- 		SELECT COUNT(*) AS que_cnt FROM product_que WHERE mem_id = #{mem_id}
+ 		SELECT NVL(COUNT(*), 0) FROM product_que WHERE mem_id = #{mem_id}
  	</select>
  	
  	<!-- 샵-주문상세 내역조회 -->
  	<select id="orderDetail" parameterType="int" resultType="com.engineers.moyeo.six.dto.PaymentListDTO">
- 		SELECT * FROM payment_list pl, order_list ol, product_pic pp WHERE pl.payment_num = #{payment_num} AND pl.payment_num = ol.payment_num AND ol.product_num = pp.product_num ORDER BY pic_num
+ 		SELECT * FROM payment_list pl, order_list ol, product_pic pp, product_info pi WHERE pl.payment_num = #{payment_num} AND pl.payment_num = ol.payment_num AND ol.product_num = pp.product_num AND ol.product_num = pi.product_num ORDER BY pic_num
  	</select>
  	
 </mapper>

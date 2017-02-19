@@ -1243,4 +1243,12 @@ public class SixDAOImpl implements SixDAO{
 		
 		return queCnt;
 	}
+	
+	//샵-마이페이지 주문내역 상세보기
+	public ArrayList<PaymentListDTO> orderDetail(int payment_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<PaymentListDTO> dtos = dao.orderDetail(payment_num);
+		
+		return dtos;
+	}
 }

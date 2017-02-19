@@ -668,6 +668,16 @@ public class SixController {
 		
 		return "six/shop/inquireModifyPro";
 	}
+	
+	//샵-상세주문내역
+	@RequestMapping("/shop/orderDetail")
+	public String orderDetail(HttpServletRequest req, Model model) {
+		System.out.println("/shop/orderDetail");
+		if(req.getSession().getAttribute("mem_id") == null && req.getSession().getAttribute("manager_id") == null)return "redirect:/main/memberLoginForm";
+		model.addAttribute("req", req);
+		sixService.orderDetail(model);
+		return "six/shop/orderDetail";
+	}
 
 }
 
