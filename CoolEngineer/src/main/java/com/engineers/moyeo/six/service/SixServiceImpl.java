@@ -1433,8 +1433,7 @@ public class SixServiceImpl implements SixService{
 	
 			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyA();
 			model.addAttribute("dtos", dtos);
-			System.out.println(dtos.get(0).getGroup_inte1());
-
+		
 		} else if(subject.equals("운동/스포츠")) {
 		
 			ArrayList<MoimOpenDTO> dtos = sixDao.categoryHobbyB();
@@ -2122,14 +2121,5 @@ public class SixServiceImpl implements SixService{
 		PaymentListDTO dto = dtos.get(0);
 		model.addAttribute("dto", dto);
 	}
-	
-	//마이페이지-샵
-	public void myPage(Model model){
-		
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest req = (HttpServletRequest)map.get("req");
 
-		String mem_id = (String)req.getSession().getAttribute("mem_id");
-		
-	}
 }

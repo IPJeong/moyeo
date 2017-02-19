@@ -160,7 +160,5 @@ public interface SixService {
 	
 	//샵-주문확인
 	public void buyResult(Model model);
-	
-	//마이페이지-샵
-	public void myPage(Model model);
+
 }

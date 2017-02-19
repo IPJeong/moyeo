@@ -21,9 +21,11 @@ import com.engineers.moyeo.main.common.FileManager;
 import com.engineers.moyeo.main.common.TextMessage;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.main.service.MainService;
+import com.engineers.moyeo.six.dao.SixDAO;
 import com.engineers.moyeo.six.dto.InterestCatDTO;
 import com.engineers.moyeo.six.dto.InterestLocationDTO;
 import com.engineers.moyeo.six.dto.MoimOpenDTO;
+import com.engineers.moyeo.six.dto.PaymentListDTO;
 import com.engineers.moyeo.three.dao.ThreeDAO;
 import com.engineers.moyeo.three.dto.EventDTO;
 import com.engineers.moyeo.three.dto.JoinRequestDTO;
@@ -38,6 +40,8 @@ public class ThreeServiceImpl implements ThreeService{
 	ThreeDAO dao;
 	@Autowired
 	MainService noti;
+	@Autowired
+	SixDAO sixDao;
 	
 	//FAQ페이지
 	@Override
@@ -925,6 +929,32 @@ public class ThreeServiceImpl implements ThreeService{
 		req.setAttribute("applHistoryCnt", applHistoryCnt);
 		
 		model.addAttribute("location", req.getParameter("location"));
+		
+		
+/*샵 마이페이지 시작*/
+		//구매정보
+		ArrayList<PaymentListDTO>order_dtos = sixDao.myPage(mem_id);
+		model.addAttribute("order_dtos", order_dtos);
+		//적립금액 구하기
+		int mileage = sixDao.mileage(mem_id);
+		model.addAttribute("mileage", mileage);
+		//주문건수
+		int orderCnt = sixDao.orderCnt(mem_id);
+		model.addAttribute("orderCnt", orderCnt);
+		//취소건수
+		int cancelCnt = sixDao.cancelCnt(mem_id);
+		model.addAttribute("cancelCnt", cancelCnt);
+		//교환건수
+		int changeCnt = sixDao.changeCnt(mem_id);
+		model.addAttribute("changeCnt", changeCnt);
+		//환불건수
+		int refundCnt = sixDao.refundCnt(mem_id);
+		model.addAttribute("refundCnt", refundCnt);
+		//1:1문의건수
+		int queCnt = sixDao.queCnt(mem_id);
+		model.addAttribute("queCnt", queCnt);
+		
+/*샵 마이페이지 끝*/
 		
 		return "/three/member/myPage";
 	}

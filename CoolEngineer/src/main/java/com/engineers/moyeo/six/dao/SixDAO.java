@@ -434,4 +434,24 @@ public interface SixDAO {
 	//샵-관련상품
 	public ArrayList<productInfoDTO> relative(Map<String, Object> map);
 	
+	//샵-마이페이지 구매정보
+	public ArrayList<PaymentListDTO> myPage(String mem_id);
+	
+	//샵-마일리지 금액 구하기
+	public int mileage(String mem_id);
+
+	//샵-주문건수 구하기
+	public int orderCnt(String mem_id);
+	
+	//샵-취소건수 구하기
+	public int cancelCnt(String mem_id);
+
+	//샵-교환건수 구하기
+	public int changeCnt(String mem_id); 
+		
+	//샵-환불건수 구하기
+	public int refundCnt(String mem_id);
+	
+	//샵-문의글건수 구하기
+	public int queCnt(String mem_id);
 }

@@ -1,5 +1,7 @@
 package com.engineers.moyeo.six.dto;
 
+import java.sql.Timestamp;
+
 public class PaymentListDTO {
 
 	//결제번호
@@ -40,6 +42,15 @@ public class PaymentListDTO {
 	
 	//제품사진명
 	private String pic_name;
+	
+	//제품사진번호
+	private int pic_num;
+	
+	//주문일자
+	private Timestamp order_date;
+	
+	//주문상태
+	private String order_status;
 	
 	//주문수량
 	private int order_qty;
@@ -128,4 +139,23 @@ public class PaymentListDTO {
 	public void setPic_name(String pic_name) {
 		this.pic_name = pic_name;
 	}
+	public int getPic_num() {
+		return pic_num;
+	}
+	public void setPic_num(int pic_num) {
+		this.pic_num = pic_num;
+	}
+	public Timestamp getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(Timestamp order_date) {
+		this.order_date = order_date;
+	}
+	public String getOrder_status() {
+		return order_status;
+	}
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
+	
 }

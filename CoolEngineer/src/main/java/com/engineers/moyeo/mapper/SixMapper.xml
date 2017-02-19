@@ -745,10 +745,49 @@ WHERE pq.que_num = pa.que_num(+) AND pq.product_num = #{product_num} ORDER BY qu
 	<!-- 샵-관련상품 -->
 	<select id="relative" parameterType="map" resultType="com.engineers.moyeo.four.dto.productInfoDTO">
 	SELECT * FROM (
-SELECT pi.*, pp.pic_name, pp.pic_path, rownum rnum FROM product_info pi, product_pic pp WHERE seller_id = 
-(SELECT seller_id FROM product_info WHERE product_num = #{product_num}) AND pi.product_num != #{product_num} AND pi.product_num = pp.product_num ORDER BY pi.product_num DESC)
+SELECT pi.*, pp.pic_name, pp.pic_path, pp.pic_num, rownum rnum FROM product_info pi, product_pic pp WHERE seller_id = 
+(SELECT seller_id FROM product_info WHERE product_num = #{product_num}) AND pi.product_num != #{product_num} AND pi.product_num = pp.product_num ORDER BY pi.product_num DESC, pp.pic_num)
 WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 	
 	</select>
 		
+	<!-- 샵-마이페이지 -->
+	<select id="myPage" parameterType="String" resultType="com.engineers.moyeo.six.dto.PaymentListDTO">
+		    SELECT pl.*, ol.product_num, ol.order_date, ol.order_status, ol.order_qty, pi.product_name, pp.pic_path, pp.pic_name, pp.pic_num 
+		FROM payment_list pl, order_list ol, product_info pi, product_pic pp 
+		WHERE pl.payment_num = ol.payment_num AND ol.product_num = pi.product_num 
+		AND pi.product_num = pp.product_num AND pl.mem_id = #{mem_id} AND (order_status = '결제전' OR order_status ='결제완료' OR order_status = '배송준비' OR order_status = '배송중'
+    OR order_status = '상품수령' OR order_status = '구매완료') ORDER BY pl.payment_num DESC, pp.pic_num;	</select>
+		
+	<!-- 샵-마이페이지 적립금액구하기 -->
+	<select id="mileage" parameterType="String" resultType="int">
+		SELECT SUM(payment_amount-2500)*0.01 AS mileage FROM payment_list WHERE mem_id = #{mem_id}
+	</select>	
+	
+	<!-- 샵-마이페이지 주문건수 구하기 -->
+	<select id="orderCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) AS order_cnt FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '결제전' OR order_status = '결제완료' 
+		OR order_status = '배송준비' OR order_status = '배송중' OR order_status = '상품수령' OR order_status ='구매완료')
+	</select>
+	
+	<!-- 샵-마이페이지 취소건수 구하기 -->
+	<select id="cancelCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) AS cancel_cnt FROM order_list WHERE  mem_id = #{mem_id} AND (order_status = '취소접수' OR order_status = '취소완료' OR order_status = '판매자취소')
+	</select>
+	
+	<!-- 샵-마이페이지 교환건수 구하기 -->
+	<select id="changeCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) AS change_cnt FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '교환접수' OR order_status = '교환중' OR order_status = '교환완료')
+	</select>
+	
+	<!-- 샵-마이페이지 환불건수 구하기 -->
+	<select id="refundCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) AS refund_cnt FROM order_list WHERE mem_id = #{mem_id} AND (order_status = '반품접수' OR order_status = '반품완료')
+	</select>
+	
+	<!-- 샵-마이페이지 문의글 건수 구하기 -->
+ 	<select id="queCnt" parameterType="String" resultType="int">
+ 		SELECT COUNT(*) AS que_cnt FROM product_que WHERE mem_id = #{mem_id}
+ 	</select>
+ 	
 </mapper>

@@ -1183,5 +1183,64 @@ public class SixDAOImpl implements SixDAO{
 		return dtos;
 	}
 	
+	//샵-마이페이지
+	public ArrayList<PaymentListDTO> myPage(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		ArrayList<PaymentListDTO> dtos = dao.myPage(mem_id);
+		ArrayList<PaymentListDTO> my_dtos = new ArrayList<PaymentListDTO>();
+		
+		for(int i = 0; i<dtos.size(); i = i+2) {
+			my_dtos.add(dtos.get(i));
+		}
+		
+		return my_dtos;
+	}
+	
+	//샵-적립금 구하기
+	public int mileage(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int mileage = dao.mileage(mem_id);
+		
+		return mileage;
+	}
+	
+	//샵-주문건수 구하기
+	public int orderCnt(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int orderCnt = dao.orderCnt(mem_id);
+		
+		return orderCnt;
+	}
 
+	//샵-취소건수 구하기
+	public int cancelCnt(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int cancelCnt = dao.cancelCnt(mem_id);
+		
+		return cancelCnt;
+	}
+	
+	//샵-교환건수 구하기
+	public int changeCnt(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int changeCnt = dao.changeCnt(mem_id);
+		
+		return changeCnt;
+	}
+	
+	//샵-환불건수 구하기
+	public int refundCnt(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int refundCnt = dao.refundCnt(mem_id);
+		
+		return refundCnt;
+	}
+		
+	//샵-문의글건수 구하기
+	public int queCnt(String mem_id) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		int queCnt = dao.queCnt(mem_id);
+		
+		return queCnt;
+	}
 }

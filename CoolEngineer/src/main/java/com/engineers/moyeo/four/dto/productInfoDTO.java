@@ -11,6 +11,7 @@ public class productInfoDTO {
 	String product_cat2; /*제품분류2*/
 	String pic_name; /*제품사진이름*/
 	String pic_path; /*제품사진경로*/
+	String pic_num; /*제품번호*/
 	
 	
 	public int getProduct_num() {
@@ -73,5 +74,11 @@ public class productInfoDTO {
 	public void setPic_path(String pic_path) {
 		this.pic_path = pic_path;
 	}
-
+	public String getPic_num() {
+		return pic_num;
+	}
+	public void setPic_num(String pic_num) {
+		this.pic_num = pic_num;
+	}
+	
 }
