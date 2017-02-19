@@ -100,6 +100,15 @@ $(document).ready(function(){
 	}
 });
 </script>
+<script type="text/javascript">
+// 상세주문내역
+function orderPopupView(order_code)
+{
+
+    window.open("/moyeo/six/shop/orderDetail?payment_num"+order_code, "orderPopupView", "width=650, height=700, scrollbars=yes");
+
+}
+</script>
 
 <div id="overlay"></div><div id="message_box"></div><div class="layout_top_bg" style="height: 0px;"></div>
 <style type="text/css">
@@ -241,7 +250,7 @@ text-decoration:none;
 	</tbody></table>
 	<!-- 취소 end //-->
 	
-	<!-- 혜택 start //-->
+<!-- 	혜택 start
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tbody><tr height="20"><td></td></tr>
 	</tbody></table>
@@ -279,10 +288,10 @@ text-decoration:none;
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tbody><tr height="15"><td></td></tr>
 	</tbody></table>
-	<!-- 혜택 end //-->
+	혜택 end //
 	
 
-	
+	 -->
 
 	
 
@@ -610,7 +619,7 @@ function orderOk(order_code)
 
 <table border="0" cellspacing="0" cellpadding="0" class="auto">
 <tbody><tr>
-    <td><a href="#" onclick="orderPopupView('BW1702179574'); return false;" class="view">상세주문내역</a></td>
+    <td><a href="#" onclick="orderPopupView('${dto.payment_num}'); return false;" class="view">상세주문내역</a></td>
 </tr>
 </tbody></table>
     </td>
