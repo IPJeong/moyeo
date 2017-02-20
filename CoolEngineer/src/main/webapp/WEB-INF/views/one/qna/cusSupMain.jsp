@@ -131,29 +131,29 @@
 
 							<div class="panel panel-default">
 								<div class="panel-body">
-									<p>검색 후 문의가 해결되지 않으면 Q&A를 이용하세요.</p>
+<!-- 									<p>검색 후 문의가 해결되지 않으면 Q&A를 이용하세요.</p> -->
 									<form class="form-horizontal">
 										<div class="form-group">
 											<div class="col-md-8" style="float: left">
 												<div class="input-group">
-													<div class="input-group-addon">
-														<span class="fa fa-search"></span>
-													</div>
-													<input type="text" class="form-control"
-														placeholder="문의 내용을 입력해주세요" />
-													<div class="input-group-btn">
-														<button class="btn btn-primary">Search</button>
-													</div>
+<!-- 													<div class="input-group-addon"> -->
+<!-- 														<span class="fa fa-search"></span> -->
+<!-- 													</div> -->
+<!-- 													<input type="text" class="form-control" -->
+<!-- 														placeholder="문의 내용을 입력해주세요" /> -->
+<!-- 													<div class="input-group-btn"> -->
+<!-- 														<button class="btn btn-primary">Search</button> -->
+<!-- 													</div> -->
 												</div>
 											</div>
-											<div class="col-md-4" style="float: left; top: -5px">
+											<div class="col-md-4" style="float: left; top: -5px;">
 												<input type="button" class="btn btn-success btn-block"
-													style="margin: 5px; float: left; width: 20%;" value="건의사항"
+													style="margin: 5px; float: right; width: 20%;" value="건의사항"
 													onclick="window.location='/moyeo/two/suggestionInputForm'">
 												
 												<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">
 													<input type="button" class="btn btn-success btn-warning"
-														style="margin: 5px; float: left; width: 20%;"
+														style="margin: 5px; float: right; width: 20%;"
 														value="건의사항확인"
 														onclick="window.location='/moyeo/two/suggestionList'">
 												</c:if>		
