@@ -27,12 +27,14 @@
 			<div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
 				<div id="sliding_menu" style="float:left; width:80%; margin-left:10%; margin-top:20px;">
                     <ul>
-                   	
                    	   <li style="width:100%;"><a href="/moyeo/one/moyeoShop">전체보기</a>
                        
                        <li style="width:100%;"><a href="#">브랜드패션</a>
                            <ul>
                            		<li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=">전체보기</a></li>
+                           		<li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=브랜드 여성의류">브랜드 여성의류</a></li>
+                           		<li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=브랜드 남성의류">브랜드 남성의류</a></li>
+                           		<li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=브랜드 여성신발">브랜드 여성신발</a></li>
 	                           	<li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=브랜드 남성신발">브랜드 남성신발</a></li> 
 	                           	<li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=브랜드 시계">브랜드 시계</a></li> 
 	                            <li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=브랜드 쥬얼리">브랜드 쥬얼리</a></li> 
@@ -46,10 +48,7 @@
 	                           	<li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=브랜드 지갑/벨트">브랜드 지갑/벨트</a></li> 
 	                           	<li style="width:100%;"><a href="/moyeo/two/productCategory?product_cat1=브랜드패션&product_cat2=브랜드 여행가방">브랜드 여행가방</a></li>       
 	                           	<li style="width:100%; height:40px; border:0;">&nbsp;</li>
-	                           	<li style="width:100%; height:40px; border:0;">&nbsp;</li>
-	                           	<li style="width:100%; height:40px; border:0;">&nbsp;</li>
-	                           	<li style="width:100%; height:40px; border:0;">&nbsp;</li>
-	                           	<li style="width:100%; height:40px; border:0;">&nbsp;</li>             
+	                           	<li style="width:100%; height:40px; border:0;">&nbsp;</li>         
                            </ul>
                        </li> 
                        
