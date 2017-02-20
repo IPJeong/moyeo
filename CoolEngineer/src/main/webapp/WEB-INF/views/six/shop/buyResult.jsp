@@ -1295,7 +1295,7 @@ body {
 																				<tbody>
 																					<tr>
 																						<td><a
-																							href="productDetail?product_num=${product_num}"
+																							href="productDetail?product_num=${dto.product_num}"
 																							target="_blank"><img
 																								src="/moyeo/resources/resource/img/shop/blank.gif"
 																								border="0"></a></td>

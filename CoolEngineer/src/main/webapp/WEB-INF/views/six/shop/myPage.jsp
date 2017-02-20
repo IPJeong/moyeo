@@ -117,10 +117,10 @@ function orderPopupAddress(order_code)
 
 }
 //교환신청
-function orderPopupOption(order_code)
+function orderPopupChange(order_code)
 {
 
-    window.open("/moyeo/six/shop/addressModify?payment_num="+order_code, "orderPopupOption", "width=650, height=700, scrollbars=yes");
+    window.open("/moyeo/six/shop/productChange?payment_num="+order_code, "orderPopupOption", "width=650, height=700, scrollbars=yes");
 
 }
 
@@ -128,7 +128,7 @@ function orderPopupOption(order_code)
 function orderPopupCancel(order_code)
 {
 
-	window.open("/moyeo/six/shop/addressModify?payment_num="+order_code, "orderPopupCancel", "width=650, height=700, scrollbars=yes");
+	window.open("/moyeo/six/shop/orderCancel?payment_num="+order_code, "orderPopupCancel", "width=650, height=700, scrollbars=yes");
 
 }
 
@@ -700,7 +700,7 @@ function orderOk(order_code)
 <tbody><tr>
     <td><a href="#" onclick="orderPopupAddress('${dto.payment_num}'); return false;"><img src="/moyeo/resources/resource/img/shop/btn1.gif" border="0"></a></td>
     <td width="2"></td>
-    <td><a href="#" onclick="orderPopupOption('${dto.payment_num}'); return false;"><input type="button" style="width:57px; height:50px; background:#fbfbfb; font-family: 'Open Sans', sans-serif; font-size: 12px; border:1px solid #bdbdbd;" value="교환신청"></a></td>
+    <td><a href="#" onclick="orderPopupChange('${dto.payment_num}'); return false;"><input type="button" style="width:57px; height:50px; background:#fbfbfb; font-family: 'Open Sans', sans-serif; font-size: 12px; border:1px solid #bdbdbd;" value="교환신청"></a></td>
     <td width="2"></td>
     <td><a href="#" onclick="orderPopupCancel('${dto.payment_num}'); return false;"><img src="/moyeo/resources/resource/img/shop/btn3.gif" border="0"></a></td>
 </tr>

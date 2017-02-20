@@ -1635,8 +1635,8 @@ li {
 																									<c:forEach var="rel_dto" items="${rel_dtos}"
 																										varStatus="status">
 																										<li
-																											style="overflow: hidden; float: left; width: 116px; height: 122px;"><div
-																												style="width: 80px;">
+																											style="overflow: auto; float: left; width: 116px; height: 122px;"><div
+																												style="width: 80px;" >
 																												<table border="0" cellspacing="0"
 																													cellpadding="0">
 																													<tbody>
@@ -1766,9 +1766,9 @@ li {
 													<table border="0" cellpadding="0" cellspacing="0">
 														<tbody>
 															<tr>
-																<td valign="top"><p
+																<td valign="top"><div style="overflow:auto;"><p
 																		style="text-align: left; line-height: 16px; font-size: 12px; color: #878787; font-family: gulim, 굴림;">
-																		${dto.product_detail}</p></td>
+																		${dto.product_detail}</p></div></td>
 															</tr>
 														</tbody>
 													</table>

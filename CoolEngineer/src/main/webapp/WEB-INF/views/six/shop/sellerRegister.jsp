@@ -100,9 +100,8 @@ li {
 	background: url(/moyeo/resources/resource/img/bg.png) left top repeat white;
 
 }
-
 .registration-container .registration-box .registration-body .form-control:focus {
-    background: #f8f9fa;
+    background: rgb(249, 249, 249);
 }
 .registration-container .registration-box {  
     padding-top: 25px;
