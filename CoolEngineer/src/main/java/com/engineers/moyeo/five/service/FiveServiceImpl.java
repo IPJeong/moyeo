@@ -23,6 +23,7 @@ import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
 import com.engineers.moyeo.main.common.Code;
 import com.engineers.moyeo.main.common.FileManager;
+import com.engineers.moyeo.main.dto.GroupLeaderNotiDTO;
 import com.engineers.moyeo.main.model.FileForm;
 import com.engineers.moyeo.main.service.MainService;
 import com.engineers.moyeo.six.dao.SixDAO;
@@ -877,4 +878,33 @@ public class FiveServiceImpl implements FiveService {
 		}
 		mav.addObject("cnt", cnt);
 	}
+
+	// 모임알림 조회
+	@Override
+	public String getGroupNoti(Model model) {
+		
+		HttpServletRequest req = ((HttpServletRequest)model.asMap().get("req"));
+		
+		int group_num = Integer.parseInt(req.getParameter("group_num"));
+		
+		List<GroupLeaderNotiDTO> dtos = fiveDao.getGroupNoti(group_num);
+		System.out.println("알림 수 : " + dtos.size()) ;
+		
+		int cnt = 0;
+		
+		if(dtos != null) {
+			cnt = dtos.size();
+		}
+		
+		if(cnt > 0) {
+			model.addAttribute("cnt", cnt);
+			model.addAttribute("dtos", dtos);
+			fiveDao.updateGroupNoti(group_num);
+		}
+		
+		return "three/member/notiList";
+		
+	}
+	
+	
 }

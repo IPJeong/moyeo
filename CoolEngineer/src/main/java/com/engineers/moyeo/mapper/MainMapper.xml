@@ -291,18 +291,18 @@
 	<!-- 회원의 알림을 등록 -->
 	<insert id="addMemberNoti" parameterType="com.engineers.moyeo.main.dto.MemberNotiDTO">
 		insert into member_noti (noti_num, noti_content, is_checked, noti_date, mem_id)
-						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, #{noti_date}, #{mem_id})
+						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, sysdate, #{mem_id})
 	</insert>
 	
 	<!-- 모임장 알림을 등록 -->
 	<insert id="addLeaderNoti" parameterType="com.engineers.moyeo.main.dto.GroupLeaderNotiDTO">
 		insert into group_leader_noti (noti_num, noti_content, is_checked, noti_date, group_num, mem_id)
-						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, #{noti_date}, #{group_num}, #{mem_id})
+						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, sysdate, #{group_num}, #{mem_id})
 	</insert>
 	
 	<!-- 판매자 알림을 등록 -->
 	<insert id="addSellerNoti" parameterType="com.engineers.moyeo.main.dto.SellerNotiDTO">
 		insert into seller_noti (noti_num, noti_content, is_checked, noti_date, seller_id)
-						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, #{noti_date}, #{seller_id})
+						 VALUES (member_noti_seq.nextval, #{noti_content}, #{is_checked}, sysdate, #{seller_id})
 	</insert>
 </mapper>

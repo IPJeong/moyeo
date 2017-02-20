@@ -882,6 +882,13 @@ public class SixDAOImpl implements SixDAO{
 		
 		return dtos;
 	}
+	
+	// 모임 알림 개수 불러오기
+	@Override
+	public int getGroupNotiCnt(int group_num) {
+		SixDAO dao = this.sqlSession.getMapper(SixDAO.class);
+		return dao.getGroupNotiCnt(group_num);
+	}
 
 	//최근접속일 불러오기
 	@Override

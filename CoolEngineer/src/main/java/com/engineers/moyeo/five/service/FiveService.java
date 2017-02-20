@@ -48,4 +48,7 @@ public interface FiveService {
 	
 	// 모임후기 갤러리 삭제
 	public void deleteGallery(ModelAndView mav);
+	
+	// 모임알림 조회
+	public String getGroupNoti(Model model);
 }

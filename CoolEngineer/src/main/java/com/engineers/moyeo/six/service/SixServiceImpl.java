@@ -1099,6 +1099,11 @@ public class SixServiceImpl implements SixService{
 			req.getSession().setAttribute("group_per", 4);
 		}
 		
+		if((Integer)req.getSession().getAttribute("group_per") == 1 || (Integer)req.getSession().getAttribute("group_per") == 2 ) {
+			int notiCnt = sixDao.getGroupNotiCnt(group_num);
+			model.addAttribute("notiCnt", notiCnt);
+		}
+		
 		InterestGroupDTO dto = new InterestGroupDTO();
 		dto.setMem_id(mem_id);
 		dto.setGroup_num(Integer.parseInt(req.getParameter("group_num")));

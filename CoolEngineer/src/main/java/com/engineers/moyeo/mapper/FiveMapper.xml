@@ -256,4 +256,19 @@
     	 WHERE group_num = #{group_num}
     	   AND mem_id = #{mem_id}
     </select>
+    
+    <!-- 모임에서 모임알림을 조회 -->
+    <select id="getGroupNoti" parameterType="int" resultType="com.engineers.moyeo.main.dto.GroupLeaderNotiDTO">
+    	SELECT *
+    	  FROM group_leader_noti
+    	 WHERE group_num = #{group_num}
+    	 ORDER BY noti_date DESC   
+    </select>
+    
+    <!-- 조회한 모임 알림을 읽음으로 처리 -->
+    <update id="updateGroupNoti" parameterType="int">
+    	UPDATE group_leader_noti
+    	   SET is_checked = '1'
+    	 WHERE group_num = #{group_num}
+    </update>
 </mapper>

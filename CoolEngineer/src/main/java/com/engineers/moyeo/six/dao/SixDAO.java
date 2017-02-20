@@ -292,6 +292,8 @@ public interface SixDAO {
 	//모임-사이드 사진 불러오기
 	public List<MainPictureDTO> moimImagesView(int group_num);
 	
+	// 모임 - 알림 불러오기
+	public int getGroupNotiCnt(int group_num);
 	
 	//모임-소개사진 등록
 	public int moimAddImageProB(MainPictureDTO dto);

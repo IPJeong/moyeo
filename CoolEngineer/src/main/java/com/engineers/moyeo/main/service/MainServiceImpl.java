@@ -761,7 +761,6 @@ public class MainServiceImpl implements MainService{
 	public int addMemberNotiDTO(String msg, long time, String mem_id) {
 		MemberNotiDTO dto = new MemberNotiDTO();
 		dto.setNoti_content(msg);
-		dto.setNoti_date(new Date(time));
 		dto.setIs_checked(Code.NotiNonChecked);
 		dto.setMem_id(mem_id);
 		return mainDao.addMemberNoti(dto);
@@ -770,7 +769,6 @@ public class MainServiceImpl implements MainService{
 	public int addGroupLeaderNotiDTO(String msg, long time, String mem_id, int group_num) {
 		GroupLeaderNotiDTO dto = new GroupLeaderNotiDTO();
 		dto.setNoti_content(msg);
-		dto.setNoti_date(new Date(time));
 		dto.setIs_checked(Code.NotiNonChecked);
 		dto.setMem_id(mem_id);
 		dto.setGroup_num(group_num);
@@ -780,7 +778,6 @@ public class MainServiceImpl implements MainService{
 	public int addSellerNotiDTO(String msg, long time, String seller_id) {
 		SellerNotiDTO dto = new SellerNotiDTO();
 		dto.setNoti_content(msg);
-		dto.setNoti_date(new Date(time));
 		dto.setIs_checked(Code.NotiNonChecked);
 		dto.setSeller_id(seller_id);
 		return mainDao.addSellerNoti(dto);

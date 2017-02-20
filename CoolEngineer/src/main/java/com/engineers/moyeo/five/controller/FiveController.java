@@ -249,4 +249,13 @@ public class FiveController {
 		return mav;
 	}
 	
+	// 모임알림 조회
+	@RequestMapping(value="groupNotiList")
+	public String getGroupNoti(Model model, HttpServletRequest req) {
+		
+		System.out.println("모임알림 조회");
+		model.addAttribute("req", req);
+		viewPage = fiveService.getGroupNoti(model);
+		return viewPage;
+	}
 }

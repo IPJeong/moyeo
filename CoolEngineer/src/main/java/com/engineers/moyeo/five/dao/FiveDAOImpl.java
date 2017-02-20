@@ -14,6 +14,7 @@ import com.engineers.moyeo.five.dto.MeetingPostViewDTO;
 import com.engineers.moyeo.five.dto.PostPictureDTO;
 import com.engineers.moyeo.five.dto.PostReplyDTO;
 import com.engineers.moyeo.five.dto.PostVideoDTO;
+import com.engineers.moyeo.main.dto.GroupLeaderNotiDTO;
 import com.engineers.moyeo.six.dto.MyGroupDTO;
 
 @Repository
@@ -228,5 +229,20 @@ public class FiveDAOImpl implements FiveDAO{
 		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
 		return dao.getGroupPer(dto);
 	}
+
+	// 모임의 알림을 조회
+	@Override
+	public List<GroupLeaderNotiDTO> getGroupNoti(int group_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.getGroupNoti(group_num);
+	}
+
+	// 조회한 알림을 읽음처리
+	@Override
+	public int updateGroupNoti(int group_num) {
+		FiveDAO dao = sqlSession.getMapper(FiveDAO.class);
+		return dao.updateGroupNoti(group_num);
+	}
+	
 	
 }
