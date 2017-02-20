@@ -177,14 +177,13 @@ tr {
 					<li><a href="/moyeo/one/main/main.jsp">Home</a></li>
 					<li><a
 						href="/moyeo/one/customer-support/customer_support_main.jsp">고객지원</a></li>
-					<li class="active">공지사항</li>
+					<li class="active">Q&A</li>
 				</ul>
 				<!-- END BREADCRUMB -->
 
 				<div class="page-title">
 					<h2>
-						<span class="fa fa-users"></span> Q&A <small> 무엇이든 질문을
-							하세요! </small>
+						<span class="fa fa-users"></span> Q&A <small> 궁금한 사항을 질문 하세요. </small>
 					</h2>
 				</div>
 
