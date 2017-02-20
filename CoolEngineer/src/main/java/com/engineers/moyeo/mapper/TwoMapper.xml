@@ -200,40 +200,42 @@
 	</select>
 	
 	<select id="getPlaceLikeCount" resultType="int">
-		 SELECT COUNT(*) 
-		   FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum
-		           FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count  
-		                   FROM (SELECT cc.place_like_count, cc.recpla_num, pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, DENSE_RANK() OVER (ORDER BY cc.place_like_count DESC) AS place_like_order
-		                           FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
-		                                   FROM place_like pl, rec_place rp, place_info pi, place_pic pp
-		                                 WHERE pl.recpla_num = rp.recpla_num
-		                                   AND rp.place_num = pi.place_num
-		                                   AND pi.place_num = pp.place_num
-		                                 GROUP BY pl.recpla_num) cc, rec_place rp, place_info pi, place_pic pp 
-		                          WHERE cc.recpla_num = rp.recpla_num
-		                            AND rp.place_num = pi.place_num
-		                            AND pi.place_num = pp.place_num)
-		                 ORDER BY place_like_count DESC)
-		        )
+		 SELECT COUNT(*)
+		  FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum
+		          FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, pc.place_like_count
+		                  FROM (SELECT NVL(SUM(place_like_count), 0) as place_like_count, rp.place_num
+		                          FROM (SELECT NVL(COUNT(plalike_num), 0) as place_like_count, recpla_num as recpla_num
+		                                  FROM place_like
+		                                 GROUP BY recpla_num) pl,
+		                               (SELECT recpla_num, place_num
+		                                  FROM rec_place) rp
+		                        WHERE rp.recpla_num = pl.recpla_num(+)
+		                        GROUP BY rp.place_num) pc, 
+		                        place_info pi, 
+		                        place_pic pp
+		                WHERE pc.place_num = pi.place_num
+		                  AND pi.place_num = pp.place_num
+		                ORDER BY place_like_count DESC))
 	</select>
 	
 	<select id="getPlaceLikeList" parameterType="Map" resultType="com.engineers.moyeo.two.dto.Place_likeDTO">		
-		 SELECT * 
-		   FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum
-		           FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count  
-		                   FROM (SELECT cc.place_like_count, cc.recpla_num, pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, DENSE_RANK() OVER (ORDER BY cc.place_like_count DESC) AS place_like_order
-		                           FROM (SELECT COUNT(pl.plalike_num) as place_like_count, pl.recpla_num as recpla_num
-		                                   FROM place_like pl, rec_place rp, place_info pi, place_pic pp
-		                                 WHERE pl.recpla_num = rp.recpla_num
-		                                   AND rp.place_num = pi.place_num
-		                                   AND pi.place_num = pp.place_num
-		                                 GROUP BY pl.recpla_num) cc, rec_place rp, place_info pi, place_pic pp 
-		                          WHERE cc.recpla_num = rp.recpla_num
-		                            AND rp.place_num = pi.place_num
-		                            AND pi.place_num = pp.place_num)
-		                 ORDER BY place_like_count DESC)
-		        )
-		 WHERE rnum BETWEEN #{start2} AND #{end2}
+		SELECT *
+		  FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum
+		          FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, pc.place_like_count
+		                  FROM (SELECT NVL(SUM(place_like_count), 0) as place_like_count, rp.place_num
+		                          FROM (SELECT NVL(COUNT(plalike_num), 0) as place_like_count, recpla_num as recpla_num
+		                                  FROM place_like
+		                                 GROUP BY recpla_num) pl,
+		                               (SELECT recpla_num, place_num
+		                                  FROM rec_place) rp
+		                        WHERE rp.recpla_num = pl.recpla_num(+)
+		                        GROUP BY rp.place_num) pc, 
+		                        place_info pi, 
+		                        place_pic pp
+		                WHERE pc.place_num = pi.place_num
+		                  AND pi.place_num = pp.place_num
+		                ORDER BY place_like_count DESC))
+		WHERE rnum BETWEEN #{start2} AND #{end2}
 	</select>
 	
 	<select id="readPlace" parameterType="int" resultType="com.engineers.moyeo.two.dto.Place_infoDTO">
