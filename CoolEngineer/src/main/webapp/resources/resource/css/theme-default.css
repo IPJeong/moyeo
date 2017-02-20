@@ -6668,7 +6668,7 @@ td.dataTables_empty {
   transition: all 200ms ease;
 }
 .registration-container .registration-box .registration-body .form-control:focus {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgb(249, 249, 249);
 }
 .registration-container .registration-box .registration-body .btn-link {
   color: #33414e;
