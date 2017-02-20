@@ -1336,7 +1336,8 @@
 		                        </if>
 		                        ORDER BY product_price) pi,
 		                       (SELECT pic_num, pic_path, pic_name, product_num, pic_type
-		                          FROM product_pic) pp
+		                          FROM product_pic
+		                        WHERE rowid IN (SELECT MIN(rowid) FROM product_pic GROUP BY product_num)) pp
 		                WHERE pi.product_num = pp.product_num)
 		       )
 	</select>
@@ -1361,7 +1362,8 @@
 		                        </if>
 		                        ORDER BY product_price) pi,
 		                       (SELECT pic_num, pic_path, pic_name, product_num, pic_type
-		                          FROM product_pic) pp
+		                          FROM product_pic
+		                        WHERE rowid IN (SELECT MIN(rowid) FROM product_pic GROUP BY product_num)) pp
 		                WHERE pi.product_num = pp.product_num)
 		       )
 		WHERE rnum BETWEEN #{start} AND #{end}
