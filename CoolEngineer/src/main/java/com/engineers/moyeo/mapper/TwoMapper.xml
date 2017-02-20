@@ -1264,61 +1264,64 @@
 	</select>
 	
 	<select id="checkBestTenPresent" parameterType="int" resultType="int">
-		SELECT COUNT(*)
+		SELECT COUNT(*) 
 		  FROM (SELECT present_cnt, name, mem_id, birth, gender, rownum AS present_rank
-				  FROM (SELECT cp.present_cnt AS present_cnt, mi.mem_id AS mem_id, mi.name AS name, mi.address AS address, mi.birth AS birth, mi.gender AS gender, DENSE_RANK() OVER (ORDER BY present_cnt DESC) AS present_cnt_rank
-				          FROM (SELECT mem_id, COUNT(*) AS present_cnt
-				                  FROM check_present
-				                WHERE group_num = #{group_num}
-				                GROUP BY mem_id
-				                ORDER BY present_cnt DESC) cp,
-				              (SELECT mem_id, name, address, birth, gender
-				                 FROM member_info) mi
-				       WHERE cp.mem_id = mi.mem_id)
-				WHERE present_cnt_rank BETWEEN 1 AND 10)
-		WHERE present_rank BETWEEN 1 AND 10
+		          FROM (SELECT present_cnt, name, mem_id, birth, gender
+		                  FROM (SELECT cp.present_cnt AS present_cnt, mi.mem_id AS mem_id, mi.name AS name, mi.address AS address, mi.birth AS birth, mi.gender AS gender
+		                          FROM (SELECT mem_id, COUNT(*) AS present_cnt
+		                                  FROM check_present
+		                                WHERE group_num = #{group_num}
+		                                GROUP BY mem_id
+		                                ORDER BY present_cnt DESC) cp,
+		                              (SELECT mem_id, name, address, birth, gender
+		                                 FROM member_info) mi
+		                       WHERE cp.mem_id = mi.mem_id)
+		                ORDER BY present_cnt DESC))
 	</select>
 	
 	<select id="getBestTenArticle" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
-	   SELECT *
-	   	 FROM (SELECT title, hit, reg_date, mem_id, rownum AS hit_rank
-				 FROM (SELECT title, hit, reg_date, mem_id, DENSE_RANK() OVER (ORDER BY hit DESC) AS hit_rank
-				        FROM (SELECT * 
-				                FROM (SELECT greeting_title AS title, greeting_hit AS hit, greeting_date AS reg_date, mem_id
-				                        FROM greeting_board
-				                      WHERE group_num = #{group_num}
-				                      ORDER BY hit)
-				              UNION 
-				              SELECT *
-				                FROM (SELECT group_noti_title AS title, hit AS hit, group_noti_date AS reg_date, mem_id
-				                        FROM group_notice
-				                      WHERE group_num = #{group_num}
-				                      ORDER BY hit)
-				              UNION
-				              SELECT *
-				                FROM (SELECT post_title AS title, post_hit AS hit, post_date AS reg_date, mem_id
-				                        FROM meeting_post
-				                      WHERE group_num = #{group_num}
-				                      ORDER BY hit)
-				              )
-				       )
-				WHERE hit_rank BETWEEN 1 AND 10)
+	    SELECT *
+		  FROM (SELECT title, hit, reg_date, mem_id, rownum AS hit_rank
+		         FROM (SELECT title, hit, reg_date, mem_id
+		                 FROM (SELECT title, hit, reg_date, mem_id
+		                        FROM (SELECT * 
+		                                FROM (SELECT greeting_title AS title, greeting_hit AS hit, greeting_date AS reg_date, mem_id
+		                                        FROM greeting_board
+		                                      WHERE group_num = #{group_num}
+		                                      ORDER BY hit)
+		                              UNION 
+		                              SELECT *
+		                                FROM (SELECT group_noti_title AS title, hit AS hit, group_noti_date AS reg_date, mem_id
+		                                        FROM group_notice
+		                                      WHERE group_num = #{group_num}
+		                                      ORDER BY hit)
+		                              UNION
+		                              SELECT *
+		                                FROM (SELECT post_title AS title, post_hit AS hit, post_date AS reg_date, mem_id
+		                                        FROM meeting_post
+		                                      WHERE group_num = #{group_num}
+		                                      ORDER BY hit)
+		                              )
+		                       )
+		               ORDER BY hit DESC)
+		      )
 		WHERE hit_rank BETWEEN 1 AND 10
 	</select>
 	
 	<select id="getBestTenPresent" parameterType="int" resultType="com.engineers.moyeo.two.dto.StatisticsDTO">
-		SELECT *
+		SELECT * 
 		  FROM (SELECT present_cnt, name, mem_id, birth, gender, rownum AS present_rank
-				  FROM (SELECT cp.present_cnt AS present_cnt, mi.mem_id AS mem_id, mi.name AS name, mi.address AS address, mi.birth AS birth, mi.gender AS gender, DENSE_RANK() OVER (ORDER BY present_cnt DESC) AS present_cnt_rank
-				          FROM (SELECT mem_id, COUNT(*) AS present_cnt
-				                  FROM check_present
-				                WHERE group_num = #{group_num}
-				                GROUP BY mem_id
-				                ORDER BY present_cnt DESC) cp,
-				              (SELECT mem_id, name, address, birth, gender
-				                 FROM member_info) mi
-				       WHERE cp.mem_id = mi.mem_id)
-				WHERE present_cnt_rank BETWEEN 1 AND 10)
+		          FROM (SELECT present_cnt, name, mem_id, birth, gender
+		                  FROM (SELECT cp.present_cnt AS present_cnt, mi.mem_id AS mem_id, mi.name AS name, mi.address AS address, mi.birth AS birth, mi.gender AS gender
+		                          FROM (SELECT mem_id, COUNT(*) AS present_cnt
+		                                  FROM check_present
+		                                WHERE group_num = #{group_num}
+		                                GROUP BY mem_id
+		                                ORDER BY present_cnt DESC) cp,
+		                              (SELECT mem_id, name, address, birth, gender
+		                                 FROM member_info) mi
+		                       WHERE cp.mem_id = mi.mem_id)
+		                ORDER BY present_cnt DESC))
 		WHERE present_rank BETWEEN 1 AND 10
 	</select>
 
