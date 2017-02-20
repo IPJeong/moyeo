@@ -142,6 +142,134 @@ function myShop() {
 
 </style>
 
+
+
+<!-- 모달 -->
+<div class="modal animated fadeIn" id="modal_change_photo" tabindex="-1"
+	role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="smallModalHead">프로필 사진 변경</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="text-center" id="user_image">
+					<img src="${dto.proPicPath}/${dto.proPicName}"
+						class="img-thumbnail" style="width: 70%;" />
+				</div>
+			</div>
+
+			<form:form class="form-horizontal" action="changeProImg"
+				method="post" name="changeProImg" modelAttribute="uploadForm"
+				enctype="multipart/form-data" onsubmit="changeProImg();">
+				<div class="modal-body form-horizontal form-group-separated">
+					<div class="form-group">
+						<label class="col-md-4 control-label">New Photo</label>
+						<div class="col-md-8">
+							<input type="file" class="fileinput btn-info" name="files[0]"
+								id="cp_photo" data-filename-placement="inside" title="사진 선택">
+							<label class="check" style="margin-left: 20px"><input
+								type="checkbox" class="icheckbox" name="noImg"
+								value="${dto.gender}" />프로필 사진 선택 안함</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success" id="cp_accept">사진변경</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+			</form:form>
+		</div>
+	</div>
+</div>
+<!-- 비밀번호 모달 -->
+<div class="modal animated fadeIn" id="modal_change_pw" tabindex="-1"
+	role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="smallModalHead">비밀번호 변경</h4>
+			</div>
+			<form:form class="form-horizontal" action="changePw" method="post"
+				name="proPwCng">
+				<div class="modal-body form-horizontal form-group-separated">
+					<div class="form-group">
+						<label class="col-md-4 control-label">현재 비밀번호</label>
+						<div class="col-md-4">
+							<input type="password" name="passwd" class="form-control"
+								onkeyup="curPwChk()" required />
+						</div>
+						<div class="col-md-4" id="curPwChk" style="border: 0px;"></div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">새 비밀번호</label>
+						<div class="col-md-4">
+							<input type="password" name="password" class="form-control"
+								onkeyup="passChk2()" required />
+						</div>
+						<div class="col-md-4" id="proPwChk2" style="border: 0px;"></div>
+
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">비밀번호 확인</label>
+						<div class="col-md-4">
+							<input type="password" name="re_password" class="form-control"
+								onkeyup="passChk2()" required />
+						</div>
+						<div class="col-md-4" id="proPwChk" style="border: 0px;"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success" id="proPwSub"
+						disabled>비밀번호변경</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+			</form:form>
+		</div>
+	</div>
+</div>
+
+<!-- 회원탈퇴 모달 -->
+<div class="modal animated fadeIn" id="modal_delete" tabindex="-1"
+	role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="smallModalHead">회원탈퇴</h4>
+			</div>
+			<form:form class="form-horizontal" action="delMem" method="post"
+				name="deleteMem" onsubmit="return chkDel();">
+				<div class="modal-body form-horizontal form-group-separated">
+					<div class="form-group">
+						<label class="col-md-4 control-label">비밀번호</label>
+						<div class="col-md-4">
+							<input type="password" name="passwd" class="form-control"
+								onkeyup="curPwChk2()" required />
+						</div>
+						<div class="col-md-4" id="curPwChk2" style="border: 0px;"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success" id="delSub" disabled>회원탈퇴</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+			</form:form>
+		</div>
+	</div>
+</div>
+
+
+
 <div class="col-md-6 page-title"></div>
 
 <div class="col-md-10 " style="margin: auto; float: none;">
@@ -544,131 +672,6 @@ function myShop() {
 	
 	<!--******************************************** 샵 영역 끝  ******************************************************* -->
 		
-</div>
-
-
-<!-- 모달 -->
-<div class="modal animated fadeIn" id="modal_change_photo" tabindex="-1"
-	role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title" id="smallModalHead">프로필 사진 변경</h4>
-			</div>
-
-			<div class="modal-body">
-				<div class="text-center" id="user_image">
-					<img src="${dto.proPicPath}/${dto.proPicName}"
-						class="img-thumbnail" style="width: 70%;" />
-				</div>
-			</div>
-
-			<form:form class="form-horizontal" action="changeProImg"
-				method="post" name="changeProImg" modelAttribute="uploadForm"
-				enctype="multipart/form-data" onsubmit="changeProImg();">
-				<div class="modal-body form-horizontal form-group-separated">
-					<div class="form-group">
-						<label class="col-md-4 control-label">New Photo</label>
-						<div class="col-md-8">
-							<input type="file" class="fileinput btn-info" name="files[0]"
-								id="cp_photo" data-filename-placement="inside" title="사진 선택">
-							<label class="check" style="margin-left: 20px"><input
-								type="checkbox" class="icheckbox" name="noImg"
-								value="${dto.gender}" />프로필 사진 선택 안함</label>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-success" id="cp_accept">사진변경</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-				</div>
-			</form:form>
-		</div>
-	</div>
-</div>
-<!-- 비밀번호 모달 -->
-<div class="modal animated fadeIn" id="modal_change_pw" tabindex="-1"
-	role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title" id="smallModalHead">비밀번호 변경</h4>
-			</div>
-			<form:form class="form-horizontal" action="changePw" method="post"
-				name="proPwCng">
-				<div class="modal-body form-horizontal form-group-separated">
-					<div class="form-group">
-						<label class="col-md-4 control-label">현재 비밀번호</label>
-						<div class="col-md-4">
-							<input type="password" name="passwd" class="form-control"
-								onkeyup="curPwChk()" required />
-						</div>
-						<div class="col-md-4" id="curPwChk" style="border: 0px;"></div>
-					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">새 비밀번호</label>
-						<div class="col-md-4">
-							<input type="password" name="password" class="form-control"
-								onkeyup="passChk2()" required />
-						</div>
-						<div class="col-md-4" id="proPwChk2" style="border: 0px;"></div>
-
-					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label">비밀번호 확인</label>
-						<div class="col-md-4">
-							<input type="password" name="re_password" class="form-control"
-								onkeyup="passChk2()" required />
-						</div>
-						<div class="col-md-4" id="proPwChk" style="border: 0px;"></div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-success" id="proPwSub"
-						disabled>비밀번호변경</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-				</div>
-			</form:form>
-		</div>
-	</div>
-</div>
-
-<!-- 회원탈퇴 모달 -->
-<div class="modal animated fadeIn" id="modal_delete" tabindex="-1"
-	role="dialog" aria-labelledby="smallModalHead" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title" id="smallModalHead">회원탈퇴</h4>
-			</div>
-			<form:form class="form-horizontal" action="delMem" method="post"
-				name="deleteMem" onsubmit="return chkDel();">
-				<div class="modal-body form-horizontal form-group-separated">
-					<div class="form-group">
-						<label class="col-md-4 control-label">비밀번호</label>
-						<div class="col-md-4">
-							<input type="password" name="passwd" class="form-control"
-								onkeyup="curPwChk2()" required />
-						</div>
-						<div class="col-md-4" id="curPwChk2" style="border: 0px;"></div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-success" id="delSub" disabled>회원탈퇴</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-				</div>
-			</form:form>
-		</div>
-	</div>
 </div>
 
 
