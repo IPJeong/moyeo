@@ -2816,7 +2816,7 @@ li {
 																										</tr>
 																									</tbody>
 																								</table>
-<!-- 답변 없는 경우 예시 시작-->
+<!-- 답변 없는 경우 예시 시작
 																								<table width="100%" border="0" cellspacing="0"
 																									cellpadding="0"
 																									onmouseover="this.style.backgroundColor='#ffffe5';"
@@ -2968,9 +2968,7 @@ li {
 																									</tbody>
 																								</table>
 
-<!-- 답변 없는 경우 예시 끝 -->
 
-<!-- 답변 있는 경우 예시 시작 -->
 																								<table width="100%" border="0" cellspacing="0"
 																									cellpadding="0"
 																									onmouseover="this.style.backgroundColor='#ffffe5';"
@@ -3230,7 +3228,7 @@ li {
 																								</div>
 																								<div style="height: 1px; background: #efefef;"
 																									class="none">&nbsp;</div>
-<!-- 답변 있는 경우 예시 끝 -->
+ 답변 있는 경우 예시 끝 -->
 
 
 
