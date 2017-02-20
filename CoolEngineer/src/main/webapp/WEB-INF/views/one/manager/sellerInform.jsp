@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- CSS INCLUDE -->
 <link rel="stylesheet" type="text/css" id="theme"
@@ -85,7 +86,8 @@
 							
 					</div>
 				</div>
-
+	
+				<c:if test="${recognition == '91'}">
 				<div class="form-group">
 					<div class="col-md-12 col-xs-12" style="width: 520px">
 						<a onclick="if(confirm('판매승인을 하시겠습니까?'))
@@ -99,7 +101,38 @@
 							data-target="#modal_change_password">판매거절</a>
 					</div>
 				</div>
-
+				</c:if>
+				
+				<c:if test="${recognition == '06'}">
+				<div class="form-group">
+					<div class="col-md-12 col-xs-12" style="width: 520px">
+						<a onclick="if(confirm('판매자 자격을 박탈하시겠습니까?'))
+                     		window.location='/moyeo/two/sellerRevokePro?seller_id=${dto.seller_id}&pageNum=${pageNum}'"
+							class="btn btn-danger btn-block btn-rounded" data-toggle="modal"
+							data-target="#modal_change_password">판매자 자격 박탈</a>
+					</div>
+				</div>
+				</c:if>
+				
+				<c:if test="${recognition == '15'}">
+				<div class="form-group">
+					<div class="col-md-12 col-xs-12" style="width: 520px">
+						<a onclick="#"
+							class="btn btn-danger btn-block btn-rounded" data-toggle="modal"
+							data-target="#modal_change_password">판매자 거부된 회원입니다.</a>
+					</div>
+				</div>
+				</c:if>
+				
+				<c:if test="${recognition == '20'}">
+				<div class="form-group">
+					<div class="col-md-12 col-xs-12" style="width: 520px">
+						<a onclick="#"
+							class="btn btn-danger btn-block btn-rounded" data-toggle="modal"
+							data-target="#modal_change_password">판매자 자격이 박탈된 회원입니다.</a>
+					</div>
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</form>

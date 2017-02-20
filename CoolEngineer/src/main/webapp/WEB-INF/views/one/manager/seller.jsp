@@ -116,6 +116,9 @@
 										<c:if test="${dto.recognition=='15'}">
 										<td><font color="orange">신청거절</font></td>
 										</c:if>
+										<c:if test="${dto.recognition=='20'}">
+										<td><font color="red">자격박탈</font></td>
+										</c:if>
 										<td>${dto.seller_id}</td>
 										<td>${dto.tel}</td>
 										<td>${dto.address}</td>
