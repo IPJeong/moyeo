@@ -134,8 +134,10 @@ li {
                 	<input type="hidden" name="place_num" value="${place_num}">
                 	<input type="hidden" name="pageNum" value="${pageNum}">
 					<div style="float: right; margin-right:20%;">
+					<c:if test="${sessionScope.authority == '02' || sessionScope.authority == '08'}">	
 						<input type="button" class="btn btn-info" value="수정" onclick="placeModify()">
 						<input type="button" class="btn btn-info" value="삭제" onclick="placeDelete()">
+					</c:if>	
 						<input type="button" class="btn btn-info" value="목록" onclick="window.location='placeList'">
 					</div>
 				</form>
