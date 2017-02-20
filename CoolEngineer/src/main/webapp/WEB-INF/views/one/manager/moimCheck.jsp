@@ -88,8 +88,8 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="panel-title-box">
-								<h3>회원관리</h3>
-								<span>설명</span>
+								<h3>모임관리</h3>
+								<span>모임을 관리하는 관리자 페이지 입니다.</span>
 							</div>
 						</div>
 

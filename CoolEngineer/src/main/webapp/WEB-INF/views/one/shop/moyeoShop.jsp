@@ -178,11 +178,18 @@ li {
 			return false;
 		}
 	}
+	
+	function comma() {
+	   $('.product_price').each(function() {
+		   $(this).text($(this).text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+	   })
+	   
+	}
 </script>
 <!-- END TEMPLATE -->
 <!-- END SCRIPTS -->
 
-<body class="x-dashboard">
+<body class="x-dashboard" onload="comma();">
 	<!-- START PAGE CONTAINER -->
 
 	<div class="page-container">
@@ -242,9 +249,9 @@ li {
 								
 											
 											<div class="meta">
-												<strong>${dto.product_name}</strong> 
-												<span>${dto.product_price}원</span>
-											</div>
+			                                    <strong>${dto.product_name}</strong>
+			                                    <span class="product_price">${dto.product_price}</span>
+			                                 </div>
 										</a>
 										</c:forEach>
 										</div>

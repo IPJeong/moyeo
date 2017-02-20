@@ -232,9 +232,10 @@ li {
                            <div class="pull-right push-up-10">
                            </div>
 
+						   <c:forEach var="dto" items="${dtos}" begin="0">
                            <div class="gallery">
                               <div>
-                              <c:forEach var="dto" items="${dtos}" begin="0">
+
                               <a class="gallery-item" style="width:300px; height:200px; margin:30px;"
                                  href="/moyeo/six/shop/productDetail?product_num=${dto.product_num}"
                                  title="Nature Image 1" data-gallery>
@@ -242,18 +243,19 @@ li {
                                     <img
                                        src="${dto.pic_path}/${dto.pic_name}"
                                        style="width:300px; height:200px;" />
-                              
-                              
-                        
-                                 
-                                 <div class="meta">
-                                    <strong>${dto.product_name}</strong>
-                                    <span class="product_price">${dto.product_price}</span>
-                                 </div>
+                                            
                               </a>
-                              </c:forEach>
+                          			<br><br><br>
+                                    <input type="button" value="제품수정" onclick="return getInfo('${dto.product_num}', '${pageNum}')"><br>
+                                    <strong>제품이름: ${dto.product_name}</strong><br>
+                                    <strong><span class="product_price">가격: ${dto.product_price}</span></strong><br><br>
+                          			<strong>상세정보: </strong> <br>
+                          			${dto.product_detail}
+                              
+                              
                               </div>
-                           </div>                     
+                           </div>     
+                           </c:forEach>                
                         </div>
                      <div class="row">
                      <div class="col-md-12">
@@ -264,8 +266,8 @@ li {
                            
                               <!-- 처음[◀◀] 이전[◀]-->
                               <c:if test="${startPage > pageBlock}">
-                                 <li><a href="moyeoShop">«</a></li>
-                                 <li><a href="moyeoShop?pageNum=${startPage - pageBlock}">‹</a></li>
+                                 <li><a href="productManage">«</a></li>
+                                 <li><a href="productManage?pageNum=${startPage - pageBlock}">‹</a></li>
                               </c:if>
 
                               <c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -273,14 +275,14 @@ li {
                                     <li class="active"><a href="#">${i}</a></li>
                                  </c:if>
                                  <c:if test="${i != currentPage}">
-                                    <li><a href="moyeoShop?pageNum=${i}">${i}</a></li>
+                                    <li><a href="productManage?pageNum=${i}">${i}</a></li>
                                  </c:if>
                               </c:forEach>
 
                               <!-- 다음[▶] 끝[▶▶] -->
                               <c:if test="${pageCount > endPage}">
-                                 <li><a href="moyeoShop?pageNum=${startPage + pageBlock}">›</a></li>
-                                 <li><a href="moyeoShop?pageNum=${pageCount}">»</a></li>
+                                 <li><a href="productManage?pageNum=${startPage + pageBlock}">›</a></li>
+                                 <li><a href="productManage?pageNum=${pageCount}">»</a></li>
                               </c:if>
                            </c:if>
                         </ul>
@@ -293,6 +295,13 @@ li {
 				</div>
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+			function getInfo(product_num, pageNum) {
+				window.open('productModifyForm?product_num='+product_num+'&pageNum='+pageNum, 'productInform', 'menubar=no, width=550, height=400, top=100, left=500');
+			}
+		
+		</script>
 		
 		<!-- 
 	-->

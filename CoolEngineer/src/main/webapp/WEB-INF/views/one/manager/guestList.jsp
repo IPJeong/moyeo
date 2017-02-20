@@ -100,7 +100,7 @@
 						<div class="panel-heading">
 							<div class="panel-title-box">
 								<h3>회원관리</h3>
-								<span>설명</span>
+								<span>회원들을 관리하는 페이지 입니다.</span>
 							</div>
 						</div>
 						<div style="margin-left: 84%; width: 300px;">

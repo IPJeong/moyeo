@@ -115,7 +115,7 @@
 														<div class="input-group">
 															<span class="input-group-addon"><span
 																class="fa fa-info-circle"></span></span>
-																 <input type="text" class="form-control" name="product_name" required/>
+																 <input type="text" class="form-control" name="product_name"/>
 														</div>
 													</div>
 												</div>
@@ -125,7 +125,8 @@
 													<div class="col-md-9 col-xs-12">
 														<div class="input-group">
 															<span class="input-group-addon"><span
-																class="fa fa-krw"></span></span> <input type="number" class="form-control" name="product_price" min="10" required/>
+																class="fa fa-krw"></span></span> <input type="text"
+																class="form-control" name="product_price"/>
 														</div>
 													
 													</div>
@@ -136,7 +137,8 @@
 													<div class="col-md-9 col-xs-12">
 														<div class="input-group">
 															<span class="input-group-addon"><span
-																class="fa fa-floppy-o"></span></span> <input type="number" class="form-control" name="product_qty" min="1" required/>
+																class="fa fa-floppy-o"></span></span> <input type="number"
+																class="form-control" name="product_qty"/>
 														</div>
 													
 													</div>
@@ -145,7 +147,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label">제품 설명</label>
 													<div class="col-md-9 col-xs-12">
-														<textarea class="form-control" rows="5" name="product_detail" required></textarea>
+														<textarea class="form-control" rows="5" name="product_detail"></textarea>
 													
 													</div>
 												</div>
@@ -192,13 +194,17 @@
 												</div>
 											</div>
 										</div>
+
 									</div>
 									
 										<input type="submit" class="btn btn-primary" style="margin-left:62%;" value="제품등록">
+									
 								</div>
 							</form:form>
+
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
