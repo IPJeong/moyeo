@@ -58,7 +58,18 @@ img {
 
 
 </style>
+<script type="text/javascript">
+function notiList(group_num) {
+	
+	var windowW = 300;  // 창의 가로 길이
+    var windowH = 70;  // 창의 세로 길이
+    var left = Math.ceil((window.screen.width - windowW)/2);
+    var top = Math.ceil((window.screen.height - windowH)/2);
 
+	window.open('/moyeo/five/groupNotiList?group_num='+group_num, 'notiWindow', 'width=800, height=450, left=' + left + 'top=' + top);
+	
+}
+</script>
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb push-down-0">
 	<li><a href="../main/main.jsp">Home</a></li>
@@ -119,7 +130,7 @@ img {
 										style="width: 20%; height: 40px; font-size: 13px"></a> 
 								</c:if>	
 								
-								<c:if test="${group_per != 4}">
+								<c:if test="${group_per == 1 || group_per == 2}">
 									<a
 										href="../../two/moimWithdraw?group_num=${group_num}">
 									<input type="button" class="btn btn-warning"
@@ -128,8 +139,19 @@ img {
 								</c:if>
 							
 								<a>
-								<input class="btn btn-warning"	type="button" value="모임신고" onclick="window.location='/moyeo/one/moimReportMain?group_num='+${group_num}" style="width: 20%; height: 40px; font-size: 13px">
+									<c:if test="${group_per == 2 || group_per == 3}">
+										<input class="btn btn-warning"	type="button" value="모임신고" onclick="window.location='/moyeo/one/moimReportMain?group_num='+${group_num}" style="width: 20%; height: 40px; font-size: 13px">
+									</c:if>
 								</a>
+								
+								<c:if test="${group_per == 1 || group_per == 2}">
+									<button type="button" class="btn btn-warning" onclick="notiList('${group_num}')" style="width: 28%; height: 40px; font-size: 13px">
+	                                	<i class="fa fa-bullhorn"></i>모임알림
+	                                	<c:if test="${notiCnt > 0}">
+											<span class="badge badge-info" style="background-color : #FFD8D8;"><font size="3px;" style="font-style: bold">${notiCnt}</font></span>
+											</c:if>
+	                                </button>
+                                </c:if>
 							</div>
 						</div>
 					</div>
