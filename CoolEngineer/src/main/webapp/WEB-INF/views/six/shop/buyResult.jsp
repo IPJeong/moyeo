@@ -1208,11 +1208,10 @@ body {
 																cellpadding="0">
 																<tbody>
 																	<tr height="30">
-																		<td width="6"></td>
-																		<td align="center" width="680"><img
+																		<td align="center" width="648"><img
 																			src="/moyeo/resources/resource/img/shop/title_item2.gif"></td>
 																		<td width="1"></td>
-																		<td width="60" align="center"><img
+																		<td width="55" align="center"><img
 																			src="/moyeo/resources/resource/img/shop/title_limit.gif"></td>
 																		<td width="1"></td>
 																		<td width="90" align="center"><img

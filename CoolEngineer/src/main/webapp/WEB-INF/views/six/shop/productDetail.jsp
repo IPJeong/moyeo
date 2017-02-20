@@ -1563,19 +1563,19 @@ li {
 																												<tbody>
 																													<tr>
 																														<td><a
-																															href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DL234534367&amp;text=${dto.product_name}"
+																															href="https://twitter.com/intent/tweet?url=http://meosidda.com/product/detail.html?product_no=27008&cate_no=33&display_group=1&cafe_mkt=naver_ks&mkt_in=Y&ghost_mall_id=naver&ref=naver_open&n_media=11068&n_query=%EB%B0%94%EC%A7%80&n_rank=1&n_ad_group=grp-a001-02-000000001429544&n_ad=nad-a001-02-000000008681727&n_campaign_type=2&n_mall_pid=27008&NaPm=ct%3Dizdenz48%7Cci%3D0zC00005eEDm%5Few9JeNK%7Ctr%3Dpla%7Chk%3D1ffcd6b4d836d702934273ddd6c04ccb0a29822e&amp;text=${dto.product_name}"
 																															target="_blank" title="트위터 퍼가기"><img
 																																src="/moyeo/resources/resource/img/shop/sns_twitter.png"
 																																border="0"></a></td>
 																														<td width="4"></td>
 																														<td><a
-																															href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DL234534367"
+																															href="https://www.facebook.com/sharer/sharer.php?u=http://meosidda.com/product/detail.html?product_no=27008&cate_no=33&display_group=1&cafe_mkt=naver_ks&mkt_in=Y&ghost_mall_id=naver&ref=naver_open&n_media=11068&n_query=%EB%B0%94%EC%A7%80&n_rank=1&n_ad_group=grp-a001-02-000000001429544&n_ad=nad-a001-02-000000008681727&n_campaign_type=2&n_mall_pid=27008&NaPm=ct%3Dizdenz48%7Cci%3D0zC00005eEDm%5Few9JeNK%7Ctr%3Dpla%7Chk%3D1ffcd6b4d836d702934273ddd6c04ccb0a29822e"
 																															target="_blank" title="페이스북 퍼가기"><img
 																																src="/moyeo/resources/resource/img/shop/sns_facebook.png"
 																																border="0"></a></td>
 																														<td width="4"></td>
 																														<td><a
-																															href="https://story.kakao.com/share?url=http%3A%2F%2Fdmshop.kr%2Fitem.php%3Fid%3DL234534367"
+																															href="https://story.kakao.com/share?url=http://meosidda.com/product/detail.html?product_no=27008&cate_no=33&display_group=1&cafe_mkt=naver_ks&mkt_in=Y&ghost_mall_id=naver&ref=naver_open&n_media=11068&n_query=%EB%B0%94%EC%A7%80&n_rank=1&n_ad_group=grp-a001-02-000000001429544&n_ad=nad-a001-02-000000008681727&n_campaign_type=2&n_mall_pid=27008&NaPm=ct%3Dizdenz48%7Cci%3D0zC00005eEDm%5Few9JeNK%7Ctr%3Dpla%7Chk%3D1ffcd6b4d836d702934273ddd6c04ccb0a29822e"
 																															target="_blank" title="카카오스토리 퍼가기"><img
 																																src="/moyeo/resources/resource/img/shop/sns_kakaostory.png"
 																																border="0"></a></td>

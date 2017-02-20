@@ -1386,7 +1386,7 @@ function smsSelfSend(order_code)
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tbody><tr height="30">
     <td width="6"></td>
-    <td align="center" width="517"><img src="/moyeo/resources/resource/img/shop/title_item.gif"></td>
+    <td align="center" width="663"><img src="/moyeo/resources/resource/img/shop/title_item.gif"></td>
     <td width="1"></td>
     <td width="59" align="center"><img src="/moyeo/resources/resource/img/shop/title_limit.gif"></td>
     <td width="1"></td>
@@ -1722,11 +1722,11 @@ function cartCouponUpdate()
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><input type="text" name="order_rec_hp1" value="" maxlength="4" class="input" style="width:27px;"></td>
+    <td><input type="text" name="order_rec_hp1" value="" maxlength="4" class="input" style="width:33px;"></td>
     <td width="20" align="center" class="hyphen">-</td>
-    <td><input type="text" name="order_rec_hp2" value="" maxlength="4" class="input" style="width:27px;"></td>
+    <td><input type="text" name="order_rec_hp2" value="" maxlength="4" class="input" style="width:35px;"></td>
     <td width="20" align="center" class="hyphen">-</td>
-    <td><input type="text" name="order_rec_hp3" value="" maxlength="4" class="input" style="width:27px;"></td>
+    <td><input type="text" name="order_rec_hp3" value="" maxlength="4" class="input" style="width:35px;"></td>
 </tr>
 </tbody></table>
     </td>
@@ -1744,11 +1744,11 @@ function cartCouponUpdate()
     <td>
 <table border="0" cellspacing="0" cellpadding="0">
 <tbody><tr>
-    <td><input type="text" name="order_rec_tel1" value="" maxlength="4" class="input" style="width:27px;"></td>
+    <td><input type="text" name="order_rec_tel1" value="" maxlength="4" class="input" style="width:33px;"></td>
     <td width="20" align="center" class="hyphen">-</td>
-    <td><input type="text" name="order_rec_tel2" value="" maxlength="4" class="input" style="width:27px;"></td>
+    <td><input type="text" name="order_rec_tel2" value="" maxlength="4" class="input" style="width:35px;"></td>
     <td width="20" align="center" class="hyphen">-</td>
-    <td><input type="text" name="order_rec_tel3" value="" maxlength="4" class="input" style="width:27px;"></td>
+    <td><input type="text" name="order_rec_tel3" value="" maxlength="4" class="input" style="width:35px;"></td>
 </tr>
 </tbody></table>
     </td>
