@@ -109,15 +109,15 @@ li {
 					                        
 			                            <c:if test="${sessionScope.authority == null}">
 					                        <div class="profile"  style="background-color: white; height:150px; width:100%; overflow: auto;">
-					                            <div class="profile-image" style="float:left; width:100px;">
-					                                <img style="float:center; border: solid black 1px;" src="${memInfo.propic_path}/${memInfo.propic_name}" alt="회원님의 프로필 사진 입니다."/>
+					                            <div class="profile-image" style="float:left; width:90px; height:70px;">
+					                                <img style="float:center; border: solid black 1px; height:120px;" src="${memInfo.propic_path}/${memInfo.propic_name}" alt="회원님의 프로필 사진 입니다."/>
 					                            </div>
-						                            <div style="float:left; margin-left:10px; width:240px; height:100px;">
+						                            <div style="float:left; margin-left:10px; width:230px; height:100px;">
 							                            <div class="profile-data">
 							                            	<div><font color="black;" size="3px;">이름(아이디) : ${memInfo.name}(${memInfo.mem_id})</font></div>
 							                                <div class="col-md-9" style="margin-top: 15px; width:100%;">
 							                                	<div style="float:left;">                                                                                            
-				                                                    <select class="form-control select" id="group_name_box" style="float:left; width:160px;" >
+				                                                    <select class="form-control select" id="group_name_box" style="float:left; width:140px;" >
 				                                                    	<c:forEach var="moim" items="${moimList}">
 					                                                        <option value="${moim.group_num}">${moim.group_name}</option>
 				                                                        </c:forEach>
@@ -132,7 +132,7 @@ li {
 							                            </div>
 							                            <div>
 							                                <a href="/moyeo/three/myPage"><button type="button" class="btn btn-danger" style="width:100px; float:left; margin-top:15px; margin-left:15px;"><i class="fa fa-info-circle"></i>마이페이지</button></a>
-							                                <button type="button" class="btn btn-warning" onclick="notiList()" style="width:100px; float:left; margin-top:15px; margin-left:10px;">
+							                                <button type="button" class="btn btn-warning" onclick="notiList()" style="width:90px; float:left; margin-top:15px; margin-left:10px;">
 							                                	<i class="fa fa-bullhorn"></i>알림
 							                                	<c:if test="${notiCnt > 0}">
 																	<span class="badge badge-info" style="background-color : #FFD8D8;"><font size="3px;" style="font-style: bold">${notiCnt}</font></span>
@@ -482,10 +482,9 @@ li {
 										<div style="float:left; margin-top: 10px;">
 											<a class="gallery-item" style="width:150px; height:120px; margin:30px;" href="/moyeo/six/shop/productDetail?product_num=${productDto.product_num}"
 												title="Nature Image 1" data-gallery>
-												
 												<img src="${productDto.pic_path}/${productDto.pic_name}" style="width:120px; height:90px;" />
 												<div class="meta" align="center" >
-												<strong>${productDto.product_name}</strong> 
+												<strong>${fn:substring(productDto.product_name, 0, 14)}</strong> 
 												</div>
 											</a>
 										</div>
