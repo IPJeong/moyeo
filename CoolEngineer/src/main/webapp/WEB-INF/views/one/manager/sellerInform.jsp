@@ -123,16 +123,6 @@
 					</div>
 				</div>
 				</c:if>
-				
-				<c:if test="${recognition == '20'}">
-				<div class="form-group">
-					<div class="col-md-12 col-xs-12" style="width: 520px">
-						<a onclick="#"
-							class="btn btn-danger btn-block btn-rounded" data-toggle="modal"
-							data-target="#modal_change_password">판매자 자격이 박탈된 회원입니다.</a>
-					</div>
-				</div>
-				</c:if>
 			</div>
 		</div>
 	</form>
