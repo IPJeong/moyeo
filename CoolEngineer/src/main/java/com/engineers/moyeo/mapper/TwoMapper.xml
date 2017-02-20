@@ -1251,16 +1251,31 @@
 	</select>
 	
 	<select id="checkBestTenArticle" parameterType="int" resultType="int">
-		SELECT greeting_cnt+notice_cnt+post_cnt AS article_cnt
-		  FROM (SELECT COUNT(*) AS greeting_cnt
-		          FROM greeting_board
-		        WHERE group_num = #{group_num}),
-		       (SELECT COUNT(*) AS notice_cnt
-		          FROM group_notice
-		        WHERE group_num = #{group_num}),
-		       (SELECT COUNT(*) AS post_cnt
-		          FROM meeting_post
-		        WHERE group_num = #{group_num})
+		SELECT COUNT(*)
+		  FROM (SELECT title, hit, reg_date, mem_id, rownum AS hit_rank
+		         FROM (SELECT title, hit, reg_date, mem_id
+		                 FROM (SELECT title, hit, reg_date, mem_id
+		                        FROM (SELECT * 
+		                                FROM (SELECT greeting_title AS title, greeting_hit AS hit, greeting_date AS reg_date, mem_id
+		                                        FROM greeting_board
+		                                      WHERE group_num = #{group_num}
+		                                      ORDER BY hit)
+		                              UNION 
+		                              SELECT *
+		                                FROM (SELECT group_noti_title AS title, hit AS hit, group_noti_date AS reg_date, mem_id
+		                                        FROM group_notice
+		                                      WHERE group_num = #{group_num}
+		                                      ORDER BY hit)
+		                              UNION
+		                              SELECT *
+		                                FROM (SELECT post_title AS title, post_hit AS hit, post_date AS reg_date, mem_id
+		                                        FROM meeting_post
+		                                      WHERE group_num = #{group_num}
+		                                      ORDER BY hit)
+		                              )
+		                       )
+		               ORDER BY hit DESC)
+		      )
 	</select>
 	
 	<select id="checkBestTenPresent" parameterType="int" resultType="int">
