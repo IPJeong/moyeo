@@ -541,7 +541,7 @@ public class OneConroller {
 	public String moyeoSeller(HttpServletRequest req, Model model) {
 		System.out.println("판매샵(판매페이지)메인");
 		
-		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		if(req.getSession().getAttribute("mem_id")==null)return "redirect:/main/memberLoginForm";
 		
 		model.addAttribute("req", req);
 		
@@ -589,6 +589,34 @@ public class OneConroller {
 		model.addAttribute("req", req);
 		
 		viewPage = oneSellerService.productManage(model);
+		
+		return viewPage;
+	}
+
+	// 제품정보 수정 폼
+	@RequestMapping(value="/productModifyForm", method=RequestMethod.GET)
+	public String productModifyForm(HttpServletRequest req, Model model) {
+		System.out.println("제품등록 폼");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneSellerService.productModifyForm(model);
+		
+		return viewPage;
+	}
+	
+	// 제품정보 수정요청
+	@RequestMapping(value="/productModifyPro", method=RequestMethod.POST)
+	public String productModifyPro(HttpServletRequest req, Model model) {
+		System.out.println("제품등록 폼");
+		
+		if(req.getSession().getAttribute("mem_id")==null&&req.getSession().getAttribute("manager_id")==null)return "redirect:/main/memberLoginForm";
+		
+		model.addAttribute("req", req);
+		
+		viewPage = oneSellerService.productModifyPro(model);
 		
 		return viewPage;
 	}

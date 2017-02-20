@@ -38,7 +38,7 @@ public class OneSellerServiceImpl implements OneSellerService {
 		
 		int cnt = 0;
 		int start = 0;
-		int end = 9;
+		int end = 0;
 		int number = 0;
 		String pageNum = null;
 		int currentPage = 0;
@@ -219,10 +219,11 @@ public class OneSellerServiceImpl implements OneSellerService {
 		return "one/shop/productInsertPro";
 	}
 
+	// 해당 판매자가 판매중인 모든 상품 불러오기
 	@Override
 	public String productManage(Model model) {
 	
-		int pageSize = 8;
+		int pageSize = 3;
 		int pageBlock = 3;
 		
 		int cnt = 0;
@@ -239,10 +240,27 @@ public class OneSellerServiceImpl implements OneSellerService {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest req = (HttpServletRequest) map.get("req");
 		
-		// 해당 판매자가 등록한 모든 제품의 갯수를 불러옴
-		cnt = oneDao.getSellerProductCount();
 		
 		System.out.println("cnt: " + cnt);
+		
+		String mem_id = (String)req.getSession().getAttribute("mem_id");
+		String seller_id = mem_id;
+		
+		cnt = oneDao.getSellerProductCount(seller_id);
+		
+		System.out.println(req.getSession().getAttribute("mem_id"));
+		System.out.println("seller_id: " + seller_id);
+		
+		String recognition = oneDao.getRecognition(seller_id);
+		System.out.println("recognition: " + recognition);
+		
+		SellerInfoDTO dto = oneDao.getSellerInformArticle(seller_id);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("seller_id", seller_id);
+		model.addAttribute("recognition", recognition);
+		
+		System.out.println("seller_id: " + seller_id);
 		
 		pageNum = req.getParameter("pageNum");
 		
@@ -260,15 +278,23 @@ public class OneSellerServiceImpl implements OneSellerService {
 		
 		number = cnt - (currentPage - 1) * pageSize;
 		
-		if(cnt > 0) {
+		/*if(cnt > 0) {
 			Map<String, Object> daoMap = new HashMap<String, Object>();
+			Map<String, Object> daoMap2 = new HashMap<String, Object>();
 			daoMap.put("start", start);
 			daoMap.put("end", end);
+			daoMap2.put("start", start);
+			daoMap2.put("end", end);
+			daoMap2.put("seller_id", seller_id);
+			daoMap.put("seller_id", seller_id);
 			
 			// 모든 그룹의 정보를 ArrayList에 담는다.
 			ArrayList<ProductInfoDTO> dtos = oneDao.getSellerProductInform(daoMap);
 			model.addAttribute("dtos", dtos);
-		}
+			
+			ArrayList<ProductInfoDTO> dtos2 = oneDao.getProductArticles2(daoMap2);
+			model.addAttribute("dtos2", dtos2);
+		}*/
 		
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
@@ -283,6 +309,14 @@ public class OneSellerServiceImpl implements OneSellerService {
 		System.out.println("cnt: " + cnt);
 		
 		if(cnt > 0) {
+			
+			Map<String, Object> daoMap = new HashMap<String, Object>();
+			daoMap.put("start", start);
+			daoMap.put("end", end);
+			daoMap.put("seller_id", seller_id);
+			ArrayList<ProductInfoDTO> dtos = oneDao.getProductArticles2(daoMap);
+			model.addAttribute("dtos", dtos);
+			
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
@@ -293,6 +327,54 @@ public class OneSellerServiceImpl implements OneSellerService {
 		}
 		
 		return "one/shop/productManage";
+	}
+
+	@Override
+	public String productModifyForm(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		// 상품번호
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		
+		ProductInfoDTO dto = oneDao.getProductInform(product_num);
+		
+		
+		model.addAttribute("product_num", product_num);
+		model.addAttribute("dto", dto);
+		model.addAttribute("pageNum", pageNum);
+		
+		
+		return "one/shop/productModifyForm";
+	}
+
+	@Override
+	public String productModifyPro(Model model) {
+		
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest req = (HttpServletRequest)map.get("req");
+		
+		int product_num = Integer.parseInt(req.getParameter("product_num"));
+		String product_name = req.getParameter("product_name");
+		int product_price = Integer.parseInt(req.getParameter("product_price"));
+		int product_qty = Integer.parseInt(req.getParameter("product_qty"));
+		String product_detail = req.getParameter("product_detail");
+		
+		ProductInfoDTO dto = new ProductInfoDTO();
+		
+		dto.setProduct_num(product_num);
+		dto.setProduct_name(product_name);
+		dto.setProduct_price(product_price);
+		dto.setProduct_qty(product_qty);
+		dto.setProduct_detail(product_detail);
+		
+		int cnt = oneDao.productUpdate(dto);
+		
+		model.addAttribute("cnt", cnt);
+	
+		return "one/shop/productModifyPro";
 	}
 	
 

@@ -608,7 +608,7 @@ public class MainServiceImpl implements MainService{
 		if(type == 1) {
 			
 			List<EventDTO> eventDtos = (List<EventDTO>)map.get("mem_ids");
-			String event_title = (String)map.get("event_titme");
+			String event_title = (String)map.get("event_title");
 			
 			for(EventDTO dto : eventDtos) {
 				String msg = TextMessage.memWinningMsg(dto.getMem_id(), event_title);

@@ -196,7 +196,7 @@ public interface OneDAO {
 	public int getProductCount();
 	
 	// 해당 판매자가 등록한 제품 갯수 구하기
-	public int getSellerProductCount();
+	public int getSellerProductCount(String seller_id);
 	
 	// 해당 판매자가 등록한 제품의 정보들을 불러옴
 	public ArrayList<ProductInfoDTO> getSellerProductInform(Map<String, Object> daoMap);
@@ -204,6 +204,15 @@ public interface OneDAO {
 	// 모든 제품정보 구하기
 	public ArrayList<ProductInfoDTO> getProductArticles(Map<String, Integer> daoMap);
 	
+	// 해당 판매자의 아이디를 조회하여 제품정보 구하기
+	public ArrayList<ProductInfoDTO> getProductArticles2(Map<String, Object> daoMap);
+	
 	// 판매자 recognition 구하기
 	public String getRecognition(String seller_id);
+	
+	// 해당 제품번호로 제품정보 불러오기
+	public ProductInfoDTO getProductInform(int product_num);
+	
+	// 판매중인 상품 수정하기
+	public int productUpdate(ProductInfoDTO dto);
 }

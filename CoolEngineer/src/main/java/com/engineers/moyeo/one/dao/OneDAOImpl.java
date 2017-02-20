@@ -609,19 +609,18 @@ public class OneDAOImpl implements OneDAO{
 	@Override
 	public int getProductCount() {
 		int cnt = 0;
-		
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
-		cnt = dao.getManagerCount();
+		cnt = dao.getProductCount();
 		return cnt;
 	}
 	
 	// 해당 판매자가 등록한 제품갯수 구하기
 	@Override
-	public int getSellerProductCount() {
+	public int getSellerProductCount(String seller_id) {
 		int cnt = 0;
 		
 		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
-		cnt = dao.getSellerProductCount();
+		cnt = dao.getSellerProductCount(seller_id);
 		return cnt;
 	}
 	
@@ -643,6 +642,15 @@ public class OneDAOImpl implements OneDAO{
 		dtos = dao.getProductArticles(daoMap);
 		return dtos;
 	}
+	
+	// 해당 판매자의 아이디를 이용하여 제품정보 가져오기
+	@Override
+	public ArrayList<ProductInfoDTO> getProductArticles2(Map<String, Object> daoMap) {
+		ArrayList<ProductInfoDTO> dtos = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dtos = dao.getProductArticles2(daoMap);
+		return dtos;
+	}
 
 	@Override
 	public String getRecognition(String seller_id) {
@@ -652,4 +660,24 @@ public class OneDAOImpl implements OneDAO{
 		recognition = dao.getRecognition(seller_id);
 		return recognition;
 	}
+
+	@Override
+	public ProductInfoDTO getProductInform(int product_num) {
+		ProductInfoDTO dto = null;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		dto = dao.getProductInform(product_num);
+		
+		return dto;
+	}
+
+	// 판매중인 상품 업데이트하기
+	@Override
+	public int productUpdate(ProductInfoDTO dto) {
+		int cnt = 0;
+		OneDAO dao = this.sqlSession.getMapper(OneDAO.class);
+		cnt = dao.productUpdate(dto);
+		
+		return cnt;
+	}
+
 }

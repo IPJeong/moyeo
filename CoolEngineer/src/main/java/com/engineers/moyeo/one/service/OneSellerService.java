@@ -21,4 +21,10 @@ public interface OneSellerService {
 	
 	// 제품관리 페이지(판매자)
 	public String productManage(Model model);
+	
+	// 제품정보 수정 폼
+	public String productModifyForm(Model model);
+	
+	// 제품정보 수정요청
+	public String productModifyPro(Model model);
 }

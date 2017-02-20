@@ -1,5 +1,7 @@
 package com.engineers.moyeo.one.dto;
 
+import java.sql.Timestamp;
+
 public class SellerInfoDTO {
 	
 	private String seller_id; // 판매자 아이디
@@ -10,7 +12,7 @@ public class SellerInfoDTO {
 	private String account_number; // 계좌번호
 	private String depositor; // 예금주
 	private String reason; // 판매사유
-	private String reg_date; // 등록일
+	private Timestamp reg_date; // 등록일
 	private String bc_path;
 	private String bc_name;
 	private String recognition;
@@ -69,10 +71,10 @@ public class SellerInfoDTO {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public String getReg_date() {
+	public Timestamp getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(String reg_date) {
+	public void setReg_date(Timestamp reg_date) {
 		this.reg_date = reg_date;
 	}
 	public String getBc_path() {

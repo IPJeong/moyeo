@@ -500,6 +500,7 @@ public class OneManagerServiceImpl implements OneManagerService {
 		
 		// 해당 모임에 있는 멤버가 몇명인지 cnt에 가져온다.
 		cnt = oneDao.getMemberCount(group_num);
+		cnt = cnt-1;
 		
 		pageNum = req.getParameter("pageNum");
 		
@@ -859,8 +860,10 @@ public class OneManagerServiceImpl implements OneManagerService {
 		
 		// seller_id로 회원정보를 불러옴
 		SellerInfoDTO dto = oneDao.getSellerInformArticle(seller_id);
+		String recognition = dto.getRecognition();
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("recognition", recognition);
 		model.addAttribute("pageNum", pageNum);
 		
 		return "one/manager/sellerInform";

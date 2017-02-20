@@ -376,7 +376,7 @@
     	SELECT count(*) FROM product_info
     </select>
     
-    <select id="getSellerProductCount" resultType="int">
+    <select id="getSellerProductCount" parameterType="String" resultType="int">
     	SELECT count(*) FROM product_info WHERE seller_id=#{seller_id}
     </select>
     
@@ -386,15 +386,63 @@
     			FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, rownum rnum
     					FROM (SELECT * FROM product_info
     						  ORDER BY product_num DESC) 
-    				  ) ss,
-    				  (SELECT pic_num, pic_path, pic_name, product_num, pic_type
-		                          FROM product_pic
-		                        WHERE rowid IN (SELECT MIN(rowid) FROM product_pic GROUP BY product_num)) pp  
+    				  ) ss, 
+    			     (SELECT pic_num, pic_path, pic_name, product_num, pic_type
+		                FROM product_pic
+		              WHERE rowid IN (SELECT MIN(rowid) FROM product_pic GROUP BY product_num)) pp    
     	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND ss.product_num = pp.product_num ORDER BY pp.product_num DESC
+    </select>
+    
+    <!-- 해당 판매자의 모든 제품 구하기 -->
+    <select id="getProductArticles2" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ProductInfoDTO">
+    	SELECT * 
+    			FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, rownum rnum
+    					FROM (SELECT * FROM product_info
+    						  ORDER BY product_num DESC) 
+    				  ) ss,
+    				 (SELECT pic_num, pic_path, pic_name, product_num, pic_type
+		                FROM product_pic
+		              WHERE rowid IN (SELECT MIN(rowid) FROM product_pic GROUP BY product_num)) pp  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND seller_id=#{seller_id} AND ss.product_num = pp.product_num ORDER BY pp.product_num DESC
     </select>
     
     <!-- 판매자의 recognition 구하기 -->
     <select id="getRecognition" parameterType="String" resultType="String">
     	SELECT recognition FROM seller_info WHERE seller_id=#{seller_id}
     </select>
+    
+    <!-- 해당판매자의 모든 판매목록 불러오기 -->
+    <select id="getSellerProductInform" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ProductInfoDTO">
+    	SELECT * 
+    			FROM (SELECT product_num, product_name, product_price, product_qty, seller_id, product_cat1, product_cat2, rownum rnum
+    					FROM (SELECT * FROM product_info
+    						  ORDER BY product_num DESC)
+    				  )  
+    	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+    </select>
+    
+    <!-- 제품번호로 해당 제품정보 가져오기 -->
+    <select id="getProductInform" parameterType="Map" resultType="com.engineers.moyeo.one.dto.ProductInfoDTO">
+    	SELECT * FROM product_info WHERE product_num = #{product_num}
+        
+    	<!-- SELECT * 
+    			FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, rownum rnum
+    					FROM product_info
+    				  ) ss,
+    				  (SELECT * 
+    				    FROM (
+		    				 SELECT pic_num, pic_path, pic_name, product_num, pic_type, rownum rn
+				                FROM product_pic
+				             ) 
+				       WHERE rn = 1
+				     ) pp  
+    	         WHERE ss.product_num = pp.product_num
+    	           AND ss.product_num = #{product_num} -->
+    </select>
+    
+    <!-- 판매중인 상품 수정하기 -->
+    <update id = "productUpdate" parameterType="com.engineers.moyeo.one.dto.ProductInfoDTO">
+    	UPDATE product_info SET product_name=#{product_name}, product_price=#{product_price}, product_qty=#{product_qty}, product_detail=#{product_detail} WHERE product_num=#{product_num} 
+    </update>
+    
 </mapper>
