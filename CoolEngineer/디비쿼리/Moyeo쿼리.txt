@@ -1,0 +1,1474 @@
+/* 회원정보 */
+CREATE TABLE member_info (
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	passwd VARCHAR2(80) NOT NULL, /* 비밀번호 */
+	name VARCHAR2(20) NOT NULL, /* 이름 */
+	address VARCHAR2(120), /* 주소 */
+	tel VARCHAR2(30) NOT NULL, /* 연락처 */
+	birth TIMESTAMP NOT NULL, /* 생년월일 */
+	email VARCHAR2(60) NOT NULL, /* 이메일 */
+	gender VARCHAR2(10), /* 성별 */
+	join_date TIMESTAMP, /* 가입일자 */
+	propic_path VARCHAR2(80), /* 프사경로 */
+	propic_name VARCHAR2(80), /* 프사이름 */
+	email_check VARCHAR2(40) /* 이메일인증여부 */
+);
+
+ALTER TABLE member_info
+	ADD
+		CONSTRAINT pk_member_info
+		PRIMARY KEY (
+			mem_id
+		);
+
+/* QnA */
+CREATE TABLE qna (
+	qboard_num NUMBER NOT NULL, /* 게시판키 */
+	title VARCHAR2(120) NOT NULL, /* 질문제목 */
+	content VARCHAR2(4000) NOT NULL, /* 질문내용 */
+	write_date TIMESTAMP, /* 작성일 */
+	hit NUMBER, /* 조회수 */
+	status VARCHAR2(12), /* 답변여부 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE qna
+	ADD
+		CONSTRAINT PK_qna
+		PRIMARY KEY (
+			qboard_num
+		);
+
+/* 모임신고 */
+CREATE TABLE report_group (
+	report_num NUMBER NOT NULL, /* 신고키 */
+	report_title VARCHAR2(160) NOT NULL, /* 신고제목 */
+	report_content VARCHAR2(4000) NOT NULL, /* 신고사유 */
+	report_date TIMESTAMP NOT NULL, /* 작성일 */
+	sol_content VARCHAR2(2000), /* 처리내용 */
+	sol_status VARCHAR2(40), /* 처리여부 */
+	sol_date TIMESTAMP, /* 처리날짜 */
+	manager_id VARCHAR2(40), /* 관리자아이디 */
+	pic_path VARCHAR2(120), /* 사진경로 */
+	pic_name VARCHAR2(120), /* 사진이름 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	group_num NUMBER NOT NULL /* 모임번호 */
+);
+
+ALTER TABLE report_group
+	ADD
+		CONSTRAINT PK_report_group
+		PRIMARY KEY (
+			report_num
+		);
+
+/* 건의사항 */
+CREATE TABLE suggestion (
+	sug_num NUMBER NOT NULL, /* 건의사항키 */
+	sug_title VARCHAR2(160) NOT NULL, /* 건의제목 */
+	sug_content VARCHAR2(4000) NOT NULL, /* 건의내용 */
+	sug_date TIMESTAMP NOT NULL, /* 작성일 */
+	re_email VARCHAR2(80), /* 회신이메일 */
+	sug_status VARCHAR2(40) NOT NULL, /* 처리여부 */
+	manager_id VARCHAR2(40), /* 관리자아이디 */
+	sol_content VARCHAR2(2000), /* 처리내용 */
+	sol_date TIMESTAMP, /* 처리날짜 */
+	mem_id VARCHAR2(40) /* 아이디 */
+);
+
+ALTER TABLE suggestion
+	ADD
+		CONSTRAINT PK_suggestion
+		PRIMARY KEY (
+			sug_num
+		);
+
+/* 질문댓글 */
+CREATE TABLE qna_reply (
+	reply_num NUMBER NOT NULL, /* 댓글키 */
+	reply_content VARCHAR2(4000), /* 댓글내용 */
+	manager_id VARCHAR2(40), /* 관리자아이디 */
+	write_date TIMESTAMP, /* 작성일 */
+	qboard_num NUMBER /* 게시판키 */
+);
+
+ALTER TABLE qna_reply
+	ADD
+		CONSTRAINT PK_QnA_REPLY
+		PRIMARY KEY (
+			reply_num
+		);
+
+/* 추천장소 */
+CREATE TABLE rec_place (
+	recpla_num NUMBER NOT NULL, /* 추천장소키 */
+	recpla_title VARCHAR2(120) NOT NULL, /* 제목 */
+	recpla_content VARCHAR2(4000), /* 내용 */
+	recpla_category1 VARCHAR2(40) NOT NULL, /* 카테고리1 */
+	recpla_category2 VARCHAR2(40), /* 카테고리2 */
+	recpla_tag VARCHAR2(200), /* 태그 */
+	place_num NUMBER NOT NULL, /* 장소키 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE rec_place
+	ADD
+		CONSTRAINT PK_rec_place
+		PRIMARY KEY (
+			recpla_num
+		);
+
+/* 장소사진 */
+CREATE TABLE place_pic (
+	place_pic_num NUMBER NOT NULL, /* 장소사진키 */
+	place_pic_path VARCHAR2(80) NOT NULL, /* 장소사진경로 */
+	place_pic_name VARCHAR2(80) NOT NULL, /* 장소사진명 */
+	place_num NUMBER NOT NULL /* 장소키 */
+);
+
+ALTER TABLE place_pic
+	ADD
+		CONSTRAINT PK_place_pic
+		PRIMARY KEY (
+			place_pic_num
+		);
+
+/* 장소좋아요 */
+CREATE TABLE place_like (
+	plalike_num NUMBER NOT NULL, /* 장소좋아요키 */
+	recpla_num NUMBER NOT NULL, /* 추천장소키 */
+	mem_id VARCHAR2(40) /* 아이디 */
+);
+
+ALTER TABLE place_like
+	ADD
+		CONSTRAINT PK_place_like
+		PRIMARY KEY (
+			plalike_num
+		);
+
+/* 장소정보 */
+CREATE TABLE place_info (
+	place_num NUMBER NOT NULL, /* 장소키 */
+	place_name VARCHAR2(80) NOT NULL, /* 장소명 */
+	place_address VARCHAR2(160) NOT NULL, /* 주소 */
+	place_detail VARCHAR2(4000), /* 장소설명 */
+	place_link VARCHAR2(120) /* 링크 */
+);
+
+ALTER TABLE place_info
+	ADD
+		CONSTRAINT PK_place_info
+		PRIMARY KEY (
+			place_num
+		);
+
+/* 판매자 */
+CREATE TABLE seller_info (
+	seller_id VARCHAR2(40) NOT NULL, /* 판매자아이디 */
+	tel VARCHAR2(40) NOT NULL, /* 연락처 */
+	address VARCHAR2(120) NOT NULL, /* 주소 */
+	comp_name VARCHAR2(40) NOT NULL, /* 상호명 */
+	bank VARCHAR2(40) NOT NULL, /* 거래은행 */
+	account_number VARCHAR2(60) NOT NULL, /* 계좌번호 */
+	depositor VARCHAR2(40) NOT NULL, /* 예금주 */
+	reason VARCHAR2(4000) NOT NULL, /* 신청사유 */
+	reg_date TIMESTAMP NOT NULL, /* 신청일 */
+	bc_path VARCHAR2(80) NOT NULL, /* 사업자등록증 경로 */
+	bc_name VARCHAR2(80) NOT NULL, /* 사업자등록증 이름 */
+	recognition VARCHAR2(20) NOT NULL /* 승인여부 */
+);
+
+ALTER TABLE seller_info
+	ADD
+		CONSTRAINT PK_seller_info
+		PRIMARY KEY (
+			seller_id
+		);
+
+/* 제품정보 */
+CREATE TABLE product_info (
+	product_num NUMBER NOT NULL, /* 제품번호 */
+	product_name VARCHAR2(80) NOT NULL, /* 제품명 */
+	product_price NUMBER NOT NULL, /* 제품가격 */
+	product_qty NUMBER NOT NULL, /* 제품수량 */
+	product_detail VARCHAR2(1600), /* 제품설명 */
+	product_cat1 VARCHAR2(40), /* 카테고리1차 */
+	product_cat2 VARCHAR2(40), /* 카테고리2차 */
+	seller_id VARCHAR2(40) NOT NULL /* 판매자아이디 */
+);
+
+ALTER TABLE product_info
+	ADD
+		CONSTRAINT PK_product_info
+		PRIMARY KEY (
+			product_num
+		);
+
+/* 제품사진 */
+CREATE TABLE product_pic (
+	pic_num NUMBER NOT NULL, /* 사진번호 */
+	pic_path VARCHAR2(80) NOT NULL, /* 사진경로 */
+	pic_name VARCHAR2(80) NOT NULL, /* 사진이름 */
+	pic_type NUMBER NOT NULL, /* 사진타입 */
+	product_num NUMBER NOT NULL /* 제품번호 */
+);
+
+ALTER TABLE product_pic
+	ADD
+		CONSTRAINT PK_product_pic
+		PRIMARY KEY (
+			pic_num
+		);
+
+/* 제품문의 */
+CREATE TABLE product_que (
+	que_num NUMBER NOT NULL, /* 문의번호 */
+	que_title VARCHAR2(120) NOT NULL, /* 제목 */
+	que_content VARCHAR2(1600) NOT NULL, /* 문의내용 */
+	que_date TIMESTAMP NOT NULL, /* 문의날짜 */
+	que_type VARCHAR2(30) NOT NULL, /* 문의유형 */
+	visible VARCHAR2(20) NOT NULL, /* 공개여부 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	product_num NUMBER NOT NULL /* 제품번호 */
+);
+
+ALTER TABLE product_que
+	ADD
+		CONSTRAINT PK_product_que
+		PRIMARY KEY (
+			que_num
+		);
+
+/* 상품평 */
+CREATE TABLE product_comments (
+	comments_num NUMBER NOT NULL, /* 상품평번호 */
+	comments_title VARCHAR2(80) NOT NULL, /* 평가타이틀 */
+	comments_content VARCHAR2(200) NOT NULL, /* 평가내용 */
+	comments_date TIMESTAMP NOT NULL, /* 상품평가일 */
+	star_points NUMBER NOT NULL, /* 별점 */
+	product_num NUMBER NOT NULL, /* 제품번호 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE product_comments
+	ADD
+		CONSTRAINT PK_product_comments
+		PRIMARY KEY (
+			comments_num
+		);
+
+/* 구매리스트 */
+CREATE TABLE order_list (
+	order_num NUMBER NOT NULL, /* 구매번호 */
+	order_date TIMESTAMP NOT NULL, /* 구매일 */
+	order_qty NUMBER NOT NULL, /* 구매수량 */
+	order_status VARCHAR2(80) NOT NULL, /* 진행상태 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	product_num NUMBER, /* 제품번호 */
+	payment_num NUMBER, /* 결제번호 */
+	consult_title VARCHAR2(120), /* 상담제목 */
+	consult_content VARCHAR2(4000), /* 상담내용 */
+	depositor VARCHAR2(40), /* 예금주 */
+	account_number VARCHAR2(60), /* 계좌번호 */
+	bank VARCHAR2(40) /* 은행 */
+);
+
+ALTER TABLE order_list
+	ADD
+		CONSTRAINT PK_order_list
+		PRIMARY KEY (
+			order_num
+		);
+
+/* 관심카테고리 */
+CREATE TABLE interest_cat (
+	inter_num NUMBER NOT NULL, /* 관심사번호 */
+	inter_first VARCHAR2(40) NOT NULL, /* 관심사1차 */
+	inter_second VARCHAR2(40), /* 관심사2차 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE interest_cat
+	ADD
+		CONSTRAINT PK_interest_cat
+		PRIMARY KEY (
+			inter_num
+		);
+
+/* 관심지역 */
+CREATE TABLE interest_location (
+	int_loc_num NUMBER NOT NULL, /* 관심지역번호 */
+	loc_city VARCHAR2(40) NOT NULL, /* 지역_시 */
+	loc_gu VARCHAR2(40), /* 지역_구 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE interest_location
+	ADD
+		CONSTRAINT PK_interest_location
+		PRIMARY KEY (
+			int_loc_num
+		);
+
+/* 관심모임 */
+CREATE TABLE interest_group (
+	intergroup_num NUMBER NOT NULL, /* 관심모임번호 */
+	group_num NUMBER NOT NULL, /* 모임번호 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE interest_group
+	ADD
+		CONSTRAINT PK_interest_group
+		PRIMARY KEY (
+			intergroup_num
+		);
+
+/* 모임리스트 */
+CREATE TABLE group_list (
+	group_num NUMBER NOT NULL, /* 모임번호 */
+	group_name VARCHAR2(80) NOT NULL, /* 모임명 */
+	group_mem_cnt NUMBER, /* 인원 */
+	group_inte1 VARCHAR2(40) NOT NULL, /* 관심사1 */
+	group_inte2 VARCHAR2(40) NOT NULL, /* 관심사2 */
+	group_location VARCHAR2(80) NOT NULL, /* 지역 */
+	group_intro VARCHAR2(800), /* 모임소개 */
+	reg_date TIMESTAMP /* 모임생성일 */
+);
+
+ALTER TABLE group_list
+	ADD
+		CONSTRAINT PK_group_list
+		PRIMARY KEY (
+			group_num
+		);
+
+/* 내모임 */
+CREATE TABLE my_group (
+	my_group_num NUMBER NOT NULL, /* 소속모임번호 */
+	group_per VARCHAR2(40) NOT NULL, /* 모임권한 */
+	group_num NUMBER NOT NULL, /* 모임번호 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE my_group
+	ADD
+		CONSTRAINT PK_my_group
+		PRIMARY KEY (
+			my_group_num
+		);
+
+/* 모임공지사항 */
+CREATE TABLE group_notice (
+	group_noti_num NUMBER NOT NULL, /* 공지사항번호 */
+	group_noti_title VARCHAR2(120) NOT NULL, /* 제목 */
+	group_noti_content VARCHAR2(4000), /* 내용 */
+	group_noti_date TIMESTAMP NOT NULL, /* 등록일 */
+	hit NUMBER, /* 조회수 */
+	mem_id VARCHAR2(40) NOT NULL, /* 작성자아이디 */
+	group_num NUMBER NOT NULL /* 모임번호 */
+);
+
+ALTER TABLE group_notice
+	ADD
+		CONSTRAINT PK_group_notice
+		PRIMARY KEY (
+			group_noti_num
+		);
+
+/* 가입인사게시판 */
+CREATE TABLE greeting_board (
+	greeting_num NUMBER NOT NULL, /* 가입인사번호 */
+	greeting_title VARCHAR2(120) NOT NULL, /* 제목 */
+	greeting_content VARCHAR2(4000), /* 내용 */
+	greeting_date TIMESTAMP NOT NULL, /* 작성일 */
+	greeting_hit NUMBER, /* 조회수 */
+	like_num NUMBER NOT NULL, /* 좋아요수 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	group_num NUMBER NOT NULL /* 모임번호 */
+);
+
+ALTER TABLE greeting_board
+	ADD
+		CONSTRAINT PK_greeting_board
+		PRIMARY KEY (
+			greeting_num
+		);
+
+/* 모임후기 */
+CREATE TABLE meeting_post (
+	post_num NUMBER NOT NULL, /* 모임후기번호 */
+	post_title VARCHAR2(120) NOT NULL, /* 후기제목 */
+	post_content VARCHAR2(4000), /* 후기내용 */
+	post_tag VARCHAR2(200), /* 태그 */
+	post_date TIMESTAMP NOT NULL, /* 등록일 */
+	like_num NUMBER, /* 좋아요수 */
+	post_hit NUMBER, /* 조회수 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	group_num NUMBER NOT NULL /* 모임번호 */
+);
+
+ALTER TABLE meeting_post
+	ADD
+		CONSTRAINT PK_meeting_post
+		PRIMARY KEY (
+			post_num
+		);
+
+/* 가입인사댓글 */
+CREATE TABLE greeting_reply (
+	gre_reply_num NUMBER NOT NULL, /* 가입인사댓글번호 */
+	gre_reply_content VARCHAR2(400) NOT NULL, /* 댓글내용 */
+	gre_reply_date TIMESTAMP NOT NULL, /* 작성일 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	greeting_num NUMBER NOT NULL /* 가입인사번호 */
+);
+
+ALTER TABLE greeting_reply
+	ADD
+		CONSTRAINT PK_greeting_reply
+		PRIMARY KEY (
+			gre_reply_num
+		);
+
+/* 가입인사 좋아요 */
+CREATE TABLE like_greeting (
+	gre_like_num NUMBER NOT NULL, /* 가입인사좋아요번호 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	greeting_num NUMBER NOT NULL /* 가입인사번호 */
+);
+
+ALTER TABLE like_greeting
+	ADD
+		CONSTRAINT PK_like_greeting
+		PRIMARY KEY (
+			gre_like_num
+		);
+
+/* 모임후기좋아요 */
+CREATE TABLE meeting_post_like (
+	post_like_num NUMBER NOT NULL, /* 모임후기좋아요번호 */
+	post_num NUMBER NOT NULL, /* 모임후기번호 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE meeting_post_like
+	ADD
+		CONSTRAINT PK_meeting_post_like
+		PRIMARY KEY (
+			post_like_num
+		);
+
+/* 모임후기댓글 */
+CREATE TABLE meeting_post_reply (
+	postrep_num NUMBER NOT NULL, /* 모임후기댓글번호 */
+	reply_content VARCHAR2(400) NOT NULL, /* 내용 */
+	write_date TIMESTAMP NOT NULL, /* 작성일 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	post_num NUMBER /* 모임후기번호 */
+);
+
+ALTER TABLE meeting_post_reply
+	ADD
+		CONSTRAINT PK_meeting_post_reply
+		PRIMARY KEY (
+			postrep_num
+		);
+
+/* 출석체크 */
+CREATE TABLE check_present (
+	present_num NUMBER NOT NULL, /* 출석번호 */
+	present_date TIMESTAMP NOT NULL, /* 날짜 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	group_num NUMBER NOT NULL /* 모임번호 */
+);
+
+ALTER TABLE check_present
+	ADD
+		CONSTRAINT PK_check_present
+		PRIMARY KEY (
+			present_num
+		);
+
+/* 모임일정 */
+CREATE TABLE meeting_list (
+	meeting_num NUMBER NOT NULL, /* 모임일정번호 */
+	meeting_title VARCHAR2(120) NOT NULL, /* 모임제목 */
+	meeting_detail VARCHAR2(200), /* 모임내용 */
+	meeting_loc VARCHAR2(160), /* 모임장소 */
+	loc_detail VARCHAR2(160) NOT NULL, /* 장소설명 */
+	meeting_date TIMESTAMP NOT NULL, /* 모임일자 */
+	meeting_cost NUMBER, /* 참가비용 */
+	meeting_pernum NUMBER, /* 참가정원 */
+	group_num NUMBER NOT NULL /* 모임번호 */
+);
+
+ALTER TABLE meeting_list
+	ADD
+		CONSTRAINT PK_meeting_list
+		PRIMARY KEY (
+			meeting_num
+		);
+
+/* 참여자 */
+CREATE TABLE present_per_list (
+	pre_per_num NUMBER NOT NULL, /* 참여자번호 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	meeting_num NUMBER /* 모임일정번호 */
+);
+
+ALTER TABLE present_per_list
+	ADD
+		CONSTRAINT PK_present_per_list
+		PRIMARY KEY (
+			pre_per_num
+		);
+
+/* 대화방 */
+CREATE TABLE chat_room_list (
+	chat_room_num NUMBER NOT NULL, /* 대화방번호 */
+	group_num NUMBER /* 모임번호 */
+);
+
+ALTER TABLE chat_room_list
+	ADD
+		CONSTRAINT PK_chat_room_list
+		PRIMARY KEY (
+			chat_room_num
+		);
+
+/* 대화리스트 */
+CREATE TABLE msg_list (
+	msg_num NUMBER NOT NULL, /* 대화번호 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	msg_content VARCHAR2(1200) NOT NULL, /* 대화내용 */
+	msg_date TIMESTAMP NOT NULL, /* 작성일 */
+	chat_room_num NUMBER NOT NULL /* 대화방번호 */
+);
+
+ALTER TABLE msg_list
+	ADD
+		CONSTRAINT PK_msg_list
+		PRIMARY KEY (
+			msg_num
+		);
+
+/* 사진첩 */
+CREATE TABLE post_pictures (
+	pic_num NUMBER NOT NULL, /* 사진번호 */
+	pic_path VARCHAR2(80) NOT NULL, /* 저장경로 */
+	pic_name VARCHAR2(80) NOT NULL, /* 파일명 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	group_num NUMBER NOT NULL, /* 모임번호 */
+	post_num NUMBER NOT NULL /* 모임후기번호 */
+);
+
+ALTER TABLE post_pictures
+	ADD
+		CONSTRAINT PK_post_pictures
+		PRIMARY KEY (
+			pic_num
+		);
+
+/* 동영상 */
+CREATE TABLE post_video (
+	video_num NUMBER NOT NULL, /* 동영상번호 */
+	video_path VARCHAR2(80) NOT NULL, /* 저장경로 */
+	video_name VARCHAR2(80) NOT NULL, /* 파일명 */
+	mem_id VARCHAR2(40), /* 아이디 */
+	group_num NUMBER, /* 모임번호 */
+	post_num NUMBER /* 모임후기번호 */
+);
+
+ALTER TABLE post_video
+	ADD
+		CONSTRAINT PK_post_video
+		PRIMARY KEY (
+			video_num
+		);
+
+/* 관리자정보 */
+CREATE TABLE manager_info (
+	manager_id VARCHAR2(40) NOT NULL, /* 관리자아이디 */
+	passwd VARCHAR2(40) NOT NULL, /* 비밀번호 */
+	name VARCHAR2(20) NOT NULL, /* 이름 */
+	authority VARCHAR2(20) NOT NULL /* 권한 */
+);
+
+ALTER TABLE manager_info
+	ADD
+		CONSTRAINT PK_manager_info
+		PRIMARY KEY (
+			manager_id
+		);
+
+/* 공지사항 */
+CREATE TABLE noti_board (
+	noti_num NUMBER NOT NULL, /* 공지사항번호 */
+	noti_title VARCHAR2(120) NOT NULL, /* 제목 */
+	noti_content VARCHAR2(4000) NOT NULL, /* 내용 */
+	noti_date TIMESTAMP NOT NULL, /* 작성일 */
+	noti_hit NUMBER, /* 조회수 */
+	manager_id VARCHAR2(40) NOT NULL /* 관리자아이디 */
+);
+
+ALTER TABLE noti_board
+	ADD
+		CONSTRAINT PK_noti_board
+		PRIMARY KEY (
+			noti_num
+		);
+
+/* 이벤트 */
+CREATE TABLE event_list (
+	event_num NUMBER NOT NULL, /* 이벤트번호 */
+	event_title VARCHAR2(120) NOT NULL, /* 이벤트제목 */
+	event_content VARCHAR2(1000) NOT NULL, /* 이벤트내용 */
+	reg_date TIMESTAMP NOT NULL, /* 이벤트등록일 */
+	start_date TIMESTAMP NOT NULL, /* 이벤트시작일 */
+	end_date TIMESTAMP, /* 이벤트마감일 */
+	ing VARCHAR2(40), /* 진행중여부 */
+	noti_date TIMESTAMP, /* 당첨자발표일 */
+	manager_id VARCHAR2(40) /* 관리자아이디 */
+);
+
+ALTER TABLE event_list
+	ADD
+		CONSTRAINT PK_event_list
+		PRIMARY KEY (
+			event_num
+		);
+
+/* 당첨자리스트 */
+CREATE TABLE winning_per_list (
+	win_per_num NUMBER NOT NULL, /* 당첨자번호 */
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	winning_num NUMBER NOT NULL /* 당첨번호 */
+);
+
+ALTER TABLE winning_per_list
+	ADD
+		CONSTRAINT PK_winning_per_list
+		PRIMARY KEY (
+			win_per_num
+		);
+
+/* 이벤트사진 */
+CREATE TABLE event_pic (
+	evepic_num NUMBER NOT NULL, /* 이벤트사진번호 */
+	evepic_path VARCHAR2(80) NOT NULL, /* 이미지경로 */
+	evepic_name VARCHAR2(80) NOT NULL, /* 이미지이름 */
+	event_num NUMBER NOT NULL /* 이벤트번호 */
+);
+
+ALTER TABLE event_pic
+	ADD
+		CONSTRAINT PK_event_pic
+		PRIMARY KEY (
+			evepic_num
+		);
+
+/* 대표사진 */
+CREATE TABLE main_picture (
+	main_pic_num NUMBER NOT NULL, /* 대표사진번호 */
+	main_pic_path VARCHAR2(80) NOT NULL, /* 경로명 */
+	main_pic_name VARCHAR2(80) NOT NULL, /* 사진명 */
+	group_num NUMBER NOT NULL /* 모임번호 */
+);
+
+ALTER TABLE main_picture
+	ADD
+		CONSTRAINT PK_main_picture
+		PRIMARY KEY (
+			main_pic_num
+		);
+
+/* 회원알림 */
+CREATE TABLE member_noti (
+	noti_num NUMBER NOT NULL, /* 알림번호 */
+	noti_content VARCHAR2(200) NOT NULL, /* 알림내용 */
+	is_checked VARCHAR2(40) NOT NULL, /* 확인여부 */
+	noti_date TIMESTAMP NOT NULL, /* 알림날짜 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE member_noti
+	ADD
+		CONSTRAINT PK_member_noti
+		PRIMARY KEY (
+			noti_num
+		);
+
+/* 판매자알림 */
+CREATE TABLE seller_noti (
+	noti_num NUMBER NOT NULL, /* 알림번호 */
+	noti_content VARCHAR2(200) NOT NULL, /* 알림내용 */
+	is_checked VARCHAR2(40) NOT NULL, /* 확인여부 */
+	noti_date TIMESTAMP NOT NULL, /* 알림날짜 */
+	seller_id VARCHAR2(40) NOT NULL /* 판매자아이디 */
+);
+
+ALTER TABLE seller_noti
+	ADD
+		CONSTRAINT PK_seller_noti
+		PRIMARY KEY (
+			noti_num
+		);
+
+/* 관리자알림 */
+CREATE TABLE manager_noti (
+	noti_num NUMBER NOT NULL, /* 알림번호 */
+	noti_content VARCHAR2(120) NOT NULL, /* 알림내용 */
+	is_checked VARCHAR2(40) NOT NULL, /* 확인여부 */
+	noti_date TIMESTAMP NOT NULL, /* 알림날짜 */
+	manager_id VARCHAR2(40) NOT NULL /* 관리자아이디 */
+);
+
+ALTER TABLE manager_noti
+	ADD
+		CONSTRAINT PK_manager_noti
+		PRIMARY KEY (
+			noti_num
+		);
+
+/* 모임장알림 */
+CREATE TABLE group_leader_noti (
+	noti_num NUMBER NOT NULL, /* 알림번호 */
+	noti_content VARCHAR2(200) NOT NULL, /* 알림내용 */
+	is_checked VARCHAR2(40), /* 확인여부 */
+	noti_date TIMESTAMP NOT NULL, /* 알림날짜 */
+	group_num NUMBER NOT NULL, /* 모임번호 */
+	mem_id VARCHAR2(40) NOT NULL /* 아이디 */
+);
+
+ALTER TABLE group_leader_noti
+	ADD
+		CONSTRAINT PK_group_leader_noti
+		PRIMARY KEY (
+			noti_num
+		);
+
+/* 문의답변 */
+CREATE TABLE product_ans (
+	ans_num NUMBER NOT NULL, /* 답변번호 */
+	ans_content VARCHAR2(1600) NOT NULL, /* 답변내용 */
+	ans_date TIMESTAMP NOT NULL, /* 답변날짜 */
+	seller_id VARCHAR2(40) NOT NULL, /* 판매자아이디 */
+	que_num NUMBER NOT NULL /* 문의번호 */
+);
+
+ALTER TABLE product_ans
+	ADD
+		CONSTRAINT PK_product_ans
+		PRIMARY KEY (
+			ans_num
+		);
+
+/* 당첨리스트 */
+CREATE TABLE event_winning_list (
+	winning_num NUMBER NOT NULL, /* 당첨번호 */
+	winning_title VARCHAR2(160) NOT NULL, /* 제목 */
+	winning_content VARCHAR2(800) NOT NULL, /* 내용 */
+	reg_date TIMESTAMP NOT NULL, /* 작성일 */
+	hit NUMBER, /* 조회수 */
+	event_num NUMBER NOT NULL /* 이벤트번호 */
+);
+
+ALTER TABLE event_winning_list
+	ADD
+		CONSTRAINT PK_event_winning_list
+		PRIMARY KEY (
+			winning_num
+		);
+
+/* 모임가입신청 */
+CREATE TABLE join_request (
+	request_num NUMBER NOT NULL, /* 신청번호 */
+	request_date TIMESTAMP NOT NULL, /* 신청일 */
+	status VARCHAR2(60) NOT NULL, /* 상태 */
+	mem_id VARCHAR2(40), /* 아이디 */
+	group_num NUMBER /* 모임번호 */
+);
+
+ALTER TABLE join_request
+	ADD
+		CONSTRAINT PK_join_request
+		PRIMARY KEY (
+			request_num
+		);
+
+/* FAQ카테고리 */
+CREATE TABLE faq_category (
+	category_num NUMBER NOT NULL, /* 카테고리번호 */
+	category_name VARCHAR2(40) NOT NULL /* 카테고리명 */
+);
+
+ALTER TABLE faq_category
+	ADD
+		CONSTRAINT PK_faq_category
+		PRIMARY KEY (
+			category_num
+		);
+
+/* FAQ */
+CREATE TABLE faq (
+	faq_num NUMBER NOT NULL, /* 게시판키 */
+	faq_title VARCHAR2(120) NOT NULL, /* 게시글제목 */
+	faq_content VARCHAR2(4000) NOT NULL, /* 게시글내용 */
+	faq_date TIMESTAMP NOT NULL, /* 게시글작성일 */
+	faq_hit NUMBER, /* 조회수 */
+	category_name VARCHAR2(40) NOT NULL, /* 카테고리명 */
+	manager_id VARCHAR2(40) NOT NULL /* 관리자아이디 */
+);
+
+ALTER TABLE faq
+	ADD
+		CONSTRAINT PK_faq
+		PRIMARY KEY (
+			faq_num
+		);
+
+/* 참여자목록 */
+CREATE TABLE evejoin_list (
+	evejoin_num NUMBER NOT NULL, /* 참여자번호 */
+	mem_id VARCHAR2(40) NOT NULL, /* 회원아이디 */
+	event_num NUMBER NOT NULL /* 이벤트번호 */
+);
+
+ALTER TABLE evejoin_list
+	ADD
+		CONSTRAINT PK_evejoin_list
+		PRIMARY KEY (
+			evejoin_num
+		);
+
+/* 워드클라우드 단어리스트 */
+CREATE TABLE wordcloud_list (
+	word VARCHAR2(60) NOT NULL, /* 단어 */
+	count NUMBER NOT NULL, /* 횟수 */
+	type_of_speech VARCHAR2(40) NOT NULL, /* 품사 */
+	update_date TIMESTAMP NOT NULL, /* 수정일 */
+	reg_date TIMESTAMP NOT NULL /* 최초등록일 */
+);
+
+ALTER TABLE wordcloud_list
+	ADD
+		CONSTRAINT PK_wordcloud_list
+		PRIMARY KEY (
+			word
+		);
+
+/* 임시비밀번호리스트 */
+CREATE TABLE temppasswd_list (
+	mem_id VARCHAR2(40) NOT NULL, /* 아이디 */
+	temp_passwd VARCHAR2(40) /* 임시비밀번호 */
+);
+
+ALTER TABLE temppasswd_list
+	ADD
+		CONSTRAINT PK_temppasswd_list
+		PRIMARY KEY (
+			mem_id
+		);
+
+/* 결제리스트 */
+CREATE TABLE payment_list (
+	payment_num NUMBER NOT NULL, /* 결제번호 */
+	receiver_name VARCHAR2(40) NOT NULL, /* 수령자명 */
+	address VARCHAR2(120) NOT NULL, /* 주소 */
+	tel1 VARCHAR2(40) NOT NULL, /* 연락처1 */
+	tel2 VARCHAR2(40), /* 연락처2 */
+	delivery_request VARCHAR2(200), /* 배송요구사항 */
+	payment_means VARCHAR2(40) NOT NULL, /* 결제수단 */
+	payment_amount NUMBER NOT NULL, /* 결제금액 */
+	mem_id VARCHAR2(40) /* 아이디 */
+);
+
+ALTER TABLE payment_list
+	ADD
+		CONSTRAINT PK_payment_list
+		PRIMARY KEY (
+			payment_num
+		);
+
+ALTER TABLE qna
+	ADD
+		CONSTRAINT FK_member_info_TO_qna
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE report_group
+	ADD
+		CONSTRAINT FK_member_info_TO_report_group
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE report_group
+	ADD
+		CONSTRAINT FK_group_list_TO_report_group
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE suggestion
+	ADD
+		CONSTRAINT FK_member_info_TO_suggestion
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE qna_reply
+	ADD
+		CONSTRAINT FK_qna_TO_qna_reply
+		FOREIGN KEY (
+			qboard_num
+		)
+		REFERENCES qna (
+			qboard_num
+		);
+
+ALTER TABLE rec_place
+	ADD
+		CONSTRAINT FK_member_info_TO_rec_place
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE rec_place
+	ADD
+		CONSTRAINT FK_place_info_TO_rec_place
+		FOREIGN KEY (
+			place_num
+		)
+		REFERENCES place_info (
+			place_num
+		);
+
+ALTER TABLE place_pic
+	ADD
+		CONSTRAINT FK_place_info_TO_place_pic
+		FOREIGN KEY (
+			place_num
+		)
+		REFERENCES place_info (
+			place_num
+		);
+
+ALTER TABLE place_like
+	ADD
+		CONSTRAINT FK_rec_place_TO_place_like
+		FOREIGN KEY (
+			recpla_num
+		)
+		REFERENCES rec_place (
+			recpla_num
+		);
+
+ALTER TABLE place_like
+	ADD
+		CONSTRAINT FK_member_info_TO_place_like
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE product_info
+	ADD
+		CONSTRAINT FK_seller_info_TO_product_info
+		FOREIGN KEY (
+			seller_id
+		)
+		REFERENCES seller_info (
+			seller_id
+		);
+
+ALTER TABLE product_pic
+	ADD
+		CONSTRAINT FK_product_info_TO_product_pic
+		FOREIGN KEY (
+			product_num
+		)
+		REFERENCES product_info (
+			product_num
+		);
+
+ALTER TABLE product_que
+	ADD
+		CONSTRAINT FK_product_info_TO_product_que
+		FOREIGN KEY (
+			product_num
+		)
+		REFERENCES product_info (
+			product_num
+		);
+
+ALTER TABLE product_que
+	ADD
+		CONSTRAINT FK_member_info_TO_product_que
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE product_comments
+	ADD
+		CONSTRAINT FK_prdct_inf_TO_prdct_cmnts
+		FOREIGN KEY (
+			product_num
+		)
+		REFERENCES product_info (
+			product_num
+		);
+
+ALTER TABLE product_comments
+	ADD
+		CONSTRAINT FK_mbr_info_TO_prdct_cmnts
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE order_list
+	ADD
+		CONSTRAINT FK_member_info_TO_order_list
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE order_list
+	ADD
+		CONSTRAINT FK_product_info_TO_order_list
+		FOREIGN KEY (
+			product_num
+		)
+		REFERENCES product_info (
+			product_num
+		);
+
+ALTER TABLE order_list
+	ADD
+		CONSTRAINT FK_payment_list_TO_order_list
+		FOREIGN KEY (
+			payment_num
+		)
+		REFERENCES payment_list (
+			payment_num
+		);
+
+ALTER TABLE interest_cat
+	ADD
+		CONSTRAINT FK_member_info_TO_interest_cat
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE interest_location
+	ADD
+		CONSTRAINT FK_mbr_info_TO_intrst_lctn
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE interest_group
+	ADD
+		CONSTRAINT FK_mbr_info_TO_interest_grp
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE interest_group
+	ADD
+		CONSTRAINT FK_grp_list_TO_interest_grp
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE my_group
+	ADD
+		CONSTRAINT FK_member_info_TO_my_group
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE my_group
+	ADD
+		CONSTRAINT FK_group_list_TO_my_group
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE group_notice
+	ADD
+		CONSTRAINT FK_group_list_TO_group_notice
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE greeting_board
+	ADD
+		CONSTRAINT FK_grp_list_TO_greeting_brd
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE meeting_post
+	ADD
+		CONSTRAINT FK_group_list_TO_meeting_post
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE greeting_reply
+	ADD
+		CONSTRAINT FK_grtng_board_TO_grtng_rpl
+		FOREIGN KEY (
+			greeting_num
+		)
+		REFERENCES greeting_board (
+			greeting_num
+		);
+
+ALTER TABLE like_greeting
+	ADD
+		CONSTRAINT FK_grtng_board_TO_lk_grtng
+		FOREIGN KEY (
+			greeting_num
+		)
+		REFERENCES greeting_board (
+			greeting_num
+		);
+
+ALTER TABLE meeting_post_like
+	ADD
+		CONSTRAINT FK_mtng_post_TO_mtng_pst_lk
+		FOREIGN KEY (
+			post_num
+		)
+		REFERENCES meeting_post (
+			post_num
+		);
+
+ALTER TABLE meeting_post_like
+	ADD
+		CONSTRAINT FK_mbr_info_TO_mtng_pst_lk
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE meeting_post_reply
+	ADD
+		CONSTRAINT FK_mtng_pst_TO_mtng_pst_rpl
+		FOREIGN KEY (
+			post_num
+		)
+		REFERENCES meeting_post (
+			post_num
+		);
+
+ALTER TABLE check_present
+	ADD
+		CONSTRAINT FK_group_list_TO_check_present
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE meeting_list
+	ADD
+		CONSTRAINT FK_group_list_TO_meeting_list
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE present_per_list
+	ADD
+		CONSTRAINT FK_mtng_lst_TO_prsnt_pr_lst
+		FOREIGN KEY (
+			meeting_num
+		)
+		REFERENCES meeting_list (
+			meeting_num
+		);
+
+ALTER TABLE chat_room_list
+	ADD
+		CONSTRAINT FK_grp_list_TO_chat_rm_list
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE msg_list
+	ADD
+		CONSTRAINT FK_chat_room_list_TO_msg_list
+		FOREIGN KEY (
+			chat_room_num
+		)
+		REFERENCES chat_room_list (
+			chat_room_num
+		);
+
+ALTER TABLE post_pictures
+	ADD
+		CONSTRAINT FK_group_list_TO_post_pictures
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE post_pictures
+	ADD
+		CONSTRAINT FK_mtng_post_TO_post_pctrs
+		FOREIGN KEY (
+			post_num
+		)
+		REFERENCES meeting_post (
+			post_num
+		);
+
+ALTER TABLE post_video
+	ADD
+		CONSTRAINT FK_group_list_TO_post_video
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE post_video
+	ADD
+		CONSTRAINT FK_meeting_post_TO_post_video
+		FOREIGN KEY (
+			post_num
+		)
+		REFERENCES meeting_post (
+			post_num
+		);
+
+ALTER TABLE winning_per_list
+	ADD
+		CONSTRAINT FK_mbr_info_TO_wng_pr_lst
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE winning_per_list
+	ADD
+		CONSTRAINT FK_evnt_wng_lst_TO_wng_lst
+		FOREIGN KEY (
+			winning_num
+		)
+		REFERENCES event_winning_list (
+			winning_num
+		);
+
+ALTER TABLE event_pic
+	ADD
+		CONSTRAINT FK_event_list_TO_event_pic
+		FOREIGN KEY (
+			event_num
+		)
+		REFERENCES event_list (
+			event_num
+		);
+
+ALTER TABLE main_picture
+	ADD
+		CONSTRAINT FK_group_list_TO_main_picture
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE member_noti
+	ADD
+		CONSTRAINT FK_member_info_TO_member_noti
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE seller_noti
+	ADD
+		CONSTRAINT FK_seller_info_TO_seller_noti
+		FOREIGN KEY (
+			seller_id
+		)
+		REFERENCES seller_info (
+			seller_id
+		);
+
+ALTER TABLE manager_noti
+	ADD
+		CONSTRAINT FK_mngr_info_TO_manager_nt
+		FOREIGN KEY (
+			manager_id
+		)
+		REFERENCES manager_info (
+			manager_id
+		);
+
+ALTER TABLE group_leader_noti
+	ADD
+		CONSTRAINT FK_mbr_info_TO_group_ldr_nt
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE group_leader_noti
+	ADD
+		CONSTRAINT FK_grp_list_TO_group_ldr_nt
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE product_ans
+	ADD
+		CONSTRAINT FK_product_que_TO_product_ans
+		FOREIGN KEY (
+			que_num
+		)
+		REFERENCES product_que (
+			que_num
+		);
+
+ALTER TABLE product_ans
+	ADD
+		CONSTRAINT FK_seller_info_TO_product_ans
+		FOREIGN KEY (
+			seller_id
+		)
+		REFERENCES seller_info (
+			seller_id
+		);
+
+ALTER TABLE event_winning_list
+	ADD
+		CONSTRAINT FK_evnt_lst_TO_evnt_wng_lst
+		FOREIGN KEY (
+			event_num
+		)
+		REFERENCES event_list (
+			event_num
+		);
+
+ALTER TABLE join_request
+	ADD
+		CONSTRAINT FK_member_info_TO_join_request
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+
+ALTER TABLE join_request
+	ADD
+		CONSTRAINT FK_group_list_TO_join_request
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		);
+
+ALTER TABLE evejoin_list
+	ADD
+		CONSTRAINT FK_event_list_TO_evejoin_list
+		FOREIGN KEY (
+			event_num
+		)
+		REFERENCES event_list (
+			event_num
+		);
+
+ALTER TABLE payment_list
+	ADD
+		CONSTRAINT FK_member_info_TO_payment_list
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		);
+

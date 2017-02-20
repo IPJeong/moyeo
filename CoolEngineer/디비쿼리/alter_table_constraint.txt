@@ -1,0 +1,882 @@
+ALTER TABLE qna
+	DROP
+		CONSTRAINT FK_member_info_TO_qna;
+
+ALTER TABLE qna
+	ADD
+		CONSTRAINT FK_member_info_TO_qna
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)
+    ON DELETE CASCADE;
+
+ALTER TABLE report_group
+	DROP
+		CONSTRAINT FK_member_info_TO_report_group;
+
+ALTER TABLE report_group
+	ADD
+		CONSTRAINT FK_member_info_TO_report_group
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)
+    ON DELETE CASCADE
+    ;
+
+ALTER TABLE report_group
+	DROP
+		CONSTRAINT FK_group_list_TO_report_group;
+
+ALTER TABLE report_group
+	ADD
+		CONSTRAINT FK_group_list_TO_report_group
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+ALTER TABLE suggestion
+	DROP
+		CONSTRAINT FK_member_info_TO_suggestion;
+
+ALTER TABLE suggestion
+	ADD
+		CONSTRAINT FK_member_info_TO_suggestion
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+ALTER TABLE qna_reply
+	DROP
+		CONSTRAINT FK_qna_TO_qna_reply;
+
+ALTER TABLE qna_reply
+	ADD
+		CONSTRAINT FK_qna_TO_qna_reply
+		FOREIGN KEY (
+			qboard_num
+		)
+		REFERENCES qna (
+			qboard_num
+		)ON DELETE CASCADE;
+
+ALTER TABLE rec_place
+	DROP
+		CONSTRAINT FK_member_info_TO_rec_place;
+
+ALTER TABLE rec_place
+	ADD
+		CONSTRAINT FK_member_info_TO_rec_place
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+ALTER TABLE rec_place
+	DROP
+		CONSTRAINT FK_place_info_TO_rec_place;
+
+ALTER TABLE rec_place
+	ADD
+		CONSTRAINT FK_place_info_TO_rec_place
+		FOREIGN KEY (
+			place_num
+		)
+		REFERENCES place_info (
+			place_num
+		)ON DELETE CASCADE;
+
+ALTER TABLE place_pic
+	DROP
+		CONSTRAINT FK_place_info_TO_place_pic;
+
+ALTER TABLE place_pic
+	ADD
+		CONSTRAINT FK_place_info_TO_place_pic
+		FOREIGN KEY (
+			place_num
+		)
+		REFERENCES place_info (
+			place_num
+		)ON DELETE CASCADE;
+
+ALTER TABLE place_like
+	DROP
+		CONSTRAINT FK_rec_place_TO_place_like;
+
+ALTER TABLE place_like
+	ADD
+		CONSTRAINT FK_rec_place_TO_place_like
+		FOREIGN KEY (
+			recpla_num
+		)
+		REFERENCES rec_place (
+			recpla_num
+		)ON DELETE CASCADE;
+
+ALTER TABLE place_like
+	DROP
+		CONSTRAINT FK_member_info_TO_place_like;
+
+ALTER TABLE place_like
+	ADD
+		CONSTRAINT FK_member_info_TO_place_like
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE product_info
+	DROP
+		CONSTRAINT FK_seller_info_TO_product_info;
+
+ALTER TABLE product_info
+	ADD
+		CONSTRAINT FK_seller_info_TO_product_info
+		FOREIGN KEY (
+			seller_id
+		)
+		REFERENCES seller_info (
+			seller_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE product_pic
+	DROP
+		CONSTRAINT FK_product_info_TO_product_pic;
+
+ALTER TABLE product_pic
+	ADD
+		CONSTRAINT FK_product_info_TO_product_pic
+		FOREIGN KEY (
+			product_num
+		)
+		REFERENCES product_info (
+			product_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE product_que
+	DROP
+		CONSTRAINT FK_product_info_TO_product_que;
+
+ALTER TABLE product_que
+	ADD
+		CONSTRAINT FK_product_info_TO_product_que
+		FOREIGN KEY (
+			product_num
+		)
+		REFERENCES product_info (
+			product_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE product_que
+  DROP
+		CONSTRAINT FK_member_info_TO_product_que;
+
+ALTER TABLE product_que
+	ADD
+		CONSTRAINT FK_member_info_TO_product_que
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE product_comments
+	DROP
+		CONSTRAINT FK_prdct_inf_TO_prdct_cmnts;
+
+ALTER TABLE product_comments
+	ADD
+		CONSTRAINT FK_prdct_inf_TO_prdct_cmnts
+		FOREIGN KEY (
+			product_num
+		)
+		REFERENCES product_info (
+			product_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE product_comments
+	DROP
+		CONSTRAINT FK_mbr_info_TO_prdct_cmnts;
+
+ALTER TABLE product_comments
+	ADD
+		CONSTRAINT FK_mbr_info_TO_prdct_cmnts
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE order_list
+	DROP
+		CONSTRAINT FK_product_info_TO_order_list;
+
+ALTER TABLE order_list
+	ADD
+		CONSTRAINT FK_product_info_TO_order_list
+		FOREIGN KEY (
+			product_num
+		)
+		REFERENCES product_info (
+			product_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE order_list
+	DROP
+		CONSTRAINT FK_member_info_TO_order_list;
+
+ALTER TABLE order_list
+	ADD
+		CONSTRAINT FK_member_info_TO_order_list
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE interest_cat
+	DROP
+		CONSTRAINT FK_member_info_TO_interest_cat;
+
+ALTER TABLE interest_cat
+	ADD
+		CONSTRAINT FK_member_info_TO_interest_cat
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE interest_location
+	DROP
+		CONSTRAINT FK_mbr_info_TO_intrst_lctn;
+
+ALTER TABLE interest_location
+	ADD
+		CONSTRAINT FK_mbr_info_TO_intrst_lctn
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE interest_group
+	DROP
+		CONSTRAINT FK_mbr_info_TO_interest_grp;
+
+ALTER TABLE interest_group
+	ADD
+		CONSTRAINT FK_mbr_info_TO_interest_grp
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE my_group
+  DROP
+		CONSTRAINT FK_member_info_TO_my_group;
+
+ALTER TABLE my_group
+	ADD
+		CONSTRAINT FK_member_info_TO_my_group
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE my_group
+	DROP
+		CONSTRAINT FK_group_list_TO_my_group;
+
+ALTER TABLE my_group
+	ADD
+		CONSTRAINT FK_group_list_TO_my_group
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE group_notice
+	DROP
+		CONSTRAINT FK_group_list_TO_group_notice;
+
+ALTER TABLE group_notice
+	ADD
+		CONSTRAINT FK_group_list_TO_group_notice
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE greeting_board
+	DROP
+		CONSTRAINT FK_grp_list_TO_greeting_brd;
+
+ALTER TABLE greeting_board
+	ADD
+		CONSTRAINT FK_grp_list_TO_greeting_brd
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE meeting_post
+	DROP
+		CONSTRAINT FK_group_list_TO_meeting_post;
+
+ALTER TABLE meeting_post
+	ADD
+		CONSTRAINT FK_group_list_TO_meeting_post
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE greeting_reply
+  DROP
+		CONSTRAINT FK_grtng_board_TO_grtng_rpl;
+
+ALTER TABLE greeting_reply
+	ADD
+		CONSTRAINT FK_grtng_board_TO_grtng_rpl
+		FOREIGN KEY (
+			greeting_num
+		)
+		REFERENCES greeting_board (
+			greeting_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE like_greeting
+	DROP
+		CONSTRAINT FK_grtng_board_TO_lk_grtng;
+
+ALTER TABLE like_greeting
+	ADD
+		CONSTRAINT FK_grtng_board_TO_lk_grtng
+		FOREIGN KEY (
+			greeting_num
+		)
+		REFERENCES greeting_board (
+			greeting_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE meeting_post_like
+	DROP
+		CONSTRAINT FK_mtng_post_TO_mtng_pst_lk;
+
+ALTER TABLE meeting_post_like
+	ADD
+		CONSTRAINT FK_mtng_post_TO_mtng_pst_lk
+		FOREIGN KEY (
+			post_num
+		)
+		REFERENCES meeting_post (
+			post_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE meeting_post_like
+	DROP
+		CONSTRAINT FK_mbr_info_TO_mtng_pst_lk;
+
+ALTER TABLE meeting_post_like
+	ADD
+		CONSTRAINT FK_mbr_info_TO_mtng_pst_lk
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+    
+    
+    
+ALTER TABLE meeting_post_reply
+	DROP
+		CONSTRAINT FK_mtng_pst_TO_mtng_pst_rpl;    
+
+ALTER TABLE meeting_post_reply
+	ADD
+		CONSTRAINT FK_mtng_pst_TO_mtng_pst_rpl
+		FOREIGN KEY (
+			post_num
+		)
+		REFERENCES meeting_post (
+			post_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE check_present
+	DROP
+		CONSTRAINT FK_group_list_TO_check_present;
+
+ALTER TABLE check_present
+	ADD
+		CONSTRAINT FK_group_list_TO_check_present
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE meeting_list
+	DROP
+		CONSTRAINT FK_group_list_TO_meeting_list;
+
+ALTER TABLE meeting_list
+	ADD
+		CONSTRAINT FK_group_list_TO_meeting_list
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE present_per_list
+	DROP
+		CONSTRAINT FK_mtng_lst_TO_prsnt_pr_lst;
+
+ALTER TABLE present_per_list
+	ADD
+		CONSTRAINT FK_mtng_lst_TO_prsnt_pr_lst
+		FOREIGN KEY (
+			meeting_num
+		)
+		REFERENCES meeting_list (
+			meeting_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE chat_room_list
+	DROP
+		CONSTRAINT FK_grp_list_TO_chat_rm_list;
+
+ALTER TABLE chat_room_list
+	ADD
+		CONSTRAINT FK_grp_list_TO_chat_rm_list
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE msg_list
+	DROP
+		CONSTRAINT FK_chat_room_list_TO_msg_list;
+
+ALTER TABLE msg_list
+	ADD
+		CONSTRAINT FK_chat_room_list_TO_msg_list
+		FOREIGN KEY (
+			chat_room_num
+		)
+		REFERENCES chat_room_list (
+			chat_room_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE post_pictures
+	DROP
+		CONSTRAINT FK_group_list_TO_post_pictures;
+
+ALTER TABLE post_pictures
+	ADD
+		CONSTRAINT FK_group_list_TO_post_pictures
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE post_pictures
+	DROP
+		CONSTRAINT FK_mtng_post_TO_post_pctrs;
+
+ALTER TABLE post_pictures
+	ADD
+		CONSTRAINT FK_mtng_post_TO_post_pctrs
+		FOREIGN KEY (
+			post_num
+		)
+		REFERENCES meeting_post (
+			post_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE post_video
+	DROP
+		CONSTRAINT FK_group_list_TO_post_video;
+
+ALTER TABLE post_video
+	ADD
+		CONSTRAINT FK_group_list_TO_post_video
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE post_video
+	DROP
+		CONSTRAINT FK_meeting_post_TO_post_video;
+
+ALTER TABLE post_video
+	ADD
+		CONSTRAINT FK_meeting_post_TO_post_video
+		FOREIGN KEY (
+			post_num
+		)
+		REFERENCES meeting_post (
+			post_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE winning_per_list
+	DROP
+		CONSTRAINT FK_mbr_info_TO_wng_pr_lst;
+
+ALTER TABLE winning_per_list
+	ADD
+		CONSTRAINT FK_mbr_info_TO_wng_pr_lst
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+ALTER TABLE winning_per_list
+	DROP
+		CONSTRAINT FK_evnt_wng_lst_TO_wng_lst;
+
+
+ALTER TABLE winning_per_list
+	ADD
+		CONSTRAINT FK_evnt_wng_lst_TO_wng_lst
+		FOREIGN KEY (
+			winning_num
+		)
+		REFERENCES event_winning_list (
+			winning_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE event_pic
+	DROP
+		CONSTRAINT FK_event_list_TO_event_pic;
+
+ALTER TABLE event_pic
+	ADD
+		CONSTRAINT FK_event_list_TO_event_pic
+		FOREIGN KEY (
+			event_num
+		)
+		REFERENCES event_list (
+			event_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE main_picture
+	DROP
+		CONSTRAINT FK_group_list_TO_main_picture;
+
+ALTER TABLE main_picture
+	ADD
+		CONSTRAINT FK_group_list_TO_main_picture
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE member_noti
+	DROP
+		CONSTRAINT FK_member_info_TO_member_noti;
+
+ALTER TABLE member_noti
+	ADD
+		CONSTRAINT FK_member_info_TO_member_noti
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE seller_noti
+	DROP
+		CONSTRAINT FK_seller_info_TO_seller_noti;
+
+ALTER TABLE seller_noti
+	ADD
+		CONSTRAINT FK_seller_info_TO_seller_noti
+		FOREIGN KEY (
+			seller_id
+		)
+		REFERENCES seller_info (
+			seller_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE manager_noti
+	DROP
+		CONSTRAINT FK_mngr_info_TO_manager_nt;
+
+ALTER TABLE manager_noti
+	ADD
+		CONSTRAINT FK_mngr_info_TO_manager_nt
+		FOREIGN KEY (
+			manager_id
+		)
+		REFERENCES manager_info (
+			manager_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE group_leader_noti
+	DROP
+		CONSTRAINT FK_mbr_info_TO_group_ldr_nt;
+
+ALTER TABLE group_leader_noti
+	ADD
+		CONSTRAINT FK_mbr_info_TO_group_ldr_nt
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE group_leader_noti
+	DROP
+		CONSTRAINT FK_grp_list_TO_group_ldr_nt;
+
+ALTER TABLE group_leader_noti
+	ADD
+		CONSTRAINT FK_grp_list_TO_group_ldr_nt
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE product_ans
+	DROP
+		CONSTRAINT FK_product_que_TO_product_ans;
+
+ALTER TABLE product_ans
+	ADD
+		CONSTRAINT FK_product_que_TO_product_ans
+		FOREIGN KEY (
+			que_num
+		)
+		REFERENCES product_que (
+			que_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE product_ans
+	DROP
+		CONSTRAINT FK_seller_info_TO_product_ans;
+
+ALTER TABLE product_ans
+	ADD
+		CONSTRAINT FK_seller_info_TO_product_ans
+		FOREIGN KEY (
+			seller_id
+		)
+		REFERENCES seller_info (
+			seller_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE event_winning_list
+	DROP
+		CONSTRAINT FK_evnt_lst_TO_evnt_wng_lst;
+
+ALTER TABLE event_winning_list
+	ADD
+		CONSTRAINT FK_evnt_lst_TO_evnt_wng_lst
+		FOREIGN KEY (
+			event_num
+		)
+		REFERENCES event_list (
+			event_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE join_request
+	DROP
+		CONSTRAINT FK_member_info_TO_join_request;
+
+ALTER TABLE join_request
+	ADD
+		CONSTRAINT FK_member_info_TO_join_request
+		FOREIGN KEY (
+			mem_id
+		)
+		REFERENCES member_info (
+			mem_id
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE join_request
+	DROP
+		CONSTRAINT FK_group_list_TO_join_request;
+
+ALTER TABLE join_request
+	ADD
+		CONSTRAINT FK_group_list_TO_join_request
+		FOREIGN KEY (
+			group_num
+		)
+		REFERENCES group_list (
+			group_num
+		)ON DELETE CASCADE;
+
+
+
+ALTER TABLE evejoin_list
+	DROP
+		CONSTRAINT FK_event_list_TO_evejoin_list;
+
+ALTER TABLE evejoin_list
+	ADD
+		CONSTRAINT FK_event_list_TO_evejoin_list
+		FOREIGN KEY (
+			event_num
+		)
+		REFERENCES event_list (
+			event_num
+		)ON DELETE CASCADE;
+
+
+-- 구매리스트에 제약조건 삭제
+ALTER TABLE order_list
+	DROP
+		CONSTRAINT FK_payment_list_TO_order_list;
+    
+-- 구매리스트에 제약조건 추가
+ALTER TABLE order_list
+	ADD
+		CONSTRAINT FK_payment_list_TO_order_list
+		FOREIGN KEY (
+			payment_num
+		)
+		REFERENCES payment_list (
+			payment_num    
+		)ON DELETE CASCADE  ;
+    	
+		
+COMMIT;    
