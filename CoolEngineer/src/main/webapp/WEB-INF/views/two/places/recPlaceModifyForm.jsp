@@ -362,6 +362,7 @@ li {
 							<div class="col-lg-10 col-lg-offset-2">
 								<button type="submit" class="btn btn-primary">입력</button>
 								<button type="reset" class="btn btn-default">다시 입력</button>
+								<input type="button" class="btn btn-info" value="목록" onclick="window.location='placeContentForm?place_num=${rpdto.place_num}'">
 							</div>
 						</div>
 					</fieldset>
