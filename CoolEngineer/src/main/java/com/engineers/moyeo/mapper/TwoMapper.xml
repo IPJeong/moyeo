@@ -209,7 +209,7 @@
 		                                 GROUP BY recpla_num) pl,
 		                               (SELECT recpla_num, place_num
 		                                  FROM rec_place) rp
-		                        WHERE rp.recpla_num = pl.recpla_num(+)
+		                        WHERE rp.recpla_num = pl.recpla_num
 		                        GROUP BY rp.place_num) pc, 
 		                        place_info pi, 
 		                        place_pic pp
@@ -228,7 +228,7 @@
 		                                 GROUP BY recpla_num) pl,
 		                               (SELECT recpla_num, place_num
 		                                  FROM rec_place) rp
-		                        WHERE rp.recpla_num = pl.recpla_num(+)
+		                        WHERE rp.recpla_num = pl.recpla_num
 		                        GROUP BY rp.place_num) pc, 
 		                        place_info pi, 
 		                        place_pic pp
