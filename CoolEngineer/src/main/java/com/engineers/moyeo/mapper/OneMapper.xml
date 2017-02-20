@@ -386,7 +386,10 @@
     			FROM (SELECT product_num, product_name, product_price, product_qty, product_detail, seller_id, rownum rnum
     					FROM (SELECT * FROM product_info
     						  ORDER BY product_num DESC) 
-    				  ) ss, product_pic pp   
+    				  ) ss,
+    				  (SELECT pic_num, pic_path, pic_name, product_num, pic_type
+		                          FROM product_pic
+		                        WHERE rowid IN (SELECT MIN(rowid) FROM product_pic GROUP BY product_num)) pp  
     	         WHERE rnum &gt;= #{start} AND rnum &lt;= #{end} AND ss.product_num = pp.product_num ORDER BY pp.product_num DESC
     </select>
     
