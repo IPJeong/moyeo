@@ -387,7 +387,7 @@
 																</div>
 																<div class="form-group col-md-12"
 																	style="padding: 5px; text-align: center;">
-																	<c:forEach var="dto2" items="${dtos2}">
+																	<c:forEach var="dto5" items="${dtos5}">
 																		<c:if test="${dto5.eventNum2 == dto4.eventNum}">
 																			<div class="col-md-12">
 																				<div class="col-md-8"
