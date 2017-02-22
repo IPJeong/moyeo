@@ -204,7 +204,7 @@
 		  FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum
 		          FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, pc.place_like_count
 		                  FROM (SELECT NVL(SUM(place_like_count), 0) as place_like_count, rp.place_num
-		                          FROM (SELECT NVL(COUNT(plalike_num), 0) as place_like_count, recpla_num as recpla_num
+		                          FROM (SELECT NVL(COUNT(plalike_num), 0) as place_like_count, recpla_num
 		                                  FROM place_like
 		                                 GROUP BY recpla_num) pl,
 		                               (SELECT recpla_num, place_num
@@ -223,7 +223,7 @@
 		  FROM (SELECT place_num, place_name, place_address, place_pic_path, place_pic_name, place_like_count, rownum rnum
 		          FROM (SELECT pi.place_num, pi.place_name, pi.place_address, pp.place_pic_path, pp.place_pic_name, pc.place_like_count
 		                  FROM (SELECT NVL(SUM(place_like_count), 0) as place_like_count, rp.place_num
-		                          FROM (SELECT NVL(COUNT(plalike_num), 0) as place_like_count, recpla_num as recpla_num
+		                          FROM (SELECT NVL(COUNT(plalike_num), 0) as place_like_count, recpla_num
 		                                  FROM place_like
 		                                 GROUP BY recpla_num) pl,
 		                               (SELECT recpla_num, place_num
